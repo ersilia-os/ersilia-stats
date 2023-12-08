@@ -2,79 +2,88 @@ import requests
 
 ORG_NAME = "ersilia-os"
 
-def list_org_repos(org_name):
+def _list_org_repos(org_name):
     # GitHub API endpoint to list organization repositories
     url = f"https://api.github.com/orgs/{org_name}/repos"
-
-    # Make a GET request to the GitHub API
+    repositories = []
     response = requests.get(url)
-
+    response.raise_for_status()
+    repositories.extend(response.json())
+    while 'next' in response.links:
+        next_url = response.links['next']['url']
+        response = requests.get(next_url)
+        response.raise_for_status()
+        repositories.extend(response.json())
     repo_names = []
-    # Check if the request was successful
-    if response.status_code == 200:
-        repos = response.json()
-        for repo in repos:
+    for repo in repositories:
             repo_names += [repo['name']]
-    else:
-        print("Error:", response.status_code)
     return repo_names
 
+def _get_first_commit(owner, repo_name):
+    url = f"https://api.github.com/repos/{owner}/{repo_name}/commits"
+    req = requests.get(url)
+    json_data = req.json()
+    if req.headers.get('Link'):
+        page_url = req.headers.get('Link').split(',')[1].split(';')[0].split('<')[1].split('>')[0]
+        req_last_commit = requests.get(page_url)
+        first_commit = req_last_commit.json()
+        first_commit_hash = first_commit[-1]['sha']
+    else:
+        first_commit_hash = json_data[-1]['sha']
+    return first_commit_hash
+
+def _get_all_commits_count(owner, repo_name, sha):
+    first_commit_hash = _get_first_commit(owner, repo_name)
+    compare_url = f"https://api.github.com/repos/{owner}/{repo_name}/compare/{first_commit_hash}...{sha}"
+    commit_req = requests.get(compare_url)
+    commit_count = commit_req.json()['total_commits'] + 1
+    return commit_count
 
 def general_repo_details(owner, repo_name):
-    # Endpoint for repository details
     repo_url = f"https://api.github.com/repos/{owner}/{repo_name}"
-
-    # Get repository details
     repo_response = requests.get(repo_url)
+    repo_info ={}
     if repo_response.status_code == 200:
         repo_data = repo_response.json()
         name = repo_data['name']
         description = repo_data['description']
         stars = repo_data['stargazers_count']
-        forks = repo_data['forks_count']
-        open_issues_count = repo_data['open_issues_count']
-        print(f"Name: {repo_name}")
-        print(f"Description: {repo_description}")
-        print(f"Stars: {repo_stars}")
+        forks = repo_data['forks']
+        open_issues = repo_data['open_issues']
+        subscribers = repo_data['subscribers_count']
+        contributors = []
+        contributors_resp = requests.get(repo_data["contributors_url"])
+        contributors.extend(contributors_resp.json())
+        while 'next' in contributors_resp.links:
+            next_url = contributors_resp.links['next']['url']
+            contributors_resp = requests.get(next_url)
+            contributors_resp.raise_for_status()
+            contributors.extend(contributors_resp.json())
+        contributor_names = []
+        for i in range(len(contributors)):
+            contr_name = contributors[i]["login"]
+            contributor_names += contr_name
+        issues_resp = requests.get(f"https://api.github.com/repos/{owner}/{repo_name}/issues")
+        issues = issues_resp.json()
+        total_issues = issues[0]["number"]
+        last_commit_resp = requests.get(f"https://api.github.com/repos/{owner}/{repo_name}/commits")
+        last_commit = last_commit_resp.json()
+        last_commit_sha = last_commit[0]["sha"]
+        total_commits = _get_all_commits_count(owner, repo_name, last_commit_sha)
+        repo_info["name"]=name
+        repo_info["description"]= description
+        repo_info["stars"]= stars
+        repo_info["forks"]= forks
+        repo_info["total_issues"]= total_issues
+        repo_info["open_issues"]= open_issues
+        repo_info["subscribers"]=subscribers
+        repo_info["contributors"]=len(contributors)
+        repo_info["contributor_names"]=contributor_names
+        repo_info["total_commits"]=total_commits
+        return
     else:
         print("Error fetching repository details:", repo_response.status_code)
         return
 
-    # Endpoint for the commits - getting the last page
-    commits_url = f"https://api.github.com/repos/{owner}/{repo_name}/commits?per_page=1&page=1"
-    commits_response = requests.head(commits_url)
-
-    if commits_response.status_code == 200:
-        # Checking if 'Link' is present in headers
-        if 'Link' in commits_response.headers:
-            # Parsing the 'Link' header to find the last page number
-            links = commits_response.headers['Link'].split(',')
-            last_page_url = [link for link in links if 'rel="last"' in link][0]
-            last_page_number = int(last_page_url.split('page=')[1].split('>')[0])
-        else:
-            last_page_number = 1
-
-        print(f"Total Commits: {last_page_number}")
-    else:
-        print("Error fetching commit count:", commits_response.status_code)
-
-
-# Example usage
-#get_repo_details('ersilia-os', 'ersilia')
-import requests
-from urllib.parse import parse_qs, urlparse
-
-def get_commits_count(owner_name: str, repo_name: str) -> int:
-    """
-    Returns the number of commits to a GitHub repository.
-    """
-    url = f"https://api.github.com/repos/{owner_name}/{repo_name}/commits?per_page=1"
-    r = requests.get(url)
-    links = r.links
-    rel_last_link_url = urlparse(links["last"]["url"])
-    rel_last_link_url_args = parse_qs(rel_last_link_url.query)
-    rel_last_link_url_page_arg = rel_last_link_url_args["page"][0]
-    commits_count = int(rel_last_link_url_page_arg)
-    return commits_count
-
-get_commits_count("ersilia-os", "ersilia")
+repo_details = general_repo_details(ORG_NAME, "ersilia")
+print(repo_details)
