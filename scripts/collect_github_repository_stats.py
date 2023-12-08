@@ -85,5 +85,5 @@ def general_repo_details(owner, repo_name):
         print("Error fetching repository details:", repo_response.status_code)
         return
 
-repo_details = general_repo_details(ORG_NAME, "ersilia")
+repo_details = general_repo_details(ORG_NAME, "eos4wt0")
 print(repo_details)
