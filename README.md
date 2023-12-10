@@ -1,2 +1,2 @@
-# ersilia-stats
-Collection of statistics from the Ersilia open source software tools
+# Ersilia statistics
+This repository contains scripts to gather relevant statistics of the [Ersilia Open Source Inititiative](https://ersilia.io). Statistics are eventually stored in the AirTable `Content` base.
