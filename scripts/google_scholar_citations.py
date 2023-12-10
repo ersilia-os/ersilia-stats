@@ -57,6 +57,5 @@ def update_citations_to_airtable(data):
 
 data = get_publications_records_from_airtable()
 random.shuffle(data)
-data = data[:5]
 data = get_citations_from_records(data)
 update_citations_to_airtable(data)
