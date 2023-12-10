@@ -29,7 +29,7 @@ def get_google_scholar_citations_from_cluster_id(cluster_id):
     print(url)
     result = requests.get(url)
     text = result.text
-    citations = text.split(">Cited by ")[1].split("<")[0]
+    citations = int(text.split(">Cited by ")[1].split("<")[0])
     return citations
 
 
