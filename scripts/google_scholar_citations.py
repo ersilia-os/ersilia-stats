@@ -36,11 +36,11 @@ def get_google_scholar_citations_from_cluster_id(cluster_id):
 def get_citations_from_records(data):
     results = []
     for d in data:
-        print(data)
         if d[1] is not None:
             try:
                 v = get_google_scholar_citations_from_cluster_id(d[1])
                 results += [(d[0], v)]
+                print("Successfully fetched citations for {0}".format(d[1]))
             except:
                 print("Failed to fetch citations data")
             time.sleep(5)
