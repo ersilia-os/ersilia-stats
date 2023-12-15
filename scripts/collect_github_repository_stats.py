@@ -1,8 +1,13 @@
 import requests
 import collections
 import sys
+from pyairtable import Api
 
 github_api_token = sys.argv[1]
+airtable_api_key = sys.argv[2]
+
+BASE_ID = "app1iYv78K6xbHkmL"
+TABLE_ID = "tbluZtI3W9pseCSPH"
 
 headers = {"Authorization": "token %s" % github_api_token}
 
@@ -48,11 +53,14 @@ def _get_first_commit(owner, repo_name):
 
 
 def _get_all_commits_count(owner, repo_name, sha):
-    first_commit_hash = _get_first_commit(owner, repo_name)
-    compare_url = f"https://api.github.com/repos/{owner}/{repo_name}/compare/{first_commit_hash}...{sha}"
-    commit_req = requests.get(compare_url, headers=headers)
-    commit_count = commit_req.json()["total_commits"] + 1
-    return commit_count
+    try:
+        first_commit_hash = _get_first_commit(owner, repo_name)
+        compare_url = f"https://api.github.com/repos/{owner}/{repo_name}/compare/{first_commit_hash}...{sha}"
+        commit_req = requests.get(compare_url, headers=headers)
+        commit_count = commit_req.json()["total_commits"] + 1
+        return commit_count
+    except:
+        return 0
 
 
 def general_repo_details(owner, repo_name):
@@ -138,3 +146,37 @@ repo_contributor_names = dict(
 repo_contributors = dict((k, len(v)) for k, v in repo_contributor_names.items())
 
 repo_keys = sorted(set(repo_keys))
+
+
+def get_available_record_ids_from_airtable():
+    api = Api(airtable_api_key)
+    table = api.table(BASE_ID, TABLE_ID)
+    records = table.all()
+    data = {}
+    for r in records:
+        name = r["fields"]["Name"]
+        data[r["id"]] = name
+    return data
+
+
+available_repos = get_available_record_ids_from_airtable()
+
+api = Api(airtable_api_key)
+table = api.table(BASE_ID, TABLE_ID)
+
+for repo in repo_keys:
+    data = {
+        "Name": repo,
+        "Stars": repo_stars[repo],
+        "Forks": repo_forks[repo],
+        "Open Issues": repo_open_issues[repo],
+        "Subscribers": repo_subscribers[repo],
+        "Total Commits": repo_total_commits[repo],
+        "Contributors": repo_contributors[repo],
+        "Contributor Names": ", ".join(repo_contributor_names[repo]),
+    }
+    if repo in available_repos:
+        record_id = available_repos[repo]
+        table.update(record_id, data)
+    else:
+        table.create(data)
