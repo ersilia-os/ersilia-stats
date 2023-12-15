@@ -155,7 +155,7 @@ def get_available_record_ids_from_airtable():
     data = {}
     for r in records:
         name = r["fields"]["Name"]
-        data[r["id"]] = name
+        data[name] = r["id"]
     return data
 
 
