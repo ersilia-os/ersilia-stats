@@ -1,4 +1,5 @@
 import requests
+import random
 import collections
 import sys
 from pyairtable import Api
@@ -109,10 +110,11 @@ def general_repo_details(owner, repo_name):
 
 
 all_repos = _list_org_repos("ersilia-os")
+random.shuffle(all_repos)
 
 repos_data = {}
 
-for repo in all_repos:
+for repo in all_repos[:100]:
     data = general_repo_details("ersilia-os", repo)
     print(data)
     repos_data[repo] = data
