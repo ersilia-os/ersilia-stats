@@ -18,12 +18,13 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
 
-      - name: Update Repositories table
+      - name: Update Repositories AirTable table
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
 
         run: |
-          python scripts/collect_github_repository_stats.py $GITHUB_API_TOKEN
+          python scripts/collect_github_repository_stats.py $GITHUB_API_TOKEN $AIRTABLE_API_KEY
 
       - name: Install dependencies
         run: |
