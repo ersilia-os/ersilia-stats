@@ -112,7 +112,7 @@ all_repos = _list_org_repos("ersilia-os")
 
 repos_data = {}
 
-for repo in all_repos[:10]:
+for repo in all_repos:
     data = general_repo_details("ersilia-os", repo)
     print(data)
     repos_data[repo] = data
