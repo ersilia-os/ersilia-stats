@@ -160,11 +160,13 @@ def get_available_record_ids_from_airtable():
 
 
 available_repos = get_available_record_ids_from_airtable()
+print(available_repos)
 
 api = Api(airtable_api_key)
 table = api.table(BASE_ID, TABLE_ID)
 
 for repo in repo_keys:
+    print("Checking", repo)
     data = {
         "Name": repo,
         "Stars": repo_stars[repo],
@@ -175,7 +177,7 @@ for repo in repo_keys:
         "Contributors": repo_contributors[repo],
         "Contributor Names": ", ".join(repo_contributor_names[repo]),
     }
-    if repo in available_repos:
+    if repo in available_repos.keys():
         record_id = available_repos[repo]
         table.update(record_id, data)
     else:
