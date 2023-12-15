@@ -12,7 +12,7 @@ TABLE_ID = "tbljYubYjWAtO1ab8"
 
 
 def get_publications_records_from_airtable():
-    api  = Api(airtable_api_key)
+    api = Api(airtable_api_key)
     table = api.table(BASE_ID, TABLE_ID)
     records = table.all()
     data = []
@@ -48,7 +48,7 @@ def get_citations_from_records(data):
 
 
 def update_citations_to_airtable(data):
-    api  = Api(airtable_api_key)
+    api = Api(airtable_api_key)
     table = api.table(BASE_ID, TABLE_ID)
     for d in data:
         if d[1] is not None:
