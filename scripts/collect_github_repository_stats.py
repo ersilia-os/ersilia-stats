@@ -128,8 +128,8 @@ repo_total_commits = collections.defaultdict(int)
 repo_keys = []
 for repo, v in repos_data.items():
     if len(repo) == 7 and repo.startswith("eos"):
-        repo_description[repo] = "Aggregate of Ersilia models"
         repo = "eos"
+        repo_description[repo] = "Aggregate of Ersilia models"
     else:
         repo_description[repo] = v["description"]
     repo_keys += [repo]
