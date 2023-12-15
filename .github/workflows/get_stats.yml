@@ -7,7 +7,7 @@ on:
     - cron: '0 2 * * *'
 
 jobs:
-  publications:
+  publications-and-repositories:
     runs-on: ubuntu-latest
     
     steps:
