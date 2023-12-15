@@ -9,7 +9,7 @@ airtable_api_key = sys.argv[2]
 BASE_ID = "app1iYv78K6xbHkmL"
 TABLE_ID = "tbluZtI3W9pseCSPH"
 
-headers = {"Authorization": "token %s" % github_api_token}
+headers = {"Authorization": "Bearer %s" % github_api_token}
 
 ORG_NAME = "ersilia-os"
 
