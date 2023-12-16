@@ -2,6 +2,7 @@ import requests
 import random
 import collections
 import sys
+import os
 from pyairtable import Api
 
 github_api_token = sys.argv[1]
@@ -64,6 +65,28 @@ def _get_all_commits_count(owner, repo_name, sha):
         return 0
 
 
+def _get_github_title(repo):
+    url = "https://raw.githubusercontent.com/{0}/{1}/main/README.md".format(ORG_NAME, repo)
+    result = requests.get(url)
+    if result.status_code == 200:
+        text = result.text
+    else:
+        text = None
+    if text is None:
+        url = "https://raw.githubusercontent.com/{0}/{1}/master/README.md".format(ORG_NAME, repo)
+        result = requests.get(url)
+        if result.status_code != 200:
+            return None
+        text = result.text
+    if text is None:
+        return None
+    lines = text.split(os.linesep)
+    for l in lines:
+        if l.startswith("# "):
+            return l.split("# ")[1]
+    return None
+
+
 def general_repo_details(owner, repo_name):
     repo_url = f"https://api.github.com/repos/{owner}/{repo_name}"
     repo_response = requests.get(repo_url, headers=headers)
@@ -95,6 +118,7 @@ def general_repo_details(owner, repo_name):
         last_commit_sha = last_commit[0]["sha"]
         total_commits = _get_all_commits_count(owner, repo_name, last_commit_sha)
         repo_info["name"] = name
+        repo_info["title"] = _get_github_title(repo_name)
         repo_info["description"] = description
         repo_info["stars"] = stars
         repo_info["forks"] = forks
@@ -120,6 +144,7 @@ for repo in all_repos[:100]:
     repos_data[repo] = data
 
 repo_description = {}
+repo_title = {}
 repo_stars = collections.defaultdict(int)
 repo_forks = collections.defaultdict(int)
 repo_open_issues = collections.defaultdict(int)
@@ -132,8 +157,10 @@ for repo, v in repos_data.items():
     if len(repo) == 7 and repo.startswith("eos"):
         repo = "eos"
         repo_description[repo] = "Aggregate of Ersilia models"
+        repo_title[repo] = "Ersilia model"
     else:
         repo_description[repo] = v["description"]
+        repo_title[repo] = v["title"]
     repo_keys += [repo]
     repo_stars[repo] += v["stars"]
     repo_forks[repo] += v["forks"]
@@ -171,6 +198,8 @@ for repo in repo_keys:
     print("Checking", repo)
     data = {
         "Name": repo,
+        "Title": repo_title[repo],
+        "Description": repo_description[repo],
         "Stars": repo_stars[repo],
         "Forks": repo_forks[repo],
         "Open Issues": repo_open_issues[repo],
