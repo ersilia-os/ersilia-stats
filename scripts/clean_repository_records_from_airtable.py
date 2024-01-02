@@ -47,4 +47,6 @@ def get_available_record_ids_from_airtable():
 
 available_repos = get_available_record_ids_from_airtable()
 
-print(available_repos)
+for k,v in available_repos.items():
+    if k not in all_repos:
+        print(k, "is not there")
