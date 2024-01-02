@@ -44,7 +44,6 @@ def get_available_record_ids_from_airtable():
         data[name] = r["id"]
     return data
 
-
 available_repos = get_available_record_ids_from_airtable()
 
 def check_repository_exists(user, repo):
@@ -57,9 +56,18 @@ def check_repository_exists(user, repo):
     else:
         return False
 
+def delete_airtable_records(record_ids):
+    api = Api(airtable_api_key)
+    table = api.table(BASE_ID, TABLE_ID)
+    for record_id in record_ids:
+        table.delete(record_id)
+
+record_ids_to_delete = []
 for k,v in available_repos.items():
     if k == "eos":
         continue
     if k not in all_repos:
         if not check_repository_exists(ORG_NAME, k):
-            print(k, "is not there")
+            record_ids_to_delete += [v]
+
+delete_airtable_records(record_ids_to_delete)
