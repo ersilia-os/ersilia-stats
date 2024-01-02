@@ -49,6 +49,7 @@ available_repos = get_available_record_ids_from_airtable()
 
 def check_repository_exists(user, repo):
     url = f"https://github.com/{user}/{repo}"
+    print("Checking", url)
     response = requests.get(url)
     return response.status_code == 200
 
