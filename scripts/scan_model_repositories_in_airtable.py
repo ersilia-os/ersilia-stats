@@ -38,6 +38,7 @@ print(nonregistered_model_repos)
 nonexistent_model_registries = []
 for model_id in model_ids_from_airtable.keys():
     if model_id.startswith("eos0t"): continue
+    if model_id == "eos0abc": continue
     if model_id not in model_ids:
         nonexistent_model_registries += [model_id]
 
