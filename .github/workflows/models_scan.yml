@@ -29,10 +29,10 @@ jobs:
           gh search repos eos --owner=ersilia-os --visibility=public --json name -L 1000 --match name > ersilia_model_repos.json
           python -c "import json; f = open('ersilia_model_repos.json', 'r'); data = json.load(f); f.close(); model_ids = [d['name'] for d in data if d['name'].startswith('eos') and len(d['name']) == 7]; f = open('ersilia_model_repos.txt', 'w'); f.write('\n'.join(model_ids)); f.close()"
           
-      - name: Find which repositories do not exist in AirTable
+      - name: Find which repositories do not exist in AirTable and viceversa
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
-          python scripts/scan_model_repositories_in_airtable.py ersilia_model_repos.txt $AIRTABLE_API_KEY nonregistered_model_repos.txt
+          python scripts/scan_model_repositories_in_airtable.py ersilia_model_repos.txt $AIRTABLE_API_KEY nonregistered_model_repos.txt nonexistent_model_registries.txt
           
 
