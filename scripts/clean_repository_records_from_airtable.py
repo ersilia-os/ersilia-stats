@@ -50,12 +50,12 @@ available_repos = get_available_record_ids_from_airtable()
 def check_repository_exists(user, repo):
     url = f"https://github.com/{user}/{repo}"
     print("Checking", url)
-    response = requests.get(url)
+    response = requests.get(url, headers=headers)
     print("Response", response.status_code)
-    if response.status_code == 404:
-        return False
-    else:
+    if response.status_code == 200:
         return True
+    else:
+        return False
 
 for k,v in available_repos.items():
     if k not in all_repos:
