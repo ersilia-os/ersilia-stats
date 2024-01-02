@@ -133,7 +133,7 @@ def general_repo_details(owner, repo_name):
         return
 
 
-all_repos = _list_org_repos("ersilia-os")
+all_repos = _list_org_repos(ORG_NAME)
 random.shuffle(all_repos)
 
 repos_data = {}
