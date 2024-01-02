@@ -41,4 +41,4 @@ for model_id in model_ids_from_airtable.keys():
         nonexistent_model_registries += [model_id]
 
 print("Non-existent model registries")
-print(model_ids_from_airtable)
+print(nonexistent_model_registries)
