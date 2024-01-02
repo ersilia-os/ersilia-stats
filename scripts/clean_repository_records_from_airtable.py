@@ -47,6 +47,12 @@ def get_available_record_ids_from_airtable():
 
 available_repos = get_available_record_ids_from_airtable()
 
+def check_repository_exists(user, repo):
+    url = f"https://github.com/{user}/{repo}"
+    response = requests.get(url)
+    return response.status_code == 200
+
 for k,v in available_repos.items():
     if k not in all_repos:
-        print(k, "is not there")
+        if not check_repository_exists(ORG_NAME, k):
+            print(k, "is not there")
