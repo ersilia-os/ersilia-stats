@@ -3,7 +3,8 @@ from pyairtable import Api
 
 model_ids_file = sys.argv[1]
 airtable_api_key = sys.argv[2]
-output_file = sys.argv[3]
+output_file_0 = sys.argv[3]
+output_file_1 = sys.argv[4]
 
 BASE_ID = "appgxpCzCDNyGjWc8"
 TABLE_ID = "tblZGe2a2XeBxrEHP"
@@ -45,3 +46,11 @@ for model_id in model_ids_from_airtable.keys():
 
 print("Non-existent model registries")
 print(nonexistent_model_registries)
+
+with open(output_file_0, "w") as f:
+    for l in nonregistered_model_repos:
+        f.write(l+"\n")
+
+with open(output_file_1, "w") as f:
+    for l in nonexistent_model_registries:
+        f.write(l+"\n")
