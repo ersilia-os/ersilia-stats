@@ -27,6 +27,6 @@ def get_available_record_ids_from_airtable():
         data[name] = r["id"]
     return data
 
-models_ids_from_airtable = get_available_record_ids_from_airtable()
+model_ids_from_airtable = get_available_record_ids_from_airtable()
 
 print(model_ids_from_airtable)
