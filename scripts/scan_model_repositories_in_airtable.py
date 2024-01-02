@@ -9,5 +9,7 @@ with open(model_ids_file, "r") as f:
         if l.startswith("eos"):
             model_ids += [l]
 
+print(len(model_ids))
+
 for model_id in model_ids:
     print(model_id)
