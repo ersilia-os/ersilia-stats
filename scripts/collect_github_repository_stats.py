@@ -30,6 +30,8 @@ def _list_org_repos(org_name):
         repositories.extend(response.json())
     repo_names = []
     for repo in repositories:
+        if repo["name"] == ".github":
+            continue
         repo_names += [repo["name"]]
     return repo_names
 
@@ -213,3 +215,29 @@ for repo in repo_keys:
         table.update(record_id, data)
     else:
         table.create(data)
+
+def check_repository_exists(user, repo):
+    url = f"https://github.com/{user}/{repo}"
+    print("Checking", url)
+    response = requests.get(url, headers=headers)
+    print("Response", response.status_code)
+    if response.status_code == 200:
+        return True
+    else:
+        return False
+
+def delete_airtable_records(record_ids):
+    api = Api(airtable_api_key)
+    table = api.table(BASE_ID, TABLE_ID)
+    for record_id in record_ids:
+        table.delete(record_id)
+
+record_ids_to_delete = []
+for k,v in available_repos.items():
+    if k == "eos":
+        continue
+    if k not in all_repos:
+        if not check_repository_exists(ORG_NAME, k):
+            record_ids_to_delete += [v]
+
+delete_airtable_records(record_ids_to_delete)
