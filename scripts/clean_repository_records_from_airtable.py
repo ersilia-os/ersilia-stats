@@ -51,7 +51,10 @@ def check_repository_exists(user, repo):
     url = f"https://github.com/{user}/{repo}"
     print("Checking", url)
     response = requests.get(url)
-    return response.status_code == 200
+    if response.status_code == 404:
+        return False
+    else:
+        return True
 
 for k,v in available_repos.items():
     if k not in all_repos:
