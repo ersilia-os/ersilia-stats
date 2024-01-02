@@ -1,6 +1,12 @@
 import sys
+import pyairtable
 
 model_ids_file = sys.argv[1]
+airtable_api_key = sys.argv[2]
+output_file = sys.argv[3]
+
+BASE_ID = "appgxpCzCDNyGjWc8"
+TABLE_ID = "tblZGe2a2XeBxrEHP"
 
 model_ids = []
 with open(model_ids_file, "r") as f:
@@ -11,5 +17,16 @@ with open(model_ids_file, "r") as f:
 
 print(len(model_ids))
 
-for model_id in model_ids:
-    print(model_id)
+def get_available_record_ids_from_airtable():
+    api = Api(airtable_api_key)
+    table = api.table(BASE_ID, TABLE_ID)
+    records = table.all()
+    data = {}
+    for r in records:
+        name = r["fields"]["Identifier"]
+        data[name] = r["id"]
+    return data
+
+models_ids_from_airtable = get_available_record_ids_from_airtable()
+
+print(model_ids_from_airtable)
