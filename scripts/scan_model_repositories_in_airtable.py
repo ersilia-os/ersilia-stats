@@ -30,6 +30,7 @@ model_ids_from_airtable = get_available_record_ids_from_airtable()
 nonregistered_model_repos = []
 for model_id in model_ids:
     if model_id not in model_ids_from_airtable:
+        if model_id == "eos0abc": continue
         nonregistered_model_repos += [model_id]
 
 print("Non-registered model repos")
