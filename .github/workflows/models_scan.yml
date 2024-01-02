@@ -22,5 +22,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh search repos eos --owner=ersilia-os --visibility=public --json name -L 1000 --match name
-          #python scan_ersilia_repos.py
+          gh search repos eos --owner=ersilia-os --visibility=public --json name -L 1000 --match name > ersilia_model_repos.json
+          python -c "import json; f = open('ersilia_models.json', 'r'); data = json.load(f); f.close(); model_ids = [d['name'] for d in data]; print(model_ids)"
