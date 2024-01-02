@@ -18,6 +18,10 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
 
+      - name: Install dependencies
+        run: |
+          pip install pyairtable
+
       - name: List EOS repositories
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -26,5 +30,9 @@ jobs:
           python -c "import json; f = open('ersilia_model_repos.json', 'r'); data = json.load(f); f.close(); model_ids = [d['name'] for d in data if d['name'].startswith('eos') and len(d['name']) == 7]; f = open('ersilia_model_repos.txt', 'w'); f.write('\n'.join(model_ids)); f.close()"
           
       - name: Find which repositories do not exist in AirTable
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
-          python scripts/scan_model_repositories_in_airtable.py ersilia_model_repos.txt
+          python scripts/scan_model_repositories_in_airtable.py ersilia_model_repos.txt $AIRTABLE_API_KEY nonregistered_model_repos.txt
+          
+
