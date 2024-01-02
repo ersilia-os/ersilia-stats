@@ -22,4 +22,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh search repos --owner=ersilia-os --visibility=public --json name
+          gh search repos --owner=ersilia-os --visibility=public --json name -L 999999 > ersilia_repos.json
+          #python scan_ersilia_repos.py
