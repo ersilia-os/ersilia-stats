@@ -58,6 +58,8 @@ def check_repository_exists(user, repo):
         return False
 
 for k,v in available_repos.items():
+    if k == "eos":
+        continue
     if k not in all_repos:
         if not check_repository_exists(ORG_NAME, k):
             print(k, "is not there")
