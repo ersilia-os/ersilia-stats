@@ -15,8 +15,6 @@ with open(model_ids_file, "r") as f:
         if l.startswith("eos"):
             model_ids += [l]
 
-print(len(model_ids))
-
 def get_available_record_ids_from_airtable():
     api = Api(airtable_api_key)
     table = api.table(BASE_ID, TABLE_ID)
@@ -29,4 +27,18 @@ def get_available_record_ids_from_airtable():
 
 model_ids_from_airtable = get_available_record_ids_from_airtable()
 
+nonregistered_model_repos = []
+for model_id in model_ids:
+    if model_id not in model_ids_from_airtable:
+        nonregistered_model_repos += [model_id]
+
+print("Non-registered model repos")
+print(nonregistered_model_repos)
+
+nonexistent_model_registries = []
+for model_id in model_ids_from_airtable.keys():
+    if model_id not in model_ids:
+        nonexistent_model_registries += [model_id]
+
+print("Non-existent model registries")
 print(model_ids_from_airtable)
