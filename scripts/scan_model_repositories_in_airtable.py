@@ -1,5 +1,5 @@
 import sys
-import pyairtable
+from pyairtable import Api
 
 model_ids_file = sys.argv[1]
 airtable_api_key = sys.argv[2]
