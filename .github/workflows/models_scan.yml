@@ -60,17 +60,9 @@ jobs:
             else
               # Create new issue
               gh issue create --title "$ISSUE_TITLE" \
-                              --body "The model [$MODEL_ID](https://github.com/ersilia-os/$MODEL_ID) is found in the ersilia repositories but **has no associated record in AirTable** record! Please consider removing this model. The url of the model is: https://ersilia-os/$MODEL_ID" \
+                              --body "$ISSUE_BODY" \
                               --label "bug" \
                               --repo $REPO_OWNER/$REPO_NAME
             fi
-
-
-
-          while IFS= read -r MODEL_ID; do
-            gh issue create --title "Model $MODEL_ID is not registered in AirTable" \
-                            --body "Hi! 🚨 The model $MODEL_ID is found in the ersilia repositories but not in AirTable! Please consider removing this model. The url of the model is: https://github.com/ersilia-os/$MODEL_ID" \
-                            --label "bug" \
-                            --repo $REPO_OWNER/$REPO_NAME
           done < nonregistered_model_repos.txt
           
