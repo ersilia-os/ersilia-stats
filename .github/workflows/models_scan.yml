@@ -52,7 +52,7 @@ jobs:
           while IFS= read -r MODEL_ID; do
             ISSUE_TITLE="🚨 Model $MODEL_ID repository not registered in AirTable 🚨"
 
-            ISSUE_BODY=$'Hi! 👋\n\nThe model $MODEL_ID has an associated repository in the [ersilia-os](https://github.com/ersilia-os) organization profile, but there is **no registered record in the AirTable base.**\n\nPlease consider removing this repository from ersilia-os since it is anyway not accessible from the Ersilia CLI if no AirTable record is available.\n\nThank you! 🙏'
+            ISSUE_BODY="Hi! 👋 The model [$MODEL_ID](https://github.com/ersilia-os/$MODEL_ID) has an associated repository in the [ersilia-os](https://github.com/ersilia-os) organization profile, but there is **no registered record in the AirTable base.** 🙏 Please consider removing this repository from ersilia-os since it is anyway not accessible from the Ersilia CLI if no AirTable record is available."
             
             # Check if issue already exists
             if gh issue list --repo $REPO_OWNER/$REPO_NAME --search "$ISSUE_TITLE in:title" | grep -q "$ISSUE_TITLE"; then
@@ -61,7 +61,7 @@ jobs:
               # Create new issue
               gh issue create --title "$ISSUE_TITLE" \
                               --body "$ISSUE_BODY" \
-                              --label "bug" \
+                              --label "maintenance" \
                               --repo $REPO_OWNER/$REPO_NAME
             fi
           done < nonregistered_model_repos.txt
