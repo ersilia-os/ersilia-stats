@@ -3,15 +3,15 @@ name: Fetch Airtable Table and Convert to CSV
 # Trigger the workflow manually and accept inputs
 on:
   workflow_dispatch:
-    inputs:
-      airtable_base_id:
-        description: 'The ID of the Airtable base'
-        required: true
-        type: string
-      airtable_table_id:
-        description: 'The ID of the Airtable table'
-        required: true
-        type: string
+    # inputs:
+    #   airtable_base_id:
+    #     description: 'The ID of the Airtable base'
+    #     required: true
+    #     type: string
+    #   airtable_table_id:
+    #     description: 'The ID of the Airtable table'
+    #     required: true
+    #     type: string
 
 jobs:
   fetch_table:

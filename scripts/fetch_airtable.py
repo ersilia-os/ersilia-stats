@@ -10,6 +10,7 @@ from pyairtable.formulas import match
 airtable_api_key = sys.argv[1]
 BASE_ID = "app1iYv78K6xbHkmL"
 TABLE_ID = "tbluZtI3W9pseCSPH"
+
 def parse_arguments():
     """
     Parse command line arguments.
