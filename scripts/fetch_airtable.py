@@ -3,7 +3,6 @@
 import os
 import sys
 import argparse
-import json
 import csv
 from pyairtable import Api
 from pyairtable.formulas import match
@@ -105,9 +104,10 @@ def main():
     """
 
     args = parse_arguments()
+    airtable_api_key = os.getenv("AIRTABLE_API_KEY")
 
     # Fetch data from Airtable
-    records = fetch_table(args.airtable_api_key, args.base_id, args.table_id)
+    records = fetch_table(airtable_api_key, args.base_id, args.table_id)
 
     # Determine output file name
     output_file = args.output if args.output else f"{args.table_id}.csv"
