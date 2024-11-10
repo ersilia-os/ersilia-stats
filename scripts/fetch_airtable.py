@@ -7,6 +7,7 @@ import csv
 from pyairtable import Api
 from pyairtable.formulas import match
 
+airtable_api_key = sys.argv[1]
 def parse_arguments():
     """
     Parse command line arguments.
@@ -15,7 +16,6 @@ def parse_arguments():
         argparse.Namespace: Parsed command line arguments.
     """
     parser = argparse.ArgumentParser(description='Fetch data from an Airtable table and convert it to CSV.')
-    parser.add_argument('--api_key', required=True, help='API key for Airtable.')
     parser.add_argument('--base_id', required=True, help='The ID of the Airtable base.')
     parser.add_argument('--table_id', required=True, help='The name of the table to fetch.')
     return parser.parse_args()

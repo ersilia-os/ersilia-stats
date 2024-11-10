@@ -35,7 +35,7 @@ jobs:
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
-          python scripts/fetch_airtable.py \
+          python scripts/fetch_airtable.py \ $AIRTABLE_API_KEY
             --base_id "${{ github.event.inputs.airtable_base_id }}" \
             --table_id "${{ github.event.inputs.table_id }}"
 
