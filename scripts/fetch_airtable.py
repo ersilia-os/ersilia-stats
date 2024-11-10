@@ -17,18 +17,17 @@ def parse_arguments():
     """
     parser = argparse.ArgumentParser(description='Fetch data from an Airtable table and convert it to CSV.')
     parser.add_argument('--base_id', required=True, help='The ID of the Airtable base.')
-    parser.add_argument('--table_name', required=True, help='The name of the table to fetch.')
-    parser.add_argument('--output', default=None, help='Output CSV file name. Defaults to <table_name>.csv')
+    parser.add_argument('--table_id', required=True, help='The name of the table to fetch.')
     return parser.parse_args()
 
-def fetch_table(api_key, base_id, table_name):
+def fetch_table(api_key, base_id, table_id):
     """
     Fetch data from an Airtable table.
 
     Args:
         api_key (str): API key for Airtable.
         base_id (str): ID of the Airtable base.
-        table_name (str): Name of the table to fetch.
+        table_id (str): ID of the table to fetch.
 
     Returns:
         list: List of records from the table.
@@ -38,9 +37,9 @@ def fetch_table(api_key, base_id, table_name):
     """
     try:
         api = Api(api_key)
-        table = api.table(base_id, table_name)
+        table = api.table(base_id, table_id)
         records = table.all()
-        print(f"Fetched {len(records)} records from table '{table_name}'.")
+        print(f"Fetched {len(records)} records from table '{table_id}'.")
         return records
     except Exception as e:
         print(f"Error: Failed to fetch data from Airtable. Exception: {e}")
@@ -113,10 +112,10 @@ def main():
         sys.exit(1)
 
     # Fetch data from Airtable
-    records = fetch_table(airtable_api_key, args.base_id, args.table_name)
+    records = fetch_table(airtable_api_key, args.base_id, args.table_id)
 
     # Determine output file name
-    output_file = args.output if args.output else f"{args.table_name}.csv"
+    output_file = args.output if args.output else f"{args.table_id}.csv"
 
     # Convert fetched data to CSV
     convert_to_csv(records, output_file)
