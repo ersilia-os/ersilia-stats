@@ -106,10 +106,7 @@ def main():
     args = parse_arguments()
 
     # Obtain Airtable API key from environment variable
-    airtable_api_key = os.getenv('AIRTABLE_API_KEY')
-    if not airtable_api_key:
-        print("Error: AIRTABLE_API_KEY environment variable is not set.")
-        sys.exit(1)
+    airtable_api_key = sys.argv[1]
 
     # Fetch data from Airtable
     records = fetch_table(airtable_api_key, args.base_id, args.table_id)
