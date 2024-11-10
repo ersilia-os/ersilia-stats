@@ -16,6 +16,7 @@ def parse_arguments():
         argparse.Namespace: Parsed command line arguments.
     """
     parser = argparse.ArgumentParser(description='Fetch data from an Airtable table and convert it to CSV.')
+    parser.add_argument('--api_key', required=True, help='API key for Airtable.')
     parser.add_argument('--base_id', required=True, help='The ID of the Airtable base.')
     parser.add_argument('--table_id', required=True, help='The name of the table to fetch.')
     return parser.parse_args()
@@ -105,11 +106,8 @@ def main():
 
     args = parse_arguments()
 
-    # Obtain Airtable API key from environment variable
-    airtable_api_key = sys.argv[1]
-
     # Fetch data from Airtable
-    records = fetch_table(airtable_api_key, args.base_id, args.table_id)
+    records = fetch_table(args.airtable_api_key, args.base_id, args.table_id)
 
     # Determine output file name
     output_file = args.output if args.output else f"{args.table_id}.csv"
