@@ -11,18 +11,6 @@ airtable_api_key = sys.argv[1]
 BASE_ID = "app1iYv78K6xbHkmL"
 TABLE_ID = "tbluZtI3W9pseCSPH"
 
-def parse_arguments():
-    """
-    Parse command line arguments.
-
-    Returns:
-        argparse.Namespace: Parsed command line arguments.
-    """
-    parser = argparse.ArgumentParser(description='Fetch data from an Airtable table and convert it to CSV.')
-    # parser.add_argument('--base_id', required=True, help='The ID of the Airtable base.')
-    # parser.add_argument('--table_id', required=True, help='The name of the table to fetch.')
-    return parser.parse_args()
-
 def fetch_table(api_key, base_id, table_id):
     """
     Fetch data from an Airtable table.
@@ -94,26 +82,11 @@ def convert_to_csv(records, output_file):
         sys.exit(1)
 
 def main():
-    """
-    Main entry point for the script.
-
-    This function fetches data from Airtable given a base ID and table name, and
-    writes the data to a CSV file. The output file name is determined by the
-    `--output` command line argument, or defaults to `<table_name>.csv` if not
-    provided.
-
-    The function exits with a status code of 1 if an error occurs when fetching
-    data from Airtable or writing the data to CSV.
-    """
-
-    args = parse_arguments()
-    airtable_api_key = os.getenv("AIRTABLE_API_KEY")
-
     # Fetch data from Airtable
     records = fetch_table(airtable_api_key, BASE_ID, TABLE_ID)
 
     # Determine output file name
-    output_file = args.output if args.output else f"{args.table_id}.csv"
+    output_file = f"{TABLE_ID}.csv"
 
     # Convert fetched data to CSV
     convert_to_csv(records, output_file)
