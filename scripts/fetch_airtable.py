@@ -1,28 +1,24 @@
-#!/usr/bin/env python3
-
 import os
 import sys
 import argparse
-import csv
+import csv    
+import os
 from pyairtable import Api
 from pyairtable.formulas import match
 
-airtable_api_key = sys.argv[1]
+airtable_api_key = sys.argv[1] #takes in first system arg
 BASE_ID = "app1iYv78K6xbHkmL"
-TABLE_ID = "tbluZtI3W9pseCSPH"
+TABLE_ID = "tblQlxprqUmjHxrmF"
 
 def fetch_table(api_key, base_id, table_id):
     """
     Fetch data from an Airtable table.
-
     Args:
         api_key (str): API key for Airtable.
         base_id (str): ID of the Airtable base.
         table_id (str): ID of the table to fetch.
-
     Returns:
         list: List of records from the table.
-
     Raises:
         SystemExit: If an exception occurs when fetching data from Airtable.
     """
@@ -38,17 +34,7 @@ def fetch_table(api_key, base_id, table_id):
 
 def convert_to_csv(records, output_file):
     """
-    Convert a list of Airtable records to a CSV file.
-
-    Args:
-        records (list): List of records to write to CSV.
-        output_file (str): Path to output CSV file.
-
-    Returns:
-        None
-
-    Raises:
-        SystemExit: If an exception occurs when writing data to CSV.
+    Converts to CSV taking in airtable records
     """
     if not records:
         print("No records found to write to CSV.")
@@ -63,7 +49,7 @@ def convert_to_csv(records, output_file):
     # Define CSV headers: id, createdTime, followed by sorted field names
     headers = ['id', 'createdTime'] + sorted(field_names)
     
-    try:
+    try: #print to output file
         with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=headers)
             writer.writeheader()
@@ -85,11 +71,15 @@ def main():
     # Fetch data from Airtable
     records = fetch_table(airtable_api_key, BASE_ID, TABLE_ID)
 
-    # Determine output file name
-    output_file = f"table_test.csv"
+    # directs the CSV to be stored in data
+    folder_path = "data" 
+    file_name = "table_test.txt"
+
+    # Create the full file path
+    output_path = os.path.join(folder_path, file_name)
 
     # Convert fetched data to CSV
-    convert_to_csv(records, output_file)
+    convert_to_csv(records, output_path)
 
 if __name__ == "__main__":
     main()
