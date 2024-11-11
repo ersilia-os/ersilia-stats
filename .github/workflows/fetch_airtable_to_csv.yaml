@@ -34,7 +34,18 @@ jobs:
       - name: Run fetch_airtable.py
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         run: |
           python scripts/fetch_airtable.py $AIRTABLE_API_KEY
-            
+          
+      - name: Push New CSV to branch
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name 'GitHub Action (Adding file to Python)'
+          git config --global user.email 'aliisona@users.noreply.github.com'
+          git commit -am "Adding CSV files"
+          git push  
 
