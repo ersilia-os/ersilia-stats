@@ -35,6 +35,6 @@ jobs:
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
-          python scripts/fetch_airtable.py \ $AIRTABLE_API_KEY
+          python scripts/fetch_airtable.py $AIRTABLE_API_KEY
             
 
