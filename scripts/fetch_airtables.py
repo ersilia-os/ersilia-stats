@@ -108,5 +108,10 @@ def main():
         # Convert fetched data to CSV
         convert_to_csv(records, output_path)
 
+        if os.path.exists(output_path):
+            print(f"File created successfully at {output_path}")
+        else:
+            print(f"Failed to create file at {output_path}")
+
 if __name__ == "__main__":
     main()
