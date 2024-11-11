@@ -46,6 +46,7 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action (Adding file to Python)'
           git config --global user.email 'aliisona@users.noreply.github.com'
+          git add *
           git commit -am "Adding CSV files"
           git push  
 

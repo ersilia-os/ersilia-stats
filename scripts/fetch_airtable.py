@@ -86,7 +86,7 @@ def main():
     records = fetch_table(airtable_api_key, BASE_ID, TABLE_ID)
 
     # Determine output file name
-    output_file = f"{TABLE_ID}.csv"
+    output_file = f"table_test.csv"
 
     # Convert fetched data to CSV
     convert_to_csv(records, output_file)
