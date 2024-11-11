@@ -73,7 +73,7 @@ def main():
 
     # directs the CSV to be stored in data
     folder_path = "data" 
-    file_name = "Projects.csv"
+    file_name = f"base.{BASE_ID}.table_{TABLE_ID}.csv"
 
     # Create the full file path
     output_path = os.path.join(folder_path, file_name)
