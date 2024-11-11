@@ -55,4 +55,4 @@ jobs:
           branch: update-airtable-csv-${{ github.run_id }}
           title: "Update CSV files from Airtable"
           body: "This PR updates the CSV files based on the latest data from Airtable."
-          base: main
+          base: create-CSVs
