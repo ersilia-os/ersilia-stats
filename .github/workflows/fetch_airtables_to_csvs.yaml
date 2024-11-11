@@ -40,13 +40,12 @@ jobs:
           git checkout -b update-airtable-csv-${{ github.run_id }}
 
       - name: Commit changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git add .
-          git commit -m "Update CSV files from Airtable" || echo "No changes to commit."
-          git push origin update-airtable-csv-${{ github.run_id }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: t4sg-airtable-to-csv
+          message: "Update CSV files from Airtable"
+          new_branch: update-airtable-csv-${{github.run_id}}
+          push: true
 
       # - name: Check for file existence
       #   run: ls -R data
