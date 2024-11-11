@@ -42,6 +42,15 @@ jobs:
           git add *
           git commit -am "Update CSV files from Airtable"
 
+      - name: Check for file existence
+        run: ls -R data
+      
+      - name: Check git status
+        run: git status
+      
+      - name: Show last commit
+        run: git show --name-status
+
       - name: Push changes to the new branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
