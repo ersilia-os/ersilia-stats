@@ -87,6 +87,8 @@ def read_csv_as_dicts(file_path):
         print(f"Error: Failed to read CSV file. Exception: {e}")
         sys.exit(1)
 
+    return data
+
 def main():
     # Retrieve CSVs with table information
     csv_file_path = 'data/airtable_api_identifiers.csv'
