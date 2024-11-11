@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'data/airtable_api_identifiers.csv'
+  workflow_dispatch:
 
 jobs:
   fetch_table:
