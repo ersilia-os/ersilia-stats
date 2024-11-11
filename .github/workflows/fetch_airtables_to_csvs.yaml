@@ -6,6 +6,8 @@ on:
     paths:
       - 'data/airtable_api_identifiers.csv'
   workflow_dispatch:
+permissions:
+  contents: write
 
 jobs:
   fetch_table:
@@ -44,20 +46,16 @@ jobs:
           git remote set-url origin https://github-actions:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add .
           git commit -m "Update CSV files from Airtable" || echo "No changes to commit."
+          git push origin update-airtable-csv-${{ github.run_id }}
 
-      - name: Check for file existence
-        run: ls -R data
+      # - name: Check for file existence
+      #   run: ls -R data
       
-      - name: Check git status
-        run: git status
+      # - name: Check git status
+      #   run: git status
       
-      - name: Show last commit
-        run: git show --name-status
-
-      - name: Push changes
-        uses: ad-m/github-push-action@update-airtable-csv-${{ github.run_id }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Show last commit
+      #   run: git show --name-status
 
       - name: Create a Pull Request
         uses: peter-evans/create-pull-request@v5
