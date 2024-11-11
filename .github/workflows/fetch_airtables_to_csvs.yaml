@@ -1,4 +1,4 @@
-name: Fetch Airtable Table and Convert to CSV
+name: Fetch Airtable Tables and Convert to CSVs
 
 # Trigger the workflow on push to the specific file
 on:
@@ -25,11 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyairtable
 
-      - name: Run fetch_airtable.py
+      - name: Run fetch_airtables.py
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
-          python scripts/fetch_airtable.py $AIRTABLE_API_KEY
+          python scripts/fetch_airtables.py $AIRTABLE_API_KEY
 
       - name: Create a new branch
         run: |
