@@ -41,7 +41,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add .
-          git commit -am "Update CSV files from Airtable"
+          git commit -m "Update CSV files from Airtable" || echo "No changes to commit."
 
       - name: Check for file existence
         run: ls -R data
@@ -56,7 +56,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push --set-upstream origin update-airtable-csv-${{ github.run_id }}
+          git push origin update-airtable-csv-${{ github.run_id }}
+          git log --pretty=oneline --abbrev-commit --graph --decorate --all
 
       - name: Create a Pull Request
         uses: peter-evans/create-pull-request@v5
