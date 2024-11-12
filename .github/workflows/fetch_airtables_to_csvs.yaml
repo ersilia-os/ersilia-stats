@@ -53,6 +53,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.BRANCH_NAME }}  # Push to the new branch created earlier
 
+      - name: Wait for branch recognition
+        run: sleep 10  # Optional: Wait a few seconds to ensure branch is recognized remotely
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: List remote branches
+        run: git branch -r
+
       - name: Create a Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
