@@ -1,0 +1,198 @@
+id,createdTime,Collaborators,Community,Conferences,Country,Donations,Imported table,Income Group,Population,Region,Subregion
+rec02yam7Zsm0u0W8,2023-12-08T07:52:03.000Z,,,,Maldives,,,UMIC,600000,Asia,Southern Asia
+rec04FOULJyRzLm4J,2023-12-08T07:52:03.000Z,Kenya Medical Research Institute,['recUDby0yXMNa07pQ'],['rechLsReFrOVFS2vd'],Kenya,,"['recdtZXPofDhKR05d', 'rectRemc3bU46MGtX']",LMIC,54000000,Africa,Sub-Saharan Africa
+rec09pnHpHhsbuFmH,2023-12-08T07:52:03.000Z,,,,Germany,,"['rec10JsGFMceYNviC', 'recANJMRBGQfTiorU', 'recCsn3ga7AWQPMOe', 'recuqWzQCddQpf64b']",HIC,84000000,Europe,Western Europe
+rec0jtFAAV5rQT6iT,2023-12-08T07:52:03.000Z,,,,South Sudan,,,LIC,13000000,,
+rec1GV3aU7GEXsh47,2023-12-08T07:52:03.000Z,,,,Burkina,,,LIC,22000000,,
+rec1gITT1jPGWmAC8,2023-12-08T07:52:03.000Z,,,,Argentina,,,UMIC,46000000,Americas,Latin America and the Caribbean
+rec1iTCb5BjoEq6BQ,2023-12-08T07:52:03.000Z,,,,Ecuador,,,UMIC,19000000,Americas,Latin America and the Caribbean
+rec2YkwgOoOPmDaGl,2023-12-08T07:52:03.000Z,,"['recpABLOJt08ENWHy', 'recGRxXwYvzyCc5jD']",,Colombia,,,UMIC,52000000,Americas,Latin America and the Caribbean
+rec2f2efSNdWzXfLG,2023-12-08T07:52:03.000Z,,,,Ireland [Republic],,,HIC,5200000,Europe,Northern Europe
+rec2zDKGckhbeCGqE,2023-12-08T07:52:03.000Z,"Centre for Infectious Disease Research Zambia, Apex University",,['recFD0bpcm4ciMKQ4'],Zambia,,"['recufKZgZ42sJtlDV', 'recoWiGipkDQpj945']",LMIC,19000000,Africa,Sub-Saharan Africa
+rec3aZ7PsSnZj3e2t,2023-12-08T07:51:46.000Z,,,,Afghanistan,,,LIC,42000000,Asia,Southern Asia
+rec3nC9a0W1vKoVBH,2023-12-08T07:52:03.000Z,,,,Botswana,,,UMIC,2400000,Africa,Sub-Saharan Africa
+rec43RfSGh2tdFgJ6,2023-12-08T07:52:03.000Z,,"['recDo5NgERhiWh1S0', 'reciPwfy7xwlO9R3s', 'recRmGpPHzRmIqA2w', 'recps83oukNvzGPUX', 'rec71h3GgcryADI5Z', 'recSs3iq071lgtyE9', 'rechvB8Ycxeq0lH3M', 'recfltXjBND2BXqUE', 'recTfDQgeS0EN05PA']",,Nigeria,,,LMIC,218000000,Africa,Sub-Saharan Africa
+rec45gNIgxStxBW0b,2023-12-08T07:52:03.000Z,,,,Mexico,,['rec7o6VrtZle0t7wn'],UMIC,126000000,,
+rec4R0jfQw61IswGM,2023-12-08T07:52:03.000Z,"Drugs for Neglected Diseases Initiative, Medicines for Malaria Venture",,,Switzerland,,"['recpSb764HFyImbds', 'recC0J05vOi7psFFo', 'recBHA9YvoxIf0ab6', 'recfsCHWchHdu0ABJ', 'recWDrB2jvAUGCLnn', 'rec2xGpQ8kmSaRKOR', 'recrECfutZL7KSxQ9', 'recw2SShQ2Ftq2Nb2']",HIC,9000000,Europe,Western Europe
+rec4qpaa4pp9KQu3m,2023-12-08T07:52:03.000Z,,,,Latvia,,,HIC,1800000,Europe,Northern Europe
+rec56rFWOFhuZAPi5,2023-12-08T07:52:03.000Z,,"['recPGQvZk5mYvFoz3', 'rectaI4PkUiUuZIed']",,Pakistan,,,LMIC,242000000,Asia,Southern Asia
+rec59evAwATJhUdMk,2023-12-08T07:52:03.000Z,,,,Vanuatu,,,LIC,300000,Oceania,Melanesia
+rec5H7gz95voLLpEK,2023-12-08T07:52:03.000Z,,,,Thailand,,,UMIC,71000000,Asia,South-Eastern Asia
+rec5cVTrkIOlkVcy5,2023-12-08T07:52:03.000Z,,,,Bolivia,,,LMIC,12000000,Americas,Latin America and the Caribbean
+rec5fenpFoUSUQBUC,2023-12-08T07:52:03.000Z,,,,Mauritania,,,LMIC,4500000,Africa,Sub-Saharan Africa
+rec5oJCA31JbfKPOb,2023-12-08T07:52:03.000Z,,,,Uzbekistan,,,UMIC,35000000,Asia,Central Asia
+rec69pZb7SvzriQlG,2023-12-08T07:52:03.000Z,,,,Iran,,,UMIC,89000000,Asia,Southern Asia
+rec6INgmYe05VA4nv,2023-12-08T07:52:03.000Z,,,,Laos,,,LMIC,8000000,Asia,South-Eastern Asia
+rec6NT7sPNWc8Brcx,2023-12-08T07:52:03.000Z,,,,Haiti,,,LIC,12000000,Americas,Latin America and the Caribbean
+rec7IuBvlpnzQhH7N,2023-12-08T07:52:03.000Z,,,,Malaysia,,,UMIC,33000000,Asia,South-Eastern Asia
+rec7LHhYLYSEiuqny,2023-12-08T07:52:03.000Z,,,,Monaco,,,,40000,Europe,Western Europe
+rec7nPBGCo6VKUxhT,2023-12-08T07:52:03.000Z,,,,Brazil,,"['receAceePBVtZ5CjI', 'recKti51ORbbnBijp', 'recfeB9FaiVITBmWV']",UMIC,215000000,Americas,Latin America and the Caribbean
+rec7vzObBEbzuS9Ue,2023-12-08T07:52:03.000Z,,,,Palau,,,,20000,Oceania,Micronesia
+rec83A4QhlXsTEjZs,2023-12-08T07:52:03.000Z,,,,Azerbaijan,,,UMIC,10000000,Asia,Western Asia
+rec84vRvetsoi585t,2023-12-08T07:52:03.000Z,,,,Somalia,,,LIC,17000000,Africa,Sub-Saharan Africa
+rec91S81NZqowqjNT,2023-12-08T07:52:03.000Z,,,,Djibouti,,,LMIC,1000000,Africa,Sub-Saharan Africa
+rec9JJK2fOcBFal2Z,2023-12-08T07:52:03.000Z,CeMM Research Center for Molecular Medicine,,,Austria,['rec2sJkKbqwRXmmqS'],['rec4pp3YOfIXkqSs6'],HIC,9000000,Europe,Western Europe
+rec9NavVWwwVYV0TC,2023-12-08T07:52:03.000Z,,,,San Marino,,,HIC,30000,Europe,Southern Europe
+rec9XWBNDmRK5cE00,2023-12-08T07:52:03.000Z,,,,Mali,,,LIC,22000000,Africa,Sub-Saharan Africa
+recA5BAVKhG1o6eOU,2023-12-08T07:52:03.000Z,,,,Portugal,,,HIC,10000000,Europe,Southern Europe
+recAJU0FKDN6Z8yZa,2023-12-08T07:52:03.000Z,,,['rec5OR1OvpJ9lcSLS'],Sweden,,,HIC,10500000,Europe,Northern Europe
+recAiMP5QuoefhjOK,2023-12-08T07:52:03.000Z,,,,Saint Vincent & the Grenadines,,,,100000,Americas,Latin America and the Caribbean
+recBiWCG8kTIIsASq,2023-12-08T07:52:03.000Z,,"['recxD5bRn4ha5pIut', 'recnIB1Gjl06vZNz7', 'recxPUzscyXAWKuRa']",,Australia,,['recWJLQWFfKbfBiUo'],HIC,26000000,Oceania,Australia and New Zealand
+recBrTSqQctTC3HCL,2023-12-08T07:52:03.000Z,,,,Vietnam,,,LMIC,99000000,Asia,South-Eastern Asia
+recC0NRI1QCXEp86i,2023-12-08T07:52:03.000Z,,,,Greece,,,HIC,10400000,Europe,Southern Europe
+recC36fgNHIfvGcPH,2023-12-08T07:52:03.000Z,,,,Costa Rica,,,UMIC,5200000,Americas,Latin America and the Caribbean
+recCKrXFKB160zftG,2023-12-08T07:52:03.000Z,,,,Georgia,,,UMIC,4000000,Asia,Western Asia
+recCXEqdBt5g3ww0T,2023-12-08T07:52:03.000Z,,,,Egypt,,,UMIC,104000000,Africa,Northern Africa
+recCf4tCE25pEaa08,2023-12-08T07:52:03.000Z,,,,Philippines,,,UMIC,113000000,Asia,South-Eastern Asia
+recCjD010dinPedAr,2023-12-08T07:52:03.000Z,,,,Vatican City,,,,1000,Europe,Southern Europe
+recCnBPXz9T6q81Ju,2023-12-08T07:52:03.000Z,,,,Brunei,,,HIC,500000,Asia,South-Eastern Asia
+recCqtsZ1UGpMZtm0,2023-12-08T07:52:03.000Z,,,,Liechtenstein,,,HIC,40000,Europe,Western Europe
+recDn2mErnSKfY0Gd,2023-12-08T07:52:03.000Z,,,,Iceland,,,HIC,400000,Europe,Northern Europe
+recEhPfHSM4dgHjRe,2023-12-08T07:52:03.000Z,,['recwDQI7wvWXrxwvS'],,Uganda,,,LIC,48000000,Africa,Sub-Saharan Africa
+recFo93ku0tE1VUgb,2023-12-08T07:52:03.000Z,,,,United Arab Emirates,,['rectCJ5EJ9PKGfTIr'],HIC,10000000,Asia,Western Asia
+recFs1g9UXjm0pT37,2023-12-08T07:52:03.000Z,,,,Netherlands,,['recsqfLFyoqOzFtYv'],HIC,18000000,Europe,Western Europe
+recFsDqBpDODisSBg,2023-12-08T07:52:03.000Z,,,['recH8Jwc8wJ8alURZ'],Senegal,,,LMIC,17000000,Africa,Sub-Saharan Africa
+recGJmU42JsxxP7Cq,2023-12-08T07:52:03.000Z,,,,Suriname,,,UMIC,600000,Americas,Latin America and the Caribbean
+recGWpz40uYmwGj7m,2023-12-08T07:52:03.000Z,,,,Moldova,,,LMIC,2600000,Europe,Eastern Europe
+recGheRAPmyfcf1Rh,2023-12-08T07:52:03.000Z,,,,Lithuania,,,HIC,2700000,Europe,Northern Europe
+recGyBHzJ9cEpFdvU,2023-12-08T07:52:03.000Z,,,,Bahrain,,,HIC,1500000,Asia,Western Asia
+recHDuLb55lL6YghY,2023-12-08T07:52:03.000Z,,,,Marshall Islands,,,,60000,Oceania,Micronesia
+recHT5ZWgY5YR4aqg,2023-12-08T07:52:03.000Z,,,,Chile,,,HIC,19000000,Americas,Latin America and the Caribbean
+recHxgBhVm4eaBdWU,2023-12-08T07:52:03.000Z,,,,Armenia,,,UMIC,3000000,Asia,Western Asia
+recIY1LmlfJnDh8pd,2023-12-08T07:52:03.000Z,,,,Grenada,,,UMIC,100000,Americas,Latin America and the Caribbean
+recJTjtAXCEIp8MC5,2023-12-08T07:52:03.000Z,,,,Paraguay,,,UMIC,7500000,Americas,Latin America and the Caribbean
+recK35k8ruew3qzPX,2024-04-26T08:35:46.000Z,,,['recPPsTSoqizJMEe5'],Europe,,,,,,
+recK6sdFlifJ70mP3,2023-12-08T07:52:03.000Z,,,,Montenegro,,,UMIC,600000,Europe,Southern Europe
+recK7jcLjFhUCtCFP,2023-12-08T07:52:03.000Z,"Wistar Institute, Northeastern University, New York University Langone","['rec6rcAVm9RKida5q', 'recOiLDSjjBBX82J9', 'recGNFhPA6v4BReV8', 'rec4KoiM9mWaw2DKz', 'recRurk1pjpcqrIsj', 'rec7HtcQhidauPTtV', 'rec7urEmZAJrCVweB', 'recPlzwlLIitFetWg', 'recR9O8v2PZGc7gn7', 'recFw76lpT7BWk7U2', 'rec91awbRNiyp7wfS', 'reco8u7bIlJTgoDh0', 'recutuxgG4Ix2lQoN', 'recvUprejpqUNDQpt', 'recY4zK7SvE6ZYFHD', 'recm2QzzCp8DSYF54', 'recyCMXd39VnNARff', 'recwpOSq2zbECGM1t', 'rech9tBa7MyfWaz6h', 'reczNhRsYmWaTlpKR', 'recyWXyQ8wgb6UxFr', 'recqgyaZZCtk4SsmP', 'recegAzhP9xHbpqB0', 'recHJ92g2p7BGRm2f', 'rec8RULytza2s6Eai', 'recWq5NgiX6e8xbKj', 'recIyxJBUlaHffzHq', 'recVl3SQtJWZ7CJFJ', 'recBSFFROTlVUCMPA', 'recFvRb6NXficqfFX', 'rec5tJqH6R8tZN92D', 'recowWZypY4CIS2xY', 'recHcVMCmg4rPz6mE', 'recMMGK6x768ekhHb', 'recV5HXLOcf7QpKeo', 'recbu5mZZkfsK83RO', 'reccGaJ1eH2YubPRu', 'recjv2Sg2Dkx2xFUM', 'reczlDQpV5a7yeWK2', 'recx17ZJwZ17kp2pv', 'recqpsgMww82dsf3A', 'rec8CCkLc89hiFVrq', 'recyvCGbYUpmtUgsu', 'recYo8ci8TCkjKXl4', 'recDMUprspDuUYSJN', 'recMzS9IoCvN1Kg79', 'recdJBlh5s5T3Hci1', 'rec3YXdJHdXPe7Tw9']","['recQcHKAlWegDcE1d', 'recix4KBK7lKczSjZ', 'rec8D0KravCLfavPx', 'recPPsTSoqizJMEe5', 'recnSf8mQKh9RSwqi']",United States,"['recu3sOJhUUiuWAor', 'recDGDIyizMQA8pU0', 'recaFW2jgunlL0Nuq', 'reczBcaA3b8amnnCS', 'recFOJnC8fQJfC604']","['rec1TjXvTumME7x5L', 'recwc1p07vzXT0qwR', 'recVaIRwIc53m8DoG', 'rec1VukbtVoIQWIXt', 'rec6WIcYHxK1TGncd', 'rec1hs07aGXHzsMc9', 'recqhZBk9Jjh2BSvf', 'recorSE1oeqjRXcrb', 'rec1a5wCBLEUlySyD', 'recDjmp1sdTYcHOqm', 'recYj5eJn2xaueD22', 'rec5EsILDAfurtpu5', 'rec1c0GqZaPGQXLcp', 'rec0aBdsxiuE1diUT', 'recIvR4F9DEE7auhV', 'reczjfxnVL2XgBBqf', 'recCpuN6xZhuvUw96', 'recPwqhKNWpq2XhRR', 'recPonMghDrc7HY0x', 'recBXkWvz62oARNZW', 'recGf3xW7uJyKhkdx', 'recpMeRbyXCk1Ku5P', 'recIhoa2h1KYYN7Ou', 'recwqpZc7f6zLKFlf', 'recUghmYGzXylvnSl', 'reczCieNh9idVSJi0', 'recX9ohOVs7DeS1IR', 'recrGPkQ0GHoyTqG6', 'rec2K6P1RbUcvyvSz', 'recGAl8F0wAdGUa5c', 'rec7vrPXNV2i1r3uf', 'recz4JtvQ19EmNUKw', 'recKYcntxqXlX1xf1', 'recXj51Yl5EHQ4ZVC', 'recyGDzeJEoVuPowm', 'recRuIi5ASvnSpKZE', 'recwk3lnzglGJqCg3', 'recnaVIlum3IshPEB', 'rec9P3jU43Lo4VGxs', 'recjfOwwI6c3Ehs7N', 'recp6V0BYrr7xtno7', 'recxOjwRh7twpWN25', 'recBAvcmMa5IYoZPA', 'receWK8hNCuNfyreF', 'recjYQiIVFJPSEGHA', 'recYvD3nrzgXEnivf', 'recgFCccNkz825cBc', 'rec8aTcwvLhHNhft6', 'rec0ZhfVY8JmpZ5Rj', 'recBbVoObgZpqc8Io', 'reczZnd64aCPrDZzz', 'recJkOJuLMjKSr76o', 'recwTHOQpELBDf2Qz', 'recQ78u0N9ECE33EP', 'recscFsco8Q40pKgH', 'recPLKR2EoqhQk7IP', 'rectEvTgqsamQOosD', 'recjwZFDoPIrgECUB', 'recE1vpy5mkCBkWDQ', 'recS6AIiAnIZSyLbv', 'reck6U0K2KZBbBwDO', 'recbX6SLp9hUobuhJ', 'rec1O2nLVwKX2ZMht', 'recwpEYXL3A3CySqe', 'reczDHok1ollotQfV', 'recEf0VoAOz6arG5O', 'recZUpZ2U13Ij8LVq', 'recsuFfjassNyIu5r', 'recZR55TQCvoHqOIN', 'recx1ldLW9zSxPZqn', 'recIOJ013ibeYSLPX', 'recFiPXnEdBRzCmtB', 'recnqzLS2CrJ4oNtx', 'recgWvgVvFFqinyC1', 'recRdeKaxQvupA5hq', 'rec9hKTXZO5B6msns', 'rec1IeZ9dLbp0jAht', 'recnFzohqlUhBndzl', 'recJE9JWkXOrJkQC9', 'recX2RB9hIPY0DU5L', 'rec0R9MDPPi8vG2Dy', 'recagXHPpFZw6LKjL', 'rech2GsmLhn0kFgqS', 'rece3jh476oqm5DhZ', 'recAMQeRrJbJsVxjA', 'recCWIMNDg9vNPsfg', 'rec43VcSlu5JJTWzG', 'recEILSqQSWdKxZm4', 'recOFzjspaL9qCRCQ', 'recEltMeIRiLnQaCG', 'recjMp3jpOeYz2Bcq', 'recmQrJjdjV83NgJ1', 'recVtVQWFiyQ22ByP', 'reccWwoxBeg5Z1NBL', 'reculURo2deuOUoIv', 'rechOdAVxAck6X3Qj', 'recU4z4gxGPnNWLs5', 'recBTbDLUi5epOsih', 'rec6t4JipoZpYtoYl', 'recDUcNPALXBInopu']",HIC,335000000,Americas,Northern America
+recLPk4STAo8OBQyQ,2023-12-08T07:52:03.000Z,,,,Oman,,,HIC,4800000,Asia,Western Asia
+recLXpIu4gZL7vKBK,2023-12-08T07:52:03.000Z,,,,Macedonia,,,,2100000,Europe,Southern Europe
+recMEdUQoOXIKtUp4,2023-12-08T07:52:03.000Z,,,,Mauritius,,,UMIC,1300000,Africa,Sub-Saharan Africa
+recMWICrO7uv6h8J8,2023-12-08T07:52:03.000Z,,,,Liberia,,,LIC,5200000,Africa,Sub-Saharan Africa
+recMbTRBtrl2civCF,2023-12-08T07:52:03.000Z,,,,Kuwait,,,HIC,4700000,Asia,Western Asia
+recMnVes7mwZ4Hv3r,2023-12-08T07:52:03.000Z,,,,Tajikistan,,,LMIC,10000000,Asia,Central Asia
+recO7TwnWpFowmv4k,2023-12-08T07:52:03.000Z,,,,Bosnia Herzegovina,,,UMIC,3200000,Europe,Southern Europe
+recODK8p9BK0xzSKF,2023-12-08T07:52:03.000Z,,,,Venezuela,,,UMIC,29000000,Americas,Latin America and the Caribbean
+recODvSj1QpC6BBSc,2023-12-08T07:52:03.000Z,,,,Tuvalu,,,,10000,Oceania,Polynesia
+recOxXResHgTBXuOY,2023-12-08T07:52:03.000Z,,,,Gambia,,['recKN0PHUAp2dcCd4'],LIC,2500000,Africa,Sub-Saharan Africa
+recP4sJBwsk9aLRQO,2023-12-08T07:52:03.000Z,,,,Nauru,,,,10000,Oceania,Micronesia
+recPFQXQ1CJ1PDLYD,2023-12-08T07:52:03.000Z,,,,Romania,,,UMIC,19000000,Europe,Eastern Europe
+recPa6AuLKEGTxK0H,2023-12-08T07:52:03.000Z,,,,Guinea-Bissau,,,LIC,2000000,Africa,Sub-Saharan Africa
+recPb6TGjr3ArzaLQ,2023-12-08T07:52:03.000Z,,,,Yemen,,,LMIC,34000000,Asia,Western Asia
+recPepqvQn9uDVkMk,2023-12-08T07:52:03.000Z,,,,Malta,,,HIC,500000,Europe,Southern Europe
+recQDeKpCYIegChn5,2023-12-08T07:52:03.000Z,,,,Kosovo,,,UMIC,1800000,,
+recQUsl19SQuUMDLf,2023-12-08T07:52:03.000Z,,,,France,,['recXEtQtLdg499DvZ'],HIC,65000000,Europe,Western Europe
+recQd06Ua1twt1rcg,2023-12-08T07:52:03.000Z,,,,Cape Verde,,,LMIC,600000,Africa,Sub-Saharan Africa
+recQli11RjRORHedw,2023-12-08T07:52:03.000Z,,,,Bhutan,,,LMIC,800000,Asia,Southern Asia
+recQqGBQPsKC9z7q6,2023-12-08T07:52:03.000Z,,,,Solomon Islands,,,LMIC,800000,Oceania,Melanesia
+recQzTHyR1sEjNUDP,2023-12-08T07:52:03.000Z,,,,Korea North,,,,26000000,Asia,Eastern Asia
+recR0UMr1OO5Glynp,2023-12-08T07:52:03.000Z,"Ngouchi Memorial Institute for Medical Research, University of Ghana",,,Ghana,,"['recwkPr3knwW5c6Ho', 'recKJluJrJDlbEKII', 'recI6T5oljwjLYugV']",LMIC,33000000,Africa,Sub-Saharan Africa
+recREXMCbFSXJPXgJ,2023-12-08T07:52:03.000Z,,,,Indonesia,,,LMIC,278000000,Asia,South-Eastern Asia
+recRQg6CKP5JbtGhK,2023-12-08T07:52:03.000Z,"Holistic Drug Discovery and Development Center, University of Pretoria",['recZxEgJU1iaaWw0U'],,South Africa,,"['reclWUUCAvsEK1RIG', 'recJQEo4tjYymvage', 'recpT7uPpqYwIogTS', 'rec8TLkEaOZNGRBPL', 'recrtD9MMygtBRkh7', 'recF8FMKW5a8pNDd0', 'rec61X6lEI4M8VTpx', 'recYsVZiGBEuNoU5n', 'recrSzJLzRAOBjryc']",UMIC,60000000,Africa,Sub-Saharan Africa
+recRVf3WUKn3qYjcd,2023-12-08T07:52:03.000Z,,,,Comoros,,,LMIC,900000,Africa,Sub-Saharan Africa
+recRkrT82pvICtRCC,2023-12-08T07:52:03.000Z,Open Source Malaria,['reccFDoEHufKOZRUq'],"['recXyyBqFRmDjpTYp', 'recjyLXOTPqO92F9d']",United Kingdom,"['recDUw6F5VNXx2GRj', 'recDdGpNjCIikpr9G', 'rec10rSoFNkKdH7EG']","['rec5a7vYCs5uR7K6O', 'recwMx5zzqI9w2RFn', 'recad9LiYLMDUhDEX', 'reca8uFgljd1j4FfW', 'recJPK8qAaalPbjxJ', 'reca4nVHNoyYiI4iu', 'recHDDAsfAyNmLxJS', 'rec6Gl8XMWflj07LZ', 'recj7Ph0J9qGlSHdq', 'rec2P1O7i7qwy0zwe', 'recQhJHOZgVpH1CbM', 'recjJo5X2oEnA5ylZ', 'recZDgIs2LM15v1fB', 'rechRLvRmZwLDtB8D', 'recPuiszlD3eF9PAI', 'rec0BI2reMCAdfQDI', 'recjyzrMvheopTdxf', 'recFu4ZUaVnA0GZfX', 'recEpdBkCFGua22mJ', 'recgBdR15VKoDRi0n', 'recxq1WElKky1p2Bf', 'rec5HDjTsSizE9md3', 'reccs1nPauETWOU6O', 'recUzgzaVBWuyFksA', 'recmEM4V5m8c5S4wX', 'recqxgLZagNKT89Yf']",HIC,67000000,Europe,Northern Europe
+recRn2ltKuQ4IpRhc,2023-12-08T07:52:03.000Z,,,,Lebanon,,,UMIC,5400000,Asia,Western Asia
+recRzDwbpgX10xxXJ,2023-12-08T07:52:03.000Z,"University of Buea, University of Yaoundé I, Advanced Research and Health Innovation Lab, Mboa Lab, Institute of Medical Research and Medicinal Plant Studies",['rec8oX8oJ4avGslNP'],['recbKxAjbpozJFJHu'],Cameroon,,"['recR0EQnNRPUePQBR', 'rec4vhA2YOrdU3dtl', 'rectQfFyYpHKqYaGr', 'recNzzYl5w19ZuZSg', 'recRLAC5o2RnRrJlJ']",LMIC,27000000,Africa,Sub-Saharan Africa
+recSYHoVtYBzvVvPy,2023-12-08T07:52:03.000Z,,,,Malawi,,,LIC,20000000,Africa,Sub-Saharan Africa
+recSaf6BrD8QBunhj,2023-12-08T07:52:03.000Z,,,,Chad,,,LIC,17000000,Africa,Sub-Saharan Africa
+recSd7keGckqafXe8,2023-12-08T07:52:03.000Z,,,,Morocco,,,UMIC,37000000,Africa,Northern Africa
+recSmKkms7TvlwdJ2,2023-12-08T07:52:03.000Z,,,,Micronesia,,,,100000,Oceania,Micronesia
+recTCadc92yMLYzXh,2023-12-08T07:52:03.000Z,,,,Mozambique,,,LIC,33000000,Africa,Sub-Saharan Africa
+recTKs7Jsgrbr2xeW,2023-12-08T07:52:03.000Z,,,,Peru,,,UMIC,34000000,Americas,Latin America and the Caribbean
+recTN3kt6hBOpFPG5,2023-12-08T07:52:03.000Z,,,,Trinidad & Tobago,,,UMIC,1400000,Americas,Latin America and the Caribbean
+recTnbBx8f43iXD54,2023-12-08T07:52:03.000Z,,,,Seychelles,,,,100000,Africa,Sub-Saharan Africa
+recUCamAw3uIx5nz7,2023-12-08T07:52:03.000Z,,,['recPPsTSoqizJMEe5'],Japan,,['recprfgLikJKHgPGE'],HIC,125000000,Asia,Eastern Asia
+recUS45E9t4VnGza4,2023-12-08T07:52:03.000Z,,,,Hungary,,,HIC,9600000,Europe,Eastern Europe
+recUTOtqnXZx2Fvpy,2023-12-08T07:52:03.000Z,,,,Cambodia,,,LMIC,17000000,Asia,South-Eastern Asia
+recUZxh1lRyfGdqLP,2023-12-08T07:52:03.000Z,,,,East Timor,,,LMIC,1300000,Asia,South-Eastern Asia
+recUpXJ5ujiftHGLg,2023-12-08T07:52:03.000Z,,,,Swaziland,,,,1200000,,
+recV2CtdhBnbIxmd4,2023-12-08T07:52:03.000Z,,,,Uruguay,,,HIC,3500000,Americas,Latin America and the Caribbean
+recVbkdS6TDCg0IOs,2023-12-08T07:52:03.000Z,,,,Guatemala,,,UMIC,19000000,Americas,Latin America and the Caribbean
+recVs7aY2OoDbGDg8,2023-12-08T07:52:03.000Z,,,,Kiribati,,,,100000,Oceania,Micronesia
+recW4fEorP34ZRXsb,2023-12-08T07:52:03.000Z,,,,Togo,,,LMIC,8800000,Africa,Sub-Saharan Africa
+recWCDddHWp0dlkD0,2023-12-08T07:52:03.000Z,,,,New Zealand,,,HIC,5000000,Oceania,Australia and New Zealand
+recWOlo0VYKghzrad,2023-12-08T07:52:03.000Z,,,,Guyana,,,UMIC,800000,Americas,Latin America and the Caribbean
+recWkwF2HJJV8cBoc,2023-12-08T07:52:03.000Z,,,,Denmark,,,HIC,6000000,Europe,Northern Europe
+recWl0Js5wGlTybad,2023-12-08T07:51:46.000Z,,,,Algeria,,,UMIC,44000000,Africa,Northern Africa
+recXP7lWp9iOBj9JT,2023-12-08T07:52:03.000Z,Scuola Normale Superiore,['recGlN1xZBf5VQPvL'],,Italy,,['recX5mtTh9T0aDJmh'],HIC,59000000,Europe,Southern Europe
+recXPmifewR19HKg9,2023-12-08T07:52:03.000Z,,,,Tonga,,,,100000,Oceania,Polynesia
+recXpQWmlKyCwC8KZ,2023-12-08T07:52:03.000Z,Midlands State University,,,Zimbabwe,,['recVOf7EbwGGXT3md'],LMIC,15000000,Africa,Sub-Saharan Africa
+recYHth2pNzq5MDu7,2023-12-08T07:52:03.000Z,,,,Belarus,,,UMIC,9200000,Europe,Eastern Europe
+recYW0pDLk11j36gh,2023-12-08T07:52:03.000Z,,,,Qatar,,,HIC,3000000,Asia,Western Asia
+recYZLeNr8KJZTOll,2023-12-08T07:52:03.000Z,,,,Congo,,,LMIC,6000000,Africa,Sub-Saharan Africa
+recYy9f9L1Zn1LoNa,2023-12-08T07:52:03.000Z,,,,Ukraine,,,LMIC,37000000,Europe,Eastern Europe
+recZ0U5Gbp9qMmm2V,2023-12-08T07:52:03.000Z,,,,Sao Tome & Principe,,,LMIC,200000,Africa,Sub-Saharan Africa
+recZA2iJDWFVeAcr4,2023-12-08T07:51:46.000Z,,,,Albania,,,UMIC,2800000,Europe,Southern Europe
+recZFPUBhKNOV2lm9,2023-12-08T07:52:03.000Z,,['rec9BlSEkCJlp7awK'],,Singapore,,['recKqJBXTck4ZQuww'],HIC,5700000,Asia,South-Eastern Asia
+recZPpOJoyqoqTgoF,2023-12-08T07:52:03.000Z,,,,Sri Lanka,,,UMIC,22000000,Asia,Southern Asia
+recZXZPCJQFbzYhWD,2023-12-08T07:52:03.000Z,,,,Jordan,,,UMIC,11000000,Asia,Western Asia
+recZdLQl9NEtVEXFl,2023-12-08T07:52:03.000Z,,,,Fiji,,,UMIC,900000,Oceania,Melanesia
+recZjd5mkehXc1XHM,2023-12-08T07:52:03.000Z,,,,Turkmenistan,,,UMIC,6000000,Asia,Central Asia
+recZu6y3XMxC2gGUu,2023-12-08T07:52:03.000Z,,,,Iraq,,,UMIC,45000000,Asia,Western Asia
+reca0LkpQYMvmS3Re,2023-12-08T07:52:03.000Z,,,,Andorra,,,HIC,80000,Europe,Southern Europe
+recaSlMTYMU6s4zvg,2023-12-08T07:52:03.000Z,,,,St Kitts & Nevis,,,,50000,Americas,Latin America and the Caribbean
+reccc3MO4kSuuyMLG,2023-12-08T07:52:03.000Z,,,,Nepal,,,LMIC,32000000,Asia,Southern Asia
+reccjPzE6KEzH0yDh,2023-12-08T07:52:03.000Z,,,,Kazakhstan,,,UMIC,19000000,Asia,Central Asia
+recdsn1e3RpHjidzN,2023-12-08T07:52:03.000Z,,,,Slovakia,,,HIC,5400000,Europe,Eastern Europe
+recdyTg5cJ0mQI7kt,2023-12-08T07:52:03.000Z,,,,Congo [Democratic Rep],,,LMIC,97000000,Africa,Sub-Saharan Africa
+recf8D2dG0ComLW7q,2023-12-08T07:52:03.000Z,,,,Eritrea,,,LIC,3600000,Africa,Sub-Saharan Africa
+recfJmibGqQKiul4n,2023-12-08T07:52:03.000Z,,,,Cuba,,,UMIC,11000000,Americas,Latin America and the Caribbean
+recfiURLGF1cXT5i6,2024-04-26T08:41:24.000Z,,,['rec1sSa8oisTQZzkg'],Canada,,,HIC,38000000,Americas,Northern America
+recfmI3XDEb4dcwn0,2023-12-08T07:52:03.000Z,,,['recwIlXYB6CUGxx6v'],Korea South,,,HIC,52000000,Asia,Eastern Asia
+recgO0FUJH8K3xrEt,2023-12-08T07:52:03.000Z,,,,Cyprus,,,HIC,1200000,Asia,Western Asia
+recgVJtlAMu4HxOcg,2023-12-08T07:52:03.000Z,,,,Antigua & Deps,,,HIC,100000,Americas,Latin America and the Caribbean
+recgZnkkXhekQbFGf,2023-12-08T07:52:03.000Z,,,,Bulgaria,,,UMIC,6700000,Europe,Eastern Europe
+recgaBWVC403MtPPk,2023-12-08T07:52:03.000Z,,,,Myanmar [Burma],,,LMIC,55000000,Asia,South-Eastern Asia
+recgdf3gf7bz7mlCg,2023-12-08T07:52:03.000Z,,,,St Lucia,,,,200000,Americas,Latin America and the Caribbean
+recgkTcMeu2PuH5Fg,2023-12-08T07:52:03.000Z,,,,Bahamas,,,HIC,400000,Americas,Latin America and the Caribbean
+reciMfTdiJeoz52F3,2023-12-08T07:52:03.000Z,,,,Papua New Guinea,,,LMIC,10000000,Oceania,Melanesia
+recifEIvTqZrmAX4U,2023-12-08T07:52:03.000Z,,,,Sudan,,,LMIC,45000000,Africa,Northern Africa
+recifqEUuIhyuEZBc,2023-12-08T07:52:03.000Z,,,,Sierra Leone,,,LIC,8400000,Africa,Sub-Saharan Africa
+recjKTXfRLtXvDa2R,2023-12-08T07:52:03.000Z,,,,Jamaica,,,UMIC,3000000,Americas,Latin America and the Caribbean
+recjRnjrtK6rnrsqN,2023-12-08T07:52:03.000Z,,,,Bangladesh,,,LMIC,172000000,Asia,Southern Asia
+recjmJxBs9Zo4NVh6,2023-12-08T07:52:03.000Z,,,,Madagascar,,,LIC,29000000,Africa,Sub-Saharan Africa
+reck7TAEBZNJSfxSa,2023-12-08T07:52:03.000Z,,,,Niger,,,LIC,25000000,Africa,Sub-Saharan Africa
+reckEzaf328ArQut8,2023-12-08T07:52:03.000Z,,,,Dominica,,,,70000,Americas,Latin America and the Caribbean
+reckgrJ9XwxziJUId,2023-12-08T07:52:03.000Z,,,,Angola,,,LIC,35000000,Africa,Sub-Saharan Africa
+reckpSKYMExFxRAWx,2023-12-08T07:52:03.000Z,,,,Croatia,,,HIC,4000000,Europe,Southern Europe
+recl7H7gjaAsYZPjh,2023-12-08T07:52:03.000Z,,,,Belize,,,LMIC,400000,Americas,Latin America and the Caribbean
+reclI2PLkGipdNN8J,2023-12-08T07:52:03.000Z,,,,El Salvador,,,UMIC,6500000,Americas,Latin America and the Caribbean
+reclnrJuWiQX0ReoM,2023-12-08T07:52:03.000Z,,,,Libya,,,UMIC,7000000,Africa,Northern Africa
+reclyxmCNckRISuTo,2023-12-08T07:52:03.000Z,,,,Saudi Arabia,,,HIC,36000000,Asia,Western Asia
+recmrT3PeAVwmNUWJ,2023-12-08T07:52:03.000Z,,,,Ethiopia,,,LIC,120000000,Africa,Sub-Saharan Africa
+reco0KwTkEkexd1PD,2023-12-08T07:52:03.000Z,,,['recF9cS30y5CScs6o'],Rwanda,,,LIC,13000000,Africa,Sub-Saharan Africa
+recp211DQg6PMJmgp,2023-12-08T07:52:03.000Z,,,,Belgium,,"['rec0tndU7a8eVgz1h', 'recJWNVnfgJC1Slbg', 'recUkTndzXoqAvJDg', 'rec28hfkjglix2TVt', 'recCHQEhaT3GoIBX1']",HIC,12000000,Europe,Western Europe
+recpLDLKrpw5a6ZIq,2023-12-08T07:52:03.000Z,,"['rectGcjPtdlqvFCEG', 'recGCOUSJHNDpqkLS']",['recmSoB5pFpNAp0yX'],Poland,,,HIC,38000000,Europe,Eastern Europe
+recqNVHXOz6tpwEzf,2023-12-08T07:52:03.000Z,,,,Honduras,,,LMIC,10000000,Americas,Latin America and the Caribbean
+recqSpjktNURZgzLd,2023-12-08T07:52:03.000Z,,,,Israel,,,HIC,9300000,Asia,Western Asia
+recqmXGb7cohGYLnr,2023-12-08T07:52:03.000Z,,,,Equatorial Guinea,,,LMIC,1500000,Africa,Sub-Saharan Africa
+recqyFRtcbjyJK6D0,2023-12-08T07:52:03.000Z,,,,Kyrgyzstan,,,LMIC,7000000,Asia,Central Asia
+recr4lMfVYILaaH3S,2023-12-08T07:52:03.000Z,,,,Ivory Coast,,,LMIC,27000000,Africa,Sub-Saharan Africa
+recrB70ExC63Pm9O8,2023-12-08T07:52:03.000Z,,,,Samoa,,,LMIC,200000,Oceania,Polynesia
+recrQySAT0VdkW6g8,2023-12-08T07:52:03.000Z,,,,China,,,UMIC,1425000000,Asia,Eastern Asia
+recrjemEAIehPfiGm,2023-12-08T07:52:03.000Z,,,,Tanzania,,['recC6WXykhvj0E6Ev'],LMIC,61000000,Africa,Sub-Saharan Africa
+recrrT96mPx4XgwFl,2023-12-08T07:52:03.000Z,,,,Syria,,,LMIC,22000000,Asia,Western Asia
+recrtJkVfQGfjehNO,2023-12-08T07:52:03.000Z,,,,Luxembourg,,,HIC,700000,Europe,Western Europe
+recs5yKjVfVXnR00T,2023-12-08T07:52:03.000Z,,['recXFloSSr839ZXx5'],,Serbia,,,UMIC,7000000,Europe,Southern Europe
+recsPOjEXAyxfS6an,2023-12-08T07:52:03.000Z,,,,Barbados,,,HIC,300000,Americas,Latin America and the Caribbean
+recsWCVVn45lvsdup,2023-12-08T07:52:03.000Z,,,,Czech Republic,,,HIC,10700000,Europe,Eastern Europe
+rectaEMyAJh34fvfd,2023-12-08T07:52:03.000Z,,,,Central African Rep,,,LIC,5000000,,
+recu7efhK1Ib9eD8I,2023-12-08T07:52:03.000Z,,,,Dominican Republic,,,UMIC,11000000,Americas,Latin America and the Caribbean
+recugE9bq7gFfkkIe,2023-12-08T07:52:03.000Z,,,,Russian Federation,,,UMIC,144000000,,
+recuu0cDD1QyAkzS4,2023-12-08T07:52:03.000Z,,,['recjRI7IU1pSSwNR3'],Finland,,,HIC,5600000,Europe,Northern Europe
+recvDoQm8lqUmhY52,2023-12-08T07:52:03.000Z,,,,Gabon,,,UMIC,2300000,Africa,Sub-Saharan Africa
+recvIrLIqwHq6v6nG,2023-12-08T07:52:03.000Z,,,,Norway,,,HIC,5500000,Europe,Northern Europe
+recvKmqPJGq32T1ag,2023-12-08T07:52:03.000Z,,,,Nicaragua,,,LMIC,6900000,Americas,Latin America and the Caribbean
+recvMdVqsiTmwnxt6,2023-12-08T07:52:03.000Z,,,,Turkey,,,UMIC,86000000,Asia,Western Asia
+recveGt3g60Oe17AO,2023-12-08T07:52:03.000Z,,,,Slovenia,,,HIC,2100000,Europe,Southern Europe
+recwGWxVHZHyMkMMk,2023-12-08T07:52:03.000Z,,,,Benin,,,LIC,13000000,Africa,Sub-Saharan Africa
+recwPpFnb46opjkPG,2023-12-08T07:52:03.000Z,,,,Tunisia,,,UMIC,12000000,Africa,Northern Africa
+recwRneScH1rtvqIS,2023-12-08T07:52:03.000Z,"IRB Barcelona, Institut de Salut Global","['recRbPDMRtxZLdcGj', 'recLZbmJVAqs3sfvw', 'rect93vd5vGtAwBCt', 'recJq434uwuRUKGIQ', 'recqK3w4ULnEIER4e', 'recJHgeRXFjb01VvN', 'recUiaOF7rrbkeXCZ', 'rec18jBZQ4Q05JmLW', 'recWEbpzIxgUCEXSF']","['rectUO5KZPowsER7D', 'recllAj7Oy6M9v3bW']",Spain,"['recb9xzn9BZ3FCBb7', 'recra2zE2BDpvfAxY', 'recyP5WtXZGzOCMfF', 'recRsNzjHfQw23kfI', 'rec4iFbOpas8BLvfm', 'recfVV84SUoIEkVOB', 'recRKnjTCkVEwq9xB', 'recGpplEQ4zB2I7Jm', 'recU49Pz5XKJJSm73', 'recYwRdxcWRdtyrs9']","['recRoEECdF7hITsYL', 'rec5ESNI3HnDoPf2K', 'recd7md1dKVPVLn42', 'rec8QroLbTMyh6pKV', 'recBvu6ckss73YuCL', 'recSkzrWVrQeWbfgy', 'recYcGDsm8jy1QBWB', 'reccyKQRMVnciHBjL', 'recOZKDUpCgq8KzD2', 'recIAct5PvIc4ucDu', 'recFu4ZUaVnA0GZfX', 'recwVztiKBTE0GaCP', 'recdgMbysSEnb7prA', 'rec6HAS4TWc56ffpF', 'recyeH3jbg8zjl4St', 'recWsp03uZkpbplbT', 'recW4pTwfBETXehor', 'recEc9Oo1HNlzc53Y', 'recIV1KYRpmDRN1Jz', 'rec6wQKj5Lfive1Qa', 'recUoopwGWzWbCkA3', 'rec2ZhRb2E1t6NvMt', 'recHCKFiOWOyHP16G', 'rectXZdKMXiXrl61S']",HIC,47000000,Europe,Southern Europe
+recwci0fCwM6Elie7,2023-12-08T07:52:03.000Z,,,,Estonia,,,HIC,1300000,Europe,Northern Europe
+recx0yrwhEA578c9h,2023-12-08T07:52:03.000Z,,,,Burundi,,,LIC,12000000,Africa,Sub-Saharan Africa
+recxSUrUhtGoK4Hoo,2023-12-08T07:52:03.000Z,,,,Panama,,,UMIC,4500000,Americas,Latin America and the Caribbean
+recxW4VsWDiFroWym,2023-12-08T07:52:03.000Z,,,,Mongolia,,,LMIC,3500000,Asia,Eastern Asia
+recxhvxWFoxGmE96y,2023-12-08T07:52:03.000Z,,,,Taiwan,,,HIC,24000000,Asia,Eastern Asia
+recyMGhDhV2uafOAq,2023-12-08T07:52:03.000Z,,['recN1H21eJnsjhSlO'],,Namibia,,,UMIC,2500000,Africa,Sub-Saharan Africa
+recyUmP8DCORDWvLQ,2023-12-08T07:52:03.000Z,,,,Lesotho,,,LMIC,2100000,Africa,Sub-Saharan Africa
+reczIuRyApKfy8Ao4,2023-12-08T07:52:03.000Z,,,,Guinea,,"['recoSBdhhPMxywlOx', 'recVyf3paYaQiDcEb']",LIC,14000000,Africa,Sub-Saharan Africa
+reczZPmD8eqh88VyJ,2023-12-08T07:52:03.000Z,,"['recA2bm6jQvcZAY00', 'rec2WQ7LkLh0wUKAg', 'recKH2Ejb1P9K9Umc', 'rec97UCaUXSlYlEd7', 'recWEGaCriANHPN9Y', 'recWJVBEuhVUka5v3', 'recoXVitKz3jrbWp3']",,India,,,LMIC,1426000000,Asia,Southern Asia
