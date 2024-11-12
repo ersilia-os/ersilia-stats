@@ -62,11 +62,17 @@ jobs:
       - name: List remote branches
         run: git branch -r
 
-      - name: Create a Pull Request
-        uses: peter-evans/create-pull-request@v5
+      - name: Create Pull Request with GitHub Script
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ env.BRANCH_NAME }}  # Source branch for the PR
-          title: "Update CSV files from Airtable"
-          body: "This PR updates the CSV files based on the latest data from Airtable."
-          base: create-CSVs  # Target branch for the PR
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequest } = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Update CSV files from Airtable",
+              head: "${{ env.BRANCH_NAME }}", // Source branch
+              base: "create-CSVs", // Target branch for the PR
+              body: "This PR updates the CSV files based on the latest data from Airtable."
+            });
+            console.log(`Pull request created: ${pullRequest.html_url}`);
