@@ -46,10 +46,16 @@ jobs:
           git add .
           git commit -a -m "*** Update Airtable CSVs"
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: update-airtable-csv-${{ github.run_id }}
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     branch: update-airtable-csv-${{ github.run_id }}
+
+      - name: Push changes to the new branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push --set-upstream origin update-airtable-csv-${{ github.run_id }} || echo "Push failed"
 
       # - name: Check for file existence
       #   run: ls -R data
