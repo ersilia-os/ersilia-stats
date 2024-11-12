@@ -77,4 +77,4 @@ jobs:
           gh pr create --title "Update CSV files from Airtable" \
                        --body "This PR updates the CSV files based on the latest data from Airtable." \
                        --head "${{ env.BRANCH_NAME }}" \
-                       --base "create-CSVs"
+                       --base "main"
