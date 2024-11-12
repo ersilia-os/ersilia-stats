@@ -18,6 +18,12 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create a new branch
+        run: |
+          BRANCH_NAME="update-airtable-csv-${{ github.run_id }}"
+          git checkout -b $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -33,12 +39,6 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
           python scripts/fetch_airtables.py $AIRTABLE_API_KEY
-
-      - name: Create a new branch
-        run: |
-          BRANCH_NAME="update-airtable-csv-${{ github.run_id }}"
-          git checkout -b $BRANCH_NAME
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Commit changes
         run: |
