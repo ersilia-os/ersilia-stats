@@ -1,6 +1,5 @@
 name: Fetch Airtable Tables and Convert to CSVs
 
-# Trigger the workflow on push to the specific file or manually
 on:
   push:
     paths:
@@ -35,24 +34,30 @@ jobs:
         run: |
           python scripts/fetch_airtables.py $AIRTABLE_API_KEY
 
+      - name: Create a new branch
+        run: |
+          BRANCH_NAME="update-airtable-csv-${{ github.run_id }}"
+          git checkout -b $BRANCH_NAME
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
-          git commit -a -m "*** Update Airtable CSVs" || echo "No changes to commit"
+          git commit -m "Update Airtable CSVs" || echo "No changes to commit"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref_name }}
+          branch: ${{ env.BRANCH_NAME }}  # Push to the new branch created earlier
 
       - name: Create a Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref_name }}  # This refers to the current branch
+          branch: ${{ env.BRANCH_NAME }}  # Source branch for the PR
           title: "Update CSV files from Airtable"
           body: "This PR updates the CSV files based on the latest data from Airtable."
-          base: create-CSVs  # Adjust this to your desired base branch
+          base: create-CSVs  # Target branch for the PR
