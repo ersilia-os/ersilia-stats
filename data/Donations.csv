@@ -1,0 +1,20 @@
+id,createdTime,Amount,Certificate,Country,Country (from Country),Currency,Date,Ersilia,Name,Platform,Quarter,Year
+rec10rSoFNkKdH7EG,2023-06-08T07:36:44.000Z,1.56,Not Applicable,['recRkrT82pvICtRCC'],['United Kingdom'],£,2023-03-08,UK,Miquel Duran Frigola,Stripe,Q1,2023
+rec2sJkKbqwRXmmqS,2023-06-08T07:27:02.000Z,2289.83,Not Applicable,['rec9JJK2fOcBFal2Z'],['Austria'],£,2022-02-02,UK,CeMM Giulio Superti-Furga,Bank,Q1,2022
+rec4iFbOpas8BLvfm,2023-06-08T07:32:32.000Z,49.2,Not Applicable,['recwRneScH1rtvqIS'],['Spain'],£,2023-01-09,UK,Alex Espel Ribera,Stripe,Q1,2023
+recDGDIyizMQA8pU0,2023-06-08T07:30:34.000Z,25,Not Applicable,['recK7jcLjFhUCtCFP'],['United States'],£,2022-11-28,UK,Benevity,Benevity,Q4,2022
+recDUw6F5VNXx2GRj,2023-06-08T07:34:11.000Z,81.53,Not Applicable,['recRkrT82pvICtRCC'],['United Kingdom'],£,2023-02-06,UK,Individual Donor - UK Online Giving,Benevity,Q1,2023
+recDdGpNjCIikpr9G,2023-06-08T07:36:05.000Z,7.83,Not Applicable,['recRkrT82pvICtRCC'],['United Kingdom'],£,2023-03-07,UK,Individual Donor - UK Online Giving,Benevity,Q1,2023
+recFOJnC8fQJfC604,2024-08-28T09:06:52.000Z,2500,Not Applicable,['recK7jcLjFhUCtCFP'],['United States'],€,2024-08-18,Spain,FastForward,FFWD,Q3,2024
+recGpplEQ4zB2I7Jm,2023-06-08T07:37:47.000Z,148,Done,['recwRneScH1rtvqIS'],['Spain'],£,2023-05-25,UK,Josep Pinsos Figueras,Stripe,Q2,2023
+recRKnjTCkVEwq9xB,2023-06-08T07:33:02.000Z,29.44,Not Applicable,['recwRneScH1rtvqIS'],['Spain'],£,2023-01-13,UK,Victor Romero Peralta,Stripe,Q1,2023
+recRsNzjHfQw23kfI,2023-06-08T07:31:52.000Z,69.65,Not Applicable,['recwRneScH1rtvqIS'],['Spain'],£,2022-12-12,UK,Ruben Ruiz,Stripe,Q4,2022
+recU49Pz5XKJJSm73,2023-12-18T17:29:26.000Z,98,Done,['recwRneScH1rtvqIS'],['Spain'],€,2023-12-10,Spain,Rubén Ruiz,Stripe,Q4,2023
+recYwRdxcWRdtyrs9,2024-01-02T14:16:35.000Z,217,Done,['recwRneScH1rtvqIS'],['Spain'],€,2023-12-26,Spain,Albert Winoc,Stripe,Q4,2023
+recaFW2jgunlL0Nuq,2023-06-08T07:37:16.000Z,3819.59,Not Applicable,['recK7jcLjFhUCtCFP'],['United States'],£,2023-04-12,UK,Barry Bunin,FFWD,Q2,2023
+recb9xzn9BZ3FCBb7,2023-06-04T02:00:58.000Z,100,Done,['recwRneScH1rtvqIS'],['Spain'],€,2023-05-30,Spain,Josep Compte Codina,Cash,Q2,2023
+recfVV84SUoIEkVOB,2023-06-08T07:32:43.000Z,98.6,Not Applicable,['recwRneScH1rtvqIS'],['Spain'],£,2023-01-12,UK,Eli Vilella,Stripe,Q1,2023
+recra2zE2BDpvfAxY,2023-06-04T02:00:58.000Z,1000,Done,['recwRneScH1rtvqIS'],['Spain'],€,2023-05-31,Spain,Rotary Club Banyoles,Bank,Q2,2023
+recu3sOJhUUiuWAor,2023-06-08T07:24:33.000Z,73.48,Not Applicable,['recK7jcLjFhUCtCFP'],['United States'],£,2021-10-05,UK,Open Collective,Bank,Q4,2021
+recyP5WtXZGzOCMfF,2023-06-08T07:26:41.000Z,37.36,Not Applicable,['recwRneScH1rtvqIS'],['Spain'],£,2021-11-29,UK,Ruben Ruiz,Bank,Q4,2021
+reczBcaA3b8amnnCS,2024-08-28T09:05:55.000Z,5000,Not Applicable,['recK7jcLjFhUCtCFP'],['United States'],$,2024-08-21,Spain,Scot Goodman,FFWD,Q3,2024
