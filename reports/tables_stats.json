@@ -1,12 +1,11 @@
 {
     "publications": {
-        "total-publications": 38,
-        "total-citations": 1128,
-        "total-publications-senior-author": 19,
-        "average-citations-article-year": [
+        "total-publications": 39,
+        "total-citations": 1178,
+        "citations-by-year": [
             {
                 "Year": 2013,
-                "average_Citations": 52.0
+                "average_Citations": 53.0
             },
             {
                 "Year": 2014,
@@ -18,1054 +17,2049 @@
             },
             {
                 "Year": 2018,
-                "average_Citations": 104.5
+                "average_Citations": 105.5
             },
             {
                 "Year": 2019,
-                "average_Citations": 18.0
+                "average_Citations": 19.0
             },
             {
                 "Year": 2020,
-                "average_Citations": 36.8
+                "average_Citations": 37.2
             },
             {
                 "Year": 2021,
-                "average_Citations": 30.0
+                "average_Citations": 31.4
             },
             {
                 "Year": 2022,
-                "average_Citations": 21.67
+                "average_Citations": 23.33
             },
             {
                 "Year": 2023,
-                "average_Citations": 13.5
+                "average_Citations": 16.33
             },
             {
                 "Year": 2024,
-                "average_Citations": 9.5
+                "average_Citations": 6.75
+            }
+        ],
+        "collaboration-breakdown": [
+            {
+                "Count": "Yes",
+                "count": 23
+            },
+            {
+                "Count": "No",
+                "count": 16
+            }
+        ],
+        "publications-by-topic": [
+            {
+                "Count": "Chemoinformatics",
+                "count": 17
+            },
+            {
+                "Count": "Bioinformatics",
+                "count": 13
+            },
+            {
+                "Count": "Medical informatics",
+                "count": 7
+            },
+            {
+                "Count": "Molecular biology",
+                "count": 2
             }
         ]
     },
     "blogposts-events": {
-        "num-posts-quarter-year": [
+        "total-blogposts": 46,
+        "topics-distribution": [
             {
-                "Year": 2021,
-                "Quarter": "Q2",
-                "post_count": 6
+                "Count": "Ersilia",
+                "count": 36
             },
             {
-                "Year": 2021,
-                "Quarter": "Q3",
-                "post_count": 4
-            },
-            {
-                "Year": 2021,
-                "Quarter": "Q4",
-                "post_count": 2
-            },
-            {
-                "Year": 2022,
-                "Quarter": "Q1",
-                "post_count": 3
-            },
-            {
-                "Year": 2022,
-                "Quarter": "Q2",
-                "post_count": 2
-            },
-            {
-                "Year": 2022,
-                "Quarter": "Q3",
-                "post_count": 3
-            },
-            {
-                "Year": 2022,
-                "Quarter": "Q4",
-                "post_count": 2
-            },
-            {
-                "Year": 2023,
-                "Quarter": "Q1",
-                "post_count": 2
-            },
-            {
-                "Year": 2023,
-                "Quarter": "Q2",
-                "post_count": 3
-            },
-            {
-                "Year": 2023,
-                "Quarter": "Q3",
-                "post_count": 4
-            },
-            {
-                "Year": 2023,
-                "Quarter": "Q4",
-                "post_count": 4
-            },
-            {
-                "Year": 2024,
-                "Quarter": "Q1",
-                "post_count": 3
-            },
-            {
-                "Year": 2024,
-                "Quarter": "Q2",
-                "post_count": 3
-            },
-            {
-                "Year": 2024,
-                "Quarter": "Q3",
-                "post_count": 2
-            },
-            {
-                "Year": 2024,
-                "Quarter": "Q4",
-                "post_count": 2
+                "Count": "Other",
+                "count": 10
             }
         ],
-        "total-events": 63
+        "posts-over-time": [
+            {
+                "Year": 2021,
+                "Quarter": "Q2",
+                "Post Count": 6
+            },
+            {
+                "Year": 2021,
+                "Quarter": "Q3",
+                "Post Count": 4
+            },
+            {
+                "Year": 2021,
+                "Quarter": "Q4",
+                "Post Count": 2
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q1",
+                "Post Count": 3
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q2",
+                "Post Count": 2
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q3",
+                "Post Count": 3
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q4",
+                "Post Count": 2
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q1",
+                "Post Count": 2
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q2",
+                "Post Count": 3
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q3",
+                "Post Count": 4
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q4",
+                "Post Count": 4
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q1",
+                "Post Count": 3
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q2",
+                "Post Count": 3
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q3",
+                "Post Count": 2
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q4",
+                "Post Count": 3
+            }
+        ]
     },
     "countries": {
         "num-unique-countries": 197,
         "num-countries-region": [
             {
                 "Region": "Africa",
-                "unique_column_count": 50
+                "unique_count": 50
             },
             {
                 "Region": "Americas",
-                "unique_column_count": 34
+                "unique_count": 34
             },
             {
                 "Region": "Asia",
-                "unique_column_count": 48
+                "unique_count": 48
             },
             {
                 "Region": "Europe",
-                "unique_column_count": 43
+                "unique_count": 43
             },
             {
                 "Region": "Oceania",
-                "unique_column_count": 14
-            }
-        ],
-        "num-countries-subregion": [
-            {
-                "Subregion": "Australia and New Zealand",
-                "unique_column_count": 2
-            },
-            {
-                "Subregion": "Central Asia",
-                "unique_column_count": 5
-            },
-            {
-                "Subregion": "Eastern Asia",
-                "unique_column_count": 6
-            },
-            {
-                "Subregion": "Eastern Europe",
-                "unique_column_count": 9
-            },
-            {
-                "Subregion": "Latin America and the Caribbean",
-                "unique_column_count": 32
-            },
-            {
-                "Subregion": "Melanesia",
-                "unique_column_count": 4
-            },
-            {
-                "Subregion": "Micronesia",
-                "unique_column_count": 5
-            },
-            {
-                "Subregion": "Northern Africa",
-                "unique_column_count": 6
-            },
-            {
-                "Subregion": "Northern America",
-                "unique_column_count": 2
-            },
-            {
-                "Subregion": "Northern Europe",
-                "unique_column_count": 10
-            },
-            {
-                "Subregion": "Polynesia",
-                "unique_column_count": 3
-            },
-            {
-                "Subregion": "South-Eastern Asia",
-                "unique_column_count": 11
-            },
-            {
-                "Subregion": "Southern Asia",
-                "unique_column_count": 9
-            },
-            {
-                "Subregion": "Southern Europe",
-                "unique_column_count": 15
-            },
-            {
-                "Subregion": "Sub-Saharan Africa",
-                "unique_column_count": 44
-            },
-            {
-                "Subregion": "Western Asia",
-                "unique_column_count": 17
-            },
-            {
-                "Subregion": "Western Europe",
-                "unique_column_count": 9
-            }
-        ],
-        "country-population": [
-            {
-                "Country": "Maldives",
-                "Population": 600000.0
-            },
-            {
-                "Country": "Kenya",
-                "Population": 54000000.0
-            },
-            {
-                "Country": "Germany",
-                "Population": 84000000.0
-            },
-            {
-                "Country": "South Sudan",
-                "Population": 13000000.0
-            },
-            {
-                "Country": "Burkina",
-                "Population": 22000000.0
-            },
-            {
-                "Country": "Argentina",
-                "Population": 46000000.0
-            },
-            {
-                "Country": "Ecuador",
-                "Population": 19000000.0
-            },
-            {
-                "Country": "Colombia",
-                "Population": 52000000.0
-            },
-            {
-                "Country": "Ireland [Republic]",
-                "Population": 5200000.0
-            },
-            {
-                "Country": "Zambia",
-                "Population": 19000000.0
-            },
-            {
-                "Country": "Afghanistan",
-                "Population": 42000000.0
-            },
-            {
-                "Country": "Botswana",
-                "Population": 2400000.0
-            },
-            {
-                "Country": "Nigeria",
-                "Population": 218000000.0
-            },
-            {
-                "Country": "Mexico",
-                "Population": 126000000.0
-            },
-            {
-                "Country": "Switzerland",
-                "Population": 9000000.0
-            },
-            {
-                "Country": "Latvia",
-                "Population": 1800000.0
-            },
-            {
-                "Country": "Pakistan",
-                "Population": 242000000.0
-            },
-            {
-                "Country": "Vanuatu",
-                "Population": 300000.0
-            },
-            {
-                "Country": "Thailand",
-                "Population": 71000000.0
-            },
-            {
-                "Country": "Bolivia",
-                "Population": 12000000.0
-            },
-            {
-                "Country": "Mauritania",
-                "Population": 4500000.0
-            },
-            {
-                "Country": "Uzbekistan",
-                "Population": 35000000.0
-            },
-            {
-                "Country": "Iran",
-                "Population": 89000000.0
-            },
-            {
-                "Country": "Laos",
-                "Population": 8000000.0
-            },
-            {
-                "Country": "Haiti",
-                "Population": 12000000.0
-            },
-            {
-                "Country": "Malaysia",
-                "Population": 33000000.0
-            },
-            {
-                "Country": "Monaco",
-                "Population": 40000.0
-            },
-            {
-                "Country": "Brazil",
-                "Population": 215000000.0
-            },
-            {
-                "Country": "Palau",
-                "Population": 20000.0
-            },
-            {
-                "Country": "Azerbaijan",
-                "Population": 10000000.0
-            },
-            {
-                "Country": "Somalia",
-                "Population": 17000000.0
-            },
-            {
-                "Country": "Djibouti",
-                "Population": 1000000.0
-            },
-            {
-                "Country": "Austria",
-                "Population": 9000000.0
-            },
-            {
-                "Country": "San Marino",
-                "Population": 30000.0
-            },
-            {
-                "Country": "Mali",
-                "Population": 22000000.0
-            },
-            {
-                "Country": "Portugal",
-                "Population": 10000000.0
-            },
-            {
-                "Country": "Sweden",
-                "Population": 10500000.0
-            },
-            {
-                "Country": "Saint Vincent & the Grenadines",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Australia",
-                "Population": 26000000.0
-            },
-            {
-                "Country": "Vietnam",
-                "Population": 99000000.0
-            },
-            {
-                "Country": "Greece",
-                "Population": 10400000.0
-            },
-            {
-                "Country": "Costa Rica",
-                "Population": 5200000.0
-            },
-            {
-                "Country": "Georgia",
-                "Population": 4000000.0
-            },
-            {
-                "Country": "Egypt",
-                "Population": 104000000.0
-            },
-            {
-                "Country": "Philippines",
-                "Population": 113000000.0
-            },
-            {
-                "Country": "Vatican City",
-                "Population": 1000.0
-            },
-            {
-                "Country": "Brunei",
-                "Population": 500000.0
-            },
-            {
-                "Country": "Liechtenstein",
-                "Population": 40000.0
-            },
-            {
-                "Country": "Iceland",
-                "Population": 400000.0
-            },
-            {
-                "Country": "Uganda",
-                "Population": 48000000.0
-            },
-            {
-                "Country": "United Arab Emirates",
-                "Population": 10000000.0
-            },
-            {
-                "Country": "Netherlands",
-                "Population": 18000000.0
-            },
-            {
-                "Country": "Senegal",
-                "Population": 17000000.0
-            },
-            {
-                "Country": "Suriname",
-                "Population": 600000.0
-            },
-            {
-                "Country": "Moldova",
-                "Population": 2600000.0
-            },
-            {
-                "Country": "Lithuania",
-                "Population": 2700000.0
-            },
-            {
-                "Country": "Bahrain",
-                "Population": 1500000.0
-            },
-            {
-                "Country": "Marshall Islands",
-                "Population": 60000.0
-            },
-            {
-                "Country": "Chile",
-                "Population": 19000000.0
-            },
-            {
-                "Country": "Armenia",
-                "Population": 3000000.0
-            },
-            {
-                "Country": "Grenada",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Paraguay",
-                "Population": 7500000.0
-            },
-            {
-                "Country": "Europe",
-                "Population": NaN
-            },
-            {
-                "Country": "Montenegro",
-                "Population": 600000.0
-            },
-            {
-                "Country": "United States",
-                "Population": 335000000.0
-            },
-            {
-                "Country": "Oman",
-                "Population": 4800000.0
-            },
-            {
-                "Country": "Macedonia",
-                "Population": 2100000.0
-            },
-            {
-                "Country": "Mauritius",
-                "Population": 1300000.0
-            },
-            {
-                "Country": "Liberia",
-                "Population": 5200000.0
-            },
-            {
-                "Country": "Kuwait",
-                "Population": 4700000.0
-            },
-            {
-                "Country": "Tajikistan",
-                "Population": 10000000.0
-            },
-            {
-                "Country": "Bosnia Herzegovina",
-                "Population": 3200000.0
-            },
-            {
-                "Country": "Venezuela",
-                "Population": 29000000.0
-            },
-            {
-                "Country": "Tuvalu",
-                "Population": 10000.0
-            },
-            {
-                "Country": "Gambia",
-                "Population": 2500000.0
-            },
-            {
-                "Country": "Nauru",
-                "Population": 10000.0
-            },
-            {
-                "Country": "Romania",
-                "Population": 19000000.0
-            },
-            {
-                "Country": "Guinea-Bissau",
-                "Population": 2000000.0
-            },
-            {
-                "Country": "Yemen",
-                "Population": 34000000.0
-            },
-            {
-                "Country": "Malta",
-                "Population": 500000.0
-            },
-            {
-                "Country": "Kosovo",
-                "Population": 1800000.0
-            },
-            {
-                "Country": "France",
-                "Population": 65000000.0
-            },
-            {
-                "Country": "Cape Verde",
-                "Population": 600000.0
-            },
-            {
-                "Country": "Bhutan",
-                "Population": 800000.0
-            },
-            {
-                "Country": "Solomon Islands",
-                "Population": 800000.0
-            },
-            {
-                "Country": "Korea North",
-                "Population": 26000000.0
-            },
-            {
-                "Country": "Ghana",
-                "Population": 33000000.0
-            },
-            {
-                "Country": "Indonesia",
-                "Population": 278000000.0
-            },
-            {
-                "Country": "South Africa",
-                "Population": 60000000.0
-            },
-            {
-                "Country": "Comoros",
-                "Population": 900000.0
-            },
-            {
-                "Country": "United Kingdom",
-                "Population": 67000000.0
-            },
-            {
-                "Country": "Lebanon",
-                "Population": 5400000.0
-            },
-            {
-                "Country": "Cameroon",
-                "Population": 27000000.0
-            },
-            {
-                "Country": "Malawi",
-                "Population": 20000000.0
-            },
-            {
-                "Country": "Chad",
-                "Population": 17000000.0
-            },
-            {
-                "Country": "Morocco",
-                "Population": 37000000.0
-            },
-            {
-                "Country": "Micronesia",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Mozambique",
-                "Population": 33000000.0
-            },
-            {
-                "Country": "Peru",
-                "Population": 34000000.0
-            },
-            {
-                "Country": "Trinidad & Tobago",
-                "Population": 1400000.0
-            },
-            {
-                "Country": "Seychelles",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Japan",
-                "Population": 125000000.0
-            },
-            {
-                "Country": "Hungary",
-                "Population": 9600000.0
-            },
-            {
-                "Country": "Cambodia",
-                "Population": 17000000.0
-            },
-            {
-                "Country": "East Timor",
-                "Population": 1300000.0
-            },
-            {
-                "Country": "Swaziland",
-                "Population": 1200000.0
-            },
-            {
-                "Country": "Uruguay",
-                "Population": 3500000.0
-            },
-            {
-                "Country": "Guatemala",
-                "Population": 19000000.0
-            },
-            {
-                "Country": "Kiribati",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Togo",
-                "Population": 8800000.0
-            },
-            {
-                "Country": "New Zealand",
-                "Population": 5000000.0
-            },
-            {
-                "Country": "Guyana",
-                "Population": 800000.0
-            },
-            {
-                "Country": "Denmark",
-                "Population": 6000000.0
-            },
-            {
-                "Country": "Algeria",
-                "Population": 44000000.0
-            },
-            {
-                "Country": "Italy",
-                "Population": 59000000.0
-            },
-            {
-                "Country": "Tonga",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Zimbabwe",
-                "Population": 15000000.0
-            },
-            {
-                "Country": "Belarus",
-                "Population": 9200000.0
-            },
-            {
-                "Country": "Qatar",
-                "Population": 3000000.0
-            },
-            {
-                "Country": "Congo",
-                "Population": 6000000.0
-            },
-            {
-                "Country": "Ukraine",
-                "Population": 37000000.0
-            },
-            {
-                "Country": "Sao Tome & Principe",
-                "Population": 200000.0
-            },
-            {
-                "Country": "Albania",
-                "Population": 2800000.0
-            },
-            {
-                "Country": "Singapore",
-                "Population": 5700000.0
-            },
-            {
-                "Country": "Sri Lanka",
-                "Population": 22000000.0
-            },
-            {
-                "Country": "Jordan",
-                "Population": 11000000.0
-            },
-            {
-                "Country": "Fiji",
-                "Population": 900000.0
-            },
-            {
-                "Country": "Turkmenistan",
-                "Population": 6000000.0
-            },
-            {
-                "Country": "Iraq",
-                "Population": 45000000.0
-            },
-            {
-                "Country": "Andorra",
-                "Population": 80000.0
-            },
-            {
-                "Country": "St Kitts & Nevis",
-                "Population": 50000.0
-            },
-            {
-                "Country": "Nepal",
-                "Population": 32000000.0
-            },
-            {
-                "Country": "Kazakhstan",
-                "Population": 19000000.0
-            },
-            {
-                "Country": "Slovakia",
-                "Population": 5400000.0
-            },
-            {
-                "Country": "Congo [Democratic Rep]",
-                "Population": 97000000.0
-            },
-            {
-                "Country": "Eritrea",
-                "Population": 3600000.0
-            },
-            {
-                "Country": "Cuba",
-                "Population": 11000000.0
-            },
-            {
-                "Country": "Canada",
-                "Population": 38000000.0
-            },
-            {
-                "Country": "Korea South",
-                "Population": 52000000.0
-            },
-            {
-                "Country": "Cyprus",
-                "Population": 1200000.0
-            },
-            {
-                "Country": "Antigua & Deps",
-                "Population": 100000.0
-            },
-            {
-                "Country": "Bulgaria",
-                "Population": 6700000.0
-            },
-            {
-                "Country": "Myanmar [Burma]",
-                "Population": 55000000.0
-            },
-            {
-                "Country": "St Lucia",
-                "Population": 200000.0
-            },
-            {
-                "Country": "Bahamas",
-                "Population": 400000.0
-            },
-            {
-                "Country": "Papua New Guinea",
-                "Population": 10000000.0
-            },
-            {
-                "Country": "Sudan",
-                "Population": 45000000.0
-            },
-            {
-                "Country": "Sierra Leone",
-                "Population": 8400000.0
-            },
-            {
-                "Country": "Jamaica",
-                "Population": 3000000.0
-            },
-            {
-                "Country": "Bangladesh",
-                "Population": 172000000.0
-            },
-            {
-                "Country": "Madagascar",
-                "Population": 29000000.0
-            },
-            {
-                "Country": "Niger",
-                "Population": 25000000.0
-            },
-            {
-                "Country": "Dominica",
-                "Population": 70000.0
-            },
-            {
-                "Country": "Angola",
-                "Population": 35000000.0
-            },
-            {
-                "Country": "Croatia",
-                "Population": 4000000.0
-            },
-            {
-                "Country": "Belize",
-                "Population": 400000.0
-            },
-            {
-                "Country": "El Salvador",
-                "Population": 6500000.0
-            },
-            {
-                "Country": "Libya",
-                "Population": 7000000.0
-            },
-            {
-                "Country": "Saudi Arabia",
-                "Population": 36000000.0
-            },
-            {
-                "Country": "Ethiopia",
-                "Population": 120000000.0
-            },
-            {
-                "Country": "Rwanda",
-                "Population": 13000000.0
-            },
-            {
-                "Country": "Belgium",
-                "Population": 12000000.0
-            },
-            {
-                "Country": "Poland",
-                "Population": 38000000.0
-            },
-            {
-                "Country": "Honduras",
-                "Population": 10000000.0
-            },
-            {
-                "Country": "Israel",
-                "Population": 9300000.0
-            },
-            {
-                "Country": "Equatorial Guinea",
-                "Population": 1500000.0
-            },
-            {
-                "Country": "Kyrgyzstan",
-                "Population": 7000000.0
-            },
-            {
-                "Country": "Ivory Coast",
-                "Population": 27000000.0
-            },
-            {
-                "Country": "Samoa",
-                "Population": 200000.0
-            },
-            {
-                "Country": "China",
-                "Population": 1425000000.0
-            },
-            {
-                "Country": "Tanzania",
-                "Population": 61000000.0
-            },
-            {
-                "Country": "Syria",
-                "Population": 22000000.0
-            },
-            {
-                "Country": "Luxembourg",
-                "Population": 700000.0
-            },
-            {
-                "Country": "Serbia",
-                "Population": 7000000.0
-            },
-            {
-                "Country": "Barbados",
-                "Population": 300000.0
-            },
-            {
-                "Country": "Czech Republic",
-                "Population": 10700000.0
-            },
-            {
-                "Country": "Central African Rep",
-                "Population": 5000000.0
-            },
-            {
-                "Country": "Dominican Republic",
-                "Population": 11000000.0
-            },
-            {
-                "Country": "Russian Federation",
-                "Population": 144000000.0
-            },
-            {
-                "Country": "Finland",
-                "Population": 5600000.0
-            },
-            {
-                "Country": "Gabon",
-                "Population": 2300000.0
-            },
-            {
-                "Country": "Norway",
-                "Population": 5500000.0
-            },
-            {
-                "Country": "Nicaragua",
-                "Population": 6900000.0
-            },
-            {
-                "Country": "Turkey",
-                "Population": 86000000.0
-            },
-            {
-                "Country": "Slovenia",
-                "Population": 2100000.0
-            },
-            {
-                "Country": "Benin",
-                "Population": 13000000.0
-            },
-            {
-                "Country": "Tunisia",
-                "Population": 12000000.0
-            },
-            {
-                "Country": "Spain",
-                "Population": 47000000.0
-            },
-            {
-                "Country": "Estonia",
-                "Population": 1300000.0
-            },
-            {
-                "Country": "Burundi",
-                "Population": 12000000.0
-            },
-            {
-                "Country": "Panama",
-                "Population": 4500000.0
-            },
-            {
-                "Country": "Mongolia",
-                "Population": 3500000.0
-            },
-            {
-                "Country": "Taiwan",
-                "Population": 24000000.0
-            },
-            {
-                "Country": "Namibia",
-                "Population": 2500000.0
-            },
-            {
-                "Country": "Lesotho",
-                "Population": 2100000.0
-            },
-            {
-                "Country": "Guinea",
-                "Population": 14000000.0
-            },
-            {
-                "Country": "India",
-                "Population": 1426000000.0
-            }
-        ],
-        "members-globalsouth-country": [
-            {
-                "Country": "Cameroon",
-                "Count": 1.0
-            },
-            {
-                "Country": "India",
-                "Count": 7.0
-            },
-            {
-                "Country": "Kenya",
-                "Count": 1.0
-            },
-            {
-                "Country": "Namibia",
-                "Count": 1.0
-            },
-            {
-                "Country": "Nigeria",
-                "Count": 9.0
-            },
-            {
-                "Country": "Pakistan",
-                "Count": 2.0
-            },
-            {
-                "Country": "Singapore",
-                "Count": 1.0
-            },
-            {
-                "Country": "South Africa",
-                "Count": 1.0
-            },
-            {
-                "Country": "Uganda",
-                "Count": 1.0
+                "unique_count": 14
             }
         ]
     },
-    "organization": {
-        "num-collab-classification": [
-            {
-                "Classification": "Collaborator",
-                "Count": 48
-            },
-            {
-                "Classification": "Funder",
-                "Count": 119
-            },
-            {
-                "Classification": "Network",
-                "Count": 38
-            }
-        ]
-    },
+    "organization": {},
     "community": {
+        "countries-represented": 17,
+        "role-distribution": [
+            {
+                "Count": "['Volunteer']",
+                "count": 47
+            },
+            {
+                "Count": "['Intern']",
+                "count": 24
+            },
+            {
+                "Count": "['Trustee']",
+                "count": 4
+            },
+            {
+                "Count": "['MSc Student']",
+                "count": 3
+            },
+            {
+                "Count": "['Advisor']",
+                "count": 2
+            },
+            {
+                "Count": "['BSc Student']",
+                "count": 2
+            },
+            {
+                "Count": "['OS Maintainer', 'Mentor']",
+                "count": 1
+            },
+            {
+                "Count": "['Mentor']",
+                "count": 1
+            },
+            {
+                "Count": "['Intern', 'Mentor', 'OS Maintainer']",
+                "count": 1
+            },
+            {
+                "Count": "['Employee']",
+                "count": 1
+            },
+            {
+                "Count": "['Employee', 'Trustee']",
+                "count": 1
+            },
+            {
+                "Count": "['OS Maintainer']",
+                "count": 1
+            },
+            {
+                "Count": "['Visiting Researcher']",
+                "count": 1
+            },
+            {
+                "Count": "['Intern', 'OS Maintainer']",
+                "count": 1
+            },
+            {
+                "Count": "['Intern', 'MSc Student', 'Mentor']",
+                "count": 1
+            }
+        ],
+        "contributors-by-country": [
+            {
+                "Country": "['rec04FOULJyRzLm4J']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['rec2YkwgOoOPmDaGl']",
+                "Contributors": 2
+            },
+            {
+                "Country": "['rec43RfSGh2tdFgJ6']",
+                "Contributors": 9
+            },
+            {
+                "Country": "['rec56rFWOFhuZAPi5']",
+                "Contributors": 2
+            },
+            {
+                "Country": "['recBiWCG8kTIIsASq']",
+                "Contributors": 3
+            },
+            {
+                "Country": "['recEhPfHSM4dgHjRe']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recK7jcLjFhUCtCFP']",
+                "Contributors": 48
+            },
+            {
+                "Country": "['recRQg6CKP5JbtGhK']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recRkrT82pvICtRCC']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recRzDwbpgX10xxXJ']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recXP7lWp9iOBj9JT']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recZFPUBhKNOV2lm9']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recpLDLKrpw5a6ZIq']",
+                "Contributors": 2
+            },
+            {
+                "Country": "['recs5yKjVfVXnR00T']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['recwRneScH1rtvqIS']",
+                "Contributors": 9
+            },
+            {
+                "Country": "['recyMGhDhV2uafOAq']",
+                "Contributors": 1
+            },
+            {
+                "Country": "['reczZPmD8eqh88VyJ']",
+                "Contributors": 7
+            }
+        ],
         "total-members": 91
+    },
+    "models-impact": {
+        "total-models": 180,
+        "model-distribution": [
+            {
+                "Count": "['Similarity']",
+                "count": 11
+            },
+            {
+                "Count": "['Compound generation']",
+                "count": 7
+            },
+            {
+                "Count": "['Dummy']",
+                "count": 6
+            },
+            {
+                "Count": "['Descriptor']",
+                "count": 6
+            },
+            {
+                "Count": "['Embedding']",
+                "count": 4
+            },
+            {
+                "Count": "['Fingerprint']",
+                "count": 4
+            },
+            {
+                "Count": "['Synthetic accessibility', 'Chemical synthesis']",
+                "count": 4
+            },
+            {
+                "Count": "['CYP450', 'ADME', 'Metabolism']",
+                "count": 4
+            },
+            {
+                "Count": "['Fingerprint', 'Descriptor']",
+                "count": 4
+            },
+            {
+                "Count": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
+                "count": 3
+            },
+            {
+                "Count": "['Descriptor', 'Embedding']",
+                "count": 3
+            },
+            {
+                "Count": "['Descriptor', 'Fingerprint']",
+                "count": 3
+            },
+            {
+                "Count": "['Chemical graph model', 'Compound generation']",
+                "count": 3
+            },
+            {
+                "Count": "['Chemical notation', 'Chemical language model']",
+                "count": 2
+            },
+            {
+                "Count": "['hERG', 'Toxicity', 'Cardiotoxicity']",
+                "count": 2
+            },
+            {
+                "Count": "['Drug-likeness']",
+                "count": 2
+            },
+            {
+                "Count": "['Natural product', 'Descriptor']",
+                "count": 2
+            },
+            {
+                "Count": "['ADME', 'Permeability', 'LogP']",
+                "count": 2
+            },
+            {
+                "Count": "['Similarity', 'ChEMBL']",
+                "count": 2
+            },
+            {
+                "Count": "['Chemical language model', 'Chemical notation']",
+                "count": 2
+            },
+            {
+                "Count": "['P.falciparum', 'Malaria', 'Antimicrobial activity']",
+                "count": 2
+            },
+            {
+                "Count": "['Natural product', 'Drug-likeness']",
+                "count": 2
+            },
+            {
+                "Count": "['Descriptor', 'Bioactivity profile', 'Embedding']",
+                "count": 2
+            },
+            {
+                "Count": "['Permeability', 'ADME', 'LogP']",
+                "count": 2
+            },
+            {
+                "Count": "['Malaria', 'P.falciparum', 'IC50']",
+                "count": 2
+            },
+            {
+                "Count": "['Descriptor', 'Chemical language model', 'Chemical graph model', 'Embedding']",
+                "count": 1
+            },
+            {
+                "Count": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Tox21', 'Toxicity', 'MoleculeNet']",
+                "count": 1
+            },
+            {
+                "Count": "['Antiviral activity', 'IC50', 'HBV', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['Fraction bound', 'ADME']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Solubility', 'Human']",
+                "count": 1
+            },
+            {
+                "Count": "['hERG', 'Toxicity', 'Cardiotoxicity', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Microsomal stability', 'ADME', 'Metabolism', 'Half-life', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Permeability', 'MoleculeNet', 'Chemical graph model', 'Alzheimer']",
+                "count": 1
+            },
+            {
+                "Count": "['Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical notation', 'Chemical language model', 'Compound generation']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical notation']",
+                "count": 1
+            },
+            {
+                "Count": "['ZINC', 'Compound generation']",
+                "count": 1
+            },
+            {
+                "Count": "['Mycetoma', 'Antifungal activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Metabolism']",
+                "count": 1
+            },
+            {
+                "Count": "['COVID19', 'Antiviral activity', 'Sars-CoV-2', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Embedding', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'ToxCast', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Metabolism', 'ADME', 'Human', 'Microsomal stability', 'Half-life']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical synthesis']",
+                "count": 1
+            },
+            {
+                "Count": "['HIV', 'Antiviral activity', 'MoleculeNet']",
+                "count": 1
+            },
+            {
+                "Count": "['Cancer', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Human', 'Metabolism']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Metabolism']",
+                "count": 1
+            },
+            {
+                "Count": "['Cardiotoxicity', 'DrugBank']",
+                "count": 1
+            },
+            {
+                "Count": "['CYP450', 'ADME', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Toxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Molecular weight']",
+                "count": 1
+            },
+            {
+                "Count": "['ChEMBL', 'IC50', 'Toxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Lipophilicity', 'LogP']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Synthetic accessibility']",
+                "count": 1
+            },
+            {
+                "Count": "['Sars-CoV-2', 'COVID19', 'Antiviral activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Solubility', 'ADME', 'LogS']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Descriptor', 'Embedding']",
+                "count": 1
+            },
+            {
+                "Count": "['MoleculeNet', 'Lipophilicity', 'ADME', 'LogD', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Price', 'Compound generation', 'Chemical synthesis']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'ADME', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Tox21', 'Toxicity', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Permeability', 'M.tuberculosis', 'ADME', 'Tuberculosis']",
+                "count": 1
+            },
+            {
+                "Count": "['Similarity', 'ChEMBL', 'DrugBank']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Fraction bound', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Human']",
+                "count": 1
+            },
+            {
+                "Count": "['pKa']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Toxicity', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'hERG', 'Cardiotoxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Fingerprint', 'Embedding', 'Chemical synthesis']",
+                "count": 1
+            },
+            {
+                "Count": "['Metabolism', 'Toxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Neglected tropical disease', 'Schistosomiasis', 'IC50']",
+                "count": 1
+            },
+            {
+                "Count": "['Cardiotoxicity', 'hERG', 'Toxicity', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['Malaria', 'P.falciparum']",
+                "count": 1
+            },
+            {
+                "Count": "['Permeability', 'ADME', 'Papp']",
+                "count": 1
+            },
+            {
+                "Count": "['Therapeutic indication']",
+                "count": 1
+            },
+            {
+                "Count": "['Malaria', 'P.falciparum', 'Tuberculosis', 'M.tuberculosis', 'ADME', 'Cytotoxicity', 'Solubility']",
+                "count": 1
+            },
+            {
+                "Count": "['Drug-likeness', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['ChEMBL', 'Similarity']",
+                "count": 1
+            },
+            {
+                "Count": "['Target identification', 'GPCR']",
+                "count": 1
+            },
+            {
+                "Count": "['Bioactivity profile', 'Target identification', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'Antimicrobial activity', 'MIC90', 'Tuberculosis']",
+                "count": 1
+            },
+            {
+                "Count": "['BACE', 'Chemical graph model', 'MoleculeNet']",
+                "count": 1
+            },
+            {
+                "Count": "['Cytotoxicity', 'Antimicrobial activity', 'ESKAPE']",
+                "count": 1
+            },
+            {
+                "Count": "['Permeability', 'ADME', 'Papp', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Embedding']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'MoleculeNet', 'Side effects']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'MoleculeNet', 'Chemical graph model', 'Side effects']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Chemical notation', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Solubility']",
+                "count": 1
+            },
+            {
+                "Count": "['HIV', 'Human', 'HDAC1']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Microsomal stability', 'Rat', 'ADME', 'Metabolism', 'Half-life']",
+                "count": 1
+            },
+            {
+                "Count": "['A.baumannii', 'Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Cytotoxicity', 'ESKAPE']",
+                "count": 1
+            },
+            {
+                "Count": "['Solubility', 'MoleculeNet', 'ADME', 'LogS', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Cancer', 'Metabolism']",
+                "count": 1
+            },
+            {
+                "Count": "['COVID19']",
+                "count": 1
+            },
+            {
+                "Count": "['Descriptor', 'Chemical language model']",
+                "count": 1
+            },
+            {
+                "Count": "['Natural product', 'Fingerprint', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['Antimicrobial activity', 'ChEMBL', 'N.gonorrhoeae']",
+                "count": 1
+            },
+            {
+                "Count": "['Alzheimer', 'BACE', 'MoleculeNet', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'IC50', 'Tuberculosis', 'Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Metabolism', 'Human', 'Half-life']",
+                "count": 1
+            },
+            {
+                "Count": "['Similarity', 'Bioactivity profile', 'Compound generation']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical graph model', 'Embedding', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['pKa', 'ADME']",
+                "count": 1
+            },
+            {
+                "Count": "['Sars-CoV-2', 'Antiviral activity', 'COVID19']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Embedding', 'Biomedical text']",
+                "count": 1
+            }
+        ],
+        "ready-percentage": 85.0,
+        "model-list": [
+            {
+                "Title": "REINVENT 4 LibInvent",
+                "Tag": "['Similarity']",
+                "Contributor": "ankitskvmdam",
+                "Incorporation Date": "2024-04-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ChemGPT-4.7",
+                "Tag": "['Descriptor', 'Chemical language model', 'Chemical graph model', 'Embedding']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-04-11",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Toxicity prediction across the Tox21 panel with semi-supervised learning",
+                "Tag": "['Tox21', 'Toxicity', 'MoleculeNet']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-06-16",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Inhibition of Hepatits B virus",
+                "Tag": "['Antiviral activity', 'IC50', 'HBV', 'ChEMBL']",
+                "Contributor": "emmakodes",
+                "Incorporation Date": "2023-03-24",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Human Plasma Protein Binding (PPB) of Compounds",
+                "Tag": "['Fraction bound', 'ADME']",
+                "Contributor": "carcablop",
+                "Incorporation Date": "2023-02-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Human oral bioavailability prediction",
+                "Tag": "['ADME', 'Solubility', 'Human']",
+                "Contributor": "HellenNamulinda",
+                "Incorporation Date": "2023-03-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Retrosynthetic accessibility score",
+                "Tag": "['Synthetic accessibility', 'Chemical synthesis']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SARS-CoV inhibition",
+                "Tag": "['COVID19', 'Antiviral activity', 'Sars-CoV-2', 'Chemical graph model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-06-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MolBERT chemical language transformer",
+                "Tag": "['Chemical language model', 'Embedding', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Small World Enamine REAL search",
+                "Tag": "['Similarity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-11-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ToxCast toxicity panel",
+                "Tag": "['Toxicity', 'ToxCast', 'Chemical graph model']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "BayeshERG: hERG channel blockade",
+                "Tag": "['hERG', 'Toxicity', 'Cardiotoxicity']",
+                "Contributor": "azycn",
+                "Incorporation Date": "2022-08-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Bayesian prediction of synthetic accessibility",
+                "Tag": "['Synthetic accessibility', 'Chemical synthesis']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-25",
+                "Status": "Ready"
+            },
+            {
+                "Title": "STOUT: SMILES to IUPAC name translator",
+                "Tag": "['Chemical notation', 'Chemical language model']",
+                "Contributor": "carcablop",
+                "Incorporation Date": "2023-01-13",
+                "Status": "To do"
+            },
+            {
+                "Title": "Uni-Mol molecular representation",
+                "Tag": "['Fingerprint']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-07-22",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Broad spectrum antibiotic activity",
+                "Tag": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2018-06-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Scaffold morphing",
+                "Tag": "['Compound generation']",
+                "Contributor": "Inyrkz",
+                "Incorporation Date": "2024-01-12",
+                "Status": "Ready"
+            },
+            {
+                "Title": "CYP450 metabolism",
+                "Tag": "['CYP450', 'ADME', 'Metabolism']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-04-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "DrugTax: Drug taxonomy",
+                "Tag": "['Fingerprint', 'Descriptor']",
+                "Contributor": "Femme-js",
+                "Incorporation Date": "2023-01-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Identifying HDAC3 inhibitors",
+                "Tag": "['Cancer', 'ChEMBL']",
+                "Contributor": "Richiio",
+                "Incorporation Date": "2023-12-14",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Burkholderia cenocepacia inhibition",
+                "Tag": "['Antimicrobial activity']",
+                "Contributor": "Richioo",
+                "Incorporation Date": "2023-12-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SELF-referencIng Embedded Strings",
+                "Tag": "['Chemical notation', 'Chemical language model', 'Compound generation']",
+                "Contributor": "brosular",
+                "Incorporation Date": "2022-07-14",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Morgan counts fingerprints",
+                "Tag": "['Fingerprint', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-08-30",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ImageMol HIV growth inhibition",
+                "Tag": "['HIV', 'Antiviral activity', 'MoleculeNet']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2023-01-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Organic reaction outcome prediction",
+                "Tag": "['Chemical synthesis']",
+                "Contributor": "svolk19-stanford ",
+                "Incorporation Date": "2022-08-08",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Human Liver Microsomal Stability",
+                "Tag": "['Metabolism', 'ADME', 'Human', 'Microsomal stability', 'Half-life']",
+                "Contributor": "pauline-banye",
+                "Incorporation Date": "2023-03-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Test model 5",
+                "Tag": "['Dummy']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2022-08-19",
+                "Status": "Test"
+            },
+            {
+                "Title": "Blood-brain barrier penetration",
+                "Tag": "['Permeability', 'MoleculeNet', 'Chemical graph model', 'Alzheimer']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2021-06-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Electronic spectra and excited state energy",
+                "Tag": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ErG 2D Descriptors",
+                "Tag": "['Descriptor', 'Fingerprint']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2024-03-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Pharmacokinetics Profiler (PhaKinPro)",
+                "Tag": "['Microsomal stability', 'ADME', 'Metabolism', 'Half-life', 'Permeability']",
+                "Contributor": "sucksido",
+                "Incorporation Date": "2024-05-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "REINVENT 4 Mol2MolScaffold",
+                "Tag": "['Similarity']",
+                "Contributor": "ankitskvmdam",
+                "Incorporation Date": "2024-03-08",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Chemical space 2D projections against DrugBank",
+                "Tag": "['Embedding']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-11-09",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Coloring molecules for hERG blockade",
+                "Tag": "['hERG', 'Toxicity', 'Cardiotoxicity', 'Chemical graph model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Drug-likeness prediction with Bayesian neural networks",
+                "Tag": "['Drug-likeness']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-11-09",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Inhibition of Eumycetoma from MycetOS",
+                "Tag": "['Mycetoma', 'Antifungal activity']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-09-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "USR descriptors with pharmacophoric constraints",
+                "Tag": "['Descriptor', 'Embedding']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-11-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MolBloom: molecule purchasability in ZINC20",
+                "Tag": "['ZINC', 'Compound generation']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-11-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Scaffold decoration",
+                "Tag": "['Compound generation']",
+                "Contributor": "Inyrkz",
+                "Incorporation Date": "2024-02-20",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Converter of SMILES in Canonical, Selfie, Inchi, Inchi Key form",
+                "Tag": "['Chemical notation']",
+                "Contributor": "carcablop",
+                "Incorporation Date": "2023-01-25",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Molecular weight",
+                "Tag": "['Molecular weight']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "S2DV HepG2 toxicity",
+                "Tag": "['ChEMBL', 'IC50', 'Toxicity']",
+                "Contributor": "emmakodes",
+                "Incorporation Date": "2023-03-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Chemical Checker signaturizer",
+                "Tag": "['Descriptor', 'Bioactivity profile', 'Embedding']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-07-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MetaTrans: human drug metabolites",
+                "Tag": "['Metabolism']",
+                "Contributor": "carcablop",
+                "Incorporation Date": "2022-12-20",
+                "Status": "Ready"
+            },
+            {
+                "Title": "WHALES scaled",
+                "Tag": "['Natural product', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-03-05",
+                "Status": "Ready"
+            },
+            {
+                "Title": "DRKG_COVID19",
+                "Tag": NaN,
+                "Contributor": "Inyrkz",
+                "Incorporation Date": "2023-12-05",
+                "Status": "Archived"
+            },
+            {
+                "Title": "ADMET properties prediction",
+                "Tag": "['ADME', 'Toxicity']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2024-02-07",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Physicochemical descriptors available from RDKIT",
+                "Tag": "['Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Chemical Checker Signaturizer 3D",
+                "Tag": "['Descriptor', 'Bioactivity profile', 'Embedding']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2024-03-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "STOUT: SMILES to IUPAC name translator",
+                "Tag": "['Chemical notation', 'Chemical language model']",
+                "Contributor": "carcablop",
+                "Incorporation Date": "2023-01-09",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Test model 1",
+                "Tag": "['Dummy']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-03",
+                "Status": "Test"
+            },
+            {
+                "Title": "Coloring molecules for interaction with CYP3A4",
+                "Tag": "['CYP450', 'ADME', 'Chemical graph model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Ligand-based prediction of hERG blockade",
+                "Tag": "['hERG', 'Toxicity', 'Cardiotoxicity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Test model 2",
+                "Tag": "['Dummy']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-03",
+                "Status": "Test"
+            },
+            {
+                "Title": "REINVENT 4 LinkInvent",
+                "Tag": NaN,
+                "Contributor": "ankitskvmdam",
+                "Incorporation Date": "2024-05-19",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Cardiotoxicity Classifier",
+                "Tag": "['Cardiotoxicity', 'DrugBank']",
+                "Contributor": "kurysauce",
+                "Incorporation Date": "2024-06-29",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Early prediction of Drug-Induced Liver Injury",
+                "Tag": "['Toxicity', 'Metabolism']",
+                "Contributor": "Zainab-ik",
+                "Incorporation Date": "2024-02-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "InterDILI: drug-induced injury prediction",
+                "Tag": "['Toxicity', 'Human', 'Metabolism']",
+                "Contributor": "leilayesufu",
+                "Incorporation Date": "2024-01-30",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Test for the eos-template",
+                "Tag": "['Dummy']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2022-07-12",
+                "Status": "Test"
+            },
+            {
+                "Title": "Parallel Artificial Membrane Permeability Assay (PAMPA) 7",
+                "Tag": "['ADME', 'Permeability', 'LogP']",
+                "Contributor": "pauline-banye",
+                "Incorporation Date": "2023-04-07",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Predicts activity of compounds accross the Tox21 panel",
+                "Tag": "['Tox21', 'Toxicity', 'Chemical graph model']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-12",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Natural product likeness score",
+                "Tag": "['Natural product', 'Drug-likeness']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "BBBP model tested on marine-derived kinase inhibitors",
+                "Tag": "['Drug-likeness', 'Permeability']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-10-23",
+                "Status": "Ready"
+            },
+            {
+                "Title": "DeepSMILES, an alternate SMILES representation for deep learning",
+                "Tag": "['Chemical language model', 'Chemical notation']",
+                "Contributor": "brosular",
+                "Incorporation Date": "2022-07-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Neural network-based logP prediction for druglike small molecules",
+                "Tag": "['Lipophilicity', 'LogP']",
+                "Contributor": "leilayesufu",
+                "Incorporation Date": "2023-12-12",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Small molecule price prediction",
+                "Tag": "['Price', 'Compound generation', 'Chemical synthesis']",
+                "Contributor": "anamika-yadav99",
+                "Incorporation Date": "2022-03-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "CYP2C9 metabolism",
+                "Tag": "['CYP450', 'ADME', 'Metabolism']",
+                "Contributor": "ZakiaYahya",
+                "Incorporation Date": "2023-07-05",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ADMETlab-2",
+                "Tag": "['Toxicity', 'ADME', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2022-09-16",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Toxicity and synthetic accessibility prediction",
+                "Tag": "['Toxicity', 'Synthetic accessibility']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-06-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SARS-CoV-2 antiviral prediction: REDIAL-2020",
+                "Tag": "['Sars-CoV-2', 'COVID19', 'Antiviral activity']",
+                "Contributor": "Pradnya2203",
+                "Incorporation Date": "2023-03-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MAIP: antimalarial activity prediction",
+                "Tag": "['P.falciparum', 'Malaria', 'Antimicrobial activity']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-08-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Aqueous solubility prediction",
+                "Tag": "['Solubility', 'ADME', 'LogS']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SMILES transformer descriptor",
+                "Tag": "['Chemical language model', 'Descriptor', 'Embedding']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-22",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Octanol/water distribution coefficient",
+                "Tag": "['MoleculeNet', 'Lipophilicity', 'ADME', 'LogD', 'Chemical graph model']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Coloring molecules for plasma protein binding prediction",
+                "Tag": "['ADME', 'Fraction bound', 'Chemical graph model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MAIP distillation: antimalarial potential prediction",
+                "Tag": "['P.falciparum', 'Malaria', 'Antimicrobial activity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-11-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Unit test model for compounds",
+                "Tag": "['Fingerprint']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-07-03",
+                "Status": "Test"
+            },
+            {
+                "Title": "Morgan Fingerprints",
+                "Tag": "['Descriptor', 'Fingerprint']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-12-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Similarity search in ChEMBL, DrugBank and UNPD",
+                "Tag": "['Similarity', 'ChEMBL', 'DrugBank']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-08-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Membrane permeability in Mycobacterium tuberculosis",
+                "Tag": "['Permeability', 'M.tuberculosis', 'ADME', 'Tuberculosis']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-14",
+                "Status": "Ready"
+            },
+            {
+                "Title": "HepG2 Toxicity - MMV",
+                "Tag": "['Toxicity', 'Human']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-08-24",
+                "Status": "Ready"
+            },
+            {
+                "Title": "CYP2D6 metabolism",
+                "Tag": "['CYP450', 'ADME', 'Metabolism']",
+                "Contributor": "ZakiaYahya",
+                "Incorporation Date": "2023-07-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "GDBChEMBL similarity search",
+                "Tag": "['Similarity', 'ChEMBL']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-08-15",
+                "Status": "Ready"
+            },
+            {
+                "Title": "PADEL small molecule descriptors",
+                "Tag": "['Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Classification of hERG blockers and nonblockers",
+                "Tag": "['Toxicity', 'hERG', 'Cardiotoxicity']",
+                "Contributor": "azycn",
+                "Incorporation Date": "2022-07-22",
+                "Status": "Ready"
+            },
+            {
+                "Title": "3D pharmacophore descriptor",
+                "Tag": "['Descriptor', 'Fingerprint']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-11-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "RXNFP - chemical reaction fingerprints",
+                "Tag": "['Fingerprint', 'Embedding', 'Chemical synthesis']",
+                "Contributor": "samuelmaina",
+                "Incorporation Date": "2023-03-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Predict micro-pKa of organic molecules",
+                "Tag": "['pKa']",
+                "Contributor": "LauraGomezjurado",
+                "Incorporation Date": "2024-07-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ADMETlab models for evaluation of drug candidates",
+                "Tag": "['ADME', 'Toxicity', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "Contributor": "svolk19-stanford ",
+                "Incorporation Date": "2022-07-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "PubChem Molecular Sampler",
+                "Tag": "['Similarity']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-08-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Anti-schistosomiasis activity",
+                "Tag": "['Neglected tropical disease', 'Schistosomiasis', 'IC50']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-08-24",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Molecular Prediction Model Fine-Tuning (MolPMoFiT)",
+                "Tag": "['Descriptor', 'Embedding']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-11-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Parallel Artificial Membrane Permeability Assay 5",
+                "Tag": "['ADME', 'Permeability', 'LogP']",
+                "Contributor": "pauline-banye",
+                "Incorporation Date": "2023-01-29",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Drug-induced liver injury prediction",
+                "Tag": "['Metabolism', 'Toxicity']",
+                "Contributor": "leilayesufu",
+                "Incorporation Date": "2024-01-02",
+                "Status": "Archived"
+            },
+            {
+                "Title": "Molecular representation learning",
+                "Tag": "['Embedding']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2023-01-25",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Path-based fingerprint",
+                "Tag": "['Fingerprint', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Membrane permeability of fluorescent probes",
+                "Tag": "['Permeability', 'ADME', 'LogP']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-11-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Pharmacophore-guided molecular generation",
+                "Tag": "['Chemical graph model', 'Compound generation']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-12-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "GDBMedChem similarity search",
+                "Tag": "['Similarity', 'ChEMBL']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-08-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Prediction of hERG Channel Blockers with Directed Message Passing Neural Networks",
+                "Tag": "['Cardiotoxicity', 'hERG', 'Toxicity', 'Descriptor']",
+                "Contributor": "leilayesufu",
+                "Incorporation Date": "2023-12-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Antimalarial activity (ABS and sexual stages)",
+                "Tag": "['Malaria', 'P.falciparum']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-07-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Basic molecular descriptors from Datamol",
+                "Tag": "['Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-11-09",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Passive permeability based on simulations",
+                "Tag": "['Permeability', 'ADME', 'Papp']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-11-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Molecular fingerprint maps based on broadly learned knowledge-based representations",
+                "Tag": "['Fingerprint']",
+                "Contributor": "samuelmaina",
+                "Incorporation Date": "2023-07-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "CYP3A4 metabolism",
+                "Tag": "['CYP450', 'ADME', 'Metabolism']",
+                "Contributor": "ZakiaYahya",
+                "Incorporation Date": "2023-07-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MeSH therapeutic use based on chemical structure",
+                "Tag": "['Therapeutic indication']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-10-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MolT5-Translation between Molecules and Natural Language",
+                "Tag": "['Chemical language model', 'Chemical notation']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-11-14",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Drug-likeness scoring based on unsupervised learning",
+                "Tag": "['Drug-likeness']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-09-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "H3D virtual screening cascade light",
+                "Tag": "['Malaria', 'P.falciparum', 'Tuberculosis', 'M.tuberculosis', 'ADME', 'Cytotoxicity', 'Solubility']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-05-09",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Similarity search in ChEMBL",
+                "Tag": "['ChEMBL', 'Similarity']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-08-18",
+                "Status": "Ready"
+            },
+            {
+                "Title": "imagemol-gpcr",
+                "Tag": "['Target identification', 'GPCR']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2023-01-25",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Antituberculosis activity prediction",
+                "Tag": "['M.tuberculosis', 'Antimicrobial activity', 'MIC90', 'Tuberculosis']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-11-24",
+                "Status": "Ready"
+            },
+            {
+                "Title": "DelFTa quantum mechanical properties prediction",
+                "Tag": NaN,
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-04-24",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Synthetic accessibility score",
+                "Tag": "['Synthetic accessibility', 'Chemical synthesis']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2022-07-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Multi-target prediction based on ChEMBL data",
+                "Tag": "['Bioactivity profile', 'Target identification', 'ChEMBL']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-06-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Natural product score",
+                "Tag": "['Natural product', 'Drug-likeness']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ImageMol human beta-secretase-1 (BACE-1) inhibition",
+                "Tag": "['BACE', 'Chemical graph model', 'MoleculeNet']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2023-01-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Antimalarial activity (MMV)",
+                "Tag": "['Malaria', 'P.falciparum', 'IC50']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-08-24",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Atomization energy of small molecules",
+                "Tag": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Substructure-based search of novel antibiotics",
+                "Tag": "['Cytotoxicity', 'Antimicrobial activity', 'ESKAPE']",
+                "Contributor": "Richiio",
+                "Incorporation Date": "2024-01-26",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Chemical space 2D projections against ChemDiv",
+                "Tag": "['Embedding']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-11-09",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Coloring molecules for Caco-2 cell permeability",
+                "Tag": "['Permeability', 'ADME', 'Papp', 'Chemical graph model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-10-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Variational autoencoder for small molecule generation",
+                "Tag": "['Compound generation']",
+                "Contributor": "brosular",
+                "Incorporation Date": "2022-08-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Text Embeddings Extraction using Pretrained Lamguage Models",
+                "Tag": "['Chemical language model', 'Embedding']",
+                "Contributor": "Femme-js",
+                "Incorporation Date": "2023-01-25",
+                "Status": "To do"
+            },
+            {
+                "Title": "Adverse Drug Reactions",
+                "Tag": "['Toxicity', 'MoleculeNet', 'Side effects']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2021-06-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Molecular maps based on broadly learned knowledge-based representations",
+                "Tag": "['Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2022-08-25",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ChEMBL Molecular Sampler",
+                "Tag": "['Similarity']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-09-04",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Mordred chemical descriptors",
+                "Tag": "['Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-17",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Estate Molecular Descriptors",
+                "Tag": "['Fingerprint', 'Descriptor']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-04-11",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Toxicity at clinical trial stage",
+                "Tag": "['Toxicity', 'MoleculeNet', 'Chemical graph model', 'Side effects']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "WHALES similarity search on 600k molecules from Q-Mug",
+                "Tag": "['Similarity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-04-22",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SmilesPE: tokenizer algorithm for SMILES, DeepSMILES, and SELFIES",
+                "Tag": "['Chemical language model', 'Chemical notation', 'ChEMBL']",
+                "Contributor": "Richiio",
+                "Incorporation Date": "2023-08-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "CHEESE similarity search with multiple similarity measures and against various databases",
+                "Tag": "['Similarity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-08-19",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Aqueous Kinetic Solubility",
+                "Tag": "['ADME', 'Solubility']",
+                "Contributor": "pauline-banye",
+                "Incorporation Date": "2023-01-31",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Small World Zinc search",
+                "Tag": "['Similarity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-11-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "CReM fragment based structure generation",
+                "Tag": "['Compound generation']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2022-12-20",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Ersilia Compound Embeddings",
+                "Tag": "['Descriptor', 'Embedding']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-04-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Antimalarial activity from OSM",
+                "Tag": "['Malaria', 'P.falciparum', 'IC50']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-08-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Knowledge-guided pre-trained graph transformer",
+                "Tag": "['Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-12-17",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Inhibition of HDAC1",
+                "Tag": "['HIV', 'Human', 'HDAC1']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-09-27",
+                "Status": "Ready"
+            },
+            {
+                "Title": "QcrB Inhibition (M. tuberculosis)",
+                "Tag": "['M.tuberculosis', 'Antimicrobial activity']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-04-06",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Rat liver microsomal stability",
+                "Tag": "['Microsomal stability', 'Rat', 'ADME', 'Metabolism', 'Half-life']",
+                "Contributor": "pauline-banye",
+                "Incorporation Date": "2023-01-12",
+                "Status": "Ready"
+            },
+            {
+                "Title": "REINVENT 4 Mol2MolMediumSimilarity",
+                "Tag": "['Similarity']",
+                "Contributor": "ankitskvmdam",
+                "Incorporation Date": "2024-02-07",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Inhibition of A.Baumannii growth",
+                "Tag": "['A.baumannii', 'Antimicrobial activity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-08-23",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Human cytotoxicity endpoints",
+                "Tag": "['Cytotoxicity', 'ESKAPE']",
+                "Contributor": "Richiio",
+                "Incorporation Date": "2024-02-05",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Water solubility",
+                "Tag": "['Solubility', 'MoleculeNet', 'ADME', 'LogS', 'Chemical graph model']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Test model 3",
+                "Tag": "['Dummy']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-03",
+                "Status": "Test"
+            },
+            {
+                "Title": "Extending molecular scaffolds with building blocks",
+                "Tag": "['Chemical graph model', 'Compound generation']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-11-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Carcinogenic potential of metabolites and small molecules",
+                "Tag": "['Toxicity', 'Cancer', 'Metabolism']",
+                "Contributor": "brosular",
+                "Incorporation Date": "2022-08-30",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Avalon fingerprint",
+                "Tag": "['Fingerprint']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-09-14",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Predict bioactivity against Main Protease of SARS-CoV-2",
+                "Tag": "['COVID19']",
+                "Contributor": "HarmonySosa",
+                "Incorporation Date": "2024-07-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Continuous and data-driven descriptors",
+                "Tag": "['Descriptor', 'Chemical language model']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-07-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SQUID 3D shape generation",
+                "Tag": "['Compound generation']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-05-01",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Natural product fingerprint",
+                "Tag": "['Natural product', 'Fingerprint', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-11-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Small World Wuxi search",
+                "Tag": "['Similarity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-11-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Antimicrobial class specificity prediction",
+                "Tag": NaN,
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-12-17",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Holistic molecular descriptors for scaffold hopping",
+                "Tag": "['Natural product', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-07-15",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Growth Inhibitors of Neisseria gonorrhoeae",
+                "Tag": "['Antimicrobial activity', 'ChEMBL', 'N.gonorrhoeae']",
+                "Contributor": "Richiio",
+                "Incorporation Date": "2024-01-03",
+                "Status": "Ready"
+            },
+            {
+                "Title": "BACE-1 inhibition",
+                "Tag": "['Alzheimer', 'BACE', 'MoleculeNet', 'Chemical graph model']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Mycobacterium tuberculosis inhibitor prediction",
+                "Tag": "['M.tuberculosis', 'IC50', 'Tuberculosis', 'Antimicrobial activity']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-06-28",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Extending molecular scaffolds with fragments",
+                "Tag": "['Chemical graph model', 'Compound generation']",
+                "Contributor": "anamika-yadav99",
+                "Incorporation Date": "2022-11-16",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Retrosynthesis planning",
+                "Tag": "['Synthetic accessibility', 'Chemical synthesis']",
+                "Contributor": "svolk19-stanford ",
+                "Incorporation Date": "2022-07-19",
+                "Status": "Ready"
+            },
+            {
+                "Title": "One-molecule MolLib",
+                "Tag": "['Similarity']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-07-23",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Projections against Coconut",
+                "Tag": "['Embedding']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-11-10",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Human Liver Cytosolic Stability",
+                "Tag": "['ADME', 'Metabolism', 'Human', 'Half-life']",
+                "Contributor": "pauline-banye",
+                "Incorporation Date": "2023-03-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "FCD: Fr\u00e9chet ChemNet Distance to evaluate generative models",
+                "Tag": "['Similarity', 'Bioactivity profile', 'Compound generation']",
+                "Contributor": "brosular",
+                "Incorporation Date": "2022-08-12",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Stoned Sampler",
+                "Tag": "['Compound generation']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2023-08-08",
+                "Status": "Ready"
+            },
+            {
+                "Title": "PAMPA effective permeability",
+                "Tag": "['Permeability', 'ADME', 'LogP']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-11-10",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Large-scale graph transformer",
+                "Tag": "['Chemical graph model', 'Embedding', 'Descriptor']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2021-07-02",
+                "Status": "Ready"
+            },
+            {
+                "Title": "ADMET Properties Optimization",
+                "Tag": NaN,
+                "Contributor": "Zainab-ik",
+                "Incorporation Date": "2024-02-13",
+                "Status": "To do"
+            },
+            {
+                "Title": "Hydration free energy of small molecules in water",
+                "Tag": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
+                "Contributor": "Amna-28",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "FasmiFra molecule generator",
+                "Tag": "['Compound generation']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-08-01",
+                "Status": "Ready"
+            },
+            {
+                "Title": "MolE molecular embeddings",
+                "Tag": NaN,
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-11-18",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Drug metabolites prediction",
+                "Tag": NaN,
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-10-24",
+                "Status": "In progress"
+            },
+            {
+                "Title": "Microstate pKa values",
+                "Tag": "['pKa', 'ADME']",
+                "Contributor": "svolk19-stanford ",
+                "Incorporation Date": "2022-07-13",
+                "Status": "Ready"
+            },
+            {
+                "Title": "SARS-CoV-2 Anti viral screening",
+                "Tag": "['Sars-CoV-2', 'Antiviral activity', 'COVID19']",
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2023-01-25",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Mtb Permeability",
+                "Tag": "['M.tuberculosis', 'Permeability']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2024-10-16",
+                "Status": "In progress"
+            },
+            {
+                "Title": "BioGPT embeddings",
+                "Tag": "['Embedding', 'Biomedical text']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2023-08-30",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Test model 4",
+                "Tag": "['Dummy']",
+                "Contributor": "miquelduranfrigola",
+                "Incorporation Date": "2022-07-21",
+                "Status": "Test"
+            },
+            {
+                "Title": "Unit Testing Compounds Ersilia Pack",
+                "Tag": NaN,
+                "Contributor": "DhanshreeA",
+                "Incorporation Date": "2024-07-15",
+                "Status": "In progress"
+            }
+        ]
+    },
+    "events": {
+        "total-events": 63,
+        "events-by-year": [
+            {
+                "Count": 2022,
+                "count": 26
+            },
+            {
+                "Count": 2023,
+                "count": 20
+            },
+            {
+                "Count": 2024,
+                "count": 9
+            },
+            {
+                "Count": 2021,
+                "count": 6
+            },
+            {
+                "Count": 2020,
+                "count": 2
+            }
+        ]
     }
 }
