@@ -126,7 +126,7 @@ def create_readme(json_data, country_names, output_file):
 
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     readme_content = f"# 📊 Ersilia Statistics Report\n\n"
-    readme_content += f"_Last updated: {current_time}_\n\n"
+    readme_content += f"_Last updated: {current_time} GMT_\n\n"
     readme_content += models_section + "\n\n" + community_section + "\n\n" + events_section + "\n\nThe full data output that this report is based on can be found in `data/` and `external-data/`. An abbreviated version can be found in `reports/table_stats.json`."
 
     with open(output_file, 'w') as file:
