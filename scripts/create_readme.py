@@ -136,9 +136,9 @@ def create_readme(json_data, country_names, output_file):
 
 # Run the script
 if __name__ == "__main__":
-    input_json = 'tables_stats.json'  # Path to stats JSON
-    countries_csv = '../data/Countries.csv'  # Path to Countries CSV
-    output_readme = '../README.md'  # Output README file
+    input_json = 'reports/tables_stats.json'  # Path to stats JSON
+    countries_csv = 'data/Countries.csv'  # Path to Countries CSV
+    output_readme = 'README.md'  # Output README file
     data = load_json(input_json)
     country_names = load_country_names(countries_csv)
     create_readme(data, country_names, output_readme)
