@@ -71,10 +71,27 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.BRANCH_NAME }}
 
-      # 9. Create Pull Request
+      # 9. Process to create a pull request
+      - name: Wait for branch recognition
+        run: sleep 10
+        
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: List remote branches
+        run: git branch -r
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get install gh
+      
+      - name: Authenticate GitHub CLI
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+      
       - name: Create Pull Request using GitHub CLI
         run: |
-          gh pr create --title "Update Airtable CSVs, Stats, and README" \
-                       --body "This PR updates the CSV files, recalculates internal statistics, and updates the README." \
+          gh pr create --title "Update CSV files from Airtable" \
+                       --body "This PR updates the CSV files based on the latest data from Airtable." \
                        --head "${{ env.BRANCH_NAME }}" \
                        --base "main"
