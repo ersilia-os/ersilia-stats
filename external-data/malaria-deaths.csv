@@ -1,0 +1,205 @@
+measure_id,measure_name,location_id,Entity,sex_id,sex_name,age_id,age_name,cause_id,cause_name,metric_id,metric_name,Year,Deaths,upper,lower,Code
+1,Deaths,87,Luxembourg,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LUX
+1,Deaths,185,Rwanda,3,Both,22,All ages,345,Malaria,1,Number,2021,3035.457040380358,5339.768388344029,1719.0086074139638,RWA
+1,Deaths,7,Democratic People's Republic of Korea,3,Both,22,All ages,345,Malaria,1,Number,2021,2.0904313057858928,2.708823961618107,1.573882216316515,PRK
+1,Deaths,153,Syrian Arab Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SYR
+1,Deaths,23,Kiribati,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KIR
+1,Deaths,40,Turkmenistan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TKM
+1,Deaths,26,Papua New Guinea,3,Both,22,All ages,345,Malaria,1,Number,2021,2163.69624363032,4191.796052920094,846.919904271058,PNG
+1,Deaths,122,Ecuador,3,Both,22,All ages,345,Malaria,1,Number,2021,1.4166154791014025,2.3354888206229445,0.5050368848027083,ECU
+1,Deaths,367,Monaco,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MCO
+1,Deaths,59,Latvia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LVA
+1,Deaths,155,Turkey,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
+1,Deaths,89,Netherlands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NLD
+1,Deaths,171,Democratic Republic of the Congo,3,Both,22,All ages,345,Malaria,1,Number,2021,62358.608926125125,112100.2080959243,27976.27995988436,
+1,Deaths,139,Algeria,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DZA
+1,Deaths,88,Malta,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MLT
+1,Deaths,24,Marshall Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MHL
+1,Deaths,191,Zambia,3,Both,22,All ages,345,Malaria,1,Number,2021,6521.253982876089,14601.43975632695,1570.0906123081213,ZMB
+1,Deaths,91,Portugal,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PRT
+1,Deaths,205,Côte d'Ivoire,3,Both,22,All ages,345,Malaria,1,Number,2021,27762.932097565503,52331.201206569945,11228.68163133978,CIV
+1,Deaths,8,Taiwan (Province of China),3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
+1,Deaths,189,United Republic of Tanzania,3,Both,22,All ages,345,Malaria,1,Number,2021,15269.250628945503,32294.820188059093,4660.62332327353,TZA
+1,Deaths,106,Bahamas,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BHS
+1,Deaths,154,Tunisia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TUN
+1,Deaths,186,Seychelles,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SYC
+1,Deaths,121,Bolivia (Plurinational State of),3,Both,22,All ages,345,Malaria,1,Number,2021,0.6828023142549424,1.1926325583408377,0.2948809932449074,
+1,Deaths,41,Uzbekistan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,UZB
+1,Deaths,374,Niue,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NIU
+1,Deaths,92,Spain,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ESP
+1,Deaths,77,Cyprus,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CYP
+1,Deaths,10,Cambodia,3,Both,22,All ages,345,Malaria,1,Number,2021,3.66886379122751,5.7977839639734015,1.6206942902182055,KHM
+1,Deaths,108,Belize,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BLZ
+1,Deaths,75,Austria,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AUT
+1,Deaths,141,Egypt,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,EGY
+1,Deaths,74,Andorra,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AND
+1,Deaths,187,Somalia,3,Both,22,All ages,345,Malaria,1,Number,2021,2307.100393347551,5523.529894660616,831.614239351541,SOM
+1,Deaths,12,Lao People's Democratic Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,6.197700286636183,10.732708068594995,3.159062073911562,LAO
+1,Deaths,172,Equatorial Guinea,3,Both,22,All ages,345,Malaria,1,Number,2021,924.4108205735416,1950.4933015831684,383.7983767753114,GNQ
+1,Deaths,107,Barbados,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BRB
+1,Deaths,157,Yemen,3,Both,22,All ages,345,Malaria,1,Number,2021,9054.217304191729,21542.52344328266,1637.1634546088192,YEM
+1,Deaths,207,Ghana,3,Both,22,All ages,345,Malaria,1,Number,2021,15733.637819235904,29505.89658857038,7035.633534654811,GHA
+1,Deaths,78,Denmark,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DNK
+1,Deaths,206,Gambia,3,Both,22,All ages,345,Malaria,1,Number,2021,553.384475728277,890.5441138302083,366.1396475151066,GMB
+1,Deaths,376,Northern Mariana Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MNP
+1,Deaths,27,Samoa,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,WSM
+1,Deaths,143,Iraq,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,IRQ
+1,Deaths,61,Republic of Moldova,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MDA
+1,Deaths,173,Gabon,3,Both,22,All ages,345,Malaria,1,Number,2021,747.4683670483853,1859.5921269301728,233.27294890318743,GAB
+1,Deaths,30,Vanuatu,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,VUT
+1,Deaths,208,Guinea,3,Both,22,All ages,345,Malaria,1,Number,2021,12582.806093019568,24520.912336185505,5127.808774730951,GIN
+1,Deaths,63,Ukraine,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,UKR
+1,Deaths,127,El Salvador,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SLV
+1,Deaths,210,Liberia,3,Both,22,All ages,345,Malaria,1,Number,2021,5631.146134572071,11230.10840795085,1834.3651248912888,LBR
+1,Deaths,176,Comoros,3,Both,22,All ages,345,Malaria,1,Number,2021,29.6585947903394,50.209602156425056,13.317853322857264,COM
+1,Deaths,125,Colombia,3,Both,22,All ages,345,Malaria,1,Number,2021,74.50207047493831,141.76281575133407,16.473820352224813,COL
+1,Deaths,94,Switzerland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CHE
+1,Deaths,60,Lithuania,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LTU
+1,Deaths,45,Bulgaria,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BGR
+1,Deaths,126,Costa Rica,3,Both,22,All ages,345,Malaria,1,Number,2021,0.2005127003729511,0.2337777015048839,0.1721008874760998,CRI
+1,Deaths,46,Croatia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,HRV
+1,Deaths,14,Maldives,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MDV
+1,Deaths,298,American Samoa,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ASM
+1,Deaths,110,Dominica,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DMA
+1,Deaths,13,Malaysia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MYS
+1,Deaths,140,Bahrain,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BHR
+1,Deaths,28,Solomon Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,169.17292179108327,303.86419223828466,96.6181251940922,SLB
+1,Deaths,93,Sweden,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SWE
+1,Deaths,380,Palau,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PLW
+1,Deaths,47,Czechia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CZE
+1,Deaths,129,Honduras,3,Both,22,All ages,345,Malaria,1,Number,2021,0.2892591064704523,1.4708656922937289,0.032954734496169,HND
+1,Deaths,193,Botswana,3,Both,22,All ages,345,Malaria,1,Number,2021,7.771846110257332,14.84615065409752,3.652540745294551,BWA
+1,Deaths,79,Finland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,FIN
+1,Deaths,160,Afghanistan,3,Both,22,All ages,345,Malaria,1,Number,2021,121.28222472045294,187.61309941282505,55.19543966957506,AFG
+1,Deaths,111,Dominican Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,9.542322292198063,40.27447551499013,1.169019127625173,DOM
+1,Deaths,145,Kuwait,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KWT
+1,Deaths,413,Tokelau,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TKL
+1,Deaths,181,Madagascar,3,Both,22,All ages,345,Malaria,1,Number,2021,6639.041387552446,14521.448737046429,1512.5060545643933,MDG
+1,Deaths,113,Guyana,3,Both,22,All ages,345,Malaria,1,Number,2021,55.412575025110776,98.4761043139979,22.0603168545877,GUY
+1,Deaths,16,Philippines,3,Both,22,All ages,345,Malaria,1,Number,2021,24.12182442726317,104.04889421058384,0.3423209169383896,PHL
+1,Deaths,131,Nicaragua,3,Both,22,All ages,345,Malaria,1,Number,2021,87.0412213899635,152.82373150367505,0.0,NIC
+1,Deaths,522,Sudan,3,Both,22,All ages,345,Malaria,1,Number,2021,3944.7854060047534,9084.777200353994,1394.773807425762,SDN
+1,Deaths,178,Eritrea,3,Both,22,All ages,345,Malaria,1,Number,2021,158.21210241779843,259.5661694015866,97.7985654166722,ERI
+1,Deaths,50,Montenegro,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MNE
+1,Deaths,146,Lebanon,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LBN
+1,Deaths,80,France,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,FRA
+1,Deaths,132,Panama,3,Both,22,All ages,345,Malaria,1,Number,2021,0.1123013113924884,0.8189663158984559,0.0,PAN
+1,Deaths,396,San Marino,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SMR
+1,Deaths,196,South Africa,3,Both,22,All ages,345,Malaria,1,Number,2021,54.48080306132545,245.744563752731,11.138374274052913,ZAF
+1,Deaths,49,North Macedonia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MKD
+1,Deaths,148,Morocco,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MAR
+1,Deaths,162,Bhutan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0985784944966828,0.1949292144738473,0.0577758653366337,BTN
+1,Deaths,66,Brunei Darussalam,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BRN
+1,Deaths,177,Djibouti,3,Both,22,All ages,345,Malaria,1,Number,2021,181.1989786086405,273.6525685644721,99.85087995622897,DJI
+1,Deaths,112,Grenada,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GRD
+1,Deaths,17,Sri Lanka,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LKA
+1,Deaths,214,Nigeria,3,Both,22,All ages,345,Malaria,1,Number,2021,227528.89875153344,475654.51587861904,74960.16271434822,NGA
+1,Deaths,130,Mexico,3,Both,22,All ages,345,Malaria,1,Number,2021,1.90203651365666,2.251048377362735,1.5965311924914694,MEX
+1,Deaths,97,Argentina,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ARG
+1,Deaths,82,Greece,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GRC
+1,Deaths,51,Poland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,POL
+1,Deaths,211,Mali,3,Both,22,All ages,345,Malaria,1,Number,2021,23815.326976840435,48435.79732332388,10738.779468566152,MLI
+1,Deaths,212,Mauritania,3,Both,22,All ages,345,Malaria,1,Number,2021,385.7230057171477,849.1050782759525,62.02792688330542,MRT
+1,Deaths,19,Timor-Leste,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TLS
+1,Deaths,35,Georgia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GEO
+1,Deaths,351,Guam,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GUM
+1,Deaths,197,Eswatini,3,Both,22,All ages,345,Malaria,1,Number,2021,3.719744975160245,10.669819309543389,1.1525920749152554,SWZ
+1,Deaths,320,Cook Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,COK
+1,Deaths,164,Nepal,3,Both,22,All ages,345,Malaria,1,Number,2021,4.315668565350227,10.68881448846798,1.0372868554401578,NPL
+1,Deaths,144,Jordan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,JOR
+1,Deaths,83,Iceland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ISL
+1,Deaths,152,Saudi Arabia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.2595723133806552,1.0704112727000432,0.0016963410904123,SAU
+1,Deaths,52,Romania,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ROU
+1,Deaths,68,Republic of Korea,3,Both,22,All ages,345,Malaria,1,Number,2021,1.7520006923069364,2.139206986423395,1.450404164423323,PRK
+1,Deaths,215,Sao Tome and Principe,3,Both,22,All ages,345,Malaria,1,Number,2021,7.9419491342212,12.99087443124406,3.2368005191598286,STP
+1,Deaths,98,Chile,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CHL
+1,Deaths,18,Thailand,3,Both,22,All ages,345,Malaria,1,Number,2021,0.5379981009792447,1.2466882495864138,0.1012694739145207,THA
+1,Deaths,115,Jamaica,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,JAM
+1,Deaths,117,Saint Vincent and the Grenadines,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,VCT
+1,Deaths,416,Tuvalu,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TUV
+1,Deaths,305,Bermuda,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BMU
+1,Deaths,33,Armenia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ARM
+1,Deaths,36,Kazakhstan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KAZ
+1,Deaths,435,South Sudan,3,Both,22,All ages,345,Malaria,1,Number,2021,7457.541571185339,14506.821286551578,3022.7683824130045,SSD
+1,Deaths,99,Uruguay,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,URY
+1,Deaths,150,Oman,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0014904403257075,0.0073979584165636,4.9910511780035656e-05,OMN
+1,Deaths,198,Zimbabwe,3,Both,22,All ages,345,Malaria,1,Number,2021,1707.985885805097,3495.073636811269,714.9009174184955,ZWE
+1,Deaths,37,Kyrgyzstan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KGZ
+1,Deaths,200,Benin,3,Both,22,All ages,345,Malaria,1,Number,2021,15653.765139315115,28341.34704777878,7166.430725424123,BEN
+1,Deaths,116,Saint Lucia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LCA
+1,Deaths,55,Slovenia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SVN
+1,Deaths,101,Canada,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CAN
+1,Deaths,84,Ireland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,IRL
+1,Deaths,136,Paraguay,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PRY
+1,Deaths,183,Mauritius,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MUS
+1,Deaths,163,India,3,Both,22,All ages,345,Malaria,1,Number,2021,16917.06449954352,66855.92758656752,0.0,IND
+1,Deaths,135,Brazil,3,Both,22,All ages,345,Malaria,1,Number,2021,175.69094903808826,553.0076394947848,3.3324002807386104,BRA
+1,Deaths,182,Malawi,3,Both,22,All ages,345,Malaria,1,Number,2021,8302.922347444612,17728.361597608317,3062.114217303252,MWI
+1,Deaths,102,United States of America,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,USA
+1,Deaths,71,Australia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AUS
+1,Deaths,216,Senegal,3,Both,22,All ages,345,Malaria,1,Number,2021,4886.607997452372,7335.823413506033,2103.792801196674,SEN
+1,Deaths,85,Israel,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ISR
+1,Deaths,149,Palestine,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PSE
+1,Deaths,217,Sierra Leone,3,Both,22,All ages,345,Malaria,1,Number,2021,12979.978913268586,25324.062963880897,4209.031572484179,SLE
+1,Deaths,169,Central African Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,5040.926315868949,11682.104185798456,1825.640891710492,CAF
+1,Deaths,201,Burkina Faso,3,Both,22,All ages,345,Malaria,1,Number,2021,35962.56023818523,64139.2369714016,16365.36576084328,BFA
+1,Deaths,54,Slovakia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SVK
+1,Deaths,203,Cabo Verde,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0460776287726376,0.2165345271621192,0.0022233191152928,CPV
+1,Deaths,38,Mongolia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MNG
+1,Deaths,22,Fiji,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,FJI
+1,Deaths,69,Singapore,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SGP
+1,Deaths,202,Cameroon,3,Both,22,All ages,345,Malaria,1,Number,2021,28945.612979130445,58505.86529030088,11324.32729146244,CMR
+1,Deaths,168,Angola,3,Both,22,All ages,345,Malaria,1,Number,2021,18396.46227962601,38747.947783053314,7261.132284918794,AGO
+1,Deaths,39,Tajikistan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TJK
+1,Deaths,72,New Zealand,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NZL
+1,Deaths,105,Antigua and Barbuda,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ATG
+1,Deaths,170,Congo,3,Both,22,All ages,345,Malaria,1,Number,2021,2439.276171645046,4789.946423448607,893.2947750895945,COG
+1,Deaths,57,Belarus,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BLR
+1,Deaths,90,Norway,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NOR
+1,Deaths,25,Micronesia (Federated States of),3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
+1,Deaths,123,Peru,3,Both,22,All ages,345,Malaria,1,Number,2021,24.02322328603504,125.29046783181188,0.8982351843265877,PER
+1,Deaths,204,Chad,3,Both,22,All ages,345,Malaria,1,Number,2021,8798.15583958796,18325.75489941128,2705.78901516314,TCD
+1,Deaths,58,Estonia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,EST
+1,Deaths,369,Nauru,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NRU
+1,Deaths,156,United Arab Emirates,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ARE
+1,Deaths,190,Uganda,3,Both,22,All ages,345,Malaria,1,Number,2021,45361.02133747084,82604.27057460984,14826.12394793638,UGA
+1,Deaths,11,Indonesia,3,Both,22,All ages,345,Malaria,1,Number,2021,1312.06764237564,5995.150612176331,104.81222546334917,IDN
+1,Deaths,43,Albania,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ALB
+1,Deaths,109,Cuba,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CUB
+1,Deaths,142,Iran (Islamic Republic of),3,Both,22,All ages,345,Malaria,1,Number,2021,0.1215269689728442,0.7171043909584274,0.0008678223347777,
+1,Deaths,76,Belgium,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BEL
+1,Deaths,44,Bosnia and Herzegovina,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BIH
+1,Deaths,175,Burundi,3,Both,22,All ages,345,Malaria,1,Number,2021,13547.098841622288,26039.34948117932,5803.4296998106265,BDI
+1,Deaths,29,Tonga,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TON
+1,Deaths,385,Puerto Rico,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PRI
+1,Deaths,95,United Kingdom,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GBR
+1,Deaths,62,Russian Federation,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,RUS
+1,Deaths,15,Myanmar,3,Both,22,All ages,345,Malaria,1,Number,2021,366.6434636962392,938.176468512232,197.60498828944912,MMR
+1,Deaths,393,Saint Kitts and Nevis,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KNA
+1,Deaths,128,Guatemala,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GTM
+1,Deaths,194,Lesotho,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LSO
+1,Deaths,161,Bangladesh,3,Both,22,All ages,345,Malaria,1,Number,2021,603.331741172993,1210.7821516581337,146.9659344214066,BGD
+1,Deaths,195,Namibia,3,Both,22,All ages,345,Malaria,1,Number,2021,34.63159145835799,167.3248387796551,9.002158717365697,NAM
+1,Deaths,209,Guinea-Bissau,3,Both,22,All ages,345,Malaria,1,Number,2021,578.6776390345032,1309.204246788151,127.19151991226389,GNB
+1,Deaths,48,Hungary,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,HUN
+1,Deaths,179,Ethiopia,3,Both,22,All ages,345,Malaria,1,Number,2021,6054.430045198381,14426.500669248013,1638.78734951802,ETH
+1,Deaths,114,Haiti,3,Both,22,All ages,345,Malaria,1,Number,2021,711.5303254518524,2349.235009090143,77.07119762207208,HTI
+1,Deaths,147,Libya,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LBY
+1,Deaths,180,Kenya,3,Both,22,All ages,345,Malaria,1,Number,2021,7550.57174365101,11989.85708006952,4492.544870047267,KEN
+1,Deaths,81,Germany,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DEU
+1,Deaths,34,Azerbaijan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AZE
+1,Deaths,67,Japan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,JPN
+1,Deaths,20,Viet Nam,3,Both,22,All ages,345,Malaria,1,Number,2021,2.2941398234031465,4.369604751240988,0.9344163844159362,VNM
+1,Deaths,165,Pakistan,3,Both,22,All ages,345,Malaria,1,Number,2021,8839.575703718438,25709.59080817289,459.7424031525027,PAK
+1,Deaths,133,Venezuela (Bolivarian Republic of),3,Both,22,All ages,345,Malaria,1,Number,2021,362.9502065867258,1020.5824693612932,77.94139531888865,
+1,Deaths,422,United States Virgin Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
+1,Deaths,349,Greenland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GRL
+1,Deaths,151,Qatar,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,QAT
+1,Deaths,6,China,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CHN
+1,Deaths,53,Serbia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SRB
+1,Deaths,184,Mozambique,3,Both,22,All ages,345,Malaria,1,Number,2021,27422.79487489615,60626.359737616935,8554.904974502477,MOZ
+1,Deaths,86,Italy,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ITA
+1,Deaths,118,Suriname,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SUR
+1,Deaths,213,Niger,3,Both,22,All ages,345,Malaria,1,Number,2021,33664.34507233972,61379.58239734914,11795.283569559337,NGA
+1,Deaths,119,Trinidad and Tobago,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TTO
+1,Deaths,218,Togo,3,Both,22,All ages,345,Malaria,1,Number,2021,5776.35900291037,11141.673734207803,1928.157969126143,TGO
