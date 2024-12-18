@@ -1,4 +1,4 @@
-name: Fetch Airtable Tables, Calculate Stats, and Update README
+name: Ersilia Weekly Stats Report
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       # 2. Create a New Branch
       - name: Create a new branch
         run: |
-          BRANCH_NAME="update-airtable-csv-${{ github.run_id }}"
+          BRANCH_NAME="update-ersilia-stats-${{ github.run_id }}"
           git checkout -b $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
@@ -37,7 +37,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyairtable pandas numpy
+          pip install -r requirements.txt
 
       # 4. Fetch Airtable Tables
       - name: Run fetch_airtables.py
