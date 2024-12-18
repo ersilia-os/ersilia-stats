@@ -1,4 +1,4 @@
-name: Fetch Airtable Tables and Convert to CSVs
+name: Fetch Airtable Tables, Calculate Stats, and Update README
 
 on:
   push:
@@ -11,70 +11,78 @@ permissions:
   pull-requests: write
 
 jobs:
-  fetch_table:
+  update_stats_and_readme:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # 2. Create a New Branch
       - name: Create a new branch
         run: |
           BRANCH_NAME="update-airtable-csv-${{ github.run_id }}"
           git checkout -b $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
+      # 3. Set Up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'  # Specify the Python version you prefer
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyairtable
+          pip install pyairtable pandas numpy
 
+      # 4. Fetch Airtable Tables
       - name: Run fetch_airtables.py
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
           python scripts/fetch_airtables.py $AIRTABLE_API_KEY
 
+      # 5. Run Internal Stats Calculation
+      - name: Calculate Internal Statistics
+        run: |
+          python scripts/internal_stats.py
+        working-directory: scripts
+
+      # 6. Move tables_stats.json to Reports
+      - name: Relocate tables_stats.json
+        run: |
+          mkdir -p reports
+          mv scripts/tables_stats.json reports/tables_stats.json
+
+      # 7. Generate README.md
+      - name: Update README
+        run: |
+          python scripts/create_readme.py
+        working-directory: scripts
+
+      # 8. Commit Changes
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add .
-          git commit -m "Update Airtable CSVs" || echo "No changes to commit"
+          git add reports/tables_stats.json README.md
+          git commit -m "Update internal stats and README" || echo "No changes to commit"
 
+      # 9. Push Changes
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ env.BRANCH_NAME }}  # Push to the new branch created earlier
+          branch: ${{ env.BRANCH_NAME }}
 
-      - name: Wait for branch recognition
-        run: sleep 10  # Optional: Wait a few seconds to ensure branch is recognized remotely
-
-      - name: Fetch all branches
-        run: git fetch --all
-
-      - name: List remote branches
-        run: git branch -r
-
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-get install gh
-      
-      - name: Authenticate GitHub CLI
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-      
+      # 10. Create Pull Request
       - name: Create Pull Request using GitHub CLI
         run: |
-          gh pr create --title "Update CSV files from Airtable" \
-                       --body "This PR updates the CSV files based on the latest data from Airtable." \
+          gh pr create --title "Update Airtable CSVs, Stats, and README" \
+                       --body "This PR updates the CSV files, recalculates internal statistics, and updates the README." \
                        --head "${{ env.BRANCH_NAME }}" \
                        --base "main"
