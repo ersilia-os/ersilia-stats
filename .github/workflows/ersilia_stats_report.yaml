@@ -50,7 +50,6 @@ jobs:
       - name: Calculate Internal Statistics
         run: |
           python scripts/internal_stats.py
-        working-directory: scripts
 
       # 6. Move tables_stats.json to Reports
       - name: Relocate tables_stats.json
@@ -62,7 +61,6 @@ jobs:
       - name: Update README
         run: |
           python scripts/create_readme.py
-        working-directory: scripts
 
       # 8. Commit Changes
       - name: Commit changes
