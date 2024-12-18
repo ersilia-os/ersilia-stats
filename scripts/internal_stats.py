@@ -3,13 +3,13 @@ import numpy as np
 import json
 
 # Reading all the specified CSV files into DataFrames
-blogposts_df = pd.read_csv('../data/Blogposts.csv')
-community_df = pd.read_csv('../data/Community.csv')
-countries_df = pd.read_csv('../data/Countries.csv')
-events_df = pd.read_csv('../data/Events.csv')
-models_df = pd.read_csv('../data/Models.csv')
-organisations_df = pd.read_csv('../data/Organisations.csv')
-publications_df = pd.read_csv('../data/Publications.csv')
+blogposts_df = pd.read_csv('data/Blogposts.csv')
+community_df = pd.read_csv('data/Community.csv')
+countries_df = pd.read_csv('data/Countries.csv')
+events_df = pd.read_csv('data/Events.csv')
+models_df = pd.read_csv('data/Models.csv')
+organisations_df = pd.read_csv('data/Organisations.csv')
+publications_df = pd.read_csv('data/Publications.csv')
 
 output_data = {
     "publications": {},
@@ -124,7 +124,7 @@ def convert_to_serializable(obj):
 output_data_serializable = convert_to_serializable(output_data)
 
 # Write the output_data to a JSON file
-with open('tables_stats.json', 'w') as json_file:
+with open('reports/tables_stats.json', 'w') as json_file:
     json.dump(output_data_serializable, json_file, indent=4)
 
 # Print confirmation message
