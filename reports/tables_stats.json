@@ -1,0 +1,1071 @@
+{
+    "publications": {
+        "total-publications": 38,
+        "total-citations": 1128,
+        "total-publications-senior-author": 19,
+        "average-citations-article-year": [
+            {
+                "Year": 2013,
+                "average_Citations": 52.0
+            },
+            {
+                "Year": 2014,
+                "average_Citations": 32.0
+            },
+            {
+                "Year": 2017,
+                "average_Citations": 44.0
+            },
+            {
+                "Year": 2018,
+                "average_Citations": 104.5
+            },
+            {
+                "Year": 2019,
+                "average_Citations": 18.0
+            },
+            {
+                "Year": 2020,
+                "average_Citations": 36.8
+            },
+            {
+                "Year": 2021,
+                "average_Citations": 30.0
+            },
+            {
+                "Year": 2022,
+                "average_Citations": 21.67
+            },
+            {
+                "Year": 2023,
+                "average_Citations": 13.5
+            },
+            {
+                "Year": 2024,
+                "average_Citations": 9.5
+            }
+        ]
+    },
+    "blogposts-events": {
+        "num-posts-quarter-year": [
+            {
+                "Year": 2021,
+                "Quarter": "Q2",
+                "post_count": 6
+            },
+            {
+                "Year": 2021,
+                "Quarter": "Q3",
+                "post_count": 4
+            },
+            {
+                "Year": 2021,
+                "Quarter": "Q4",
+                "post_count": 2
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q1",
+                "post_count": 3
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q2",
+                "post_count": 2
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q3",
+                "post_count": 3
+            },
+            {
+                "Year": 2022,
+                "Quarter": "Q4",
+                "post_count": 2
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q1",
+                "post_count": 2
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q2",
+                "post_count": 3
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q3",
+                "post_count": 4
+            },
+            {
+                "Year": 2023,
+                "Quarter": "Q4",
+                "post_count": 4
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q1",
+                "post_count": 3
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q2",
+                "post_count": 3
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q3",
+                "post_count": 2
+            },
+            {
+                "Year": 2024,
+                "Quarter": "Q4",
+                "post_count": 2
+            }
+        ],
+        "total-events": 63
+    },
+    "countries": {
+        "num-unique-countries": 197,
+        "num-countries-region": [
+            {
+                "Region": "Africa",
+                "unique_column_count": 50
+            },
+            {
+                "Region": "Americas",
+                "unique_column_count": 34
+            },
+            {
+                "Region": "Asia",
+                "unique_column_count": 48
+            },
+            {
+                "Region": "Europe",
+                "unique_column_count": 43
+            },
+            {
+                "Region": "Oceania",
+                "unique_column_count": 14
+            }
+        ],
+        "num-countries-subregion": [
+            {
+                "Subregion": "Australia and New Zealand",
+                "unique_column_count": 2
+            },
+            {
+                "Subregion": "Central Asia",
+                "unique_column_count": 5
+            },
+            {
+                "Subregion": "Eastern Asia",
+                "unique_column_count": 6
+            },
+            {
+                "Subregion": "Eastern Europe",
+                "unique_column_count": 9
+            },
+            {
+                "Subregion": "Latin America and the Caribbean",
+                "unique_column_count": 32
+            },
+            {
+                "Subregion": "Melanesia",
+                "unique_column_count": 4
+            },
+            {
+                "Subregion": "Micronesia",
+                "unique_column_count": 5
+            },
+            {
+                "Subregion": "Northern Africa",
+                "unique_column_count": 6
+            },
+            {
+                "Subregion": "Northern America",
+                "unique_column_count": 2
+            },
+            {
+                "Subregion": "Northern Europe",
+                "unique_column_count": 10
+            },
+            {
+                "Subregion": "Polynesia",
+                "unique_column_count": 3
+            },
+            {
+                "Subregion": "South-Eastern Asia",
+                "unique_column_count": 11
+            },
+            {
+                "Subregion": "Southern Asia",
+                "unique_column_count": 9
+            },
+            {
+                "Subregion": "Southern Europe",
+                "unique_column_count": 15
+            },
+            {
+                "Subregion": "Sub-Saharan Africa",
+                "unique_column_count": 44
+            },
+            {
+                "Subregion": "Western Asia",
+                "unique_column_count": 17
+            },
+            {
+                "Subregion": "Western Europe",
+                "unique_column_count": 9
+            }
+        ],
+        "country-population": [
+            {
+                "Country": "Maldives",
+                "Population": 600000.0
+            },
+            {
+                "Country": "Kenya",
+                "Population": 54000000.0
+            },
+            {
+                "Country": "Germany",
+                "Population": 84000000.0
+            },
+            {
+                "Country": "South Sudan",
+                "Population": 13000000.0
+            },
+            {
+                "Country": "Burkina",
+                "Population": 22000000.0
+            },
+            {
+                "Country": "Argentina",
+                "Population": 46000000.0
+            },
+            {
+                "Country": "Ecuador",
+                "Population": 19000000.0
+            },
+            {
+                "Country": "Colombia",
+                "Population": 52000000.0
+            },
+            {
+                "Country": "Ireland [Republic]",
+                "Population": 5200000.0
+            },
+            {
+                "Country": "Zambia",
+                "Population": 19000000.0
+            },
+            {
+                "Country": "Afghanistan",
+                "Population": 42000000.0
+            },
+            {
+                "Country": "Botswana",
+                "Population": 2400000.0
+            },
+            {
+                "Country": "Nigeria",
+                "Population": 218000000.0
+            },
+            {
+                "Country": "Mexico",
+                "Population": 126000000.0
+            },
+            {
+                "Country": "Switzerland",
+                "Population": 9000000.0
+            },
+            {
+                "Country": "Latvia",
+                "Population": 1800000.0
+            },
+            {
+                "Country": "Pakistan",
+                "Population": 242000000.0
+            },
+            {
+                "Country": "Vanuatu",
+                "Population": 300000.0
+            },
+            {
+                "Country": "Thailand",
+                "Population": 71000000.0
+            },
+            {
+                "Country": "Bolivia",
+                "Population": 12000000.0
+            },
+            {
+                "Country": "Mauritania",
+                "Population": 4500000.0
+            },
+            {
+                "Country": "Uzbekistan",
+                "Population": 35000000.0
+            },
+            {
+                "Country": "Iran",
+                "Population": 89000000.0
+            },
+            {
+                "Country": "Laos",
+                "Population": 8000000.0
+            },
+            {
+                "Country": "Haiti",
+                "Population": 12000000.0
+            },
+            {
+                "Country": "Malaysia",
+                "Population": 33000000.0
+            },
+            {
+                "Country": "Monaco",
+                "Population": 40000.0
+            },
+            {
+                "Country": "Brazil",
+                "Population": 215000000.0
+            },
+            {
+                "Country": "Palau",
+                "Population": 20000.0
+            },
+            {
+                "Country": "Azerbaijan",
+                "Population": 10000000.0
+            },
+            {
+                "Country": "Somalia",
+                "Population": 17000000.0
+            },
+            {
+                "Country": "Djibouti",
+                "Population": 1000000.0
+            },
+            {
+                "Country": "Austria",
+                "Population": 9000000.0
+            },
+            {
+                "Country": "San Marino",
+                "Population": 30000.0
+            },
+            {
+                "Country": "Mali",
+                "Population": 22000000.0
+            },
+            {
+                "Country": "Portugal",
+                "Population": 10000000.0
+            },
+            {
+                "Country": "Sweden",
+                "Population": 10500000.0
+            },
+            {
+                "Country": "Saint Vincent & the Grenadines",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Australia",
+                "Population": 26000000.0
+            },
+            {
+                "Country": "Vietnam",
+                "Population": 99000000.0
+            },
+            {
+                "Country": "Greece",
+                "Population": 10400000.0
+            },
+            {
+                "Country": "Costa Rica",
+                "Population": 5200000.0
+            },
+            {
+                "Country": "Georgia",
+                "Population": 4000000.0
+            },
+            {
+                "Country": "Egypt",
+                "Population": 104000000.0
+            },
+            {
+                "Country": "Philippines",
+                "Population": 113000000.0
+            },
+            {
+                "Country": "Vatican City",
+                "Population": 1000.0
+            },
+            {
+                "Country": "Brunei",
+                "Population": 500000.0
+            },
+            {
+                "Country": "Liechtenstein",
+                "Population": 40000.0
+            },
+            {
+                "Country": "Iceland",
+                "Population": 400000.0
+            },
+            {
+                "Country": "Uganda",
+                "Population": 48000000.0
+            },
+            {
+                "Country": "United Arab Emirates",
+                "Population": 10000000.0
+            },
+            {
+                "Country": "Netherlands",
+                "Population": 18000000.0
+            },
+            {
+                "Country": "Senegal",
+                "Population": 17000000.0
+            },
+            {
+                "Country": "Suriname",
+                "Population": 600000.0
+            },
+            {
+                "Country": "Moldova",
+                "Population": 2600000.0
+            },
+            {
+                "Country": "Lithuania",
+                "Population": 2700000.0
+            },
+            {
+                "Country": "Bahrain",
+                "Population": 1500000.0
+            },
+            {
+                "Country": "Marshall Islands",
+                "Population": 60000.0
+            },
+            {
+                "Country": "Chile",
+                "Population": 19000000.0
+            },
+            {
+                "Country": "Armenia",
+                "Population": 3000000.0
+            },
+            {
+                "Country": "Grenada",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Paraguay",
+                "Population": 7500000.0
+            },
+            {
+                "Country": "Europe",
+                "Population": NaN
+            },
+            {
+                "Country": "Montenegro",
+                "Population": 600000.0
+            },
+            {
+                "Country": "United States",
+                "Population": 335000000.0
+            },
+            {
+                "Country": "Oman",
+                "Population": 4800000.0
+            },
+            {
+                "Country": "Macedonia",
+                "Population": 2100000.0
+            },
+            {
+                "Country": "Mauritius",
+                "Population": 1300000.0
+            },
+            {
+                "Country": "Liberia",
+                "Population": 5200000.0
+            },
+            {
+                "Country": "Kuwait",
+                "Population": 4700000.0
+            },
+            {
+                "Country": "Tajikistan",
+                "Population": 10000000.0
+            },
+            {
+                "Country": "Bosnia Herzegovina",
+                "Population": 3200000.0
+            },
+            {
+                "Country": "Venezuela",
+                "Population": 29000000.0
+            },
+            {
+                "Country": "Tuvalu",
+                "Population": 10000.0
+            },
+            {
+                "Country": "Gambia",
+                "Population": 2500000.0
+            },
+            {
+                "Country": "Nauru",
+                "Population": 10000.0
+            },
+            {
+                "Country": "Romania",
+                "Population": 19000000.0
+            },
+            {
+                "Country": "Guinea-Bissau",
+                "Population": 2000000.0
+            },
+            {
+                "Country": "Yemen",
+                "Population": 34000000.0
+            },
+            {
+                "Country": "Malta",
+                "Population": 500000.0
+            },
+            {
+                "Country": "Kosovo",
+                "Population": 1800000.0
+            },
+            {
+                "Country": "France",
+                "Population": 65000000.0
+            },
+            {
+                "Country": "Cape Verde",
+                "Population": 600000.0
+            },
+            {
+                "Country": "Bhutan",
+                "Population": 800000.0
+            },
+            {
+                "Country": "Solomon Islands",
+                "Population": 800000.0
+            },
+            {
+                "Country": "Korea North",
+                "Population": 26000000.0
+            },
+            {
+                "Country": "Ghana",
+                "Population": 33000000.0
+            },
+            {
+                "Country": "Indonesia",
+                "Population": 278000000.0
+            },
+            {
+                "Country": "South Africa",
+                "Population": 60000000.0
+            },
+            {
+                "Country": "Comoros",
+                "Population": 900000.0
+            },
+            {
+                "Country": "United Kingdom",
+                "Population": 67000000.0
+            },
+            {
+                "Country": "Lebanon",
+                "Population": 5400000.0
+            },
+            {
+                "Country": "Cameroon",
+                "Population": 27000000.0
+            },
+            {
+                "Country": "Malawi",
+                "Population": 20000000.0
+            },
+            {
+                "Country": "Chad",
+                "Population": 17000000.0
+            },
+            {
+                "Country": "Morocco",
+                "Population": 37000000.0
+            },
+            {
+                "Country": "Micronesia",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Mozambique",
+                "Population": 33000000.0
+            },
+            {
+                "Country": "Peru",
+                "Population": 34000000.0
+            },
+            {
+                "Country": "Trinidad & Tobago",
+                "Population": 1400000.0
+            },
+            {
+                "Country": "Seychelles",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Japan",
+                "Population": 125000000.0
+            },
+            {
+                "Country": "Hungary",
+                "Population": 9600000.0
+            },
+            {
+                "Country": "Cambodia",
+                "Population": 17000000.0
+            },
+            {
+                "Country": "East Timor",
+                "Population": 1300000.0
+            },
+            {
+                "Country": "Swaziland",
+                "Population": 1200000.0
+            },
+            {
+                "Country": "Uruguay",
+                "Population": 3500000.0
+            },
+            {
+                "Country": "Guatemala",
+                "Population": 19000000.0
+            },
+            {
+                "Country": "Kiribati",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Togo",
+                "Population": 8800000.0
+            },
+            {
+                "Country": "New Zealand",
+                "Population": 5000000.0
+            },
+            {
+                "Country": "Guyana",
+                "Population": 800000.0
+            },
+            {
+                "Country": "Denmark",
+                "Population": 6000000.0
+            },
+            {
+                "Country": "Algeria",
+                "Population": 44000000.0
+            },
+            {
+                "Country": "Italy",
+                "Population": 59000000.0
+            },
+            {
+                "Country": "Tonga",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Zimbabwe",
+                "Population": 15000000.0
+            },
+            {
+                "Country": "Belarus",
+                "Population": 9200000.0
+            },
+            {
+                "Country": "Qatar",
+                "Population": 3000000.0
+            },
+            {
+                "Country": "Congo",
+                "Population": 6000000.0
+            },
+            {
+                "Country": "Ukraine",
+                "Population": 37000000.0
+            },
+            {
+                "Country": "Sao Tome & Principe",
+                "Population": 200000.0
+            },
+            {
+                "Country": "Albania",
+                "Population": 2800000.0
+            },
+            {
+                "Country": "Singapore",
+                "Population": 5700000.0
+            },
+            {
+                "Country": "Sri Lanka",
+                "Population": 22000000.0
+            },
+            {
+                "Country": "Jordan",
+                "Population": 11000000.0
+            },
+            {
+                "Country": "Fiji",
+                "Population": 900000.0
+            },
+            {
+                "Country": "Turkmenistan",
+                "Population": 6000000.0
+            },
+            {
+                "Country": "Iraq",
+                "Population": 45000000.0
+            },
+            {
+                "Country": "Andorra",
+                "Population": 80000.0
+            },
+            {
+                "Country": "St Kitts & Nevis",
+                "Population": 50000.0
+            },
+            {
+                "Country": "Nepal",
+                "Population": 32000000.0
+            },
+            {
+                "Country": "Kazakhstan",
+                "Population": 19000000.0
+            },
+            {
+                "Country": "Slovakia",
+                "Population": 5400000.0
+            },
+            {
+                "Country": "Congo [Democratic Rep]",
+                "Population": 97000000.0
+            },
+            {
+                "Country": "Eritrea",
+                "Population": 3600000.0
+            },
+            {
+                "Country": "Cuba",
+                "Population": 11000000.0
+            },
+            {
+                "Country": "Canada",
+                "Population": 38000000.0
+            },
+            {
+                "Country": "Korea South",
+                "Population": 52000000.0
+            },
+            {
+                "Country": "Cyprus",
+                "Population": 1200000.0
+            },
+            {
+                "Country": "Antigua & Deps",
+                "Population": 100000.0
+            },
+            {
+                "Country": "Bulgaria",
+                "Population": 6700000.0
+            },
+            {
+                "Country": "Myanmar [Burma]",
+                "Population": 55000000.0
+            },
+            {
+                "Country": "St Lucia",
+                "Population": 200000.0
+            },
+            {
+                "Country": "Bahamas",
+                "Population": 400000.0
+            },
+            {
+                "Country": "Papua New Guinea",
+                "Population": 10000000.0
+            },
+            {
+                "Country": "Sudan",
+                "Population": 45000000.0
+            },
+            {
+                "Country": "Sierra Leone",
+                "Population": 8400000.0
+            },
+            {
+                "Country": "Jamaica",
+                "Population": 3000000.0
+            },
+            {
+                "Country": "Bangladesh",
+                "Population": 172000000.0
+            },
+            {
+                "Country": "Madagascar",
+                "Population": 29000000.0
+            },
+            {
+                "Country": "Niger",
+                "Population": 25000000.0
+            },
+            {
+                "Country": "Dominica",
+                "Population": 70000.0
+            },
+            {
+                "Country": "Angola",
+                "Population": 35000000.0
+            },
+            {
+                "Country": "Croatia",
+                "Population": 4000000.0
+            },
+            {
+                "Country": "Belize",
+                "Population": 400000.0
+            },
+            {
+                "Country": "El Salvador",
+                "Population": 6500000.0
+            },
+            {
+                "Country": "Libya",
+                "Population": 7000000.0
+            },
+            {
+                "Country": "Saudi Arabia",
+                "Population": 36000000.0
+            },
+            {
+                "Country": "Ethiopia",
+                "Population": 120000000.0
+            },
+            {
+                "Country": "Rwanda",
+                "Population": 13000000.0
+            },
+            {
+                "Country": "Belgium",
+                "Population": 12000000.0
+            },
+            {
+                "Country": "Poland",
+                "Population": 38000000.0
+            },
+            {
+                "Country": "Honduras",
+                "Population": 10000000.0
+            },
+            {
+                "Country": "Israel",
+                "Population": 9300000.0
+            },
+            {
+                "Country": "Equatorial Guinea",
+                "Population": 1500000.0
+            },
+            {
+                "Country": "Kyrgyzstan",
+                "Population": 7000000.0
+            },
+            {
+                "Country": "Ivory Coast",
+                "Population": 27000000.0
+            },
+            {
+                "Country": "Samoa",
+                "Population": 200000.0
+            },
+            {
+                "Country": "China",
+                "Population": 1425000000.0
+            },
+            {
+                "Country": "Tanzania",
+                "Population": 61000000.0
+            },
+            {
+                "Country": "Syria",
+                "Population": 22000000.0
+            },
+            {
+                "Country": "Luxembourg",
+                "Population": 700000.0
+            },
+            {
+                "Country": "Serbia",
+                "Population": 7000000.0
+            },
+            {
+                "Country": "Barbados",
+                "Population": 300000.0
+            },
+            {
+                "Country": "Czech Republic",
+                "Population": 10700000.0
+            },
+            {
+                "Country": "Central African Rep",
+                "Population": 5000000.0
+            },
+            {
+                "Country": "Dominican Republic",
+                "Population": 11000000.0
+            },
+            {
+                "Country": "Russian Federation",
+                "Population": 144000000.0
+            },
+            {
+                "Country": "Finland",
+                "Population": 5600000.0
+            },
+            {
+                "Country": "Gabon",
+                "Population": 2300000.0
+            },
+            {
+                "Country": "Norway",
+                "Population": 5500000.0
+            },
+            {
+                "Country": "Nicaragua",
+                "Population": 6900000.0
+            },
+            {
+                "Country": "Turkey",
+                "Population": 86000000.0
+            },
+            {
+                "Country": "Slovenia",
+                "Population": 2100000.0
+            },
+            {
+                "Country": "Benin",
+                "Population": 13000000.0
+            },
+            {
+                "Country": "Tunisia",
+                "Population": 12000000.0
+            },
+            {
+                "Country": "Spain",
+                "Population": 47000000.0
+            },
+            {
+                "Country": "Estonia",
+                "Population": 1300000.0
+            },
+            {
+                "Country": "Burundi",
+                "Population": 12000000.0
+            },
+            {
+                "Country": "Panama",
+                "Population": 4500000.0
+            },
+            {
+                "Country": "Mongolia",
+                "Population": 3500000.0
+            },
+            {
+                "Country": "Taiwan",
+                "Population": 24000000.0
+            },
+            {
+                "Country": "Namibia",
+                "Population": 2500000.0
+            },
+            {
+                "Country": "Lesotho",
+                "Population": 2100000.0
+            },
+            {
+                "Country": "Guinea",
+                "Population": 14000000.0
+            },
+            {
+                "Country": "India",
+                "Population": 1426000000.0
+            }
+        ],
+        "members-globalsouth-country": [
+            {
+                "Country": "Cameroon",
+                "Count": 1.0
+            },
+            {
+                "Country": "India",
+                "Count": 7.0
+            },
+            {
+                "Country": "Kenya",
+                "Count": 1.0
+            },
+            {
+                "Country": "Namibia",
+                "Count": 1.0
+            },
+            {
+                "Country": "Nigeria",
+                "Count": 9.0
+            },
+            {
+                "Country": "Pakistan",
+                "Count": 2.0
+            },
+            {
+                "Country": "Singapore",
+                "Count": 1.0
+            },
+            {
+                "Country": "South Africa",
+                "Count": 1.0
+            },
+            {
+                "Country": "Uganda",
+                "Count": 1.0
+            }
+        ]
+    },
+    "organization": {
+        "num-collab-classification": [
+            {
+                "Classification": "Collaborator",
+                "Count": 48
+            },
+            {
+                "Classification": "Funder",
+                "Count": 119
+            },
+            {
+                "Classification": "Network",
+                "Count": 38
+            }
+        ]
+    },
+    "community": {
+        "total-members": 91
+    }
+}
