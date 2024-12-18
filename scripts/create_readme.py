@@ -97,7 +97,7 @@ def generate_community_section(data, country_names):
     return section
 
 # Function to generate Events & Publications Section
-def generate_events_section(events_data, publications_data):
+def generate_events_section(events_data, publications_data, authors_data, titles_data):
     section = "## 📅 Events & Publications\n\n"
     section += f"### **Total Events: {events_data['total-events']}**\n\n"
 
@@ -116,13 +116,24 @@ def generate_events_section(events_data, publications_data):
     for year, avg_citations in sorted([(item['Year'], item['average_Citations']) for item in publications_data['citations-by-year']]):
         section += f"- **{year}**: {avg_citations} average citations\n"
 
+    # OpenAlex paper and author data
+    section += "### OpenAlex Paper Match\n"
+    section += f"- **Total Papers Queried**: {titles_data['total_titles']}\n"
+    section += f"- **Exact Matches Found**: {titles_data['exact_matches']}\n"
+    section += f"- **Match Percentage**: {titles_data['match_percentage']}%\n\n"
+
+    section += "### Author Highlights\n"
+    section += f"- **Total Authors**: {authors_data['total_authors']}\n"
+    section += f"- **Top Author**: {authors_data['top_author']} (H-index: {authors_data['highest_h_index']})\n"
+
+
     return section
 
 # Main function to create README.md
 def create_readme(json_data, country_names, output_file):
     models_section = generate_models_section(json_data["models-impact"])
     community_section = generate_community_section(json_data["community"], country_names)
-    events_section = generate_events_section(json_data["events"], json_data["publications"])
+    events_section = generate_events_section(json_data["events"], json_data["publications"], json_data["openalex_authors"], json_data["openalex_titles"])
 
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     readme_content = f"# 📊 Ersilia Statistics Report\n\n"

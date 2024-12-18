@@ -44,19 +44,24 @@ jobs:
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: |
-          python scripts/fetch_airtables.py $AIRTABLE_API_KEY
+          python scripts/fetch_internal_stats.py $AIRTABLE_API_KEY
 
-      # 5. Run Internal Stats Calculation
-      - name: Calculate Internal Statistics
+      # 5. Fetch OpenAlex Data
+      - name: Fetch OpenAlex Author Data
         run: |
-          python scripts/internal_stats.py
+          python scripts/get_open_alex_stats.py 
+      
+      # 6. Calculate All Relevant Stats and store in JSON
+      - name: Calculate Stats
+        run: |
+          python scripts/calculate_stats.py
 
-      # 6. Generate README.md
+      # 7. Generate README.md
       - name: Update README
         run: |
           python scripts/create_readme.py
 
-      # 7. Commit Changes
+      # 8. Commit Changes
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -64,14 +69,14 @@ jobs:
           git add reports/tables_stats.json README.md
           git commit -m "Update internal stats and README" || echo "No changes to commit"
 
-      # 8. Push Changes
+      # 9. Push Changes
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.BRANCH_NAME }}
 
-      # 9. Process to create a pull request
+      # 10. Process to create a pull request
       - name: Wait for branch recognition
         run: sleep 10
         

@@ -10,6 +10,8 @@ events_df = pd.read_csv('data/Events.csv')
 models_df = pd.read_csv('data/Models.csv')
 organisations_df = pd.read_csv('data/Organisations.csv')
 publications_df = pd.read_csv('data/Publications.csv')
+external_titles_df = pd.read_csv('external-data/titles_results.csv')
+external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
 output_data = {
     "publications": {},
@@ -17,7 +19,9 @@ output_data = {
     "countries": {},
     "organization": {},
     "community": {},
-    "models-impact": {}
+    "models-impact": {},
+    "openalex_titles": {},
+    "openalex_authors": {}
 }
 
 # ------------------------ General Helper Functions ------------------------
@@ -99,6 +103,24 @@ def calculate_countries_stats():
     countries_data["num-countries-region"] = sum_unique_grouped(countries_df, 'Country', 'Region')
     return countries_data
 
+# OpenAlex titles query
+def calculate_openalex_titles():
+    return {
+        "total_titles": len(external_titles_df),
+        "exact_matches": external_titles_df["Match"].sum(),
+        "match_percentage": round(external_titles_df["Match"].mean() * 100, 2) if len(external_titles_df) > 0 else 0
+    }
+
+# OpenAlex authors query
+def calculate_openalex_authors():
+    return {
+        "total_authors": len(external_authors_df),
+        "total_works": external_authors_df["Number of Works"].sum(),
+        "total_citations": external_authors_df["Total Citations"].sum(),
+        "highest_h_index": external_authors_df["H-index"].max(),
+        "top_author": external_authors_df.loc[external_authors_df["H-index"].idxmax(), "Name"]
+    }
+
 # ------------------------ Aggregating All Calculations ------------------------
 output_data["models-impact"] = calculate_models_impact()
 output_data["community"] = calculate_community_stats()
@@ -106,6 +128,8 @@ output_data["blogposts-events"] = calculate_blogposts_stats()
 output_data["events"] = calculate_events_stats()
 output_data["publications"] = calculate_publications_stats()
 output_data["countries"] = calculate_countries_stats()
+output_data["openalex_titles"] = calculate_openalex_titles()
+output_data["openalex_authors"] = calculate_openalex_authors()
 
 # ------------------------ Serialization & Output ------------------------
 def convert_to_serializable(obj):
