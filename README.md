@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2024-12-18 23:16:12 GMT_
+_Last updated: 2024-12-19 00:30:52 GMT_
 
 ## 🧬 Models' Impact
 
@@ -111,6 +111,14 @@ _Last updated: 2024-12-18 23:16:12 GMT_
 - **2022**: 23.33 average citations
 - **2023**: 16.33 average citations
 - **2024**: 6.75 average citations
+### OpenAlex Paper Match
+- **Total Papers Queried**: 39
+- **Exact Matches Found**: 36
+- **Match Percentage**: 92.31%
+
+### Author Highlights
+- **Total Authors**: 217
+- **Top Author**: Wei Wang (H-index: 328)
 
 
 The full data output that this report is based on can be found in `data/` and `external-data/`. An abbreviated version can be found in `reports/table_stats.json`.
