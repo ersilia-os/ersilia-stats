@@ -13,7 +13,7 @@ publications_df = pd.read_csv('data/Publications.csv')
 external_titles_df = pd.read_csv('external-data/titles_results.csv')
 external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
-print(external_authors_df)
+print(external_authors_df.columns)
 
 output_data = {
     "publications": {},
