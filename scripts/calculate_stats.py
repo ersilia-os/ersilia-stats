@@ -113,6 +113,7 @@ def calculate_openalex_titles():
 
 # OpenAlex authors query
 def calculate_openalex_authors():
+    print(external_authors_df)
     return {
         "total_authors": len(external_authors_df),
         "total_works": external_authors_df["Number of Works"].sum(),

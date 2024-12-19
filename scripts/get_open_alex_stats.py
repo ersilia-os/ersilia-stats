@@ -36,6 +36,7 @@ def get_openalex_data(file_path):
 
 def get_authors_set(file_path):
     authors_set = set()
+    
     with open(file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -44,21 +45,30 @@ def get_authors_set(file_path):
                 author = author.strip()
                 if author.lower() != 'et al':
                     authors_set.add(author)
+    
     return authors_set
 
 def query_openalex_for_author(author_name):
     search_term = author_name.replace(" ", "%20")
     url = f"https://api.openalex.org/authors?search={search_term}"
+    
     try:
         response = requests.get(url)
         response.raise_for_status()
+        
         data = response.json()
+        
         if 'meta' in data and data['meta']['count'] > 0:
-            return data['results'][0]
-        return None
+            author_data = data['results'][0]
+            return author_data
+        else:
+            print(f"No data found for {author_name}.")
+            return None
+        
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data for {author_name}: {e}")
         return None
+
 
 def write_titles_to_csv(results, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -66,45 +76,63 @@ def write_titles_to_csv(results, output_path):
         fieldnames = ['Title', 'Match']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(results)
+        for result in results:
+            writer.writerow(result)
 
 def write_authors_to_csv(authors_data, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', newline='') as csvfile:
         fieldnames = ['Author', 'Name', 'Number of Works', 'Total Citations', 'H-index', 'First Published Year', 'Affiliation']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
         for author_name, author_data in authors_data.items():
             if author_data:
+                name = author_data.get('display_name', 'N/A')
+                num_works = author_data.get('works_count', 'N/A')
+                citation_count = author_data.get('cited_by_count', 'N/A')
+                h_index = author_data.get('summary_stats', {}).get('h_index', 'N/A')
                 counts_by_year = author_data.get('counts_by_year', [])
-                first_pub_year = min(counts_by_year, key=lambda x: x['year'])['year'] if counts_by_year else 'N/A'
+                if counts_by_year:
+                    first_pub_year = min(counts_by_year, key=lambda x: x['year'])['year']
+                else:
+                    first_pub_year = 'N/A'
                 affiliations = author_data.get('affiliations', [])
-                affiliation = ', '.join([a['institution']['display_name'] for a in affiliations]) if affiliations else 'N/A'
+                if affiliations:
+                    affiliation_names = [affiliation.get('institution', {}).get('display_name', 'N/A') for affiliation in affiliations]
+                    affiliation = ', '.join(affiliation_names)
+                else:
+                    affiliation = 'N/A'
                 writer.writerow({
                     'Author': author_name,
-                    'Name': author_data.get('display_name', 'N/A'),
-                    'Number of Works': author_data.get('works_count', 'N/A'),
-                    'Total Citations': author_data.get('cited_by_count', 'N/A'),
-                    'H-index': author_data.get('summary_stats', {}).get('h_index', 'N/A'),
+                    'Name': name,
+                    'Number of Works': num_works,
+                    'Total Citations': citation_count,
+                    'H-index': h_index,
                     'First Published Year': first_pub_year,
                     'Affiliation': affiliation
                 })
 
 if __name__ == "__main__":
-    publications_path = 'data/Publications.csv'
-    titles_output = 'external-data/titles_results.csv'
-    authors_output = 'external-data/authors_results.csv'
+    file_path = 'data/Publications.csv'
+    titles_output_path = 'external-data/titles_results.csv'
+    authors_output_path = 'external-data/authors_results.csv'
 
-    print("Querying OpenAlex for titles...")
-    total_titles, exact_matches, results = get_openalex_data(publications_path)
-    write_titles_to_csv(results, titles_output)
+    total_titles, exact_matches, results = get_openalex_data(file_path)
+    write_titles_to_csv(results, titles_output_path)
 
-    print(f"Total titles: {total_titles}, Exact matches: {exact_matches}")
+    print(f"Total titles searched: {total_titles}")
+    print(f"Exact matches found: {exact_matches}")
+    if total_titles > 0:
+        percentage = (exact_matches / total_titles) * 100
+        print(f"Percentage of exact matches: {percentage:.2f}%")
 
-    print("\nQuerying OpenAlex for authors...")
-    authors_set = get_authors_set(publications_path)
+    authors_set = get_authors_set(file_path)
+
     authors_data = {}
     for author in authors_set:
-        print(f"Querying data for {author}...")
-        authors_data[author] = query_openalex_for_author(author)
+        author_data = query_openalex_for_author(author)
+        authors_data[author] = author_data
+        
         time.sleep(0.1)
-    write_authors_to_csv(authors_data, authors_output)
+    
+    write_authors_to_csv(authors_data, authors_output_path)

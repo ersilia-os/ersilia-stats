@@ -1,7 +1,7 @@
 {
     "publications": {
         "total-publications": 39,
-        "total-citations": 1178,
+        "total-citations": 1177,
         "citations-by-year": [
             {
                 "Year": 2013,
@@ -33,7 +33,7 @@
             },
             {
                 "Year": 2022,
-                "average_Citations": 23.33
+                "average_Citations": 23.17
             },
             {
                 "Year": 2023,
@@ -221,11 +221,11 @@
                 "count": 1
             },
             {
-                "Count": "['Mentor']",
+                "Count": "['Intern', 'Mentor', 'OS Maintainer']",
                 "count": 1
             },
             {
-                "Count": "['Intern', 'Mentor', 'OS Maintainer']",
+                "Count": "['Mentor']",
                 "count": 1
             },
             {
@@ -326,7 +326,7 @@
         "total-members": 91
     },
     "models-impact": {
-        "total-models": 180,
+        "total-models": 181,
         "model-distribution": [
             {
                 "Count": "['Similarity']",
@@ -342,10 +342,10 @@
             },
             {
                 "Count": "['Descriptor']",
-                "count": 6
+                "count": 5
             },
             {
-                "Count": "['Embedding']",
+                "Count": "['CYP450', 'ADME', 'Metabolism']",
                 "count": 4
             },
             {
@@ -353,24 +353,16 @@
                 "count": 4
             },
             {
-                "Count": "['Synthetic accessibility', 'Chemical synthesis']",
-                "count": 4
-            },
-            {
-                "Count": "['CYP450', 'ADME', 'Metabolism']",
-                "count": 4
-            },
-            {
                 "Count": "['Fingerprint', 'Descriptor']",
                 "count": 4
             },
             {
-                "Count": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
-                "count": 3
+                "Count": "['Embedding']",
+                "count": 4
             },
             {
-                "Count": "['Descriptor', 'Embedding']",
-                "count": 3
+                "Count": "['Synthetic accessibility', 'Chemical synthesis']",
+                "count": 4
             },
             {
                 "Count": "['Descriptor', 'Fingerprint']",
@@ -381,6 +373,54 @@
                 "count": 3
             },
             {
+                "Count": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
+                "count": 3
+            },
+            {
+                "Count": "['Descriptor', 'Embedding']",
+                "count": 3
+            },
+            {
+                "Count": "['Descriptor', 'Bioactivity profile', 'Embedding']",
+                "count": 2
+            },
+            {
+                "Count": "['ADME', 'Permeability', 'LogP']",
+                "count": 2
+            },
+            {
+                "Count": "['Chemical language model', 'Chemical notation']",
+                "count": 2
+            },
+            {
+                "Count": "['Natural product', 'Drug-likeness']",
+                "count": 2
+            },
+            {
+                "Count": "['Permeability', 'ADME', 'LogP']",
+                "count": 2
+            },
+            {
+                "Count": "['P.falciparum', 'Malaria', 'Antimicrobial activity']",
+                "count": 2
+            },
+            {
+                "Count": "['Malaria', 'P.falciparum', 'IC50']",
+                "count": 2
+            },
+            {
+                "Count": "['Natural product', 'Descriptor']",
+                "count": 2
+            },
+            {
+                "Count": "['Drug-likeness']",
+                "count": 2
+            },
+            {
+                "Count": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "count": 2
+            },
+            {
                 "Count": "['Chemical notation', 'Chemical language model']",
                 "count": 2
             },
@@ -389,87 +429,179 @@
                 "count": 2
             },
             {
-                "Count": "['Drug-likeness']",
-                "count": 2
-            },
-            {
-                "Count": "['Natural product', 'Descriptor']",
-                "count": 2
-            },
-            {
-                "Count": "['ADME', 'Permeability', 'LogP']",
-                "count": 2
-            },
-            {
                 "Count": "['Similarity', 'ChEMBL']",
                 "count": 2
             },
             {
-                "Count": "['Chemical language model', 'Chemical notation']",
-                "count": 2
-            },
-            {
-                "Count": "['P.falciparum', 'Malaria', 'Antimicrobial activity']",
-                "count": 2
-            },
-            {
-                "Count": "['Natural product', 'Drug-likeness']",
-                "count": 2
-            },
-            {
-                "Count": "['Descriptor', 'Bioactivity profile', 'Embedding']",
-                "count": 2
-            },
-            {
-                "Count": "['Permeability', 'ADME', 'LogP']",
-                "count": 2
-            },
-            {
-                "Count": "['Malaria', 'P.falciparum', 'IC50']",
-                "count": 2
-            },
-            {
-                "Count": "['Descriptor', 'Chemical language model', 'Chemical graph model', 'Embedding']",
+                "Count": "['Cytotoxicity', 'Antimicrobial activity', 'ESKAPE']",
                 "count": 1
             },
             {
-                "Count": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "Count": "['BACE', 'Chemical graph model', 'MoleculeNet']",
                 "count": 1
             },
             {
-                "Count": "['Tox21', 'Toxicity', 'MoleculeNet']",
+                "Count": "['Permeability', 'ADME', 'Papp', 'Chemical graph model']",
                 "count": 1
             },
             {
-                "Count": "['Antiviral activity', 'IC50', 'HBV', 'ChEMBL']",
+                "Count": "['Malaria', 'P.falciparum', 'Tuberculosis', 'M.tuberculosis', 'ADME', 'Cytotoxicity', 'Solubility']",
                 "count": 1
             },
             {
-                "Count": "['Fraction bound', 'ADME']",
+                "Count": "['Bioactivity profile', 'Target identification', 'ChEMBL']",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Solubility', 'Human']",
+                "Count": "['M.tuberculosis', 'Antimicrobial activity', 'MIC90', 'Tuberculosis']",
                 "count": 1
             },
             {
-                "Count": "['hERG', 'Toxicity', 'Cardiotoxicity', 'Chemical graph model']",
+                "Count": "['Target identification', 'GPCR']",
                 "count": 1
             },
             {
-                "Count": "['Microsomal stability', 'ADME', 'Metabolism', 'Half-life', 'Permeability']",
+                "Count": "['ChEMBL', 'Similarity']",
                 "count": 1
             },
             {
-                "Count": "['Permeability', 'MoleculeNet', 'Chemical graph model', 'Alzheimer']",
+                "Count": "['Therapeutic indication']",
                 "count": 1
             },
             {
-                "Count": "['Antimicrobial activity']",
+                "Count": "['Permeability', 'ADME', 'Papp']",
                 "count": 1
             },
             {
-                "Count": "['Chemical notation', 'Chemical language model', 'Compound generation']",
+                "Count": "['Malaria', 'P.falciparum']",
+                "count": 1
+            },
+            {
+                "Count": "['Cardiotoxicity', 'hERG', 'Toxicity', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['Metabolism', 'Toxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Neglected tropical disease', 'Schistosomiasis', 'IC50']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Embedding']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'MoleculeNet', 'Side effects']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'MoleculeNet', 'Chemical graph model', 'Side effects']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Sars-CoV-2', 'Antiviral activity', 'COVID19']",
+                "count": 1
+            },
+            {
+                "Count": "['pKa', 'ADME']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical graph model', 'Embedding', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['Similarity', 'Bioactivity profile', 'Compound generation']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Metabolism', 'Human', 'Half-life']",
+                "count": 1
+            },
+            {
+                "Count": "['M.tuberculosis', 'IC50', 'Tuberculosis', 'Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Alzheimer', 'BACE', 'MoleculeNet', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Antimicrobial activity', 'ChEMBL', 'N.gonorrhoeae']",
+                "count": 1
+            },
+            {
+                "Count": "['Natural product', 'Fingerprint', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['Descriptor', 'Chemical language model']",
+                "count": 1
+            },
+            {
+                "Count": "['COVID19']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Cancer', 'Metabolism']",
+                "count": 1
+            },
+            {
+                "Count": "['Solubility', 'MoleculeNet', 'ADME', 'LogS', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Cytotoxicity', 'ESKAPE']",
+                "count": 1
+            },
+            {
+                "Count": "['A.baumannii', 'Antimicrobial activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Microsomal stability', 'Rat', 'ADME', 'Metabolism', 'Half-life']",
+                "count": 1
+            },
+            {
+                "Count": "['pKa']",
+                "count": 1
+            },
+            {
+                "Count": "['HIV', 'Human', 'HDAC1']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Solubility']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Chemical notation', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Toxicity', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Sars-CoV-2', 'COVID19', 'Antiviral activity']",
+                "count": 1
+            },
+            {
+                "Count": "['Fingerprint', 'Embedding', 'Chemical synthesis']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'hERG', 'Cardiotoxicity']",
                 "count": 1
             },
             {
@@ -485,19 +617,15 @@
                 "count": 1
             },
             {
-                "Count": "['Metabolism']",
+                "Count": "['hERG', 'Toxicity', 'Cardiotoxicity', 'Chemical graph model']",
                 "count": 1
             },
             {
-                "Count": "['COVID19', 'Antiviral activity', 'Sars-CoV-2', 'Chemical graph model']",
+                "Count": "['Microsomal stability', 'ADME', 'Metabolism', 'Half-life', 'Permeability']",
                 "count": 1
             },
             {
-                "Count": "['Chemical language model', 'Embedding', 'Descriptor']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'ToxCast', 'Chemical graph model']",
+                "Count": "['Permeability', 'MoleculeNet', 'Chemical graph model', 'Alzheimer']",
                 "count": 1
             },
             {
@@ -513,7 +641,115 @@
                 "count": 1
             },
             {
+                "Count": "['Chemical notation', 'Chemical language model', 'Compound generation']",
+                "count": 1
+            },
+            {
+                "Count": "['Antimicrobial activity']",
+                "count": 1
+            },
+            {
                 "Count": "['Cancer', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'ToxCast', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Embedding', 'Descriptor']",
+                "count": 1
+            },
+            {
+                "Count": "['COVID19', 'Antiviral activity', 'Sars-CoV-2', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Solubility', 'Human']",
+                "count": 1
+            },
+            {
+                "Count": "['Fraction bound', 'ADME']",
+                "count": 1
+            },
+            {
+                "Count": "['Antiviral activity', 'IC50', 'HBV', 'ChEMBL']",
+                "count": 1
+            },
+            {
+                "Count": "['Tox21', 'Toxicity', 'MoleculeNet']",
+                "count": 1
+            },
+            {
+                "Count": "['Molecular weight']",
+                "count": 1
+            },
+            {
+                "Count": "['ChEMBL', 'IC50', 'Toxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Metabolism']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Synthetic accessibility']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'Human']",
+                "count": 1
+            },
+            {
+                "Count": "['Permeability', 'M.tuberculosis', 'ADME', 'Tuberculosis']",
+                "count": 1
+            },
+            {
+                "Count": "['Similarity', 'ChEMBL', 'DrugBank']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Fraction bound', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['MoleculeNet', 'Lipophilicity', 'ADME', 'LogD', 'Chemical graph model']",
+                "count": 1
+            },
+            {
+                "Count": "['Chemical language model', 'Descriptor', 'Embedding']",
+                "count": 1
+            },
+            {
+                "Count": "['Solubility', 'ADME', 'LogS']",
+                "count": 1
+            },
+            {
+                "Count": "['Descriptor', 'Chemical language model', 'Chemical graph model', 'Embedding']",
+                "count": 1
+            },
+            {
+                "Count": "['Toxicity', 'ADME', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['ADME', 'Toxicity']",
+                "count": 1
+            },
+            {
+                "Count": "['Price', 'Compound generation', 'Chemical synthesis']",
+                "count": 1
+            },
+            {
+                "Count": "['Lipophilicity', 'LogP']",
+                "count": 1
+            },
+            {
+                "Count": "['Drug-likeness', 'Permeability']",
+                "count": 1
+            },
+            {
+                "Count": "['Tox21', 'Toxicity', 'Chemical graph model']",
                 "count": 1
             },
             {
@@ -533,247 +769,11 @@
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Toxicity']",
-                "count": 1
-            },
-            {
-                "Count": "['Molecular weight']",
-                "count": 1
-            },
-            {
-                "Count": "['ChEMBL', 'IC50', 'Toxicity']",
-                "count": 1
-            },
-            {
-                "Count": "['Lipophilicity', 'LogP']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'Synthetic accessibility']",
-                "count": 1
-            },
-            {
-                "Count": "['Sars-CoV-2', 'COVID19', 'Antiviral activity']",
-                "count": 1
-            },
-            {
-                "Count": "['Solubility', 'ADME', 'LogS']",
-                "count": 1
-            },
-            {
-                "Count": "['Chemical language model', 'Descriptor', 'Embedding']",
-                "count": 1
-            },
-            {
-                "Count": "['MoleculeNet', 'Lipophilicity', 'ADME', 'LogD', 'Chemical graph model']",
-                "count": 1
-            },
-            {
-                "Count": "['Price', 'Compound generation', 'Chemical synthesis']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'ADME', 'Lipophilicity', 'Solubility', 'Permeability']",
-                "count": 1
-            },
-            {
-                "Count": "['Tox21', 'Toxicity', 'Chemical graph model']",
-                "count": 1
-            },
-            {
-                "Count": "['Permeability', 'M.tuberculosis', 'ADME', 'Tuberculosis']",
-                "count": 1
-            },
-            {
-                "Count": "['Similarity', 'ChEMBL', 'DrugBank']",
-                "count": 1
-            },
-            {
-                "Count": "['ADME', 'Fraction bound', 'Chemical graph model']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'Human']",
-                "count": 1
-            },
-            {
-                "Count": "['pKa']",
-                "count": 1
-            },
-            {
-                "Count": "['ADME', 'Toxicity', 'Lipophilicity', 'Solubility', 'Permeability']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'hERG', 'Cardiotoxicity']",
-                "count": 1
-            },
-            {
-                "Count": "['Fingerprint', 'Embedding', 'Chemical synthesis']",
-                "count": 1
-            },
-            {
-                "Count": "['Metabolism', 'Toxicity']",
-                "count": 1
-            },
-            {
-                "Count": "['Neglected tropical disease', 'Schistosomiasis', 'IC50']",
-                "count": 1
-            },
-            {
-                "Count": "['Cardiotoxicity', 'hERG', 'Toxicity', 'Descriptor']",
-                "count": 1
-            },
-            {
-                "Count": "['Malaria', 'P.falciparum']",
-                "count": 1
-            },
-            {
-                "Count": "['Permeability', 'ADME', 'Papp']",
-                "count": 1
-            },
-            {
-                "Count": "['Therapeutic indication']",
-                "count": 1
-            },
-            {
-                "Count": "['Malaria', 'P.falciparum', 'Tuberculosis', 'M.tuberculosis', 'ADME', 'Cytotoxicity', 'Solubility']",
-                "count": 1
-            },
-            {
-                "Count": "['Drug-likeness', 'Permeability']",
-                "count": 1
-            },
-            {
-                "Count": "['ChEMBL', 'Similarity']",
-                "count": 1
-            },
-            {
-                "Count": "['Target identification', 'GPCR']",
-                "count": 1
-            },
-            {
-                "Count": "['Bioactivity profile', 'Target identification', 'ChEMBL']",
-                "count": 1
-            },
-            {
-                "Count": "['M.tuberculosis', 'Antimicrobial activity', 'MIC90', 'Tuberculosis']",
-                "count": 1
-            },
-            {
-                "Count": "['BACE', 'Chemical graph model', 'MoleculeNet']",
-                "count": 1
-            },
-            {
-                "Count": "['Cytotoxicity', 'Antimicrobial activity', 'ESKAPE']",
-                "count": 1
-            },
-            {
-                "Count": "['Permeability', 'ADME', 'Papp', 'Chemical graph model']",
-                "count": 1
-            },
-            {
-                "Count": "['Chemical language model', 'Embedding']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'MoleculeNet', 'Side effects']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'MoleculeNet', 'Chemical graph model', 'Side effects']",
-                "count": 1
-            },
-            {
-                "Count": "['Chemical language model', 'Chemical notation', 'ChEMBL']",
-                "count": 1
-            },
-            {
-                "Count": "['ADME', 'Solubility']",
-                "count": 1
-            },
-            {
-                "Count": "['HIV', 'Human', 'HDAC1']",
-                "count": 1
-            },
-            {
-                "Count": "['M.tuberculosis', 'Antimicrobial activity']",
-                "count": 1
-            },
-            {
-                "Count": "['Microsomal stability', 'Rat', 'ADME', 'Metabolism', 'Half-life']",
-                "count": 1
-            },
-            {
-                "Count": "['A.baumannii', 'Antimicrobial activity']",
-                "count": 1
-            },
-            {
-                "Count": "['Cytotoxicity', 'ESKAPE']",
-                "count": 1
-            },
-            {
-                "Count": "['Solubility', 'MoleculeNet', 'ADME', 'LogS', 'Chemical graph model']",
-                "count": 1
-            },
-            {
-                "Count": "['Toxicity', 'Cancer', 'Metabolism']",
-                "count": 1
-            },
-            {
-                "Count": "['COVID19']",
-                "count": 1
-            },
-            {
-                "Count": "['Descriptor', 'Chemical language model']",
-                "count": 1
-            },
-            {
-                "Count": "['Natural product', 'Fingerprint', 'Descriptor']",
-                "count": 1
-            },
-            {
-                "Count": "['Antimicrobial activity', 'ChEMBL', 'N.gonorrhoeae']",
-                "count": 1
-            },
-            {
-                "Count": "['Alzheimer', 'BACE', 'MoleculeNet', 'Chemical graph model']",
-                "count": 1
-            },
-            {
-                "Count": "['M.tuberculosis', 'IC50', 'Tuberculosis', 'Antimicrobial activity']",
-                "count": 1
-            },
-            {
-                "Count": "['ADME', 'Metabolism', 'Human', 'Half-life']",
-                "count": 1
-            },
-            {
-                "Count": "['Similarity', 'Bioactivity profile', 'Compound generation']",
-                "count": 1
-            },
-            {
-                "Count": "['Chemical graph model', 'Embedding', 'Descriptor']",
-                "count": 1
-            },
-            {
-                "Count": "['pKa', 'ADME']",
-                "count": 1
-            },
-            {
-                "Count": "['Sars-CoV-2', 'Antiviral activity', 'COVID19']",
-                "count": 1
-            },
-            {
-                "Count": "['M.tuberculosis', 'Permeability']",
-                "count": 1
-            },
-            {
                 "Count": "['Embedding', 'Biomedical text']",
                 "count": 1
             }
         ],
-        "ready-percentage": 85.0,
+        "ready-percentage": 85.08,
         "model-list": [
             {
                 "Title": "REINVENT 4 LibInvent",
@@ -997,6 +997,13 @@
                 "Tag": "['Similarity']",
                 "Contributor": "ankitskvmdam",
                 "Incorporation Date": "2024-03-08",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Broad spectrum antibiotic potential",
+                "Tag": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2022-09-28",
                 "Status": "Ready"
             },
             {
@@ -1743,7 +1750,7 @@
             },
             {
                 "Title": "Knowledge-guided pre-trained graph transformer",
-                "Tag": "['Descriptor']",
+                "Tag": NaN,
                 "Contributor": "miquelduranfrigola",
                 "Incorporation Date": "2024-12-17",
                 "Status": "In progress"
@@ -2036,6 +2043,18 @@
                 "Status": "In progress"
             }
         ]
+    },
+    "openalex_titles": {
+        "total_titles": 38,
+        "exact_matches": 35,
+        "match_percentage": 92.11
+    },
+    "openalex_authors": {
+        "total_authors": 217,
+        "total_works": 264110,
+        "total_citations": 4841118,
+        "highest_h_index": 328,
+        "top_author": "Wei Wang"
     },
     "events": {
         "total-events": 63,
