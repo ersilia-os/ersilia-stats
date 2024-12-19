@@ -2045,9 +2045,9 @@
         ]
     },
     "openalex_titles": {
-        "total_titles": 38,
-        "exact_matches": 35,
-        "match_percentage": 92.11
+        "total_titles": 39,
+        "exact_matches": 36,
+        "match_percentage": 92.31
     },
     "openalex_authors": {
         "total_authors": 217,

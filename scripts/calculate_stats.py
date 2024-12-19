@@ -13,6 +13,8 @@ publications_df = pd.read_csv('data/Publications.csv')
 external_titles_df = pd.read_csv('external-data/titles_results.csv')
 external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
+print(external_authors_df.columns)
+
 output_data = {
     "publications": {},
     "blogposts-events": {},
@@ -153,5 +155,5 @@ with open('reports/tables_stats.json', 'w') as json_file:
     json.dump(output_data_serializable, json_file, indent=4)
 
 # Print confirmation message
-print(json.dumps(output_data_serializable, indent=4))
+# print(json.dumps(output_data_serializable, indent=4))
 print("Data has been written to 'tables_stats.json'")
