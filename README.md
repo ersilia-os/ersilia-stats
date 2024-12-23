@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2024-12-19 00:30:52 GMT_
+_Last updated: 2024-12-23 09:06:18 GMT_
 
 ## 🧬 Models' Impact
 
@@ -97,7 +97,7 @@ _Last updated: 2024-12-19 00:30:52 GMT_
 
 ### Publications
 **Total Publications**: 39  
-**Total Citations**: 1178
+**Total Citations**: 1181
 
 
 ### Citations Over Time
@@ -107,7 +107,7 @@ _Last updated: 2024-12-19 00:30:52 GMT_
 - **2018**: 105.5 average citations
 - **2019**: 19.0 average citations
 - **2020**: 37.2 average citations
-- **2021**: 31.4 average citations
+- **2021**: 32.0 average citations
 - **2022**: 23.33 average citations
 - **2023**: 16.33 average citations
 - **2024**: 6.75 average citations

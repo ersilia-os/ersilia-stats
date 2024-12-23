@@ -1,7 +1,7 @@
 {
     "publications": {
         "total-publications": 39,
-        "total-citations": 1178,
+        "total-citations": 1181,
         "citations-by-year": [
             {
                 "Year": 2013,
@@ -29,7 +29,7 @@
             },
             {
                 "Year": 2021,
-                "average_Citations": 31.4
+                "average_Citations": 32.0
             },
             {
                 "Year": 2022,
@@ -2044,8 +2044,8 @@
     },
     "openalex_authors": {
         "total_authors": 217,
-        "total_works": 264110,
-        "total_citations": 4841118,
+        "total_works": 264152,
+        "total_citations": 4843389,
         "highest_h_index": 328,
         "top_author": "Wei Wang"
     },
