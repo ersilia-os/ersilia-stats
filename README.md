@@ -1,12 +1,12 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2024-12-24 11:21:02 GMT_
+_Last updated: 2024-12-24 16:25:21 GMT_
 
 ## 🧬 Models' Impact
 
-### **Total Models: 181**
+### **Total Models: 180**
 
-### **Percentage Ready to Use: 85.08%**
+### **Percentage Ready to Use: 85.0%**
 
 ### Model Categorization
 | Category | Count |
@@ -14,20 +14,20 @@ _Last updated: 2024-12-24 11:21:02 GMT_
 | Similarity | 11 |
 | Compound generation | 7 |
 | Dummy | 6 |
-| Descriptor | 5 |
-| Fingerprint | 4 |
+| Descriptor | 6 |
 | Embedding | 4 |
+| Fingerprint | 4 |
 | Drug-likeness | 2 |
+| Antimicrobial activity | 2 |
+| Chemical notation | 1 |
+| Metabolism | 1 |
+| Chemical synthesis | 1 |
+| Molecular weight | 1 |
+| pKa | 1 |
 | Therapeutic indication | 1 |
 | COVID19 | 1 |
-| pKa | 1 |
-| Chemical notation | 1 |
-| Chemical synthesis | 1 |
-| Antimicrobial activity | 1 |
-| Molecular weight | 1 |
-| Metabolism | 1 |
 | Two Categories | 51 |
-| Three or More Categories | 74 |
+| Three or More Categories | 73 |
 
 ### Most Recent Models
 | Title | Contributor | Date | Status |
@@ -56,8 +56,8 @@ _Last updated: 2024-12-24 11:21:02 GMT_
 | Advisor | 2 |
 | BSc Student | 2 |
 | OS Maintainer, Mentor | 1 |
-| Intern, Mentor, OS Maintainer | 1 |
 | Mentor | 1 |
+| Intern, Mentor, OS Maintainer | 1 |
 | Employee | 1 |
 | Employee, Trustee | 1 |
 | OS Maintainer | 1 |
@@ -146,7 +146,7 @@ _Last updated: 2024-12-24 11:21:02 GMT_
 
 ### Publications
 **Total Publications**: 39  
-**Total Citations**: 1177
+**Total Citations**: 1181
 
 
 ### Citations Over Time
@@ -156,8 +156,8 @@ _Last updated: 2024-12-24 11:21:02 GMT_
 - **2018**: 105.5 average citations
 - **2019**: 19.0 average citations
 - **2020**: 37.2 average citations
-- **2021**: 31.4 average citations
-- **2022**: 23.17 average citations
+- **2021**: 32.0 average citations
+- **2022**: 23.33 average citations
 - **2023**: 16.33 average citations
 - **2024**: 6.75 average citations
 ### OpenAlex Paper Match
