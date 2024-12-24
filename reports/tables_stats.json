@@ -1,8 +1,8 @@
 {
     "publications": {
-        "total-publications": 39,
-        "total-citations": 1181,
-        "citations-by-year": [
+        "total_publications": 39,
+        "total_citations": 1181,
+        "citations_by_year": [
             {
                 "Year": 2013,
                 "average_Citations": 53.0
@@ -44,7 +44,7 @@
                 "average_Citations": 6.75
             }
         ],
-        "collaboration-breakdown": [
+        "collaboration_breakdown": [
             {
                 "Count": "Yes",
                 "count": 23
@@ -54,7 +54,7 @@
                 "count": 16
             }
         ],
-        "publications-by-topic": [
+        "publications_by_topic": [
             {
                 "Count": "Chemoinformatics",
                 "count": 17
@@ -74,8 +74,8 @@
         ]
     },
     "blogposts-events": {
-        "total-blogposts": 46,
-        "topics-distribution": [
+        "total_blogposts": 46,
+        "topics_distribution": [
             {
                 "Count": "Ersilia",
                 "count": 36
@@ -85,7 +85,7 @@
                 "count": 10
             }
         ],
-        "posts-over-time": [
+        "posts_over_time": [
             {
                 "Year": 2021,
                 "Quarter": "Q2",
@@ -164,617 +164,775 @@
         ]
     },
     "countries": {
-        "num-unique-countries": 197,
-        "num-countries-region": [
+        "total_countries": 197,
+        "global_south_countries": 70,
+        "global_north_countries": 109,
+        "income_groups": [
+            {
+                "Count": "UMIC",
+                "count": 56
+            },
+            {
+                "Count": "HIC",
+                "count": 53
+            },
+            {
+                "Count": "LMIC",
+                "count": 45
+            },
+            {
+                "Count": "LIC",
+                "count": 25
+            }
+        ],
+        "population_by_region": [
             {
                 "Region": "Africa",
-                "unique_count": 50
+                "Total Population": 1350900000
             },
             {
                 "Region": "Americas",
-                "unique_count": 34
+                "Total Population": 903620000
             },
             {
                 "Region": "Asia",
-                "unique_count": 48
+                "Total Population": 4731300000
             },
             {
                 "Region": "Europe",
-                "unique_count": 43
+                "Total Population": 590791000
             },
             {
                 "Region": "Oceania",
-                "unique_count": 14
+                "Total Population": 43600000
             }
         ]
     },
-    "organization": {},
-    "community": {
-        "countries-represented": 17,
-        "role-distribution": [
+    "organization": {
+        "total_organizations": 209,
+        "organization_types": [
             {
-                "Count": "['Volunteer']",
-                "count": 47
+                "Count": "Academia",
+                "count": 61
             },
             {
-                "Count": "['Intern']",
-                "count": 24
+                "Count": "Foundation",
+                "count": 49
             },
             {
-                "Count": "['Trustee']",
-                "count": 4
+                "Count": "Nonprofit",
+                "count": 33
             },
             {
-                "Count": "['MSc Student']",
-                "count": 3
+                "Count": "Corporate",
+                "count": 31
             },
             {
-                "Count": "['Advisor']",
-                "count": 2
+                "Count": "Pharma",
+                "count": 14
             },
             {
-                "Count": "['BSc Student']",
-                "count": 2
-            },
-            {
-                "Count": "['OS Maintainer', 'Mentor']",
-                "count": 1
-            },
-            {
-                "Count": "['Mentor']",
-                "count": 1
-            },
-            {
-                "Count": "['Intern', 'Mentor', 'OS Maintainer']",
-                "count": 1
-            },
-            {
-                "Count": "['Employee']",
-                "count": 1
-            },
-            {
-                "Count": "['Employee', 'Trustee']",
-                "count": 1
-            },
-            {
-                "Count": "['OS Maintainer']",
-                "count": 1
-            },
-            {
-                "Count": "['Visiting Researcher']",
-                "count": 1
-            },
-            {
-                "Count": "['Intern', 'OS Maintainer']",
-                "count": 1
-            },
-            {
-                "Count": "['Intern', 'MSc Student', 'Mentor']",
-                "count": 1
-            }
-        ],
-        "contributors-by-country": [
-            {
-                "Country": "['rec04FOULJyRzLm4J']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['rec2YkwgOoOPmDaGl']",
-                "Contributors": 2
-            },
-            {
-                "Country": "['rec43RfSGh2tdFgJ6']",
-                "Contributors": 9
-            },
-            {
-                "Country": "['rec56rFWOFhuZAPi5']",
-                "Contributors": 2
-            },
-            {
-                "Country": "['recBiWCG8kTIIsASq']",
-                "Contributors": 3
-            },
-            {
-                "Country": "['recEhPfHSM4dgHjRe']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recK7jcLjFhUCtCFP']",
-                "Contributors": 48
-            },
-            {
-                "Country": "['recRQg6CKP5JbtGhK']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recRkrT82pvICtRCC']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recRzDwbpgX10xxXJ']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recXP7lWp9iOBj9JT']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recZFPUBhKNOV2lm9']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recpLDLKrpw5a6ZIq']",
-                "Contributors": 2
-            },
-            {
-                "Country": "['recs5yKjVfVXnR00T']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['recwRneScH1rtvqIS']",
-                "Contributors": 9
-            },
-            {
-                "Country": "['recyMGhDhV2uafOAq']",
-                "Contributors": 1
-            },
-            {
-                "Country": "['reczZPmD8eqh88VyJ']",
-                "Contributors": 7
-            }
-        ],
-        "total-members": 91
-    },
-    "models-impact": {
-        "total-models": 180,
-        "model-distribution": [
-            {
-                "Count": "['Similarity']",
+                "Count": "Government",
                 "count": 11
             },
             {
-                "Count": "['Compound generation']",
+                "Count": "Accelerator",
+                "count": 8
+            }
+        ],
+        "organizations_by_country": [
+            {
+                "Country": "Kenya",
+                "Total Organizations": 2
+            },
+            {
+                "Country": "Germany",
+                "Total Organizations": 4
+            },
+            {
+                "Country": "Zambia",
+                "Total Organizations": 2
+            },
+            {
+                "Country": "Mexico",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Switzerland",
+                "Total Organizations": 8
+            },
+            {
+                "Country": "Brazil",
+                "Total Organizations": 3
+            },
+            {
+                "Country": "Austria",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Australia",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "United Arab Emirates",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Netherlands",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "United States",
+                "Total Organizations": 102
+            },
+            {
+                "Country": "Gambia",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "France",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Ghana",
+                "Total Organizations": 3
+            },
+            {
+                "Country": "South Africa",
+                "Total Organizations": 9
+            },
+            {
+                "Country": "United Kingdom",
+                "Total Organizations": 25
+            },
+            {
+                "Country": "Cameroon",
+                "Total Organizations": 5
+            },
+            {
+                "Country": "Japan",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Italy",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Zimbabwe",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Singapore",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Belgium",
+                "Total Organizations": 5
+            },
+            {
+                "Country": "Tanzania",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Unknown",
+                "Total Organizations": 1
+            },
+            {
+                "Country": "Spain",
+                "Total Organizations": 23
+            },
+            {
+                "Country": "Guinea",
+                "Total Organizations": 2
+            }
+        ]
+    },
+    "community": {
+        "countries_represented": 17,
+        "role_distribution": [
+            {
+                "Role": "Volunteer",
+                "Count": 47
+            },
+            {
+                "Role": "Intern",
+                "Count": 24
+            },
+            {
+                "Role": "Trustee",
+                "Count": 4
+            },
+            {
+                "Role": "MSc Student",
+                "Count": 3
+            },
+            {
+                "Role": "Advisor",
+                "Count": 2
+            },
+            {
+                "Role": "BSc Student",
+                "Count": 2
+            },
+            {
+                "Role": "OS Maintainer, Mentor",
+                "Count": 1
+            },
+            {
+                "Role": "Mentor",
+                "Count": 1
+            },
+            {
+                "Role": "Intern, Mentor, OS Maintainer",
+                "Count": 1
+            },
+            {
+                "Role": "Employee",
+                "Count": 1
+            },
+            {
+                "Role": "Employee, Trustee",
+                "Count": 1
+            },
+            {
+                "Role": "OS Maintainer",
+                "Count": 1
+            },
+            {
+                "Role": "Visiting Researcher",
+                "Count": 1
+            },
+            {
+                "Role": "Intern, OS Maintainer",
+                "Count": 1
+            },
+            {
+                "Role": "Intern, MSc Student, Mentor",
+                "Count": 1
+            }
+        ],
+        "contributors_by_country": [
+            {
+                "Country": "Kenya",
+                "Contributors": 1
+            },
+            {
+                "Country": "Colombia",
+                "Contributors": 2
+            },
+            {
+                "Country": "Nigeria",
+                "Contributors": 9
+            },
+            {
+                "Country": "Pakistan",
+                "Contributors": 2
+            },
+            {
+                "Country": "Australia",
+                "Contributors": 3
+            },
+            {
+                "Country": "Uganda",
+                "Contributors": 1
+            },
+            {
+                "Country": "United States",
+                "Contributors": 48
+            },
+            {
+                "Country": "South Africa",
+                "Contributors": 1
+            },
+            {
+                "Country": "United Kingdom",
+                "Contributors": 1
+            },
+            {
+                "Country": "Cameroon",
+                "Contributors": 1
+            },
+            {
+                "Country": "Italy",
+                "Contributors": 1
+            },
+            {
+                "Country": "Singapore",
+                "Contributors": 1
+            },
+            {
+                "Country": "Poland",
+                "Contributors": 2
+            },
+            {
+                "Country": "Serbia",
+                "Contributors": 1
+            },
+            {
+                "Country": "Spain",
+                "Contributors": 9
+            },
+            {
+                "Country": "Namibia",
+                "Contributors": 1
+            },
+            {
+                "Country": "India",
+                "Contributors": 7
+            }
+        ],
+        "total_members": 91
+    },
+    "models-impact": {
+        "total_models": 180,
+        "model_distribution": [
+            {
+                "Count": "Similarity",
+                "count": 11
+            },
+            {
+                "Count": "Compound generation",
                 "count": 7
             },
             {
-                "Count": "['Dummy']",
+                "Count": "Dummy",
                 "count": 6
             },
             {
-                "Count": "['Descriptor']",
+                "Count": "Descriptor",
                 "count": 6
             },
             {
-                "Count": "['Embedding']",
+                "Count": "Embedding",
                 "count": 4
             },
             {
-                "Count": "['Fingerprint']",
+                "Count": "Fingerprint",
                 "count": 4
             },
             {
-                "Count": "['Synthetic accessibility', 'Chemical synthesis']",
+                "Count": "Synthetic accessibility, Chemical synthesis",
                 "count": 4
             },
             {
-                "Count": "['CYP450', 'ADME', 'Metabolism']",
+                "Count": "CYP450, ADME, Metabolism",
                 "count": 4
             },
             {
-                "Count": "['Fingerprint', 'Descriptor']",
+                "Count": "Fingerprint, Descriptor",
                 "count": 4
             },
             {
-                "Count": "['MoleculeNet', 'Chemical graph model', 'Quantum properties']",
+                "Count": "MoleculeNet, Chemical graph model, Quantum properties",
                 "count": 3
             },
             {
-                "Count": "['Descriptor', 'Embedding']",
+                "Count": "Descriptor, Embedding",
                 "count": 3
             },
             {
-                "Count": "['Descriptor', 'Fingerprint']",
+                "Count": "Descriptor, Fingerprint",
                 "count": 3
             },
             {
-                "Count": "['Chemical graph model', 'Compound generation']",
+                "Count": "Chemical graph model, Compound generation",
                 "count": 3
             },
             {
-                "Count": "['Chemical notation', 'Chemical language model']",
+                "Count": "Chemical notation, Chemical language model",
                 "count": 2
             },
             {
-                "Count": "['hERG', 'Toxicity', 'Cardiotoxicity']",
+                "Count": "hERG, Toxicity, Cardiotoxicity",
                 "count": 2
             },
             {
-                "Count": "['Drug-likeness']",
+                "Count": "Drug-likeness",
                 "count": 2
             },
             {
-                "Count": "['Natural product', 'Descriptor']",
+                "Count": "Natural product, Descriptor",
                 "count": 2
             },
             {
-                "Count": "['ADME', 'Permeability', 'LogP']",
+                "Count": "Antimicrobial activity",
                 "count": 2
             },
             {
-                "Count": "['Similarity', 'ChEMBL']",
+                "Count": "ADME, Permeability, LogP",
                 "count": 2
             },
             {
-                "Count": "['Chemical language model', 'Chemical notation']",
+                "Count": "Chemical language model, Chemical notation",
                 "count": 2
             },
             {
-                "Count": "['P.falciparum', 'Malaria', 'Antimicrobial activity']",
+                "Count": "P.falciparum, Malaria, Antimicrobial activity",
                 "count": 2
             },
             {
-                "Count": "['Natural product', 'Drug-likeness']",
+                "Count": "Natural product, Drug-likeness",
                 "count": 2
             },
             {
-                "Count": "['Descriptor', 'Bioactivity profile', 'Embedding']",
+                "Count": "Descriptor, Bioactivity profile, Embedding",
                 "count": 2
             },
             {
-                "Count": "['Permeability', 'ADME', 'LogP']",
+                "Count": "Permeability, ADME, LogP",
                 "count": 2
             },
             {
-                "Count": "['Malaria', 'P.falciparum', 'IC50']",
+                "Count": "Malaria, P.falciparum, IC50",
                 "count": 2
             },
             {
-                "Count": "['Descriptor', 'Chemical language model', 'Chemical graph model', 'Embedding']",
-                "count": 1
+                "Count": "Similarity, ChEMBL",
+                "count": 2
             },
             {
-                "Count": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "Count": "Descriptor, Chemical language model, Chemical graph model, Embedding",
                 "count": 1
             },
             {
-                "Count": "['Tox21', 'Toxicity', 'MoleculeNet']",
+                "Count": "E.coli, IC50, Antimicrobial activity, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Antiviral activity', 'IC50', 'HBV', 'ChEMBL']",
+                "Count": "Antiviral activity, IC50, HBV, ChEMBL",
                 "count": 1
             },
             {
-                "Count": "['Fraction bound', 'ADME']",
+                "Count": "Fraction bound, ADME",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Solubility', 'Human']",
+                "Count": "ADME, Solubility, Human",
                 "count": 1
             },
             {
-                "Count": "['hERG', 'Toxicity', 'Cardiotoxicity', 'Chemical graph model']",
+                "Count": "hERG, Toxicity, Cardiotoxicity, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Microsomal stability', 'ADME', 'Metabolism', 'Half-life', 'Permeability']",
+                "Count": "Microsomal stability, ADME, Metabolism, Half-life, Permeability",
                 "count": 1
             },
             {
-                "Count": "['Permeability', 'MoleculeNet', 'Chemical graph model', 'Alzheimer']",
+                "Count": "Permeability, MoleculeNet, Chemical graph model, Alzheimer",
                 "count": 1
             },
             {
-                "Count": "['Antimicrobial activity']",
+                "Count": "Cancer, ChEMBL",
                 "count": 1
             },
             {
-                "Count": "['Chemical notation', 'Chemical language model', 'Compound generation']",
+                "Count": "Chemical notation, Chemical language model, Compound generation",
                 "count": 1
             },
             {
-                "Count": "['Chemical notation']",
+                "Count": "Chemical notation",
                 "count": 1
             },
             {
-                "Count": "['ZINC', 'Compound generation']",
+                "Count": "ZINC, Compound generation",
                 "count": 1
             },
             {
-                "Count": "['Mycetoma', 'Antifungal activity']",
+                "Count": "Mycetoma, Antifungal activity",
                 "count": 1
             },
             {
-                "Count": "['Metabolism']",
+                "Count": "Metabolism",
                 "count": 1
             },
             {
-                "Count": "['COVID19', 'Antiviral activity', 'Sars-CoV-2', 'Chemical graph model']",
+                "Count": "COVID19, Antiviral activity, Sars-CoV-2, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Chemical language model', 'Embedding', 'Descriptor']",
+                "Count": "Chemical language model, Embedding, Descriptor",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'ToxCast', 'Chemical graph model']",
+                "Count": "Toxicity, ToxCast, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Metabolism', 'ADME', 'Human', 'Microsomal stability', 'Half-life']",
+                "Count": "Tox21, Toxicity, MoleculeNet",
                 "count": 1
             },
             {
-                "Count": "['Chemical synthesis']",
+                "Count": "Metabolism, ADME, Human, Microsomal stability, Half-life",
                 "count": 1
             },
             {
-                "Count": "['HIV', 'Antiviral activity', 'MoleculeNet']",
+                "Count": "HIV, Antiviral activity, MoleculeNet",
                 "count": 1
             },
             {
-                "Count": "['Cancer', 'ChEMBL']",
+                "Count": "Chemical synthesis",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'Human', 'Metabolism']",
+                "Count": "Toxicity, Human, Metabolism",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'Metabolism']",
+                "Count": "Toxicity, Metabolism",
                 "count": 1
             },
             {
-                "Count": "['Cardiotoxicity', 'DrugBank']",
+                "Count": "Cardiotoxicity, DrugBank",
                 "count": 1
             },
             {
-                "Count": "['CYP450', 'ADME', 'Chemical graph model']",
+                "Count": "CYP450, ADME, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Toxicity']",
+                "Count": "ADME, Toxicity",
                 "count": 1
             },
             {
-                "Count": "['Molecular weight']",
+                "Count": "Molecular weight",
                 "count": 1
             },
             {
-                "Count": "['ChEMBL', 'IC50', 'Toxicity']",
+                "Count": "ChEMBL, IC50, Toxicity",
                 "count": 1
             },
             {
-                "Count": "['Lipophilicity', 'LogP']",
+                "Count": "Lipophilicity, LogP",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'Synthetic accessibility']",
+                "Count": "Toxicity, Synthetic accessibility",
                 "count": 1
             },
             {
-                "Count": "['Sars-CoV-2', 'COVID19', 'Antiviral activity']",
+                "Count": "Sars-CoV-2, COVID19, Antiviral activity",
                 "count": 1
             },
             {
-                "Count": "['Solubility', 'ADME', 'LogS']",
+                "Count": "Solubility, ADME, LogS",
                 "count": 1
             },
             {
-                "Count": "['Chemical language model', 'Descriptor', 'Embedding']",
+                "Count": "Chemical language model, Descriptor, Embedding",
                 "count": 1
             },
             {
-                "Count": "['MoleculeNet', 'Lipophilicity', 'ADME', 'LogD', 'Chemical graph model']",
+                "Count": "MoleculeNet, Lipophilicity, ADME, LogD, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Price', 'Compound generation', 'Chemical synthesis']",
+                "Count": "Price, Compound generation, Chemical synthesis",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'ADME', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "Count": "Toxicity, ADME, Lipophilicity, Solubility, Permeability",
                 "count": 1
             },
             {
-                "Count": "['Tox21', 'Toxicity', 'Chemical graph model']",
+                "Count": "Tox21, Toxicity, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Permeability', 'M.tuberculosis', 'ADME', 'Tuberculosis']",
+                "Count": "Permeability, M.tuberculosis, ADME, Tuberculosis",
                 "count": 1
             },
             {
-                "Count": "['Similarity', 'ChEMBL', 'DrugBank']",
+                "Count": "Similarity, ChEMBL, DrugBank",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Fraction bound', 'Chemical graph model']",
+                "Count": "ADME, Fraction bound, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'Human']",
+                "Count": "Toxicity, Human",
                 "count": 1
             },
             {
-                "Count": "['pKa']",
+                "Count": "pKa",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Toxicity', 'Lipophilicity', 'Solubility', 'Permeability']",
+                "Count": "ADME, Toxicity, Lipophilicity, Solubility, Permeability",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'hERG', 'Cardiotoxicity']",
+                "Count": "Toxicity, hERG, Cardiotoxicity",
                 "count": 1
             },
             {
-                "Count": "['Fingerprint', 'Embedding', 'Chemical synthesis']",
+                "Count": "Fingerprint, Embedding, Chemical synthesis",
                 "count": 1
             },
             {
-                "Count": "['Metabolism', 'Toxicity']",
+                "Count": "Metabolism, Toxicity",
                 "count": 1
             },
             {
-                "Count": "['Neglected tropical disease', 'Schistosomiasis', 'IC50']",
+                "Count": "Neglected tropical disease, Schistosomiasis, IC50",
                 "count": 1
             },
             {
-                "Count": "['Cardiotoxicity', 'hERG', 'Toxicity', 'Descriptor']",
+                "Count": "Cardiotoxicity, hERG, Toxicity, Descriptor",
                 "count": 1
             },
             {
-                "Count": "['Malaria', 'P.falciparum']",
+                "Count": "Malaria, P.falciparum",
                 "count": 1
             },
             {
-                "Count": "['Permeability', 'ADME', 'Papp']",
+                "Count": "Permeability, ADME, Papp",
                 "count": 1
             },
             {
-                "Count": "['Therapeutic indication']",
+                "Count": "Therapeutic indication",
                 "count": 1
             },
             {
-                "Count": "['Malaria', 'P.falciparum', 'Tuberculosis', 'M.tuberculosis', 'ADME', 'Cytotoxicity', 'Solubility']",
+                "Count": "Malaria, P.falciparum, Tuberculosis, M.tuberculosis, ADME, Cytotoxicity, Solubility",
                 "count": 1
             },
             {
-                "Count": "['Drug-likeness', 'Permeability']",
+                "Count": "Drug-likeness, Permeability",
                 "count": 1
             },
             {
-                "Count": "['ChEMBL', 'Similarity']",
+                "Count": "ChEMBL, Similarity",
                 "count": 1
             },
             {
-                "Count": "['Target identification', 'GPCR']",
+                "Count": "Target identification, GPCR",
                 "count": 1
             },
             {
-                "Count": "['Bioactivity profile', 'Target identification', 'ChEMBL']",
+                "Count": "Bioactivity profile, Target identification, ChEMBL",
                 "count": 1
             },
             {
-                "Count": "['M.tuberculosis', 'Antimicrobial activity', 'MIC90', 'Tuberculosis']",
+                "Count": "M.tuberculosis, Antimicrobial activity, MIC90, Tuberculosis",
                 "count": 1
             },
             {
-                "Count": "['BACE', 'Chemical graph model', 'MoleculeNet']",
+                "Count": "BACE, Chemical graph model, MoleculeNet",
                 "count": 1
             },
             {
-                "Count": "['Cytotoxicity', 'Antimicrobial activity', 'ESKAPE']",
+                "Count": "Cytotoxicity, Antimicrobial activity, ESKAPE",
                 "count": 1
             },
             {
-                "Count": "['Permeability', 'ADME', 'Papp', 'Chemical graph model']",
+                "Count": "Permeability, ADME, Papp, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Chemical language model', 'Embedding']",
+                "Count": "Chemical language model, Embedding",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'MoleculeNet', 'Side effects']",
+                "Count": "Toxicity, MoleculeNet, Side effects",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'MoleculeNet', 'Chemical graph model', 'Side effects']",
+                "Count": "Toxicity, MoleculeNet, Chemical graph model, Side effects",
                 "count": 1
             },
             {
-                "Count": "['Chemical language model', 'Chemical notation', 'ChEMBL']",
+                "Count": "Chemical language model, Chemical notation, ChEMBL",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Solubility']",
+                "Count": "ADME, Solubility",
                 "count": 1
             },
             {
-                "Count": "['HIV', 'Human', 'HDAC1']",
+                "Count": "HIV, Human, HDAC1",
                 "count": 1
             },
             {
-                "Count": "['M.tuberculosis', 'Antimicrobial activity']",
+                "Count": "M.tuberculosis, Antimicrobial activity",
                 "count": 1
             },
             {
-                "Count": "['Microsomal stability', 'Rat', 'ADME', 'Metabolism', 'Half-life']",
+                "Count": "Microsomal stability, Rat, ADME, Metabolism, Half-life",
                 "count": 1
             },
             {
-                "Count": "['A.baumannii', 'Antimicrobial activity']",
+                "Count": "A.baumannii, Antimicrobial activity",
                 "count": 1
             },
             {
-                "Count": "['Cytotoxicity', 'ESKAPE']",
+                "Count": "Cytotoxicity, ESKAPE",
                 "count": 1
             },
             {
-                "Count": "['Solubility', 'MoleculeNet', 'ADME', 'LogS', 'Chemical graph model']",
+                "Count": "Solubility, MoleculeNet, ADME, LogS, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['Toxicity', 'Cancer', 'Metabolism']",
+                "Count": "Toxicity, Cancer, Metabolism",
                 "count": 1
             },
             {
-                "Count": "['COVID19']",
+                "Count": "COVID19",
                 "count": 1
             },
             {
-                "Count": "['Descriptor', 'Chemical language model']",
+                "Count": "Descriptor, Chemical language model",
                 "count": 1
             },
             {
-                "Count": "['Natural product', 'Fingerprint', 'Descriptor']",
+                "Count": "Natural product, Fingerprint, Descriptor",
                 "count": 1
             },
             {
-                "Count": "['Antimicrobial activity', 'ChEMBL', 'N.gonorrhoeae']",
+                "Count": "Antimicrobial activity, ChEMBL, N.gonorrhoeae",
                 "count": 1
             },
             {
-                "Count": "['Alzheimer', 'BACE', 'MoleculeNet', 'Chemical graph model']",
+                "Count": "Alzheimer, BACE, MoleculeNet, Chemical graph model",
                 "count": 1
             },
             {
-                "Count": "['M.tuberculosis', 'IC50', 'Tuberculosis', 'Antimicrobial activity']",
+                "Count": "M.tuberculosis, IC50, Tuberculosis, Antimicrobial activity",
                 "count": 1
             },
             {
-                "Count": "['ADME', 'Metabolism', 'Human', 'Half-life']",
+                "Count": "ADME, Metabolism, Human, Half-life",
                 "count": 1
             },
             {
-                "Count": "['Similarity', 'Bioactivity profile', 'Compound generation']",
+                "Count": "Similarity, Bioactivity profile, Compound generation",
                 "count": 1
             },
             {
-                "Count": "['Chemical graph model', 'Embedding', 'Descriptor']",
+                "Count": "Chemical graph model, Embedding, Descriptor",
                 "count": 1
             },
             {
-                "Count": "['pKa', 'ADME']",
+                "Count": "pKa, ADME",
                 "count": 1
             },
             {
-                "Count": "['Sars-CoV-2', 'Antiviral activity', 'COVID19']",
+                "Count": "Sars-CoV-2, Antiviral activity, COVID19",
                 "count": 1
             },
             {
-                "Count": "['M.tuberculosis', 'Permeability']",
+                "Count": "M.tuberculosis, Permeability",
                 "count": 1
             },
             {
-                "Count": "['Embedding', 'Biomedical text']",
+                "Count": "Embedding, Biomedical text",
                 "count": 1
             }
         ],
-        "ready-percentage": 85.0,
-        "model-list": [
+        "ready_percentage": 85.0,
+        "model_list": [
             {
                 "Title": "REINVENT 4 LibInvent",
                 "Tag": "['Similarity']",
@@ -1862,7 +2020,7 @@
             },
             {
                 "Title": "Antimicrobial class specificity prediction",
-                "Tag": NaN,
+                "Tag": "['Antimicrobial activity']",
                 "Contributor": "miquelduranfrigola",
                 "Incorporation Date": "2024-12-17",
                 "Status": "In progress"
@@ -2044,14 +2202,64 @@
     },
     "openalex_authors": {
         "total_authors": 217,
-        "total_works": 264152,
-        "total_citations": 4843389,
+        "total_works": 270374,
+        "total_citations": 4869874,
         "highest_h_index": 328,
         "top_author": "Wei Wang"
     },
+    "external_data": {
+        "disease_statistics": [
+            {
+                "disease": "Alzheimers",
+                "total_deaths": 78193529,
+                "most_recent_year": 2021,
+                "most_recent_year_deaths": 2080
+            },
+            {
+                "disease": "Meningitis",
+                "total_deaths": 19317843,
+                "most_recent_year": 2021,
+                "most_recent_year_deaths": 1540
+            },
+            {
+                "disease": "Pneumonia",
+                "total_deaths": 175302228,
+                "most_recent_year": 2021,
+                "most_recent_year_deaths": 13232
+            },
+            {
+                "disease": "Hivaids",
+                "total_deaths": 114405860,
+                "most_recent_year": 2022,
+                "most_recent_year_deaths": 779
+            },
+            {
+                "disease": "Cardiovascular",
+                "total_deaths": 1103874706,
+                "most_recent_year": 2021,
+                "most_recent_year_deaths": 64217
+            },
+            {
+                "disease": "Malaria",
+                "total_deaths": 45951860,
+                "most_recent_year": 2021,
+                "most_recent_year_deaths": 91
+            },
+            {
+                "disease": "Tuberculosis",
+                "total_deaths": 127005702,
+                "most_recent_year": 2021,
+                "most_recent_year_deaths": 10148
+            }
+        ],
+        "covid_statistics": {
+            "total_cases": 777025779,
+            "total_deaths": 7078468
+        }
+    },
     "events": {
-        "total-events": 63,
-        "events-by-year": [
+        "total_events": 63,
+        "events_by_year": [
             {
                 "Count": 2022,
                 "count": 26

@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2024-12-23 09:06:18 GMT_
+_Last updated: 2024-12-24 16:25:21 GMT_
 
 ## 🧬 Models' Impact
 
@@ -18,7 +18,7 @@ _Last updated: 2024-12-23 09:06:18 GMT_
 | Embedding | 4 |
 | Fingerprint | 4 |
 | Drug-likeness | 2 |
-| Antimicrobial activity | 1 |
+| Antimicrobial activity | 2 |
 | Chemical notation | 1 |
 | Metabolism | 1 |
 | Chemical synthesis | 1 |
@@ -55,12 +55,15 @@ _Last updated: 2024-12-23 09:06:18 GMT_
 | MSc Student | 3 |
 | Advisor | 2 |
 | BSc Student | 2 |
+| OS Maintainer, Mentor | 1 |
 | Mentor | 1 |
+| Intern, Mentor, OS Maintainer | 1 |
 | Employee | 1 |
+| Employee, Trustee | 1 |
 | OS Maintainer | 1 |
 | Visiting Researcher | 1 |
-| Two Roles | 3 |
-| Three or More Roles | 2 |
+| Intern, OS Maintainer | 1 |
+| Intern, MSc Student, Mentor | 1 |
 
 ### Contributors by Country
 | Country | Contributors |
@@ -82,6 +85,52 @@ _Last updated: 2024-12-23 09:06:18 GMT_
 | Spain | 9 |
 | Namibia | 1 |
 | India | 7 |
+
+
+## 🏢 Organizations
+
+### **Total Organizations: 209**
+
+### Organization Types
+| Type | Count |
+| --- | --- |
+| Academia | 61 |
+| Foundation | 49 |
+| Nonprofit | 33 |
+| Corporate | 31 |
+| Pharma | 14 |
+| Government | 11 |
+| Accelerator | 8 |
+
+### Organizations by Country
+| Country | Total Organizations |
+| --- | --- |
+| Kenya | 2 |
+| Germany | 4 |
+| Zambia | 2 |
+| Mexico | 1 |
+| Switzerland | 8 |
+| Brazil | 3 |
+| Austria | 1 |
+| Australia | 1 |
+| United Arab Emirates | 1 |
+| Netherlands | 1 |
+| United States | 102 |
+| Gambia | 1 |
+| France | 1 |
+| Ghana | 3 |
+| South Africa | 9 |
+| United Kingdom | 25 |
+| Cameroon | 5 |
+| Japan | 1 |
+| Italy | 1 |
+| Zimbabwe | 1 |
+| Singapore | 1 |
+| Belgium | 5 |
+| Tanzania | 1 |
+| Unknown | 1 |
+| Spain | 23 |
+| Guinea | 2 |
 
 
 ## 📅 Events & Publications
@@ -121,4 +170,24 @@ _Last updated: 2024-12-23 09:06:18 GMT_
 - **Top Author**: Wei Wang (H-index: 328)
 
 
+## 🌐 External Data
+
+### Disease Statistics
+| Disease | Estimated Total Deaths (based on death rates) | Most Recent Year | Deaths in Most Recent Year |
+| --- | --- | --- | --- |
+| Alzheimers | 78193529 | 2021 | 2080 |
+| Meningitis | 19317843 | 2021 | 1540 |
+| Pneumonia | 175302228 | 2021 | 13232 |
+| Hivaids | 114405860 | 2022 | 779 |
+| Cardiovascular | 1103874706 | 2021 | 64217 |
+| Malaria | 45951860 | 2021 | 91 |
+| Tuberculosis | 127005702 | 2021 | 10148 |
+| TOTAL | 1664051728 | - | - |
+
+### COVID-19 Statistics
+- **Total Cases**: 777,025,779
+- **Total Deaths**: 7,078,468
+
+
+---
 The full data output that this report is based on can be found in `data/` and `external-data/`. An abbreviated version can be found in `reports/table_stats.json`.
