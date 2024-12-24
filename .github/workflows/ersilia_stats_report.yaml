@@ -48,10 +48,11 @@ jobs:
         run: |
           python scripts/fetch_internal_stats.py $AIRTABLE_API_KEY
 
-      # 5. Fetch OpenAlex Data
-      - name: Fetch OpenAlex Author Data
+      # 5. Fetch External Data
+      - name: Fetch External Data
         run: |
           python scripts/get_open_alex_stats.py 
+          python scripts/fetch_external_disease_data.py
       
       # 6. Calculate All Relevant Stats and store in JSON
       - name: Calculate Stats

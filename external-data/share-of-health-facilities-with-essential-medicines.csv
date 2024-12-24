@@ -1,40 +1,40 @@
-Entity,Code,Year,_3_b_3__sh_hlf_emed
+Entity,Code,Year,Value
 Bolivia,BOL,2016,23.08
-Burkina Faso,BFA,2016,0
-Burundi,BDI,2013,0
-Burundi,BDI,2016,0
+Burkina Faso,BFA,2016,0.0
+Burundi,BDI,2013,0.0
+Burundi,BDI,2016,0.0
 Chile,CHL,2016,36.36
 Colombia,COL,2008,88.76
 Colombia,COL,2016,8.33
-Congo,COG,2016,0
-Ecuador,ECU,2016,50
+Congo,COG,2016,0.0
+Ecuador,ECU,2016,50.0
 Ghana,GHA,2016,12.5
 Guinea,GIN,2016,12.5
-Haiti,HTI,2011,0
+Haiti,HTI,2011,0.0
 Indonesia,IDN,2004,36.9
 Indonesia,IDN,2010,14.65
-Kyrgyzstan,KGZ,2005,0
-Kyrgyzstan,KGZ,2010,0
-Kyrgyzstan,KGZ,2015,0
-Kyrgyzstan,KGZ,2016,0
+Kyrgyzstan,KGZ,2005,0.0
+Kyrgyzstan,KGZ,2010,0.0
+Kyrgyzstan,KGZ,2015,0.0
+Kyrgyzstan,KGZ,2016,0.0
 Laos,LAO,2013,25.27
-Lebanon,LBN,2004,50
+Lebanon,LBN,2004,50.0
 Lebanon,LBN,2013,52.46
-Mali,MLI,2016,0
+Mali,MLI,2016,0.0
 Mauritius,MUS,2008,26.23
-Moldova,MDA,2019,25
+Moldova,MDA,2019,25.0
 Mongolia,MNG,2004,9.09
 Mongolia,MNG,2012,26.74
 Peru,PER,2016,69.23
 Senegal,SEN,2016,7.69
 Sri Lanka,LKA,2019,68.33
 Sudan,SDN,2012,34.48
-Sudan,SDN,2013,41
-Tajikistan,TJK,2004,0
-Tajikistan,TJK,2013,15
+Sudan,SDN,2013,41.0
+Tajikistan,TJK,2004,0.0
+Tajikistan,TJK,2013,15.0
 Tanzania,TZA,2004,27.93
 Tanzania,TZA,2012,18.97
-Tanzania,TZA,2016,0
-Trinidad and Tobago,TTO,2016,0
+Tanzania,TZA,2016,0.0
+Trinidad and Tobago,TTO,2016,0.0
 Ukraine,UKR,2019,19.75
 Zambia,ZMB,2016,16.67

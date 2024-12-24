@@ -1,205 +1,2505 @@
-measure_id,measure_name,location_id,Entity,sex_id,sex_name,age_id,age_name,cause_id,cause_name,metric_id,metric_name,Year,Deaths,upper,lower,Code
-1,Deaths,87,Luxembourg,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LUX
-1,Deaths,185,Rwanda,3,Both,22,All ages,345,Malaria,1,Number,2021,3035.457040380358,5339.768388344029,1719.0086074139638,RWA
-1,Deaths,7,Democratic People's Republic of Korea,3,Both,22,All ages,345,Malaria,1,Number,2021,2.0904313057858928,2.708823961618107,1.573882216316515,PRK
-1,Deaths,153,Syrian Arab Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SYR
-1,Deaths,23,Kiribati,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KIR
-1,Deaths,40,Turkmenistan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TKM
-1,Deaths,26,Papua New Guinea,3,Both,22,All ages,345,Malaria,1,Number,2021,2163.69624363032,4191.796052920094,846.919904271058,PNG
-1,Deaths,122,Ecuador,3,Both,22,All ages,345,Malaria,1,Number,2021,1.4166154791014025,2.3354888206229445,0.5050368848027083,ECU
-1,Deaths,367,Monaco,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MCO
-1,Deaths,59,Latvia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LVA
-1,Deaths,155,Turkey,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
-1,Deaths,89,Netherlands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NLD
-1,Deaths,171,Democratic Republic of the Congo,3,Both,22,All ages,345,Malaria,1,Number,2021,62358.608926125125,112100.2080959243,27976.27995988436,
-1,Deaths,139,Algeria,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DZA
-1,Deaths,88,Malta,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MLT
-1,Deaths,24,Marshall Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MHL
-1,Deaths,191,Zambia,3,Both,22,All ages,345,Malaria,1,Number,2021,6521.253982876089,14601.43975632695,1570.0906123081213,ZMB
-1,Deaths,91,Portugal,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PRT
-1,Deaths,205,Côte d'Ivoire,3,Both,22,All ages,345,Malaria,1,Number,2021,27762.932097565503,52331.201206569945,11228.68163133978,CIV
-1,Deaths,8,Taiwan (Province of China),3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
-1,Deaths,189,United Republic of Tanzania,3,Both,22,All ages,345,Malaria,1,Number,2021,15269.250628945503,32294.820188059093,4660.62332327353,TZA
-1,Deaths,106,Bahamas,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BHS
-1,Deaths,154,Tunisia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TUN
-1,Deaths,186,Seychelles,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SYC
-1,Deaths,121,Bolivia (Plurinational State of),3,Both,22,All ages,345,Malaria,1,Number,2021,0.6828023142549424,1.1926325583408377,0.2948809932449074,
-1,Deaths,41,Uzbekistan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,UZB
-1,Deaths,374,Niue,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NIU
-1,Deaths,92,Spain,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ESP
-1,Deaths,77,Cyprus,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CYP
-1,Deaths,10,Cambodia,3,Both,22,All ages,345,Malaria,1,Number,2021,3.66886379122751,5.7977839639734015,1.6206942902182055,KHM
-1,Deaths,108,Belize,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BLZ
-1,Deaths,75,Austria,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AUT
-1,Deaths,141,Egypt,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,EGY
-1,Deaths,74,Andorra,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AND
-1,Deaths,187,Somalia,3,Both,22,All ages,345,Malaria,1,Number,2021,2307.100393347551,5523.529894660616,831.614239351541,SOM
-1,Deaths,12,Lao People's Democratic Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,6.197700286636183,10.732708068594995,3.159062073911562,LAO
-1,Deaths,172,Equatorial Guinea,3,Both,22,All ages,345,Malaria,1,Number,2021,924.4108205735416,1950.4933015831684,383.7983767753114,GNQ
-1,Deaths,107,Barbados,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BRB
-1,Deaths,157,Yemen,3,Both,22,All ages,345,Malaria,1,Number,2021,9054.217304191729,21542.52344328266,1637.1634546088192,YEM
-1,Deaths,207,Ghana,3,Both,22,All ages,345,Malaria,1,Number,2021,15733.637819235904,29505.89658857038,7035.633534654811,GHA
-1,Deaths,78,Denmark,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DNK
-1,Deaths,206,Gambia,3,Both,22,All ages,345,Malaria,1,Number,2021,553.384475728277,890.5441138302083,366.1396475151066,GMB
-1,Deaths,376,Northern Mariana Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MNP
-1,Deaths,27,Samoa,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,WSM
-1,Deaths,143,Iraq,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,IRQ
-1,Deaths,61,Republic of Moldova,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MDA
-1,Deaths,173,Gabon,3,Both,22,All ages,345,Malaria,1,Number,2021,747.4683670483853,1859.5921269301728,233.27294890318743,GAB
-1,Deaths,30,Vanuatu,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,VUT
-1,Deaths,208,Guinea,3,Both,22,All ages,345,Malaria,1,Number,2021,12582.806093019568,24520.912336185505,5127.808774730951,GIN
-1,Deaths,63,Ukraine,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,UKR
-1,Deaths,127,El Salvador,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SLV
-1,Deaths,210,Liberia,3,Both,22,All ages,345,Malaria,1,Number,2021,5631.146134572071,11230.10840795085,1834.3651248912888,LBR
-1,Deaths,176,Comoros,3,Both,22,All ages,345,Malaria,1,Number,2021,29.6585947903394,50.209602156425056,13.317853322857264,COM
-1,Deaths,125,Colombia,3,Both,22,All ages,345,Malaria,1,Number,2021,74.50207047493831,141.76281575133407,16.473820352224813,COL
-1,Deaths,94,Switzerland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CHE
-1,Deaths,60,Lithuania,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LTU
-1,Deaths,45,Bulgaria,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BGR
-1,Deaths,126,Costa Rica,3,Both,22,All ages,345,Malaria,1,Number,2021,0.2005127003729511,0.2337777015048839,0.1721008874760998,CRI
-1,Deaths,46,Croatia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,HRV
-1,Deaths,14,Maldives,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MDV
-1,Deaths,298,American Samoa,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ASM
-1,Deaths,110,Dominica,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DMA
-1,Deaths,13,Malaysia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MYS
-1,Deaths,140,Bahrain,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BHR
-1,Deaths,28,Solomon Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,169.17292179108327,303.86419223828466,96.6181251940922,SLB
-1,Deaths,93,Sweden,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SWE
-1,Deaths,380,Palau,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PLW
-1,Deaths,47,Czechia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CZE
-1,Deaths,129,Honduras,3,Both,22,All ages,345,Malaria,1,Number,2021,0.2892591064704523,1.4708656922937289,0.032954734496169,HND
-1,Deaths,193,Botswana,3,Both,22,All ages,345,Malaria,1,Number,2021,7.771846110257332,14.84615065409752,3.652540745294551,BWA
-1,Deaths,79,Finland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,FIN
-1,Deaths,160,Afghanistan,3,Both,22,All ages,345,Malaria,1,Number,2021,121.28222472045294,187.61309941282505,55.19543966957506,AFG
-1,Deaths,111,Dominican Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,9.542322292198063,40.27447551499013,1.169019127625173,DOM
-1,Deaths,145,Kuwait,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KWT
-1,Deaths,413,Tokelau,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TKL
-1,Deaths,181,Madagascar,3,Both,22,All ages,345,Malaria,1,Number,2021,6639.041387552446,14521.448737046429,1512.5060545643933,MDG
-1,Deaths,113,Guyana,3,Both,22,All ages,345,Malaria,1,Number,2021,55.412575025110776,98.4761043139979,22.0603168545877,GUY
-1,Deaths,16,Philippines,3,Both,22,All ages,345,Malaria,1,Number,2021,24.12182442726317,104.04889421058384,0.3423209169383896,PHL
-1,Deaths,131,Nicaragua,3,Both,22,All ages,345,Malaria,1,Number,2021,87.0412213899635,152.82373150367505,0.0,NIC
-1,Deaths,522,Sudan,3,Both,22,All ages,345,Malaria,1,Number,2021,3944.7854060047534,9084.777200353994,1394.773807425762,SDN
-1,Deaths,178,Eritrea,3,Both,22,All ages,345,Malaria,1,Number,2021,158.21210241779843,259.5661694015866,97.7985654166722,ERI
-1,Deaths,50,Montenegro,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MNE
-1,Deaths,146,Lebanon,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LBN
-1,Deaths,80,France,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,FRA
-1,Deaths,132,Panama,3,Both,22,All ages,345,Malaria,1,Number,2021,0.1123013113924884,0.8189663158984559,0.0,PAN
-1,Deaths,396,San Marino,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SMR
-1,Deaths,196,South Africa,3,Both,22,All ages,345,Malaria,1,Number,2021,54.48080306132545,245.744563752731,11.138374274052913,ZAF
-1,Deaths,49,North Macedonia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MKD
-1,Deaths,148,Morocco,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MAR
-1,Deaths,162,Bhutan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0985784944966828,0.1949292144738473,0.0577758653366337,BTN
-1,Deaths,66,Brunei Darussalam,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BRN
-1,Deaths,177,Djibouti,3,Both,22,All ages,345,Malaria,1,Number,2021,181.1989786086405,273.6525685644721,99.85087995622897,DJI
-1,Deaths,112,Grenada,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GRD
-1,Deaths,17,Sri Lanka,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LKA
-1,Deaths,214,Nigeria,3,Both,22,All ages,345,Malaria,1,Number,2021,227528.89875153344,475654.51587861904,74960.16271434822,NGA
-1,Deaths,130,Mexico,3,Both,22,All ages,345,Malaria,1,Number,2021,1.90203651365666,2.251048377362735,1.5965311924914694,MEX
-1,Deaths,97,Argentina,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ARG
-1,Deaths,82,Greece,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GRC
-1,Deaths,51,Poland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,POL
-1,Deaths,211,Mali,3,Both,22,All ages,345,Malaria,1,Number,2021,23815.326976840435,48435.79732332388,10738.779468566152,MLI
-1,Deaths,212,Mauritania,3,Both,22,All ages,345,Malaria,1,Number,2021,385.7230057171477,849.1050782759525,62.02792688330542,MRT
-1,Deaths,19,Timor-Leste,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TLS
-1,Deaths,35,Georgia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GEO
-1,Deaths,351,Guam,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GUM
-1,Deaths,197,Eswatini,3,Both,22,All ages,345,Malaria,1,Number,2021,3.719744975160245,10.669819309543389,1.1525920749152554,SWZ
-1,Deaths,320,Cook Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,COK
-1,Deaths,164,Nepal,3,Both,22,All ages,345,Malaria,1,Number,2021,4.315668565350227,10.68881448846798,1.0372868554401578,NPL
-1,Deaths,144,Jordan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,JOR
-1,Deaths,83,Iceland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ISL
-1,Deaths,152,Saudi Arabia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.2595723133806552,1.0704112727000432,0.0016963410904123,SAU
-1,Deaths,52,Romania,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ROU
-1,Deaths,68,Republic of Korea,3,Both,22,All ages,345,Malaria,1,Number,2021,1.7520006923069364,2.139206986423395,1.450404164423323,PRK
-1,Deaths,215,Sao Tome and Principe,3,Both,22,All ages,345,Malaria,1,Number,2021,7.9419491342212,12.99087443124406,3.2368005191598286,STP
-1,Deaths,98,Chile,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CHL
-1,Deaths,18,Thailand,3,Both,22,All ages,345,Malaria,1,Number,2021,0.5379981009792447,1.2466882495864138,0.1012694739145207,THA
-1,Deaths,115,Jamaica,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,JAM
-1,Deaths,117,Saint Vincent and the Grenadines,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,VCT
-1,Deaths,416,Tuvalu,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TUV
-1,Deaths,305,Bermuda,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BMU
-1,Deaths,33,Armenia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ARM
-1,Deaths,36,Kazakhstan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KAZ
-1,Deaths,435,South Sudan,3,Both,22,All ages,345,Malaria,1,Number,2021,7457.541571185339,14506.821286551578,3022.7683824130045,SSD
-1,Deaths,99,Uruguay,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,URY
-1,Deaths,150,Oman,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0014904403257075,0.0073979584165636,4.9910511780035656e-05,OMN
-1,Deaths,198,Zimbabwe,3,Both,22,All ages,345,Malaria,1,Number,2021,1707.985885805097,3495.073636811269,714.9009174184955,ZWE
-1,Deaths,37,Kyrgyzstan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KGZ
-1,Deaths,200,Benin,3,Both,22,All ages,345,Malaria,1,Number,2021,15653.765139315115,28341.34704777878,7166.430725424123,BEN
-1,Deaths,116,Saint Lucia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LCA
-1,Deaths,55,Slovenia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SVN
-1,Deaths,101,Canada,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CAN
-1,Deaths,84,Ireland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,IRL
-1,Deaths,136,Paraguay,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PRY
-1,Deaths,183,Mauritius,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MUS
-1,Deaths,163,India,3,Both,22,All ages,345,Malaria,1,Number,2021,16917.06449954352,66855.92758656752,0.0,IND
-1,Deaths,135,Brazil,3,Both,22,All ages,345,Malaria,1,Number,2021,175.69094903808826,553.0076394947848,3.3324002807386104,BRA
-1,Deaths,182,Malawi,3,Both,22,All ages,345,Malaria,1,Number,2021,8302.922347444612,17728.361597608317,3062.114217303252,MWI
-1,Deaths,102,United States of America,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,USA
-1,Deaths,71,Australia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AUS
-1,Deaths,216,Senegal,3,Both,22,All ages,345,Malaria,1,Number,2021,4886.607997452372,7335.823413506033,2103.792801196674,SEN
-1,Deaths,85,Israel,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ISR
-1,Deaths,149,Palestine,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PSE
-1,Deaths,217,Sierra Leone,3,Both,22,All ages,345,Malaria,1,Number,2021,12979.978913268586,25324.062963880897,4209.031572484179,SLE
-1,Deaths,169,Central African Republic,3,Both,22,All ages,345,Malaria,1,Number,2021,5040.926315868949,11682.104185798456,1825.640891710492,CAF
-1,Deaths,201,Burkina Faso,3,Both,22,All ages,345,Malaria,1,Number,2021,35962.56023818523,64139.2369714016,16365.36576084328,BFA
-1,Deaths,54,Slovakia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SVK
-1,Deaths,203,Cabo Verde,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0460776287726376,0.2165345271621192,0.0022233191152928,CPV
-1,Deaths,38,Mongolia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,MNG
-1,Deaths,22,Fiji,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,FJI
-1,Deaths,69,Singapore,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SGP
-1,Deaths,202,Cameroon,3,Both,22,All ages,345,Malaria,1,Number,2021,28945.612979130445,58505.86529030088,11324.32729146244,CMR
-1,Deaths,168,Angola,3,Both,22,All ages,345,Malaria,1,Number,2021,18396.46227962601,38747.947783053314,7261.132284918794,AGO
-1,Deaths,39,Tajikistan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TJK
-1,Deaths,72,New Zealand,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NZL
-1,Deaths,105,Antigua and Barbuda,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ATG
-1,Deaths,170,Congo,3,Both,22,All ages,345,Malaria,1,Number,2021,2439.276171645046,4789.946423448607,893.2947750895945,COG
-1,Deaths,57,Belarus,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BLR
-1,Deaths,90,Norway,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NOR
-1,Deaths,25,Micronesia (Federated States of),3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
-1,Deaths,123,Peru,3,Both,22,All ages,345,Malaria,1,Number,2021,24.02322328603504,125.29046783181188,0.8982351843265877,PER
-1,Deaths,204,Chad,3,Both,22,All ages,345,Malaria,1,Number,2021,8798.15583958796,18325.75489941128,2705.78901516314,TCD
-1,Deaths,58,Estonia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,EST
-1,Deaths,369,Nauru,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,NRU
-1,Deaths,156,United Arab Emirates,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ARE
-1,Deaths,190,Uganda,3,Both,22,All ages,345,Malaria,1,Number,2021,45361.02133747084,82604.27057460984,14826.12394793638,UGA
-1,Deaths,11,Indonesia,3,Both,22,All ages,345,Malaria,1,Number,2021,1312.06764237564,5995.150612176331,104.81222546334917,IDN
-1,Deaths,43,Albania,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ALB
-1,Deaths,109,Cuba,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CUB
-1,Deaths,142,Iran (Islamic Republic of),3,Both,22,All ages,345,Malaria,1,Number,2021,0.1215269689728442,0.7171043909584274,0.0008678223347777,
-1,Deaths,76,Belgium,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BEL
-1,Deaths,44,Bosnia and Herzegovina,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,BIH
-1,Deaths,175,Burundi,3,Both,22,All ages,345,Malaria,1,Number,2021,13547.098841622288,26039.34948117932,5803.4296998106265,BDI
-1,Deaths,29,Tonga,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TON
-1,Deaths,385,Puerto Rico,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,PRI
-1,Deaths,95,United Kingdom,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GBR
-1,Deaths,62,Russian Federation,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,RUS
-1,Deaths,15,Myanmar,3,Both,22,All ages,345,Malaria,1,Number,2021,366.6434636962392,938.176468512232,197.60498828944912,MMR
-1,Deaths,393,Saint Kitts and Nevis,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,KNA
-1,Deaths,128,Guatemala,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GTM
-1,Deaths,194,Lesotho,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LSO
-1,Deaths,161,Bangladesh,3,Both,22,All ages,345,Malaria,1,Number,2021,603.331741172993,1210.7821516581337,146.9659344214066,BGD
-1,Deaths,195,Namibia,3,Both,22,All ages,345,Malaria,1,Number,2021,34.63159145835799,167.3248387796551,9.002158717365697,NAM
-1,Deaths,209,Guinea-Bissau,3,Both,22,All ages,345,Malaria,1,Number,2021,578.6776390345032,1309.204246788151,127.19151991226389,GNB
-1,Deaths,48,Hungary,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,HUN
-1,Deaths,179,Ethiopia,3,Both,22,All ages,345,Malaria,1,Number,2021,6054.430045198381,14426.500669248013,1638.78734951802,ETH
-1,Deaths,114,Haiti,3,Both,22,All ages,345,Malaria,1,Number,2021,711.5303254518524,2349.235009090143,77.07119762207208,HTI
-1,Deaths,147,Libya,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,LBY
-1,Deaths,180,Kenya,3,Both,22,All ages,345,Malaria,1,Number,2021,7550.57174365101,11989.85708006952,4492.544870047267,KEN
-1,Deaths,81,Germany,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,DEU
-1,Deaths,34,Azerbaijan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,AZE
-1,Deaths,67,Japan,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,JPN
-1,Deaths,20,Viet Nam,3,Both,22,All ages,345,Malaria,1,Number,2021,2.2941398234031465,4.369604751240988,0.9344163844159362,VNM
-1,Deaths,165,Pakistan,3,Both,22,All ages,345,Malaria,1,Number,2021,8839.575703718438,25709.59080817289,459.7424031525027,PAK
-1,Deaths,133,Venezuela (Bolivarian Republic of),3,Both,22,All ages,345,Malaria,1,Number,2021,362.9502065867258,1020.5824693612932,77.94139531888865,
-1,Deaths,422,United States Virgin Islands,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,
-1,Deaths,349,Greenland,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,GRL
-1,Deaths,151,Qatar,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,QAT
-1,Deaths,6,China,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,CHN
-1,Deaths,53,Serbia,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SRB
-1,Deaths,184,Mozambique,3,Both,22,All ages,345,Malaria,1,Number,2021,27422.79487489615,60626.359737616935,8554.904974502477,MOZ
-1,Deaths,86,Italy,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,ITA
-1,Deaths,118,Suriname,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,SUR
-1,Deaths,213,Niger,3,Both,22,All ages,345,Malaria,1,Number,2021,33664.34507233972,61379.58239734914,11795.283569559337,NGA
-1,Deaths,119,Trinidad and Tobago,3,Both,22,All ages,345,Malaria,1,Number,2021,0.0,0.0,0.0,TTO
-1,Deaths,218,Togo,3,Both,22,All ages,345,Malaria,1,Number,2021,5776.35900291037,11141.673734207803,1928.157969126143,TGO
+Entity,Code,Year,estimated_number_of_malaria_deaths
+Afghanistan,AFG,2000,965
+Afghanistan,AFG,2001,965
+Afghanistan,AFG,2002,1133
+Afghanistan,AFG,2003,798
+Afghanistan,AFG,2004,350
+Afghanistan,AFG,2005,259
+Afghanistan,AFG,2006,222
+Afghanistan,AFG,2007,236
+Afghanistan,AFG,2008,198
+Afghanistan,AFG,2009,139
+Afghanistan,AFG,2010,165
+Afghanistan,AFG,2011,192
+Afghanistan,AFG,2012,92
+Afghanistan,AFG,2013,129
+Afghanistan,AFG,2014,152
+Afghanistan,AFG,2015,174
+Afghanistan,AFG,2016,351
+Afghanistan,AFG,2017,378
+Afghanistan,AFG,2018,292
+Afghanistan,AFG,2019,170
+Afghanistan,AFG,2020,110
+Afghanistan,AFG,2021,91
+Africa (WHO),,2000,840915
+Africa (WHO),,2001,834330
+Africa (WHO),,2002,795664
+Africa (WHO),,2003,774451
+Africa (WHO),,2004,754012
+Africa (WHO),,2005,729200
+Africa (WHO),,2006,721873
+Africa (WHO),,2007,704916
+Africa (WHO),,2008,684925
+Africa (WHO),,2009,671222
+Africa (WHO),,2010,653024
+Africa (WHO),,2011,616838
+Africa (WHO),,2012,583635
+Africa (WHO),,2013,570160
+Africa (WHO),,2014,549364
+Africa (WHO),,2015,541632
+Africa (WHO),,2016,542311
+Africa (WHO),,2017,555248
+Africa (WHO),,2018,541171
+Africa (WHO),,2019,544165
+Africa (WHO),,2020,599400
+Africa (WHO),,2021,593470
+Algeria,DZA,2000,2
+Algeria,DZA,2001,1
+Algeria,DZA,2002,0
+Algeria,DZA,2003,0
+Algeria,DZA,2004,0
+Algeria,DZA,2005,0
+Algeria,DZA,2006,0
+Algeria,DZA,2007,0
+Algeria,DZA,2008,0
+Algeria,DZA,2009,0
+Algeria,DZA,2010,1
+Algeria,DZA,2011,0
+Algeria,DZA,2012,0
+Algeria,DZA,2013,0
+Algeria,DZA,2014,0
+Algeria,DZA,2015,0
+Algeria,DZA,2016,0
+Algeria,DZA,2017,0
+Algeria,DZA,2018,0
+Algeria,DZA,2019,0
+Algeria,DZA,2020,0
+Algeria,DZA,2021,0
+Americas (WHO),,2000,919
+Americas (WHO),,2001,832
+Americas (WHO),,2002,765
+Americas (WHO),,2003,725
+Americas (WHO),,2004,712
+Americas (WHO),,2005,688
+Americas (WHO),,2006,584
+Americas (WHO),,2007,504
+Americas (WHO),,2008,470
+Americas (WHO),,2009,464
+Americas (WHO),,2010,502
+Americas (WHO),,2011,464
+Americas (WHO),,2012,430
+Americas (WHO),,2013,470
+Americas (WHO),,2014,348
+Americas (WHO),,2015,390
+Americas (WHO),,2016,530
+Americas (WHO),,2017,665
+Americas (WHO),,2018,572
+Americas (WHO),,2019,510
+Americas (WHO),,2020,418
+Americas (WHO),,2021,334
+Angola,AGO,2000,23478
+Angola,AGO,2001,23856
+Angola,AGO,2002,21992
+Angola,AGO,2003,22162
+Angola,AGO,2004,22190
+Angola,AGO,2005,21628
+Angola,AGO,2006,20340
+Angola,AGO,2007,18172
+Angola,AGO,2008,15179
+Angola,AGO,2009,13168
+Angola,AGO,2010,12352
+Angola,AGO,2011,11773
+Angola,AGO,2012,11463
+Angola,AGO,2013,11470
+Angola,AGO,2014,11659
+Angola,AGO,2015,12675
+Angola,AGO,2016,13553
+Angola,AGO,2017,14080
+Angola,AGO,2018,13624
+Angola,AGO,2019,13897
+Angola,AGO,2020,14853
+Angola,AGO,2021,17836
+Argentina,ARG,2000,0
+Argentina,ARG,2001,0
+Argentina,ARG,2002,0
+Argentina,ARG,2003,1
+Argentina,ARG,2004,0
+Argentina,ARG,2005,0
+Argentina,ARG,2006,0
+Argentina,ARG,2007,0
+Argentina,ARG,2008,0
+Argentina,ARG,2009,0
+Argentina,ARG,2010,0
+Argentina,ARG,2011,0
+Argentina,ARG,2012,0
+Argentina,ARG,2013,0
+Argentina,ARG,2014,0
+Argentina,ARG,2015,0
+Argentina,ARG,2016,0
+Argentina,ARG,2017,0
+Argentina,ARG,2018,0
+Argentina,ARG,2019,0
+Argentina,ARG,2020,0
+Argentina,ARG,2021,0
+Armenia,ARM,2000,0
+Armenia,ARM,2001,0
+Armenia,ARM,2002,0
+Armenia,ARM,2003,0
+Armenia,ARM,2004,0
+Armenia,ARM,2005,0
+Armenia,ARM,2006,0
+Armenia,ARM,2007,0
+Armenia,ARM,2008,0
+Armenia,ARM,2009,0
+Armenia,ARM,2010,0
+Armenia,ARM,2011,0
+Armenia,ARM,2012,0
+Armenia,ARM,2013,0
+Armenia,ARM,2014,0
+Armenia,ARM,2015,0
+Armenia,ARM,2016,0
+Armenia,ARM,2017,0
+Armenia,ARM,2018,0
+Armenia,ARM,2019,0
+Armenia,ARM,2020,0
+Armenia,ARM,2021,0
+Azerbaijan,AZE,2000,0
+Azerbaijan,AZE,2001,0
+Azerbaijan,AZE,2002,0
+Azerbaijan,AZE,2003,0
+Azerbaijan,AZE,2004,0
+Azerbaijan,AZE,2005,0
+Azerbaijan,AZE,2006,0
+Azerbaijan,AZE,2007,0
+Azerbaijan,AZE,2008,0
+Azerbaijan,AZE,2009,0
+Azerbaijan,AZE,2010,0
+Azerbaijan,AZE,2011,0
+Azerbaijan,AZE,2012,0
+Azerbaijan,AZE,2013,0
+Azerbaijan,AZE,2014,0
+Azerbaijan,AZE,2015,0
+Azerbaijan,AZE,2016,0
+Azerbaijan,AZE,2017,0
+Azerbaijan,AZE,2018,0
+Azerbaijan,AZE,2019,0
+Azerbaijan,AZE,2020,0
+Azerbaijan,AZE,2021,0
+Bangladesh,BGD,2000,199
+Bangladesh,BGD,2001,203
+Bangladesh,BGD,2002,206
+Bangladesh,BGD,2003,210
+Bangladesh,BGD,2004,213
+Bangladesh,BGD,2005,216
+Bangladesh,BGD,2006,139
+Bangladesh,BGD,2007,263
+Bangladesh,BGD,2008,264
+Bangladesh,BGD,2009,187
+Bangladesh,BGD,2010,166
+Bangladesh,BGD,2011,155
+Bangladesh,BGD,2012,85
+Bangladesh,BGD,2013,77
+Bangladesh,BGD,2014,160
+Bangladesh,BGD,2015,105
+Bangladesh,BGD,2016,72
+Bangladesh,BGD,2017,73
+Bangladesh,BGD,2018,26
+Bangladesh,BGD,2019,47
+Bangladesh,BGD,2020,15
+Bangladesh,BGD,2021,16
+Belize,BLZ,2000,0
+Belize,BLZ,2001,0
+Belize,BLZ,2002,0
+Belize,BLZ,2003,0
+Belize,BLZ,2004,1
+Belize,BLZ,2005,0
+Belize,BLZ,2006,1
+Belize,BLZ,2007,0
+Belize,BLZ,2008,0
+Belize,BLZ,2009,0
+Belize,BLZ,2010,0
+Belize,BLZ,2011,0
+Belize,BLZ,2012,0
+Belize,BLZ,2013,0
+Belize,BLZ,2014,0
+Belize,BLZ,2015,0
+Belize,BLZ,2016,0
+Belize,BLZ,2017,0
+Belize,BLZ,2018,0
+Belize,BLZ,2019,0
+Belize,BLZ,2020,0
+Belize,BLZ,2021,0
+Benin,BEN,2000,7420
+Benin,BEN,2001,7662
+Benin,BEN,2002,8693
+Benin,BEN,2003,9748
+Benin,BEN,2004,11134
+Benin,BEN,2005,12180
+Benin,BEN,2006,13078
+Benin,BEN,2007,12342
+Benin,BEN,2008,10790
+Benin,BEN,2009,9491
+Benin,BEN,2010,8694
+Benin,BEN,2011,8429
+Benin,BEN,2012,8942
+Benin,BEN,2013,9973
+Benin,BEN,2014,10522
+Benin,BEN,2015,11546
+Benin,BEN,2016,11849
+Benin,BEN,2017,10854
+Benin,BEN,2018,10428
+Benin,BEN,2019,10454
+Benin,BEN,2020,10585
+Benin,BEN,2021,11154
+Bhutan,BTN,2000,15
+Bhutan,BTN,2001,14
+Bhutan,BTN,2002,11
+Bhutan,BTN,2003,14
+Bhutan,BTN,2004,7
+Bhutan,BTN,2005,5
+Bhutan,BTN,2006,7
+Bhutan,BTN,2007,2
+Bhutan,BTN,2008,2
+Bhutan,BTN,2009,4
+Bhutan,BTN,2010,2
+Bhutan,BTN,2011,1
+Bhutan,BTN,2012,1
+Bhutan,BTN,2013,0
+Bhutan,BTN,2014,0
+Bhutan,BTN,2015,0
+Bhutan,BTN,2016,0
+Bhutan,BTN,2017,0
+Bhutan,BTN,2018,0
+Bhutan,BTN,2019,0
+Bhutan,BTN,2020,0
+Bhutan,BTN,2021,0
+Bolivia,BOL,2000,24
+Bolivia,BOL,2001,9
+Bolivia,BOL,2002,9
+Bolivia,BOL,2003,12
+Bolivia,BOL,2004,9
+Bolivia,BOL,2005,12
+Bolivia,BOL,2006,14
+Bolivia,BOL,2007,11
+Bolivia,BOL,2008,6
+Bolivia,BOL,2009,6
+Bolivia,BOL,2010,10
+Bolivia,BOL,2011,4
+Bolivia,BOL,2012,4
+Bolivia,BOL,2013,6
+Bolivia,BOL,2014,4
+Bolivia,BOL,2015,3
+Bolivia,BOL,2016,2
+Bolivia,BOL,2017,2
+Bolivia,BOL,2018,2
+Bolivia,BOL,2019,4
+Bolivia,BOL,2020,6
+Bolivia,BOL,2021,5
+Botswana,BWA,2000,49
+Botswana,BWA,2001,19
+Botswana,BWA,2002,9
+Botswana,BWA,2003,4
+Botswana,BWA,2004,3
+Botswana,BWA,2005,3
+Botswana,BWA,2006,12
+Botswana,BWA,2007,3
+Botswana,BWA,2008,6
+Botswana,BWA,2009,6
+Botswana,BWA,2010,5
+Botswana,BWA,2011,1
+Botswana,BWA,2012,0
+Botswana,BWA,2013,1
+Botswana,BWA,2014,5
+Botswana,BWA,2015,1
+Botswana,BWA,2016,2
+Botswana,BWA,2017,7
+Botswana,BWA,2018,2
+Botswana,BWA,2019,0
+Botswana,BWA,2020,4
+Botswana,BWA,2021,2
+Brazil,BRA,2000,245
+Brazil,BRA,2001,142
+Brazil,BRA,2002,95
+Brazil,BRA,2003,104
+Brazil,BRA,2004,102
+Brazil,BRA,2005,123
+Brazil,BRA,2006,110
+Brazil,BRA,2007,93
+Brazil,BRA,2008,68
+Brazil,BRA,2009,85
+Brazil,BRA,2010,76
+Brazil,BRA,2011,70
+Brazil,BRA,2012,60
+Brazil,BRA,2013,40
+Brazil,BRA,2014,36
+Brazil,BRA,2015,35
+Brazil,BRA,2016,35
+Brazil,BRA,2017,34
+Brazil,BRA,2018,56
+Brazil,BRA,2019,37
+Brazil,BRA,2020,51
+Brazil,BRA,2021,58
+Burkina Faso,BFA,2000,37845
+Burkina Faso,BFA,2001,40660
+Burkina Faso,BFA,2002,38905
+Burkina Faso,BFA,2003,37642
+Burkina Faso,BFA,2004,35229
+Burkina Faso,BFA,2005,32505
+Burkina Faso,BFA,2006,31512
+Burkina Faso,BFA,2007,32545
+Burkina Faso,BFA,2008,35534
+Burkina Faso,BFA,2009,31446
+Burkina Faso,BFA,2010,36142
+Burkina Faso,BFA,2011,34912
+Burkina Faso,BFA,2012,28346
+Burkina Faso,BFA,2013,27175
+Burkina Faso,BFA,2014,23619
+Burkina Faso,BFA,2015,21940
+Burkina Faso,BFA,2016,20625
+Burkina Faso,BFA,2017,20228
+Burkina Faso,BFA,2018,18482
+Burkina Faso,BFA,2019,19228
+Burkina Faso,BFA,2020,21402
+Burkina Faso,BFA,2021,18976
+Burundi,BDI,2000,11340
+Burundi,BDI,2001,10469
+Burundi,BDI,2002,9186
+Burundi,BDI,2003,8268
+Burundi,BDI,2004,7064
+Burundi,BDI,2005,6117
+Burundi,BDI,2006,5699
+Burundi,BDI,2007,5512
+Burundi,BDI,2008,5529
+Burundi,BDI,2009,5530
+Burundi,BDI,2010,5470
+Burundi,BDI,2011,5187
+Burundi,BDI,2012,5048
+Burundi,BDI,2013,4899
+Burundi,BDI,2014,4990
+Burundi,BDI,2015,5198
+Burundi,BDI,2016,5851
+Burundi,BDI,2017,6125
+Burundi,BDI,2018,5299
+Burundi,BDI,2019,5315
+Burundi,BDI,2020,5792
+Burundi,BDI,2021,5957
+Cambodia,KHM,2000,1582
+Cambodia,KHM,2001,904
+Cambodia,KHM,2002,803
+Cambodia,KHM,2003,1062
+Cambodia,KHM,2004,894
+Cambodia,KHM,2005,705
+Cambodia,KHM,2006,897
+Cambodia,KHM,2007,394
+Cambodia,KHM,2008,497
+Cambodia,KHM,2009,853
+Cambodia,KHM,2010,644
+Cambodia,KHM,2011,641
+Cambodia,KHM,2012,383
+Cambodia,KHM,2013,231
+Cambodia,KHM,2014,399
+Cambodia,KHM,2015,374
+Cambodia,KHM,2016,204
+Cambodia,KHM,2017,336
+Cambodia,KHM,2018,265
+Cambodia,KHM,2019,102
+Cambodia,KHM,2020,27
+Cambodia,KHM,2021,10
+Cameroon,CMR,2000,16029
+Cameroon,CMR,2001,15962
+Cameroon,CMR,2002,17289
+Cameroon,CMR,2003,17958
+Cameroon,CMR,2004,19026
+Cameroon,CMR,2005,19704
+Cameroon,CMR,2006,19474
+Cameroon,CMR,2007,17798
+Cameroon,CMR,2008,15635
+Cameroon,CMR,2009,14198
+Cameroon,CMR,2010,13110
+Cameroon,CMR,2011,12048
+Cameroon,CMR,2012,12056
+Cameroon,CMR,2013,12197
+Cameroon,CMR,2014,12438
+Cameroon,CMR,2015,12932
+Cameroon,CMR,2016,13698
+Cameroon,CMR,2017,13736
+Cameroon,CMR,2018,12898
+Cameroon,CMR,2019,12792
+Cameroon,CMR,2020,14505
+Cameroon,CMR,2021,13839
+Cape Verde,CPV,2000,0
+Cape Verde,CPV,2001,0
+Cape Verde,CPV,2002,2
+Cape Verde,CPV,2003,4
+Cape Verde,CPV,2004,4
+Cape Verde,CPV,2005,2
+Cape Verde,CPV,2006,8
+Cape Verde,CPV,2007,2
+Cape Verde,CPV,2008,2
+Cape Verde,CPV,2009,2
+Cape Verde,CPV,2010,1
+Cape Verde,CPV,2011,1
+Cape Verde,CPV,2012,0
+Cape Verde,CPV,2013,0
+Cape Verde,CPV,2014,1
+Cape Verde,CPV,2015,0
+Cape Verde,CPV,2016,1
+Cape Verde,CPV,2017,2
+Cape Verde,CPV,2018,0
+Cape Verde,CPV,2019,0
+Cape Verde,CPV,2020,0
+Cape Verde,CPV,2021,0
+Central African Republic,CAF,2000,7525
+Central African Republic,CAF,2001,7709
+Central African Republic,CAF,2002,7862
+Central African Republic,CAF,2003,8391
+Central African Republic,CAF,2004,8777
+Central African Republic,CAF,2005,9367
+Central African Republic,CAF,2006,10017
+Central African Republic,CAF,2007,9890
+Central African Republic,CAF,2008,9181
+Central African Republic,CAF,2009,8749
+Central African Republic,CAF,2010,8125
+Central African Republic,CAF,2011,7279
+Central African Republic,CAF,2012,7343
+Central African Republic,CAF,2013,6813
+Central African Republic,CAF,2014,6684
+Central African Republic,CAF,2015,6174
+Central African Republic,CAF,2016,5763
+Central African Republic,CAF,2017,5533
+Central African Republic,CAF,2018,5397
+Central African Republic,CAF,2019,5096
+Central African Republic,CAF,2020,5130
+Central African Republic,CAF,2021,5151
+Chad,TCD,2000,8426
+Chad,TCD,2001,9069
+Chad,TCD,2002,8615
+Chad,TCD,2003,8876
+Chad,TCD,2004,8964
+Chad,TCD,2005,9428
+Chad,TCD,2006,9994
+Chad,TCD,2007,10446
+Chad,TCD,2008,10874
+Chad,TCD,2009,11421
+Chad,TCD,2010,11796
+Chad,TCD,2011,11519
+Chad,TCD,2012,11291
+Chad,TCD,2013,11132
+Chad,TCD,2014,11106
+Chad,TCD,2015,11141
+Chad,TCD,2016,11414
+Chad,TCD,2017,11657
+Chad,TCD,2018,11502
+Chad,TCD,2019,11621
+Chad,TCD,2020,12190
+Chad,TCD,2021,11744
+China,CHN,2000,39
+China,CHN,2001,30
+China,CHN,2002,42
+China,CHN,2003,52
+China,CHN,2004,31
+China,CHN,2005,48
+China,CHN,2006,38
+China,CHN,2007,18
+China,CHN,2008,23
+China,CHN,2009,12
+China,CHN,2010,19
+China,CHN,2011,33
+China,CHN,2012,0
+China,CHN,2013,0
+China,CHN,2014,0
+China,CHN,2015,0
+China,CHN,2016,0
+China,CHN,2017,0
+China,CHN,2018,0
+China,CHN,2019,0
+China,CHN,2020,0
+China,CHN,2021,0
+Colombia,COL,2000,124
+Colombia,COL,2001,168
+Colombia,COL,2002,162
+Colombia,COL,2003,118
+Colombia,COL,2004,126
+Colombia,COL,2005,87
+Colombia,COL,2006,77
+Colombia,COL,2007,68
+Colombia,COL,2008,54
+Colombia,COL,2009,28
+Colombia,COL,2010,42
+Colombia,COL,2011,23
+Colombia,COL,2012,24
+Colombia,COL,2013,10
+Colombia,COL,2014,17
+Colombia,COL,2015,18
+Colombia,COL,2016,36
+Colombia,COL,2017,19
+Colombia,COL,2018,9
+Colombia,COL,2019,3
+Colombia,COL,2020,5
+Colombia,COL,2021,11
+Comoros,COM,2000,89
+Comoros,COM,2001,89
+Comoros,COM,2002,89
+Comoros,COM,2003,89
+Comoros,COM,2004,89
+Comoros,COM,2005,89
+Comoros,COM,2006,89
+Comoros,COM,2007,89
+Comoros,COM,2008,89
+Comoros,COM,2009,89
+Comoros,COM,2010,92
+Comoros,COM,2011,62
+Comoros,COM,2012,125
+Comoros,COM,2013,135
+Comoros,COM,2014,5
+Comoros,COM,2015,3
+Comoros,COM,2016,2
+Comoros,COM,2017,8
+Comoros,COM,2018,38
+Comoros,COM,2019,45
+Comoros,COM,2020,11
+Comoros,COM,2021,26
+Congo,COG,2000,2879
+Congo,COG,2001,2790
+Congo,COG,2002,2526
+Congo,COG,2003,2513
+Congo,COG,2004,2416
+Congo,COG,2005,2386
+Congo,COG,2006,2225
+Congo,COG,2007,2065
+Congo,COG,2008,1928
+Congo,COG,2009,1898
+Congo,COG,2010,1931
+Congo,COG,2011,1970
+Congo,COG,2012,2001
+Congo,COG,2013,2119
+Congo,COG,2014,2147
+Congo,COG,2015,2024
+Congo,COG,2016,2158
+Congo,COG,2017,2215
+Congo,COG,2018,2227
+Congo,COG,2019,2360
+Congo,COG,2020,2279
+Congo,COG,2021,2293
+Costa Rica,CRI,2000,0
+Costa Rica,CRI,2001,0
+Costa Rica,CRI,2002,0
+Costa Rica,CRI,2003,0
+Costa Rica,CRI,2004,0
+Costa Rica,CRI,2005,0
+Costa Rica,CRI,2006,0
+Costa Rica,CRI,2007,0
+Costa Rica,CRI,2008,0
+Costa Rica,CRI,2009,1
+Costa Rica,CRI,2010,0
+Costa Rica,CRI,2011,0
+Costa Rica,CRI,2012,0
+Costa Rica,CRI,2013,0
+Costa Rica,CRI,2014,0
+Costa Rica,CRI,2015,0
+Costa Rica,CRI,2016,0
+Costa Rica,CRI,2017,0
+Costa Rica,CRI,2018,0
+Costa Rica,CRI,2019,0
+Costa Rica,CRI,2020,0
+Costa Rica,CRI,2021,0
+Cote d'Ivoire,CIV,2000,32078
+Cote d'Ivoire,CIV,2001,33888
+Cote d'Ivoire,CIV,2002,34372
+Cote d'Ivoire,CIV,2003,34284
+Cote d'Ivoire,CIV,2004,32711
+Cote d'Ivoire,CIV,2005,31615
+Cote d'Ivoire,CIV,2006,31237
+Cote d'Ivoire,CIV,2007,31806
+Cote d'Ivoire,CIV,2008,30883
+Cote d'Ivoire,CIV,2009,30583
+Cote d'Ivoire,CIV,2010,27301
+Cote d'Ivoire,CIV,2011,22772
+Cote d'Ivoire,CIV,2012,16621
+Cote d'Ivoire,CIV,2013,13315
+Cote d'Ivoire,CIV,2014,12233
+Cote d'Ivoire,CIV,2015,14009
+Cote d'Ivoire,CIV,2016,16874
+Cote d'Ivoire,CIV,2017,18079
+Cote d'Ivoire,CIV,2018,15035
+Cote d'Ivoire,CIV,2019,14918
+Cote d'Ivoire,CIV,2020,15110
+Cote d'Ivoire,CIV,2021,14906
+Democratic Republic of Congo,COD,2000,100495
+Democratic Republic of Congo,COD,2001,100200
+Democratic Republic of Congo,COD,2002,101615
+Democratic Republic of Congo,COD,2003,105477
+Democratic Republic of Congo,COD,2004,112038
+Democratic Republic of Congo,COD,2005,112726
+Democratic Republic of Congo,COD,2006,115483
+Democratic Republic of Congo,COD,2007,111540
+Democratic Republic of Congo,COD,2008,106675
+Democratic Republic of Congo,COD,2009,101411
+Democratic Republic of Congo,COD,2010,91816
+Democratic Republic of Congo,COD,2011,79872
+Democratic Republic of Congo,COD,2012,67514
+Democratic Republic of Congo,COD,2013,59282
+Democratic Republic of Congo,COD,2014,56824
+Democratic Republic of Congo,COD,2015,58166
+Democratic Republic of Congo,COD,2016,63972
+Democratic Republic of Congo,COD,2017,67810
+Democratic Republic of Congo,COD,2018,65576
+Democratic Republic of Congo,COD,2019,65353
+Democratic Republic of Congo,COD,2020,78709
+Democratic Republic of Congo,COD,2021,78847
+Djibouti,DJI,2000,4
+Djibouti,DJI,2001,4
+Djibouti,DJI,2002,4
+Djibouti,DJI,2003,4
+Djibouti,DJI,2004,4
+Djibouti,DJI,2005,4
+Djibouti,DJI,2006,5
+Djibouti,DJI,2007,5
+Djibouti,DJI,2008,5
+Djibouti,DJI,2009,6
+Djibouti,DJI,2010,2
+Djibouti,DJI,2011,5
+Djibouti,DJI,2012,5
+Djibouti,DJI,2013,4
+Djibouti,DJI,2014,24
+Djibouti,DJI,2015,24
+Djibouti,DJI,2016,30
+Djibouti,DJI,2017,25
+Djibouti,DJI,2018,43
+Djibouti,DJI,2019,97
+Djibouti,DJI,2020,126
+Djibouti,DJI,2021,117
+Dominican Republic,DOM,2000,6
+Dominican Republic,DOM,2001,17
+Dominican Republic,DOM,2002,11
+Dominican Republic,DOM,2003,12
+Dominican Republic,DOM,2004,16
+Dominican Republic,DOM,2005,16
+Dominican Republic,DOM,2006,10
+Dominican Republic,DOM,2007,17
+Dominican Republic,DOM,2008,11
+Dominican Republic,DOM,2009,14
+Dominican Republic,DOM,2010,15
+Dominican Republic,DOM,2011,10
+Dominican Republic,DOM,2012,8
+Dominican Republic,DOM,2013,5
+Dominican Republic,DOM,2014,4
+Dominican Republic,DOM,2015,3
+Dominican Republic,DOM,2016,1
+Dominican Republic,DOM,2017,1
+Dominican Republic,DOM,2018,1
+Dominican Republic,DOM,2019,4
+Dominican Republic,DOM,2020,2
+Dominican Republic,DOM,2021,1
+East Timor,TLS,2000,244
+East Timor,TLS,2001,248
+East Timor,TLS,2002,199
+East Timor,TLS,2003,125
+East Timor,TLS,2004,449
+East Timor,TLS,2005,304
+East Timor,TLS,2006,326
+East Timor,TLS,2007,226
+East Timor,TLS,2008,271
+East Timor,TLS,2009,198
+East Timor,TLS,2010,194
+East Timor,TLS,2011,65
+East Timor,TLS,2012,9
+East Timor,TLS,2013,1
+East Timor,TLS,2014,0
+East Timor,TLS,2015,0
+East Timor,TLS,2016,0
+East Timor,TLS,2017,0
+East Timor,TLS,2018,0
+East Timor,TLS,2019,0
+East Timor,TLS,2020,0
+East Timor,TLS,2021,0
+Eastern Mediterranean (WHO),,2000,13609
+Eastern Mediterranean (WHO),,2001,14063
+Eastern Mediterranean (WHO),,2002,13090
+Eastern Mediterranean (WHO),,2003,12228
+Eastern Mediterranean (WHO),,2004,10487
+Eastern Mediterranean (WHO),,2005,11203
+Eastern Mediterranean (WHO),,2006,11315
+Eastern Mediterranean (WHO),,2007,9591
+Eastern Mediterranean (WHO),,2008,7092
+Eastern Mediterranean (WHO),,2009,6862
+Eastern Mediterranean (WHO),,2010,8634
+Eastern Mediterranean (WHO),,2011,7845
+Eastern Mediterranean (WHO),,2012,7954
+Eastern Mediterranean (WHO),,2013,7517
+Eastern Mediterranean (WHO),,2014,7524
+Eastern Mediterranean (WHO),,2015,8209
+Eastern Mediterranean (WHO),,2016,9484
+Eastern Mediterranean (WHO),,2017,10243
+Eastern Mediterranean (WHO),,2018,11137
+Eastern Mediterranean (WHO),,2019,11903
+Eastern Mediterranean (WHO),,2020,12727
+Eastern Mediterranean (WHO),,2021,13413
+Ecuador,ECU,2000,66
+Ecuador,ECU,2001,84
+Ecuador,ECU,2002,64
+Ecuador,ECU,2003,46
+Ecuador,ECU,2004,37
+Ecuador,ECU,2005,22
+Ecuador,ECU,2006,9
+Ecuador,ECU,2007,8
+Ecuador,ECU,2008,5
+Ecuador,ECU,2009,6
+Ecuador,ECU,2010,0
+Ecuador,ECU,2011,0
+Ecuador,ECU,2012,0
+Ecuador,ECU,2013,0
+Ecuador,ECU,2014,0
+Ecuador,ECU,2015,0
+Ecuador,ECU,2016,0
+Ecuador,ECU,2017,0
+Ecuador,ECU,2018,0
+Ecuador,ECU,2019,0
+Ecuador,ECU,2020,3
+Ecuador,ECU,2021,0
+El Salvador,SLV,2000,0
+El Salvador,SLV,2001,0
+El Salvador,SLV,2002,0
+El Salvador,SLV,2003,0
+El Salvador,SLV,2004,0
+El Salvador,SLV,2005,0
+El Salvador,SLV,2006,0
+El Salvador,SLV,2007,0
+El Salvador,SLV,2008,0
+El Salvador,SLV,2009,0
+El Salvador,SLV,2010,0
+El Salvador,SLV,2011,0
+El Salvador,SLV,2012,0
+El Salvador,SLV,2013,0
+El Salvador,SLV,2014,0
+El Salvador,SLV,2015,0
+El Salvador,SLV,2016,0
+El Salvador,SLV,2017,0
+El Salvador,SLV,2018,0
+El Salvador,SLV,2019,0
+El Salvador,SLV,2020,0
+El Salvador,SLV,2021,0
+Equatorial Guinea,GNQ,2000,715
+Equatorial Guinea,GNQ,2001,712
+Equatorial Guinea,GNQ,2002,716
+Equatorial Guinea,GNQ,2003,739
+Equatorial Guinea,GNQ,2004,766
+Equatorial Guinea,GNQ,2005,772
+Equatorial Guinea,GNQ,2006,752
+Equatorial Guinea,GNQ,2007,698
+Equatorial Guinea,GNQ,2008,648
+Equatorial Guinea,GNQ,2009,610
+Equatorial Guinea,GNQ,2010,712
+Equatorial Guinea,GNQ,2011,731
+Equatorial Guinea,GNQ,2012,786
+Equatorial Guinea,GNQ,2013,873
+Equatorial Guinea,GNQ,2014,904
+Equatorial Guinea,GNQ,2015,803
+Equatorial Guinea,GNQ,2016,740
+Equatorial Guinea,GNQ,2017,756
+Equatorial Guinea,GNQ,2018,724
+Equatorial Guinea,GNQ,2019,726
+Equatorial Guinea,GNQ,2020,766
+Equatorial Guinea,GNQ,2021,785
+Eritrea,ERI,2000,98
+Eritrea,ERI,2001,130
+Eritrea,ERI,2002,74
+Eritrea,ERI,2003,112
+Eritrea,ERI,2004,32
+Eritrea,ERI,2005,59
+Eritrea,ERI,2006,36
+Eritrea,ERI,2007,60
+Eritrea,ERI,2008,37
+Eritrea,ERI,2009,41
+Eritrea,ERI,2010,161
+Eritrea,ERI,2011,141
+Eritrea,ERI,2012,85
+Eritrea,ERI,2013,88
+Eritrea,ERI,2014,227
+Eritrea,ERI,2015,128
+Eritrea,ERI,2016,198
+Eritrea,ERI,2017,221
+Eritrea,ERI,2018,196
+Eritrea,ERI,2019,437
+Eritrea,ERI,2020,372
+Eritrea,ERI,2021,211
+Eswatini,SWZ,2000,2
+Eswatini,SWZ,2001,3
+Eswatini,SWZ,2002,1
+Eswatini,SWZ,2003,0
+Eswatini,SWZ,2004,1
+Eswatini,SWZ,2005,0
+Eswatini,SWZ,2006,0
+Eswatini,SWZ,2007,0
+Eswatini,SWZ,2008,0
+Eswatini,SWZ,2009,0
+Eswatini,SWZ,2010,0
+Eswatini,SWZ,2011,0
+Eswatini,SWZ,2012,1
+Eswatini,SWZ,2013,1
+Eswatini,SWZ,2014,0
+Eswatini,SWZ,2015,0
+Eswatini,SWZ,2016,0
+Eswatini,SWZ,2017,1
+Eswatini,SWZ,2018,1
+Eswatini,SWZ,2019,0
+Eswatini,SWZ,2020,0
+Eswatini,SWZ,2021,0
+Ethiopia,ETH,2000,25208
+Ethiopia,ETH,2001,23352
+Ethiopia,ETH,2002,21590
+Ethiopia,ETH,2003,22799
+Ethiopia,ETH,2004,23844
+Ethiopia,ETH,2005,16956
+Ethiopia,ETH,2006,15221
+Ethiopia,ETH,2007,12705
+Ethiopia,ETH,2008,11109
+Ethiopia,ETH,2009,16218
+Ethiopia,ETH,2010,19144
+Ethiopia,ETH,2011,17276
+Ethiopia,ETH,2012,20863
+Ethiopia,ETH,2013,27024
+Ethiopia,ETH,2014,23862
+Ethiopia,ETH,2015,22125
+Ethiopia,ETH,2016,16302
+Ethiopia,ETH,2017,12460
+Ethiopia,ETH,2018,6500
+Ethiopia,ETH,2019,5708
+Ethiopia,ETH,2020,9424
+Ethiopia,ETH,2021,8041
+Europe (WHO),,2000,0
+Europe (WHO),,2001,0
+Europe (WHO),,2002,0
+Europe (WHO),,2003,0
+Europe (WHO),,2004,0
+Europe (WHO),,2005,0
+Europe (WHO),,2006,0
+Europe (WHO),,2007,0
+Europe (WHO),,2008,0
+Europe (WHO),,2009,0
+Europe (WHO),,2010,0
+Europe (WHO),,2011,0
+Europe (WHO),,2012,0
+Europe (WHO),,2013,0
+Europe (WHO),,2014,0
+Europe (WHO),,2015,0
+Europe (WHO),,2016,0
+Europe (WHO),,2017,0
+Europe (WHO),,2018,0
+Europe (WHO),,2019,0
+Europe (WHO),,2020,0
+Europe (WHO),,2021,0
+Gabon,GAB,2000,365
+Gabon,GAB,2001,292
+Gabon,GAB,2002,276
+Gabon,GAB,2003,243
+Gabon,GAB,2004,218
+Gabon,GAB,2005,218
+Gabon,GAB,2006,214
+Gabon,GAB,2007,213
+Gabon,GAB,2008,226
+Gabon,GAB,2009,243
+Gabon,GAB,2010,269
+Gabon,GAB,2011,300
+Gabon,GAB,2012,332
+Gabon,GAB,2013,378
+Gabon,GAB,2014,403
+Gabon,GAB,2015,407
+Gabon,GAB,2016,387
+Gabon,GAB,2017,383
+Gabon,GAB,2018,387
+Gabon,GAB,2019,384
+Gabon,GAB,2020,385
+Gabon,GAB,2021,384
+Gambia,GMB,2000,632
+Gambia,GMB,2001,584
+Gambia,GMB,2002,542
+Gambia,GMB,2003,517
+Gambia,GMB,2004,498
+Gambia,GMB,2005,488
+Gambia,GMB,2006,487
+Gambia,GMB,2007,488
+Gambia,GMB,2008,492
+Gambia,GMB,2009,496
+Gambia,GMB,2010,518
+Gambia,GMB,2011,528
+Gambia,GMB,2012,536
+Gambia,GMB,2013,541
+Gambia,GMB,2014,551
+Gambia,GMB,2015,557
+Gambia,GMB,2016,562
+Gambia,GMB,2017,577
+Gambia,GMB,2018,596
+Gambia,GMB,2019,601
+Gambia,GMB,2020,608
+Gambia,GMB,2021,615
+Georgia,GEO,2000,0
+Georgia,GEO,2001,0
+Georgia,GEO,2002,0
+Georgia,GEO,2003,0
+Georgia,GEO,2004,0
+Georgia,GEO,2005,0
+Georgia,GEO,2006,0
+Georgia,GEO,2007,0
+Georgia,GEO,2008,0
+Georgia,GEO,2009,0
+Georgia,GEO,2010,0
+Georgia,GEO,2011,0
+Georgia,GEO,2012,0
+Georgia,GEO,2013,0
+Georgia,GEO,2014,0
+Georgia,GEO,2015,0
+Georgia,GEO,2016,0
+Georgia,GEO,2017,0
+Georgia,GEO,2018,0
+Georgia,GEO,2019,0
+Georgia,GEO,2020,0
+Georgia,GEO,2021,0
+Ghana,GHA,2000,18647
+Ghana,GHA,2001,18294
+Ghana,GHA,2002,16996
+Ghana,GHA,2003,16714
+Ghana,GHA,2004,15838
+Ghana,GHA,2005,15430
+Ghana,GHA,2006,15682
+Ghana,GHA,2007,15139
+Ghana,GHA,2008,15430
+Ghana,GHA,2009,16413
+Ghana,GHA,2010,16496
+Ghana,GHA,2011,17663
+Ghana,GHA,2012,17076
+Ghana,GHA,2013,16352
+Ghana,GHA,2014,14869
+Ghana,GHA,2015,13459
+Ghana,GHA,2016,12174
+Ghana,GHA,2017,11839
+Ghana,GHA,2018,12227
+Ghana,GHA,2019,12324
+Ghana,GHA,2020,12516
+Ghana,GHA,2021,12557
+Guatemala,GTM,2000,27
+Guatemala,GTM,2001,18
+Guatemala,GTM,2002,20
+Guatemala,GTM,2003,16
+Guatemala,GTM,2004,14
+Guatemala,GTM,2005,20
+Guatemala,GTM,2006,15
+Guatemala,GTM,2007,6
+Guatemala,GTM,2008,3
+Guatemala,GTM,2009,3
+Guatemala,GTM,2010,3
+Guatemala,GTM,2011,2
+Guatemala,GTM,2012,2
+Guatemala,GTM,2013,2
+Guatemala,GTM,2014,2
+Guatemala,GTM,2015,2
+Guatemala,GTM,2016,2
+Guatemala,GTM,2017,1
+Guatemala,GTM,2018,1
+Guatemala,GTM,2019,0
+Guatemala,GTM,2020,0
+Guatemala,GTM,2021,0
+Guinea,GIN,2000,16416
+Guinea,GIN,2001,15929
+Guinea,GIN,2002,14464
+Guinea,GIN,2003,12852
+Guinea,GIN,2004,10996
+Guinea,GIN,2005,9906
+Guinea,GIN,2006,9681
+Guinea,GIN,2007,9941
+Guinea,GIN,2008,10773
+Guinea,GIN,2009,12366
+Guinea,GIN,2010,13305
+Guinea,GIN,2011,13865
+Guinea,GIN,2012,13731
+Guinea,GIN,2013,12537
+Guinea,GIN,2014,11602
+Guinea,GIN,2015,10530
+Guinea,GIN,2016,9742
+Guinea,GIN,2017,9277
+Guinea,GIN,2018,8500
+Guinea,GIN,2019,8611
+Guinea,GIN,2020,9954
+Guinea,GIN,2021,9439
+Guinea-Bissau,GNB,2000,2296
+Guinea-Bissau,GNB,2001,1814
+Guinea-Bissau,GNB,2002,1324
+Guinea-Bissau,GNB,2003,855
+Guinea-Bissau,GNB,2004,766
+Guinea-Bissau,GNB,2005,775
+Guinea-Bissau,GNB,2006,756
+Guinea-Bissau,GNB,2007,756
+Guinea-Bissau,GNB,2008,774
+Guinea-Bissau,GNB,2009,811
+Guinea-Bissau,GNB,2010,839
+Guinea-Bissau,GNB,2011,844
+Guinea-Bissau,GNB,2012,827
+Guinea-Bissau,GNB,2013,815
+Guinea-Bissau,GNB,2014,800
+Guinea-Bissau,GNB,2015,772
+Guinea-Bissau,GNB,2016,817
+Guinea-Bissau,GNB,2017,829
+Guinea-Bissau,GNB,2018,880
+Guinea-Bissau,GNB,2019,875
+Guinea-Bissau,GNB,2020,969
+Guinea-Bissau,GNB,2021,1029
+Guyana,GUY,2000,50
+Guyana,GUY,2001,52
+Guyana,GUY,2002,42
+Guyana,GUY,2003,53
+Guyana,GUY,2004,51
+Guyana,GUY,2005,69
+Guyana,GUY,2006,40
+Guyana,GUY,2007,20
+Guyana,GUY,2008,23
+Guyana,GUY,2009,28
+Guyana,GUY,2010,52
+Guyana,GUY,2011,72
+Guyana,GUY,2012,76
+Guyana,GUY,2013,90
+Guyana,GUY,2014,27
+Guyana,GUY,2015,22
+Guyana,GUY,2016,25
+Guyana,GUY,2017,34
+Guyana,GUY,2018,39
+Guyana,GUY,2019,30
+Guyana,GUY,2020,28
+Guyana,GUY,2021,27
+Haiti,HTI,2000,184
+Haiti,HTI,2001,188
+Haiti,HTI,2002,191
+Haiti,HTI,2003,194
+Haiti,HTI,2004,198
+Haiti,HTI,2005,201
+Haiti,HTI,2006,207
+Haiti,HTI,2007,187
+Haiti,HTI,2008,229
+Haiti,HTI,2009,215
+Haiti,HTI,2010,217
+Haiti,HTI,2011,208
+Haiti,HTI,2012,167
+Haiti,HTI,2013,160
+Haiti,HTI,2014,84
+Haiti,HTI,2015,82
+Haiti,HTI,2016,92
+Haiti,HTI,2017,84
+Haiti,HTI,2018,40
+Haiti,HTI,2019,45
+Haiti,HTI,2020,104
+Haiti,HTI,2021,57
+Honduras,HND,2000,23
+Honduras,HND,2001,15
+Honduras,HND,2002,11
+Honduras,HND,2003,9
+Honduras,HND,2004,12
+Honduras,HND,2005,11
+Honduras,HND,2006,8
+Honduras,HND,2007,7
+Honduras,HND,2008,6
+Honduras,HND,2009,8
+Honduras,HND,2010,7
+Honduras,HND,2011,5
+Honduras,HND,2012,4
+Honduras,HND,2013,5
+Honduras,HND,2014,3
+Honduras,HND,2015,4
+Honduras,HND,2016,5
+Honduras,HND,2017,0
+Honduras,HND,2018,0
+Honduras,HND,2019,0
+Honduras,HND,2020,0
+Honduras,HND,2021,2
+India,IND,2000,29561
+India,IND,2001,28669
+India,IND,2002,27176
+India,IND,2003,27816
+India,IND,2004,31229
+India,IND,2005,32539
+India,IND,2006,27819
+India,IND,2007,27709
+India,IND,2008,29850
+India,IND,2009,32038
+India,IND,2010,30654
+India,IND,2011,25663
+India,IND,2012,20485
+India,IND,2013,16683
+India,IND,2014,20130
+India,IND,2015,21702
+India,IND,2016,22399
+India,IND,2017,16285
+India,IND,2018,9630
+India,IND,2019,7704
+India,IND,2020,7316
+India,IND,2021,7450
+Indonesia,IDN,2000,1550
+Indonesia,IDN,2001,1572
+Indonesia,IDN,2002,1593
+Indonesia,IDN,2003,1615
+Indonesia,IDN,2004,1367
+Indonesia,IDN,2005,1647
+Indonesia,IDN,2006,1957
+Indonesia,IDN,2007,1701
+Indonesia,IDN,2008,1723
+Indonesia,IDN,2009,1744
+Indonesia,IDN,2010,3209
+Indonesia,IDN,2011,2875
+Indonesia,IDN,2012,2837
+Indonesia,IDN,2013,2446
+Indonesia,IDN,2014,1895
+Indonesia,IDN,2015,1651
+Indonesia,IDN,2016,1893
+Indonesia,IDN,2017,1306
+Indonesia,IDN,2018,1142
+Indonesia,IDN,2019,1395
+Indonesia,IDN,2020,1415
+Indonesia,IDN,2021,1412
+Iran,IRN,2000,4
+Iran,IRN,2001,2
+Iran,IRN,2002,2
+Iran,IRN,2003,5
+Iran,IRN,2004,1
+Iran,IRN,2005,1
+Iran,IRN,2006,1
+Iran,IRN,2007,3
+Iran,IRN,2008,3
+Iran,IRN,2009,0
+Iran,IRN,2010,0
+Iran,IRN,2011,0
+Iran,IRN,2012,0
+Iran,IRN,2013,0
+Iran,IRN,2014,0
+Iran,IRN,2015,0
+Iran,IRN,2016,0
+Iran,IRN,2017,0
+Iran,IRN,2018,0
+Iran,IRN,2019,0
+Iran,IRN,2020,0
+Iran,IRN,2021,0
+Iraq,IRQ,2000,0
+Iraq,IRQ,2001,0
+Iraq,IRQ,2002,0
+Iraq,IRQ,2003,0
+Iraq,IRQ,2004,0
+Iraq,IRQ,2005,0
+Iraq,IRQ,2006,0
+Iraq,IRQ,2007,0
+Iraq,IRQ,2008,0
+Iraq,IRQ,2009,0
+Iraq,IRQ,2010,0
+Iraq,IRQ,2011,0
+Iraq,IRQ,2012,0
+Iraq,IRQ,2013,0
+Iraq,IRQ,2014,0
+Iraq,IRQ,2015,0
+Iraq,IRQ,2016,0
+Iraq,IRQ,2017,0
+Iraq,IRQ,2018,0
+Iraq,IRQ,2019,0
+Iraq,IRQ,2020,0
+Iraq,IRQ,2021,0
+Kazakhstan,KAZ,2000,0
+Kazakhstan,KAZ,2001,0
+Kazakhstan,KAZ,2002,0
+Kazakhstan,KAZ,2003,0
+Kazakhstan,KAZ,2004,0
+Kazakhstan,KAZ,2005,0
+Kazakhstan,KAZ,2006,0
+Kazakhstan,KAZ,2007,0
+Kazakhstan,KAZ,2008,0
+Kazakhstan,KAZ,2009,0
+Kazakhstan,KAZ,2010,0
+Kazakhstan,KAZ,2011,0
+Kazakhstan,KAZ,2012,0
+Kazakhstan,KAZ,2013,0
+Kazakhstan,KAZ,2014,0
+Kazakhstan,KAZ,2015,0
+Kazakhstan,KAZ,2016,0
+Kazakhstan,KAZ,2017,0
+Kazakhstan,KAZ,2018,0
+Kazakhstan,KAZ,2019,0
+Kazakhstan,KAZ,2020,0
+Kazakhstan,KAZ,2021,0
+Kenya,KEN,2000,11376
+Kenya,KEN,2001,13118
+Kenya,KEN,2002,12989
+Kenya,KEN,2003,12595
+Kenya,KEN,2004,11285
+Kenya,KEN,2005,10098
+Kenya,KEN,2006,9562
+Kenya,KEN,2007,9541
+Kenya,KEN,2008,9479
+Kenya,KEN,2009,9618
+Kenya,KEN,2010,9788
+Kenya,KEN,2011,10074
+Kenya,KEN,2012,10037
+Kenya,KEN,2013,10058
+Kenya,KEN,2014,10182
+Kenya,KEN,2015,10351
+Kenya,KEN,2016,10733
+Kenya,KEN,2017,11223
+Kenya,KEN,2018,11218
+Kenya,KEN,2019,11298
+Kenya,KEN,2020,11768
+Kenya,KEN,2021,12011
+Kyrgyzstan,KGZ,2000,0
+Kyrgyzstan,KGZ,2001,0
+Kyrgyzstan,KGZ,2002,0
+Kyrgyzstan,KGZ,2003,0
+Kyrgyzstan,KGZ,2004,0
+Kyrgyzstan,KGZ,2005,0
+Kyrgyzstan,KGZ,2006,0
+Kyrgyzstan,KGZ,2007,0
+Kyrgyzstan,KGZ,2008,0
+Kyrgyzstan,KGZ,2009,0
+Kyrgyzstan,KGZ,2010,0
+Kyrgyzstan,KGZ,2011,0
+Kyrgyzstan,KGZ,2012,0
+Kyrgyzstan,KGZ,2013,0
+Kyrgyzstan,KGZ,2014,0
+Kyrgyzstan,KGZ,2015,0
+Kyrgyzstan,KGZ,2016,0
+Kyrgyzstan,KGZ,2017,0
+Kyrgyzstan,KGZ,2018,0
+Kyrgyzstan,KGZ,2019,0
+Kyrgyzstan,KGZ,2020,0
+Kyrgyzstan,KGZ,2021,0
+Laos,LAO,2000,221
+Laos,LAO,2001,152
+Laos,LAO,2002,124
+Laos,LAO,2003,110
+Laos,LAO,2004,100
+Laos,LAO,2005,86
+Laos,LAO,2006,123
+Laos,LAO,2007,115
+Laos,LAO,2008,104
+Laos,LAO,2009,120
+Laos,LAO,2010,109
+Laos,LAO,2011,73
+Laos,LAO,2012,174
+Laos,LAO,2013,125
+Laos,LAO,2014,134
+Laos,LAO,2015,80
+Laos,LAO,2016,32
+Laos,LAO,2017,21
+Laos,LAO,2018,23
+Laos,LAO,2019,11
+Laos,LAO,2020,7
+Laos,LAO,2021,6
+Liberia,LBR,2000,6426
+Liberia,LBR,2001,6369
+Liberia,LBR,2002,6352
+Liberia,LBR,2003,5596
+Liberia,LBR,2004,4688
+Liberia,LBR,2005,4062
+Liberia,LBR,2006,3675
+Liberia,LBR,2007,3522
+Liberia,LBR,2008,3525
+Liberia,LBR,2009,3305
+Liberia,LBR,2010,2871
+Liberia,LBR,2011,2813
+Liberia,LBR,2012,2760
+Liberia,LBR,2013,2916
+Liberia,LBR,2014,3315
+Liberia,LBR,2015,3070
+Liberia,LBR,2016,3789
+Liberia,LBR,2017,4046
+Liberia,LBR,2018,3419
+Liberia,LBR,2019,3390
+Liberia,LBR,2020,3931
+Liberia,LBR,2021,3578
+Madagascar,MDG,2000,2239
+Madagascar,MDG,2001,2747
+Madagascar,MDG,2002,2221
+Madagascar,MDG,2003,2917
+Madagascar,MDG,2004,2062
+Madagascar,MDG,2005,1638
+Madagascar,MDG,2006,1647
+Madagascar,MDG,2007,1092
+Madagascar,MDG,2008,1160
+Madagascar,MDG,2009,2182
+Madagascar,MDG,2010,2208
+Madagascar,MDG,2011,2035
+Madagascar,MDG,2012,3941
+Madagascar,MDG,2013,3701
+Madagascar,MDG,2014,2665
+Madagascar,MDG,2015,5800
+Madagascar,MDG,2016,3482
+Madagascar,MDG,2017,4873
+Madagascar,MDG,2018,4750
+Madagascar,MDG,2019,5026
+Madagascar,MDG,2020,10265
+Madagascar,MDG,2021,12571
+Malawi,MWI,2000,18170
+Malawi,MWI,2001,16919
+Malawi,MWI,2002,14390
+Malawi,MWI,2003,12078
+Malawi,MWI,2004,10600
+Malawi,MWI,2005,10078
+Malawi,MWI,2006,10424
+Malawi,MWI,2007,11175
+Malawi,MWI,2008,11588
+Malawi,MWI,2009,11492
+Malawi,MWI,2010,10817
+Malawi,MWI,2011,9906
+Malawi,MWI,2012,9015
+Malawi,MWI,2013,7925
+Malawi,MWI,2014,7365
+Malawi,MWI,2015,7023
+Malawi,MWI,2016,6954
+Malawi,MWI,2017,7024
+Malawi,MWI,2018,7021
+Malawi,MWI,2019,7061
+Malawi,MWI,2020,7400
+Malawi,MWI,2021,7392
+Malaysia,MYS,2000,35
+Malaysia,MYS,2001,46
+Malaysia,MYS,2002,38
+Malaysia,MYS,2003,21
+Malaysia,MYS,2004,35
+Malaysia,MYS,2005,33
+Malaysia,MYS,2006,21
+Malaysia,MYS,2007,15
+Malaysia,MYS,2008,20
+Malaysia,MYS,2009,23
+Malaysia,MYS,2010,13
+Malaysia,MYS,2011,11
+Malaysia,MYS,2012,11
+Malaysia,MYS,2013,10
+Malaysia,MYS,2014,4
+Malaysia,MYS,2015,4
+Malaysia,MYS,2016,2
+Malaysia,MYS,2017,1
+Malaysia,MYS,2018,0
+Malaysia,MYS,2019,0
+Malaysia,MYS,2020,0
+Malaysia,MYS,2021,0
+Mali,MLI,2000,24739
+Mali,MLI,2001,22250
+Mali,MLI,2002,22339
+Mali,MLI,2003,21913
+Mali,MLI,2004,22551
+Mali,MLI,2005,23776
+Mali,MLI,2006,23397
+Mali,MLI,2007,21774
+Mali,MLI,2008,19237
+Mali,MLI,2009,17172
+Mali,MLI,2010,17356
+Mali,MLI,2011,20247
+Mali,MLI,2012,23944
+Mali,MLI,2013,25545
+Mali,MLI,2014,22863
+Mali,MLI,2015,17783
+Mali,MLI,2016,14736
+Mali,MLI,2017,15442
+Mali,MLI,2018,18423
+Mali,MLI,2019,18630
+Mali,MLI,2020,20662
+Mali,MLI,2021,19933
+Mauritania,MRT,2000,937
+Mauritania,MRT,2001,900
+Mauritania,MRT,2002,880
+Mauritania,MRT,2003,877
+Mauritania,MRT,2004,845
+Mauritania,MRT,2005,880
+Mauritania,MRT,2006,874
+Mauritania,MRT,2007,863
+Mauritania,MRT,2008,867
+Mauritania,MRT,2009,874
+Mauritania,MRT,2010,869
+Mauritania,MRT,2011,902
+Mauritania,MRT,2012,939
+Mauritania,MRT,2013,953
+Mauritania,MRT,2014,996
+Mauritania,MRT,2015,1032
+Mauritania,MRT,2016,1049
+Mauritania,MRT,2017,1069
+Mauritania,MRT,2018,1085
+Mauritania,MRT,2019,1114
+Mauritania,MRT,2020,1129
+Mauritania,MRT,2021,1144
+Mauritius,MUS,2021,0
+Mayotte,MYT,2003,4
+Mayotte,MYT,2004,4
+Mayotte,MYT,2005,2
+Mayotte,MYT,2006,1
+Mayotte,MYT,2007,1
+Mayotte,MYT,2008,1
+Mayotte,MYT,2009,0
+Mayotte,MYT,2010,1
+Mayotte,MYT,2011,0
+Mayotte,MYT,2012,0
+Mayotte,MYT,2013,0
+Mayotte,MYT,2014,0
+Mayotte,MYT,2015,0
+Mayotte,MYT,2016,0
+Mayotte,MYT,2017,0
+Mayotte,MYT,2018,0
+Mayotte,MYT,2019,0
+Mexico,MEX,2000,0
+Mexico,MEX,2001,0
+Mexico,MEX,2002,0
+Mexico,MEX,2003,0
+Mexico,MEX,2004,0
+Mexico,MEX,2005,0
+Mexico,MEX,2006,0
+Mexico,MEX,2007,0
+Mexico,MEX,2008,0
+Mexico,MEX,2009,0
+Mexico,MEX,2010,0
+Mexico,MEX,2011,0
+Mexico,MEX,2012,0
+Mexico,MEX,2013,0
+Mexico,MEX,2014,0
+Mexico,MEX,2015,0
+Mexico,MEX,2016,0
+Mexico,MEX,2017,0
+Mexico,MEX,2018,0
+Mexico,MEX,2019,0
+Mexico,MEX,2020,0
+Mexico,MEX,2021,0
+Morocco,MAR,2000,0
+Morocco,MAR,2001,0
+Morocco,MAR,2002,0
+Morocco,MAR,2003,0
+Morocco,MAR,2004,0
+Morocco,MAR,2005,0
+Morocco,MAR,2006,0
+Morocco,MAR,2007,0
+Morocco,MAR,2008,0
+Morocco,MAR,2009,0
+Morocco,MAR,2010,0
+Morocco,MAR,2011,0
+Morocco,MAR,2012,0
+Morocco,MAR,2013,0
+Morocco,MAR,2014,0
+Morocco,MAR,2015,0
+Morocco,MAR,2016,0
+Morocco,MAR,2017,0
+Morocco,MAR,2018,0
+Morocco,MAR,2019,0
+Morocco,MAR,2020,0
+Morocco,MAR,2021,0
+Mozambique,MOZ,2000,44699
+Mozambique,MOZ,2001,44168
+Mozambique,MOZ,2002,40972
+Mozambique,MOZ,2003,36977
+Mozambique,MOZ,2004,31912
+Mozambique,MOZ,2005,27220
+Mozambique,MOZ,2006,27304
+Mozambique,MOZ,2007,26006
+Mozambique,MOZ,2008,25587
+Mozambique,MOZ,2009,25990
+Mozambique,MOZ,2010,26140
+Mozambique,MOZ,2011,25686
+Mozambique,MOZ,2012,25176
+Mozambique,MOZ,2013,25425
+Mozambique,MOZ,2014,24756
+Mozambique,MOZ,2015,23519
+Mozambique,MOZ,2016,22857
+Mozambique,MOZ,2017,21403
+Mozambique,MOZ,2018,19200
+Mozambique,MOZ,2019,19156
+Mozambique,MOZ,2020,23693
+Mozambique,MOZ,2021,22291
+Myanmar,MMR,2000,2742
+Myanmar,MMR,2001,2771
+Myanmar,MMR,2002,2799
+Myanmar,MMR,2003,2826
+Myanmar,MMR,2004,2851
+Myanmar,MMR,2005,2874
+Myanmar,MMR,2006,2041
+Myanmar,MMR,2007,2560
+Myanmar,MMR,2008,3222
+Myanmar,MMR,2009,3023
+Myanmar,MMR,2010,3623
+Myanmar,MMR,2011,3214
+Myanmar,MMR,2012,3412
+Myanmar,MMR,2013,1169
+Myanmar,MMR,2014,729
+Myanmar,MMR,2015,481
+Myanmar,MMR,2016,274
+Myanmar,MMR,2017,209
+Myanmar,MMR,2018,164
+Myanmar,MMR,2019,97
+Myanmar,MMR,2020,77
+Myanmar,MMR,2021,231
+Namibia,NAM,2000,198
+Namibia,NAM,2001,263
+Namibia,NAM,2002,180
+Namibia,NAM,2003,172
+Namibia,NAM,2004,270
+Namibia,NAM,2005,167
+Namibia,NAM,2006,174
+Namibia,NAM,2007,52
+Namibia,NAM,2008,30
+Namibia,NAM,2009,15
+Namibia,NAM,2010,6
+Namibia,NAM,2011,7
+Namibia,NAM,2012,13
+Namibia,NAM,2013,20
+Namibia,NAM,2014,65
+Namibia,NAM,2015,38
+Namibia,NAM,2016,82
+Namibia,NAM,2017,228
+Namibia,NAM,2018,128
+Namibia,NAM,2019,14
+Namibia,NAM,2020,51
+Namibia,NAM,2021,54
+Nepal,NPL,2000,25
+Nepal,NPL,2001,28
+Nepal,NPL,2002,62
+Nepal,NPL,2003,46
+Nepal,NPL,2004,24
+Nepal,NPL,2005,26
+Nepal,NPL,2006,32
+Nepal,NPL,2007,39
+Nepal,NPL,2008,25
+Nepal,NPL,2009,21
+Nepal,NPL,2010,27
+Nepal,NPL,2011,16
+Nepal,NPL,2012,13
+Nepal,NPL,2013,6
+Nepal,NPL,2014,3
+Nepal,NPL,2015,2
+Nepal,NPL,2016,2
+Nepal,NPL,2017,0
+Nepal,NPL,2018,1
+Nepal,NPL,2019,0
+Nepal,NPL,2020,0
+Nepal,NPL,2021,0
+Nicaragua,NIC,2000,4
+Nicaragua,NIC,2001,2
+Nicaragua,NIC,2002,8
+Nicaragua,NIC,2003,7
+Nicaragua,NIC,2004,1
+Nicaragua,NIC,2005,6
+Nicaragua,NIC,2006,1
+Nicaragua,NIC,2007,0
+Nicaragua,NIC,2008,0
+Nicaragua,NIC,2009,0
+Nicaragua,NIC,2010,1
+Nicaragua,NIC,2011,1
+Nicaragua,NIC,2012,2
+Nicaragua,NIC,2013,0
+Nicaragua,NIC,2014,0
+Nicaragua,NIC,2015,1
+Nicaragua,NIC,2016,2
+Nicaragua,NIC,2017,1
+Nicaragua,NIC,2018,3
+Nicaragua,NIC,2019,1
+Nicaragua,NIC,2020,0
+Nicaragua,NIC,2021,0
+Niger,NER,2000,26182
+Niger,NER,2001,23238
+Niger,NER,2002,21344
+Niger,NER,2003,19133
+Niger,NER,2004,17876
+Niger,NER,2005,20011
+Niger,NER,2006,19349
+Niger,NER,2007,20076
+Niger,NER,2008,21260
+Niger,NER,2009,23951
+Niger,NER,2010,26471
+Niger,NER,2011,28225
+Niger,NER,2012,28977
+Niger,NER,2013,28864
+Niger,NER,2014,27969
+Niger,NER,2015,26184
+Niger,NER,2016,26110
+Niger,NER,2017,23815
+Niger,NER,2018,22047
+Niger,NER,2019,22568
+Niger,NER,2020,24068
+Niger,NER,2021,24997
+Nigeria,NGA,2000,249259
+Nigeria,NGA,2001,242479
+Nigeria,NGA,2002,230464
+Nigeria,NGA,2003,226442
+Nigeria,NGA,2004,226548
+Nigeria,NGA,2005,230350
+Nigeria,NGA,2006,232391
+Nigeria,NGA,2007,229178
+Nigeria,NGA,2008,221435
+Nigeria,NGA,2009,210275
+Nigeria,NGA,2010,197612
+Nigeria,NGA,2011,184121
+Nigeria,NGA,2012,173344
+Nigeria,NGA,2013,168943
+Nigeria,NGA,2014,165188
+Nigeria,NGA,2015,163088
+Nigeria,NGA,2016,165672
+Nigeria,NGA,2017,176539
+Nigeria,NGA,2018,186940
+Nigeria,NGA,2019,187428
+Nigeria,NGA,2020,195720
+Nigeria,NGA,2021,193512
+North Korea,PRK,2000,0
+North Korea,PRK,2001,0
+North Korea,PRK,2002,0
+North Korea,PRK,2003,0
+North Korea,PRK,2004,0
+North Korea,PRK,2005,0
+North Korea,PRK,2006,0
+North Korea,PRK,2007,0
+North Korea,PRK,2008,0
+North Korea,PRK,2009,0
+North Korea,PRK,2010,0
+North Korea,PRK,2011,0
+North Korea,PRK,2012,0
+North Korea,PRK,2013,0
+North Korea,PRK,2014,0
+North Korea,PRK,2015,0
+North Korea,PRK,2016,0
+North Korea,PRK,2017,0
+North Korea,PRK,2018,0
+North Korea,PRK,2019,0
+North Korea,PRK,2020,0
+North Korea,PRK,2021,0
+Oman,OMN,2000,0
+Oman,OMN,2001,0
+Oman,OMN,2002,0
+Oman,OMN,2003,0
+Oman,OMN,2004,0
+Oman,OMN,2005,0
+Oman,OMN,2006,0
+Oman,OMN,2007,0
+Oman,OMN,2008,0
+Oman,OMN,2009,0
+Oman,OMN,2010,0
+Oman,OMN,2011,0
+Oman,OMN,2012,0
+Oman,OMN,2013,0
+Oman,OMN,2014,0
+Oman,OMN,2015,0
+Oman,OMN,2016,0
+Oman,OMN,2017,0
+Oman,OMN,2018,0
+Oman,OMN,2019,0
+Oman,OMN,2020,0
+Oman,OMN,2021,0
+Pakistan,PAK,2000,989
+Pakistan,PAK,2001,1144
+Pakistan,PAK,2002,1001
+Pakistan,PAK,2003,991
+Pakistan,PAK,2004,643
+Pakistan,PAK,2005,923
+Pakistan,PAK,2006,882
+Pakistan,PAK,2007,879
+Pakistan,PAK,2008,679
+Pakistan,PAK,2009,1000
+Pakistan,PAK,2010,1616
+Pakistan,PAK,2011,1814
+Pakistan,PAK,2012,1703
+Pakistan,PAK,2013,1165
+Pakistan,PAK,2014,725
+Pakistan,PAK,2015,765
+Pakistan,PAK,2016,844
+Pakistan,PAK,2017,641
+Pakistan,PAK,2018,511
+Pakistan,PAK,2019,544
+Pakistan,PAK,2020,454
+Pakistan,PAK,2021,460
+Panama,PAN,2000,1
+Panama,PAN,2001,1
+Panama,PAN,2002,2
+Panama,PAN,2003,4
+Panama,PAN,2004,2
+Panama,PAN,2005,1
+Panama,PAN,2006,1
+Panama,PAN,2007,1
+Panama,PAN,2008,1
+Panama,PAN,2009,0
+Panama,PAN,2010,1
+Panama,PAN,2011,0
+Panama,PAN,2012,1
+Panama,PAN,2013,0
+Panama,PAN,2014,0
+Panama,PAN,2015,0
+Panama,PAN,2016,0
+Panama,PAN,2017,0
+Panama,PAN,2018,0
+Panama,PAN,2019,0
+Panama,PAN,2020,0
+Panama,PAN,2021,0
+Papua New Guinea,PNG,2000,3142
+Papua New Guinea,PNG,2001,3075
+Papua New Guinea,PNG,2002,2635
+Papua New Guinea,PNG,2003,2816
+Papua New Guinea,PNG,2004,3517
+Papua New Guinea,PNG,2005,2796
+Papua New Guinea,PNG,2006,2924
+Papua New Guinea,PNG,2007,2692
+Papua New Guinea,PNG,2008,2508
+Papua New Guinea,PNG,2009,3378
+Papua New Guinea,PNG,2010,2354
+Papua New Guinea,PNG,2011,2032
+Papua New Guinea,PNG,2012,2739
+Papua New Guinea,PNG,2013,3452
+Papua New Guinea,PNG,2014,3142
+Papua New Guinea,PNG,2015,1860
+Papua New Guinea,PNG,2016,2568
+Papua New Guinea,PNG,2017,2510
+Papua New Guinea,PNG,2018,2571
+Papua New Guinea,PNG,2019,2250
+Papua New Guinea,PNG,2020,2962
+Papua New Guinea,PNG,2021,2449
+Paraguay,PRY,2000,0
+Paraguay,PRY,2001,0
+Paraguay,PRY,2002,0
+Paraguay,PRY,2003,0
+Paraguay,PRY,2004,0
+Paraguay,PRY,2005,0
+Paraguay,PRY,2006,0
+Paraguay,PRY,2007,0
+Paraguay,PRY,2008,0
+Paraguay,PRY,2009,0
+Paraguay,PRY,2010,0
+Paraguay,PRY,2011,0
+Paraguay,PRY,2012,0
+Paraguay,PRY,2013,0
+Paraguay,PRY,2014,0
+Paraguay,PRY,2015,0
+Paraguay,PRY,2016,0
+Paraguay,PRY,2017,0
+Paraguay,PRY,2018,0
+Paraguay,PRY,2019,0
+Paraguay,PRY,2020,0
+Paraguay,PRY,2021,0
+Peru,PER,2000,106
+Peru,PER,2001,89
+Peru,PER,2002,108
+Peru,PER,2003,95
+Peru,PER,2004,98
+Peru,PER,2005,80
+Peru,PER,2006,52
+Peru,PER,2007,43
+Peru,PER,2008,34
+Peru,PER,2009,31
+Peru,PER,2010,20
+Peru,PER,2011,19
+Peru,PER,2012,24
+Peru,PER,2013,45
+Peru,PER,2014,60
+Peru,PER,2015,70
+Peru,PER,2016,69
+Peru,PER,2017,64
+Peru,PER,2018,48
+Peru,PER,2019,35
+Peru,PER,2020,23
+Peru,PER,2021,17
+Philippines,PHL,2000,204
+Philippines,PHL,2001,143
+Philippines,PHL,2002,180
+Philippines,PHL,2003,257
+Philippines,PHL,2004,233
+Philippines,PHL,2005,167
+Philippines,PHL,2006,203
+Philippines,PHL,2007,218
+Philippines,PHL,2008,144
+Philippines,PHL,2009,116
+Philippines,PHL,2010,113
+Philippines,PHL,2011,47
+Philippines,PHL,2012,35
+Philippines,PHL,2013,36
+Philippines,PHL,2014,29
+Philippines,PHL,2015,63
+Philippines,PHL,2016,38
+Philippines,PHL,2017,36
+Philippines,PHL,2018,25
+Philippines,PHL,2019,31
+Philippines,PHL,2020,33
+Philippines,PHL,2021,22
+Rwanda,RWA,2000,6769
+Rwanda,RWA,2001,6459
+Rwanda,RWA,2002,5320
+Rwanda,RWA,2003,4393
+Rwanda,RWA,2004,3718
+Rwanda,RWA,2005,3334
+Rwanda,RWA,2006,3129
+Rwanda,RWA,2007,3031
+Rwanda,RWA,2008,2984
+Rwanda,RWA,2009,2956
+Rwanda,RWA,2010,2982
+Rwanda,RWA,2011,2936
+Rwanda,RWA,2012,2903
+Rwanda,RWA,2013,2894
+Rwanda,RWA,2014,2904
+Rwanda,RWA,2015,2948
+Rwanda,RWA,2016,3027
+Rwanda,RWA,2017,3086
+Rwanda,RWA,2018,3093
+Rwanda,RWA,2019,3143
+Rwanda,RWA,2020,3205
+Rwanda,RWA,2021,3258
+Sao Tome and Principe,STP,2000,254
+Sao Tome and Principe,STP,2001,248
+Sao Tome and Principe,STP,2002,321
+Sao Tome and Principe,STP,2003,193
+Sao Tome and Principe,STP,2004,169
+Sao Tome and Principe,STP,2005,85
+Sao Tome and Principe,STP,2006,26
+Sao Tome and Principe,STP,2007,3
+Sao Tome and Principe,STP,2008,16
+Sao Tome and Principe,STP,2009,23
+Sao Tome and Principe,STP,2010,14
+Sao Tome and Principe,STP,2011,19
+Sao Tome and Principe,STP,2012,7
+Sao Tome and Principe,STP,2013,11
+Sao Tome and Principe,STP,2014,0
+Sao Tome and Principe,STP,2015,0
+Sao Tome and Principe,STP,2016,1
+Sao Tome and Principe,STP,2017,1
+Sao Tome and Principe,STP,2018,0
+Sao Tome and Principe,STP,2019,0
+Sao Tome and Principe,STP,2020,0
+Sao Tome and Principe,STP,2021,1
+Saudi Arabia,SAU,2000,0
+Saudi Arabia,SAU,2001,0
+Saudi Arabia,SAU,2002,0
+Saudi Arabia,SAU,2003,0
+Saudi Arabia,SAU,2004,0
+Saudi Arabia,SAU,2005,0
+Saudi Arabia,SAU,2006,0
+Saudi Arabia,SAU,2007,0
+Saudi Arabia,SAU,2008,0
+Saudi Arabia,SAU,2009,0
+Saudi Arabia,SAU,2010,0
+Saudi Arabia,SAU,2011,0
+Saudi Arabia,SAU,2012,0
+Saudi Arabia,SAU,2013,0
+Saudi Arabia,SAU,2014,0
+Saudi Arabia,SAU,2015,0
+Saudi Arabia,SAU,2016,0
+Saudi Arabia,SAU,2017,0
+Saudi Arabia,SAU,2018,0
+Saudi Arabia,SAU,2019,0
+Saudi Arabia,SAU,2020,0
+Saudi Arabia,SAU,2021,0
+Senegal,SEN,2000,6114
+Senegal,SEN,2001,5796
+Senegal,SEN,2002,4753
+Senegal,SEN,2003,4867
+Senegal,SEN,2004,4435
+Senegal,SEN,2005,4056
+Senegal,SEN,2006,3926
+Senegal,SEN,2007,3850
+Senegal,SEN,2008,3862
+Senegal,SEN,2009,3847
+Senegal,SEN,2010,3833
+Senegal,SEN,2011,3799
+Senegal,SEN,2012,3712
+Senegal,SEN,2013,3741
+Senegal,SEN,2014,3857
+Senegal,SEN,2015,3910
+Senegal,SEN,2016,3904
+Senegal,SEN,2017,3987
+Senegal,SEN,2018,4192
+Senegal,SEN,2019,4251
+Senegal,SEN,2020,4311
+Senegal,SEN,2021,4375
+Sierra Leone,SLE,2000,12666
+Sierra Leone,SLE,2001,13847
+Sierra Leone,SLE,2002,13834
+Sierra Leone,SLE,2003,13061
+Sierra Leone,SLE,2004,12513
+Sierra Leone,SLE,2005,11356
+Sierra Leone,SLE,2006,10844
+Sierra Leone,SLE,2007,11216
+Sierra Leone,SLE,2008,12713
+Sierra Leone,SLE,2009,14159
+Sierra Leone,SLE,2010,15377
+Sierra Leone,SLE,2011,15008
+Sierra Leone,SLE,2012,14021
+Sierra Leone,SLE,2013,13009
+Sierra Leone,SLE,2014,11317
+Sierra Leone,SLE,2015,10884
+Sierra Leone,SLE,2016,9659
+Sierra Leone,SLE,2017,8760
+Sierra Leone,SLE,2018,7408
+Sierra Leone,SLE,2019,7236
+Sierra Leone,SLE,2020,9020
+Sierra Leone,SLE,2021,8314
+Solomon Islands,SLB,2000,476
+Solomon Islands,SLB,2001,521
+Solomon Islands,SLB,2002,513
+Solomon Islands,SLB,2003,456
+Solomon Islands,SLB,2004,652
+Solomon Islands,SLB,2005,547
+Solomon Islands,SLB,2006,549
+Solomon Islands,SLB,2007,310
+Solomon Islands,SLB,2008,182
+Solomon Islands,SLB,2009,142
+Solomon Islands,SLB,2010,163
+Solomon Islands,SLB,2011,108
+Solomon Islands,SLB,2012,89
+Solomon Islands,SLB,2013,83
+Solomon Islands,SLB,2014,56
+Solomon Islands,SLB,2015,57
+Solomon Islands,SLB,2016,103
+Solomon Islands,SLB,2017,134
+Solomon Islands,SLB,2018,109
+Solomon Islands,SLB,2019,158
+Solomon Islands,SLB,2020,123
+Solomon Islands,SLB,2021,162
+Somalia,SOM,2000,3013
+Somalia,SOM,2001,3285
+Somalia,SOM,2002,3164
+Somalia,SOM,2003,3247
+Somalia,SOM,2004,3187
+Somalia,SOM,2005,3565
+Somalia,SOM,2006,3263
+Somalia,SOM,2007,2796
+Somalia,SOM,2008,1811
+Somalia,SOM,2009,1143
+Somalia,SOM,2010,1280
+Somalia,SOM,2011,1073
+Somalia,SOM,2012,1109
+Somalia,SOM,2013,1352
+Somalia,SOM,2014,1628
+Somalia,SOM,2015,1989
+Somalia,SOM,2016,2051
+Somalia,SOM,2017,2100
+Somalia,SOM,2018,2198
+Somalia,SOM,2019,2311
+Somalia,SOM,2020,2372
+Somalia,SOM,2021,2506
+South Africa,ZAF,2000,424
+South Africa,ZAF,2001,81
+South Africa,ZAF,2002,96
+South Africa,ZAF,2003,142
+South Africa,ZAF,2004,88
+South Africa,ZAF,2005,63
+South Africa,ZAF,2006,87
+South Africa,ZAF,2007,37
+South Africa,ZAF,2008,43
+South Africa,ZAF,2009,45
+South Africa,ZAF,2010,83
+South Africa,ZAF,2011,54
+South Africa,ZAF,2012,72
+South Africa,ZAF,2013,105
+South Africa,ZAF,2014,174
+South Africa,ZAF,2015,110
+South Africa,ZAF,2016,34
+South Africa,ZAF,2017,301
+South Africa,ZAF,2018,69
+South Africa,ZAF,2019,79
+South Africa,ZAF,2020,38
+South Africa,ZAF,2021,56
+South Korea,KOR,2000,0
+South Korea,KOR,2001,0
+South Korea,KOR,2002,0
+South Korea,KOR,2003,0
+South Korea,KOR,2004,0
+South Korea,KOR,2005,0
+South Korea,KOR,2006,0
+South Korea,KOR,2007,1
+South Korea,KOR,2008,0
+South Korea,KOR,2009,1
+South Korea,KOR,2010,1
+South Korea,KOR,2011,2
+South Korea,KOR,2012,0
+South Korea,KOR,2013,0
+South Korea,KOR,2014,0
+South Korea,KOR,2015,0
+South Korea,KOR,2016,0
+South Korea,KOR,2017,0
+South Korea,KOR,2018,0
+South Korea,KOR,2019,0
+South Korea,KOR,2020,0
+South Korea,KOR,2021,0
+South Sudan,SSD,2000,10974
+South Sudan,SSD,2001,10504
+South Sudan,SSD,2002,9420
+South Sudan,SSD,2003,8771
+South Sudan,SSD,2004,8090
+South Sudan,SSD,2005,7547
+South Sudan,SSD,2006,7226
+South Sudan,SSD,2007,6861
+South Sudan,SSD,2008,6687
+South Sudan,SSD,2009,6387
+South Sudan,SSD,2010,6108
+South Sudan,SSD,2011,5900
+South Sudan,SSD,2012,5840
+South Sudan,SSD,2013,5925
+South Sudan,SSD,2014,6232
+South Sudan,SSD,2015,6542
+South Sudan,SSD,2016,6890
+South Sudan,SSD,2017,7134
+South Sudan,SSD,2018,6869
+South Sudan,SSD,2019,7095
+South Sudan,SSD,2020,7290
+South Sudan,SSD,2021,7344
+South-East Asia (WHO),,2000,35038
+South-East Asia (WHO),,2001,33981
+South-East Asia (WHO),,2002,32437
+South-East Asia (WHO),,2003,32860
+South-East Asia (WHO),,2004,36371
+South-East Asia (WHO),,2005,37772
+South-East Asia (WHO),,2006,32435
+South-East Asia (WHO),,2007,32598
+South-East Asia (WHO),,2008,35458
+South-East Asia (WHO),,2009,37285
+South-East Asia (WHO),,2010,37955
+South-East Asia (WHO),,2011,32032
+South-East Asia (WHO),,2012,26879
+South-East Asia (WHO),,2013,20429
+South-East Asia (WHO),,2014,22955
+South-East Asia (WHO),,2015,23974
+South-East Asia (WHO),,2016,24667
+South-East Asia (WHO),,2017,17888
+South-East Asia (WHO),,2018,10978
+South-East Asia (WHO),,2019,9256
+South-East Asia (WHO),,2020,8826
+South-East Asia (WHO),,2021,9109
+Sri Lanka,LKA,2000,77
+Sri Lanka,LKA,2001,52
+Sri Lanka,LKA,2002,30
+Sri Lanka,LKA,2003,4
+Sri Lanka,LKA,2004,1
+Sri Lanka,LKA,2005,0
+Sri Lanka,LKA,2006,1
+Sri Lanka,LKA,2007,1
+Sri Lanka,LKA,2008,0
+Sri Lanka,LKA,2009,0
+Sri Lanka,LKA,2010,0
+Sri Lanka,LKA,2011,0
+Sri Lanka,LKA,2012,0
+Sri Lanka,LKA,2013,0
+Sri Lanka,LKA,2014,0
+Sri Lanka,LKA,2015,0
+Sri Lanka,LKA,2016,0
+Sri Lanka,LKA,2017,0
+Sri Lanka,LKA,2018,0
+Sri Lanka,LKA,2019,0
+Sri Lanka,LKA,2020,0
+Sri Lanka,LKA,2021,0
+Sudan,SDN,2000,5978
+Sudan,SDN,2001,5702
+Sudan,SDN,2002,4503
+Sudan,SDN,2003,4219
+Sudan,SDN,2004,3911
+Sudan,SDN,2005,3956
+Sudan,SDN,2006,3915
+Sudan,SDN,2007,3555
+Sudan,SDN,2008,3035
+Sudan,SDN,2009,2795
+Sudan,SDN,2010,2705
+Sudan,SDN,2011,2746
+Sudan,SDN,2012,2848
+Sudan,SDN,2013,3081
+Sudan,SDN,2014,3497
+Sudan,SDN,2015,3948
+Sudan,SDN,2016,4527
+Sudan,SDN,2017,5213
+Sudan,SDN,2018,5882
+Sudan,SDN,2019,6673
+Sudan,SDN,2020,7635
+Sudan,SDN,2021,7784
+Suriname,SUR,2000,24
+Suriname,SUR,2001,23
+Suriname,SUR,2002,15
+Suriname,SUR,2003,18
+Suriname,SUR,2004,7
+Suriname,SUR,2005,1
+Suriname,SUR,2006,1
+Suriname,SUR,2007,1
+Suriname,SUR,2008,0
+Suriname,SUR,2009,0
+Suriname,SUR,2010,1
+Suriname,SUR,2011,1
+Suriname,SUR,2012,0
+Suriname,SUR,2013,1
+Suriname,SUR,2014,1
+Suriname,SUR,2015,0
+Suriname,SUR,2016,0
+Suriname,SUR,2017,1
+Suriname,SUR,2018,0
+Suriname,SUR,2019,0
+Suriname,SUR,2020,0
+Suriname,SUR,2021,0
+Syria,SYR,2000,0
+Syria,SYR,2001,0
+Syria,SYR,2002,0
+Syria,SYR,2003,0
+Syria,SYR,2004,0
+Syria,SYR,2005,0
+Syria,SYR,2006,0
+Syria,SYR,2007,0
+Syria,SYR,2008,0
+Syria,SYR,2009,0
+Syria,SYR,2010,0
+Syria,SYR,2011,0
+Syria,SYR,2012,0
+Syria,SYR,2013,0
+Syria,SYR,2014,0
+Syria,SYR,2015,0
+Syria,SYR,2016,0
+Syria,SYR,2017,0
+Syria,SYR,2018,0
+Syria,SYR,2019,0
+Syria,SYR,2020,0
+Syria,SYR,2021,0
+Tajikistan,TJK,2000,0
+Tajikistan,TJK,2001,0
+Tajikistan,TJK,2002,0
+Tajikistan,TJK,2003,0
+Tajikistan,TJK,2004,0
+Tajikistan,TJK,2005,0
+Tajikistan,TJK,2006,0
+Tajikistan,TJK,2007,0
+Tajikistan,TJK,2008,0
+Tajikistan,TJK,2009,0
+Tajikistan,TJK,2010,0
+Tajikistan,TJK,2011,0
+Tajikistan,TJK,2012,0
+Tajikistan,TJK,2013,0
+Tajikistan,TJK,2014,0
+Tajikistan,TJK,2015,0
+Tajikistan,TJK,2016,0
+Tajikistan,TJK,2017,0
+Tajikistan,TJK,2018,0
+Tajikistan,TJK,2019,0
+Tajikistan,TJK,2020,0
+Tajikistan,TJK,2021,0
+Tanzania,TZA,2000,42579
+Tanzania,TZA,2001,40009
+Tanzania,TZA,2002,34901
+Tanzania,TZA,2003,31635
+Tanzania,TZA,2004,28232
+Tanzania,TZA,2005,25833
+Tanzania,TZA,2006,24055
+Tanzania,TZA,2007,22751
+Tanzania,TZA,2008,22293
+Tanzania,TZA,2009,21981
+Tanzania,TZA,2010,21764
+Tanzania,TZA,2011,21356
+Tanzania,TZA,2012,20879
+Tanzania,TZA,2013,21744
+Tanzania,TZA,2014,22378
+Tanzania,TZA,2015,22917
+Tanzania,TZA,2016,23689
+Tanzania,TZA,2017,23852
+Tanzania,TZA,2018,24278
+Tanzania,TZA,2019,24699
+Tanzania,TZA,2020,25464
+Tanzania,TZA,2021,25787
+Thailand,THA,2000,625
+Thailand,THA,2001,424
+Thailand,THA,2002,361
+Thailand,THA,2003,204
+Thailand,THA,2004,230
+Thailand,THA,2005,161
+Thailand,THA,2006,113
+Thailand,THA,2007,97
+Thailand,THA,2008,101
+Thailand,THA,2009,70
+Thailand,THA,2010,80
+Thailand,THA,2011,43
+Thailand,THA,2012,37
+Thailand,THA,2013,47
+Thailand,THA,2014,38
+Thailand,THA,2015,33
+Thailand,THA,2016,27
+Thailand,THA,2017,15
+Thailand,THA,2018,15
+Thailand,THA,2019,13
+Thailand,THA,2020,3
+Thailand,THA,2021,0
+Togo,TGO,2000,5177
+Togo,TGO,2001,5270
+Togo,TGO,2002,5723
+Togo,TGO,2003,5978
+Togo,TGO,2004,6497
+Togo,TGO,2005,6843
+Togo,TGO,2006,6626
+Togo,TGO,2007,6042
+Togo,TGO,2008,4984
+Togo,TGO,2009,4253
+Togo,TGO,2010,4046
+Togo,TGO,2011,4076
+Togo,TGO,2012,4526
+Togo,TGO,2013,5138
+Togo,TGO,2014,5356
+Togo,TGO,2015,5177
+Togo,TGO,2016,4414
+Togo,TGO,2017,3793
+Togo,TGO,2018,3667
+Togo,TGO,2019,3703
+Togo,TGO,2020,3745
+Togo,TGO,2021,3715
+Turkey,TUR,2000,0
+Turkey,TUR,2001,0
+Turkey,TUR,2002,0
+Turkey,TUR,2003,0
+Turkey,TUR,2004,0
+Turkey,TUR,2005,0
+Turkey,TUR,2006,0
+Turkey,TUR,2007,0
+Turkey,TUR,2008,0
+Turkey,TUR,2009,0
+Turkey,TUR,2010,0
+Turkey,TUR,2011,0
+Turkey,TUR,2012,0
+Turkey,TUR,2013,0
+Turkey,TUR,2014,0
+Turkey,TUR,2015,0
+Turkey,TUR,2016,0
+Turkey,TUR,2017,0
+Turkey,TUR,2018,0
+Turkey,TUR,2019,0
+Turkey,TUR,2020,0
+Turkey,TUR,2021,0
+Turkmenistan,TKM,2000,0
+Turkmenistan,TKM,2001,0
+Turkmenistan,TKM,2002,0
+Turkmenistan,TKM,2003,0
+Turkmenistan,TKM,2004,0
+Turkmenistan,TKM,2005,0
+Turkmenistan,TKM,2006,0
+Turkmenistan,TKM,2007,0
+Turkmenistan,TKM,2008,0
+Turkmenistan,TKM,2009,0
+Turkmenistan,TKM,2010,0
+Turkmenistan,TKM,2011,0
+Turkmenistan,TKM,2012,0
+Turkmenistan,TKM,2013,0
+Turkmenistan,TKM,2014,0
+Turkmenistan,TKM,2015,0
+Turkmenistan,TKM,2016,0
+Turkmenistan,TKM,2017,0
+Turkmenistan,TKM,2018,0
+Turkmenistan,TKM,2019,0
+Turkmenistan,TKM,2020,0
+Turkmenistan,TKM,2021,0
+Uganda,UGA,2000,44688
+Uganda,UGA,2001,51069
+Uganda,UGA,2002,48487
+Uganda,UGA,2003,43827
+Uganda,UGA,2004,37670
+Uganda,UGA,2005,29135
+Uganda,UGA,2006,25409
+Uganda,UGA,2007,24542
+Uganda,UGA,2008,26929
+Uganda,UGA,2009,28832
+Uganda,UGA,2010,26913
+Uganda,UGA,2011,23606
+Uganda,UGA,2012,19568
+Uganda,UGA,2013,15938
+Uganda,UGA,2014,15148
+Uganda,UGA,2015,15704
+Uganda,UGA,2016,18494
+Uganda,UGA,2017,20560
+Uganda,UGA,2018,17114
+Uganda,UGA,2019,17282
+Uganda,UGA,2020,20279
+Uganda,UGA,2021,19663
+United Arab Emirates,ARE,2000,0
+United Arab Emirates,ARE,2001,0
+United Arab Emirates,ARE,2002,0
+United Arab Emirates,ARE,2003,0
+United Arab Emirates,ARE,2004,0
+United Arab Emirates,ARE,2005,0
+United Arab Emirates,ARE,2006,0
+United Arab Emirates,ARE,2007,0
+United Arab Emirates,ARE,2008,0
+United Arab Emirates,ARE,2009,0
+United Arab Emirates,ARE,2010,0
+United Arab Emirates,ARE,2011,0
+United Arab Emirates,ARE,2012,0
+United Arab Emirates,ARE,2013,0
+United Arab Emirates,ARE,2014,0
+United Arab Emirates,ARE,2015,0
+United Arab Emirates,ARE,2016,0
+United Arab Emirates,ARE,2017,0
+United Arab Emirates,ARE,2018,0
+United Arab Emirates,ARE,2019,0
+United Arab Emirates,ARE,2020,0
+United Arab Emirates,ARE,2021,0
+Uzbekistan,UZB,2000,0
+Uzbekistan,UZB,2001,0
+Uzbekistan,UZB,2002,0
+Uzbekistan,UZB,2003,0
+Uzbekistan,UZB,2004,0
+Uzbekistan,UZB,2005,0
+Uzbekistan,UZB,2006,0
+Uzbekistan,UZB,2007,0
+Uzbekistan,UZB,2008,0
+Uzbekistan,UZB,2009,0
+Uzbekistan,UZB,2010,0
+Uzbekistan,UZB,2011,0
+Uzbekistan,UZB,2012,0
+Uzbekistan,UZB,2013,0
+Uzbekistan,UZB,2014,0
+Uzbekistan,UZB,2015,0
+Uzbekistan,UZB,2016,0
+Uzbekistan,UZB,2017,0
+Uzbekistan,UZB,2018,0
+Uzbekistan,UZB,2019,0
+Uzbekistan,UZB,2020,0
+Uzbekistan,UZB,2021,0
+Vanuatu,VUT,2000,34
+Vanuatu,VUT,2001,24
+Vanuatu,VUT,2002,52
+Vanuatu,VUT,2003,68
+Vanuatu,VUT,2004,46
+Vanuatu,VUT,2005,35
+Vanuatu,VUT,2006,30
+Vanuatu,VUT,2007,36
+Vanuatu,VUT,2008,37
+Vanuatu,VUT,2009,22
+Vanuatu,VUT,2010,27
+Vanuatu,VUT,2011,14
+Vanuatu,VUT,2012,0
+Vanuatu,VUT,2013,0
+Vanuatu,VUT,2014,0
+Vanuatu,VUT,2015,0
+Vanuatu,VUT,2016,0
+Vanuatu,VUT,2017,0
+Vanuatu,VUT,2018,0
+Vanuatu,VUT,2019,0
+Vanuatu,VUT,2020,0
+Vanuatu,VUT,2021,0
+Venezuela,VEN,2000,26
+Venezuela,VEN,2001,15
+Venezuela,VEN,2002,19
+Venezuela,VEN,2003,27
+Venezuela,VEN,2004,31
+Venezuela,VEN,2005,34
+Venezuela,VEN,2006,33
+Venezuela,VEN,2007,37
+Venezuela,VEN,2008,26
+Venezuela,VEN,2009,36
+Venezuela,VEN,2010,53
+Venezuela,VEN,2011,47
+Venezuela,VEN,2012,56
+Venezuela,VEN,2013,105
+Venezuela,VEN,2014,110
+Venezuela,VEN,2015,150
+Venezuela,VEN,2016,261
+Venezuela,VEN,2017,424
+Venezuela,VEN,2018,373
+Venezuela,VEN,2019,351
+Venezuela,VEN,2020,196
+Venezuela,VEN,2021,156
+Vietnam,VNM,2000,421
+Vietnam,VNM,2001,380
+Vietnam,VNM,2002,271
+Vietnam,VNM,2003,197
+Vietnam,VNM,2004,115
+Vietnam,VNM,2005,79
+Vietnam,VNM,2006,92
+Vietnam,VNM,2007,53
+Vietnam,VNM,2008,37
+Vietnam,VNM,2009,47
+Vietnam,VNM,2010,45
+Vietnam,VNM,2011,36
+Vietnam,VNM,2012,41
+Vietnam,VNM,2013,34
+Vietnam,VNM,2014,29
+Vietnam,VNM,2015,16
+Vietnam,VNM,2016,7
+Vietnam,VNM,2017,9
+Vietnam,VNM,2018,6
+Vietnam,VNM,2019,6
+Vietnam,VNM,2020,2
+Vietnam,VNM,2021,0
+Western Pacific (WHO),,2000,6154
+Western Pacific (WHO),,2001,5275
+Western Pacific (WHO),,2002,4658
+Western Pacific (WHO),,2003,5039
+Western Pacific (WHO),,2004,5623
+Western Pacific (WHO),,2005,4496
+Western Pacific (WHO),,2006,4877
+Western Pacific (WHO),,2007,3852
+Western Pacific (WHO),,2008,3552
+Western Pacific (WHO),,2009,4714
+Western Pacific (WHO),,2010,3488
+Western Pacific (WHO),,2011,2997
+Western Pacific (WHO),,2012,3472
+Western Pacific (WHO),,2013,3971
+Western Pacific (WHO),,2014,3793
+Western Pacific (WHO),,2015,2454
+Western Pacific (WHO),,2016,2954
+Western Pacific (WHO),,2017,3047
+Western Pacific (WHO),,2018,2999
+Western Pacific (WHO),,2019,2558
+Western Pacific (WHO),,2020,3154
+Western Pacific (WHO),,2021,2649
+World,OWID_WRL,2000,896635
+World,OWID_WRL,2001,888481
+World,OWID_WRL,2002,846614
+World,OWID_WRL,2003,825303
+World,OWID_WRL,2004,807205
+World,OWID_WRL,2005,783359
+World,OWID_WRL,2006,771084
+World,OWID_WRL,2007,751461
+World,OWID_WRL,2008,731497
+World,OWID_WRL,2009,720547
+World,OWID_WRL,2010,703603
+World,OWID_WRL,2011,660176
+World,OWID_WRL,2012,622370
+World,OWID_WRL,2013,602547
+World,OWID_WRL,2014,583984
+World,OWID_WRL,2015,576659
+World,OWID_WRL,2016,579946
+World,OWID_WRL,2017,587091
+World,OWID_WRL,2018,566857
+World,OWID_WRL,2019,568392
+World,OWID_WRL,2020,624525
+World,OWID_WRL,2021,618975
+Yemen,YEM,2000,2656
+Yemen,YEM,2001,2961
+Yemen,YEM,2002,3283
+Yemen,YEM,2003,2964
+Yemen,YEM,2004,2391
+Yemen,YEM,2005,2495
+Yemen,YEM,2006,3027
+Yemen,YEM,2007,2117
+Yemen,YEM,2008,1361
+Yemen,YEM,2009,1779
+Yemen,YEM,2010,2866
+Yemen,YEM,2011,2015
+Yemen,YEM,2012,2197
+Yemen,YEM,2013,1786
+Yemen,YEM,2014,1498
+Yemen,YEM,2015,1309
+Yemen,YEM,2016,1681
+Yemen,YEM,2017,1886
+Yemen,YEM,2018,2211
+Yemen,YEM,2019,2108
+Yemen,YEM,2020,2030
+Yemen,YEM,2021,2455
+Zambia,ZMB,2000,12485
+Zambia,ZMB,2001,12569
+Zambia,ZMB,2002,10981
+Zambia,ZMB,2003,10055
+Zambia,ZMB,2004,8759
+Zambia,ZMB,2005,7702
+Zambia,ZMB,2006,7118
+Zambia,ZMB,2007,6767
+Zambia,ZMB,2008,6688
+Zambia,ZMB,2009,6720
+Zambia,ZMB,2010,6675
+Zambia,ZMB,2011,7047
+Zambia,ZMB,2012,7458
+Zambia,ZMB,2013,7974
+Zambia,ZMB,2014,8385
+Zambia,ZMB,2015,8231
+Zambia,ZMB,2016,8104
+Zambia,ZMB,2017,8011
+Zambia,ZMB,2018,8107
+Zambia,ZMB,2019,8244
+Zambia,ZMB,2020,8846
+Zambia,ZMB,2021,8806
+Zimbabwe,ZWE,2000,2526
+Zimbabwe,ZWE,2001,2543
+Zimbabwe,ZWE,2002,2559
+Zimbabwe,ZWE,2003,2578
+Zimbabwe,ZWE,2004,2596
+Zimbabwe,ZWE,2005,2610
+Zimbabwe,ZWE,2006,2632
+Zimbabwe,ZWE,2007,4326
+Zimbabwe,ZWE,2008,1763
+Zimbabwe,ZWE,2009,1955
+Zimbabwe,ZWE,2010,2810
+Zimbabwe,ZWE,2011,1848
+Zimbabwe,ZWE,2012,1516
+Zimbabwe,ZWE,2013,2211
+Zimbabwe,ZWE,2014,2798
+Zimbabwe,ZWE,2015,2731
+Zimbabwe,ZWE,2016,1947
+Zimbabwe,ZWE,2017,3424
+Zimbabwe,ZWE,2018,1624
+Zimbabwe,ZWE,2019,2003
+Zimbabwe,ZWE,2020,2951
+Zimbabwe,ZWE,2021,876
