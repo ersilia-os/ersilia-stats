@@ -2201,9 +2201,9 @@
         "match_percentage": 92.31
     },
     "openalex_authors": {
-        "total_authors": 217,
-        "total_works": 270374,
-        "total_citations": 4869874,
+        "total_authors": 216,
+        "total_works": 270096,
+        "total_citations": 4861072,
         "highest_h_index": 328,
         "top_author": "Wei Wang"
     },

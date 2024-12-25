@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2024-12-24 16:33:35 GMT_
+_Last updated: 2024-12-25 00:32:39 GMT_
 
 ## 🧬 Models' Impact
 
@@ -166,7 +166,7 @@ _Last updated: 2024-12-24 16:33:35 GMT_
 - **Match Percentage**: 92.31%
 
 ### Author Highlights
-- **Total Authors**: 217
+- **Total Authors**: 216
 - **Top Author**: Wei Wang (H-index: 328)
 
 
