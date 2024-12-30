@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2024-12-25 00:32:39 GMT_
+_Last updated: 2024-12-30 09:06:40 GMT_
 
 ## 🧬 Models' Impact
 
@@ -135,18 +135,19 @@ _Last updated: 2024-12-25 00:32:39 GMT_
 
 ## 📅 Events & Publications
 
-### **Total Events: 63**
+### **Total Events: 68**
 
 ### Event Timeline
 - **2020**: 2 events
 - **2021**: 6 events
 - **2022**: 26 events
 - **2023**: 20 events
-- **2024**: 9 events
+- **2024**: 11 events
+- **2025**: 3 events
 
 ### Publications
-**Total Publications**: 39  
-**Total Citations**: 1181
+**Total Publications**: 40  
+**Total Citations**: 1183
 
 
 ### Citations Over Time
@@ -159,15 +160,15 @@ _Last updated: 2024-12-25 00:32:39 GMT_
 - **2021**: 32.0 average citations
 - **2022**: 23.33 average citations
 - **2023**: 16.33 average citations
-- **2024**: 6.75 average citations
+- **2024**: 5.8 average citations
 ### OpenAlex Paper Match
-- **Total Papers Queried**: 39
-- **Exact Matches Found**: 36
-- **Match Percentage**: 92.31%
+- **Total Papers Queried**: 40
+- **Exact Matches Found**: 37
+- **Match Percentage**: 92.5%
 
 ### Author Highlights
-- **Total Authors**: 216
-- **Top Author**: Wei Wang (H-index: 328)
+- **Total Authors**: 222
+- **Top Author**: Li Wang (H-index: 250)
 
 
 ## 🌐 External Data

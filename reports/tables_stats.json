@@ -1,7 +1,7 @@
 {
     "publications": {
-        "total_publications": 39,
-        "total_citations": 1181,
+        "total_publications": 40,
+        "total_citations": 1183,
         "citations_by_year": [
             {
                 "Year": 2013,
@@ -41,7 +41,7 @@
             },
             {
                 "Year": 2024,
-                "average_Citations": 6.75
+                "average_Citations": 5.8
             }
         ],
         "collaboration_breakdown": [
@@ -51,13 +51,13 @@
             },
             {
                 "Count": "No",
-                "count": 16
+                "count": 17
             }
         ],
         "publications_by_topic": [
             {
                 "Count": "Chemoinformatics",
-                "count": 17
+                "count": 18
             },
             {
                 "Count": "Bioinformatics",
@@ -2196,16 +2196,16 @@
         ]
     },
     "openalex_titles": {
-        "total_titles": 39,
-        "exact_matches": 36,
-        "match_percentage": 92.31
+        "total_titles": 40,
+        "exact_matches": 37,
+        "match_percentage": 92.5
     },
     "openalex_authors": {
-        "total_authors": 216,
-        "total_works": 270096,
-        "total_citations": 4861072,
-        "highest_h_index": 328,
-        "top_author": "Wei Wang"
+        "total_authors": 222,
+        "total_works": 138753,
+        "total_citations": 2770383,
+        "highest_h_index": 250,
+        "top_author": "Li Wang"
     },
     "external_data": {
         "disease_statistics": [
@@ -2258,7 +2258,7 @@
         }
     },
     "events": {
-        "total_events": 63,
+        "total_events": 68,
         "events_by_year": [
             {
                 "Count": 2022,
@@ -2270,11 +2270,15 @@
             },
             {
                 "Count": 2024,
-                "count": 9
+                "count": 11
             },
             {
                 "Count": 2021,
                 "count": 6
+            },
+            {
+                "Count": 2025,
+                "count": 3
             },
             {
                 "Count": 2020,
