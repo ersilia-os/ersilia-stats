@@ -1,7 +1,12 @@
 import pandas as pd
 import numpy as np
 import json
+<<<<<<< HEAD
 # Reading all the specified CSV files int DataFrames
+=======
+
+# Reading all the specified CSV files into DataFrames
+>>>>>>> c39292e06c67dee27f32e9d0bf51740f5b167281
 blogposts_df = pd.read_csv('data/Blogposts.csv')
 community_df = pd.read_csv('data/Community.csv')
 countries_df = pd.read_csv('data/Countries.csv')
@@ -12,7 +17,10 @@ publications_df = pd.read_csv('data/Publications.csv')
 external_titles_df = pd.read_csv('external-data/titles_results.csv')
 external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c39292e06c67dee27f32e9d0bf51740f5b167281
 # Reading external datasets
 external_files = {
     "alzheimers_deaths": "external-data/alzheimers-deaths.csv",
