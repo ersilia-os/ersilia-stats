@@ -2,6 +2,9 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 import requests
+from .models_impact import models_impact_page as models_impact_page
+from .community import community_blog_page as community_blog_page
+from .events_and_publications import events_publications_page as events_publications_page
 
 # Load data from JSON
 data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
@@ -47,21 +50,6 @@ sidebar = html.Div([
     ], style={"position": "absolute", "bottom": "20px", "width": "100%", "text-align": "center", "padding": "0px 20px 0px 0px"})
 ], className="sidebar", style={"padding": "20px", "width": "300px", "background-color": "#f8f9fa", "position": "fixed", "height": "100%"})
 
-# Placeholder pages
-def models_impact_page():
-    return html.Div([
-        html.H1("Models' Impact Page", style={"text-align": "center", "margin-top": "20px"})
-    ], style={"margin-left": "320px", "padding": "20px"})
-
-def community_blog_page():
-    return html.Div([
-        html.H1("Community & Blog Page", style={"text-align": "center", "margin-top": "20px"})
-    ], style={"margin-left": "320px", "padding": "20px"})
-
-def events_publications_page():
-    return html.Div([
-        html.H1("Events & Publications Page", style={"text-align": "center", "margin-top": "20px"})
-    ], style={"margin-left": "320px", "padding": "20px"})
 
 # Main content area for the landing page
 home_page = html.Div([
@@ -91,11 +79,15 @@ app.layout = html.Div([
 )
 def display_page(pathname):
     if pathname == "/models-impact":
-        return models_impact_page()
+        model_layout = models_impact_page()
+        return model_layout
     elif pathname == "/community-blog":
-        return community_blog_page()
+        community_layout = community_blog_page()
+        print(community_layout)
+        return community_layout
     elif pathname == "/events-publications":
-        return events_publications_page()
+        events_layout = events_publications_page()
+        return events_layout
     else:
         return home_page
 

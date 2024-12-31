@@ -1,12 +1,9 @@
 import pandas as pd
 import numpy as np
 import json
-<<<<<<< HEAD
-# Reading all the specified CSV files int DataFrames
-=======
+from ast import literal_eval
 
 # Reading all the specified CSV files into DataFrames
->>>>>>> c39292e06c67dee27f32e9d0bf51740f5b167281
 blogposts_df = pd.read_csv('data/Blogposts.csv')
 community_df = pd.read_csv('data/Community.csv')
 countries_df = pd.read_csv('data/Countries.csv')
@@ -17,10 +14,6 @@ publications_df = pd.read_csv('data/Publications.csv')
 external_titles_df = pd.read_csv('external-data/titles_results.csv')
 external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
-<<<<<<< HEAD
-
-=======
->>>>>>> c39292e06c67dee27f32e9d0bf51740f5b167281
 # Reading external datasets
 external_files = {
     "alzheimers_deaths": "external-data/alzheimers-deaths.csv",
@@ -56,6 +49,15 @@ def total(df):
 
 def sum_column(df, column):
     return int(df[column].sum())
+
+#  Occurance_column calculates the occurances of a string in array-like columns 
+#  Will be used to find the unique roles of contributors
+def occurances_column(df, column):
+    dummy_df = df
+    dummy_df[column] = df[column].apply(literal_eval) #changes the array-like column to an actual array
+    dummy_df = dummy_df.explode(column)
+
+    return dummy_df[column].value_counts().rename_axis('values').reset_index(name='counts')
 
 def sum_unique(df, column):
     return df[column].nunique()
@@ -112,6 +114,24 @@ def calculate_community_stats():
     }
 
     return community_data
+
+# Attempts to find the duration (months) of a contributor (specifically for duration graph)
+def community_time_duration():
+    community_df['End Date'] = community_df['End Date'].fillna(pd.Timestamp.today().date()) #if missing end date, assume today 
+
+    community_df['Start Date'] = pd.to_datetime(community_df['Start Date'])
+    community_df['End Date'] = pd.to_datetime(community_df['End Date'])
+
+    #makes new column for contributed tim
+    community_df['Contributed_Time'] = (community_df['End Date'].dt.to_period('M').astype(int)- community_df['Start Date'].dt.to_period('M').astype(int))
+
+    # place in time buckets
+    bins = [0, 3, 6, 7, 12,10000]
+
+    # Create a new column for the buckets
+    community_df['time_bucket'] = pd.cut(community_df['Contributed_Time'], bins)
+    return community_df['time_bucket'].value_counts().rename_axis('values').reset_index(name='counts')
+
 
 # Countries
 def calculate_countries_stats():
@@ -286,10 +306,11 @@ def convert_to_serializable(obj):
         return [convert_to_serializable(i) for i in obj]
     return obj
 
-output_data_serializable = convert_to_serializable(output_data)
+def create_json():
+    output_data_serializable = convert_to_serializable(output_data)
 
-# Write the output_data to a JSON file
-with open("reports/tables_stats.json", "w") as json_file:
-    json.dump(output_data_serializable, json_file, indent=4)
+    # Write the output_data to a JSON file
+    with open("reports/tables_stats.json", "w") as json_file:
+        json.dump(output_data_serializable, json_file, indent=4)
 
-print("Data has been written to 'tables_stats.json'")
+    print("Data has been written to 'tables_stats.json'")
