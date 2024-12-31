@@ -1,4 +1,4 @@
-pyairtable
+
 dash
 plotly.express
 pandas

@@ -1,0 +1,73 @@
+name: Ersilia Weekly Stats Report
+
+on:
+  push:
+    paths:
+      - 'data/airtable_api_identifiers.csv'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update_stats_and_readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      # 2. Set Up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 3. Fetch Internal Data
+      - name: Fetch Internal Data
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+        run: |
+          python scripts/fetch_internal_stats.py $AIRTABLE_API_KEY
+
+      # 4. Fetch External Data
+      - name: Fetch External Data
+        run: |
+          python scripts/get_open_alex_stats.py 
+          python scripts/fetch_external_disease_data.py
+      
+      # 5. Calculate All Relevant Stats and store in JSON
+      - name: Calculate Stats
+        run: |
+          python scripts/calculate_stats.py
+
+      # 6. Generate README.md
+      - name: Update README
+        run: |
+          python scripts/create_readme.py
+
+      # 7. Commit Changes
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add reports/tables_stats.json README.md
+          git commit -m "Update internal stats and README" || echo "No changes to commit"
+
+      # 8. Push Changes
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
