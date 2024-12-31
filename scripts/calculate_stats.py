@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+from ast import literal_eval
 # Reading all the specified CSV files int DataFrames
 blogposts_df = pd.read_csv('data/Blogposts.csv')
 community_df = pd.read_csv('data/Community.csv')
@@ -48,6 +49,15 @@ def total(df):
 
 def sum_column(df, column):
     return int(df[column].sum())
+
+#  Occurance_column calculates the occurances of a string in array-like columns 
+#  Will be used to find the unique roles of contributors
+def occurances_column(df, column):
+    dummy_df = df
+    dummy_df[column] = df[column].apply(literal_eval) #changes the array-like column to an actual array
+    dummy_df = dummy_df.explode(column)
+
+    return dummy_df[column].value_counts().rename_axis('values').reset_index(name='counts')
 
 def sum_unique(df, column):
     return df[column].nunique()
@@ -104,6 +114,15 @@ def calculate_community_stats():
     }
 
     return community_data
+
+# Attempts to find the duration of a contributor
+def community_time_duration():
+   community_df['start_date'] = pd.to_datetime(community_df['start_date'])
+   community_df['end_date'] = pd.to_datetime(community_df['end_date'])
+
+   #makes new column for contributed time
+   community_df['contributed_time'] = community_df['end_date'] - community_df['start_date'] 
+
 
 # Countries
 def calculate_countries_stats():
