@@ -115,13 +115,22 @@ def calculate_community_stats():
 
     return community_data
 
-# Attempts to find the duration of a contributor
+# Attempts to find the duration (months) of a contributor (specifically for duration graph)
 def community_time_duration():
-   community_df['start_date'] = pd.to_datetime(community_df['start_date'])
-   community_df['end_date'] = pd.to_datetime(community_df['end_date'])
+    community_df['End Date'] = community_df['End Date'].fillna(pd.Timestamp.today().date()) #if missing end date, assume today 
 
-   #makes new column for contributed time
-   community_df['contributed_time'] = community_df['end_date'] - community_df['start_date'] 
+    community_df['Start Date'] = pd.to_datetime(community_df['Start Date'])
+    community_df['End Date'] = pd.to_datetime(community_df['End Date'])
+
+    #makes new column for contributed tim
+    community_df['Contributed_Time'] = (community_df['End Date'].dt.to_period('M').astype(int)- community_df['Start Date'].dt.to_period('M').astype(int))
+
+    # place in time buckets
+    bins = [0, 3, 6, 7, 12,10000]
+
+    # Create a new column for the buckets
+    community_df['time_bucket'] = pd.cut(community_df['Contributed_Time'], bins)
+    return community_df['time_bucket'].value_counts().rename_axis('values').reset_index(name='counts')
 
 
 # Countries
@@ -297,10 +306,11 @@ def convert_to_serializable(obj):
         return [convert_to_serializable(i) for i in obj]
     return obj
 
-output_data_serializable = convert_to_serializable(output_data)
+def create_json():
+    output_data_serializable = convert_to_serializable(output_data)
 
-# Write the output_data to a JSON file
-with open("reports/tables_stats.json", "w") as json_file:
-    json.dump(output_data_serializable, json_file, indent=4)
+    # Write the output_data to a JSON file
+    with open("reports/tables_stats.json", "w") as json_file:
+        json.dump(output_data_serializable, json_file, indent=4)
 
-print("Data has been written to 'tables_stats.json'")
+    print("Data has been written to 'tables_stats.json'")

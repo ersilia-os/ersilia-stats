@@ -10,7 +10,10 @@ import calculate_stats as calc
 app = dash.Dash(__name__)
 
 # Duration of Involvement
-
+duration_data = pd.DataFrame(calc.community_time_duration())
+duration_fig = px.bar(duration_data, x="values", y="counts", barmode="group", title="Duration of Involvement")
+duration_fig.update_xaxes(title_text="Duration of Involvement")
+duration_fig.update_yaxes(title_text="Number of Contributors")
 
 # Roles
 roles_data = pd.DataFrame(calc.occurances_column(df=ref.community_df, column='Role'))
@@ -20,8 +23,8 @@ roles_fig.update_yaxes(title_text="Number of Contributors")
 
 app.layout = html.Div([
     html.H4('Range of Expertise and Involvement'),
-    dcc.Graph(id="community", figure=roles_fig),
-    # dcc.Graph(od)
+    dcc.Graph(id="roles_community", figure=roles_fig),
+    dcc.Graph(id="duration_community", figure=duration_fig),
 ])
 
 if __name__ == '__main__':
