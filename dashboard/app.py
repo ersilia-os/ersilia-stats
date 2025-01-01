@@ -1,9 +1,12 @@
 import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
+from dash.dependencies import Input, Output, State
+import plotly.express as px
 import requests
 from .models_impact import models_impact_page as models_impact_page
 from .community import community_blog_page as community_blog_page
+from .community import register_callbacks as register_community_callbacks
 from .events_and_publications import events_publications_page as events_publications_page
 
 # Load data from JSON
@@ -12,6 +15,7 @@ data = requests.get(data_url).json()
 
 # Initialize the app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+register_community_callbacks(app)
 
 # Sidebar layout
 sidebar = html.Div([
@@ -112,3 +116,4 @@ def update_sidebar_highlight(pathname):
 # Run the app
 if __name__ == "__main__":
     app.run_server(debug=True)
+
