@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 from datetime import datetime
+from calculate_stats import create_json
 
 # Function to load JSON data
 def load_json(file_path):
@@ -12,13 +13,23 @@ def load_country_names(csv_path):
     countries_df = pd.read_csv(csv_path)
     return dict(zip(countries_df['id'], countries_df['Country']))
 
-# Function to format a table in Markdown
+# Function to format a scrollable table in Markdown
 def format_table(headers, rows):
+    # Generate the Markdown table content
     table = f"| {' | '.join(headers)} |\n"
     table += f"| {' | '.join(['---'] * len(headers))} |\n"
     for row in rows:
         table += f"| {' | '.join(str(cell) for cell in row)} |\n"
-    return table
+
+    # Wrap the table in a scrollable <div> for horizontal overflow
+    scrollable_table = f"""
+<div style="overflow-x: scroll;">
+
+{table}
+
+</div>
+"""
+    return scrollable_table
 
 # Function to generate Models' Impact Section
 def generate_models_section(data):
@@ -27,24 +38,11 @@ def generate_models_section(data):
     section += f"### **Percentage Ready to Use: {data['ready_percentage']}%**\n\n"
 
     # Categorize models
-    model_cats = {"Single Category": [], "Two Categories": 0, "Three or More Categories": 0}
-
-    for model in data["model_distribution"]:
-        tag_count = len(model['Count'].split(", "))
-
-        if tag_count == 1:
-            model_cats["Single Category"].append((model['Count'], model['count']))
-        elif tag_count == 2:
-            model_cats["Two Categories"] += model['count']
-        else:
-            model_cats["Three or More Categories"] += model['count']
-
     section += "### Model Categorization\n"
     headers = ["Category", "Count"]
-    rows = model_cats["Single Category"]
-    rows.append(("Two Categories", model_cats["Two Categories"]))
-    rows.append(("Three or More Categories", model_cats["Three or More Categories"]))
+    rows = [(item["Category"], item["count"]) for item in data["model_distribution"]]
     section += format_table(headers, rows)
+    section += "\nNOTE: Models that have multiple tags are counted once under each of their tags. Thus, the sum of the number of models may be greater than the number of total models. For more detailed information, check either `reports/tables_stats.json` or the model hub, linked below."
 
     # Top 5 recent models
     section += "\n### Most Recent Models\n"
@@ -52,7 +50,7 @@ def generate_models_section(data):
     recent_models = sorted(data["model_list"], key=lambda x: x["Incorporation Date"], reverse=True)[:5]
     rows = [(model['Title'], model['Contributor'], model['Incorporation Date'], model['Status']) for model in recent_models]
     section += format_table(headers, rows)
-    section += "\n👉 [Explore more models on our dashboard](https://ersilia.io)\n"
+    section += "\n👉 [Explore more models on our dashboard](https://ersilia.io/model-hub)\n"
 
     return section
 
@@ -72,25 +70,29 @@ def generate_community_section(data, country_names):
     section += "\n### Contributors by Country\n"
     headers = ["Country", "Contributors"]
     rows = [(contributor['Country'], contributor['Contributors']) for contributor in data['contributors_by_country']]
+    rows.sort(key=lambda x: x[1], reverse=True)
+
     section += format_table(headers, rows)
 
     return section
 
 # Function to generate Organization Section
 def generate_organization_section(data, country_names):
-    section = "## 🏢 Organizations\n\n"
+    section = "## 🏢 Organizations in Ersilia's Network\n\n"
     section += f"### **Total Organizations: {data['total_organizations']}**\n\n"
 
     # Organization Types
     section += "### Organization Types\n"
     headers = ["Type", "Count"]
-    rows = [(org['Count'], org['count']) for org in data['organization_types']]
+    rows = [(org['Type'], org['Count']) for org in data['organization_types']]
     section += format_table(headers, rows)
 
     # Organizations by Country
     section += "\n### Organizations by Country\n"
     headers = ["Country", "Total Organizations"]
     rows = [(org['Country'], org['Total Organizations']) for org in data['organizations_by_country']]
+    rows.sort(key=lambda x: x[1], reverse=True)
+
     section += format_table(headers, rows)
 
     return section
@@ -100,10 +102,28 @@ def generate_events_section(events_data, publications_data, authors_data, titles
     section = "## 📅 Events & Publications\n\n"
     section += f"### **Total Events: {events_data['total_events']}**\n\n"
 
-    # Events Timeline
+    # Collapse events pre-2020 into "Before 2020"
+    collapsed_events = {}
+    for event in events_data['events_by_year']:
+        year = event["Year"]
+        count = event["Count"]
+        if year < 2020:
+            collapsed_events.setdefault("Before 2020", 0)
+            collapsed_events["Before 2020"] += count
+        else:
+            collapsed_events[str(year)] = count
+
+    # Convert the collapsed events into a sorted list for table display
+    sorted_collapsed_events = sorted(
+        [{"Year": year, "Count": count} for year, count in collapsed_events.items()],
+        key=lambda x: (x["Year"] if x["Year"] != "Before 2020" else 2019)  # Sort "Before 2020" before 2020+
+    )
+
+    # Add Event Timeline as a table
     section += "### Event Timeline\n"
-    for year, count in sorted([(event['Count'], event['count']) for event in events_data['events_by_year']]):
-        section += f"- **{year}**: {count} events\n"
+    events_headers = ["Year", "Count of Events"]
+    events_rows = [(row["Year"], row["Count"]) for row in sorted_collapsed_events]
+    section += format_table(events_headers, events_rows)
 
     # Publications Summary
     section += "\n### Publications\n"
@@ -115,15 +135,54 @@ def generate_events_section(events_data, publications_data, authors_data, titles
     for year, avg_citations in sorted([(item['Year'], item['average_Citations']) for item in publications_data['citations_by_year']]):
         section += f"- **{year}**: {avg_citations} average citations\n"
 
-    # OpenAlex paper and author data
-    section += "### OpenAlex Paper Match\n"
-    section += f"- **Total Papers Queried**: {titles_data['total_titles']}\n"
-    section += f"- **Exact Matches Found**: {titles_data['exact_matches']}\n"
-    section += f"- **Match Percentage**: {titles_data['match_percentage']}%\n\n"
+    section = "## Author Highlights\n\n"
 
-    section += "### Author Highlights\n"
+    # Basic summary
     section += f"- **Total Authors**: {authors_data['total_authors']}\n"
-    section += f"- **Top Author**: {authors_data['top_author']} (H-index: {authors_data['highest_h_index']})\n"
+    section += f"- **Top Author**: {authors_data['top_author']} (H-index: {authors_data['highest_h_index']})\n\n"
+
+    # Table of top N authors (just a quick summary)
+    highlights = authors_data["author_highlights"]
+    top_n = 3  # or any number you want
+    top_authors = highlights[:top_n]
+
+    # Summarize them in a table
+    summary_headers = ["Name", "Ersilia Pubs", "H-index", "Total Pubs"]
+    summary_rows = [
+        (
+            author["Name"],
+            author["ersilia_publications"],
+            author["H-index"],
+            author["total_publications"]
+        )
+        for author in top_authors
+    ]
+    section += format_table(summary_headers, summary_rows)
+    section += "\n"
+
+    # For each top author, show a short table of their Ersilia pubs
+    for author in top_authors:
+        section += f"### {author['Name']} - Ersilia Publications\n"
+        pub_details = author["ersilia_pub_details"]  # list of dicts
+
+        if not pub_details:
+            section += "No Ersilia publications found.\n\n"
+            continue
+
+        # Build a table of (title, year, url)
+        ersilia_pub_headers = ["Title", "Year", "URL"]
+        ersilia_pub_rows = [
+            (
+                p.get("title", "Unknown"),
+                p.get("year", ""),
+                p.get("url", "")
+            )
+            for p in pub_details
+        ]
+        section += format_table(ersilia_pub_headers, ersilia_pub_rows)
+        section += "\n"
+    
+    section += "\nThis table highlights top Ersilia contributors, meaning Gemma, Miquel, and Dhanshree weren't included. However, Ersilia and its partners appreciates their continual, tireless efforts in helping drive the mission of innovation and equitable science! 😊👏"
 
     return section
 
@@ -189,6 +248,8 @@ if __name__ == "__main__":
     input_json = 'reports/tables_stats.json'  # Path to stats JSON
     countries_csv = 'data/Countries.csv'  # Path to Countries CSV
     output_readme = 'README.md'  # Output README file
+
+    create_json()
     data = load_json(input_json)
     country_names = load_country_names(countries_csv)
     create_readme(data, country_names, output_readme)

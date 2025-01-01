@@ -83,7 +83,6 @@ def display_page(pathname):
         return model_layout
     elif pathname == "/community-blog":
         community_layout = community_blog_page()
-        print(community_layout)
         return community_layout
     elif pathname == "/events-publications":
         events_layout = events_publications_page()

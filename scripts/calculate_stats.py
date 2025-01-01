@@ -76,39 +76,73 @@ def map_ids_to_names(df, id_column, name_column):
 
 # Models' Impact
 def calculate_models_impact():
+    # Convert Tags to lists of individual categories
+    def clean_and_split_tags(tag_value):
+        # Handle missing values and convert to string
+        if pd.isna(tag_value) or not isinstance(tag_value, str):
+            return ["Untagged"]  # Treat untagged models as a separate category
+        # Remove brackets and split by commas
+        tag_value = tag_value.strip("[]").replace("'", "")
+        return [t.strip() for t in tag_value.split(",")]
+
+    # Apply the cleaning function to the Tag column
+    tag_series = models_df['Tag'].apply(clean_and_split_tags)
+
+    # Flatten the list of lists into a single list
+    from itertools import chain
+    all_tags = list(chain.from_iterable(tag_series))
+
+    # Count the occurrences of each tag
+    tags_count = pd.Series(all_tags).value_counts().reset_index()
+    tags_count.columns = ['Category', 'count']
+
+    # Prepare the final models data
     models_data = {
         "total_models": total(models_df),
-        "model_distribution": models_df['Tag'].value_counts().reset_index().rename(
-            columns={'index': 'Category', 'Tag': 'Count'}).to_dict(orient='records'),
+        "model_distribution": tags_count.to_dict(orient='records'),
         "ready_percentage": round((models_df['Status'] == "Ready").mean() * 100, 2),
         "model_list": models_df[['Title', 'Tag', 'Contributor', 'Incorporation Date', 'Status']].to_dict(orient='records')
     }
-
-    # Clean brackets and quotes in model categories
-    for model in models_data["model_distribution"]:
-        model["Count"] = model["Count"].strip("[]").replace("'", "")
 
     return models_data
 
 # Community & Blog
 def calculate_community_stats():
+    # Map country IDs to readable names
     country_map = map_ids_to_names(countries_df, "id", "Country")
 
+    # Handle and clean role data
+    def clean_and_split_roles(role_value):
+        # Handle missing or NaN values
+        if pd.isna(role_value) or not isinstance(role_value, str):
+            return ["Unspecified"]  # Default category for missing roles
+        # Remove brackets and split by commas
+        role_value = role_value.strip("[]").replace("'", "")
+        return [r.strip() for r in role_value.split(",")]
+
+    # Apply cleaning to the Role column
+    roles_series = community_df['Role'].apply(clean_and_split_roles)
+
+    # Flatten the list of lists into a single list
+    from itertools import chain
+    all_roles = list(chain.from_iterable(roles_series))
+
+    # Count the occurrences of each role
+    role_counts = pd.Series(all_roles).value_counts().reset_index()
+    role_counts.columns = ['Role', 'Count']
+
+    # Prepare the final community data
     community_data = {
         "countries_represented": sum_unique(community_df, 'Country'),
-        "role_distribution": [
-            {
-                "Role": role['Count'].strip("[]").replace("'", ""),
-                "Count": role["count"]
-            } for role in community_df['Role'].value_counts().reset_index().rename(
-                columns={'index': 'Role', 'Role': 'Count'}).to_dict(orient='records')
-        ],
+        "role_distribution": role_counts.to_dict(orient='records'),
         "contributors_by_country": [
             {
                 "Country": country_map.get(row["Country"].strip("[]").replace("'", ""), "Unknown"),
                 "Contributors": row["Contributors"]
-            } for row in community_df.groupby('Country')['Name'].nunique().reset_index(
-                name='Contributors').to_dict(orient='records')
+            }
+            for row in community_df.groupby('Country')['Name'].nunique()
+            .reset_index(name='Contributors')
+            .to_dict(orient='records')
         ],
         "total_members": total(community_df)
     }
@@ -143,7 +177,7 @@ def calculate_countries_stats():
         "global_south_countries": sum(countries_df['Income Group'].isin(global_south_income_groups)),
         "global_north_countries": sum(countries_df['Income Group'].isin(global_north_income_groups)),
         "income_groups": countries_df['Income Group'].value_counts().reset_index().rename(
-            columns={'index': 'Income Group', 'Income Group': 'Count'}).to_dict(orient='records'),
+            columns={'Count': 'Income Group', 'count': 'Count'}).to_dict(orient='records'),
         "population_by_region": [
             {
                 "Region": row["Region"],
@@ -160,7 +194,7 @@ def calculate_organization_stats():
     org_data = {
         "total_organizations": total(organisations_df),
         "organization_types": organisations_df['Type'].value_counts().reset_index().rename(
-            columns={'index': 'Organization Type', 'Type': 'Count'}).to_dict(orient='records'),
+            columns={'Count': 'Organization Type', 'count': 'Count'}).to_dict(orient='records'),
         "organizations_by_country": [
             {
                 "Country": country_map.get(row["Country"].strip("[]").replace("'", ""), "Unknown"),
@@ -176,7 +210,7 @@ def calculate_blogposts_stats():
     blogposts_data = {
         "total_blogposts": total(blogposts_df),
         "topics_distribution": blogposts_df['Publisher'].value_counts().reset_index().rename(
-            columns={'index': 'Topic', 'Publisher': 'Count'}).to_dict(orient='records'),
+            columns={'Count': 'Publisher', 'count': 'Count'}).to_dict(orient='records'),
         "posts_over_time": blogposts_df.groupby(['Year', 'Quarter']).size().reset_index(
             name='Post Count').to_dict(orient='records')
     }
@@ -187,7 +221,7 @@ def calculate_events_stats():
     events_data = {
         "total_events": total(events_df),
         "events_by_year": events_df['Year'].value_counts().reset_index().rename(
-            columns={'index': 'Year', 'Year': 'Count'}).to_dict(orient='records')
+            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records')
     }
     return events_data
 
@@ -198,10 +232,33 @@ def calculate_publications_stats():
         "total_citations": sum_column(publications_df, 'Citations'),
         "citations_by_year": calc_avg_specific(publications_df, 'Year', 'Citations'),
         "collaboration_breakdown": publications_df['Ersilia Affiliation'].value_counts().reset_index().rename(
-            columns={'index': 'Collaboration Type', 'Ersilia Affiliation': 'Count'}).to_dict(orient='records'),
+            columns={'Ersilia Affiliation': 'Count', 'count': 'Count'}).to_dict(orient='records'),
         "publications_by_topic": publications_df['Topic'].value_counts().reset_index().rename(
-            columns={'index': 'Topic', 'Topic': 'Count'}).to_dict(orient='records')
+            columns={'Count': 'Topic', 'count': 'Count'}).to_dict(orient='records')
     }
+
+    cby = calc_avg_specific(publications_df, 'Year', 'Citations')  # returns [{'Year': 2013, 'average_Citations': X}, ...]
+    
+    # Collapse years < 2020
+    collapsed = {}
+    for item in cby:
+        year = item["Year"]
+        avg_c = item["average_Citations"]
+        if year < 2020:
+            collapsed.setdefault("Before 2020", []).append(avg_c)
+        else:
+            collapsed.setdefault(str(year), []).append(avg_c)
+
+    # Now compute the average for 'Before 2020', or just store it
+    final_list = []
+    for k, v in collapsed.items():
+        final_list.append({
+            "Year": k,
+            "average_Citations": round(sum(v) / len(v), 2)
+        })
+
+    publications_data["citations_by_year"] = final_list
+
     return publications_data
 
 # OpenAlex titles query
@@ -212,15 +269,117 @@ def calculate_openalex_titles():
         "match_percentage": round(external_titles_df["Match"].mean() * 100, 2) if len(external_titles_df) > 0 else 0
     }
 
-# OpenAlex authors query
 def calculate_openalex_authors():
+    # 1. Explode the Authors column
+    pub_exploded = (
+        publications_df
+        .assign(Authors=publications_df['Authors'].str.split(','))  # split by comma
+        .explode('Authors')                                         # one row per author
+        .rename(columns={'Authors': 'Name'})
+    )
+    pub_exploded['Name'] = pub_exploded['Name'].str.strip()  # remove trailing spaces
+
+    # 2. Identify Ersilia publications more explicitly
+    #    We'll also store a small dict for each Ersilia publication
+    def build_pub_dict(row):
+        return {
+            "id": row["id"],
+            "title": row["Title"],
+            "year": row["Year"],
+            "url": row["URL"] if "URL" in row else None
+        }
+
+    # Filter to *just* rows with Ersilia Affiliation == 'Yes'
+    ersilia_rows = pub_exploded[pub_exploded["Ersilia Affiliation"] == "Yes"].copy()
+    ersilia_rows["PublicationDetails"] = ersilia_rows.apply(build_pub_dict, axis=1)
+
+    # We also want total pubs, so let's group ALL (even if affiliation == No)
+    total_pubs_grouped = (
+        pub_exploded
+        .groupby('Name')
+        .agg(
+            total_publications=('id', 'count')
+        )
+        .reset_index()
+    )
+
+    # For Ersilia pubs specifically, group and collect the details
+    ersilia_pubs_grouped = (
+        ersilia_rows
+        .groupby('Name')
+        .agg(
+            ersilia_publications=('id', 'count'),
+            ersilia_pub_details=('PublicationDetails', list)  # collect details in a list
+        )
+        .reset_index()
+    )
+
+    # 3. Merge total_pubs_grouped and ersilia_pubs_grouped
+    merged_authors = pd.merge(
+        total_pubs_grouped,
+        ersilia_pubs_grouped,
+        on='Name',
+        how='left'
+    )
+
+    # If an author has no Ersilia pubs, ersilia_publications will be NaN => fill with 0
+    merged_authors['ersilia_publications'] = merged_authors['ersilia_publications'].fillna(0).astype(int)
+    merged_authors['ersilia_pub_details'] = merged_authors['ersilia_pub_details'].fillna('')
+
+    # 4. Merge with external_authors_df (OpenAlex) for H-index, etc.
+    #    Suppose external_authors_df has columns: [Name, H-index, Number of Works, Total Citations]
+    merged_authors = pd.merge(
+        merged_authors,
+        external_authors_df[['Name', 'H-index', 'Number of Works', 'Total Citations']],
+        on='Name',
+        how='left'
+    )
+
+    # Fill missing fields for authors not found in external_authors_df
+    merged_authors['H-index'] = merged_authors['H-index'].fillna(0)
+    merged_authors['Number of Works'] = merged_authors['Number of Works'].fillna(0)
+    merged_authors['Total Citations'] = merged_authors['Total Citations'].fillna(0)
+
+    # 5. Filter out authors with 0 Ersilia pubs
+    merged_authors = merged_authors[merged_authors['ersilia_publications'] > 0].copy()
+
+    # 6. Filter out specific authors if needed
+    filter_out = ["Miquel Duran-Frigola", "Gemma Turon", "Dhanshree Arora"]
+    merged_authors = merged_authors[~merged_authors['Name'].isin(filter_out)]
+
+    # 7. Sort by (ersilia_publications DESC, H-index DESC)
+    merged_authors = merged_authors.sort_values(
+        by=['ersilia_publications', 'H-index'], 
+        ascending=[False, False]
+    )
+
+    # 8. Prepare summary stats
+    total_authors = len(external_authors_df)
+    total_works = int(external_authors_df['Number of Works'].sum())
+    total_citations = int(external_authors_df['Total Citations'].sum())
+
+    # If there's at least one author, pick top_author as the one in first row
+    if total_authors > 0:
+        top_author_row = merged_authors.iloc[0]
+        top_author = top_author_row['Name']
+        highest_h_index = int(top_author_row['H-index'])
+    else:
+        top_author = None
+        highest_h_index = 0
+
+    # 9. Convert final data to dictionary for JSON output
+    #    We'll store the full table as "author_highlights"
+    merged_dict = merged_authors.to_dict(orient='records')
+
     return {
-        "total_authors": len(external_authors_df),
-        "total_works": external_authors_df["Number of Works"].sum(),
-        "total_citations": external_authors_df["Total Citations"].sum(),
-        "highest_h_index": external_authors_df["H-index"].max(),
-        "top_author": external_authors_df.loc[external_authors_df["H-index"].idxmax(), "Name"]
+        "total_authors": total_authors,
+        "total_works": total_works,
+        "total_citations": total_citations,
+        "highest_h_index": highest_h_index,
+        "top_author": top_author,
+        "author_highlights": merged_dict
     }
+
 
 # External Data Statistics
 def calculate_external_data_stats():
@@ -280,20 +439,6 @@ def calculate_external_data_stats():
 
     return external_stats
 
-
-
-# Aggregating All Calculations
-output_data["models-impact"] = calculate_models_impact()
-output_data["community"] = calculate_community_stats()
-output_data["countries"] = calculate_countries_stats()
-output_data["organization"] = calculate_organization_stats()
-output_data["blogposts-events"] = calculate_blogposts_stats()
-output_data["events"] = calculate_events_stats()
-output_data["publications"] = calculate_publications_stats()
-output_data["openalex_titles"] = calculate_openalex_titles()
-output_data["openalex_authors"] = calculate_openalex_authors()
-output_data["external_data"] = calculate_external_data_stats()
-
 # Serialization & Output
 def convert_to_serializable(obj):
     if isinstance(obj, pd.DataFrame):
@@ -307,6 +452,18 @@ def convert_to_serializable(obj):
     return obj
 
 def create_json():
+    # Aggregating All Calculations
+    output_data["models-impact"] = calculate_models_impact()
+    output_data["community"] = calculate_community_stats()
+    output_data["countries"] = calculate_countries_stats()
+    output_data["organization"] = calculate_organization_stats()
+    output_data["blogposts-events"] = calculate_blogposts_stats()
+    output_data["events"] = calculate_events_stats()
+    output_data["publications"] = calculate_publications_stats()
+    output_data["openalex_titles"] = calculate_openalex_titles()
+    output_data["openalex_authors"] = calculate_openalex_authors()
+    output_data["external_data"] = calculate_external_data_stats()
+
     output_data_serializable = convert_to_serializable(output_data)
 
     # Write the output_data to a JSON file

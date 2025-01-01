@@ -1,5 +1,3 @@
-import dataset_references as ref
-import calculate_stats as calc
 import pandas as pd
 from ast import literal_eval
 
