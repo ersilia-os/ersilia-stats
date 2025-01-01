@@ -1,163 +1,145 @@
 {
     "publications": {
-        "total_publications": 40,
-        "total_citations": 1183,
+        "total_publications": 39,
+        "total_citations": 1177,
         "citations_by_year": [
             {
-                "Year": 2013,
-                "average_Citations": 53.0
+                "Year": "Before 2020",
+                "average_Citations": 50.7
             },
             {
-                "Year": 2014,
-                "average_Citations": 32.0
-            },
-            {
-                "Year": 2017,
-                "average_Citations": 44.0
-            },
-            {
-                "Year": 2018,
-                "average_Citations": 105.5
-            },
-            {
-                "Year": 2019,
-                "average_Citations": 19.0
-            },
-            {
-                "Year": 2020,
+                "Year": "2020",
                 "average_Citations": 37.2
             },
             {
-                "Year": 2021,
-                "average_Citations": 32.0
+                "Year": "2021",
+                "average_Citations": 31.4
             },
             {
-                "Year": 2022,
-                "average_Citations": 23.33
+                "Year": "2022",
+                "average_Citations": 23.17
             },
             {
-                "Year": 2023,
+                "Year": "2023",
                 "average_Citations": 16.33
             },
             {
-                "Year": 2024,
-                "average_Citations": 5.8
+                "Year": "2024",
+                "average_Citations": 6.75
             }
         ],
         "collaboration_breakdown": [
             {
-                "Count": "Yes",
-                "count": 23
+                "Count": 23
             },
             {
-                "Count": "No",
-                "count": 17
+                "Count": 16
             }
         ],
         "publications_by_topic": [
             {
-                "Count": "Chemoinformatics",
-                "count": 18
+                "Topic": "Chemoinformatics",
+                "Count": 17
             },
             {
-                "Count": "Bioinformatics",
-                "count": 13
+                "Topic": "Bioinformatics",
+                "Count": 13
             },
             {
-                "Count": "Medical informatics",
-                "count": 7
+                "Topic": "Medical informatics",
+                "Count": 7
             },
             {
-                "Count": "Molecular biology",
-                "count": 2
+                "Topic": "Molecular biology",
+                "Count": 2
             }
         ]
     },
     "blogposts-events": {
-        "total_blogposts": 46,
+        "total_blogposts": 50,
         "topics_distribution": [
             {
-                "Count": "Ersilia",
-                "count": 36
+                "Publisher": "Ersilia",
+                "Count": 37
             },
             {
-                "Count": "Other",
-                "count": 10
+                "Publisher": "Other",
+                "Count": 10
             }
         ],
         "posts_over_time": [
             {
-                "Year": 2021,
+                "Year": 2021.0,
                 "Quarter": "Q2",
                 "Post Count": 6
             },
             {
-                "Year": 2021,
+                "Year": 2021.0,
                 "Quarter": "Q3",
                 "Post Count": 4
             },
             {
-                "Year": 2021,
+                "Year": 2021.0,
                 "Quarter": "Q4",
                 "Post Count": 2
             },
             {
-                "Year": 2022,
+                "Year": 2022.0,
                 "Quarter": "Q1",
                 "Post Count": 3
             },
             {
-                "Year": 2022,
+                "Year": 2022.0,
                 "Quarter": "Q2",
                 "Post Count": 2
             },
             {
-                "Year": 2022,
-                "Quarter": "Q3",
-                "Post Count": 3
-            },
-            {
-                "Year": 2022,
-                "Quarter": "Q4",
-                "Post Count": 2
-            },
-            {
-                "Year": 2023,
-                "Quarter": "Q1",
-                "Post Count": 2
-            },
-            {
-                "Year": 2023,
-                "Quarter": "Q2",
-                "Post Count": 3
-            },
-            {
-                "Year": 2023,
+                "Year": 2022.0,
                 "Quarter": "Q3",
                 "Post Count": 4
             },
             {
-                "Year": 2023,
+                "Year": 2022.0,
                 "Quarter": "Q4",
-                "Post Count": 4
+                "Post Count": 2
             },
             {
-                "Year": 2024,
+                "Year": 2023.0,
                 "Quarter": "Q1",
-                "Post Count": 3
+                "Post Count": 2
             },
             {
-                "Year": 2024,
+                "Year": 2023.0,
                 "Quarter": "Q2",
                 "Post Count": 3
             },
             {
-                "Year": 2024,
+                "Year": 2023.0,
+                "Quarter": "Q3",
+                "Post Count": 4
+            },
+            {
+                "Year": 2023.0,
+                "Quarter": "Q4",
+                "Post Count": 4
+            },
+            {
+                "Year": 2024.0,
+                "Quarter": "Q1",
+                "Post Count": 3
+            },
+            {
+                "Year": 2024.0,
+                "Quarter": "Q2",
+                "Post Count": 3
+            },
+            {
+                "Year": 2024.0,
                 "Quarter": "Q3",
                 "Post Count": 2
             },
             {
-                "Year": 2024,
+                "Year": 2024.0,
                 "Quarter": "Q4",
                 "Post Count": 3
             }
@@ -169,20 +151,20 @@
         "global_north_countries": 109,
         "income_groups": [
             {
-                "Count": "UMIC",
-                "count": 56
+                "Income Group": "UMIC",
+                "Count": 56
             },
             {
-                "Count": "HIC",
-                "count": 53
+                "Income Group": "HIC",
+                "Count": 53
             },
             {
-                "Count": "LMIC",
-                "count": 45
+                "Income Group": "LMIC",
+                "Count": 45
             },
             {
-                "Count": "LIC",
-                "count": 25
+                "Income Group": "LIC",
+                "Count": 25
             }
         ],
         "population_by_region": [
@@ -212,32 +194,32 @@
         "total_organizations": 209,
         "organization_types": [
             {
-                "Count": "Academia",
-                "count": 61
+                "Type": "Academia",
+                "Count": 61
             },
             {
-                "Count": "Foundation",
-                "count": 49
+                "Type": "Foundation",
+                "Count": 49
             },
             {
-                "Count": "Nonprofit",
-                "count": 33
+                "Type": "Nonprofit",
+                "Count": 33
             },
             {
-                "Count": "Corporate",
-                "count": 31
+                "Type": "Corporate",
+                "Count": 31
             },
             {
-                "Count": "Pharma",
-                "count": 14
+                "Type": "Pharma",
+                "Count": 14
             },
             {
-                "Count": "Government",
-                "count": 11
+                "Type": "Government",
+                "Count": 11
             },
             {
-                "Count": "Accelerator",
-                "count": 8
+                "Type": "Accelerator",
+                "Count": 8
             }
         ],
         "organizations_by_country": [
@@ -356,18 +338,30 @@
             },
             {
                 "Role": "Intern",
-                "Count": 24
+                "Count": 27
             },
             {
                 "Role": "Trustee",
+                "Count": 5
+            },
+            {
+                "Role": "OS Maintainer",
+                "Count": 4
+            },
+            {
+                "Role": "Mentor",
                 "Count": 4
             },
             {
                 "Role": "MSc Student",
-                "Count": 3
+                "Count": 4
             },
             {
                 "Role": "Advisor",
+                "Count": 2
+            },
+            {
+                "Role": "Employee",
                 "Count": 2
             },
             {
@@ -375,39 +369,7 @@
                 "Count": 2
             },
             {
-                "Role": "OS Maintainer, Mentor",
-                "Count": 1
-            },
-            {
-                "Role": "Mentor",
-                "Count": 1
-            },
-            {
-                "Role": "Intern, Mentor, OS Maintainer",
-                "Count": 1
-            },
-            {
-                "Role": "Employee",
-                "Count": 1
-            },
-            {
-                "Role": "Employee, Trustee",
-                "Count": 1
-            },
-            {
-                "Role": "OS Maintainer",
-                "Count": 1
-            },
-            {
                 "Role": "Visiting Researcher",
-                "Count": 1
-            },
-            {
-                "Role": "Intern, OS Maintainer",
-                "Count": 1
-            },
-            {
-                "Role": "Intern, MSc Student, Mentor",
                 "Count": 1
             }
         ],
@@ -484,454 +446,302 @@
         "total_members": 91
     },
     "models-impact": {
-        "total_models": 180,
+        "total_models": 181,
         "model_distribution": [
             {
-                "Count": "Similarity",
+                "Category": "ADME",
+                "count": 28
+            },
+            {
+                "Category": "Descriptor",
+                "count": 26
+            },
+            {
+                "Category": "Chemical graph model",
+                "count": 23
+            },
+            {
+                "Category": "Toxicity",
+                "count": 20
+            },
+            {
+                "Category": "Similarity",
+                "count": 16
+            },
+            {
+                "Category": "Embedding",
+                "count": 16
+            },
+            {
+                "Category": "Compound generation",
+                "count": 14
+            },
+            {
+                "Category": "Permeability",
+                "count": 13
+            },
+            {
+                "Category": "Metabolism",
+                "count": 13
+            },
+            {
+                "Category": "Fingerprint",
+                "count": 13
+            },
+            {
+                "Category": "MoleculeNet",
+                "count": 12
+            },
+            {
+                "Category": "Chemical language model",
                 "count": 11
             },
             {
-                "Count": "Compound generation",
+                "Category": "Antimicrobial activity",
+                "count": 11
+            },
+            {
+                "Category": "ChEMBL",
+                "count": 10
+            },
+            {
+                "Category": "Untagged",
+                "count": 9
+            },
+            {
+                "Category": "IC50",
+                "count": 8
+            },
+            {
+                "Category": "Solubility",
                 "count": 7
             },
             {
-                "Count": "Dummy",
+                "Category": "Chemical synthesis",
+                "count": 7
+            },
+            {
+                "Category": "Chemical notation",
+                "count": 7
+            },
+            {
+                "Category": "Human",
                 "count": 6
             },
             {
-                "Count": "Descriptor",
+                "Category": "M.tuberculosis",
                 "count": 6
             },
             {
-                "Count": "Embedding",
+                "Category": "Cardiotoxicity",
+                "count": 6
+            },
+            {
+                "Category": "Dummy",
+                "count": 6
+            },
+            {
+                "Category": "P.falciparum",
+                "count": 6
+            },
+            {
+                "Category": "Malaria",
+                "count": 6
+            },
+            {
+                "Category": "Natural product",
+                "count": 5
+            },
+            {
+                "Category": "CYP450",
+                "count": 5
+            },
+            {
+                "Category": "Drug-likeness",
+                "count": 5
+            },
+            {
+                "Category": "LogP",
+                "count": 5
+            },
+            {
+                "Category": "Antiviral activity",
+                "count": 5
+            },
+            {
+                "Category": "Synthetic accessibility",
+                "count": 5
+            },
+            {
+                "Category": "hERG",
+                "count": 5
+            },
+            {
+                "Category": "Half-life",
                 "count": 4
             },
             {
-                "Count": "Fingerprint",
+                "Category": "Lipophilicity",
                 "count": 4
             },
             {
-                "Count": "Synthetic accessibility, Chemical synthesis",
+                "Category": "Tuberculosis",
                 "count": 4
             },
             {
-                "Count": "CYP450, ADME, Metabolism",
+                "Category": "Bioactivity profile",
                 "count": 4
             },
             {
-                "Count": "Fingerprint, Descriptor",
+                "Category": "COVID19",
                 "count": 4
             },
             {
-                "Count": "MoleculeNet, Chemical graph model, Quantum properties",
+                "Category": "Microsomal stability",
                 "count": 3
             },
             {
-                "Count": "Descriptor, Embedding",
+                "Category": "Cytotoxicity",
                 "count": 3
             },
             {
-                "Count": "Descriptor, Fingerprint",
+                "Category": "Quantum properties",
                 "count": 3
             },
             {
-                "Count": "Chemical graph model, Compound generation",
+                "Category": "Sars-CoV-2",
                 "count": 3
             },
             {
-                "Count": "Chemical notation, Chemical language model",
+                "Category": "Side effects",
                 "count": 2
             },
             {
-                "Count": "hERG, Toxicity, Cardiotoxicity",
+                "Category": "Papp",
                 "count": 2
             },
             {
-                "Count": "Drug-likeness",
+                "Category": "Target identification",
                 "count": 2
             },
             {
-                "Count": "Natural product, Descriptor",
+                "Category": "LogS",
                 "count": 2
             },
             {
-                "Count": "Antimicrobial activity",
+                "Category": "pKa",
                 "count": 2
             },
             {
-                "Count": "ADME, Permeability, LogP",
+                "Category": "BACE",
                 "count": 2
             },
             {
-                "Count": "Chemical language model, Chemical notation",
+                "Category": "ESKAPE",
                 "count": 2
             },
             {
-                "Count": "P.falciparum, Malaria, Antimicrobial activity",
+                "Category": "Alzheimer",
                 "count": 2
             },
             {
-                "Count": "Natural product, Drug-likeness",
+                "Category": "E.coli",
                 "count": 2
             },
             {
-                "Count": "Descriptor, Bioactivity profile, Embedding",
+                "Category": "Tox21",
                 "count": 2
             },
             {
-                "Count": "Permeability, ADME, LogP",
+                "Category": "HIV",
                 "count": 2
             },
             {
-                "Count": "Malaria, P.falciparum, IC50",
+                "Category": "Fraction bound",
                 "count": 2
             },
             {
-                "Count": "Similarity, ChEMBL",
+                "Category": "Cancer",
                 "count": 2
             },
             {
-                "Count": "Descriptor, Chemical language model, Chemical graph model, Embedding",
-                "count": 1
-            },
-            {
-                "Count": "E.coli, IC50, Antimicrobial activity, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Antiviral activity, IC50, HBV, ChEMBL",
-                "count": 1
-            },
-            {
-                "Count": "Fraction bound, ADME",
-                "count": 1
-            },
-            {
-                "Count": "ADME, Solubility, Human",
-                "count": 1
-            },
-            {
-                "Count": "hERG, Toxicity, Cardiotoxicity, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Microsomal stability, ADME, Metabolism, Half-life, Permeability",
-                "count": 1
-            },
-            {
-                "Count": "Permeability, MoleculeNet, Chemical graph model, Alzheimer",
-                "count": 1
-            },
-            {
-                "Count": "Cancer, ChEMBL",
-                "count": 1
-            },
-            {
-                "Count": "Chemical notation, Chemical language model, Compound generation",
-                "count": 1
-            },
-            {
-                "Count": "Chemical notation",
-                "count": 1
-            },
-            {
-                "Count": "ZINC, Compound generation",
-                "count": 1
-            },
-            {
-                "Count": "Mycetoma, Antifungal activity",
-                "count": 1
-            },
-            {
-                "Count": "Metabolism",
-                "count": 1
-            },
-            {
-                "Count": "COVID19, Antiviral activity, Sars-CoV-2, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Chemical language model, Embedding, Descriptor",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, ToxCast, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Tox21, Toxicity, MoleculeNet",
-                "count": 1
-            },
-            {
-                "Count": "Metabolism, ADME, Human, Microsomal stability, Half-life",
-                "count": 1
-            },
-            {
-                "Count": "HIV, Antiviral activity, MoleculeNet",
-                "count": 1
-            },
-            {
-                "Count": "Chemical synthesis",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, Human, Metabolism",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, Metabolism",
-                "count": 1
-            },
-            {
-                "Count": "Cardiotoxicity, DrugBank",
-                "count": 1
-            },
-            {
-                "Count": "CYP450, ADME, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "ADME, Toxicity",
-                "count": 1
-            },
-            {
-                "Count": "Molecular weight",
-                "count": 1
-            },
-            {
-                "Count": "ChEMBL, IC50, Toxicity",
-                "count": 1
-            },
-            {
-                "Count": "Lipophilicity, LogP",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, Synthetic accessibility",
-                "count": 1
-            },
-            {
-                "Count": "Sars-CoV-2, COVID19, Antiviral activity",
-                "count": 1
-            },
-            {
-                "Count": "Solubility, ADME, LogS",
-                "count": 1
-            },
-            {
-                "Count": "Chemical language model, Descriptor, Embedding",
-                "count": 1
-            },
-            {
-                "Count": "MoleculeNet, Lipophilicity, ADME, LogD, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Price, Compound generation, Chemical synthesis",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, ADME, Lipophilicity, Solubility, Permeability",
-                "count": 1
-            },
-            {
-                "Count": "Tox21, Toxicity, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Permeability, M.tuberculosis, ADME, Tuberculosis",
-                "count": 1
-            },
-            {
-                "Count": "Similarity, ChEMBL, DrugBank",
-                "count": 1
-            },
-            {
-                "Count": "ADME, Fraction bound, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, Human",
-                "count": 1
-            },
-            {
-                "Count": "pKa",
-                "count": 1
-            },
-            {
-                "Count": "ADME, Toxicity, Lipophilicity, Solubility, Permeability",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, hERG, Cardiotoxicity",
-                "count": 1
-            },
-            {
-                "Count": "Fingerprint, Embedding, Chemical synthesis",
-                "count": 1
-            },
-            {
-                "Count": "Metabolism, Toxicity",
-                "count": 1
-            },
-            {
-                "Count": "Neglected tropical disease, Schistosomiasis, IC50",
-                "count": 1
-            },
-            {
-                "Count": "Cardiotoxicity, hERG, Toxicity, Descriptor",
-                "count": 1
-            },
-            {
-                "Count": "Malaria, P.falciparum",
-                "count": 1
-            },
-            {
-                "Count": "Permeability, ADME, Papp",
-                "count": 1
-            },
-            {
-                "Count": "Therapeutic indication",
-                "count": 1
-            },
-            {
-                "Count": "Malaria, P.falciparum, Tuberculosis, M.tuberculosis, ADME, Cytotoxicity, Solubility",
-                "count": 1
-            },
-            {
-                "Count": "Drug-likeness, Permeability",
-                "count": 1
-            },
-            {
-                "Count": "ChEMBL, Similarity",
-                "count": 1
-            },
-            {
-                "Count": "Target identification, GPCR",
-                "count": 1
-            },
-            {
-                "Count": "Bioactivity profile, Target identification, ChEMBL",
-                "count": 1
-            },
-            {
-                "Count": "M.tuberculosis, Antimicrobial activity, MIC90, Tuberculosis",
-                "count": 1
-            },
-            {
-                "Count": "BACE, Chemical graph model, MoleculeNet",
-                "count": 1
-            },
-            {
-                "Count": "Cytotoxicity, Antimicrobial activity, ESKAPE",
-                "count": 1
-            },
-            {
-                "Count": "Permeability, ADME, Papp, Chemical graph model",
-                "count": 1
-            },
-            {
-                "Count": "Chemical language model, Embedding",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, MoleculeNet, Side effects",
-                "count": 1
-            },
-            {
-                "Count": "Toxicity, MoleculeNet, Chemical graph model, Side effects",
-                "count": 1
-            },
-            {
-                "Count": "Chemical language model, Chemical notation, ChEMBL",
-                "count": 1
-            },
-            {
-                "Count": "ADME, Solubility",
-                "count": 1
-            },
-            {
-                "Count": "HIV, Human, HDAC1",
-                "count": 1
-            },
-            {
-                "Count": "M.tuberculosis, Antimicrobial activity",
-                "count": 1
+                "Category": "DrugBank",
+                "count": 2
             },
             {
-                "Count": "Microsomal stability, Rat, ADME, Metabolism, Half-life",
+                "Category": "GPCR",
                 "count": 1
             },
             {
-                "Count": "A.baumannii, Antimicrobial activity",
+                "Category": "N.gonorrhoeae",
                 "count": 1
             },
             {
-                "Count": "Cytotoxicity, ESKAPE",
+                "Category": "A.baumannii",
                 "count": 1
             },
             {
-                "Count": "Solubility, MoleculeNet, ADME, LogS, Chemical graph model",
+                "Category": "Rat",
                 "count": 1
             },
             {
-                "Count": "Toxicity, Cancer, Metabolism",
+                "Category": "HDAC1",
                 "count": 1
             },
             {
-                "Count": "COVID19",
+                "Category": "HBV",
                 "count": 1
             },
             {
-                "Count": "Descriptor, Chemical language model",
+                "Category": "MIC90",
                 "count": 1
             },
             {
-                "Count": "Natural product, Fingerprint, Descriptor",
+                "Category": "Price",
                 "count": 1
             },
             {
-                "Count": "Antimicrobial activity, ChEMBL, N.gonorrhoeae",
+                "Category": "ToxCast",
                 "count": 1
             },
             {
-                "Count": "Alzheimer, BACE, MoleculeNet, Chemical graph model",
+                "Category": "Therapeutic indication",
                 "count": 1
             },
             {
-                "Count": "M.tuberculosis, IC50, Tuberculosis, Antimicrobial activity",
+                "Category": "Schistosomiasis",
                 "count": 1
             },
             {
-                "Count": "ADME, Metabolism, Human, Half-life",
+                "Category": "Neglected tropical disease",
                 "count": 1
             },
             {
-                "Count": "Similarity, Bioactivity profile, Compound generation",
+                "Category": "Mycetoma",
                 "count": 1
             },
             {
-                "Count": "Chemical graph model, Embedding, Descriptor",
+                "Category": "Antifungal activity",
                 "count": 1
             },
             {
-                "Count": "pKa, ADME",
+                "Category": "LogD",
                 "count": 1
             },
             {
-                "Count": "Sars-CoV-2, Antiviral activity, COVID19",
+                "Category": "ZINC",
                 "count": 1
             },
             {
-                "Count": "M.tuberculosis, Permeability",
+                "Category": "Molecular weight",
                 "count": 1
             },
             {
-                "Count": "Embedding, Biomedical text",
+                "Category": "Biomedical text",
                 "count": 1
             }
         ],
-        "ready_percentage": 85.0,
+        "ready_percentage": 85.08,
         "model_list": [
             {
                 "Title": "REINVENT 4 LibInvent",
@@ -1155,6 +965,13 @@
                 "Tag": "['Similarity']",
                 "Contributor": "ankitskvmdam",
                 "Incorporation Date": "2024-03-08",
+                "Status": "Ready"
+            },
+            {
+                "Title": "Broad spectrum antibiotic potential",
+                "Tag": "['E.coli', 'IC50', 'Antimicrobial activity', 'Chemical graph model']",
+                "Contributor": "GemmaTuron",
+                "Incorporation Date": "2022-09-28",
                 "Status": "Ready"
             },
             {
@@ -1901,7 +1718,7 @@
             },
             {
                 "Title": "Knowledge-guided pre-trained graph transformer",
-                "Tag": "['Descriptor']",
+                "Tag": NaN,
                 "Contributor": "miquelduranfrigola",
                 "Incorporation Date": "2024-12-17",
                 "Status": "In progress"
@@ -2020,7 +1837,7 @@
             },
             {
                 "Title": "Antimicrobial class specificity prediction",
-                "Tag": "['Antimicrobial activity']",
+                "Tag": NaN,
                 "Contributor": "miquelduranfrigola",
                 "Incorporation Date": "2024-12-17",
                 "Status": "In progress"
@@ -2196,16 +2013,2050 @@
         ]
     },
     "openalex_titles": {
-        "total_titles": 40,
-        "exact_matches": 37,
-        "match_percentage": 92.5
+        "total_titles": 39,
+        "exact_matches": 36,
+        "match_percentage": 92.31
     },
     "openalex_authors": {
-        "total_authors": 222,
-        "total_works": 138753,
-        "total_citations": 2770383,
-        "highest_h_index": 250,
-        "top_author": "Li Wang"
+        "total_authors": 217,
+        "total_works": 264110,
+        "total_citations": 4841118,
+        "highest_h_index": 54,
+        "top_author": "Patrick Aloy",
+        "author_highlights": [
+            {
+                "Name": "Patrick Aloy",
+                "total_publications": 16,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recMKQ0nQm2PPL5i7",
+                        "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
+                        "year": 2022,
+                        "url": "https://www.nature.com/articles/s41467-022-33026-0"
+                    },
+                    {
+                        "id": "rechnbw6EiAC54J48",
+                        "title": "Connecting chemistry and biology through molecular descriptors",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S1367593121001204?via%3Dihub"
+                    }
+                ],
+                "H-index": 54.0,
+                "Number of Works": 264.0,
+                "Total Citations": 14450.0
+            },
+            {
+                "Name": "Kelly Chibale",
+                "total_publications": 2,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSD7KGLl4qcqJAc",
+                        "title": "First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41467-023-41512-2"
+                    },
+                    {
+                        "id": "recXOhs8S6wGHkrtn",
+                        "title": "AI coupled to pharmacometric modelling to tailor malaria and tuberculosis treatment in Africa",
+                        "year": 2024,
+                        "url": "https://www.medrxiv.org/content/10.1101/2024.11.07.24316884v1"
+                    }
+                ],
+                "H-index": 39.0,
+                "Number of Works": 258.0,
+                "Total Citations": 5471.0
+            },
+            {
+                "Name": "Izukanji Sikazwe",
+                "total_publications": 2,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    },
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 25.0,
+                "Number of Works": 133.0,
+                "Total Citations": 2184.0
+            },
+            {
+                "Name": "Mathew Njoroge",
+                "total_publications": 2,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recXOhs8S6wGHkrtn",
+                        "title": "AI coupled to pharmacometric modelling to tailor malaria and tuberculosis treatment in Africa",
+                        "year": 2024,
+                        "url": "https://www.medrxiv.org/content/10.1101/2024.11.07.24316884v1"
+                    },
+                    {
+                        "id": "recjZo6G6z7izlQfX",
+                        "title": "AI can help to tailor drugs for Africa \u2014 but Africans should lead the way",
+                        "year": 2024,
+                        "url": "https://www.nature.com/articles/d41586-024-01001-y"
+                    }
+                ],
+                "H-index": 19.0,
+                "Number of Works": 62.0,
+                "Total Citations": 1100.0
+            },
+            {
+                "Name": "Mwila Mulubwa",
+                "total_publications": 2,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recXOhs8S6wGHkrtn",
+                        "title": "AI coupled to pharmacometric modelling to tailor malaria and tuberculosis treatment in Africa",
+                        "year": 2024,
+                        "url": "https://www.medrxiv.org/content/10.1101/2024.11.07.24316884v1"
+                    },
+                    {
+                        "id": "recjZo6G6z7izlQfX",
+                        "title": "AI can help to tailor drugs for Africa \u2014 but Africans should lead the way",
+                        "year": 2024,
+                        "url": "https://www.nature.com/articles/d41586-024-01001-y"
+                    }
+                ],
+                "H-index": 8.0,
+                "Number of Works": 29.0,
+                "Total Citations": 138.0
+            },
+            {
+                "Name": "Ana Rodriguez",
+                "total_publications": 2,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    },
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Carolyn Bolton Moore",
+                "total_publications": 3,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    },
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Fidele Ntie-Kang et al.",
+                "total_publications": 2,
+                "ersilia_publications": 2,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recGZUWkFiuF9b2j8",
+                        "title": "The workshops on computational applications in secondary metabolite discovery (CAiSMD)",
+                        "year": 2024,
+                        "url": "https://www.degruyter.com/document/doi/10.1515/psr-2024-0015/html"
+                    },
+                    {
+                        "id": "recoq5sP7rtjRFwWy",
+                        "title": "Computational Applications in Secondary Metabolite Discovery (CAiSMD): an online workshop",
+                        "year": 2021,
+                        "url": "https://pubmed.ncbi.nlm.nih.gov/34488889/"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Quique Bassat",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 79.0,
+                "Number of Works": 626.0,
+                "Total Citations": 37724.0
+            },
+            {
+                "Name": "Gioacchino Natoli",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 74.0,
+                "Number of Works": 231.0,
+                "Total Citations": 30659.0
+            },
+            {
+                "Name": "J\u00fcrgen Bajorath",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 72.0,
+                "Number of Works": 1054.0,
+                "Total Citations": 32986.0
+            },
+            {
+                "Name": "Johann Gasteiger",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 59.0,
+                "Number of Works": 410.0,
+                "Total Citations": 22549.0
+            },
+            {
+                "Name": "Fosca Giannotti",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 58.0,
+                "Number of Works": 373.0,
+                "Total Citations": 17405.0
+            },
+            {
+                "Name": "Brad H. Pollock",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 55.0,
+                "Number of Works": 274.0,
+                "Total Citations": 11495.0
+            },
+            {
+                "Name": "Luis J. Montaner",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recUfRe5yJ5w5hp9u",
+                        "title": "Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective",
+                        "year": 2022,
+                        "url": "https://www.frontiersin.org/articles/10.3389/fddsv.2022.1013285#.Y2LoKJerriI.twitter "
+                    }
+                ],
+                "H-index": 54.0,
+                "Number of Works": 350.0,
+                "Total Citations": 9669.0
+            },
+            {
+                "Name": "Jordi Mestres",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 47.0,
+                "Number of Works": 205.0,
+                "Total Citations": 7215.0
+            },
+            {
+                "Name": "Alfredo Mayor",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 46.0,
+                "Number of Works": 211.0,
+                "Total Citations": 6481.0
+            },
+            {
+                "Name": "Chandy C. John",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 46.0,
+                "Number of Works": 327.0,
+                "Total Citations": 8025.0
+            },
+            {
+                "Name": "Francesco Raimondi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 43.0,
+                "Number of Works": 236.0,
+                "Total Citations": 5737.0
+            },
+            {
+                "Name": "Chiara Maria Mazzanti",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 42.0,
+                "Number of Works": 278.0,
+                "Total Citations": 8794.0
+            },
+            {
+                "Name": "Robert O. Opoka",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 42.0,
+                "Number of Works": 302.0,
+                "Total Citations": 7824.0
+            },
+            {
+                "Name": "Andrea L. Conroy",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 35.0,
+                "Number of Works": 202.0,
+                "Total Citations": 3658.0
+            },
+            {
+                "Name": "Andrew D. Kerkhoff",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 33.0,
+                "Number of Works": 121.0,
+                "Total Citations": 2892.0
+            },
+            {
+                "Name": "Anna Luisa Di Stefano",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 32.0,
+                "Number of Works": 135.0,
+                "Total Citations": 3559.0
+            },
+            {
+                "Name": "Paolo Aretini",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 27.0,
+                "Number of Works": 148.0,
+                "Total Citations": 2869.0
+            },
+            {
+                "Name": "Francesco Pasqualetti",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 26.0,
+                "Number of Works": 175.0,
+                "Total Citations": 2212.0
+            },
+            {
+                "Name": "Jaime H. Vera",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 25.0,
+                "Number of Works": 179.0,
+                "Total Citations": 1970.0
+            },
+            {
+                "Name": "Simon M. N. Efange",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recUfRe5yJ5w5hp9u",
+                        "title": "Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective",
+                        "year": 2022,
+                        "url": "https://www.frontiersin.org/articles/10.3389/fddsv.2022.1013285#.Y2LoKJerriI.twitter "
+                    }
+                ],
+                "H-index": 24.0,
+                "Number of Works": 78.0,
+                "Total Citations": 1607.0
+            },
+            {
+                "Name": "Ian Tietjen",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recUfRe5yJ5w5hp9u",
+                        "title": "Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective",
+                        "year": 2022,
+                        "url": "https://www.frontiersin.org/articles/10.3389/fddsv.2022.1013285#.Y2LoKJerriI.twitter "
+                    }
+                ],
+                "H-index": 23.0,
+                "Number of Works": 82.0,
+                "Total Citations": 1861.0
+            },
+            {
+                "Name": "Mulindi Mwanahamuntu",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 23.0,
+                "Number of Works": 87.0,
+                "Total Citations": 2126.0
+            },
+            {
+                "Name": "Michael J. Vinikoor",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 22.0,
+                "Number of Works": 139.0,
+                "Total Citations": 1540.0
+            },
+            {
+                "Name": "Francesca Lessi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 20.0,
+                "Number of Works": 104.0,
+                "Total Citations": 1055.0
+            },
+            {
+                "Name": "Raquel Rodr\u00edguez-P\u00e9rez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 20.0,
+                "Number of Works": 56.0,
+                "Total Citations": 1528.0
+            },
+            {
+                "Name": "Rosauro Varo",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 20.0,
+                "Number of Works": 85.0,
+                "Total Citations": 1148.0
+            },
+            {
+                "Name": "Sharon Kapambwe",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 20.0,
+                "Number of Works": 60.0,
+                "Total Citations": 1360.0
+            },
+            {
+                "Name": "Aaloke Mody",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 18.0,
+                "Number of Works": 70.0,
+                "Total Citations": 1296.0
+            },
+            {
+                "Name": "Kennedy Lishimpi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 17.0,
+                "Number of Works": 42.0,
+                "Total Citations": 1479.0
+            },
+            {
+                "Name": "Martina Locatelli",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recMKQ0nQm2PPL5i7",
+                        "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
+                        "year": 2022,
+                        "url": "https://www.nature.com/articles/s41467-022-33026-0"
+                    }
+                ],
+                "H-index": 17.0,
+                "Number of Works": 70.0,
+                "Total Citations": 1708.0
+            },
+            {
+                "Name": "Monika Roy",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 17.0,
+                "Number of Works": 39.0,
+                "Total Citations": 1125.0
+            },
+            {
+                "Name": "Conrad V. Simoben",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recUfRe5yJ5w5hp9u",
+                        "title": "Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective",
+                        "year": 2022,
+                        "url": "https://www.frontiersin.org/articles/10.3389/fddsv.2022.1013285#.Y2LoKJerriI.twitter "
+                    }
+                ],
+                "H-index": 16.0,
+                "Number of Works": 44.0,
+                "Total Citations": 913.0
+            },
+            {
+                "Name": "John M. Ssenkusu",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 16.0,
+                "Number of Works": 70.0,
+                "Total Citations": 768.0
+            },
+            {
+                "Name": "Dibyadyuti Datta",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 15.0,
+                "Number of Works": 65.0,
+                "Total Citations": 708.0
+            },
+            {
+                "Name": "Jake M. Pry",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 15.0,
+                "Number of Works": 66.0,
+                "Total Citations": 919.0
+            },
+            {
+                "Name": "Jake M. Pry",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 15.0,
+                "Number of Works": 66.0,
+                "Total Citations": 919.0
+            },
+            {
+                "Name": "Jake M. Pry",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 15.0,
+                "Number of Works": 66.0,
+                "Total Citations": 919.0
+            },
+            {
+                "Name": "Sara Franceschi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 15.0,
+                "Number of Works": 74.0,
+                "Total Citations": 663.0
+            },
+            {
+                "Name": "Albert Manasyan",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 14.0,
+                "Number of Works": 53.0,
+                "Total Citations": 1460.0
+            },
+            {
+                "Name": "Kennedy Malama",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 14.0,
+                "Number of Works": 23.0,
+                "Total Citations": 741.0
+            },
+            {
+                "Name": "Martino Bertoni",
+                "total_publications": 6,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recMKQ0nQm2PPL5i7",
+                        "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
+                        "year": 2022,
+                        "url": "https://www.nature.com/articles/s41467-022-33026-0"
+                    }
+                ],
+                "H-index": 14.0,
+                "Number of Works": 33.0,
+                "Total Citations": 16159.0
+            },
+            {
+                "Name": "Katayoun Taghavi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 13.0,
+                "Number of Works": 42.0,
+                "Total Citations": 526.0
+            },
+            {
+                "Name": "Marko Cigler",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recJfOTN7vPWTLLPJ",
+                        "title": "Advancing Targeted Protein Degradation via Multiomics Profiling and Artificial Intelligence",
+                        "year": 2023,
+                        "url": "https://pubs.acs.org/doi/10.1021/jacs.2c11098"
+                    }
+                ],
+                "H-index": 12.0,
+                "Number of Works": 37.0,
+                "Total Citations": 396.0
+            },
+            {
+                "Name": "Mariangela Morelli",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 11.0,
+                "Number of Works": 56.0,
+                "Total Citations": 1392.0
+            },
+            {
+                "Name": "Ruth Namazzi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 11.0,
+                "Number of Works": 69.0,
+                "Total Citations": 397.0
+            },
+            {
+                "Name": "Chakit Arora",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 10.0,
+                "Number of Works": 27.0,
+                "Total Citations": 521.0
+            },
+            {
+                "Name": "Paola Rond\u00f3n-Villarreal",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 10.0,
+                "Number of Works": 40.0,
+                "Total Citations": 535.0
+            },
+            {
+                "Name": "Orazio Santo Santonocito",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 9.0,
+                "Number of Works": 56.0,
+                "Total Citations": 417.0
+            },
+            {
+                "Name": "Fabian Offensperger",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recOzhwScKfSOn795",
+                        "title": "Large-scale chemoproteomics expedites ligand discovery and predicts ligand behavior in cells",
+                        "year": 2024,
+                        "url": "https://www.science.org/doi/10.1126/science.adk5864"
+                    }
+                ],
+                "H-index": 7.0,
+                "Number of Works": 17.0,
+                "Total Citations": 271.0
+            },
+            {
+                "Name": "Alice Cortesi",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 6.0,
+                "Number of Works": 14.0,
+                "Total Citations": 248.0
+            },
+            {
+                "Name": "Belinda Chihota",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 6.0,
+                "Number of Works": 17.0,
+                "Total Citations": 123.0
+            },
+            {
+                "Name": "Edwin Tse",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recxpVNtrpI7x7UDE",
+                        "title": "Open Source Code Contributions to Global Health: The Case of Antimalarial Drug Discovery",
+                        "year": 2024,
+                        "url": "https://doi.org/10.1021/acsmedchemlett.4c00131"
+                    }
+                ],
+                "H-index": 6.0,
+                "Number of Works": 25.0,
+                "Total Citations": 568.0
+            },
+            {
+                "Name": "Jason Hlozek",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSD7KGLl4qcqJAc",
+                        "title": "First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41467-023-41512-2"
+                    }
+                ],
+                "H-index": 6.0,
+                "Number of Works": 9.0,
+                "Total Citations": 109.0
+            },
+            {
+                "Name": "Julian Sherman",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 6.0,
+                "Number of Works": 16.0,
+                "Total Citations": 283.0
+            },
+            {
+                "Name": "Dina Ricardo-Caldera",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 5.0,
+                "Number of Works": 17.0,
+                "Total Citations": 51.0
+            },
+            {
+                "Name": "Cyril T. Namba-Nzanguim",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recUfRe5yJ5w5hp9u",
+                        "title": "Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective",
+                        "year": 2022,
+                        "url": "https://www.frontiersin.org/articles/10.3389/fddsv.2022.1013285#.Y2LoKJerriI.twitter "
+                    }
+                ],
+                "H-index": 4.0,
+                "Number of Works": 9.0,
+                "Total Citations": 39.0
+            },
+            {
+                "Name": "Jacob Mutale",
+                "total_publications": 2,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 4.0,
+                "Number of Works": 11.0,
+                "Total Citations": 73.0
+            },
+            {
+                "Name": "Jane Matambo",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 4.0,
+                "Number of Works": 10.0,
+                "Total Citations": 59.0
+            },
+            {
+                "Name": "Marilyn Vasquez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 4.0,
+                "Number of Works": 6.0,
+                "Total Citations": 139.0
+            },
+            {
+                "Name": "Pasquale Miglionico",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 4.0,
+                "Number of Works": 10.0,
+                "Total Citations": 29.0
+            },
+            {
+                "Name": "Pierluigi Di Chiaro",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 4.0,
+                "Number of Works": 12.0,
+                "Total Citations": 51.0
+            },
+            {
+                "Name": "Ashleigh van Heerden",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recFnJ09WHMzzMnAq",
+                        "title": "Machine learning approaches identify chemical features for stage-specific antimalarial compounds",
+                        "year": 2023,
+                        "url": "https://pubs.acs.org/doi/10.1021/acsomega.3c05664"
+                    }
+                ],
+                "H-index": 3.0,
+                "Number of Works": 9.0,
+                "Total Citations": 95.0
+            },
+            {
+                "Name": "Arnau Comajuncosa-Creus",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "rechnbw6EiAC54J48",
+                        "title": "Connecting chemistry and biology through molecular descriptors",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S1367593121001204?via%3Dihub"
+                    }
+                ],
+                "H-index": 2.0,
+                "Number of Works": 5.0,
+                "Total Citations": 49.0
+            },
+            {
+                "Name": "Harriet Daultrey",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 2.0,
+                "Number of Works": 9.0,
+                "Total Citations": 32.0
+            },
+            {
+                "Name": "Luisa Bisceglia",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 2.0,
+                "Number of Works": 4.0,
+                "Total Citations": 22.0
+            },
+            {
+                "Name": "Margaux Sica",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSHYNlBeXfPqo2A",
+                        "title": "Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41598-023-41764-4"
+                    }
+                ],
+                "H-index": 2.0,
+                "Number of Works": 5.0,
+                "Total Citations": 29.0
+            },
+            {
+                "Name": "Natalia De Oliveira Rosa",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 2.0,
+                "Number of Works": 6.0,
+                "Total Citations": 12.0
+            },
+            {
+                "Name": "Oyere T. Ebob",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recy9NkmfbF4wRgnA",
+                        "title": "The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2",
+                        "year": 2024,
+                        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/minf.202400293"
+                    }
+                ],
+                "H-index": 2.0,
+                "Number of Works": 3.0,
+                "Total Citations": 33.0
+            },
+            {
+                "Name": "Jack Mubita",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 1.0,
+                "Number of Works": 1.0,
+                "Total Citations": 24.0
+            },
+            {
+                "Name": "Jude Y. Betow",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recy9NkmfbF4wRgnA",
+                        "title": "The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2",
+                        "year": 2024,
+                        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/minf.202400293"
+                    }
+                ],
+                "H-index": 1.0,
+                "Number of Works": 4.0,
+                "Total Citations": 1.0
+            },
+            {
+                "Name": "Adria Fernandez-Torras",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recMKQ0nQm2PPL5i7",
+                        "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
+                        "year": 2022,
+                        "url": "https://www.nature.com/articles/s41467-022-33026-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Adri\u00e0 Fern\u00e1ndez-Torras",
+                "total_publications": 4,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "rechnbw6EiAC54J48",
+                        "title": "Connecting chemistry and biology through molecular descriptors",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S1367593121001204?via%3Dihub"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Ana L. Ch\u00e1vez-Hern\u00e1ndez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Anjali Sharma",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Anna Montaner",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recXOhs8S6wGHkrtn",
+                        "title": "AI coupled to pharmacometric modelling to tailor malaria and tuberculosis treatment in Africa",
+                        "year": 2024,
+                        "url": "https://www.medrxiv.org/content/10.1101/2024.11.07.24316884v1"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Antonio Sitoe",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Catalina Tovar Acero",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Claudia Gomes",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Clovis S. Metuge",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recy9NkmfbF4wRgnA",
+                        "title": "The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2",
+                        "year": 2024,
+                        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/minf.202400293"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Edgar L\u00f3pez-L\u00f3pez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Eli Fern\u00e1ndez-de Gortari",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Elvin H. Geng",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIueLVcxNNHtFU2",
+                        "title": "Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Fernanda I. Sald\u00edvar-Gonzalez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Fernando D. Prieto-Mart\u00ednez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Fidele Ntie-Kang",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recUfRe5yJ5w5hp9u",
+                        "title": "Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective",
+                        "year": 2022,
+                        "url": "https://www.frontiersin.org/articles/10.3389/fddsv.2022.1013285#.Y2LoKJerriI.twitter "
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Gary Tin",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recOzhwScKfSOn795",
+                        "title": "Large-scale chemoproteomics expedites ligand discovery and predicts ligand behavior in cells",
+                        "year": 2024,
+                        "url": "https://www.science.org/doi/10.1126/science.adk5864"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Georg Winter",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recJfOTN7vPWTLLPJ",
+                        "title": "Advancing Targeted Protein Degradation via Multiomics Profiling and Artificial Intelligence",
+                        "year": 2023,
+                        "url": "https://pubs.acs.org/doi/10.1021/jacs.2c11098"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Giuseppe Riccardo Diaferia",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Gustavo Quintero",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Jake M Pry",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recBXJupJtsgBWhBr",
+                        "title": "Cervical cancer screening outcomes in Zambia, 2010\u201319: a cohort study",
+                        "year": 2021,
+                        "url": "https://www.sciencedirect.com/science/article/pii/S2214109X21000620"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Javier Ram\u00edrez-Montoya",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "John Woodland",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recSD7KGLl4qcqJAc",
+                        "title": "First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa",
+                        "year": 2023,
+                        "url": "https://www.nature.com/articles/s41467-023-41512-2"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Jos\u00e9 L. Medina-Franco",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Juan Rivera-Correa",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Lyn-Mari\u00e9 Birkholtz",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recFnJ09WHMzzMnAq",
+                        "title": "Machine learning approaches identify chemical features for stage-specific antimalarial compounds",
+                        "year": 2023,
+                        "url": "https://pubs.acs.org/doi/10.1021/acsomega.3c05664"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Marilia Valli",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Mar\u00eda Camila Velasco",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Mar\u00eda Fernanda Yasnot-Acosta",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Matthew Todd",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recxpVNtrpI7x7UDE",
+                        "title": "Open Source Code Contributions to Global Health: The Case of Antimalarial Drug Discovery",
+                        "year": 2024,
+                        "url": "https://doi.org/10.1021/acsmedchemlett.4c00131"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Miquel Duran-Frigola and Fidele Ntie-Kang",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recy9NkmfbF4wRgnA",
+                        "title": "The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2",
+                        "year": 2024,
+                        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/minf.202400293"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Miquel Duran-Frigola and Kelly Chibale",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recjZo6G6z7izlQfX",
+                        "title": "AI can help to tailor drugs for Africa \u2014 but Africans should lead the way",
+                        "year": 2024,
+                        "url": "https://www.nature.com/articles/d41586-024-01001-y"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Myriam Elena Cantero",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Nelisha Pillay",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recFnJ09WHMzzMnAq",
+                        "title": "Machine learning approaches identify chemical features for stage-specific antimalarial compounds",
+                        "year": 2023,
+                        "url": "https://pubs.acs.org/doi/10.1021/acsomega.3c05664"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Norberto S\u00e1nchez-Cruz",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Oscar M\u00e9ndez-Lucio",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Paula Avil\u00e9s",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recr8tTYqfQizallM",
+                        "title": "IL-4, IL-10, CCL2 and TGF-\u03b2 as potential biomarkers for severity in Plasmodium vivax malaria",
+                        "year": 2022,
+                        "url": "https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0010798"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Pietro Lio",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recIXyoMbKTZnkENC",
+                        "title": "Learning and actioning general principles of cancer cell drug sensitivity",
+                        "year": 2024,
+                        "url": "https://scholar.google.com/scholar?oi=bibs&cluster=14715140154856895273&btnI=1&hl=en"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Quique Bassat et al.",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "rec5KnzgPUcuRhjKB",
+                        "title": "Causes of Death Among Infants and Children in the Child Health and Mortality Prevention Surveillance (CHAMPS) Network",
+                        "year": 2023,
+                        "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2807636"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Ram\u00f3n Alain Miranda-Quintana",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recPOdmUEfevA9KjB",
+                        "title": "Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds",
+                        "year": 2022,
+                        "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-022-00661-0"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Rub\u00e3o Bila",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Simeon Akame",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recy9NkmfbF4wRgnA",
+                        "title": "The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2",
+                        "year": 2024,
+                        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/minf.202400293"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Sonia Machevo",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Vanessa A. Shu",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recy9NkmfbF4wRgnA",
+                        "title": "The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2",
+                        "year": 2024,
+                        "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/minf.202400293"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "Xin Qiu",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recxpVNtrpI7x7UDE",
+                        "title": "Open Source Code Contributions to Global Health: The Case of Antimalarial Drug Discovery",
+                        "year": 2024,
+                        "url": "https://doi.org/10.1021/acsmedchemlett.4c00131"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "and Ana Rodriguez",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recaMk9FEfYCupTXM",
+                        "title": "Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria",
+                        "year": 2023,
+                        "url": "https://insight.jci.org/articles/view/172845"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            },
+            {
+                "Name": "et al.",
+                "total_publications": 1,
+                "ersilia_publications": 1,
+                "ersilia_pub_details": [
+                    {
+                        "id": "recOzhwScKfSOn795",
+                        "title": "Large-scale chemoproteomics expedites ligand discovery and predicts ligand behavior in cells",
+                        "year": 2024,
+                        "url": "https://www.science.org/doi/10.1126/science.adk5864"
+                    }
+                ],
+                "H-index": 0.0,
+                "Number of Works": 0.0,
+                "Total Citations": 0.0
+            }
+        ]
     },
     "external_data": {
         "disease_statistics": [
@@ -2258,31 +4109,27 @@
         }
     },
     "events": {
-        "total_events": 68,
+        "total_events": 63,
         "events_by_year": [
             {
-                "Count": 2022,
-                "count": 26
+                "Year": 2022,
+                "Count": 26
             },
             {
-                "Count": 2023,
-                "count": 20
+                "Year": 2023,
+                "Count": 20
             },
             {
-                "Count": 2024,
-                "count": 11
+                "Year": 2024,
+                "Count": 9
             },
             {
-                "Count": 2021,
-                "count": 6
+                "Year": 2021,
+                "Count": 6
             },
             {
-                "Count": 2025,
-                "count": 3
-            },
-            {
-                "Count": 2020,
-                "count": 2
+                "Year": 2020,
+                "Count": 2
             }
         ]
     }

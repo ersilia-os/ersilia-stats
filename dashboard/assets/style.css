@@ -1,0 +1,11 @@
+.custom-volunteer-btn {
+    color: #6A1B9A;
+    border-color: #6A1B9A;
+    font-size: 12px;
+    width: 100%;
+}
+
+.custom-volunteer-btn:hover {
+    background-color: #6A1B9A;
+    color: white;
+}
