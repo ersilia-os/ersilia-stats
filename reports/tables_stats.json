@@ -30,9 +30,11 @@
         ],
         "collaboration_breakdown": [
             {
+                "Ersilia Affiliation": "Yes",
                 "Count": 23
             },
             {
+                "Ersilia Affiliation": "No",
                 "Count": 16
             }
         ],
@@ -57,14 +59,50 @@
     },
     "blogposts-events": {
         "total_blogposts": 50,
-        "publisher_distribution": [
+        "tags": [
+            "Ersilia Open Source Initiative",
+            "AI/ML in Drug Discovery",
+            "Open Science",
+            "Global Health",
+            "Funding & Partnerships",
+            "Software Development & Tools",
+            "Personal Reflections"
+        ],
+        "tag_distribution": [
             {
-                "Publisher": "Ersilia",
-                "Count": 37
+                "Tag": "AI/ML in Drug Discovery",
+                "Count": 17,
+                "Percentage": 34.69387755102041
             },
             {
-                "Publisher": "Other",
-                "Count": 10
+                "Tag": "Ersilia Open Source Initiative",
+                "Count": 12,
+                "Percentage": 24.489795918367346
+            },
+            {
+                "Tag": "Funding & Partnerships",
+                "Count": 6,
+                "Percentage": 12.244897959183673
+            },
+            {
+                "Tag": "Personal Reflections",
+                "Count": 6,
+                "Percentage": 12.244897959183673
+            },
+            {
+                "Tag": "Open Science",
+                "Count": 3,
+                "Percentage": 6.122448979591836
+            },
+            {
+                "Tag": "Software Development & Tools",
+                "Count": 3,
+                "Percentage": 6.122448979591836
+            },
+            {
+                "Tag": "Global Health",
+                "Count": 2,
+                "Percentage": 4.081632653061225
             }
         ],
         "posts_over_time": [
@@ -142,24 +180,6 @@
                 "Year": 2024.0,
                 "Quarter": "Q4",
                 "Post Count": 3
-            }
-        ],
-        "posts_per_year": [
-            {
-                "Year": 2021.0,
-                "Count": 12
-            },
-            {
-                "Year": 2022.0,
-                "Count": 11
-            },
-            {
-                "Year": 2023.0,
-                "Count": 13
-            },
-            {
-                "Year": 2024.0,
-                "Count": 11
             }
         ]
     },
@@ -389,6 +409,24 @@
             {
                 "Role": "Visiting Researcher",
                 "Count": 1
+            }
+        ],
+        "duration_distribution": [
+            {
+                "Duration": "< 3 Months",
+                "Count": 63
+            },
+            {
+                "Duration": "3-6 Months",
+                "Count": 14
+            },
+            {
+                "Duration": "> 1 Year",
+                "Count": 11
+            },
+            {
+                "Duration": "6-12 Months",
+                "Count": 2
             }
         ],
         "contributors_by_country": [
