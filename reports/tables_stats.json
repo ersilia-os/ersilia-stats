@@ -57,7 +57,7 @@
     },
     "blogposts-events": {
         "total_blogposts": 50,
-        "topics_distribution": [
+        "publisher_distribution": [
             {
                 "Publisher": "Ersilia",
                 "Count": 37

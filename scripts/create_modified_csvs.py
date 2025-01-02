@@ -13,6 +13,16 @@ external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
 
 
-print(blogposts_df['Year'].value_counts())
+topics = ['source', 'infectious', 'AI ', 'global', 'malaria'] #list of topics, can change if needed
 
+topic_counts = {
+    topic: (
+        blogposts_df['Title'].str.contains(topic, case=False, na=False) |
+        blogposts_df['Intro'].str.contains(topic, case=False, na=False)
+    ).sum()
+    for topic in topics
+}
+topic_counts_series = pd.Series(topic_counts).sort_values(ascending=False)
+
+print(topic_counts_series)
 

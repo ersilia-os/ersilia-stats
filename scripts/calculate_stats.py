@@ -149,7 +149,7 @@ def calculate_community_stats():
 
     return community_data
 
-# Attempts to find the duration (months) of a contributor (specifically for duration graph)
+# Find the duration (months) of a contributor (specifically for duration graph)
 def community_time_duration():
     community_df['End Date'] = community_df['End Date'].fillna(pd.Timestamp.today().date()) #if missing end date, assume today 
 
@@ -166,6 +166,17 @@ def community_time_duration():
     community_df['time_bucket'] = pd.cut(community_df['Contributed_Time'], bins)
     return community_df['time_bucket'].value_counts().rename_axis('values').reset_index(name='counts')
 
+# Find specific topics of a blogposts (specifically for blogposts topics pie chart) using the intro and title (searching for keywords)
+def blogposts_topics_by_desc(topics: list):
+    topic_counts = {
+        topic: (
+            blogposts_df['Title'].str.contains(topic, case=False, na=False) |
+            blogposts_df['Intro'].str.contains(topic, case=False, na=False)
+        ).sum()
+        for topic in topics
+    }
+    topic_counts_series = pd.Series(topic_counts).sort_values(ascending=False)
+    return topic_counts_series.rename_axis('topics').reset_index(name='counts')
 
 # Countries
 def calculate_countries_stats():
@@ -209,12 +220,14 @@ def calculate_organization_stats():
 def calculate_blogposts_stats():
     blogposts_data = {
         "total_blogposts": total(blogposts_df),
-        "topics_distribution": blogposts_df['Publisher'].value_counts().reset_index().rename(
+        "publisher_distribution": blogposts_df['Publisher'].value_counts().reset_index().rename(
             columns={'Count': 'Publisher', 'count': 'Count'}).to_dict(orient='records'),
         "posts_over_time": blogposts_df.groupby(['Year', 'Quarter']).size().reset_index(
             name='Post Count').to_dict(orient='records'),
         "posts_per_year": blogposts_df.groupby(['Year']).size().reset_index(
-            name='Count').to_dict(orient='records')
+            name='Count').to_dict(orient='records'),
+        
+        
 
     }
     return blogposts_data

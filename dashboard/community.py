@@ -168,15 +168,59 @@ def community_blog_page():
 
     blogposts_time_fig.update_layout(
         title={
-            "text": f"Distribution of Roles<br><sup>Total of {total_blogposts} blogposts.</sup>",
+            "text": f"Blogposts Over Time by Year<br><sup>Total of {total_blogposts} blogposts</sup>",
         }
     )
-
     blogposts_time_fig.update_xaxes(title_text="Year")
     blogposts_time_fig.update_yaxes(title_text="Number of Blogposts")
     blogposts_time_fig.update_traces(
         hovertemplate="<b>%{x}</b><br>%{y} contributors<extra></extra>",
         marker=dict(line=dict(color="white", width=0.5))
+    )
+
+    # Engagement Trends By Topic --> lACK DATA
+
+    # Blogposts Topics
+    topics = ['source', 'infectious', 'AI ', 'global', 'malaria'] #list of topics, can change if needed
+    blogposts_topics_data = pd.DataFrame(calc.blogposts_topics_by_desc(topics = topics))   
+
+    # Add custom colors for bars
+    blogposts_topics_data["color"] = blogposts_topics_data["topics"].apply(
+        lambda x: "#bee6b4" if x == "> 1 Year" else "#aa96fa"  # Green for > 1 Year, Purple otherwise
+    )
+    
+    # calc percentage contributions
+    blogposts_topics_data["Percentage"] = (blogposts_topics_data["counts"] / len(topics)) * 100
+
+    print(blogposts_topics_data)
+
+    blogposts_topics_fig = px.pie(
+        blogposts_topics_data, 
+        values="Percentage", 
+        names="topics", 
+        title="Blogpost Topics",
+        color="topics",
+        color_discrete_sequence=["#aa96fa", "#bee6b4", "#f5a623", "#4a90e2", "#ff6f61", "#e5e5e5", "#cccccc"]  # Custom colors
+    )
+
+    blogposts_topics_fig.update_traces(textposition='inside')
+    blogposts_topics_fig.update_layout(uniformtext_minsize=24, uniformtext_mode='hide')
+
+    # Update layout and tooltips
+    blogposts_topics_fig.update_traces(
+        textinfo="percent+label",
+        hovertemplate="<b>%{label}</b><br>%{value:.2f}%<extra></extra>"
+    )
+    blogposts_topics_fig.update_layout(
+        title={
+            "text": "Distribution of Blog Post Topics<br><sup>Topics align with health needs and research priorities in the Global South</sup>".format(total_types),
+        },
+        legend=dict(
+            title="Topics",
+            orientation="v",
+            x=1.1,
+            y=1.0
+        )
     )
 
 
@@ -295,16 +339,19 @@ def community_blog_page():
         ]),
         html.Div([
             html.Div([
-                html.P("Placeholder for Distribution of Blog Post Topics", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
+                html.Div([
+                    dcc.Graph(id="blogposts_topics_fig", figure=blogposts_topics_fig)
+                ]),            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
             html.Div([
-                html.P("Placeholder for Blog Posts Over Time", style={"text-align": "center", "font-size": "14px"})
+                html.Div([
+                    dcc.Graph(id="blogposts_over_time", figure=blogposts_time_fig)
+                ]),
             ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
-            html.Div([
-                html.P("Placeholder for Engagement Trends By Topic", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
-            html.Div([
-                html.P("Placeholder for Engagement Trends Over Time", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"})
+            # html.Div([
+            #     html.P("Placeholder for Engagement Trends By Topic", style={"text-align": "center", "font-size": "14px"})
+            # ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
+            # html.Div([
+            #     html.P("Placeholder for Engagement Trends Over Time", style={"text-align": "center", "font-size": "14px"})
+            # ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"})
         ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px"})
     ], style={"margin-left": "320px", "padding": "20px"})
