@@ -212,7 +212,10 @@ def calculate_blogposts_stats():
         "topics_distribution": blogposts_df['Publisher'].value_counts().reset_index().rename(
             columns={'Count': 'Publisher', 'count': 'Count'}).to_dict(orient='records'),
         "posts_over_time": blogposts_df.groupby(['Year', 'Quarter']).size().reset_index(
-            name='Post Count').to_dict(orient='records')
+            name='Post Count').to_dict(orient='records'),
+        "posts_per_year": blogposts_df.groupby(['Year']).size().reset_index(
+            name='Count').to_dict(orient='records')
+
     }
     return blogposts_data
 

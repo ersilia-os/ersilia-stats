@@ -153,6 +153,33 @@ def community_blog_page():
         )
     )
 
+     # Blogposts over time Plot
+    blogposts_time_data = pd.DataFrame(data["blogposts-events"]["posts_per_year"])
+    total_blogposts = data["blogposts-events"]["total_blogposts"]
+
+    blogposts_time_fig = px.bar(
+        blogposts_time_data, 
+        x="Year", 
+        y="Count", 
+        barmode="group", 
+        title="Distribution of Roles",
+        color_discrete_sequence=["#aa96fa"]  # Purple
+    )
+
+    blogposts_time_fig.update_layout(
+        title={
+            "text": f"Distribution of Roles<br><sup>Total of {total_blogposts} blogposts.</sup>",
+        }
+    )
+
+    blogposts_time_fig.update_xaxes(title_text="Year")
+    blogposts_time_fig.update_yaxes(title_text="Number of Blogposts")
+    blogposts_time_fig.update_traces(
+        hovertemplate="<b>%{x}</b><br>%{y} contributors<extra></extra>",
+        marker=dict(line=dict(color="white", width=0.5))
+    )
+
+
 
     return html.Div([
         # Header Section
