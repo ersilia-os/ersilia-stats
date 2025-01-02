@@ -131,26 +131,7 @@ def calculate_community_stats():
     role_counts = pd.Series(all_roles).value_counts().reset_index()
     role_counts.columns = ['Role', 'Count']
 
-    # Prepare the final community data
-    community_data = {
-        "countries_represented": sum_unique(community_df, 'Country'),
-        "role_distribution": role_counts.to_dict(orient='records'),
-        "contributors_by_country": [
-            {
-                "Country": country_map.get(row["Country"].strip("[]").replace("'", ""), "Unknown"),
-                "Contributors": row["Contributors"]
-            }
-            for row in community_df.groupby('Country')['Name'].nunique()
-            .reset_index(name='Contributors')
-            .to_dict(orient='records')
-        ],
-        "total_members": total(community_df)
-    }
-
-    return community_data
-
-# Find the duration (months) of a contributor (specifically for duration graph)
-def community_time_duration():
+    # Duration of Involvement
     community_df['End Date'] = community_df['End Date'].fillna(pd.Timestamp.today().date()) #if missing end date, assume today 
 
     community_df['Start Date'] = pd.to_datetime(community_df['Start Date'])
@@ -160,23 +141,41 @@ def community_time_duration():
     community_df['Contributed_Time'] = (community_df['End Date'].dt.to_period('M').astype(int)- community_df['Start Date'].dt.to_period('M').astype(int))
 
     # place in time buckets
-    bins = [0, 3, 6, 7, 12,10000]
+    bins = [0, 3, 6, 12, 10000]
 
     # Create a new column for the buckets
     community_df['time_bucket'] = pd.cut(community_df['Contributed_Time'], bins)
-    return community_df['time_bucket'].value_counts().rename_axis('values').reset_index(name='counts')
+    duration_data = community_df['time_bucket'].value_counts().rename_axis('values').reset_index(name='counts')
+    
+    if "values" in duration_data.columns:
+        duration_data["values"] = duration_data["values"].astype(str)  # Convert intervals to strings
 
-# Find specific topics of a blogposts (specifically for blogposts topics pie chart) using the intro and title (searching for keywords)
-def blogposts_topics_by_desc(topics: list):
-    topic_counts = {
-        topic: (
-            blogposts_df['Title'].str.contains(topic, case=False, na=False) |
-            blogposts_df['Intro'].str.contains(topic, case=False, na=False)
-        ).sum()
-        for topic in topics
+    # Replace raw intervals with meaningful labels
+    duration_data["values"] = duration_data["values"].replace({
+        "(0, 3]": "< 3 Months",
+        "(3, 6]": "3-6 Months",
+        "(6, 12]": "6-12 Months",
+        "(12, 10000]": "> 1 Year"
+    })
+    duration_data = duration_data.rename(
+        columns={'values': "Duration", "counts": "Count"}
+    )
+    # Prepare the final community data
+    community_data = {
+        "countries_represented": sum_unique(community_df, 'Country'),
+        "role_distribution": role_counts.to_dict(orient='records'),
+        "duration_distribution": duration_data.to_dict(orient='records'),
+        "contributors_by_country": [
+            {
+                "Country": country_map.get(row["Country"].strip("[]").replace("'", ""), "Unknown"),
+                "Contributors": row["Contributors"]
+            }
+            for row in community_df.groupby('Country')['Name'].nunique().reset_index(name='Contributors').to_dict(orient='records')
+        ],
+        "total_members": total(community_df)
     }
-    topic_counts_series = pd.Series(topic_counts).sort_values(ascending=False)
-    return topic_counts_series.rename_axis('topics').reset_index(name='counts')
+
+    return community_data
 
 # Countries
 def calculate_countries_stats():
@@ -202,6 +201,10 @@ def calculate_countries_stats():
 def calculate_organization_stats():
     country_map = map_ids_to_names(countries_df, "id", "Country")
 
+    # Organization Type Distribution
+    organization_type_distribution = organisations_df['Type'].value_counts(normalize=True).reset_index()
+    organization_type_distribution.columns = ['Type', 'Percentage']
+
     org_data = {
         "total_organizations": total(organisations_df),
         "organization_types": organisations_df['Type'].value_counts().reset_index().rename(
@@ -218,18 +221,78 @@ def calculate_organization_stats():
 
 # Blog Posts
 def calculate_blogposts_stats():
+    # Blogposts Topics
+    blogposts_topics_data = blogposts_df  # Assuming blogposts_df is already loaded as a DataFrame
+
+    # Concatenate slugs and intros into one string for the LLM prompt
+    input_string = "\n".join(
+        f"Slug: {row['Slug']}\nIntro: {row['Intro']}" for _, row in blogposts_topics_data.iterrows()
+    )
+
+    # LLM API function
+    import google.generativeai as genai
+    import os
+    from dotenv import load_dotenv
+
+    load_dotenv()
+
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+    def generate_tags(input_string):
+        prompt = f"""
+        Based on the following blog slugs and introductions, generate 5-7 relevant tags for categorizing the blogposts.
+        Additionally, assign each blogpost to its most relevant tag based on its slug and introduction.
+
+        Input:
+        {input_string}
+
+        Output the result in the following JSON format:
+        {{
+            "tags": ["Tag 1", "Tag 2", "Tag 3", ...],
+            "blogpost_tags": [
+                {{"Slug": "Slug 1", "Tag": "Tag 1"}},
+                {{"Slug": "Slug 2", "Tag": "Tag 2"}},
+                ...
+            ]
+        }}
+        """
+        # Lower temperature for controlled, grounded output
+        generation_config = genai.GenerationConfig(
+            temperature=0.2
+        )
+
+        response = model.generate_content(
+            prompt,
+            generation_config=generation_config
+        )
+        return json.loads(response.text[7:-4])
+
+    # Generate tags and parse JSON output
+    parsed_output = generate_tags(input_string)
+
+    # Extract tags and blogpost-tag mapping
+    blogpost_tags = pd.DataFrame(parsed_output["blogpost_tags"])
+
+    # Merge tags with the original blogpost DataFrame
+    blogpost_data = blogposts_topics_data.merge(blogpost_tags, on="Slug", how="left")
+
+    # Aggregate tag counts for visualization
+    tag_counts = blogpost_data["Tag"].value_counts()
+    tag_percentages = (tag_counts / tag_counts.sum()) * 100
+
+    # Prepare blogpost statistics
     blogposts_data = {
         "total_blogposts": total(blogposts_df),
-        "publisher_distribution": blogposts_df['Publisher'].value_counts().reset_index().rename(
-            columns={'Count': 'Publisher', 'count': 'Count'}).to_dict(orient='records'),
-        "posts_over_time": blogposts_df.groupby(['Year', 'Quarter']).size().reset_index(
-            name='Post Count').to_dict(orient='records'),
-        "posts_per_year": blogposts_df.groupby(['Year']).size().reset_index(
-            name='Count').to_dict(orient='records'),
-        
-        
-
+        "tags": parsed_output["tags"],  # The tags generated by the LLM
+        "tag_distribution": pd.DataFrame({
+            "Tag": tag_counts.index,
+            "Count": tag_counts.values,
+            "Percentage": tag_percentages.values
+        }).to_dict(orient="records"),
+        "posts_over_time": blogposts_df.groupby(['Year', 'Quarter']).size().reset_index(name='Post Count').to_dict(orient='records'),
     }
+    
     return blogposts_data
 
 # Events
@@ -248,7 +311,7 @@ def calculate_publications_stats():
         "total_citations": sum_column(publications_df, 'Citations'),
         "citations_by_year": calc_avg_specific(publications_df, 'Year', 'Citations'),
         "collaboration_breakdown": publications_df['Ersilia Affiliation'].value_counts().reset_index().rename(
-            columns={'Ersilia Affiliation': 'Count', 'count': 'Count'}).to_dict(orient='records'),
+            columns={'Count': 'Ersilia Affiliation', 'count': 'Count'}).to_dict(orient='records'),
         "publications_by_topic": publications_df['Topic'].value_counts().reset_index().rename(
             columns={'Count': 'Topic', 'count': 'Count'}).to_dict(orient='records')
     }

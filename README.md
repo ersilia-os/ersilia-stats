@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-01 20:34:21 GMT_
+_Last updated: 2025-01-01 23:18:26 GMT_
 
 ## 🧬 Models' Impact
 
@@ -135,6 +135,20 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 
 </div>
 
+### Duration of Involvement
+
+<div style="overflow-x: scroll;">
+
+| Duration | Count |
+| --- | --- |
+| < 3 Months | 63 |
+| 3-6 Months | 14 |
+| > 1 Year | 11 |
+| 6-12 Months | 2 |
+
+
+</div>
+
 ### Contributors by Country
 
 <div style="overflow-x: scroll;">
@@ -158,6 +172,53 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Singapore | 1 |
 | Serbia | 1 |
 | Namibia | 1 |
+
+
+</div>
+
+
+## 📝 Blogposts
+
+### **Total Blogposts: 50**
+
+### Blogpost Topics Distribution
+
+<div style="overflow-x: scroll;">
+
+| Topic | Count | Percentage |
+| --- | --- | --- |
+| AI/ML in Drug Discovery | 17 | 34.69% |
+| Ersilia Open Source Initiative | 12 | 24.49% |
+| Funding & Partnerships | 6 | 12.24% |
+| Personal Reflections | 6 | 12.24% |
+| Open Science | 3 | 6.12% |
+| Software Development & Tools | 3 | 6.12% |
+| Global Health | 2 | 4.08% |
+
+
+</div>
+
+### Blogposts Over Time
+
+<div style="overflow-x: scroll;">
+
+| Year | Quarter | Post Count |
+| --- | --- | --- |
+| 2021 | Q2 | 6 |
+| 2021 | Q3 | 4 |
+| 2021 | Q4 | 2 |
+| 2022 | Q1 | 3 |
+| 2022 | Q2 | 2 |
+| 2022 | Q3 | 4 |
+| 2022 | Q4 | 2 |
+| 2023 | Q1 | 2 |
+| 2023 | Q2 | 3 |
+| 2023 | Q3 | 4 |
+| 2023 | Q4 | 4 |
+| 2024 | Q1 | 3 |
+| 2024 | Q2 | 3 |
+| 2024 | Q3 | 2 |
+| 2024 | Q4 | 3 |
 
 
 </div>
