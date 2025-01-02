@@ -130,7 +130,7 @@ def community_blog_page():
         names="Type", 
         title="Volunteers By Organization Type",
         color="Type",
-        color_discrete_sequence=["#fad782", "#8cc8fa", "#dca0dc","#faa08c", "#aa96fa"],  # Custom colors
+        color_discrete_sequence=["#aa96fa", "#8cc8fa", "#dca0dc","#faa08c", "#fad782"]  # Custom colors
         
     )
     
@@ -166,7 +166,7 @@ def community_blog_page():
         barmode="stack", 
         color="Quarter",
         title="Distribution of Roles",
-        color_discrete_sequence=["#fad782", "#8cc8fa", "#dca0dc","#faa08c", "#aa96fa"],  # color
+        color_discrete_sequence=["#aa96fa", "#8cc8fa", "#dca0dc","#faa08c", "#fad782"],  # Custom colors
         category_orders={"Quarter": ["Q1", "Q2", "Q3", "Q4"]}  #  order ;o
 
     )
@@ -197,7 +197,7 @@ def community_blog_page():
         names="topics", 
         title="Blogpost Topics",
         color="topics",
-        color_discrete_sequence=["#fad782", "#8cc8fa", "#dca0dc","#faa08c", "#aa96fa"]  # Custom colors
+        color_discrete_sequence=["#aa96fa","#fad782", "#8cc8fa", "#dca0dc","#faa08c"]  # Custom colors
     )
 
     blogposts_topics_fig.update_traces(textposition='inside')
