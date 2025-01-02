@@ -9,7 +9,7 @@ import scripts.calculate_stats as calc
 import requests
 
 # Load data from JSON
-data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
+data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/mvp2.1/reports/tables_stats.json"
 data = requests.get(data_url).json()
 
 global_south_countries = [
