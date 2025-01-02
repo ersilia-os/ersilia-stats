@@ -110,7 +110,6 @@ def update_sidebar_highlight(pathname):
         highlighted_style if pathname == "/community-blog" else default_style,
         highlighted_style if pathname == "/events-publications" else default_style
     )
-
 # Run the app
 if __name__ == "__main__":
     app.run_server(debug=True)

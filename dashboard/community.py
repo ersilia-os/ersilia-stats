@@ -130,8 +130,10 @@ def community_blog_page():
         names="Type", 
         title="Volunteers By Organization Type",
         color="Type",
-        color_discrete_sequence=["#aa96fa", "#bee6b4", "#f5a623", "#4a90e2", "#ff6f61", "#e5e5e5", "#cccccc"]  # Custom colors
+        color_discrete_sequence=["#fad782", "#8cc8fa", "#dca0dc","#faa08c", "#aa96fa"],  # Custom colors
+        
     )
+    
 
     org_pie_fig.update_traces(textposition='inside')
     org_pie_fig.update_layout(uniformtext_minsize=24, uniformtext_mode='hide')
@@ -153,29 +155,26 @@ def community_blog_page():
         )
     )
 
-     # Blogposts over time Plot
-    blogposts_time_data = pd.DataFrame(data["blogposts-events"]["posts_per_year"])
+    # Blogposts over time Plot (year)
+    blogposts_time_data = pd.DataFrame(data["blogposts-events"]["posts_over_time"])
     total_blogposts = data["blogposts-events"]["total_blogposts"]
 
     blogposts_time_fig = px.bar(
         blogposts_time_data, 
         x="Year", 
-        y="Count", 
-        barmode="group", 
+        y="Post Count", 
+        barmode="stack", 
+        color="Quarter",
         title="Distribution of Roles",
-        color_discrete_sequence=["#aa96fa"]  # Purple
+        color_discrete_sequence=["#fad782", "#8cc8fa", "#dca0dc","#faa08c", "#aa96fa"],  # color
+        category_orders={"Quarter": ["Q1", "Q2", "Q3", "Q4"]}  #  order ;o
+
     )
 
-    blogposts_time_fig.update_layout(
-        title={
-            "text": f"Blogposts Over Time by Year<br><sup>Total of {total_blogposts} blogposts</sup>",
-        }
-    )
     blogposts_time_fig.update_xaxes(title_text="Year")
     blogposts_time_fig.update_yaxes(title_text="Number of Blogposts")
-    blogposts_time_fig.update_traces(
-        hovertemplate="<b>%{x}</b><br>%{y} contributors<extra></extra>",
-        marker=dict(line=dict(color="white", width=0.5))
+    blogposts_time_fig.update_layout(
+    title="Blogposts Over Time by Year & Quarter"
     )
 
     # Engagement Trends By Topic --> lACK DATA
@@ -192,15 +191,13 @@ def community_blog_page():
     # calc percentage contributions
     blogposts_topics_data["Percentage"] = (blogposts_topics_data["counts"] / len(topics)) * 100
 
-    print(blogposts_topics_data)
-
     blogposts_topics_fig = px.pie(
         blogposts_topics_data, 
         values="Percentage", 
         names="topics", 
         title="Blogpost Topics",
         color="topics",
-        color_discrete_sequence=["#aa96fa", "#bee6b4", "#f5a623", "#4a90e2", "#ff6f61", "#e5e5e5", "#cccccc"]  # Custom colors
+        color_discrete_sequence=["#fad782", "#8cc8fa", "#dca0dc","#faa08c", "#aa96fa"]  # Custom colors
     )
 
     blogposts_topics_fig.update_traces(textposition='inside')
@@ -344,7 +341,7 @@ def community_blog_page():
                 ]),            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
             html.Div([
                 html.Div([
-                    dcc.Graph(id="blogposts_over_time", figure=blogposts_time_fig)
+                dcc.Graph(id="blogposts_over_time", figure=blogposts_time_fig)
                 ]),
             ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "vertical-align": "top"}),
             # html.Div([
