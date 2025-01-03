@@ -1,8 +1,6 @@
 run_app:
-	python3 -m dashboard.app & sleep 30
-
 	echo "Starting Dash app..."
-    python3 -m dashboard.app & sleep 10
+	python3 -m dashboard.app & sleep 30
     curl http://127.0.0.1:8050/ || echo "Dash app is not reachable"
 
 	wget -r http://127.0.0.1:8050/
