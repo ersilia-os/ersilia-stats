@@ -1,5 +1,5 @@
 run_app:
-	python3 dashboard/app.py & sleep 30
+	python3 python3 -m dashboard.app & sleep 30
 
 	wget -r http://127.0.0.1:8050/
 	wget -r http://127.0.0.1:8050/_dash-layout 
@@ -18,13 +18,16 @@ run_app:
 	mv 127.0.0.1:8050 pages_files
 	ls -a pages_files
 	ls -a pages_files/assets
+	
+	REPO_PATH=ersilia-os/ersilia-stats
 
-	find pages_files -exec sed -i.bak 's|_dash-component-suites|ersilia-os/ersilia-stats/\/_dash-component-suites|g' {} \;
-	find pages_files -exec sed -i.bak 's|_dash-layout|ersilia-os/ersilia-stats/_dash-layout.json|g' {} \;
-	find pages_files -exec sed -i.bak 's|_dash-dependencies|ersilia-os/ersilia-stats/_dash-dependencies.json|g' {} \;
-	find pages_files -exec sed -i.bak 's|_reload-hash|ersilia-os/ersilia-stats/_reload-hash|g' {} \;
-	find pages_files -exec sed -i.bak 's|_dash-update-component|ersilia-os/ersilia-stats/_dash-update-component|g' {} \;
-	find pages_files -exec sed -i.bak 's|assets|ersilia-os/ersilia-stats/assets|g' {} \;
+	find pages_files -exec sed -i.bak "s|_dash-component-suites|${REPO_PATH}/_dash-component-suites|g" {} \;
+	find pages_files -exec sed -i.bak "s|_dash-layout|${REPO_PATH}/_dash-layout.json|g" {} \;
+	find pages_files -exec sed -i.bak "s|_dash-dependencies|${REPO_PATH}/_dash-dependencies.json|g" {} \;
+	find pages_files -exec sed -i.bak "s|_reload-hash|${REPO_PATH}/_reload-hash|g" {} \;
+	find pages_files -exec sed -i.bak "s|_dash-update-component|${REPO_PATH}/_dash-update-component|g" {} \;
+	find pages_files -exec sed -i.bak "s|assets|${REPO_PATH}/assets|g" {} \;
+
 
 	mv pages_files/_dash-layout pages_files/_dash-layout.json
 	mv pages_files/_dash-dependencies pages_files/_dash-dependencies.json
