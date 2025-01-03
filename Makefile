@@ -22,7 +22,7 @@ run_app:
 	ls -a pages_files
 	ls -a pages_files/assets
 	
-	REPO_PATH=ersilia-os/ersilia-stats
+	REPO_PATH=ersilia-stats
 
 	find pages_files -type f -exec sed -i.bak "s|_dash-component-suites|${REPO_PATH}/_dash-component-suites|g" {} \;
 	find pages_files -type f -exec sed -i.bak "s|_dash-layout|${REPO_PATH}/_dash-layout.json|g" {} \;
