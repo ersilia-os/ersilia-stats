@@ -20,11 +20,11 @@ run_app:
 	ls 127.0.0.1:8050/assets
 
 	mv 127.0.0.1:8050/dashboard pages_files
-	if [ ! -d "pages_files/assets" ]; then echo "Assets directory missing"; exit 1; fi
+	if [ ! -d "pages_files/dashboard/assets" ]; then echo "Assets directory missing"; exit 1; fi
 	ls -a pages_files
 	ls -a pages_files/assets
 	
-	REPO_PATH=ersilia-stats
+	REPO_PATH=ersilia-os/ersilia-stats
 
 	find pages_files -type f -exec sed -i.bak "s|_dash-component-suites|${REPO_PATH}/_dash-component-suites|g" {} \;
 	find pages_files -type f -exec sed -i.bak "s|_dash-layout|${REPO_PATH}/_dash-layout.json|g" {} \;
