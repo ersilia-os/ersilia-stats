@@ -15,7 +15,7 @@ data = requests.get(data_url).json()
 # Initialize the app
 app = dash.Dash(__name__, 
                 external_stylesheets=[dbc.themes.BOOTSTRAP],
-               requests_pathname_prefix='/ersilia-stats/')
+               requests_pathname_prefix='/ersilia-stats/dashboard')
 
 # Sidebar layout
 sidebar = html.Div([
