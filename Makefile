@@ -20,8 +20,9 @@ run_app:
 	ls 127.0.0.1:8050/dashboard/assets
 
 	mv 127.0.0.1:8050/dashboard pages_files
-	if [ ! -d "pages_files/dashboard/assets" ]; then echo "Assets directory missing"; exit 1; fi
+	mv 127.0.0.1:8050/dashboard/assets pages_files/assets
 	ls -a pages_files
+	if [ ! -d "pages_files/dashboard/assets" ]; then echo "Assets directory missing"; exit 1; fi
 	ls -a pages_files/assets
 	
 	REPO_PATH=ersilia-os/ersilia-stats
