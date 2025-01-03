@@ -18,19 +18,20 @@ run_app:
 	mv 127.0.0.1:8050 pages_files
 	ls -a pages_files
 	ls -a pages_files/assets
+	
+	REPO_PATH=ersilia-os/ersilia-stats
 
-	find pages_files -type f -exec sed -i.bak 's|_dash-component-suites|/_dash-component-suites|g' {} \;
-	find pages_files -type f -exec sed -i.bak 's|_dash-layout|/_dash-layout.json|g' {} \;
-	find pages_files -type f -exec sed -i.bak 's|assets|/assets|g' {} \;
+	find pages_files -exec sed -i.bak "s|_dash-component-suites|${REPO_PATH}/_dash-component-suites|g" {} \;
+	find pages_files -exec sed -i.bak "s|_dash-layout|${REPO_PATH}/_dash-layout.json|g" {} \;
+	find pages_files -exec sed -i.bak "s|_dash-dependencies|${REPO_PATH}/_dash-dependencies.json|g" {} \;
+	find pages_files -exec sed -i.bak "s|_reload-hash|${REPO_PATH}/_reload-hash|g" {} \;
+	find pages_files -exec sed -i.bak "s|_dash-update-component|${REPO_PATH}/_dash-update-component|g" {} \;
+	find pages_files -exec sed -i.bak "s|assets|${REPO_PATH}/dashboard/assets|g" {} \;
+
 
 	mv pages_files/_dash-layout pages_files/_dash-layout.json
 	mv pages_files/_dash-dependencies pages_files/_dash-dependencies.json
-
-	if [ -d "assets" ]; then \
-	    mv assets/* pages_files/assets/; \
-	else \
-	    echo "Warning: 'assets' directory does not exist or is empty."; \
-	fi
+	mv assets/* pages_files/assets/
 
 	ps -C python -o pid= | xargs kill -9
 
