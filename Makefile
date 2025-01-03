@@ -15,10 +15,12 @@ run_app:
 
 	wget -r http://127.0.0.1:8050/_dash-component-suites/plotly/package_data/plotly.min.js
 
-	wget -r http://127.0.0.1:8050/dashboard/assets/style.css
-	wget -r http://127.0.0.1:8050/dashboard/assets/custom.js
+	wget -r http://127.0.0.1:8050/assets/style.css
+	wget -r http://127.0.0.1:8050/assets/custom.js
+	ls 127.0.0.1:8050/assets
 
 	mv 127.0.0.1:8050 pages_files
+	if [ ! -d "pages_files/assets" ]; then echo "Assets directory missing"; exit 1; fi
 	ls -a pages_files
 	ls -a pages_files/assets
 	
