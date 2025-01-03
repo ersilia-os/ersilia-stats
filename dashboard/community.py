@@ -181,7 +181,7 @@ def community_blog_page():
     blogposts_topics_fig.update_layout(uniformtext_minsize=24, uniformtext_mode='hide')
     blogposts_topics_fig.update_layout(
         title={
-            "text": "Distribution of Blog Post Topics<br><sup>We align with needs and priorities in the Global South</sup>",
+            "text": "Distribution of Blog Post Topics<br><sup>Topics align with needs and research priorities in the Global South</sup>",
         },
         legend=dict(
             font=dict(size=7),  # Reduce legend font size
