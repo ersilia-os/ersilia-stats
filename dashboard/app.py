@@ -13,7 +13,9 @@ data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/head
 data = requests.get(data_url).json()
 
 # Initialize the app
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, 
+                external_stylesheets=[dbc.themes.BOOTSTRAP],
+               requests_pathname_prefix='/ersilia-stats/')
 
 # Sidebar layout
 sidebar = html.Div([
