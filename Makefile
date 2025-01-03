@@ -17,7 +17,7 @@ run_app:
 
 	wget -r http://127.0.0.1:8050/dashboard/assets/style.css
 	wget -r http://127.0.0.1:8050/dashboard/assets/custom.js
-	ls 127.0.0.1:8050/assets
+	ls 127.0.0.1:8050/dashboard/assets
 
 	mv 127.0.0.1:8050/dashboard pages_files
 	if [ ! -d "pages_files/dashboard/assets" ]; then echo "Assets directory missing"; exit 1; fi
