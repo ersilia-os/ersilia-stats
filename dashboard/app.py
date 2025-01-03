@@ -75,41 +75,55 @@ app.layout = html.Div([
 ])
 
 # Callbacks to handle page navigation
-@app.callback(
-    dash.dependencies.Output("page-content", "children"),
-    [dash.dependencies.Input("url", "pathname")]
+app.clientside_callback(
+    """
+    function(pathname) {
+        if (pathname === "/models-impact") {
+            return "<div>Models Impact Page Content</div>";
+        } else if (pathname === "/community-blog") {
+            return "<div>Community Blog Page Content</div>";
+        } else if (pathname === "/events-publications") {
+            return "<div>Events & Publications Page Content</div>";
+        } else {
+            return "<div>Home Page Content</div>";
+        }
+    }
+    """,
+    dash.Output("page-content", "children"),
+    [dash.Input("url", "pathname")]
 )
-def display_page(pathname):
-    if pathname == "/models-impact":
-        model_layout = models_impact_page()
-        return model_layout
-    elif pathname == "/community-blog":
-        community_layout = community_blog_page()
-        return community_layout
-    elif pathname == "/events-publications":
-        events_layout = events_publications_page()
-        return events_layout
-    else:
-        return home_page
 
 # Callbacks to manage highlight behavior
-@app.callback(
-    [
-        dash.dependencies.Output("models-impact-link", "style"),
-        dash.dependencies.Output("community-blog-link", "style"),
-        dash.dependencies.Output("events-publications-link", "style")
-    ],
-    [dash.dependencies.Input("url", "pathname")]
-)
-def update_sidebar_highlight(pathname):
-    default_style = {"display": "flex", "align-items": "center", "margin-bottom": "10px", "padding": "5px", "border-radius": "5px"}
-    highlighted_style = {"display": "flex", "align-items": "center", "margin-bottom": "10px", "padding": "5px", "border-radius": "5px", "background-color": "#e0e0e0"}
+app.clientside_callback(
+    """
+    function(pathname) {
+        const defaultStyle = {
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+            padding: "5px",
+            borderRadius: "5px"
+        };
+        const highlightedStyle = {
+            ...defaultStyle,
+            backgroundColor: "#e0e0e0"
+        };
 
-    return (
-        highlighted_style if pathname == "/models-impact" else default_style,
-        highlighted_style if pathname == "/community-blog" else default_style,
-        highlighted_style if pathname == "/events-publications" else default_style
-    )
+        return [
+            pathname === "/models-impact" ? highlightedStyle : defaultStyle,
+            pathname === "/community-blog" ? highlightedStyle : defaultStyle,
+            pathname === "/events-publications" ? highlightedStyle : defaultStyle
+        ];
+    }
+    """,
+    [
+        dash.Output("models-impact-link", "style"),
+        dash.Output("community-blog-link", "style"),
+        dash.Output("events-publications-link", "style")
+    ],
+    [dash.Input("url", "pathname")]
+)
+
 # Run the app
 if __name__ == "__main__":
     app.run_server(debug=True)
