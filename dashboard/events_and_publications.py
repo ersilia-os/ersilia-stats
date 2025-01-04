@@ -16,9 +16,7 @@ data = requests.get(data_url).json()
 
 
 def events_publications_page():
-
     event_data = pd.DataFrame(calc.calculate_events_stats())
-
     events_by_year = pd.DataFrame(event_data.events_by_year.tolist())
 
     events_fig = px.bar(events_by_year, x="Year", y="Count", barmode="group", title="Event Distribution Over Time")
