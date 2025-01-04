@@ -15,21 +15,8 @@ external_titles_df = pd.read_csv('external-data/titles_results.csv')
 external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
 # Reading external datasets
-external_files = {
-    "alzheimers_deaths": "external-data/alzheimers-deaths.csv",
-    "meningitis_deaths": "external-data/meningitis-deaths.csv",
-    "pneumonia_deaths": "external-data/pneumonia-deaths.csv",
-    "hivaids_deaths": "external-data/hivaids-deaths.csv",
-    "cardiovascular_deaths": "external-data/cardiovascular-deaths.csv",
-    "tuberculosis_deaths": "external-data/tuberculosis-deaths.csv",
-    "life_expectancy": "external-data/life-expectancy-vs-health-expenditure.csv",
-    "community_health_workers": "external-data/community-health-workers.csv",
-    "covid_data": "external-data/covid-cases-and-deaths.csv",
-    "malaria_deaths": "external-data/malaria-deaths.csv",
-    "hiv_deaths": "external-data/hivaids-deaths.csv"
-}
-
-external_data = {key: pd.read_csv(path) for key, path in external_files.items()}
+with open("external-data/external_data_stats.json", 'r') as file:
+    external_data = json.load(file)
 
 output_data = {
     "publications": {},
@@ -548,58 +535,28 @@ def calculate_openalex_authors():
 # External Data Statistics
 def calculate_external_data_stats():
     external_stats = {"disease_statistics": []}
-    population_df = pd.read_csv('external-data/world-population.csv')  # Load population data
-
-    # Function to compute total deaths for rate-based datasets
-    def calculate_deaths_from_rate(df, rate_column):
-        df = pd.merge(df, population_df, on=["Entity", "Year"], how="left")
-        if "population_historical" in df.columns:
-            df["total_deaths"] = df[rate_column] * df["population_historical"] / 100000
-            return df
+    
+    for dataset, value in external_data.items():
+        # Determine if the key refers to cases or deaths
+        if "_deaths" in dataset:
+            disease_name = dataset.replace("_deaths", "").replace("_", " ").title()
+            stat_type = "deaths"
+        elif "_cases" in dataset:
+            disease_name = dataset.replace("_cases", "").replace("_", " ").title()
+            stat_type = "cases"
         else:
-            df["total_deaths"] = None
-            return df
+            continue  # Skip if the key doesn't match "cases" or "deaths"
 
-    # Datasets and their respective columns
-    datasets = [
-        ("alzheimers_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_alzheimer_disease_and_other_dementias"),
-        ("meningitis_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_meningitis"),
-        ("pneumonia_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_lower_respiratory_infections"),
-        ("hivaids_deaths", "aids_deaths__disaggregation_all_ages_estimate"),
-        ("cardiovascular_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_cardiovascular_diseases"),
-        ("malaria_deaths", "estimated_number_of_malaria_deaths"),
-        ("tuberculosis_deaths", "death_count__age_group_allages__sex_both_sexes__cause_tuberculosis")
-    ]
-
-    for dataset, column in datasets:
-        df = external_data[dataset]
-
-        if "rate" in column:  # Rate-based datasets
-            df = calculate_deaths_from_rate(df, column)
-            total_deaths = df["total_deaths"].sum()
-            most_recent_year = df.loc[df["Year"].idxmax()]
-            most_recent_year_deaths = most_recent_year["total_deaths"]
-            most_recent_year_value = most_recent_year["Year"]
-        else:  # Absolute death count datasets
-            total_deaths = df[column].sum()
-            most_recent_year = df.loc[df["Year"].idxmax()]
-            most_recent_year_deaths = most_recent_year[column]
-            most_recent_year_value = most_recent_year["Year"]
-
-        external_stats["disease_statistics"].append({
-            "disease": dataset.replace("_deaths", "").replace("_", " ").title(),
-            "total_deaths": round(total_deaths),
-            "most_recent_year": int(most_recent_year_value),
-            "most_recent_year_deaths": round(most_recent_year_deaths)
-        })
-
-    # COVID statistics (cumulative cases and deaths)
-    covid_df = external_data["covid_data"]
-    world_covid = covid_df[covid_df["Entity"] == "World"].sort_values(by="Day").iloc[-1]
-    external_stats["covid_statistics"] = {
-        "total_cases": int(world_covid["total_cases"]),
-        "total_deaths": int(world_covid["total_deaths"])
-    }
+        # Check if the disease already exists in the stats
+        existing_entry = next((item for item in external_stats["disease_statistics"] if item["disease"] == disease_name), None)
+        if existing_entry:
+            existing_entry[f"total_{stat_type}"] = round(value)
+        else:
+            # Add a new entry
+            external_stats["disease_statistics"].append({
+                "disease": disease_name,
+                f"total_{stat_type}": round(value)
+            })
 
     return external_stats
 

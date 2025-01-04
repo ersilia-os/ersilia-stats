@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-04 12:43:14 GMT_
+_Last updated: 2025-01-04 14:23:56 GMT_
 
 ## 🧬 Models' Impact
 
@@ -325,24 +325,18 @@ _Last updated: 2025-01-04 12:43:14 GMT_
 <details>
 <summary>Disease Statistics</summary>
 
-| Disease | Estimated Total Deaths | Most Recent Year | Deaths in Most Recent Year |
-| --- | --- | --- | --- |
-| Alzheimers | 78193529 | 2021 | 2080 |
-| Meningitis | 19317843 | 2021 | 1540 |
-| Pneumonia | 175302228 | 2021 | 13232 |
-| Hivaids | 114405860 | 2022 | 779 |
-| Cardiovascular | 1103874706 | 2021 | 64217 |
-| Malaria | 45951860 | 2021 | 91 |
-| Tuberculosis | 127005702 | 2021 | 10148 |
-| TOTAL | 1664051728 | - | - |
+| Disease | Estimated Total Cases | Estimated Total Deaths |
+| --- | --- | --- |
+| Hivaids | - | 27,580,837 |
+| Covid | 777,074,039 | 7,079,129 |
+| Malaria | - | 15,317,311 |
+| Tb | 253,467,432 | 44,118,898 |
+| Cancer | - | 178,651,923 |
+| Measles | 47,347,773 | - |
+| Polio | 541,429 | - |
 
 
 </details>
-
-
-### COVID-19 Statistics
-- **Total Cases:** 777,025,779
-- **Total Deaths:** 7,078,468
 
 
 ---

@@ -148,19 +148,27 @@ def generate_authors_section(authors_data):
 # Function to generate External Data Section
 def generate_external_data_section(external_data):
     # Disease statistics
-    headers = ["Disease", "Estimated Total Deaths", "Most Recent Year", "Deaths in Most Recent Year"]
-    rows = [(stat['disease'], round(stat['total_deaths']), stat['most_recent_year'], round(stat['most_recent_year_deaths'])) for stat in external_data['disease_statistics']]
-    rows.append(("TOTAL", sum(round(stat['total_deaths']) for stat in external_data['disease_statistics']), "-", "-"))
+    headers = ["Disease", "Estimated Total Cases", "Estimated Total Deaths"]
+    rows = []
+    
+    for stat in external_data['disease_statistics']:
+        disease = stat['disease']
+        total_cases = stat.get('total_cases', '-')
+        total_deaths = stat.get('total_deaths', '-')
+        
+        # Format numbers with commas if they exist
+        total_cases = f"{total_cases:,}" if isinstance(total_cases, int) else total_cases
+        total_deaths = f"{total_deaths:,}" if isinstance(total_deaths, int) else total_deaths
+        
+        rows.append((disease, total_cases, total_deaths))
+    
     disease_table = format_table(headers, rows)
     disease_section = collapsible_section("Disease Statistics", disease_table)
 
-    # COVID statistics
-    covid_stats = external_data['covid_statistics']
-    covid_section = f"- **Total Cases:** {covid_stats['total_cases']:,}\n- **Total Deaths:** {covid_stats['total_deaths']:,}\n"
-
     section = "## 🌐 External Data\n\n"
-    section += disease_section + "\n\n### COVID-19 Statistics\n" + covid_section
+    section += disease_section
     return section
+
 
 # Main function to create README.md
 def create_readme(json_data, country_names, output_file):

@@ -4639,52 +4639,36 @@
     "external_data": {
         "disease_statistics": [
             {
-                "disease": "Alzheimers",
-                "total_deaths": 78193529,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 2080
-            },
-            {
-                "disease": "Meningitis",
-                "total_deaths": 19317843,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 1540
-            },
-            {
-                "disease": "Pneumonia",
-                "total_deaths": 175302228,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 13232
-            },
-            {
                 "disease": "Hivaids",
-                "total_deaths": 114405860,
-                "most_recent_year": 2022,
-                "most_recent_year_deaths": 779
+                "total_deaths": 27580837
             },
             {
-                "disease": "Cardiovascular",
-                "total_deaths": 1103874706,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 64217
+                "disease": "Covid",
+                "total_cases": 777074039,
+                "total_deaths": 7079129
             },
             {
                 "disease": "Malaria",
-                "total_deaths": 45951860,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 91
+                "total_deaths": 15317311
             },
             {
-                "disease": "Tuberculosis",
-                "total_deaths": 127005702,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 10148
+                "disease": "Tb",
+                "total_cases": 253467432,
+                "total_deaths": 44118898
+            },
+            {
+                "disease": "Cancer",
+                "total_deaths": 178651923
+            },
+            {
+                "disease": "Measles",
+                "total_cases": 47347773
+            },
+            {
+                "disease": "Polio",
+                "total_cases": 541429
             }
-        ],
-        "covid_statistics": {
-            "total_cases": 777025779,
-            "total_deaths": 7078468
-        }
+        ]
     },
     "events": {
         "total_events": 63,
