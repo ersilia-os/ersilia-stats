@@ -5,24 +5,158 @@ import plotly.express as px
 
 import pandas as pd
 
+import scripts.calculate_stats as calc
+import scripts.dataset_references as ref
+
+import requests
+
+# Load data from JSON
+data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
+data = requests.get(data_url).json()
+
+
 def events_publications_page():
+
+    event_data = pd.DataFrame(calc.calculate_events_stats())
+
+    events_by_year = pd.DataFrame(event_data.events_by_year.tolist())
+
+    events_fig = px.bar(events_by_year, x="Year", y="Count", barmode="group", title="Event Distribution Over Time")
+    events_fig.update_xaxes(title_text="Year")
+    events_fig.update_yaxes(title_text="Number of Events")
+
+    events_by_type = calc.calculate_event_by_types()
+    events_by_type = pd.DataFrame.from_dict(events_by_type, orient='index').reset_index().rename(columns={'index': 'Type', 0: 'Count'})
+
+    events_by_type_fig = px.pie(events_by_type, names="Type", values="Count", title="Events By Type")
+
+    publication_data = calc.calculate_publications_stats()
+
+    publication_by_year = pd.DataFrame(publication_data['publications_by_year'])
+
+    publication_by_year['Year'] = publication_by_year['Year'].apply(lambda x: 'Before 2020' if x < 2020 else str(x))
+    publication_by_year = publication_by_year.groupby('Year').agg({'Count': 'mean'}).reset_index()
+    publication_by_year = publication_by_year.sort_values(by="Year", key=lambda x: x.apply(lambda y: '0' if y == 'Before 2020' else y), ascending=True)
+
+    publications_by_year_fig = px.line(publication_by_year, x="Year", y="Count", title="Publications Over Time")
+    publications_by_year_fig.update_xaxes(title_text="Year")
+    publications_by_year_fig.update_yaxes(title_text="Number of Publications")
+
+    publication_status_distribution = pd.DataFrame(publication_data['status_distribution'])
+
+    publication_status_distribution_fig = px.pie(publication_status_distribution, names="Count", values="count", title="Publication Status Distribution")
+
+    citations_by_year = pd.DataFrame(publication_data['citations_by_year'])
+
+    citations_fig = px.bar(citations_by_year, x="Year", y="average_Citations", title="Citations Over Time")
+    citations_fig.update_xaxes(title_text="Year")
+    citations_fig.update_yaxes(title_text="Average Citations")
+
+    publications_by_topic = pd.DataFrame(publication_data['publications_by_topic'])
+    publications_by_topic = publications_by_topic.sort_values(by="Count", ascending=False)
+
+    publications_by_topic_fig = px.bar(publications_by_topic, x="Topic", y="Count", title="Publications By Topic Area")
+    publications_by_topic_fig.update_xaxes(title_text="Topic")
+    publications_by_topic_fig.update_yaxes(title_text="Number of Publications")
+
+    publication_affiliations_by_year = pd.DataFrame(publication_data['affiliation_counts_by_year'])
+    publication_affiliations_by_year = publication_affiliations_by_year.sort_values(by="Year", ascending=True)
+
+    publication_affiliations_by_year_fig = px.bar(
+        publication_affiliations_by_year,
+        x="Year",
+        y=["Non-Ersilia Affiliation", "Ersilia Affiliation"],
+        barmode="group",
+        title="Publication Affiliations By Year"
+    )
+    publication_affiliations_by_year_fig.update_xaxes(title_text="Year", dtick=1)
+    publication_affiliations_by_year_fig.update_yaxes(title_text="Count")
+
+
+    top_external_collaborators = pd.DataFrame(publication_data['non_ersilia_authors_by_frequency']).head(9)
+
+    top_external_collaborators_fig = px.bar(top_external_collaborators, x="author", y="count", title="Top External Collaborators")
+    top_external_collaborators_fig.update_xaxes(title_text="Author")
+    top_external_collaborators_fig.update_yaxes(title_text="Number of Publications")
+
+    events_by_country = calc.calculate_events_by_country()
+    events_by_country = pd.DataFrame(events_by_country)
+    events_by_country["Count"] = events_by_country["Organisers"].apply(lambda x: len(x))
+
+    global_south_countries = [
+        "Afghanistan", "Algeria", "Angola", "Antigua & Barbuda", "Argentina", "Aruba", 
+        "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belize", "Benin", 
+        "Bhutan", "Bolivia", "Botswana", "Brazil", "Brunei", "Burkina Faso", "Burundi", 
+        "Cambodia", "Cameroon", "Cape Verde", "Central African Rep.", "Chad", "Chile", 
+        "China", "Colombia", "Comoros", "Congo, Dem. Rep.", "Congo, Rep.", "Costa Rica", 
+        "Côte d'Ivoire", "Cuba", "Djibouti", "Dominica", "Dominican Rep.", "Ecuador", 
+        "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Eswatini, Kingdom of", 
+        "Ethiopia", "Fiji", "Gabon", "Gambia", "Ghana", "Grenada", "Guadeloupe", 
+        "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "India", 
+        "Indonesia", "Iran, Isl. Rep.", "Iraq", "Jamaica", "Jordan", "Kazakhstan", 
+        "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Lao PDR", "Lebanon", "Lesotho", 
+        "Liberia", "Libya", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", 
+        "Mauritania", "Mauritius", "Mexico", "Micronesia, Fed. States of", "Mongolia", 
+        "Morocco", "Mozambique", "Myanmar", "Namibia", "Nepal", "Nicaragua", "Niger", 
+        "Nigeria", "Oman", "Pakistan", "Palau", "Palestine(West Bank & Gaza)", "Panama", 
+        "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Qatar", "Rwanda", "Samoa", 
+        "São Tomé & Príncipe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", 
+        "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Sri Lanka", 
+        "St Vincent & Grenadines", "Sudan", "Suriname", "Syrian Arab Rep.", "Tajikistan", 
+        "Tanzania, United Rep.", "Thailand", "Timor-Leste", "Togo", "Tonga", 
+        "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", 
+        "United Arab Emirates", "Uruguay", "Uzbekistan", "Vanuatu, Rep.", "Venezuela", 
+        "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+    ]
+
+    events_by_country_map = px.choropleth(
+        events_by_country.assign(
+            Region=lambda df: df['Country'].apply(lambda x: 'Global South' if x in global_south_countries else 'Global North'),
+            Percent_Events=lambda df: df['Count'] / df['Count'].sum() * 100
+        ),
+        locations="Country",
+        locationmode="country names",
+        color="Region",
+        hover_name="Country",
+        hover_data={"Percent_Events": ":.2f", "Organisers": True, "Count": True},
+        color_discrete_map={"Global South": "#aa96fa", "Global North": "#bee6b4"}
+    ).update_traces(
+        marker=dict(line=dict(color="white", width=1)),
+        hovertemplate="<b>%{hovertext}</b><br>Events: %{customdata[0]:.2f}%<br>Organisers: %{customdata[1]}<br>Count: %{customdata[2]}<extra></extra>"
+    ).update_layout(
+        geo=dict(
+            showcoastlines=False,
+            showcountries=True,
+            countrycolor="white",
+            landcolor="lightgray"
+        ),
+        margin={"r": 0, "t": 0, "l": 0, "b": 0}
+    )
+
+    total_events = events_by_country["Count"].sum()
+    total_countries = events_by_country["Country"].nunique()
+
     return html.Div([
         # Header Section
-        html.P("Events & Publications", style={"font-size": "24px", "font-weight": "bold"}),
+        html.P("Events & Publications", style={"font-size": "24px", "font-weight": "bold", "text-align": "center", "margin-bottom": "20px"}),
 
         # Events Section
         html.P("Events", style={"font-size": "16px", "font-weight": "bold", "margin-bottom": "4px"}),
         html.Div([
             html.Div([
-                html.P("Placeholder for Event Distribution Over Time", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                dcc.Graph(id="roles_community", figure=events_fig),
+            ], style={"width": "48%", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
             html.Div([
-                html.P("Placeholder for Event Breakdown By Types", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
-        ], style={"text-align": "center"}),
+                dcc.Graph(id="events_by_type", figure=events_by_type_fig),
+            ], style={"width": "48%", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
+        ], style={"display": "flex", "justify-content": "space-between"}),
 
+        
         html.Div([
+
             # Country Buttons
+            html.P(f"A total of {total_events} events were organized by {total_countries} countries.", style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "10px"}),
+            html.P(f"*Global South countries are highlighted in purple.", style={"font-size": "12px", "margin-bottom": "10px"}),
             html.Div([
                 html.Button(
                     country,
@@ -32,16 +166,16 @@ def events_publications_page():
                         "margin": "5px",
                         "border": "1px solid #ddd",
                         "border-radius": "5px",
-                        "background-color": "#f5f5f5",
+                        "background-color": "#f5f5f5" if country not in global_south_countries else "#aa96fa",
                         "color": "#000",
                         "cursor": "pointer"
                     }
-                ) for country in ["Australia", "Cameroon", "Columbia", "India", "Italy", "Kenya", "Spain"]
+                ) for country in events_by_country["Country"]
             ], style={"margin-bottom": "10px", "display": "flex", "flex-wrap": "wrap"}),
-
             # Map visualization
             dcc.Graph(
                 id="events_by_country_map",
+                figure=events_by_country_map,
                 style={"height": "400px"}
             )
         ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px"}),
@@ -51,25 +185,28 @@ def events_publications_page():
         html.P("Publications", style={"font-size": "16px", "font-weight": "bold", "margin-bottom": "4px"}),
         html.Div([
             html.Div([
-                html.P("Placeholder for Timeline Of Publications", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                dcc.Graph(id="publications_by_year", figure=publications_by_year_fig, style={"height": "400px"}),
+            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
             html.Div([
-                html.P("Placeholder for Citations For Publications", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
-        ], style={"text-align": "center"}),
+                dcc.Graph(id="citations_by_year", figure=citations_fig, style={"height": "400px"}),
+            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
+        ], style={"display": "flex", "flex-wrap": "wrap", "justify-content": "space-between"}),
 
         html.Div([
             html.Div([
-                html.P("Placeholder for Collaboration With Ersilia", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                dcc.Graph(id="publication_affiliations_by_year", figure=publication_affiliations_by_year_fig, style={"height": "400px"}),
+            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "margin-right": "2%"}),            
             html.Div([
-                html.P("Placeholder for Publications By Topic Area", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                dcc.Graph(id="publications_by_topic", figure=publications_by_topic_fig, style={"height": "400px"}),
+            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+        ], style={"display": "flex", "justify-content": "space-between"}),
+
+        html.Div([
             html.Div([
-                html.P("Placeholder for Distribution Of Organizations", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                dcc.Graph(id="publications_status_distribution", figure=publication_status_distribution_fig, style={"height": "400px"}),
+            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "margin-right": "2%"}),
             html.Div([
-                html.P("Placeholder for Top Collaborators", style={"text-align": "center", "font-size": "14px"})
-            ], style={"width": "48%", "height": "300px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
-        ], style={"text-align": "center"})
-    ], style={"margin-left": "320px", "padding": "20px"})
+                dcc.Graph(id="top_external_collaborators", figure=top_external_collaborators_fig, style={"height": "400px"}),
+            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
+        ], style={"display": "flex", "justify-content": "space-between"})
+    ], style={"margin-left": "320px", "padding": "20px", "font-family": "Arial, sans-serif"})
