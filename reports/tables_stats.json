@@ -4693,6 +4693,163 @@
                 "Year": 2020,
                 "Count": 2
             }
+        ],
+        "events_by_type": [
+            {
+                "Type": "Conference",
+                "Percentage": 33.33333333333333,
+                "count": 21
+            },
+            {
+                "Type": "Seminar",
+                "Percentage": 28.57142857142857,
+                "count": 18
+            },
+            {
+                "Type": "Workshop",
+                "Percentage": 17.46031746031746,
+                "count": 11
+            },
+            {
+                "Type": "Collaboration Meeting",
+                "Percentage": 9.523809523809524,
+                "count": 6
+            },
+            {
+                "Type": "Training Course",
+                "Percentage": 4.761904761904762,
+                "count": 3
+            },
+            {
+                "Type": "Demo Day",
+                "Percentage": 4.761904761904762,
+                "count": 3
+            },
+            {
+                "Type": "Webinars",
+                "Percentage": 1.5873015873015872,
+                "count": 1
+            }
+        ],
+        "events_by_country": [
+            {
+                "Country": "United Kingdom",
+                "Organisers": [
+                    "Trend In Africa",
+                    "Open Life Sciences",
+                    "University of Reading ",
+                    "Software Sustainability Institute",
+                    "Ineos Oxford Institute",
+                    "Software Sustainability Institute",
+                    "Open Source Malaria",
+                    "University of Reading ",
+                    "EMBL European Bioinformatics Institute"
+                ]
+            },
+            {
+                "Country": "United States",
+                "Organisers": [
+                    "Bill and Melinda Gates Foundation",
+                    "NumFocus",
+                    "United Nations",
+                    "National Institutes of Health",
+                    "Fast Forward",
+                    "Open Bioinformatics Foundation",
+                    "Pistoia Alliance",
+                    "Wistar Institute",
+                    "Open Bioinformatics Foundation",
+                    "United Nations",
+                    "Code for Science and Society",
+                    "American Chemical Society",
+                    "National Institutes of Health",
+                    "National Institutes of Health",
+                    "NumFocus",
+                    "Fast Forward",
+                    "Fast Forward",
+                    "Mozilla Foundation",
+                    "Viral Emergence Research Initiative",
+                    "Linux Foundation",
+                    "AccessNow",
+                    "InvestInOpen"
+                ]
+            },
+            {
+                "Country": "South Africa",
+                "Organisers": [
+                    "Jembi Health Systems",
+                    "H3D Foundation",
+                    "University of Pretoria",
+                    "Holistic Drug Discovery and Development Center",
+                    "H3D Foundation",
+                    "H3D Foundation",
+                    "Holistic Drug Discovery and Development Center",
+                    "Sisonke Biotik",
+                    "H3D Foundation",
+                    "AfricaBio"
+                ]
+            },
+            {
+                "Country": "Spain",
+                "Organisers": [
+                    "Barcelona Supercomputing Centre",
+                    "Institut de Recerca Biomedica de Barcelona",
+                    "University of Barcelona",
+                    "Konvent",
+                    "Museu Darder",
+                    "Centre d'Estudis Avan\u00e7at Blandes",
+                    "University of Barcelona"
+                ]
+            },
+            {
+                "Country": "Cameroon",
+                "Organisers": [
+                    "University of Buea",
+                    "University of Buea",
+                    "University of Buea",
+                    "Mboa Lab",
+                    "University of Buea",
+                    "University of Buea",
+                    "University of Buea"
+                ]
+            },
+            {
+                "Country": "Kenya",
+                "Organisers": [
+                    "Kenyatta University"
+                ]
+            },
+            {
+                "Country": "Mexico",
+                "Organisers": [
+                    "Universidad Nacional Aut\u00f3noma de M\u00e9xico"
+                ]
+            },
+            {
+                "Country": "Germany",
+                "Organisers": [
+                    "Technische Universit\u00e4t Dresden"
+                ]
+            },
+            {
+                "Country": "Belgium",
+                "Organisers": [
+                    "FOSDEM",
+                    "FOSDEM",
+                    "Research Data Alliance"
+                ]
+            },
+            {
+                "Country": "Brazil",
+                "Organisers": [
+                    "Universidade de Goias"
+                ]
+            },
+            {
+                "Country": "Switzerland",
+                "Organisers": [
+                    "Origami Lab"
+                ]
+            }
         ]
     }
 }
