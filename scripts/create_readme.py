@@ -66,6 +66,12 @@ def generate_community_section(data, country_names):
     rows = [(role['Role'], role['Count']) for role in data['role_distribution']]
     section += format_table(headers, rows)
 
+    # Duration of Involvement
+    section += "\n### Duration of Involvement\n"
+    headers = ["Duration", "Count"]
+    rows = [(duration['Duration'], duration['Count']) for duration in data['duration_distribution']]
+    section += format_table(headers, rows)
+
     # Contributors by Country
     section += "\n### Contributors by Country\n"
     headers = ["Country", "Contributors"]
@@ -75,6 +81,26 @@ def generate_community_section(data, country_names):
     section += format_table(headers, rows)
 
     return section
+
+def generate_blogposts_section(data):
+    section = "## 📝 Blogposts\n\n"
+    section += f"### **Total Blogposts: {data['total_blogposts']}**\n\n"
+
+    # Blogpost Topics Distribution
+    section += "### Blogpost Topics Distribution\n"
+    headers = ["Topic", "Count", "Percentage"]
+    rows = [(topic['Tag'], topic['Count'], f"{topic['Percentage']:.2f}%") for topic in data['tag_distribution']]
+    section += format_table(headers, rows)
+    section += "\n\n These topics are AI-generated based on the introductions and a short slug summary provided in the Ersilia internal database."
+
+    # Blogposts Over Time
+    section += "\n### Blogposts Over Time\n"
+    headers = ["Year", "Quarter", "Post Count"]
+    rows = [(round(post['Year']), post['Quarter'], post['Post Count']) for post in data['posts_over_time']]
+    section += format_table(headers, rows)
+
+    return section
+
 
 # Function to generate Organization Section
 def generate_organization_section(data, country_names):
@@ -227,6 +253,7 @@ def generate_external_data_section(external_data):
 def create_readme(json_data, country_names, output_file):
     models_section = generate_models_section(json_data['models-impact'])
     community_section = generate_community_section(json_data['community'], country_names)
+    blogposts_section = generate_blogposts_section(json_data['blogposts-events'])
     organization_section = generate_organization_section(json_data['organization'], country_names)
     events_section = generate_events_section(json_data["events"], json_data["publications"], json_data["openalex_authors"], json_data["openalex_titles"])
     external_data_section = generate_external_data_section(json_data['external_data'])
@@ -234,7 +261,7 @@ def create_readme(json_data, country_names, output_file):
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     readme_content = f"# 📊 Ersilia Statistics Report\n\n"
     readme_content += f"_Last updated: {current_time} GMT_\n\n"
-    readme_content += models_section + "\n\n" + community_section + "\n\n" + organization_section + "\n\n"+ events_section + "\n\n" + external_data_section
+    readme_content += models_section + "\n\n" + community_section + "\n\n" + blogposts_section + "\n\n" + organization_section + "\n\n"+ events_section + "\n\n" + external_data_section
     readme_content += "\n\n---\nThe full data output that this report is based on can be found in `data/` and `external-data/`. An abbreviated version can be found in `reports/table_stats.json`."
 
 
