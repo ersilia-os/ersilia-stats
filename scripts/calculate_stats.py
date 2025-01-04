@@ -223,7 +223,50 @@ def calculate_events_stats():
         "events_by_year": events_df['Year'].value_counts().reset_index().rename(
             columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records')
     }
+
     return events_data
+
+def calculate_event_by_types():
+    types = ["Conference", "Workshop", "Webinar", "Seminar", "Training", "Other"]
+
+    event_type_counts = {event_type: 0 for event_type in types}
+
+    for _, row in events_df.iterrows():
+        event_name = row['Name'].lower()
+        matched = False
+        for event_type in types:
+            if event_type.lower() in event_name:
+                event_type_counts[event_type] += 1
+                matched = True
+                break
+        if not matched:
+            event_type_counts["Other"] += 1
+    
+    return event_type_counts
+
+def calculate_events_by_country():
+    # Process each row in the events DataFrame
+    events_by_country = []
+    for _, row in events_df.iterrows():
+        organisations_id = literal_eval(row['Organisations'])[0] if row['Organisations'] else None
+
+        organisations_row = organisations_df[organisations_df['id'] == organisations_id]
+        organisations_country = literal_eval(organisations_row["Country"].values[0])[0] if not organisations_row.empty else None
+
+        country_name = countries_df[countries_df['id'] == organisations_country]["Country"].values[0] if organisations_country else None
+
+        if country_name:
+            organiser = literal_eval(row["Organiser"])[0]
+            country_entry = next((item for item in events_by_country if item["Country"] == country_name), None)
+            if country_entry:
+                country_entry["Organisers"].append(organiser)
+            else:
+                events_by_country.append({"Country": country_name, "Organisers": [organiser]})
+        
+
+
+    return events_by_country
+
 
 # Publications
 def calculate_publications_stats():
@@ -231,11 +274,53 @@ def calculate_publications_stats():
         "total_publications": total(publications_df),
         "total_citations": sum_column(publications_df, 'Citations'),
         "citations_by_year": calc_avg_specific(publications_df, 'Year', 'Citations'),
+        "publications_by_year": publications_df['Year'].value_counts().reset_index().rename(
+            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
         "collaboration_breakdown": publications_df['Ersilia Affiliation'].value_counts().reset_index().rename(
             columns={'Ersilia Affiliation': 'Count', 'count': 'Count'}).to_dict(orient='records'),
         "publications_by_topic": publications_df['Topic'].value_counts().reset_index().rename(
-            columns={'Count': 'Topic', 'count': 'Count'}).to_dict(orient='records')
+            columns={'Count': 'Topic', 'count': 'Count'}).to_dict(orient='records'),
+        "status_distribution": publications_df['Status'].value_counts().reset_index().rename(
+            columns={'index': 'Status', 'Status': 'Count'}).to_dict(orient='records')
     }
+
+    # Track author counts for non-Ersilia publications
+    author_counts = {}
+
+    for _, row in publications_df.iterrows():
+        if row['Ersilia Affiliation'] == "No":
+            authors = row['Authors'].split(', ')
+            for author in authors:
+                if author in author_counts:
+                    author_counts[author] += 1
+                else:
+                    author_counts[author] = 1
+
+    # Convert the dictionary to a sorted list of tuples (author, count)
+    sorted_author_counts = sorted(author_counts.items(), key=lambda item: item[1], reverse=True)
+
+    # Extract just the names in order of frequency
+    author_names_by_frequency = [
+        {"author": author, "count": count} 
+        for author, count in sorted_author_counts 
+        if author not in ["Miquel Duran-Frigola", "Patrick Aloy"]
+    ]
+    publications_data["non_ersilia_authors_by_frequency"] = author_names_by_frequency
+
+
+
+    # Count of Ersilia and non-Ersilia affiliations for each year
+    affiliation_counts = (
+        publications_df
+        .groupby(['Year', 'Ersilia Affiliation'])
+        .size()
+        .unstack(fill_value=0)
+        .reset_index()
+        .rename(columns={'Yes': 'Ersilia Affiliation', 'No': 'Non-Ersilia Affiliation'})
+        .to_dict(orient='records')
+    )
+
+    publications_data["affiliation_counts_by_year"] = affiliation_counts
 
     cby = calc_avg_specific(publications_df, 'Year', 'Citations')  # returns [{'Year': 2013, 'average_Citations': X}, ...]
     
@@ -258,7 +343,7 @@ def calculate_publications_stats():
         })
 
     publications_data["citations_by_year"] = final_list
-
+    
     return publications_data
 
 # OpenAlex titles query
