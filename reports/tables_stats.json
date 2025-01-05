@@ -4656,7 +4656,8 @@
         "disease_statistics": [
             {
                 "disease": "Hivaids",
-                "total_deaths": 27580837
+                "total_deaths": 27580837,
+                "total_cases": 39210870
             },
             {
                 "disease": "Covid",
@@ -4665,16 +4666,13 @@
             },
             {
                 "disease": "Malaria",
-                "total_deaths": 15317311
+                "total_deaths": 15317311,
+                "total_cases": 5803879735
             },
             {
                 "disease": "Tb",
                 "total_cases": 253467432,
                 "total_deaths": 44118898
-            },
-            {
-                "disease": "Cancer",
-                "total_deaths": 178651923
             },
             {
                 "disease": "Measles",
@@ -4684,7 +4682,9 @@
                 "disease": "Polio",
                 "total_cases": 541429
             }
-        ]
+        ],
+        "total_cases": 6921521278,
+        "total_deaths": 94096175
     },
     "events": {
         "total_events": 63,

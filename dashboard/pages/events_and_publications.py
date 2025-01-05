@@ -11,7 +11,7 @@ import scripts.dataset_references as ref
 import requests
 
 # Register page with main
-# dash.register_page(__name__, path="/events-and-publications")
+dash.register_page(__name__, path="/events-and-publications")
 
 # Load data from JSON
 data_url = "https://github.com/ersilia-os/ersilia-stats/raw/refs/heads/mvp2.1/reports/tables_stats.json"

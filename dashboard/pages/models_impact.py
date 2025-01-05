@@ -2,11 +2,41 @@ import dash
 from dash import dcc
 from dash import html
 import plotly.express as px
-
+import requests
 import pandas as pd
 
 # Register page
 dash.register_page(__name__, path="/models-impact")
+
+# Load data from JSON
+data_url = "https://github.com/ersilia-os/ersilia-stats/raw/refs/heads/mvp2.1/reports/tables_stats.json"
+data = requests.get(data_url).json()
+
+global_south_countries = [
+    "Afghanistan", "Algeria", "Angola", "Antigua & Barbuda", "Argentina", "Aruba", 
+    "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belize", "Benin", 
+    "Bhutan", "Bolivia", "Botswana", "Brazil", "Brunei", "Burkina Faso", "Burundi", 
+    "Cambodia", "Cameroon", "Cape Verde", "Central African Rep.", "Chad", "Chile", 
+    "China", "Colombia", "Comoros", "Congo, Dem. Rep.", "Congo, Rep.", "Costa Rica", 
+    "Côte d'Ivoire", "Cuba", "Djibouti", "Dominica", "Dominican Rep.", "Ecuador", 
+    "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Eswatini, Kingdom of", 
+    "Ethiopia", "Fiji", "Gabon", "Gambia", "Ghana", "Grenada", "Guadeloupe", 
+    "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "India", 
+    "Indonesia", "Iran, Isl. Rep.", "Iraq", "Jamaica", "Jordan", "Kazakhstan", 
+    "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Lao PDR", "Lebanon", "Lesotho", 
+    "Liberia", "Libya", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", 
+    "Mauritania", "Mauritius", "Mexico", "Micronesia, Fed. States of", "Mongolia", 
+    "Morocco", "Mozambique", "Myanmar", "Namibia", "Nepal", "Nicaragua", "Niger", 
+    "Nigeria", "Oman", "Pakistan", "Palau", "Palestine(West Bank & Gaza)", "Panama", 
+    "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Qatar", "Rwanda", "Samoa", 
+    "São Tomé & Príncipe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", 
+    "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Sri Lanka", 
+    "St Vincent & Grenadines", "Sudan", "Suriname", "Syrian Arab Rep.", "Tajikistan", 
+    "Tanzania, United Rep.", "Thailand", "Timor-Leste", "Togo", "Tonga", 
+    "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", 
+    "United Arab Emirates", "Uruguay", "Uzbekistan", "Vanuatu, Rep.", "Venezuela", 
+    "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+]
 
 layout = html.Div([
     # Header Section
@@ -31,19 +61,19 @@ layout = html.Div([
             html.P("Disease Impact In The Global South", style={"font-size": "16px", "font-weight": "bold", "margin-bottom": "4px"}),
             html.P([
                 html.Span("In the Global South, ", style={"color": "#a9a9a9", "font-size": "12px"}),
-                html.Span("119,174,900", style={"color": "#6A1B9A", "font-weight": "bold", "font-size": "12px"}), ### CHANGE THIS: this needs to be dynamically retrieved from the output data
+                html.Span(f"{data["external_data"]["total_cases"]}", style={"color": "#6A1B9A", "font-weight": "bold", "font-size": "12px"}), ### CHANGE THIS: this needs to be dynamically retrieved from the output data
                 html.Span(" people suffer from severe diseases, and ", style={"color": "#a9a9a9", "font-size": "12px"}),
-                html.Span("160,237,419", style={"color": "#6A1B9A", "font-weight": "bold", "font-size": "12px"}), ### CHANGE THIS: this needs to be dynamically retrieved from the output data
+                html.Span(f"{data["external_data"]["total_deaths"]}", style={"color": "#6A1B9A", "font-weight": "bold", "font-size": "12px"}), ### CHANGE THIS: this needs to be dynamically retrieved from the output data
                 html.Span(" of them have died as a result.", style={"color": "#a9a9a9", "font-size": "12px"})
             ], style={"line-height": "1.6", "margin-bottom": "20px"}),
             html.Div([
                 html.Div([
                     html.P("All Disease Cases", style={"text-align": "center", "font-size": "14px", "margin-bottom": "5px"}),
-                    html.P("Placeholder for Total Cases", style={"text-align": "center", "font-size": "24px", "font-weight": "medium"}) ### CHANGE THIS: this needs to be dynamically retrieved from the output data
+                    html.P(f"{data["external_data"]["total_cases"]}", style={"text-align": "center", "font-size": "24px", "font-weight": "medium"}) ### CHANGE THIS: this needs to be dynamically retrieved from the output data
                 ], style={"padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-bottom": "10px"}),
                 html.Div([
                     html.P("All Deaths", style={"text-align": "center", "font-size": "14px", "margin-bottom": "5px"}),
-                    html.P("Placeholder for Total Deaths", style={"text-align": "center", "font-size": "24px", "font-weight": "medium"}) ### CHANGE THIS: this needs to be dynamically retrieved from the output data
+                    html.P(f"{data["external_data"]["total_deaths"]}", style={"text-align": "center", "font-size": "24px", "font-weight": "medium"}) ### CHANGE THIS: this needs to be dynamically retrieved from the output data
                 ], style={"padding": "10px", "border": "1px solid #ddd", "border-radius": "10px"})
             ])
         ], style={"width": "40%", "display": "inline-block", "vertical-align": "top", "padding-right": "20px"}),

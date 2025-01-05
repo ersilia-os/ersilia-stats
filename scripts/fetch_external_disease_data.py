@@ -6,6 +6,7 @@ from unittest import case
 from networkx import hits
 import pandas as pd
 import json
+import requests
 
 # Directory for storing external data
 DATA_DIR = "external-data"
@@ -22,8 +23,6 @@ owid_datasets = {
     # TUBERCULOSIS
     "tb_cases.csv": "https://ourworldindata.org/grapher/number-of-tuberculosis-cases.csv",
     "tb_deaths.csv": "https://ourworldindata.org/grapher/tuberculosis-deaths-who.csv",
-    # CANCER
-    "cancer_deaths.csv": "https://ourworldindata.org/grapher/deaths-from-cancer-who.csv",
     # MEASLES
     "measles_cases.csv": "https://ourworldindata.org/grapher/reported-cases-of-measles.csv",
     # POLIO
@@ -32,13 +31,14 @@ owid_datasets = {
 
 # WHO DATASETS
 who_datasets = {
+    # HIV/AIDS
+    "hivaids_cases.csv": "https://ghoapi.azureedge.net/api/HIV_0000000026?$filter=SpatialDimType%20eq%20%27COUNTRY%27",
     # MALARIA
     "malaria_cases.csv": "https://ghoapi.azureedge.net/api/MALARIA_EST_CASES?$filter=SpatialDimType%20eq%20%27COUNTRY%27"
 }
 
-disease_stats = {}
 # Function to fetch OWID datasets
-def fetch_owid_data(file_name, url):
+def fetch_owid_data(disease_stats, file_name, url):
     try:
         print(f"Fetching OWID dataset: {file_name}")
         df = pd.read_csv(url, storage_options={"User-Agent": "OWID Data Fetch/1.0"})
@@ -58,13 +58,35 @@ def fetch_owid_data(file_name, url):
 
     return disease_stats
 
+def fetch_who_data(disease_stats, file_name, url):
+    try:
+        print(f"Fetching WHO dataset: {file_name}")
+        df = pd.DataFrame(requests.get(url).json()["value"])
+        df = df[['SpatialDim', 'TimeDim', 'NumericValue']].sort_values(['SpatialDim', 'TimeDim']).fillna(0)
+        output_path = os.path.join(DATA_DIR, file_name)
+        df.to_csv(output_path, index=False)
+        print(f"Saved WHO dataset: {file_name}")
+    except Exception as e:
+        print(f"Error fetching {file_name}: {e}")
+
+    disease_stats[file_name.split(".")[0]] = int(df.iloc[:, -1:].sum().iloc[0])
+
+    return disease_stats
+
 # Main function to download all datasets
 def main():
+    disease_stats = {}
     for file_name, url in owid_datasets.items():
-        disease_stats = fetch_owid_data(file_name, url)
+        disease_stats = fetch_owid_data(disease_stats, file_name, url)
+
+    for file_name, url in who_datasets.items():
+        disease_stats = fetch_who_data(disease_stats, file_name, url)
+
+    print(disease_stats)
     
     with open("external-data/external_data_stats.json", "w") as json_file:
         json.dump(disease_stats, json_file)
+    print("Saved disease stats to JSON.")
 
 if __name__ == "__main__":
     main()

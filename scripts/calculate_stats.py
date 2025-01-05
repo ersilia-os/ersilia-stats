@@ -354,7 +354,6 @@ def calculate_events_stats():
 
     # Aggregate tag counts for visualization
     tag_counts = events_with_tags["Type"].value_counts()
-    print(tag_counts)
     tag_percentages = (tag_counts / tag_counts.sum()) * 100
 
     # Output tag percentages for visualization
@@ -391,7 +390,6 @@ def calculate_events_stats():
         "events_by_country": events_by_country
     }
 
-    print(events_data)
     return events_data
 
 # Publications
@@ -571,16 +569,22 @@ def calculate_openalex_authors():
 
 # External Data Statistics
 def calculate_external_data_stats():
-    external_stats = {"disease_statistics": []}
+    external_stats = {
+        "disease_statistics": [],
+        "total_cases": 0,
+        "total_deaths": 0
+    }
     
     for dataset, value in external_data.items():
         # Determine if the key refers to cases or deaths
         if "_deaths" in dataset:
             disease_name = dataset.replace("_deaths", "").replace("_", " ").title()
             stat_type = "deaths"
+            external_stats["total_deaths"] += value
         elif "_cases" in dataset:
             disease_name = dataset.replace("_cases", "").replace("_", " ").title()
             stat_type = "cases"
+            external_stats["total_cases"] += value
         else:
             continue  # Skip if the key doesn't match "cases" or "deaths"
 
@@ -594,6 +598,10 @@ def calculate_external_data_stats():
                 "disease": disease_name,
                 f"total_{stat_type}": round(value)
             })
+
+    # Round the totals for consistent formatting
+    external_stats["total_deaths"] = round(external_stats["total_deaths"])
+    external_stats["total_cases"] = round(external_stats["total_cases"])
 
     return external_stats
 
