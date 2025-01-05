@@ -284,33 +284,87 @@ def calculate_blogposts_stats():
 
 # Events
 def calculate_events_stats():
-    events_data = {
-        "total_events": total(events_df),
-        "events_by_year": events_df['Year'].value_counts().reset_index().rename(
-            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records')
-    }
+    # --- Events By Year ---
+    events_by_year = (
+        events_df.groupby("Year")["Name"]
+        .count()
+        .reset_index()
+        .rename(columns={"Name": "Count"})
+        .to_dict(orient="records")
+    )
 
-    return events_data
+    # --- Events By Type ---
+    # Concatenate description, event URL, and name into one string for the LLM prompt
+    input_string = "\n".join(
+        f"Description: {row['Description']}\nEvent URL: {row['Event URL']}\nName: {row['Name']}"
+        for _, row in events_df.iterrows()
+    )
 
-def calculate_event_by_types():
-    types = ["Conference", "Workshop", "Webinar", "Seminar", "Training", "Other"]
+    # LLM API function
+    import google.generativeai as genai
+    import os
+    from dotenv import load_dotenv
 
-    event_type_counts = {event_type: 0 for event_type in types}
+    load_dotenv()
 
-    for _, row in events_df.iterrows():
-        event_name = row['Name'].lower()
-        matched = False
-        for event_type in types:
-            if event_type.lower() in event_name:
-                event_type_counts[event_type] += 1
-                matched = True
-                break
-        if not matched:
-            event_type_counts["Other"] += 1
-    
-    return event_type_counts
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    model = genai.GenerativeModel("gemini-1.5-flash")
 
-def calculate_events_by_country():
+    def generate_tags(input_string):
+        """
+        Generate tags and assign each event to its most relevant tag based on description, event URL, and name.
+        """
+        prompt = f"""
+        Based on the following event descriptions, URLs, and names, generate 5-7 relevant types of events for categorizing the events. Make sure each event is an understandable noun.
+        Additionally, assign each event to its most relevant tag based on its description, URL, and name.
+
+        Input:
+        {input_string}
+
+        Output the result in the following JSON format:
+        {{
+            "types": ["Tag 1", "Tag 2", "Tag 3", ...],
+            "event_tags": [
+                {{"Name": "Event Name 1", "Type": "Type 1"}},
+                {{"Name": "Event Name 2", "Type": "Type 2"}},
+                ...
+            ]
+        }}
+        """
+        # Lower temperature for controlled, grounded output
+        generation_config = genai.GenerationConfig(
+            temperature=0.2
+        )
+
+        # Generate response
+        response = model.generate_content(
+            prompt,
+            generation_config=generation_config
+        )
+        return json.loads(response.text[7:-4])  # Adjust parsing to fit the output format
+
+    # Generate tags and parse JSON output
+    parsed_output = generate_tags(input_string)
+
+    # Extract tags and event-tag mapping
+    event_tags_df = pd.DataFrame(parsed_output["event_tags"])
+
+    # Merge tags with the original Events DataFrame
+    events_with_tags = events_df.merge(event_tags_df, left_on="Name", right_on="Name", how="left")
+
+    # Aggregate tag counts for visualization
+    tag_counts = events_with_tags["Type"].value_counts()
+    print(tag_counts)
+    tag_percentages = (tag_counts / tag_counts.sum()) * 100
+
+    # Output tag percentages for visualization
+    tag_percentages_df = tag_percentages.reset_index()
+    events_by_type_df = tag_percentages_df.merge(tag_counts, on="Type")
+    events_by_type_df.columns = ["Type", "Percentage", "Count"]
+
+    event_types_summary = events_by_type_df.to_dict(orient="records")
+
+    # --- Events by Country ---
     # Process each row in the events DataFrame
     events_by_country = []
     for _, row in events_df.iterrows():
@@ -328,18 +382,25 @@ def calculate_events_by_country():
                 country_entry["Organisers"].append(organiser)
             else:
                 events_by_country.append({"Country": country_name, "Organisers": [organiser]})
-        
 
+    events_data = {
+        "total_events": total(events_df),
+        "events_by_year": events_df['Year'].value_counts().reset_index().rename(
+            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
+        "events_by_type": event_types_summary,
+        "events_by_country": events_by_country
+    }
 
-    return events_by_country
-
+    print(events_data)
+    return events_data
 
 # Publications
 def calculate_publications_stats():
     publications_data = {
         "total_publications": total(publications_df),
         "total_citations": sum_column(publications_df, 'Citations'),
-        "citations_by_year": calc_avg_specific(publications_df, 'Year', 'Citations'),
+        "citations_by_year": publications_df.groupby("Year")["Citations"].sum().reset_index().rename(
+            columns={"Citations": "total_citations"}).to_dict(orient="records"),
         "publications_by_year": publications_df['Year'].value_counts().reset_index().rename(
             columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
         "collaboration_breakdown": publications_df['Ersilia Affiliation'].value_counts().reset_index().rename(
@@ -373,8 +434,6 @@ def calculate_publications_stats():
     ]
     publications_data["non_ersilia_authors_by_frequency"] = author_names_by_frequency
 
-
-
     # Count of Ersilia and non-Ersilia affiliations for each year
     affiliation_counts = (
         publications_df
@@ -387,28 +446,6 @@ def calculate_publications_stats():
     )
 
     publications_data["affiliation_counts_by_year"] = affiliation_counts
-
-    cby = calc_avg_specific(publications_df, 'Year', 'Citations')  # returns [{'Year': 2013, 'average_Citations': X}, ...]
-    
-    # Collapse years < 2020
-    collapsed = {}
-    for item in cby:
-        year = item["Year"]
-        avg_c = item["average_Citations"]
-        if year < 2020:
-            collapsed.setdefault("Before 2020", []).append(avg_c)
-        else:
-            collapsed.setdefault(str(year), []).append(avg_c)
-
-    # Now compute the average for 'Before 2020', or just store it
-    final_list = []
-    for k, v in collapsed.items():
-        final_list.append({
-            "Year": k,
-            "average_Citations": round(sum(v) / len(v), 2)
-        })
-
-    publications_data["citations_by_year"] = final_list
     
     return publications_data
 
