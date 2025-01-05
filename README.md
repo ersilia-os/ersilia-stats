@@ -1,16 +1,14 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-01 23:18:26 GMT_
+_Last updated: 2025-01-04 19:19:40 GMT_
 
 ## 🧬 Models' Impact
 
-### **Total Models: 181**
+- **Total Models:** 181
+- **Percentage Ready to Use:** 85.08%
 
-### **Percentage Ready to Use: 85.08%**
-
-### Model Categorization
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Model Categorization</summary>
 
 | Category | Count |
 | --- | --- |
@@ -89,12 +87,10 @@ _Last updated: 2025-01-01 23:18:26 GMT_
 | Biomedical text | 1 |
 
 
-</div>
+</details>
 
-NOTE: Models that have multiple tags are counted once under each of their tags. Thus, the sum of the number of models may be greater than the number of total models. For more detailed information, check either `reports/tables_stats.json` or the model hub, linked below.
-### Most Recent Models
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Most Recent Models</summary>
 
 | Title | Contributor | Date | Status |
 | --- | --- | --- | --- |
@@ -105,19 +101,18 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Chemical space 2D projections against DrugBank | miquelduranfrigola | 2024-11-09 | In progress |
 
 
-</div>
+</details>
 
 👉 [Explore more models on our dashboard](https://ersilia.io/model-hub)
 
 
 ## 🌍 Community & Blog
 
-### **Countries Represented: 17**
-### **Total Contributors: 91**
+- **Countries Represented:** 17
+- **Total Contributors:** 91
 
-### Role Distribution
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Role Distribution</summary>
 
 | Role | Count |
 | --- | --- |
@@ -133,11 +128,10 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Visiting Researcher | 1 |
 
 
-</div>
+</details>
 
-### Duration of Involvement
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Duration of Involvement</summary>
 
 | Duration | Count |
 | --- | --- |
@@ -147,11 +141,10 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | 6-12 Months | 2 |
 
 
-</div>
+</details>
 
-### Contributors by Country
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Contributors by Country</summary>
 
 | Country | Contributors |
 | --- | --- |
@@ -174,16 +167,15 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Namibia | 1 |
 
 
-</div>
+</details>
 
 
 ## 📝 Blogposts
 
-### **Total Blogposts: 50**
+- **Total Blogposts:** 50
 
-### Blogpost Topics Distribution
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Blogpost Topics Distribution</summary>
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
@@ -196,11 +188,10 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Global Health | 2 | 4.08% |
 
 
-</div>
+</details>
 
-### Blogposts Over Time
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Blogposts Over Time</summary>
 
 | Year | Quarter | Post Count |
 | --- | --- | --- |
@@ -221,16 +212,15 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | 2024 | Q4 | 3 |
 
 
-</div>
+</details>
 
 
 ## 🏢 Organizations in Ersilia's Network
 
-### **Total Organizations: 209**
+- **Total Organizations:** 209
 
-### Organization Types
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Organization Types</summary>
 
 | Type | Count |
 | --- | --- |
@@ -243,11 +233,10 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Accelerator | 8 |
 
 
-</div>
+</details>
 
-### Organizations by Country
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Organizations by Country</summary>
 
 | Country | Total Organizations |
 | --- | --- |
@@ -279,16 +268,16 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Unknown | 1 |
 
 
-</div>
+</details>
 
 
-## Author Highlights
+## 🏅 Author Highlights
 
-- **Total Authors**: 217
-- **Top Author**: Patrick Aloy (H-index: 54)
+- **Total Authors:** 217
+- **Top Author:** Patrick Aloy (H-index: 54)
 
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Top Authors</summary>
 
 | Name | Ersilia Pubs | H-index | Total Pubs |
 | --- | --- | --- | --- |
@@ -297,11 +286,10 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Izukanji Sikazwe | 2 | 25.0 | 2 |
 
 
-</div>
+</details>
 
-### Patrick Aloy - Ersilia Publications
-
-<div style="overflow-x: scroll;">
+<details>
+<summary>Patrick Aloy - See Publications ⬇️</summary>
 
 | Title | Year | URL |
 | --- | --- | --- |
@@ -309,11 +297,9 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Connecting chemistry and biology through molecular descriptors | 2021 | https://www.sciencedirect.com/science/article/pii/S1367593121001204?via%3Dihub |
 
 
-</div>
-
-### Kelly Chibale - Ersilia Publications
-
-<div style="overflow-x: scroll;">
+</details>
+<details>
+<summary>Kelly Chibale - See Publications ⬇️</summary>
 
 | Title | Year | URL |
 | --- | --- | --- |
@@ -321,11 +307,9 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | AI coupled to pharmacometric modelling to tailor malaria and tuberculosis treatment in Africa | 2024 | https://www.medrxiv.org/content/10.1101/2024.11.07.24316884v1 |
 
 
-</div>
-
-### Izukanji Sikazwe - Ersilia Publications
-
-<div style="overflow-x: scroll;">
+</details>
+<details>
+<summary>Izukanji Sikazwe - See Publications ⬇️</summary>
 
 | Title | Year | URL |
 | --- | --- | --- |
@@ -333,34 +317,26 @@ NOTE: Models that have multiple tags are counted once under each of their tags. 
 | Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia | 2022 | https://journals.plos.org/globalpublichealth/article?id=10.1371/journal.pgph.0000124 |
 
 
-</div>
+</details>
 
-
-This table highlights top Ersilia contributors, meaning Gemma, Miquel, and Dhanshree weren't included. However, Ersilia and its partners appreciates their continual, tireless efforts in helping drive the mission of innovation and equitable science! 😊👏
 
 ## 🌐 External Data
 
-### Disease Statistics
+<details>
+<summary>Disease Statistics</summary>
 
-<div style="overflow-x: scroll;">
-
-| Disease | Estimated Total Deaths (based on death rates) | Most Recent Year | Deaths in Most Recent Year |
-| --- | --- | --- | --- |
-| Alzheimers | 78193529 | 2021 | 2080 |
-| Meningitis | 19317843 | 2021 | 1540 |
-| Pneumonia | 175302228 | 2021 | 13232 |
-| Hivaids | 114405860 | 2022 | 779 |
-| Cardiovascular | 1103874706 | 2021 | 64217 |
-| Malaria | 45951860 | 2021 | 91 |
-| Tuberculosis | 127005702 | 2021 | 10148 |
-| TOTAL | 1664051728 | - | - |
+| Disease | Estimated Total Cases | Estimated Total Deaths |
+| --- | --- | --- |
+| Hivaids | - | 27,580,837 |
+| Covid | 777,074,039 | 7,079,129 |
+| Malaria | - | 15,317,311 |
+| Tb | 253,467,432 | 44,118,898 |
+| Cancer | - | 178,651,923 |
+| Measles | 47,347,773 | - |
+| Polio | 541,429 | - |
 
 
-</div>
-
-### COVID-19 Statistics
-- **Total Cases**: 777,025,779
-- **Total Deaths**: 7,078,468
+</details>
 
 
 ---

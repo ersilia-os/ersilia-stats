@@ -1,12 +1,16 @@
 import dash
-from dash import dcc, html
+from dash import dcc, html, callback, ClientsideFunction
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
+from dash.development.base_component import Component
 import plotly.express as px
 import requests
 from .models_impact import models_impact_page as models_impact_page
 from .community import community_blog_page as community_blog_page
 from .events_and_publications import events_publications_page as events_publications_page
+from .utils.serializer import serialize_dash_component
+
+from dash import Dash, html
 
 # Load data from JSON
 data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
@@ -69,13 +73,14 @@ home_page = html.Div([
     html.A("Ersilia.io", href="https://ersilia.io", target="_blank", style={"font-size": "18px", "color": "#6A1B9A", "text-decoration": "underline"})
 ], style={"margin-left": "320px", "padding": "20px"})
 
-# App layout
+# # App layout
 app.layout = html.Div([
     dcc.Location(id="url", refresh=False),
     sidebar,
     html.Div(id="page-content")
 ])
 
+# CALLBACKS
 # Callbacks to handle page navigation
 @app.callback(
     dash.dependencies.Output("page-content", "children"),
@@ -94,7 +99,7 @@ def display_page(pathname):
     else:
         return home_page
 
-# Callbacks to manage highlight behavior
+#Callbacks to manage highlight behavior
 @app.callback(
     [
         dash.dependencies.Output("models-impact-link", "style"),
@@ -112,6 +117,8 @@ def update_sidebar_highlight(pathname):
         highlighted_style if pathname == "/community-blog" else default_style,
         highlighted_style if pathname == "/events-publications" else default_style
     )
+
+
 # Run the app
 if __name__ == "__main__":
     app.run_server(debug=True)
