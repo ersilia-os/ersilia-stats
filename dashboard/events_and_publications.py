@@ -74,7 +74,7 @@ def events_publications_page():
     )
 
     events_by_type_fig.update_traces(
-        customdata=events_by_type[["Percentage", "count"]],
+        customdata=events_by_type[["Percentage", "Count"]],
         textinfo="percent+label",
         hovertemplate="<b>%{label}</b><br>" +
                     "Percentage: %{customdata[0][0]:.2f}%<br>" +
