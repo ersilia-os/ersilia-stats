@@ -1,5 +1,5 @@
 name: Deploy Static Pages
-run-name: Deploy HTML pages generated from dash static
+run-name: Deploy Static Pages on Update
 
 on:
   push:
