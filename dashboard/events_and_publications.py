@@ -50,18 +50,25 @@ def events_publications_page():
         x="Year",
         y="Count",
         barmode="group",
-        color_discrete_sequence=["#aa96fa"]  # Purple for bars
+        color_discrete_sequence=["#aa96fa"],  # Purple for bars
     )
 
     # Update axes and layout
-    events_fig.update_xaxes(title_text="Year")
-    events_fig.update_yaxes(title_text="Number of Events")
+    events_fig.update_xaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Year")
+    events_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Number of Events")
     events_fig.update_layout(
-        title={
-            "text": "Event Distribution Over Time By Year",
-        },
-        margin=dict(t=50, b=50, l=50, r=50),  # Adjust margins to expand the plot area
-        paper_bgcolor="#FAFAFA"
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor="#FAFAFA",
+        plot_bgcolor="#FAFAFA",
+        hoverlabel=dict(
+            bgcolor="black"
+        )
+    )
+    events_fig.update_traces(
+        hovertemplate="<b>%{x}</b><br>%{y} publications<extra></extra>",
+        marker=dict(line=dict(color="white"))
     )
 
     events_by_type = pd.DataFrame(data["events"]["events_by_type"])
@@ -74,25 +81,26 @@ def events_publications_page():
     )
 
     events_by_type_fig.update_traces(
-        customdata=events_by_type[["Percentage", "count"]],
+        customdata=events_by_type[["Percentage", "Count"]],
         textinfo="percent+label",
-        hovertemplate="<b>%{label}</b><br>" +
-                    "Percentage: %{customdata[0][0]:.2f}%<br>" +
-                    "Count: %{customdata[0][1]}<extra></extra>",
+        hovertemplate="<b>%{label}</b><br> %{customdata[0][1]}<extra></extra> (%{customdata[0][0]:.2f}%)",
         textposition='inside'
     )
     events_by_type_fig.update_layout(uniformtext_minsize=50, uniformtext_mode='hide')
 
-    events_by_type_fig.update_layout(
-        title={
-            "text": "Events Breakdown by Types<br><sup>Highlights from a diverse range of events</sup>",
-        },
+    events_by_type_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
         legend=dict(
-            font=dict(size=7),  # Reduce legend font size
-            orientation="h",  # Horizontal legend
+            font=dict(size=14),
+            xanchor="right",
+            x=1.75,
+            yanchor="middle",
+            y=0.5
         ),
-        margin=dict(t=50, b=50, l=50, r=50),  # Adjust margins to expand the plot area
-        paper_bgcolor = "#FAFAFA"
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor = "#FAFAFA",
+        plot_bgcolor="#FAFAFA",
     )
 
     publication_data = data["publications"]
@@ -107,56 +115,175 @@ def events_publications_page():
                                        x="Year", 
                                        y="Count",
                                        color_discrete_sequence=["#aa96fa"])
-    publications_by_year_fig.update_xaxes(title_text="Year")
-    publications_by_year_fig.update_yaxes(title_text="Number of Publications")
-    publications_by_year_fig.update_layout(
-        title={
-            "text": f"Timeline of Publications Yearly<br><sup>Total of {total_publications} publications</sup>",
-        },
-        margin=dict(t=50, b=50, l=50, r=50),  # Adjust margins to expand the plot area
-        paper_bgcolor = "#FAFAFA"
+    publications_by_year_fig.update_xaxes(linecolor='lightgrey', gridcolor='#FAFAFA', title_text="Year")
+    publications_by_year_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Number of Publications")
+    publications_by_year_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor = "#FAFAFA",
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        plot_bgcolor="#FAFAFA"
     )
     publications_by_year_fig.update_traces(
         hovertemplate="<b>%{x}</b><br>%{y} publications<extra></extra>",
-        marker=dict(line=dict(color="white", width=0.5))
+        marker=dict(line=dict(color="white"))
     )
 
     publication_status_distribution = pd.DataFrame(publication_data['status_distribution'])
+    total_count = publication_status_distribution['count'].sum()
+    publication_status_distribution['Percentage'] = (publication_status_distribution['count'] / total_count) * 100
 
-    publication_status_distribution_fig = px.pie(publication_status_distribution, names="Count", values="count", title="Publication Status Distribution")
+    publication_status_distribution_fig = px.pie(
+        publication_status_distribution, 
+        names="Count", 
+        values="count", 
+        color_discrete_sequence=["#aa96fa", "#bee6b4"]
+    )
+    publication_status_distribution_fig.update_traces(
+        customdata=publication_status_distribution["Percentage"],  # Add custom percentage data
+        textinfo="percent+label",
+        hovertemplate="<b>%{label}</b><br>%{value} (%{customdata:.3f}%)<extra></extra>",
+        textposition = 'inside'
+    )
+    publication_status_distribution_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), uniformtext_minsize=50, uniformtext_mode='hide')
+
+    publication_status_distribution_fig.update_layout(
+        legend=dict(
+            font=dict(size=14),  # Reduce legend font size
+            xanchor="right",
+            x=1.56,
+            yanchor="middle",
+            y=0.5
+        ),
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor = "#FAFAFA",
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        plot_bgcolor="#FAFAFA"
+    )
 
     citations_by_year = pd.DataFrame(publication_data['citations_by_year'])
+    total_citations = publication_data['total_citations']
 
-    citations_fig = px.bar(citations_by_year, x="Year", y="total_citations", title="Citations Over Time")
-    citations_fig.update_xaxes(title_text="Year")
-    citations_fig.update_yaxes(title_text="Citations")
+    citations_fig = px.bar(
+        citations_by_year, 
+        x="Year", 
+        y="total_citations", 
+        color_discrete_sequence=["#aa96fa"]
+    )
+    citations_fig.update_xaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Year", dtick=1)
+    citations_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Citations", dtick=100)
+    citations_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor = "#FAFAFA",
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        xaxis_tickangle=-40,
+        plot_bgcolor="#FAFAFA"
+    )
+    citations_fig.update_traces(
+        hovertemplate="<b>%{x}</b><br>%{y} citations<extra></extra>",
+        marker=dict(line=dict(color="white"))
+    )
 
     publications_by_topic = pd.DataFrame(publication_data['publications_by_topic'])
     publications_by_topic = publications_by_topic.sort_values(by="Count", ascending=False)
 
-    publications_by_topic_fig = px.bar(publications_by_topic, x="Topic", y="Count", title="Publications By Topic Area")
-    publications_by_topic_fig.update_xaxes(title_text="Topic")
-    publications_by_topic_fig.update_yaxes(title_text="Number of Publications")
+    publications_by_topic_fig = px.bar(
+        publications_by_topic, 
+        x="Topic", 
+        y="Count", 
+        color_discrete_sequence = ["#aa96fa"]
+    )
+    publications_by_topic_fig.update_xaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Topic")
+    publications_by_topic_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Number of Publications")
+    publications_by_topic_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor = "#FAFAFA",
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        xaxis_tickangle=-40,
+        plot_bgcolor="#FAFAFA"
+    )
+    publications_by_topic_fig.update_traces(
+        hovertemplate="<b>%{x}</b><br>%{y} publications<extra></extra>",
+        marker=dict(line=dict(color="white")),
+    )
 
     publication_affiliations_by_year = pd.DataFrame(publication_data['affiliation_counts_by_year'])
     publication_affiliations_by_year = publication_affiliations_by_year.sort_values(by="Year", ascending=True)
+    # Melt the DataFrame to long format
+    publication_affiliations_by_year_long = publication_affiliations_by_year.melt(
+        id_vars="Year", 
+        var_name="Affiliation", 
+        value_name="Count"
+    )
+
+    # Rename variables in the "Affiliation" column
+    publication_affiliations_by_year_long["Affiliation"] = publication_affiliations_by_year_long["Affiliation"].replace({
+        "Non-Ersilia Affiliation": "non-affiliated",
+        "Ersilia Affiliation": "affiliated"
+    })
+
+    # Create the bar chart
+    custom_colors = {
+        "non-affiliated": "#bee6b4", 
+        "affiliated": "#aa96fa"
+    }
 
     publication_affiliations_by_year_fig = px.bar(
-        publication_affiliations_by_year,
+        publication_affiliations_by_year_long,
         x="Year",
-        y=["Non-Ersilia Affiliation", "Ersilia Affiliation"],
+        y="Count",
+        color="Affiliation",
+        labels={'Affiliation': "Affiliation w/ Ersilia"},
+        hover_data={'Affiliation': True, 'Count': True, 'Year': True},
         barmode="group",
-        title="Publication Affiliations By Year"
+        color_discrete_map = custom_colors
     )
-    publication_affiliations_by_year_fig.update_xaxes(title_text="Year", dtick=1)
-    publication_affiliations_by_year_fig.update_yaxes(title_text="Count")
-
+    publication_affiliations_by_year_fig.update_xaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Year", dtick=1)
+    publication_affiliations_by_year_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Count")
+    publication_affiliations_by_year_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
+        legend=dict(
+            font=dict(size=10),  # Reduce legend font size
+            xanchor="right",
+            x=1,
+            yanchor="top",
+            y=1.3
+        ),
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        xaxis_tickangle=-40,
+        plot_bgcolor="#FAFAFA",
+        paper_bgcolor="#FAFAFA"
+    )
+    publication_affiliations_by_year_fig.update_traces(
+        marker=dict(line=dict(color="white")),
+        hovertemplate="%{y} <b>%{fullData.name}</b> events in %{x}<extra></extra>"
+    )
 
     top_external_collaborators = pd.DataFrame(publication_data['non_ersilia_authors_by_frequency']).head(9)
 
-    top_external_collaborators_fig = px.bar(top_external_collaborators, x="author", y="count", title="Top External Collaborators")
-    top_external_collaborators_fig.update_xaxes(title_text="Author")
-    top_external_collaborators_fig.update_yaxes(title_text="Number of Publications")
+    top_external_collaborators_fig = px.bar(
+        top_external_collaborators, 
+        x="author", 
+        y="count", 
+        color_discrete_sequence=["#aa96fa"]
+    )
+    top_external_collaborators_fig.update_xaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Author")
+    top_external_collaborators_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Number of Publications")
+    top_external_collaborators_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
+        margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+        paper_bgcolor = "#FAFAFA",
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        xaxis_tickangle=-40,
+        plot_bgcolor="#FAFAFA"
+    )
+    top_external_collaborators_fig.update_traces(
+        hovertemplate="<b>%{x}</b><br>%{y} publications<extra></extra>",
+        marker=dict(line=dict(color="white"))
+    )
 
     events_by_country = pd.DataFrame(data["events"]["events_by_country"])
     events_by_country["Count"] = events_by_country["Organisers"].apply(lambda x: len(x))
@@ -182,80 +309,115 @@ def events_publications_page():
         hover_data={"Percent_Events": ":.2f", "Organisers": True, "Count": True},
         color_discrete_map={"Global South": "#aa96fa", "Global North": "#bee6b4"}
     ).update_traces(
-        marker=dict(line=dict(color="white", width=1)),
-        hovertemplate="<b>%{hovertext}</b><br>" +
-                  "Events: %{customdata[0]:.2f}%<br>" +
-                  "Count: %{customdata[2]}<br>" +
-                  "Organisers:<br>%{customdata[1]}<extra></extra>"
-    ).update_layout(
+        marker=dict(line=dict(color="white")),
+        hovertemplate="<b>%{hovertext}</b><br>%{customdata[2]} events (%{customdata[0]:.2f}%) organised by: <br>" +
+                  "%{customdata[1]}<extra></extra>"
+    ).update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
         geo=dict(
             showcoastlines=False,
             showcountries=True,
             countrycolor="white",
-            landcolor="lightgray"
+            landcolor="lightgray",
+            bgcolor="#FAFAFA",
+            framewidth=0
         ),
         dragmode = False,
-        margin={"r": 0, "t": 0, "l": 0, "b": 0}
+        margin={"r": 0, "t": 0, "l": 0, "b": 0},
+        font=dict(color="#a9a9a9",
+                  family="Arial"),
+        plot_bgcolor="#FAFAFA",
+        paper_bgcolor="#FAFAFA"
     )
-
-    total_events = events_by_country["Count"].sum()
-    total_countries = events_by_country["Country"].nunique()
 
     return html.Div([
         # Header Section
-        html.P("Events & Publications", style={"font-size": "24px", "font-weight": "bold", "text-align": "center", "margin-bottom": "20px"}),
+        html.Div([
+            html.P("Events & Publications", 
+                   style={"font-size": "30px", "font-weight": "bold", "margin-bottom": "20px"}),
+        ]),
 
         # Events Section
-        html.P("Events", style={"font-size": "16px", "font-weight": "bold", "margin-bottom": "4px"}),
+        html.P("Events", style={"font-size": "22px", "font-weight": "bold", "margin-bottom": "10px"}),
         html.Div([
             html.Div([
-                dcc.Graph(id="roles_community", figure=events_fig),
-            ], style={"width": "48%", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                html.P("Event Distribution By Year", style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "10px"}),
+                dcc.Graph(id="roles_community", figure=events_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px",
+                      "margin-right": "1%", "width": "49%", "display": "inline-block", "padding": "25px"}),
             html.Div([
-                dcc.Graph(id="events_by_type", figure=events_by_type_fig),
-            ], style={"width": "48%", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
+                html.P("Event Breakdown By Types", style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "10px"}),
+                dcc.Graph(id="events_by_type", figure=events_by_type_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px",
+                      "width": "49%", "display": "inline-block", "padding": "25px"})
         ], style={"display": "flex", "justify-content": "space-between"}),
 
-        
         html.Div([
-            # Country Buttons
-            html.P(f"A total of {total_events} events were organized by {total_countries} countries.", style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "10px"}),
-            html.P(f"*Global South: Africa, Latin America and the Caribbean, Asia (excluding Israel, Japan, and South Korea), and Oceania (excluding Australia and New Zealand).", style={"font-size": "12px", "margin-bottom": "10px"}),
-            # Map visualization
+            html.P("Contributors' Events By Country", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+            html.P([
+                html.Span("A total of ", style={"font-size": "12px", "color": "#a9a9a9"}),
+                html.Span(f"{data['events']['total_events']}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
+                html.Span(" were organised by ", style={"font-size": "12px", "color": "#a9a9a9"}),
+                html.Span(f"{len(data['events']['events_by_country'])}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
+                html.Span(" countries.", style={"font-size": "12px", "color": "#a9a9a9"})
+            ], style={"line-height": "1.6", "margin-bottom": "10px"}),
+            html.P(f"*Global South: Africa, Latin America and the Caribbean, Asia (excluding Israel, Japan, and South Korea), and Oceania (excluding Australia and New Zealand).", 
+                   style={"font-size": "12px", "color": "#a9a9a9", "margin-bottom": "10px"}),
             dcc.Graph(
                 id="events_by_country_map",
                 figure=events_by_country_map,
                 style={"height": "400px"}
             )
-        ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px"}),
+        ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px"}),
 
         # Publications Section
-        html.Hr(style={"border": "1px solid #ddd", "margin": "20px 0"}),
-        html.P("Publications", style={"font-size": "16px", "font-weight": "bold", "margin-bottom": "4px"}),
+        html.Hr(style={"border": "1px solid #aaa", "margin": "20px 0"}),  # Horizontal line
+        html.P("Publications", style={"font-size": "22px", "font-weight": "bold", "margin-bottom": "10px"}),
         html.Div([
             html.Div([
-                dcc.Graph(id="publications_by_year", figure=publications_by_year_fig, style={"height": "400px"}),
-            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                html.P("Timeline of Publications", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+            html.P([
+                html.Span("A total of ", style={"font-size": "12px", "color": "#a9a9a9"}),
+                html.Span(f"{data['publications']['total_publications']}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
+                html.Span(" publications.", style={"font-size": "12px", "color": "#a9a9a9"}),
+            ], style={"line-height": "1.6", "margin-bottom": "10px"}),
+                dcc.Graph(id="publications_by_year", figure=publications_by_year_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "49%", "display": "inline-block"}),
             html.Div([
-                dcc.Graph(id="citations_by_year", figure=citations_fig, style={"height": "400px"}),
-            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
-        ], style={"display": "flex", "flex-wrap": "wrap", "justify-content": "space-between"}),
-
-        html.Div([
-            html.Div([
-                dcc.Graph(id="publication_affiliations_by_year", figure=publication_affiliations_by_year_fig, style={"height": "400px"}),
-            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "margin-right": "2%"}),            
-            html.Div([
-                dcc.Graph(id="publications_by_topic", figure=publications_by_topic_fig, style={"height": "400px"}),
-            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"}),
+                html.P("Timeline of Citations", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+                html.Span("A total of ", style={"font-size": "12px", "color": "#a9a9a9"}),
+                html.Span(f"{data['publications']['total_citations']}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
+                html.Span(" citations.", style={"font-size": "12px", "color": "#a9a9a9"}),
+                dcc.Graph(id="citations_by_year", figure=citations_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "49%", "display": "inline-block"})
         ], style={"display": "flex", "justify-content": "space-between"}),
 
         html.Div([
             html.Div([
-                dcc.Graph(id="publications_status_distribution", figure=publication_status_distribution_fig, style={"height": "400px"}),
-            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block", "margin-right": "2%"}),
+                html.P("Collaborations w/ Ersilia vs. Independent Research", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+                html.Span("Ersilia was established in 2020.", style={"font-size": "12px", "color": "#a9a9a9"}),
+                dcc.Graph(id="publication_affiliations_by_year", figure=publication_affiliations_by_year_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "49%", "display": "inline-block"}),
             html.Div([
-                dcc.Graph(id="top_external_collaborators", figure=top_external_collaborators_fig, style={"height": "400px"}),
-            ], style={"width": "48%", "height": "500px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "margin-bottom": "20px", "display": "inline-block"})
+                html.P("Number of Publications By Topic Area", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+                dcc.Graph(id="publications_by_topic", figure=publications_by_topic_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "49%", "display": "inline-block"})
+        ], style={"display": "flex", "justify-content": "space-between"}),
+
+        html.Div([
+            html.Div([
+                html.P("Distribution of Organisations", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+                dcc.Graph(id="publications_status_distribution", figure=publication_status_distribution_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "40%", "display": "inline-block"}),
+            html.Div([
+                html.P("Top External Collaborators With Ersilia", 
+                   style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
+                dcc.Graph(id="top_external_collaborators", figure=top_external_collaborators_fig)
+            ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "58%", "display": "inline-block"})
         ], style={"display": "flex", "justify-content": "space-between"})
-    ], style={"margin-left": "320px", "padding": "20px", "font-family": "Arial, sans-serif"})
+    ], style={"margin-left": "320px", "padding": "20px"})
