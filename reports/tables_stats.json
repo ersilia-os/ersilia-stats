@@ -4697,38 +4697,38 @@
         "events_by_type": [
             {
                 "Type": "Conference",
-                "Percentage": 33.33333333333333,
-                "count": 21
+                "Percentage": 31.746031746031743,
+                "Columns": 20
             },
             {
                 "Type": "Seminar",
-                "Percentage": 28.57142857142857,
-                "count": 18
+                "Percentage": 30.158730158730158,
+                "Columns": 19
             },
             {
                 "Type": "Workshop",
                 "Percentage": 17.46031746031746,
-                "count": 11
+                "Columns": 11
             },
             {
                 "Type": "Collaboration Meeting",
                 "Percentage": 9.523809523809524,
-                "count": 6
+                "Columns": 6
             },
             {
                 "Type": "Training Course",
                 "Percentage": 4.761904761904762,
-                "count": 3
+                "Columns": 3
             },
             {
                 "Type": "Demo Day",
                 "Percentage": 4.761904761904762,
-                "count": 3
+                "Columns": 3
             },
             {
                 "Type": "Webinars",
                 "Percentage": 1.5873015873015872,
-                "count": 1
+                "Columns": 1
             }
         ],
         "events_by_country": [
