@@ -15,21 +15,8 @@ external_titles_df = pd.read_csv('external-data/titles_results.csv')
 external_authors_df = pd.read_csv('external-data/authors_results.csv')
 
 # Reading external datasets
-external_files = {
-    "alzheimers_deaths": "external-data/alzheimers-deaths.csv",
-    "meningitis_deaths": "external-data/meningitis-deaths.csv",
-    "pneumonia_deaths": "external-data/pneumonia-deaths.csv",
-    "hivaids_deaths": "external-data/hivaids-deaths.csv",
-    "cardiovascular_deaths": "external-data/cardiovascular-deaths.csv",
-    "tuberculosis_deaths": "external-data/tuberculosis-deaths.csv",
-    "life_expectancy": "external-data/life-expectancy-vs-health-expenditure.csv",
-    "community_health_workers": "external-data/community-health-workers.csv",
-    "covid_data": "external-data/covid-cases-and-deaths.csv",
-    "malaria_deaths": "external-data/malaria-deaths.csv",
-    "hiv_deaths": "external-data/hivaids-deaths.csv"
-}
-
-external_data = {key: pd.read_csv(path) for key, path in external_files.items()}
+with open("external-data/external_data_stats.json", 'r') as file:
+    external_data = json.load(file)
 
 output_data = {
     "publications": {},
@@ -297,11 +284,114 @@ def calculate_blogposts_stats():
 
 # Events
 def calculate_events_stats():
+    # --- Events By Year ---
+    events_by_year = (
+        events_df.groupby("Year")["Name"]
+        .count()
+        .reset_index()
+        .rename(columns={"Name": "Count"})
+        .to_dict(orient="records")
+    )
+
+    # --- Events By Type ---
+    # Concatenate description, event URL, and name into one string for the LLM prompt
+    input_string = "\n".join(
+        f"Description: {row['Description']}\nEvent URL: {row['Event URL']}\nName: {row['Name']}"
+        for _, row in events_df.iterrows()
+    )
+
+    # LLM API function
+    import google.generativeai as genai
+    import os
+    from dotenv import load_dotenv
+
+    load_dotenv()
+
+    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    model = genai.GenerativeModel("gemini-1.5-flash")
+
+    def generate_tags(input_string):
+        """
+        Generate tags and assign each event to its most relevant tag based on description, event URL, and name.
+        """
+        prompt = f"""
+        Based on the following event descriptions, URLs, and names, generate 5-7 relevant types of events for categorizing the events. Make sure each event is an understandable noun.
+        Additionally, assign each event to its most relevant tag based on its description, URL, and name.
+
+        Input:
+        {input_string}
+
+        Output the result in the following JSON format:
+        {{
+            "types": ["Tag 1", "Tag 2", "Tag 3", ...],
+            "event_tags": [
+                {{"Name": "Event Name 1", "Type": "Type 1"}},
+                {{"Name": "Event Name 2", "Type": "Type 2"}},
+                ...
+            ]
+        }}
+        """
+        # Lower temperature for controlled, grounded output
+        generation_config = genai.GenerationConfig(
+            temperature=0.2
+        )
+
+        # Generate response
+        response = model.generate_content(
+            prompt,
+            generation_config=generation_config
+        )
+        return json.loads(response.text[7:-4])  # Adjust parsing to fit the output format
+
+    # Generate tags and parse JSON output
+    parsed_output = generate_tags(input_string)
+
+    # Extract tags and event-tag mapping
+    event_tags_df = pd.DataFrame(parsed_output["event_tags"])
+
+    # Merge tags with the original Events DataFrame
+    events_with_tags = events_df.merge(event_tags_df, left_on="Name", right_on="Name", how="left")
+
+    # Aggregate tag counts for visualization
+    tag_counts = events_with_tags["Type"].value_counts()
+    print(tag_counts)
+    tag_percentages = (tag_counts / tag_counts.sum()) * 100
+
+    # Output tag percentages for visualization
+    tag_percentages_df = tag_percentages.reset_index()
+    events_by_type_df = tag_percentages_df.merge(tag_counts, on="Type")
+    events_by_type_df.columns = ["Type", "Percentage", "Count"]
+
+    event_types_summary = events_by_type_df.to_dict(orient="records")
+
+    # --- Events by Country ---
+    # Process each row in the events DataFrame
+    events_by_country = []
+    for _, row in events_df.iterrows():
+        organisations_id = literal_eval(row['Organisations'])[0] if row['Organisations'] else None
+
+        organisations_row = organisations_df[organisations_df['id'] == organisations_id]
+        organisations_country = literal_eval(organisations_row["Country"].values[0])[0] if not organisations_row.empty else None
+
+        country_name = countries_df[countries_df['id'] == organisations_country]["Country"].values[0] if organisations_country else None
+
+        if country_name:
+            organiser = literal_eval(row["Organiser"])[0]
+            country_entry = next((item for item in events_by_country if item["Country"] == country_name), None)
+            if country_entry:
+                country_entry["Organisers"].append(organiser)
+            else:
+                events_by_country.append({"Country": country_name, "Organisers": [organiser]})
+
     events_data = {
         "total_events": total(events_df),
         "events_by_year": events_df['Year'].value_counts().reset_index().rename(
-            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records')
+            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
+        "events_by_type": event_types_summary,
+        "events_by_country": events_by_country
     }
+
+    print(events_data)
     return events_data
 
 # Publications
@@ -309,35 +399,54 @@ def calculate_publications_stats():
     publications_data = {
         "total_publications": total(publications_df),
         "total_citations": sum_column(publications_df, 'Citations'),
-        "citations_by_year": calc_avg_specific(publications_df, 'Year', 'Citations'),
+        "citations_by_year": publications_df.groupby("Year")["Citations"].sum().reset_index().rename(
+            columns={"Citations": "total_citations"}).to_dict(orient="records"),
+        "publications_by_year": publications_df['Year'].value_counts().reset_index().rename(
+            columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
         "collaboration_breakdown": publications_df['Ersilia Affiliation'].value_counts().reset_index().rename(
             columns={'Count': 'Ersilia Affiliation', 'count': 'Count'}).to_dict(orient='records'),
         "publications_by_topic": publications_df['Topic'].value_counts().reset_index().rename(
-            columns={'Count': 'Topic', 'count': 'Count'}).to_dict(orient='records')
+            columns={'Count': 'Topic', 'count': 'Count'}).to_dict(orient='records'),
+        "status_distribution": publications_df['Status'].value_counts().reset_index().rename(
+            columns={'index': 'Status', 'Status': 'Count'}).to_dict(orient='records')
     }
 
-    cby = calc_avg_specific(publications_df, 'Year', 'Citations')  # returns [{'Year': 2013, 'average_Citations': X}, ...]
+    # Track author counts for non-Ersilia publications
+    author_counts = {}
+
+    for _, row in publications_df.iterrows():
+        if row['Ersilia Affiliation'] == "No":
+            authors = row['Authors'].split(', ')
+            for author in authors:
+                if author in author_counts:
+                    author_counts[author] += 1
+                else:
+                    author_counts[author] = 1
+
+    # Convert the dictionary to a sorted list of tuples (author, count)
+    sorted_author_counts = sorted(author_counts.items(), key=lambda item: item[1], reverse=True)
+
+    # Extract just the names in order of frequency
+    author_names_by_frequency = [
+        {"author": author, "count": count} 
+        for author, count in sorted_author_counts 
+        if author not in ["Miquel Duran-Frigola", "Patrick Aloy"]
+    ]
+    publications_data["non_ersilia_authors_by_frequency"] = author_names_by_frequency
+
+    # Count of Ersilia and non-Ersilia affiliations for each year
+    affiliation_counts = (
+        publications_df
+        .groupby(['Year', 'Ersilia Affiliation'])
+        .size()
+        .unstack(fill_value=0)
+        .reset_index()
+        .rename(columns={'Yes': 'Ersilia Affiliation', 'No': 'Non-Ersilia Affiliation'})
+        .to_dict(orient='records')
+    )
+
+    publications_data["affiliation_counts_by_year"] = affiliation_counts
     
-    # Collapse years < 2020
-    collapsed = {}
-    for item in cby:
-        year = item["Year"]
-        avg_c = item["average_Citations"]
-        if year < 2020:
-            collapsed.setdefault("Before 2020", []).append(avg_c)
-        else:
-            collapsed.setdefault(str(year), []).append(avg_c)
-
-    # Now compute the average for 'Before 2020', or just store it
-    final_list = []
-    for k, v in collapsed.items():
-        final_list.append({
-            "Year": k,
-            "average_Citations": round(sum(v) / len(v), 2)
-        })
-
-    publications_data["citations_by_year"] = final_list
-
     return publications_data
 
 # OpenAlex titles query
@@ -463,58 +572,28 @@ def calculate_openalex_authors():
 # External Data Statistics
 def calculate_external_data_stats():
     external_stats = {"disease_statistics": []}
-    population_df = pd.read_csv('external-data/world-population.csv')  # Load population data
-
-    # Function to compute total deaths for rate-based datasets
-    def calculate_deaths_from_rate(df, rate_column):
-        df = pd.merge(df, population_df, on=["Entity", "Year"], how="left")
-        if "population_historical" in df.columns:
-            df["total_deaths"] = df[rate_column] * df["population_historical"] / 100000
-            return df
+    
+    for dataset, value in external_data.items():
+        # Determine if the key refers to cases or deaths
+        if "_deaths" in dataset:
+            disease_name = dataset.replace("_deaths", "").replace("_", " ").title()
+            stat_type = "deaths"
+        elif "_cases" in dataset:
+            disease_name = dataset.replace("_cases", "").replace("_", " ").title()
+            stat_type = "cases"
         else:
-            df["total_deaths"] = None
-            return df
+            continue  # Skip if the key doesn't match "cases" or "deaths"
 
-    # Datasets and their respective columns
-    datasets = [
-        ("alzheimers_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_alzheimer_disease_and_other_dementias"),
-        ("meningitis_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_meningitis"),
-        ("pneumonia_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_lower_respiratory_infections"),
-        ("hivaids_deaths", "aids_deaths__disaggregation_all_ages_estimate"),
-        ("cardiovascular_deaths", "death_rate100k__age_group_allages__sex_both_sexes__cause_cardiovascular_diseases"),
-        ("malaria_deaths", "estimated_number_of_malaria_deaths"),
-        ("tuberculosis_deaths", "death_count__age_group_allages__sex_both_sexes__cause_tuberculosis")
-    ]
-
-    for dataset, column in datasets:
-        df = external_data[dataset]
-
-        if "rate" in column:  # Rate-based datasets
-            df = calculate_deaths_from_rate(df, column)
-            total_deaths = df["total_deaths"].sum()
-            most_recent_year = df.loc[df["Year"].idxmax()]
-            most_recent_year_deaths = most_recent_year["total_deaths"]
-            most_recent_year_value = most_recent_year["Year"]
-        else:  # Absolute death count datasets
-            total_deaths = df[column].sum()
-            most_recent_year = df.loc[df["Year"].idxmax()]
-            most_recent_year_deaths = most_recent_year[column]
-            most_recent_year_value = most_recent_year["Year"]
-
-        external_stats["disease_statistics"].append({
-            "disease": dataset.replace("_deaths", "").replace("_", " ").title(),
-            "total_deaths": round(total_deaths),
-            "most_recent_year": int(most_recent_year_value),
-            "most_recent_year_deaths": round(most_recent_year_deaths)
-        })
-
-    # COVID statistics (cumulative cases and deaths)
-    covid_df = external_data["covid_data"]
-    world_covid = covid_df[covid_df["Entity"] == "World"].sort_values(by="Day").iloc[-1]
-    external_stats["covid_statistics"] = {
-        "total_cases": int(world_covid["total_cases"]),
-        "total_deaths": int(world_covid["total_deaths"])
-    }
+        # Check if the disease already exists in the stats
+        existing_entry = next((item for item in external_stats["disease_statistics"] if item["disease"] == disease_name), None)
+        if existing_entry:
+            existing_entry[f"total_{stat_type}"] = round(value)
+        else:
+            # Add a new entry
+            external_stats["disease_statistics"].append({
+                "disease": disease_name,
+                f"total_{stat_type}": round(value)
+            })
 
     return external_stats
 

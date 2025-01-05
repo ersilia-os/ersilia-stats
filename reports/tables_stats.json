@@ -4,28 +4,86 @@
         "total_citations": 1177,
         "citations_by_year": [
             {
-                "Year": "Before 2020",
-                "average_Citations": 50.7
+                "Year": 2013,
+                "total_citations": 53.0
             },
             {
-                "Year": "2020",
-                "average_Citations": 37.2
+                "Year": 2014,
+                "total_citations": 32.0
             },
             {
-                "Year": "2021",
-                "average_Citations": 31.4
+                "Year": 2017,
+                "total_citations": 44.0
             },
             {
-                "Year": "2022",
-                "average_Citations": 23.17
+                "Year": 2018,
+                "total_citations": 422.0
             },
             {
-                "Year": "2023",
-                "average_Citations": 16.33
+                "Year": 2019,
+                "total_citations": 19.0
             },
             {
-                "Year": "2024",
-                "average_Citations": 6.75
+                "Year": 2020,
+                "total_citations": 186.0
+            },
+            {
+                "Year": 2021,
+                "total_citations": 157.0
+            },
+            {
+                "Year": 2022,
+                "total_citations": 139.0
+            },
+            {
+                "Year": 2023,
+                "total_citations": 98.0
+            },
+            {
+                "Year": 2024,
+                "total_citations": 27.0
+            }
+        ],
+        "publications_by_year": [
+            {
+                "Year": 2024,
+                "Count": 9
+            },
+            {
+                "Year": 2023,
+                "Count": 6
+            },
+            {
+                "Year": 2022,
+                "Count": 6
+            },
+            {
+                "Year": 2020,
+                "Count": 5
+            },
+            {
+                "Year": 2021,
+                "Count": 5
+            },
+            {
+                "Year": 2018,
+                "Count": 4
+            },
+            {
+                "Year": 2017,
+                "Count": 1
+            },
+            {
+                "Year": 2019,
+                "Count": 1
+            },
+            {
+                "Year": 2014,
+                "Count": 1
+            },
+            {
+                "Year": 2013,
+                "Count": 1
             }
         ],
         "collaboration_breakdown": [
@@ -54,6 +112,486 @@
             {
                 "Topic": "Molecular biology",
                 "Count": 2
+            }
+        ],
+        "status_distribution": [
+            {
+                "Count": "Peer reviewed",
+                "count": 37
+            },
+            {
+                "Count": "Preprint",
+                "count": 2
+            }
+        ],
+        "non_ersilia_authors_by_frequency": [
+            {
+                "author": "Martino Bertoni",
+                "count": 5
+            },
+            {
+                "author": "Oriol Guitart-Pla",
+                "count": 5
+            },
+            {
+                "author": "Eduardo Pauls",
+                "count": 4
+            },
+            {
+                "author": "Adri\u00e0 Fern\u00e1ndez-Torras",
+                "count": 3
+            },
+            {
+                "author": "V\u00edctor Alcalde",
+                "count": 3
+            },
+            {
+                "author": "Teresa Juan-Blanco",
+                "count": 3
+            },
+            {
+                "author": "L\u00eddia Mateo",
+                "count": 3
+            },
+            {
+                "author": "Eytan Ruppin",
+                "count": 2
+            },
+            {
+                "author": "Pau Badia-i-Mompel",
+                "count": 2
+            },
+            {
+                "author": "Antoni Berenguer-Llergo",
+                "count": 2
+            },
+            {
+                "author": "Isabelle Brun-Heath",
+                "count": 2
+            },
+            {
+                "author": "N\u00faria Villegas",
+                "count": 2
+            },
+            {
+                "author": "Lidia Mateo",
+                "count": 2
+            },
+            {
+                "author": "Miquel Duran\u2010Frigola",
+                "count": 2
+            },
+            {
+                "author": "Lydia Siragusa",
+                "count": 1
+            },
+            {
+                "author": "Xavier Barril",
+                "count": 1
+            },
+            {
+                "author": "Gabriele Cruciani",
+                "count": 1
+            },
+            {
+                "author": "Gemma Moncunill",
+                "count": 1
+            },
+            {
+                "author": "Anja Scholzen",
+                "count": 1
+            },
+            {
+                "author": "Maximillian Mpina",
+                "count": 1
+            },
+            {
+                "author": "Augusto Nhabomba",
+                "count": 1
+            },
+            {
+                "author": "Aurore Bouyoukou Hounkpatin",
+                "count": 1
+            },
+            {
+                "author": "Lourdes Osaba",
+                "count": 1
+            },
+            {
+                "author": "Raquel Valls",
+                "count": 1
+            },
+            {
+                "author": "Joseph J Campo",
+                "count": 1
+            },
+            {
+                "author": "H\u00e8ctor Sanz",
+                "count": 1
+            },
+            {
+                "author": "Chenjerai Jairoce",
+                "count": 1
+            },
+            {
+                "author": "Nana Aba Williams",
+                "count": 1
+            },
+            {
+                "author": "Erica M Pasini",
+                "count": 1
+            },
+            {
+                "author": "David Arteta",
+                "count": 1
+            },
+            {
+                "author": "Joan Maynou",
+                "count": 1
+            },
+            {
+                "author": "Lourdes Palacios",
+                "count": 1
+            },
+            {
+                "author": "John J Aponte",
+                "count": 1
+            },
+            {
+                "author": "Clemens HM Kocken",
+                "count": 1
+            },
+            {
+                "author": "Selidji Todagbe Agnandji",
+                "count": 1
+            },
+            {
+                "author": "Jos\u00e9 Manuel Mas",
+                "count": 1
+            },
+            {
+                "author": "Benjamin Mordm\u00fcller",
+                "count": 1
+            },
+            {
+                "author": "Claudia Daubenberger",
+                "count": 1
+            },
+            {
+                "author": "Robert Sauerwein",
+                "count": 1
+            },
+            {
+                "author": "Carlota Doba\u00f1o",
+                "count": 1
+            },
+            {
+                "author": "David Rossell",
+                "count": 1
+            },
+            {
+                "author": "Erez Persi",
+                "count": 1
+            },
+            {
+                "author": "Mehdi Damaghi",
+                "count": 1
+            },
+            {
+                "author": "William R Roush",
+                "count": 1
+            },
+            {
+                "author": "John L Cleveland",
+                "count": 1
+            },
+            {
+                "author": "Robert J Gillies",
+                "count": 1
+            },
+            {
+                "author": "Modesto Orozco-Ruiz",
+                "count": 1
+            },
+            {
+                "author": "V\u00edctor M Diaz",
+                "count": 1
+            },
+            {
+                "author": "Antonio Garc\u00eda de Herreros",
+                "count": 1
+            },
+            {
+                "author": "Sergi Bayod",
+                "count": 1
+            },
+            {
+                "author": "Victor Alcalde",
+                "count": 1
+            },
+            {
+                "author": "Takaomi C Saido",
+                "count": 1
+            },
+            {
+                "author": "Takashi Saito",
+                "count": 1
+            },
+            {
+                "author": "Camille Stephan-Otto Attolini",
+                "count": 1
+            },
+            {
+                "author": "Marina Gay",
+                "count": 1
+            },
+            {
+                "author": "Eliandre de Oliveira",
+                "count": 1
+            },
+            {
+                "author": "Jake Pry",
+                "count": 1
+            },
+            {
+                "author": "Jenala Chipungu",
+                "count": 1
+            },
+            {
+                "author": "Helene J Smith",
+                "count": 1
+            },
+            {
+                "author": "Carolyn Bolton Moore",
+                "count": 1
+            },
+            {
+                "author": "Jacob Mutale",
+                "count": 1
+            },
+            {
+                "author": "Theodora Savory",
+                "count": 1
+            },
+            {
+                "author": "Michael E Herce",
+                "count": 1
+            },
+            {
+                "author": "Albert Gris-Oliver",
+                "count": 1
+            },
+            {
+                "author": "Marta Palafox",
+                "count": 1
+            },
+            {
+                "author": "Maurizio Scaltriti",
+                "count": 1
+            },
+            {
+                "author": "Pedram Razavi",
+                "count": 1
+            },
+            {
+                "author": "Sarat Chandarlapaty",
+                "count": 1
+            },
+            {
+                "author": "Joaquin Arribas",
+                "count": 1
+            },
+            {
+                "author": "Meritxell Bellet",
+                "count": 1
+            },
+            {
+                "author": "Violeta Serra",
+                "count": 1
+            },
+            {
+                "author": "Adri\u00e0 Fern\u00e1ndez\u2010Torras",
+                "count": 1
+            },
+            {
+                "author": "Eugene F Douglass",
+                "count": 1
+            },
+            {
+                "author": "Robert J Allaway",
+                "count": 1
+            },
+            {
+                "author": "Bence Szalai",
+                "count": 1
+            },
+            {
+                "author": "Wenyu Wang",
+                "count": 1
+            },
+            {
+                "author": "Tingzhong Tian",
+                "count": 1
+            },
+            {
+                "author": "Ron Realubit",
+                "count": 1
+            },
+            {
+                "author": "Charles Karan",
+                "count": 1
+            },
+            {
+                "author": "Shuyu Zheng",
+                "count": 1
+            },
+            {
+                "author": "Alberto Pessia",
+                "count": 1
+            },
+            {
+                "author": "Ziaurrehman Tanoli",
+                "count": 1
+            },
+            {
+                "author": "Mohieddin Jafari",
+                "count": 1
+            },
+            {
+                "author": "Fangping Wan",
+                "count": 1
+            },
+            {
+                "author": "Shuya Li",
+                "count": 1
+            },
+            {
+                "author": "Yuanpeng Xiong",
+                "count": 1
+            },
+            {
+                "author": "Pau Badia",
+                "count": 1
+            },
+            {
+                "author": "Verena Chung",
+                "count": 1
+            },
+            {
+                "author": "Jing Tang",
+                "count": 1
+            },
+            {
+                "author": "Jianyang Zeng",
+                "count": 1
+            },
+            {
+                "author": "Julio Saez-Rodriguez",
+                "count": 1
+            },
+            {
+                "author": "Justin Guinney",
+                "count": 1
+            },
+            {
+                "author": "Daniela S Gerhard",
+                "count": 1
+            },
+            {
+                "author": "Andrea Califano",
+                "count": 1
+            },
+            {
+                "author": "Challenge Consortium",
+                "count": 1
+            },
+            {
+                "author": "David Amat",
+                "count": 1
+            },
+            {
+                "author": "Roi Blanco",
+                "count": 1
+            },
+            {
+                "author": "V\u00edctor Mart\u00ednez",
+                "count": 1
+            },
+            {
+                "author": "Gemma Turon",
+                "count": 1
+            },
+            {
+                "author": "Carles Pons",
+                "count": 1
+            },
+            {
+                "author": "Aleix Gimeno",
+                "count": 1
+            },
+            {
+                "author": "Nicolas Soler",
+                "count": 1
+            },
+            {
+                "author": "Hugo Zaragoza",
+                "count": 1
+            },
+            {
+                "author": "Roberto Mosca",
+                "count": 1
+            }
+        ],
+        "affiliation_counts_by_year": [
+            {
+                "Year": 2013,
+                "Non-Ersilia Affiliation": 1,
+                "Ersilia Affiliation": 0
+            },
+            {
+                "Year": 2014,
+                "Non-Ersilia Affiliation": 1,
+                "Ersilia Affiliation": 0
+            },
+            {
+                "Year": 2017,
+                "Non-Ersilia Affiliation": 1,
+                "Ersilia Affiliation": 0
+            },
+            {
+                "Year": 2018,
+                "Non-Ersilia Affiliation": 4,
+                "Ersilia Affiliation": 0
+            },
+            {
+                "Year": 2019,
+                "Non-Ersilia Affiliation": 1,
+                "Ersilia Affiliation": 0
+            },
+            {
+                "Year": 2020,
+                "Non-Ersilia Affiliation": 5,
+                "Ersilia Affiliation": 0
+            },
+            {
+                "Year": 2021,
+                "Non-Ersilia Affiliation": 2,
+                "Ersilia Affiliation": 3
+            },
+            {
+                "Year": 2022,
+                "Non-Ersilia Affiliation": 1,
+                "Ersilia Affiliation": 5
+            },
+            {
+                "Year": 2023,
+                "Non-Ersilia Affiliation": 0,
+                "Ersilia Affiliation": 6
+            },
+            {
+                "Year": 2024,
+                "Non-Ersilia Affiliation": 0,
+                "Ersilia Affiliation": 9
             }
         ]
     },
@@ -4117,52 +4655,36 @@
     "external_data": {
         "disease_statistics": [
             {
-                "disease": "Alzheimers",
-                "total_deaths": 78193529,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 2080
-            },
-            {
-                "disease": "Meningitis",
-                "total_deaths": 19317843,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 1540
-            },
-            {
-                "disease": "Pneumonia",
-                "total_deaths": 175302228,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 13232
-            },
-            {
                 "disease": "Hivaids",
-                "total_deaths": 114405860,
-                "most_recent_year": 2022,
-                "most_recent_year_deaths": 779
+                "total_deaths": 27580837
             },
             {
-                "disease": "Cardiovascular",
-                "total_deaths": 1103874706,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 64217
+                "disease": "Covid",
+                "total_cases": 777074039,
+                "total_deaths": 7079129
             },
             {
                 "disease": "Malaria",
-                "total_deaths": 45951860,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 91
+                "total_deaths": 15317311
             },
             {
-                "disease": "Tuberculosis",
-                "total_deaths": 127005702,
-                "most_recent_year": 2021,
-                "most_recent_year_deaths": 10148
+                "disease": "Tb",
+                "total_cases": 253467432,
+                "total_deaths": 44118898
+            },
+            {
+                "disease": "Cancer",
+                "total_deaths": 178651923
+            },
+            {
+                "disease": "Measles",
+                "total_cases": 47347773
+            },
+            {
+                "disease": "Polio",
+                "total_cases": 541429
             }
-        ],
-        "covid_statistics": {
-            "total_cases": 777025779,
-            "total_deaths": 7078468
-        }
+        ]
     },
     "events": {
         "total_events": 63,
@@ -4186,6 +4708,163 @@
             {
                 "Year": 2020,
                 "Count": 2
+            }
+        ],
+        "events_by_type": [
+            {
+                "Type": "Conference",
+                "Percentage": 31.746031746031743,
+                "Count": 20
+            },
+            {
+                "Type": "Seminar",
+                "Percentage": 30.158730158730158,
+                "Count": 19
+            },
+            {
+                "Type": "Workshop",
+                "Percentage": 17.46031746031746,
+                "Count": 11
+            },
+            {
+                "Type": "Collaboration Meeting",
+                "Percentage": 9.523809523809524,
+                "Count": 6
+            },
+            {
+                "Type": "Training Course",
+                "Percentage": 4.761904761904762,
+                "Count": 3
+            },
+            {
+                "Type": "Demo Day",
+                "Percentage": 4.761904761904762,
+                "Count": 3
+            },
+            {
+                "Type": "Webinars",
+                "Percentage": 1.5873015873015872,
+                "Count": 1
+            }
+        ],
+        "events_by_country": [
+            {
+                "Country": "United Kingdom",
+                "Organisers": [
+                    "Trend In Africa",
+                    "Open Life Sciences",
+                    "University of Reading ",
+                    "Software Sustainability Institute",
+                    "Ineos Oxford Institute",
+                    "Software Sustainability Institute",
+                    "Open Source Malaria",
+                    "University of Reading ",
+                    "EMBL European Bioinformatics Institute"
+                ]
+            },
+            {
+                "Country": "United States",
+                "Organisers": [
+                    "Bill and Melinda Gates Foundation",
+                    "NumFocus",
+                    "United Nations",
+                    "National Institutes of Health",
+                    "Fast Forward",
+                    "Open Bioinformatics Foundation",
+                    "Pistoia Alliance",
+                    "Wistar Institute",
+                    "Open Bioinformatics Foundation",
+                    "United Nations",
+                    "Code for Science and Society",
+                    "American Chemical Society",
+                    "National Institutes of Health",
+                    "National Institutes of Health",
+                    "NumFocus",
+                    "Fast Forward",
+                    "Fast Forward",
+                    "Mozilla Foundation",
+                    "Viral Emergence Research Initiative",
+                    "Linux Foundation",
+                    "AccessNow",
+                    "InvestInOpen"
+                ]
+            },
+            {
+                "Country": "South Africa",
+                "Organisers": [
+                    "Jembi Health Systems",
+                    "H3D Foundation",
+                    "University of Pretoria",
+                    "Holistic Drug Discovery and Development Center",
+                    "H3D Foundation",
+                    "H3D Foundation",
+                    "Holistic Drug Discovery and Development Center",
+                    "Sisonke Biotik",
+                    "H3D Foundation",
+                    "AfricaBio"
+                ]
+            },
+            {
+                "Country": "Spain",
+                "Organisers": [
+                    "Barcelona Supercomputing Centre",
+                    "Institut de Recerca Biomedica de Barcelona",
+                    "University of Barcelona",
+                    "Konvent",
+                    "Museu Darder",
+                    "Centre d'Estudis Avan\u00e7at Blandes",
+                    "University of Barcelona"
+                ]
+            },
+            {
+                "Country": "Cameroon",
+                "Organisers": [
+                    "University of Buea",
+                    "University of Buea",
+                    "University of Buea",
+                    "Mboa Lab",
+                    "University of Buea",
+                    "University of Buea",
+                    "University of Buea"
+                ]
+            },
+            {
+                "Country": "Kenya",
+                "Organisers": [
+                    "Kenyatta University"
+                ]
+            },
+            {
+                "Country": "Mexico",
+                "Organisers": [
+                    "Universidad Nacional Aut\u00f3noma de M\u00e9xico"
+                ]
+            },
+            {
+                "Country": "Germany",
+                "Organisers": [
+                    "Technische Universit\u00e4t Dresden"
+                ]
+            },
+            {
+                "Country": "Belgium",
+                "Organisers": [
+                    "FOSDEM",
+                    "FOSDEM",
+                    "Research Data Alliance"
+                ]
+            },
+            {
+                "Country": "Brazil",
+                "Organisers": [
+                    "Universidade de Goias"
+                ]
+            },
+            {
+                "Country": "Switzerland",
+                "Organisers": [
+                    "Origami Lab"
+                ]
             }
         ]
     }

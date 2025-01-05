@@ -205,25 +205,25 @@ def community_blog_page():
         # Metrics Overview
         html.Div([
             html.Div([
-                html.P("Countries Represented", style={"text-align": "center", "font-size": "12px", "margin-bottom": "5px"}),
+                html.P("Countries Represented", style={"text-align": "center", "font-size": "10px", "margin-bottom": "5px"}),
                 html.P(str(data["community"]["countries_represented"]), 
                        style={"text-align": "center", "font-size": "24px", "font-weight": "medium", "color": "#6A1B9A"})
             ], style={"width": "22%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "1%",
                       "backgroundColor": "#FAFAFA"}),
             html.Div([
-                html.P("Unique Contributors", style={"text-align": "center", "font-size": "12px", "margin-bottom": "5px"}),
+                html.P("Unique Contributors", style={"text-align": "center", "font-size": "10px", "margin-bottom": "5px"}),
                 html.P(str(data["community"]["total_members"]), 
                        style={"text-align": "center", "font-size": "24px", "font-weight": "medium", "color": "#6A1B9A"})
             ], style={"width": "22%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "1%",
                       "backgroundColor": "#FAFAFA"}),
             html.Div([
-                html.P("Organizations in Our Network", style={"text-align": "center", "font-size": "12px", "margin-bottom": "5px"}),
+                html.P("Organizations in Our Network", style={"text-align": "center", "font-size": "10px", "margin-bottom": "5px"}),
                 html.P(str(data["organization"]["total_organizations"]), 
                        style={"text-align": "center", "font-size": "24px", "font-weight": "medium", "color": "#6A1B9A"})  # Placeholder: update if data available
             ], style={"width": "22%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "1%",
                       "backgroundColor": "#FAFAFA"}),
             html.Div([
-                html.P("Blog Posts", style={"text-align": "center", "font-size": "12px", "margin-bottom": "5px"}),
+                html.P("Blog Posts", style={"text-align": "center", "font-size": "10px", "margin-bottom": "5px"}),
                 html.P(str(data["blogposts-events"]["total_blogposts"]), 
                        style={"text-align": "center", "font-size": "24px", "font-weight": "medium", "color": "#6A1B9A"})
             ], style={"width": "22%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px",
