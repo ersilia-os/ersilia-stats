@@ -609,8 +609,8 @@
         "tag_distribution": [
             {
                 "Tag": "AI/ML in Drug Discovery",
-                "Count": 16,
-                "Percentage": 32.6530612244898
+                "Count": 17,
+                "Percentage": 34.69387755102041
             },
             {
                 "Tag": "Ersilia Open Source Initiative",
@@ -633,14 +633,14 @@
                 "Percentage": 6.122448979591836
             },
             {
-                "Tag": "Global Health",
+                "Tag": "Software Development & Tools",
                 "Count": 3,
                 "Percentage": 6.122448979591836
             },
             {
-                "Tag": "Software Development & Tools",
-                "Count": 3,
-                "Percentage": 6.122448979591836
+                "Tag": "Global Health",
+                "Count": 2,
+                "Percentage": 4.081632653061225
             }
         ],
         "posts_over_time": [
@@ -4713,38 +4713,38 @@
         "events_by_type": [
             {
                 "Type": "Conference",
-                "Percentage": 33.33333333333333,
-                "Columns": 21
+                "Percentage": 31.746031746031743,
+                "Count": 20
             },
             {
                 "Type": "Seminar",
-                "Percentage": 28.57142857142857,
-                "Columns": 18
+                "Percentage": 30.158730158730158,
+                "Count": 19
             },
             {
                 "Type": "Workshop",
                 "Percentage": 17.46031746031746,
-                "Columns": 11
+                "Count": 11
             },
             {
                 "Type": "Collaboration Meeting",
                 "Percentage": 9.523809523809524,
-                "Columns": 6
+                "Count": 6
             },
             {
                 "Type": "Training Course",
                 "Percentage": 4.761904761904762,
-                "Columns": 3
+                "Count": 3
             },
             {
                 "Type": "Demo Day",
                 "Percentage": 4.761904761904762,
-                "Columns": 3
+                "Count": 3
             },
             {
                 "Type": "Webinars",
                 "Percentage": 1.5873015873015872,
-                "Columns": 1
+                "Count": 1
             }
         ],
         "events_by_country": [
