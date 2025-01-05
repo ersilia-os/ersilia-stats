@@ -42,6 +42,6 @@ def save_layout_to_json(page_function, filename):
         json.dump(serialized_layout, f, indent=4)
 
 # generate JSON layouts into assets folder
-save_layout_to_json(models_impact_page, "dashboard/assets/models_impact_page.json")
-save_layout_to_json(community_blog_page, "dashboard/assets/community_blog_page.json")
-save_layout_to_json(events_publications_page, "dashboard/assets/events_publications_page.json")
+save_layout_to_json(models_impact_page, "dashboard/assets/models_impact.json")
+save_layout_to_json(community_blog_page, "dashboard/assets/community_blog.json")
+save_layout_to_json(events_publications_page, "dashboard/assets/events_publications.json")

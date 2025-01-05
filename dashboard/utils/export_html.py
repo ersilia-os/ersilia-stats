@@ -25,7 +25,7 @@ def extract_graph_dimensions(style):
     Extract width/ height from the style dictionary if exists
     """
     if not style or not isinstance(style, dict):
-        return "width: 100%; height: auto;"  # Default styling
+        return "width: 100%; height: auto;"  # default styling
 
     width = style.get("width", "100%")
     height = style.get("height", "auto")
@@ -33,28 +33,31 @@ def extract_graph_dimensions(style):
 
 # sidebar navigation template
 def generate_sidebar():
+    """
+    Generate a sidebar navigation menu with links for the three pages.
+    """
     return f"""
     <div style="padding: 20px; width: 250px; background-color: #f8f9fa; position: fixed; height: 100%; box-shadow: 2px 0px 5px rgba(0,0,0,0.1);">
         <div style="text-align: center;">
             <a href="/">
-                <img src="../assets/logo.png" style="width: 200px; margin-bottom: 20px;">
+                <img src="../assets/logo.png" style="width: 200px; margin-bottom: 20px;" alt="Ersilia Logo">
             </a>
         </div>
         <div style="padding: 10px;">
             <div style="display: flex; align-items: center; margin-bottom: 10px; padding: 5px; border-radius: 40px;">
-                <img src="../assets/icon_impact.png" style="width: 20px; margin-right: 10px;">
+                <img src="../assets/icon_impact.png" style="width: 20px; margin-right: 10px;" alt="Icon for Models' Impact">
                 <a href="models_impact.html" style="color: black; font-weight: normal; text-decoration: none; font-size: 14px;">
                     Models' Impact
                 </a>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px; padding: 5px; border-radius: 40px;">
-                <img src="../assets/icon_community.png" style="width: 20px; margin-right: 10px;">
+                <img src="../assets/icon_community.png" style="width: 20px; margin-right: 10px;" alt="Icon for Community & Blog">
                 <a href="community_blog.html" style="color: black; font-weight: normal; text-decoration: none; font-size: 14px;">
                     Community & Blog
                 </a>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px; padding: 5px; border-radius: 40px;">
-                <img src="../assets/icon_publication.png" style="width: 20px; margin-right: 10px;">
+                <img src="../assets/icon_publication.png" style="width: 20px; margin-right: 10px;" alt="Icon for Events & Publications">
                 <a href="events_publications.html" style="color: black; font-weight: normal; text-decoration: none; font-size: 14px;">
                     Events & Publications
                 </a>
@@ -92,8 +95,11 @@ def json_to_html(component, page_name, graph_count):
             graph_style = props.get("style", {})
             img_style = extract_graph_dimensions(graph_style)
 
+            # get graph title for alt text
+            graph_title = figure.get("layout", {}).get("title", {}).get("text", "Graph")
+
             # return an <img> tag referencing the exported image with original dimensions
-            return f'<img src="{graphs_dir}/{graph_filename}" style="{img_style} margin: 10px 0;">'
+            return f'<img src="{graphs_dir}/{graph_filename}" style="{img_style} margin: 10px 0;" alt="Graph: {graph_title}">'
 
         # convert everything to HTML attributes
         attributes = []
@@ -109,7 +115,7 @@ def json_to_html(component, page_name, graph_count):
         rendered_children = json_to_html(children, page_name, graph_count)
 
         return f"<{tag} {attributes_str}>{rendered_children}</{tag}>"
-    return ""  # Fallback for unsupported types
+    return ""  # fallback for unsupported types
 
 # for each JSON file into HTML (loop)
 pages = {
@@ -136,6 +142,7 @@ for filename, icon_name in pages.items():
         <html>
         <head>
             <title>{icon_name}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
                 body {{ font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; }}
                 img {{ max-width: 100%; }}
@@ -146,6 +153,7 @@ for filename, icon_name in pages.items():
         <body>
             {sidebar}
             <div style="margin-left: 300px; padding: 20px;">
+                <h1 style="font-size: 24px; font-weight: bold;">{icon_name}</h1>
                 {json_to_html(layout, filename, graph_count)}
             </div>
         </body>

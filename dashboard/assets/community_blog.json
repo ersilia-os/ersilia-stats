@@ -11,7 +11,7 @@
                             "props": {
                                 "children": "Community & Blog",
                                 "style": {
-                                    "font-size": "24px",
+                                    "font-size": "30px",
                                     "font-weight": "bold"
                                 }
                             }
@@ -21,7 +21,7 @@
                             "props": {
                                 "children": "Total To Date",
                                 "style": {
-                                    "font-size": "16px",
+                                    "font-size": "22px",
                                     "font-weight": "bold",
                                     "margin-bottom": "4px"
                                 }
@@ -64,9 +64,10 @@
                                         "props": {
                                             "children": "Countries Represented",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "10px",
-                                                "margin-bottom": "5px"
+                                                "text-align": "left",
+                                                "font-size": "12px",
+                                                "margin-bottom": "5px",
+                                                "font-weight": "bold"
                                             }
                                         }
                                     },
@@ -75,8 +76,8 @@
                                         "props": {
                                             "children": "17",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "24px",
+                                                "text-align": "left",
+                                                "font-size": "30px",
                                                 "font-weight": "medium",
                                                 "color": "#6A1B9A"
                                             }
@@ -84,9 +85,10 @@
                                     }
                                 ],
                                 "style": {
-                                    "width": "22%",
+                                    "width": "23%",
+                                    "height": "100px",
                                     "display": "inline-block",
-                                    "padding": "10px",
+                                    "padding": "20px",
                                     "border": "1px solid #ddd",
                                     "border-radius": "10px",
                                     "margin-right": "1%",
@@ -103,9 +105,10 @@
                                         "props": {
                                             "children": "Unique Contributors",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "10px",
-                                                "margin-bottom": "5px"
+                                                "text-align": "left",
+                                                "font-size": "12px",
+                                                "margin-bottom": "5px",
+                                                "font-weight": "bold"
                                             }
                                         }
                                     },
@@ -114,8 +117,8 @@
                                         "props": {
                                             "children": "91",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "24px",
+                                                "text-align": "left",
+                                                "font-size": "30px",
                                                 "font-weight": "medium",
                                                 "color": "#6A1B9A"
                                             }
@@ -123,9 +126,10 @@
                                     }
                                 ],
                                 "style": {
-                                    "width": "22%",
+                                    "width": "23%",
+                                    "height": "100px",
                                     "display": "inline-block",
-                                    "padding": "10px",
+                                    "padding": "20px",
                                     "border": "1px solid #ddd",
                                     "border-radius": "10px",
                                     "margin-right": "1%",
@@ -140,11 +144,12 @@
                                     {
                                         "type": "P",
                                         "props": {
-                                            "children": "Organizations in Our Network",
+                                            "children": "Organisations In Our Network",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "10px",
-                                                "margin-bottom": "5px"
+                                                "text-align": "left",
+                                                "font-size": "12px",
+                                                "margin-bottom": "5px",
+                                                "font-weight": "bold"
                                             }
                                         }
                                     },
@@ -153,8 +158,8 @@
                                         "props": {
                                             "children": "209",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "24px",
+                                                "text-align": "left",
+                                                "font-size": "30px",
                                                 "font-weight": "medium",
                                                 "color": "#6A1B9A"
                                             }
@@ -162,9 +167,10 @@
                                     }
                                 ],
                                 "style": {
-                                    "width": "22%",
+                                    "width": "23%",
+                                    "height": "100px",
                                     "display": "inline-block",
-                                    "padding": "10px",
+                                    "padding": "20px",
                                     "border": "1px solid #ddd",
                                     "border-radius": "10px",
                                     "margin-right": "1%",
@@ -181,9 +187,10 @@
                                         "props": {
                                             "children": "Blog Posts",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "10px",
-                                                "margin-bottom": "5px"
+                                                "text-align": "left",
+                                                "font-size": "12px",
+                                                "margin-bottom": "5px",
+                                                "font-weight": "bold"
                                             }
                                         }
                                     },
@@ -192,8 +199,8 @@
                                         "props": {
                                             "children": "50",
                                             "style": {
-                                                "text-align": "center",
-                                                "font-size": "24px",
+                                                "text-align": "left",
+                                                "font-size": "30px",
                                                 "font-weight": "medium",
                                                 "color": "#6A1B9A"
                                             }
@@ -201,11 +208,13 @@
                                     }
                                 ],
                                 "style": {
-                                    "width": "22%",
+                                    "width": "23%",
+                                    "height": "100px",
                                     "display": "inline-block",
-                                    "padding": "10px",
+                                    "padding": "20px",
                                     "border": "1px solid #ddd",
                                     "border-radius": "10px",
+                                    "margin-right": "1%",
                                     "backgroundColor": "#FAFAFA"
                                 }
                             }
@@ -221,7 +230,7 @@
                 "type": "Hr",
                 "props": {
                     "style": {
-                        "border": "1px solid #ddd",
+                        "border": "1px solid #ccc",
                         "margin": "20px 0"
                     }
                 }
@@ -231,7 +240,7 @@
                 "props": {
                     "children": "Global Representation",
                     "style": {
-                        "font-size": "16px",
+                        "font-size": "22px",
                         "font-weight": "bold",
                         "margin-bottom": "4px"
                     }
@@ -248,17 +257,17 @@
                                     {
                                         "type": "P",
                                         "props": {
+                                            "children": "Contributors By Country",
+                                            "style": {
+                                                "font-size": "14px",
+                                                "font-weight": "bold"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "type": "P",
+                                        "props": {
                                             "children": [
-                                                {
-                                                    "type": "Span",
-                                                    "props": {
-                                                        "children": "Contributors By Country: ",
-                                                        "style": {
-                                                            "font-size": "14px",
-                                                            "font-weight": "bold"
-                                                        }
-                                                    }
-                                                },
                                                 {
                                                     "type": "Span",
                                                     "props": {
@@ -350,7 +359,7 @@
                                                 ]
                                             ],
                                             "geo": "geo",
-                                            "hovertemplate": "<b>%{hovertext}</b><br>Contributors: %{customdata[0]:.2f}%<extra></extra>",
+                                            "hovertemplate": "<b>%{hovertext}</b><br>%{customdata[0]:.2f}% of all contributors<extra></extra>",
                                             "hovertext": [
                                                 "Kenya",
                                                 "Colombia",
@@ -391,8 +400,7 @@
                                             "type": "choropleth",
                                             "marker": {
                                                 "line": {
-                                                    "color": "white",
-                                                    "width": 1
+                                                    "color": "white"
                                                 }
                                             }
                                         },
@@ -434,7 +442,7 @@
                                                 ]
                                             ],
                                             "geo": "geo",
-                                            "hovertemplate": "<b>%{hovertext}</b><br>Contributors: %{customdata[0]:.2f}%<extra></extra>",
+                                            "hovertemplate": "<b>%{hovertext}</b><br>%{customdata[0]:.2f}% of all contributors<extra></extra>",
                                             "hovertext": [
                                                 "Australia",
                                                 "United States",
@@ -472,8 +480,7 @@
                                             "type": "choropleth",
                                             "marker": {
                                                 "line": {
-                                                    "color": "white",
-                                                    "width": 1
+                                                    "color": "white"
                                                 }
                                             }
                                         }
@@ -1310,7 +1317,9 @@
                                             "showcoastlines": false,
                                             "showcountries": true,
                                             "countrycolor": "white",
-                                            "landcolor": "lightgray"
+                                            "landcolor": "lightgray",
+                                            "bgcolor": "#FAFAFA",
+                                            "framewidth": 0
                                         },
                                         "legend": {
                                             "title": {
@@ -1319,12 +1328,24 @@
                                             "tracegroupgap": 0
                                         },
                                         "margin": {
-                                            "t": 50,
-                                            "b": 50,
-                                            "l": 50,
-                                            "r": 50
+                                            "t": 0,
+                                            "r": 0,
+                                            "l": 0,
+                                            "b": 0
+                                        },
+                                        "hoverlabel": {
+                                            "font": {
+                                                "size": 16,
+                                                "family": "Arial"
+                                            },
+                                            "bgcolor": "black"
+                                        },
+                                        "font": {
+                                            "color": "#a9a9a9",
+                                            "family": "Arial"
                                         },
                                         "dragmode": false,
+                                        "plot_bgcolor": "#FAFAFA",
                                         "paper_bgcolor": "#FAFAFA"
                                     }
                                 },
@@ -1346,7 +1367,7 @@
                 "type": "Hr",
                 "props": {
                     "style": {
-                        "border": "1px solid #ddd",
+                        "border": "1px solid #ccc",
                         "margin": "20px 0"
                     }
                 }
@@ -1360,7 +1381,7 @@
                             "props": {
                                 "children": "Range of Expertise and Involvement",
                                 "style": {
-                                    "font-size": "16px",
+                                    "font-size": "22px",
                                     "font-weight": "bold",
                                     "margin-bottom": "4px"
                                 }
@@ -1374,6 +1395,59 @@
                                         "type": "Div",
                                         "props": {
                                             "children": [
+                                                {
+                                                    "type": "P",
+                                                    "props": {
+                                                        "children": "Contributors' Events By Country",
+                                                        "style": {
+                                                            "font-size": "14px",
+                                                            "font-weight": "bold",
+                                                            "margin-bottom": "4px"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "P",
+                                                    "props": {
+                                                        "children": [
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": "Total of ",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#a9a9a9"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": "91",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#6A1B9A",
+                                                                        "font-weight": "bold"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": " unique contributors.",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#a9a9a9"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "style": {
+                                                            "line-height": "1.6",
+                                                            "margin-bottom": "10px"
+                                                        }
+                                                    }
+                                                },
                                                 {
                                                     "type": "Graph",
                                                     "props": {
@@ -1390,8 +1464,7 @@
                                                                             "shape": ""
                                                                         },
                                                                         "line": {
-                                                                            "color": "white",
-                                                                            "width": 0.5
+                                                                            "color": "white"
                                                                         }
                                                                     },
                                                                     "name": "",
@@ -2253,7 +2326,9 @@
                                                                     ],
                                                                     "title": {
                                                                         "text": "Role"
-                                                                    }
+                                                                    },
+                                                                    "linecolor": "lightgrey",
+                                                                    "gridcolor": "lightgrey"
                                                                 },
                                                                 "yaxis": {
                                                                     "anchor": "x",
@@ -2263,22 +2338,29 @@
                                                                     ],
                                                                     "title": {
                                                                         "text": "Number of Contributors"
-                                                                    }
+                                                                    },
+                                                                    "linecolor": "lightgrey",
+                                                                    "gridcolor": "lightgrey"
                                                                 },
                                                                 "legend": {
                                                                     "tracegroupgap": 0
                                                                 },
-                                                                "title": {
-                                                                    "text": "Distribution of Roles<br><sup>Total of 91 unique contributors</sup>"
+                                                                "margin": {
+                                                                    "t": 0,
+                                                                    "b": 0,
+                                                                    "l": 0,
+                                                                    "r": 0
                                                                 },
                                                                 "barmode": "group",
-                                                                "margin": {
-                                                                    "t": 50,
-                                                                    "b": 50,
-                                                                    "l": 50,
-                                                                    "r": 50
+                                                                "font": {
+                                                                    "color": "#a9a9a9",
+                                                                    "family": "Arial"
                                                                 },
-                                                                "paper_bgcolor": "#FAFAFA"
+                                                                "hoverlabel": {
+                                                                    "bgcolor": "black"
+                                                                },
+                                                                "paper_bgcolor": "#FAFAFA",
+                                                                "plot_bgcolor": "#FAFAFA"
                                                             }
                                                         }
                                                     }
@@ -2309,6 +2391,38 @@
                                                     "props": {
                                                         "children": [
                                                             {
+                                                                "type": "P",
+                                                                "props": {
+                                                                    "children": "Duration of Involvement",
+                                                                    "style": {
+                                                                        "font-size": "14px",
+                                                                        "font-weight": "bold",
+                                                                        "margin-bottom": "4px"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "P",
+                                                                "props": {
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "Span",
+                                                                            "props": {
+                                                                                "children": "Short-term and long-term commitments welcome.",
+                                                                                "style": {
+                                                                                    "font-size": "12px",
+                                                                                    "color": "#a9a9a9"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "style": {
+                                                                        "line-height": "1.6",
+                                                                        "margin-bottom": "10px"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
                                                                 "type": "Graph",
                                                                 "props": {
                                                                     "id": "duration_community",
@@ -2317,21 +2431,20 @@
                                                                             {
                                                                                 "alignmentgroup": "True",
                                                                                 "hovertemplate": "<b>%{x}</b><br>%{y} contributors<extra></extra>",
-                                                                                "legendgroup": "",
+                                                                                "legendgroup": "Short-Term",
                                                                                 "marker": {
                                                                                     "color": "#aa96fa",
                                                                                     "pattern": {
                                                                                         "shape": ""
                                                                                     },
                                                                                     "line": {
-                                                                                        "color": "white",
-                                                                                        "width": 0.5
+                                                                                        "color": "white"
                                                                                     }
                                                                                 },
-                                                                                "name": "",
-                                                                                "offsetgroup": "",
+                                                                                "name": "Short-Term",
+                                                                                "offsetgroup": "Short-Term",
                                                                                 "orientation": "v",
-                                                                                "showlegend": false,
+                                                                                "showlegend": true,
                                                                                 "textposition": "auto",
                                                                                 "x": [
                                                                                     "< 3 Months",
@@ -2350,21 +2463,20 @@
                                                                             {
                                                                                 "alignmentgroup": "True",
                                                                                 "hovertemplate": "<b>%{x}</b><br>%{y} contributors<extra></extra>",
-                                                                                "legendgroup": "",
+                                                                                "legendgroup": "Long-Term",
                                                                                 "marker": {
                                                                                     "color": "#bee6b4",
                                                                                     "pattern": {
                                                                                         "shape": ""
                                                                                     },
                                                                                     "line": {
-                                                                                        "color": "white",
-                                                                                        "width": 0.5
+                                                                                        "color": "white"
                                                                                     }
                                                                                 },
-                                                                                "name": "",
-                                                                                "offsetgroup": "",
+                                                                                "name": "Long-Term",
+                                                                                "offsetgroup": "Long-Term",
                                                                                 "orientation": "v",
-                                                                                "showlegend": false,
+                                                                                "showlegend": true,
                                                                                 "textposition": "auto",
                                                                                 "x": [
                                                                                     "> 1 Year"
@@ -3209,7 +3321,10 @@
                                                                                     "3-6 Months",
                                                                                     "6-12 Months",
                                                                                     "> 1 Year"
-                                                                                ]
+                                                                                ],
+                                                                                "linecolor": "lightgrey",
+                                                                                "gridcolor": "lightgrey",
+                                                                                "tickangle": -40
                                                                             },
                                                                             "yaxis": {
                                                                                 "anchor": "x",
@@ -3219,22 +3334,43 @@
                                                                                 ],
                                                                                 "title": {
                                                                                     "text": "Number of Contributors"
-                                                                                }
+                                                                                },
+                                                                                "linecolor": "lightgrey",
+                                                                                "gridcolor": "lightgrey"
                                                                             },
                                                                             "legend": {
-                                                                                "tracegroupgap": 0
+                                                                                "title": {
+                                                                                    "text": "Duration Category"
+                                                                                },
+                                                                                "tracegroupgap": 0,
+                                                                                "font": {
+                                                                                    "size": 10
+                                                                                },
+                                                                                "xanchor": "right",
+                                                                                "x": 1,
+                                                                                "yanchor": "top",
+                                                                                "y": 1.3
                                                                             },
-                                                                            "title": {
-                                                                                "text": "Duration of Involvement<br><sup>Short-term commitments and long-term roles welcome</sup>"
+                                                                            "margin": {
+                                                                                "t": 0,
+                                                                                "b": 0,
+                                                                                "l": 0,
+                                                                                "r": 0
                                                                             },
                                                                             "barmode": "relative",
-                                                                            "margin": {
-                                                                                "t": 50,
-                                                                                "b": 50,
-                                                                                "l": 50,
-                                                                                "r": 50
+                                                                            "hoverlabel": {
+                                                                                "font": {
+                                                                                    "size": 16,
+                                                                                    "family": "Arial"
+                                                                                },
+                                                                                "bgcolor": "black"
                                                                             },
-                                                                            "paper_bgcolor": "#FAFAFA"
+                                                                            "font": {
+                                                                                "color": "#a9a9a9",
+                                                                                "family": "Arial"
+                                                                            },
+                                                                            "paper_bgcolor": "#FAFAFA",
+                                                                            "plot_bgcolor": "#FAFAFA"
                                                                         }
                                                                     }
                                                                 }
@@ -3246,11 +3382,12 @@
                                             "style": {
                                                 "border": "1px solid #ddd",
                                                 "border-radius": "10px",
-                                                "padding": "20px",
-                                                "margin-right": "2%",
                                                 "backgroundColor": "#FAFAFA",
+                                                "margin-bottom": "20px",
+                                                "margin-right": "1%",
                                                 "width": "49%",
-                                                "display": "inline-block"
+                                                "display": "inline-block",
+                                                "padding": "25px"
                                             }
                                         }
                                     },
@@ -3263,6 +3400,59 @@
                                                     "props": {
                                                         "children": [
                                                             {
+                                                                "type": "P",
+                                                                "props": {
+                                                                    "children": "Volunteers by Organization",
+                                                                    "style": {
+                                                                        "font-size": "14px",
+                                                                        "font-weight": "bold",
+                                                                        "margin-bottom": "4px"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "P",
+                                                                "props": {
+                                                                    "children": [
+                                                                        {
+                                                                            "type": "Span",
+                                                                            "props": {
+                                                                                "children": "Total of ",
+                                                                                "style": {
+                                                                                    "font-size": "12px",
+                                                                                    "color": "#a9a9a9"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "type": "Span",
+                                                                            "props": {
+                                                                                "children": "209",
+                                                                                "style": {
+                                                                                    "font-size": "12px",
+                                                                                    "color": "#6A1B9A",
+                                                                                    "font-weight": "bold"
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "type": "Span",
+                                                                            "props": {
+                                                                                "children": " organisations.",
+                                                                                "style": {
+                                                                                    "font-size": "12px",
+                                                                                    "color": "#a9a9a9"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "style": {
+                                                                        "line-height": "1.6",
+                                                                        "margin-bottom": "10px"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
                                                                 "type": "Graph",
                                                                 "props": {
                                                                     "id": "organization_pie_community",
@@ -3271,25 +3461,32 @@
                                                                             {
                                                                                 "customdata": [
                                                                                     [
-                                                                                        "Academia"
+                                                                                        29.468599033816425,
+                                                                                        61.0
                                                                                     ],
                                                                                     [
-                                                                                        "Foundation"
+                                                                                        23.67149758454106,
+                                                                                        49.0
                                                                                     ],
                                                                                     [
-                                                                                        "Nonprofit"
+                                                                                        15.942028985507244,
+                                                                                        33.0
                                                                                     ],
                                                                                     [
-                                                                                        "Corporate"
+                                                                                        14.975845410628018,
+                                                                                        31.0
                                                                                     ],
                                                                                     [
-                                                                                        "Pharma"
+                                                                                        6.763285024154589,
+                                                                                        14.0
                                                                                     ],
                                                                                     [
-                                                                                        "Government"
+                                                                                        5.314009661835748,
+                                                                                        11.0
                                                                                     ],
                                                                                     [
-                                                                                        "Accelerator"
+                                                                                        3.864734299516908,
+                                                                                        8.0
                                                                                     ]
                                                                                 ],
                                                                                 "domain": {
@@ -3302,7 +3499,7 @@
                                                                                         1.0
                                                                                     ]
                                                                                 },
-                                                                                "hovertemplate": "<b>%{label}</b><br>%{value:.2f}%<extra></extra>",
+                                                                                "hovertemplate": "<b>%{label}</b><br>%{customdata[0][1]}<extra></extra> (%{customdata[0][0]:.2f}%)",
                                                                                 "labels": [
                                                                                     "Academia",
                                                                                     "Foundation",
@@ -3320,20 +3517,20 @@
                                                                                         "#dca0dc",
                                                                                         "#faa08c",
                                                                                         "#fad782",
-                                                                                        "#aa96fa",
-                                                                                        "#8cc8fa"
+                                                                                        "#bee6b4",
+                                                                                        "#d2d2d0"
                                                                                     ]
                                                                                 },
                                                                                 "name": "",
                                                                                 "showlegend": true,
                                                                                 "values": [
-                                                                                    29.468599033816425,
-                                                                                    23.67149758454106,
-                                                                                    15.942028985507244,
-                                                                                    14.975845410628018,
-                                                                                    6.763285024154589,
-                                                                                    5.314009661835748,
-                                                                                    3.864734299516908
+                                                                                    61,
+                                                                                    49,
+                                                                                    33,
+                                                                                    31,
+                                                                                    14,
+                                                                                    11,
+                                                                                    8
                                                                                 ],
                                                                                 "type": "pie",
                                                                                 "textinfo": "percent+label",
@@ -4160,31 +4357,45 @@
                                                                             "legend": {
                                                                                 "tracegroupgap": 0,
                                                                                 "font": {
-                                                                                    "size": 7
+                                                                                    "size": 14
                                                                                 },
-                                                                                "orientation": "h"
+                                                                                "xanchor": "right",
+                                                                                "x": 1.75,
+                                                                                "yanchor": "middle",
+                                                                                "y": 0.5
                                                                             },
-                                                                            "title": {
-                                                                                "text": "Volunteers By Organization Type<br><sup>A look into our 209 supporters and collaborators</sup>"
+                                                                            "margin": {
+                                                                                "t": 0,
+                                                                                "b": 0,
+                                                                                "l": 0,
+                                                                                "r": 0
                                                                             },
                                                                             "piecolorway": [
                                                                                 "#aa96fa",
                                                                                 "#8cc8fa",
                                                                                 "#dca0dc",
                                                                                 "#faa08c",
-                                                                                "#fad782"
+                                                                                "#fad782",
+                                                                                "#bee6b4",
+                                                                                "#d2d2d0"
                                                                             ],
                                                                             "uniformtext": {
                                                                                 "minsize": 50,
                                                                                 "mode": "hide"
                                                                             },
-                                                                            "margin": {
-                                                                                "t": 50,
-                                                                                "b": 50,
-                                                                                "l": 50,
-                                                                                "r": 50
+                                                                            "hoverlabel": {
+                                                                                "font": {
+                                                                                    "size": 16,
+                                                                                    "family": "Arial"
+                                                                                },
+                                                                                "bgcolor": "black"
                                                                             },
-                                                                            "paper_bgcolor": "#FAFAFA"
+                                                                            "font": {
+                                                                                "color": "#a9a9a9",
+                                                                                "family": "Arial"
+                                                                            },
+                                                                            "paper_bgcolor": "#FAFAFA",
+                                                                            "plot_bgcolor": "#FAFAFA"
                                                                         }
                                                                     }
                                                                 }
@@ -4196,10 +4407,11 @@
                                             "style": {
                                                 "border": "1px solid #ddd",
                                                 "border-radius": "10px",
-                                                "padding": "20px",
                                                 "backgroundColor": "#FAFAFA",
+                                                "margin-bottom": "20px",
                                                 "width": "49%",
-                                                "display": "inline-block"
+                                                "display": "inline-block",
+                                                "padding": "25px"
                                             }
                                         }
                                     }
@@ -4213,7 +4425,7 @@
                 "type": "Hr",
                 "props": {
                     "style": {
-                        "border": "1px solid #ddd",
+                        "border": "1px solid #ccc",
                         "margin": "20px 0"
                     }
                 }
@@ -4223,7 +4435,7 @@
                 "props": {
                     "children": "Active Knowledge Sharing",
                     "style": {
-                        "font-size": "16px",
+                        "font-size": "22px",
                         "font-weight": "bold",
                         "margin-bottom": "4px"
                     }
@@ -4295,6 +4507,38 @@
                                         "props": {
                                             "children": [
                                                 {
+                                                    "type": "P",
+                                                    "props": {
+                                                        "children": "Distribution Of Blog Post Topics",
+                                                        "style": {
+                                                            "font-size": "14px",
+                                                            "font-weight": "bold",
+                                                            "margin-bottom": "4px"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "P",
+                                                    "props": {
+                                                        "children": [
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": "Topics align with health needs and research priorities in the Global South.",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#a9a9a9"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "style": {
+                                                            "line-height": "1.6",
+                                                            "margin-bottom": "10px"
+                                                        }
+                                                    }
+                                                },
+                                                {
                                                     "type": "Graph",
                                                     "props": {
                                                         "id": "blogpost_topics_fig",
@@ -4303,25 +4547,32 @@
                                                                 {
                                                                     "customdata": [
                                                                         [
-                                                                            "AI/ML in Drug Discovery"
+                                                                            34.69387755102041,
+                                                                            17.0
                                                                         ],
                                                                         [
-                                                                            "Ersilia Open Source Initiative"
+                                                                            24.489795918367346,
+                                                                            12.0
                                                                         ],
                                                                         [
-                                                                            "Funding & Partnerships"
+                                                                            12.244897959183673,
+                                                                            6.0
                                                                         ],
                                                                         [
-                                                                            "Personal Reflections"
+                                                                            12.244897959183673,
+                                                                            6.0
                                                                         ],
                                                                         [
-                                                                            "Open Science"
+                                                                            6.122448979591836,
+                                                                            3.0
                                                                         ],
                                                                         [
-                                                                            "Software Development & Tools"
+                                                                            6.122448979591836,
+                                                                            3.0
                                                                         ],
                                                                         [
-                                                                            "Global Health"
+                                                                            4.081632653061225,
+                                                                            2.0
                                                                         ]
                                                                     ],
                                                                     "domain": {
@@ -4334,7 +4585,7 @@
                                                                             1.0
                                                                         ]
                                                                     },
-                                                                    "hovertemplate": "<b>%{label}</b><br>%{value:.2f}%<extra></extra>",
+                                                                    "hovertemplate": "<b>%{label}</b><br> %{customdata[0][1]}<extra></extra> (%{customdata[0][0]:.2f}%)",
                                                                     "labels": [
                                                                         "AI/ML in Drug Discovery",
                                                                         "Ersilia Open Source Initiative",
@@ -4348,24 +4599,24 @@
                                                                     "marker": {
                                                                         "colors": [
                                                                             "#aa96fa",
+                                                                            "#dca0dc",
+                                                                            "#8cc8fa",
+                                                                            "#faa08c",
+                                                                            "#fad782",
                                                                             "#bee6b4",
-                                                                            "#f5a623",
-                                                                            "#4a90e2",
-                                                                            "#ff6f61",
-                                                                            "#e5e5e5",
-                                                                            "#dca0dc"
+                                                                            "#d2d2d0"
                                                                         ]
                                                                     },
                                                                     "name": "",
                                                                     "showlegend": true,
                                                                     "values": [
-                                                                        34.69387755102041,
-                                                                        24.489795918367346,
-                                                                        12.244897959183673,
-                                                                        12.244897959183673,
-                                                                        6.122448979591836,
-                                                                        6.122448979591836,
-                                                                        4.081632653061225
+                                                                        17,
+                                                                        12,
+                                                                        6,
+                                                                        6,
+                                                                        3,
+                                                                        3,
+                                                                        2
                                                                     ],
                                                                     "type": "pie",
                                                                     "textinfo": "percent+label",
@@ -5192,33 +5443,45 @@
                                                                 "legend": {
                                                                     "tracegroupgap": 0,
                                                                     "font": {
-                                                                        "size": 7
+                                                                        "size": 12
                                                                     },
-                                                                    "orientation": "h"
+                                                                    "xanchor": "right",
+                                                                    "x": 2,
+                                                                    "yanchor": "middle",
+                                                                    "y": 0.5
                                                                 },
-                                                                "title": {
-                                                                    "text": "Distribution of Blog Post Topics<br><sup>Topics align with needs and research priorities in the Global South</sup>"
+                                                                "margin": {
+                                                                    "t": 0,
+                                                                    "b": 0,
+                                                                    "l": 0,
+                                                                    "r": 0
                                                                 },
                                                                 "piecolorway": [
                                                                     "#aa96fa",
+                                                                    "#dca0dc",
+                                                                    "#8cc8fa",
+                                                                    "#faa08c",
+                                                                    "#fad782",
                                                                     "#bee6b4",
-                                                                    "#f5a623",
-                                                                    "#4a90e2",
-                                                                    "#ff6f61",
-                                                                    "#e5e5e5",
-                                                                    "#dca0dc"
+                                                                    "#d2d2d0"
                                                                 ],
                                                                 "uniformtext": {
-                                                                    "minsize": 24,
+                                                                    "minsize": 2504,
                                                                     "mode": "hide"
                                                                 },
-                                                                "margin": {
-                                                                    "t": 50,
-                                                                    "b": 50,
-                                                                    "l": 50,
-                                                                    "r": 50
+                                                                "hoverlabel": {
+                                                                    "font": {
+                                                                        "size": 16,
+                                                                        "family": "Arial"
+                                                                    },
+                                                                    "bgcolor": "black"
                                                                 },
-                                                                "paper_bgcolor": "#FAFAFA"
+                                                                "font": {
+                                                                    "color": "#a9a9a9",
+                                                                    "family": "Arial"
+                                                                },
+                                                                "paper_bgcolor": "#FAFAFA",
+                                                                "plot_bgcolor": "#FAFAFA"
                                                             }
                                                         }
                                                     }
@@ -5231,7 +5494,7 @@
                                     "border": "1px solid #ddd",
                                     "border-radius": "10px",
                                     "padding": "20px",
-                                    "margin-right": "2%",
+                                    "margin-right": "1%",
                                     "backgroundColor": "#FAFAFA",
                                     "width": "49%",
                                     "display": "inline-block"
@@ -5247,6 +5510,59 @@
                                         "props": {
                                             "children": [
                                                 {
+                                                    "type": "P",
+                                                    "props": {
+                                                        "children": "Blog Posts Over Time",
+                                                        "style": {
+                                                            "font-size": "14px",
+                                                            "font-weight": "bold",
+                                                            "margin-bottom": "4px"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "P",
+                                                    "props": {
+                                                        "children": [
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": "Total of ",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#a9a9a9"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": "50",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#6A1B9A",
+                                                                        "font-weight": "bold"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Span",
+                                                                "props": {
+                                                                    "children": " blog posts.",
+                                                                    "style": {
+                                                                        "font-size": "12px",
+                                                                        "color": "#a9a9a9"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "style": {
+                                                            "line-height": "1.6",
+                                                            "margin-bottom": "10px"
+                                                        }
+                                                    }
+                                                },
+                                                {
                                                     "type": "Graph",
                                                     "props": {
                                                         "id": "blogposts_over_time",
@@ -5254,12 +5570,26 @@
                                                             "data": [
                                                                 {
                                                                     "alignmentgroup": "True",
-                                                                    "hovertemplate": "Quarter=Q1<br>Year=%{x}<br>Post Count=%{y}<extra></extra>",
+                                                                    "customdata": [
+                                                                        [
+                                                                            "Q1"
+                                                                        ],
+                                                                        [
+                                                                            "Q1"
+                                                                        ],
+                                                                        [
+                                                                            "Q1"
+                                                                        ]
+                                                                    ],
+                                                                    "hovertemplate": "<b>%{x} %{fullData.name}</b><br>%{y} posts<extra></extra>",
                                                                     "legendgroup": "Q1",
                                                                     "marker": {
                                                                         "color": "#aa96fa",
                                                                         "pattern": {
                                                                             "shape": ""
+                                                                        },
+                                                                        "line": {
+                                                                            "color": "white"
                                                                         }
                                                                     },
                                                                     "name": "Q1",
@@ -5283,12 +5613,29 @@
                                                                 },
                                                                 {
                                                                     "alignmentgroup": "True",
-                                                                    "hovertemplate": "Quarter=Q2<br>Year=%{x}<br>Post Count=%{y}<extra></extra>",
+                                                                    "customdata": [
+                                                                        [
+                                                                            "Q2"
+                                                                        ],
+                                                                        [
+                                                                            "Q2"
+                                                                        ],
+                                                                        [
+                                                                            "Q2"
+                                                                        ],
+                                                                        [
+                                                                            "Q2"
+                                                                        ]
+                                                                    ],
+                                                                    "hovertemplate": "<b>%{x} %{fullData.name}</b><br>%{y} posts<extra></extra>",
                                                                     "legendgroup": "Q2",
                                                                     "marker": {
                                                                         "color": "#8cc8fa",
                                                                         "pattern": {
                                                                             "shape": ""
+                                                                        },
+                                                                        "line": {
+                                                                            "color": "white"
                                                                         }
                                                                     },
                                                                     "name": "Q2",
@@ -5314,12 +5661,29 @@
                                                                 },
                                                                 {
                                                                     "alignmentgroup": "True",
-                                                                    "hovertemplate": "Quarter=Q3<br>Year=%{x}<br>Post Count=%{y}<extra></extra>",
+                                                                    "customdata": [
+                                                                        [
+                                                                            "Q3"
+                                                                        ],
+                                                                        [
+                                                                            "Q3"
+                                                                        ],
+                                                                        [
+                                                                            "Q3"
+                                                                        ],
+                                                                        [
+                                                                            "Q3"
+                                                                        ]
+                                                                    ],
+                                                                    "hovertemplate": "<b>%{x} %{fullData.name}</b><br>%{y} posts<extra></extra>",
                                                                     "legendgroup": "Q3",
                                                                     "marker": {
                                                                         "color": "#dca0dc",
                                                                         "pattern": {
                                                                             "shape": ""
+                                                                        },
+                                                                        "line": {
+                                                                            "color": "white"
                                                                         }
                                                                     },
                                                                     "name": "Q3",
@@ -5345,12 +5709,29 @@
                                                                 },
                                                                 {
                                                                     "alignmentgroup": "True",
-                                                                    "hovertemplate": "Quarter=Q4<br>Year=%{x}<br>Post Count=%{y}<extra></extra>",
+                                                                    "customdata": [
+                                                                        [
+                                                                            "Q4"
+                                                                        ],
+                                                                        [
+                                                                            "Q4"
+                                                                        ],
+                                                                        [
+                                                                            "Q4"
+                                                                        ],
+                                                                        [
+                                                                            "Q4"
+                                                                        ]
+                                                                    ],
+                                                                    "hovertemplate": "<b>%{x} %{fullData.name}</b><br>%{y} posts<extra></extra>",
                                                                     "legendgroup": "Q4",
                                                                     "marker": {
                                                                         "color": "#faa08c",
                                                                         "pattern": {
                                                                             "shape": ""
+                                                                        },
+                                                                        "line": {
+                                                                            "color": "white"
                                                                         }
                                                                     },
                                                                     "name": "Q4",
@@ -6200,7 +6581,10 @@
                                                                     ],
                                                                     "title": {
                                                                         "text": "Year"
-                                                                    }
+                                                                    },
+                                                                    "linecolor": "lightgrey",
+                                                                    "gridcolor": "lightgrey",
+                                                                    "tickangle": -40
                                                                 },
                                                                 "yaxis": {
                                                                     "anchor": "x",
@@ -6210,7 +6594,9 @@
                                                                     ],
                                                                     "title": {
                                                                         "text": "Number of Blogposts"
-                                                                    }
+                                                                    },
+                                                                    "linecolor": "lightgrey",
+                                                                    "gridcolor": "lightgrey"
                                                                 },
                                                                 "legend": {
                                                                     "title": {
@@ -6218,17 +6604,26 @@
                                                                     },
                                                                     "tracegroupgap": 0
                                                                 },
-                                                                "title": {
-                                                                    "text": "Blogposts Over Time by Year & Quarter<br><sup>Total of 50 blog posts</sup>"
+                                                                "margin": {
+                                                                    "t": 0,
+                                                                    "b": 0,
+                                                                    "l": 0,
+                                                                    "r": 0
                                                                 },
                                                                 "barmode": "stack",
-                                                                "margin": {
-                                                                    "t": 50,
-                                                                    "b": 50,
-                                                                    "l": 50,
-                                                                    "r": 50
+                                                                "paper_bgcolor": "#FAFAFA",
+                                                                "hoverlabel": {
+                                                                    "font": {
+                                                                        "size": 16,
+                                                                        "family": "Arial"
+                                                                    },
+                                                                    "bgcolor": "black"
                                                                 },
-                                                                "paper_bgcolor": "#FAFAFA"
+                                                                "font": {
+                                                                    "color": "#a9a9a9",
+                                                                    "family": "Arial"
+                                                                },
+                                                                "plot_bgcolor": "#FAFAFA"
                                                             }
                                                         }
                                                     }
