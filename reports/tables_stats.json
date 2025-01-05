@@ -4,28 +4,44 @@
         "total_citations": 1177,
         "citations_by_year": [
             {
-                "Year": "Before 2020",
-                "average_Citations": 50.7
+                "Year": 2013,
+                "total_citations": 53.0
             },
             {
-                "Year": "2020",
-                "average_Citations": 37.2
+                "Year": 2014,
+                "total_citations": 32.0
             },
             {
-                "Year": "2021",
-                "average_Citations": 31.4
+                "Year": 2017,
+                "total_citations": 44.0
             },
             {
-                "Year": "2022",
-                "average_Citations": 23.17
+                "Year": 2018,
+                "total_citations": 422.0
             },
             {
-                "Year": "2023",
-                "average_Citations": 16.33
+                "Year": 2019,
+                "total_citations": 19.0
             },
             {
-                "Year": "2024",
-                "average_Citations": 6.75
+                "Year": 2020,
+                "total_citations": 186.0
+            },
+            {
+                "Year": 2021,
+                "total_citations": 157.0
+            },
+            {
+                "Year": 2022,
+                "total_citations": 139.0
+            },
+            {
+                "Year": 2023,
+                "total_citations": 98.0
+            },
+            {
+                "Year": 2024,
+                "total_citations": 27.0
             }
         ],
         "publications_by_year": [
@@ -593,8 +609,8 @@
         "tag_distribution": [
             {
                 "Tag": "AI/ML in Drug Discovery",
-                "Count": 17,
-                "Percentage": 34.69387755102041
+                "Count": 16,
+                "Percentage": 32.6530612244898
             },
             {
                 "Tag": "Ersilia Open Source Initiative",
@@ -617,14 +633,14 @@
                 "Percentage": 6.122448979591836
             },
             {
-                "Tag": "Software Development & Tools",
+                "Tag": "Global Health",
                 "Count": 3,
                 "Percentage": 6.122448979591836
             },
             {
-                "Tag": "Global Health",
-                "Count": 2,
-                "Percentage": 4.081632653061225
+                "Tag": "Software Development & Tools",
+                "Count": 3,
+                "Percentage": 6.122448979591836
             }
         ],
         "posts_over_time": [
@@ -4697,13 +4713,13 @@
         "events_by_type": [
             {
                 "Type": "Conference",
-                "Percentage": 31.746031746031743,
-                "Columns": 20
+                "Percentage": 33.33333333333333,
+                "Columns": 21
             },
             {
                 "Type": "Seminar",
-                "Percentage": 30.158730158730158,
-                "Columns": 19
+                "Percentage": 28.57142857142857,
+                "Columns": 18
             },
             {
                 "Type": "Workshop",
