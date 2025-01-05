@@ -10,6 +10,8 @@ from .community import community_blog_page as community_blog_page
 from .events_and_publications import events_publications_page as events_publications_page
 from .utils.serializer import serialize_dash_component
 
+from dash import Dash, html
+
 # Load data from JSON
 data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
 data = requests.get(data_url).json()
@@ -69,63 +71,51 @@ home_page = html.Div([
     html.A("Ersilia.io", href="https://ersilia.io", target="_blank", style={"font-size": "18px", "color": "#6A1B9A", "text-decoration": "underline"})
 ], style={"margin-left": "320px", "padding": "20px"})
 
-# App layout
+# # App layout
 app.layout = html.Div([
     dcc.Location(id="url", refresh=False),
     sidebar,
     html.Div(id="page-content")
 ])
 
-# # CLIENTSIDE CALLBACK
-app.clientside_callback(
-    ClientsideFunction(namespace="namespace", function_name="displayPage"),
-    Output("page-content", "children"),
-    Input("url", "pathname")
-)
-
-# app.clientside_callback(
-#      ClientsideFunction(namespace="namespace", function_name="updateSidebarHighlight"),
-#     Output("page-content", "children"),
-#     Input("url", "pathname")
-# )
-
-# OLD CALLBACKS
+# CALLBACKS
 # Callbacks to handle page navigation
-# @app.callback(
-#     dash.dependencies.Output("page-content", "children"),
-#     [dash.dependencies.Input("url", "pathname")]
-# )
-# def display_page(pathname):
-#     if pathname == "/models-impact":
-#         model_layout = models_impact_page()
-#         return model_layout
-#     elif pathname == "/community-blog":
-#         community_layout = community_blog_page()
-#         return community_layout
-#     elif pathname == "/events-publications":
-#         events_layout = events_publications_page()
-#         return events_layout
-#     else:
-#         return home_page
+@app.callback(
+    dash.dependencies.Output("page-content", "children"),
+    [dash.dependencies.Input("url", "pathname")]
+)
+def display_page(pathname):
+    if pathname == "/models-impact":
+        model_layout = models_impact_page()
+        return model_layout
+    elif pathname == "/community-blog":
+        community_layout = community_blog_page()
+        return community_layout
+    elif pathname == "/events-publications":
+        events_layout = events_publications_page()
+        return events_layout
+    else:
+        return home_page
 
-# #Callbacks to manage highlight behavior
-# @app.callback(
-#     [
-#         dash.dependencies.Output("models-impact-link", "style"),
-#         dash.dependencies.Output("community-blog-link", "style"),
-#         dash.dependencies.Output("events-publications-link", "style")
-#     ],
-#     [dash.dependencies.Input("url", "pathname")]
-# )
-# def update_sidebar_highlight(pathname):
-#     default_style = {"display": "flex", "align-items": "center", "margin-bottom": "10px", "padding": "5px", "border-radius": "5px"}
-#     highlighted_style = {"display": "flex", "align-items": "center", "margin-bottom": "10px", "padding": "5px", "border-radius": "5px", "background-color": "#e0e0e0"}
+#Callbacks to manage highlight behavior
+@app.callback(
+    [
+        dash.dependencies.Output("models-impact-link", "style"),
+        dash.dependencies.Output("community-blog-link", "style"),
+        dash.dependencies.Output("events-publications-link", "style")
+    ],
+    [dash.dependencies.Input("url", "pathname")]
+)
+def update_sidebar_highlight(pathname):
+    default_style = {"display": "flex", "align-items": "center", "margin-bottom": "10px", "padding": "5px", "border-radius": "5px"}
+    highlighted_style = {"display": "flex", "align-items": "center", "margin-bottom": "10px", "padding": "5px", "border-radius": "5px", "background-color": "#e0e0e0"}
 
-#     return (
-#         highlighted_style if pathname == "/models-impact" else default_style,
-#         highlighted_style if pathname == "/community-blog" else default_style,
-#         highlighted_style if pathname == "/events-publications" else default_style
-#     )
+    return (
+        highlighted_style if pathname == "/models-impact" else default_style,
+        highlighted_style if pathname == "/community-blog" else default_style,
+        highlighted_style if pathname == "/events-publications" else default_style
+    )
+
 
 # Run the app
 if __name__ == "__main__":
