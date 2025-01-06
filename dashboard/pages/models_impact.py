@@ -121,7 +121,7 @@ layout = html.Div([
         # Right Column: Dropdown and Map
         html.Div([
             html.Div([
-                html.P("Placeholder for Map", style={"text-align": "center", "font-size": "16px"})
+                dcc.Graph(id="model_status", figure=model_status_fig)
             ], style={"height": "310px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px"})
         ], style={"width": "60%", "display": "inline-block", "vertical-align": "top"})
     ], style={"display": "flex", "justify-content": "space-between", "margin-bottom": "20px"}),
