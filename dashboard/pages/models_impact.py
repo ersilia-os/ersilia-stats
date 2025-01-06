@@ -1,5 +1,5 @@
 import dash
-from dash import dcc
+from dash import dcc, dash_table
 from dash import html
 import plotly.express as px
 import requests
@@ -37,7 +37,8 @@ global_south_countries = [
     "United Arab Emirates", "Uruguay", "Uzbekistan", "Vanuatu, Rep.", "Venezuela", 
     "Vietnam", "Yemen", "Zambia", "Zimbabwe"
 ]
-
+# ---- Table ---
+model_list_data = pd.DataFrame(data["models-impact"]["model_list"])
 # ---- Model Status Pie chart ----
 model_status_data = pd.DataFrame(data["models-impact"]["model_distribution"])
 total_models = model_status_data["Count"].sum()
@@ -93,8 +94,9 @@ model_status_fig.update_layout(
 )
 
 # ---- Models by Year line chart ----
-
 model_year_data = pd.DataFrame(data["models-impact"]["models_per_year"])
+model_year_data = model_year_data.sort_values(by="Year", key=lambda x: x.apply(lambda y: '0' if y == 'Before 2018' else y), ascending=True)
+
 model_year_data_fig = px.line(model_year_data, 
                                     x="Year", 
                                     y="Count",
@@ -191,7 +193,7 @@ layout = html.Div([
                     "backgroundColor": "#FAFAFA"})
         ], style={"width": "30%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "3%"}),
         html.Div([
-            html.P("Placeholder for Disease Cases vs. Models Chart", style={"text-align": "center", "font-size": "14px"})
+            dcc.Graph(id="model_status", figure=model_year_data_fig)
         ], style={"width": "30%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px"})
     ], style={"text-align": "center", "margin-bottom": "20px"}),
 
@@ -237,9 +239,16 @@ layout = html.Div([
         "margin-bottom": "2px"
     }),
     html.Div([
-        html.P("Placeholder for Model List Table", style={"text-align": "center", "font-size": "16px"})
+        dash_table.DataTable(
+            id="models-impact-table",
+            columns=[{"name": col, "id": col} for col in model_list_data.columns],
+            data=model_list_data.to_dict("records"),
+            style_table={"overflowX": "auto"},
+            style_header={"fontWeight": "bold"},
+            style_cell={"textAlign": "center"},
+        )
     ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "height": "300px", "margin-bottom": "20px"}),
-
+    
     # Pagination
     html.Div([
         html.P("Placeholder for Pagination", style={"text-align": "center", "font-size": "14px"})

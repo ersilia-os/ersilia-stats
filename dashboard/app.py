@@ -1,8 +1,10 @@
 import dash
-from dash import dcc, html
+from dash import dcc, html, callback, ClientsideFunction
+from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import requests
 from dash import html
+import pandas as pd
 
 # Load data from JSON
 data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
@@ -12,6 +14,7 @@ data = requests.get(data_url).json()
 app = dash.Dash(__name__, 
                 external_stylesheets=[dbc.themes.BOOTSTRAP],
                 use_pages=True)
+app.config.suppress_callback_exceptions = True #surpresses callback because dynamic loading
 
 # Sidebar layout
 sidebar = html.Div([
@@ -57,6 +60,26 @@ app.layout = html.Div([
     sidebar,
     dash.page_container
 ])
+
+# callback to filter table data based on search bar input
+@app.callback(
+    dash.dependencies.Output("models-impact-table", "data"),
+    [dash.dependencies.Input("search-bar", "value")]
+)
+def update_table(search_value):
+    model_list_data = pd.DataFrame(data["models-impact"]["model_list"])
+    if not search_value:  # if search empty, show all
+        return model_list_data.to_dict("records")
+
+    #filter rows if search val
+    filtered_data = model_list_data[
+        model_list_data.apply(
+            lambda row: row.astype(str).str.contains(search_value, case=False).any(),
+            axis=1
+        )
+    ]
+
+    return filtered_data.to_dict("records") 
 
 # # CALLBACKS
 # # Callbacks to handle page navigation
