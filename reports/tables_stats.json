@@ -1044,295 +1044,295 @@
         "model_distribution": [
             {
                 "Category": "ADME",
-                "count": 28
+                "Count": 28
             },
             {
                 "Category": "Descriptor",
-                "count": 26
+                "Count": 26
             },
             {
                 "Category": "Chemical graph model",
-                "count": 23
+                "Count": 23
             },
             {
                 "Category": "Toxicity",
-                "count": 20
+                "Count": 20
             },
             {
                 "Category": "Similarity",
-                "count": 16
+                "Count": 16
             },
             {
                 "Category": "Embedding",
-                "count": 16
+                "Count": 16
             },
             {
                 "Category": "Compound generation",
-                "count": 14
+                "Count": 14
             },
             {
                 "Category": "Permeability",
-                "count": 13
+                "Count": 13
             },
             {
                 "Category": "Metabolism",
-                "count": 13
+                "Count": 13
             },
             {
                 "Category": "Fingerprint",
-                "count": 13
+                "Count": 13
             },
             {
                 "Category": "MoleculeNet",
-                "count": 12
+                "Count": 12
             },
             {
                 "Category": "Chemical language model",
-                "count": 11
+                "Count": 11
             },
             {
                 "Category": "Antimicrobial activity",
-                "count": 11
+                "Count": 11
             },
             {
                 "Category": "ChEMBL",
-                "count": 10
+                "Count": 10
             },
             {
                 "Category": "Untagged",
-                "count": 9
+                "Count": 9
             },
             {
                 "Category": "IC50",
-                "count": 8
+                "Count": 8
             },
             {
                 "Category": "Solubility",
-                "count": 7
+                "Count": 7
             },
             {
                 "Category": "Chemical synthesis",
-                "count": 7
+                "Count": 7
             },
             {
                 "Category": "Chemical notation",
-                "count": 7
+                "Count": 7
             },
             {
                 "Category": "Human",
-                "count": 6
+                "Count": 6
             },
             {
                 "Category": "M.tuberculosis",
-                "count": 6
+                "Count": 6
             },
             {
                 "Category": "Cardiotoxicity",
-                "count": 6
+                "Count": 6
             },
             {
                 "Category": "Dummy",
-                "count": 6
+                "Count": 6
             },
             {
                 "Category": "P.falciparum",
-                "count": 6
+                "Count": 6
             },
             {
                 "Category": "Malaria",
-                "count": 6
+                "Count": 6
             },
             {
                 "Category": "Natural product",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "CYP450",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "Drug-likeness",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "LogP",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "Antiviral activity",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "Synthetic accessibility",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "hERG",
-                "count": 5
+                "Count": 5
             },
             {
                 "Category": "Half-life",
-                "count": 4
+                "Count": 4
             },
             {
                 "Category": "Lipophilicity",
-                "count": 4
+                "Count": 4
             },
             {
                 "Category": "Tuberculosis",
-                "count": 4
+                "Count": 4
             },
             {
                 "Category": "Bioactivity profile",
-                "count": 4
+                "Count": 4
             },
             {
                 "Category": "COVID19",
-                "count": 4
+                "Count": 4
             },
             {
                 "Category": "Microsomal stability",
-                "count": 3
+                "Count": 3
             },
             {
                 "Category": "Cytotoxicity",
-                "count": 3
+                "Count": 3
             },
             {
                 "Category": "Quantum properties",
-                "count": 3
+                "Count": 3
             },
             {
                 "Category": "Sars-CoV-2",
-                "count": 3
+                "Count": 3
             },
             {
                 "Category": "Side effects",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "Papp",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "Target identification",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "LogS",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "pKa",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "BACE",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "ESKAPE",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "Alzheimer",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "E.coli",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "Tox21",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "HIV",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "Fraction bound",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "Cancer",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "DrugBank",
-                "count": 2
+                "Count": 2
             },
             {
                 "Category": "GPCR",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "N.gonorrhoeae",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "A.baumannii",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Rat",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "HDAC1",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "HBV",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "MIC90",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Price",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "ToxCast",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Therapeutic indication",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Schistosomiasis",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Neglected tropical disease",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Mycetoma",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Antifungal activity",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "LogD",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "ZINC",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Molecular weight",
-                "count": 1
+                "Count": 1
             },
             {
                 "Category": "Biomedical text",
-                "count": 1
+                "Count": 1
             }
         ],
         "ready_percentage": 85.08,
