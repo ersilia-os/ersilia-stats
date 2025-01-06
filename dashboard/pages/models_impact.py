@@ -38,6 +38,46 @@ global_south_countries = [
     "Vietnam", "Yemen", "Zambia", "Zimbabwe"
 ]
 
+# Model Status Pie chart
+model_status_data = pd.DataFrame(data["models-impact"]["model_distribution"])
+total_types = model_status_data["Count"].sum()
+
+# Calculate percentage contributions
+model_status_data["Percentage"] = (model_status_data["Count"] / total_types) * 100
+
+# Pie chart
+model_status_fig = px.pie(
+    model_status_data, 
+    values="Count", 
+    names="Category",  
+    color="Category",
+    color_discrete_sequence=["#aa96fa", "#8cc8fa", "#dca0dc","#faa08c", "#fad782", "#bee6b4", "#d2d2d0"],  # Custom colors  
+)
+
+model_status_fig.update_traces(
+    customdata=model_status_data[["Percentage", "Count"]],
+    textinfo="percent+label",
+    hovertemplate="<b>%{label}</b><br>%{customdata[0][1]}<extra></extra> (%{customdata[0][0]:.2f}%)",
+    textposition = 'inside'
+)
+model_status_fig.update_layout(uniformtext_minsize=50, uniformtext_mode='hide')
+
+model_status_fig.update_layout(
+    hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"),
+    legend=dict(
+        font=dict(size=14),  # Reduce legend font size
+        xanchor="right",
+        x=1.75,
+        yanchor="middle",
+        y=0.5
+    ),
+    font=dict(color="#a9a9a9",
+                family="Arial"),
+    margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+    paper_bgcolor = "#FAFAFA",
+    plot_bgcolor="#FAFAFA",
+)
+
 layout = html.Div([
     # Header Section
     html.Div([
