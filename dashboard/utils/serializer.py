@@ -1,7 +1,7 @@
 from dash.development.base_component import Component
-from ..models_impact import models_impact_page
-from ..community import community_blog_page
-from ..events_and_publications import events_publications_page
+from ..pages.models_impact import models_impact_page
+from ..pages.community_and_blog import community_blog_page
+from ..pages.events_and_publications import events_publications_page
 import json
 
 import plotly.io as pio
