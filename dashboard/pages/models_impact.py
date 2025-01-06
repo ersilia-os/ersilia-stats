@@ -119,12 +119,13 @@ layout = html.Div([
         ], style={"width": "40%", "display": "inline-block", "vertical-align": "top", "padding-right": "20px"}),
 
         # Right Column: Dropdown and Map
-        html.Div([
             html.Div([
-                dcc.Graph(id="model_status", figure=model_status_fig)
-            ], style={"height": "310px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px"})
-        ], style={"width": "60%", "display": "inline-block", "vertical-align": "top"})
-    ], style={"display": "flex", "justify-content": "space-between", "margin-bottom": "20px"}),
+                html.Div([
+                    html.P("Placeholder for Map", style={"text-align": "center", "font-size": "16px"})
+                ], style={"height": "310px", "border": "1px solid #ddd", "border-radius": "10px", "padding": "20px"})
+            ], style={"width": "60%", "display": "inline-block", "vertical-align": "top"})
+        ], style={"display": "flex", "justify-content": "space-between", "margin-bottom": "20px"}),
+
 
     # Divider
     html.Hr(style={"border": "1px solid #ddd", "margin": "20px 0"}),
@@ -142,10 +143,16 @@ layout = html.Div([
     # Visualization Section
     html.Div([
         html.Div([
-            html.P("Placeholder for Model Distribution Chart", style={"text-align": "center", "font-size": "14px"})
+            dcc.Graph(id="model_status", figure=model_status_fig)
         ], style={"width": "30%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "3%"}),
         html.Div([
-            html.P("Placeholder for Model Status Gauge", style={"text-align": "center", "font-size": "14px"})
+            html.Div([
+            html.P("Ready to use", style={"text-align": "left", "font-size": "12px", "margin-bottom": "5px",
+                                                    "font-weight": "bold"}),
+            html.P(str(data["models-impact"]["ready_percentage"]), 
+                    style={"text-align": "left", "font-size": "30px", "font-weight": "medium", "color": "#6A1B9A"})
+        ], style={"width": "23%", "height": "100px", "display": "inline-block", "padding": "20px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "1%",
+                    "backgroundColor": "#FAFAFA"})
         ], style={"width": "30%", "display": "inline-block", "padding": "10px", "border": "1px solid #ddd", "border-radius": "10px", "margin-right": "3%"}),
         html.Div([
             html.P("Placeholder for Disease Cases vs. Models Chart", style={"text-align": "center", "font-size": "14px"})
