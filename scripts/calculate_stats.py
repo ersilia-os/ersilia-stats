@@ -81,14 +81,20 @@ def calculate_models_impact():
 
     # Count the occurrences of each tag
     tags_count = pd.Series(all_tags).value_counts().reset_index()
-    tags_count.columns = ['Category', 'count']
+    tags_count.columns = ['Category', 'Count']
+
+    # models per year
+    year_counts = pd.Series(models_df['Incorporation Year']).value_counts().reset_index()
+    year_counts.columns = ['Year', 'Count']
+
 
     # Prepare the final models data
     models_data = {
         "total_models": total(models_df),
         "model_distribution": tags_count.to_dict(orient='records'),
         "ready_percentage": round((models_df['Status'] == "Ready").mean() * 100, 2),
-        "model_list": models_df[['Title', 'Tag', 'Contributor', 'Incorporation Date', 'Status']].to_dict(orient='records')
+        "model_list": models_df[['Title', 'Tag', 'Contributor', 'Incorporation Date', 'Status']].to_dict(orient='records'),
+        "models_per_year": year_counts.to_dict(orient='records'),
     }
 
     return models_data

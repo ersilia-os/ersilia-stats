@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-05 12:08:22 GMT_
+_Last updated: 2025-01-05 23:10:05 GMT_
 
 ## 🧬 Models' Impact
 
@@ -179,13 +179,13 @@ _Last updated: 2025-01-05 12:08:22 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 17 | 34.69% |
+| AI/ML in Drug Discovery | 16 | 32.65% |
 | Ersilia Open Source Initiative | 12 | 24.49% |
 | Funding & Partnerships | 6 | 12.24% |
 | Personal Reflections | 6 | 12.24% |
 | Open Science | 3 | 6.12% |
+| Global Health | 3 | 6.12% |
 | Software Development & Tools | 3 | 6.12% |
-| Global Health | 2 | 4.08% |
 
 
 </details>

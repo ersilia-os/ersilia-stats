@@ -609,8 +609,8 @@
         "tag_distribution": [
             {
                 "Tag": "AI/ML in Drug Discovery",
-                "Count": 17,
-                "Percentage": 34.69387755102041
+                "Count": 16,
+                "Percentage": 32.6530612244898
             },
             {
                 "Tag": "Ersilia Open Source Initiative",
@@ -633,14 +633,14 @@
                 "Percentage": 6.122448979591836
             },
             {
-                "Tag": "Software Development & Tools",
+                "Tag": "Global Health",
                 "Count": 3,
                 "Percentage": 6.122448979591836
             },
             {
-                "Tag": "Global Health",
-                "Count": 2,
-                "Percentage": 4.081632653061225
+                "Tag": "Software Development & Tools",
+                "Count": 3,
+                "Percentage": 6.122448979591836
             }
         ],
         "posts_over_time": [
@@ -2603,6 +2603,28 @@
                 "Contributor": "DhanshreeA",
                 "Incorporation Date": "2024-07-15",
                 "Status": "In progress"
+            }
+        ],
+        "models_per_year": [
+            {
+                "Year": 2023,
+                "Count": 61
+            },
+            {
+                "Year": 2022,
+                "Count": 42
+            },
+            {
+                "Year": 2024,
+                "Count": 40
+            },
+            {
+                "Year": 2021,
+                "Count": 37
+            },
+            {
+                "Year": 2018,
+                "Count": 1
             }
         ]
     },

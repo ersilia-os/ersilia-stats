@@ -38,14 +38,14 @@ global_south_countries = [
     "Vietnam", "Yemen", "Zambia", "Zimbabwe"
 ]
 
-# Model Status Pie chart
+# ---- Model Status Pie chart ----
 model_status_data = pd.DataFrame(data["models-impact"]["model_distribution"])
 total_models = model_status_data["Count"].sum()
 
 # calc percentage contributions
 model_status_data["Percentage"] = (model_status_data["Count"] / total_models) * 100
 
-# Dataframe editing to limit tags to (max_tags_to_display)
+# df editing to limit tags to (max_tags_to_display)
 max_tags_to_display=total_models
 
 # get top 5 categories
@@ -59,8 +59,7 @@ other_percentage = model_status_data.iloc[max_tags_to_display:]["Percentage"].su
 other_row = pd.DataFrame([{"Category": "Other", "Count": other_count, "Percentage": other_percentage}])
 model_status_data = pd.concat([top_categories, other_row], ignore_index=True)
 
-
-# Pie chart
+# pie chart
 model_status_fig = px.pie(
     model_status_data, 
     values="Count", 
@@ -92,6 +91,28 @@ model_status_fig.update_layout(
     paper_bgcolor = "#FAFAFA",
     plot_bgcolor="#FAFAFA",
 )
+
+# ---- Models by Year line chart ----
+
+model_year_data = pd.DataFrame(data["models-impact"]["models_per_year"])
+model_year_data_fig = px.line(model_year_data, 
+                                    x="Year", 
+                                    y="Count",
+                                    color_discrete_sequence=["#aa96fa"])
+model_year_data_fig.update_xaxes(linecolor='lightgrey', gridcolor='#FAFAFA', title_text="Year")
+model_year_data_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Number of Publications")
+model_year_data_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
+    margin=dict(t=0, b=0, l=0, r=0),  # Adjust margins to expand the plot area
+    paper_bgcolor = "#FAFAFA",
+    font=dict(color="#a9a9a9",
+                family="Arial"),
+    plot_bgcolor="#FAFAFA"
+)
+model_year_data_fig.update_traces(
+    hovertemplate="<b>%{x}</b><br>%{y} models<extra></extra>",
+    marker=dict(line=dict(color="white"))
+)
+
 
 layout = html.Div([
     # Header Section
