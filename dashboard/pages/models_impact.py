@@ -40,10 +40,25 @@ global_south_countries = [
 
 # Model Status Pie chart
 model_status_data = pd.DataFrame(data["models-impact"]["model_distribution"])
-total_types = model_status_data["Count"].sum()
+total_models = model_status_data["Count"].sum()
 
-# Calculate percentage contributions
-model_status_data["Percentage"] = (model_status_data["Count"] / total_types) * 100
+# calc percentage contributions
+model_status_data["Percentage"] = (model_status_data["Count"] / total_models) * 100
+
+# Dataframe editing to limit tags to (max_tags_to_display)
+max_tags_to_display=total_models
+
+# get top 5 categories
+top_categories = model_status_data.iloc[:max_tags_to_display]
+
+# calc "Other" category
+other_count = model_status_data.iloc[max_tags_to_display:]["Count"].sum()
+other_percentage = model_status_data.iloc[max_tags_to_display:]["Percentage"].sum()
+
+# add "Other" category to the top max_tags_to_display
+other_row = pd.DataFrame([{"Category": "Other", "Count": other_count, "Percentage": other_percentage}])
+model_status_data = pd.concat([top_categories, other_row], ignore_index=True)
+
 
 # Pie chart
 model_status_fig = px.pie(
@@ -135,7 +150,7 @@ layout = html.Div([
         html.P("Ersilia's Models", style={"font-size": "16px", "font-weight": "bold", "margin-bottom": "4px"}),
         html.P([
                 html.Span("To address the challenges above, Ersilia has developed ", style={"color": "#a9a9a9", "font-size": "12px"}),
-                html.Span("NUMBER models", style={"color": "#6A1B9A", "font-weight": "bold", "font-size": "12px"}), ### CHANGE THIS: this needs to be dynamically retrieved from the output data
+                html.Span(str(data["models-impact"]["total_models"]) +  " models", style={"color": "#6A1B9A", "font-weight": "bold", "font-size": "12px"}), ### CHANGE THIS: this needs to be dynamically retrieved from the output data
                 html.Span(" each designed with diverse applications in mind.", style={"color": "#a9a9a9", "font-size": "12px"}),
             ], style={"line-height": "1.6", "margin-bottom": "20px"}),
     ]),
