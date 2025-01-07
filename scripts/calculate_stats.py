@@ -4,7 +4,13 @@ import json
 from ast import literal_eval
 import sys
 
-GEMINI_API_KEY = sys.argv[1]
+# GEMINI_API_KEY = sys.argv[1] # change this to os.environ("GEMINI_API_KEY") if running local dashboard
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 
 # Reading all the specified CSV files into DataFrames
 blogposts_df = pd.read_csv('data/Blogposts.csv')
@@ -310,10 +316,6 @@ def calculate_events_stats():
 
     # LLM API function
     import google.generativeai as genai
-    import os
-    from dotenv import load_dotenv
-
-    load_dotenv()
 
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-1.5-flash")
@@ -385,19 +387,15 @@ def calculate_events_stats():
             else:
                 events_by_country.append({"Country": country_name, "Organisers": [organiser]})
 
-    print(events_by_country)
-
     events_data = {
         "total_events": total(events_df),
         "events_by_year": events_df['Year'].value_counts().reset_index().rename(
             columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
-        # "events_by_type": event_types_summary,
+        "events_by_type": event_types_summary,
         "events_by_country": events_by_country
     }
 
     return events_data
-
-calculate_events_stats()
 
 # Publications
 def calculate_publications_stats():

@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-07 16:29:33 GMT_
+_Last updated: 2025-01-07 11:43:57 GMT_
 
 ## 🧬 Models' Impact
 
@@ -19,71 +19,71 @@ _Last updated: 2025-01-07 16:29:33 GMT_
 | Similarity | 16 |
 | Embedding | 16 |
 | Compound generation | 14 |
-| Fingerprint | 13 |
-| Metabolism | 13 |
 | Permeability | 13 |
+| Metabolism | 13 |
+| Fingerprint | 13 |
 | MoleculeNet | 12 |
 | Chemical language model | 11 |
 | Antimicrobial activity | 11 |
 | ChEMBL | 10 |
-| Chemical notation | 7 |
 | Chemical synthesis | 7 |
+| Untagged | 7 |
+| Chemical notation | 7 |
 | Solubility | 7 |
 | IC50 | 7 |
-| Untagged | 7 |
-| P.falciparum | 6 |
-| Malaria | 6 |
+| Dummy | 6 |
 | Cardiotoxicity | 6 |
 | Human | 6 |
+| P.falciparum | 6 |
+| Malaria | 6 |
 | M.tuberculosis | 6 |
-| Dummy | 6 |
-| CYP450 | 5 |
-| Antiviral activity | 5 |
-| Natural product | 5 |
-| LogP | 5 |
 | Synthetic accessibility | 5 |
-| Drug-likeness | 5 |
+| Natural product | 5 |
 | hERG | 5 |
+| LogP | 5 |
+| CYP450 | 5 |
+| Drug-likeness | 5 |
+| Antiviral activity | 5 |
 | Bioactivity profile | 4 |
-| Tuberculosis | 4 |
 | Lipophilicity | 4 |
-| COVID19 | 4 |
 | Half-life | 4 |
-| Sars-CoV-2 | 3 |
+| COVID19 | 4 |
+| Tuberculosis | 4 |
 | Quantum properties | 3 |
+| Sars-CoV-2 | 3 |
 | Microsomal stability | 3 |
-| Tox21 | 2 |
-| Side effects | 2 |
 | pKa | 2 |
-| DrugBank | 2 |
-| LogS | 2 |
 | BACE | 2 |
-| Cancer | 2 |
-| HIV | 2 |
-| Alzheimer | 2 |
-| Fraction bound | 2 |
+| LogS | 2 |
 | Target identification | 2 |
-| Cytotoxicity | 2 |
 | Papp | 2 |
+| Cytotoxicity | 2 |
+| Side effects | 2 |
+| Alzheimer | 2 |
+| DrugBank | 2 |
+| Fraction bound | 2 |
+| Tox21 | 2 |
+| HIV | 2 |
+| Cancer | 2 |
+| N.gonorrhoeae | 1 |
+| A.baumannii | 1 |
+| Rat | 1 |
+| HDAC1 | 1 |
+| ESKAPE | 1 |
 | HBV | 1 |
-| Mycetoma | 1 |
-| E.coli | 1 |
-| ToxCast | 1 |
-| Antifungal activity | 1 |
-| Price | 1 |
-| ZINC | 1 |
-| Molecular weight | 1 |
-| LogD | 1 |
-| Schistosomiasis | 1 |
-| Therapeutic indication | 1 |
-| Neglected tropical disease | 1 |
 | MIC90 | 1 |
 | GPCR | 1 |
-| ESKAPE | 1 |
-| HDAC1 | 1 |
-| Rat | 1 |
-| A.baumannii | 1 |
-| N.gonorrhoeae | 1 |
+| Therapeutic indication | 1 |
+| ToxCast | 1 |
+| Price | 1 |
+| E.coli | 1 |
+| Schistosomiasis | 1 |
+| Neglected tropical disease | 1 |
+| Mycetoma | 1 |
+| LogD | 1 |
+| Antifungal activity | 1 |
+| ZINC | 1 |
+| Molecular weight | 1 |
 | Biomedical text | 1 |
 
 
@@ -179,13 +179,13 @@ _Last updated: 2025-01-07 16:29:33 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 14 | 30.43% |
+| AI/ML in Drug Discovery | 13 | 28.26% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
 | Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
 | Open Science | 3 | 6.52% |
+| Global Health | 3 | 6.52% |
 | Software Development & Tools | 3 | 6.52% |
-| Global Health | 2 | 4.35% |
 
 
 </details>

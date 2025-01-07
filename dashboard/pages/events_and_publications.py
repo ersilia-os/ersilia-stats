@@ -359,7 +359,7 @@ layout = html.Div([
         html.P([
             html.Span("A total of ", style={"font-size": "12px", "color": "#a9a9a9"}),
             html.Span(f"{data['events']['total_events']}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
-            html.Span(" were organised by ", style={"font-size": "12px", "color": "#a9a9a9"}),
+            html.Span(" events were organised by ", style={"font-size": "12px", "color": "#a9a9a9"}),
             html.Span(f"{len(data['events']['events_by_country'])}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
             html.Span(" countries.", style={"font-size": "12px", "color": "#a9a9a9"})
         ], style={"line-height": "1.6", "margin-bottom": "10px"}),
