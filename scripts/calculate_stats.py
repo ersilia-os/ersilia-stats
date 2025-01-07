@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 from ast import literal_eval
+import sys
 
 GEMINI_API_KEY = sys.argv[1]
 
