@@ -1,11 +1,11 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-07 01:14:31 GMT_
+_Last updated: 2025-01-07 16:14:27 GMT_
 
 ## 🧬 Models' Impact
 
-- **Total Models:** 181
-- **Percentage Ready to Use:** 85.08%
+- **Total Models:** 180
+- **Percentage Ready to Use:** 84.44%
 
 <details>
 <summary>Model Categorization</summary>
@@ -13,77 +13,77 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 | Category | Count |
 | --- | --- |
 | ADME | 28 |
-| Descriptor | 26 |
-| Chemical graph model | 23 |
+| Descriptor | 27 |
+| Chemical graph model | 22 |
 | Toxicity | 20 |
 | Similarity | 16 |
 | Embedding | 16 |
 | Compound generation | 14 |
-| Permeability | 13 |
-| Metabolism | 13 |
 | Fingerprint | 13 |
+| Metabolism | 13 |
+| Permeability | 13 |
 | MoleculeNet | 12 |
 | Chemical language model | 11 |
 | Antimicrobial activity | 11 |
 | ChEMBL | 10 |
-| Untagged | 9 |
-| IC50 | 8 |
-| Solubility | 7 |
-| Chemical synthesis | 7 |
 | Chemical notation | 7 |
-| Human | 6 |
-| M.tuberculosis | 6 |
-| Cardiotoxicity | 6 |
-| Dummy | 6 |
+| Chemical synthesis | 7 |
+| Solubility | 7 |
+| IC50 | 7 |
+| Untagged | 7 |
 | P.falciparum | 6 |
 | Malaria | 6 |
-| Natural product | 5 |
+| Cardiotoxicity | 6 |
+| Human | 6 |
+| M.tuberculosis | 6 |
+| Dummy | 6 |
 | CYP450 | 5 |
-| Drug-likeness | 5 |
-| LogP | 5 |
 | Antiviral activity | 5 |
+| Natural product | 5 |
+| LogP | 5 |
 | Synthetic accessibility | 5 |
+| Drug-likeness | 5 |
 | hERG | 5 |
-| Half-life | 4 |
-| Lipophilicity | 4 |
-| Tuberculosis | 4 |
 | Bioactivity profile | 4 |
+| Tuberculosis | 4 |
+| Lipophilicity | 4 |
 | COVID19 | 4 |
-| Microsomal stability | 3 |
-| Cytotoxicity | 3 |
-| Quantum properties | 3 |
+| Half-life | 4 |
 | Sars-CoV-2 | 3 |
-| Side effects | 2 |
-| Papp | 2 |
-| Target identification | 2 |
-| LogS | 2 |
-| pKa | 2 |
-| BACE | 2 |
-| ESKAPE | 2 |
-| Alzheimer | 2 |
-| E.coli | 2 |
+| Quantum properties | 3 |
+| Microsomal stability | 3 |
 | Tox21 | 2 |
-| HIV | 2 |
-| Fraction bound | 2 |
-| Cancer | 2 |
+| Side effects | 2 |
+| pKa | 2 |
 | DrugBank | 2 |
-| GPCR | 1 |
-| N.gonorrhoeae | 1 |
-| A.baumannii | 1 |
-| Rat | 1 |
-| HDAC1 | 1 |
+| LogS | 2 |
+| BACE | 2 |
+| Cancer | 2 |
+| HIV | 2 |
+| Alzheimer | 2 |
+| Fraction bound | 2 |
+| Target identification | 2 |
+| Cytotoxicity | 2 |
+| Papp | 2 |
 | HBV | 1 |
-| MIC90 | 1 |
-| Price | 1 |
-| ToxCast | 1 |
-| Therapeutic indication | 1 |
-| Schistosomiasis | 1 |
-| Neglected tropical disease | 1 |
 | Mycetoma | 1 |
+| E.coli | 1 |
+| ToxCast | 1 |
 | Antifungal activity | 1 |
-| LogD | 1 |
+| Price | 1 |
 | ZINC | 1 |
 | Molecular weight | 1 |
+| LogD | 1 |
+| Schistosomiasis | 1 |
+| Therapeutic indication | 1 |
+| Neglected tropical disease | 1 |
+| MIC90 | 1 |
+| GPCR | 1 |
+| ESKAPE | 1 |
+| HDAC1 | 1 |
+| Rat | 1 |
+| A.baumannii | 1 |
+| N.gonorrhoeae | 1 |
 | Biomedical text | 1 |
 
 
@@ -95,7 +95,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 | Title | Contributor | Date | Status |
 | --- | --- | --- | --- |
 | Knowledge-guided pre-trained graph transformer | miquelduranfrigola | 2024-12-17 | In progress |
-| Antimicrobial class specificity prediction | miquelduranfrigola | 2024-12-17 | In progress |
+| Antimicrobial class specificity prediction | miquelduranfrigola | 2024-12-17 | Ready |
 | MolE molecular embeddings | miquelduranfrigola | 2024-11-18 | In progress |
 | Projections against Coconut | miquelduranfrigola | 2024-11-10 | In progress |
 | Chemical space 2D projections against DrugBank | miquelduranfrigola | 2024-11-09 | In progress |
@@ -109,7 +109,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 ## 🌍 Community & Blog
 
 - **Countries Represented:** 17
-- **Total Contributors:** 91
+- **Total Contributors:** 92
 
 <details>
 <summary>Role Distribution</summary>
@@ -117,7 +117,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 | Role | Count |
 | --- | --- |
 | Volunteer | 47 |
-| Intern | 27 |
+| Intern | 28 |
 | Trustee | 5 |
 | OS Maintainer | 4 |
 | Mentor | 4 |
@@ -135,7 +135,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 
 | Duration | Count |
 | --- | --- |
-| < 3 Months | 63 |
+| < 3 Months | 64 |
 | 3-6 Months | 14 |
 | > 1 Year | 11 |
 | 6-12 Months | 2 |
@@ -149,7 +149,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 | Country | Contributors |
 | --- | --- |
 | United States | 48 |
-| Nigeria | 9 |
+| Nigeria | 10 |
 | Spain | 9 |
 | India | 7 |
 | Australia | 3 |
@@ -172,20 +172,20 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 
 ## 📝 Blogposts
 
-- **Total Blogposts:** 50
+- **Total Blogposts:** 46
 
 <details>
 <summary>Blogpost Topics Distribution</summary>
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 16 | 32.65% |
-| Ersilia Open Source Initiative | 12 | 24.49% |
-| Funding & Partnerships | 6 | 12.24% |
-| Personal Reflections | 6 | 12.24% |
-| Open Science | 3 | 6.12% |
-| Global Health | 3 | 6.12% |
-| Software Development & Tools | 3 | 6.12% |
+| AI/ML in Drug Discovery | 13 | 28.26% |
+| Ersilia Open Source Initiative | 12 | 26.09% |
+| Funding & Partnerships | 6 | 13.04% |
+| Personal Reflections | 6 | 13.04% |
+| Open Science | 3 | 6.52% |
+| Global Health | 3 | 6.52% |
+| Software Development & Tools | 3 | 6.52% |
 
 
 </details>
@@ -200,7 +200,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 | 2021 | Q4 | 2 |
 | 2022 | Q1 | 3 |
 | 2022 | Q2 | 2 |
-| 2022 | Q3 | 4 |
+| 2022 | Q3 | 3 |
 | 2022 | Q4 | 2 |
 | 2023 | Q1 | 2 |
 | 2023 | Q2 | 3 |
@@ -273,7 +273,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 
 ## 🏅 Author Highlights
 
-- **Total Authors:** 217
+- **Total Authors:** 222
 - **Top Author:** Patrick Aloy (H-index: 54)
 
 <details>
@@ -281,7 +281,7 @@ _Last updated: 2025-01-07 01:14:31 GMT_
 
 | Name | Ersilia Pubs | H-index | Total Pubs |
 | --- | --- | --- | --- |
-| Patrick Aloy | 2 | 54.0 | 16 |
+| Patrick Aloy | 2 | 54.0 | 17 |
 | Kelly Chibale | 2 | 39.0 | 2 |
 | Izukanji Sikazwe | 2 | 25.0 | 2 |
 
