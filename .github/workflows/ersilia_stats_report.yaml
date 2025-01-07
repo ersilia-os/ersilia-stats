@@ -46,18 +46,15 @@ jobs:
         run: |
           python scripts/get_open_alex_stats.py 
           python scripts/fetch_external_disease_data.py
-      
-      # 5. Calculate All Relevant Stats and store in JSON
-      - name: Calculate Stats
-        run: |
-          python scripts/calculate_stats.py
 
-      # 6. Generate README.md
+      # 5. Generate README.md
       - name: Update README
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python scripts/create_readme.py
+          python scripts/create_readme.py $GEMINI_API_KEY
 
-      # 7. Commit Changes
+      # 6. Commit Changes
       - name: Commit changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -65,7 +62,7 @@ jobs:
           git add reports/tables_stats.json README.md
           git commit -m "Update internal stats and README" || echo "No changes to commit"
 
-      # 8. Push Changes
+      # 7. Push Changes
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
