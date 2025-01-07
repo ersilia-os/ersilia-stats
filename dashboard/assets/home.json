@@ -1,0 +1,55 @@
+{
+    "type": "Div",
+    "props": {
+        "children": [
+            {
+                "type": "H1",
+                "props": {
+                    "children": "Welcome to the Ersilia Dashboard",
+                    "style": {
+                        "margin-top": "20px",
+                        "margin-bottom": "20px"
+                    }
+                }
+            },
+            {
+                "type": "P",
+                "props": {
+                    "children": "This dashboard is designed to provide an interactive experience with data insights related to Ersilia's initiatives. Explore our Models' Impact, Community & Blog, and Events & Publications to learn more about our contributions to global health and open science.",
+                    "style": {
+                        "font-size": "18px",
+                        "line-height": "1.6"
+                    }
+                }
+            },
+            {
+                "type": "P",
+                "props": {
+                    "children": "Ersilia is committed to making science more equitable through open collaboration and innovative technologies. Learn more about our mission and explore our resources at ",
+                    "style": {
+                        "font-size": "18px",
+                        "line-height": "1.6",
+                        "display": "inline"
+                    }
+                }
+            },
+            {
+                "type": "A",
+                "props": {
+                    "children": "Ersilia.io",
+                    "href": "https://ersilia.io",
+                    "style": {
+                        "font-size": "18px",
+                        "color": "#6A1B9A",
+                        "text-decoration": "underline"
+                    },
+                    "target": "_blank"
+                }
+            }
+        ],
+        "style": {
+            "margin-left": "320px",
+            "padding": "20px"
+        }
+    }
+}

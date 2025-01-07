@@ -2,6 +2,8 @@ from dash.development.base_component import Component
 from ..pages.models_impact import models_impact_page
 from ..pages.community_and_blog import community_blog_page
 from ..pages.events_and_publications import events_publications_page
+from ..pages.home import home_page
+
 import json
 
 import plotly.io as pio
@@ -45,3 +47,4 @@ def save_layout_to_json(page_function, filename):
 save_layout_to_json(models_impact_page, "dashboard/assets/models_impact.json")
 save_layout_to_json(community_blog_page, "dashboard/assets/community_blog.json")
 save_layout_to_json(events_publications_page, "dashboard/assets/events_publications.json")
+save_layout_to_json(home_page, "dashboard/assets/home.json")

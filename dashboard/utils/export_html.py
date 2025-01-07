@@ -121,7 +121,8 @@ def json_to_html(component, page_name, graph_count):
 pages = {
     "models_impact": "Models' Impact",
     "community_blog": "Community & Blog",
-    "events_publications": "Events & Publications"
+    "events_publications": "Events & Publications",
+    "home": "/"
 }
 
 for filename, icon_name in pages.items():
