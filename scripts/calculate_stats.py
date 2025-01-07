@@ -378,7 +378,7 @@ def calculate_events_stats():
     events_by_country = []
     for _, row in events_df.iterrows():
         if isinstance(row['Country (from Country)'], str):
-            country_name = row['Country (from Country)']
+            country_name = row['Country (from Country)'].strip("[]").replace("'", "")
 
             organiser = literal_eval(row["Organiser"])[0]
             country_entry = next((item for item in events_by_country if item["Country"] == country_name), None)
