@@ -497,7 +497,7 @@ def update_map(filtered_data):
             country_stats[country]["deaths"] += stats.get("deaths", 0)
 
     # Debugging: Log unregularized country stats
-    print("Aggregated Country Statistics (Unregularized):", country_stats)
+    # print("Aggregated Country Statistics (Unregularized):", country_stats)
 
     # Step 2: Regularize country names
     regularized_stats = {}
@@ -509,7 +509,7 @@ def update_map(filtered_data):
         regularized_stats[standardized_country]["deaths"] += stats["deaths"]
 
     # Debugging: Log regularized country stats
-    print("Aggregated Country Statistics (Regularized):", regularized_stats)
+    # print("Aggregated Country Statistics (Regularized):", regularized_stats)
 
     # Step 3: Convert to DataFrame for plotting
     df = pd.DataFrame.from_dict(regularized_stats, orient="index").reset_index()
@@ -517,7 +517,7 @@ def update_map(filtered_data):
     df["Total"] = df["Cases"] + df["Deaths"]
 
     # Debugging: Log DataFrame
-    print("DataFrame for Map:", df)
+    # print("DataFrame for Map:", df)
 
     # Step 4: Create the choropleth map
     fig = px.choropleth(
