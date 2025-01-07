@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-07 16:14:27 GMT_
+_Last updated: 2025-01-07 16:25:35 GMT_
 
 ## 🧬 Models' Impact
 
@@ -179,13 +179,13 @@ _Last updated: 2025-01-07 16:14:27 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 13 | 28.26% |
+| AI/ML in Drug Discovery | 14 | 30.43% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
 | Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
 | Open Science | 3 | 6.52% |
-| Global Health | 3 | 6.52% |
 | Software Development & Tools | 3 | 6.52% |
+| Global Health | 2 | 4.35% |
 
 
 </details>
@@ -328,7 +328,6 @@ _Last updated: 2025-01-07 16:14:27 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,074,039 | 7,079,129 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
