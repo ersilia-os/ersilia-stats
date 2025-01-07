@@ -59,7 +59,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add reports/tables_stats.json README.md
+          git add .
           git commit -m "Update internal stats and README" || echo "No changes to commit"
 
       # 7. Push Changes
