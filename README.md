@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-06 22:22:49 GMT_
+_Last updated: 2025-01-07 01:14:31 GMT_
 
 ## 🧬 Models' Impact
 
@@ -331,8 +331,8 @@ _Last updated: 2025-01-06 22:22:49 GMT_
 | Covid | 777,074,039 | 7,079,129 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
-| Measles | 47,347,773 | - |
-| Polio | 541,429 | - |
+| Measles | 47,347,773 | 0 |
+| Polio | 541,429 | 0 |
 
 
 </details>
