@@ -34,7 +34,7 @@ def generate_models_section(data):
 
     # Model categorization
     headers = ["Category", "Count"]
-    rows = [(item["Category"], item["count"]) for item in data["model_distribution"]]
+    rows = [(item["Category"], item["Count"]) for item in data["model_distribution"]]
     model_table = format_table(headers, rows)
     model_table_section = collapsible_section("Model Categorization", model_table)
 

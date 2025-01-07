@@ -81,14 +81,19 @@ def calculate_models_impact():
 
     # Count the occurrences of each tag
     tags_count = pd.Series(all_tags).value_counts().reset_index()
-    tags_count.columns = ['Category', 'count']
+    tags_count.columns = ['Category', 'Count']
+
+    # models per year
+    year_counts = pd.Series(models_df['Incorporation Year']).value_counts().reset_index()
+    year_counts.columns = ['Year', 'Count']
 
     # Prepare the final models data
     models_data = {
         "total_models": total(models_df),
         "model_distribution": tags_count.to_dict(orient='records'),
         "ready_percentage": round((models_df['Status'] == "Ready").mean() * 100, 2),
-        "model_list": models_df[['Title', 'Tag', 'Contributor', 'Incorporation Date', 'Status']].to_dict(orient='records')
+        "model_list": models_df[['Title', 'Tag', 'Contributor', 'Incorporation Date', 'Status', 'GitHub']].to_dict(orient='records'),
+        "models_per_year": year_counts.to_dict(orient='records')
     }
 
     return models_data
@@ -354,7 +359,6 @@ def calculate_events_stats():
 
     # Aggregate tag counts for visualization
     tag_counts = events_with_tags["Type"].value_counts()
-    print(tag_counts)
     tag_percentages = (tag_counts / tag_counts.sum()) * 100
 
     # Output tag percentages for visualization
@@ -391,7 +395,6 @@ def calculate_events_stats():
         "events_by_country": events_by_country
     }
 
-    print(events_data)
     return events_data
 
 # Publications
@@ -571,31 +574,56 @@ def calculate_openalex_authors():
 
 # External Data Statistics
 def calculate_external_data_stats():
-    external_stats = {"disease_statistics": []}
-    
-    for dataset, value in external_data.items():
-        # Determine if the key refers to cases or deaths
-        if "_deaths" in dataset:
-            disease_name = dataset.replace("_deaths", "").replace("_", " ").title()
-            stat_type = "deaths"
-        elif "_cases" in dataset:
-            disease_name = dataset.replace("_cases", "").replace("_", " ").title()
-            stat_type = "cases"
-        else:
-            continue  # Skip if the key doesn't match "cases" or "deaths"
+    external_stats = {
+        "disease_statistics": [],
+        "total_cases": 0,
+        "total_deaths": 0
+    }
 
-        # Check if the disease already exists in the stats
-        existing_entry = next((item for item in external_stats["disease_statistics"] if item["disease"] == disease_name), None)
-        if existing_entry:
-            existing_entry[f"total_{stat_type}"] = round(value)
-        else:
-            # Add a new entry
-            external_stats["disease_statistics"].append({
-                "disease": disease_name,
-                f"total_{stat_type}": round(value)
-            })
+    for disease, stats in external_data.items():
+        # Initialize disease-level totals
+        total_cases = stats["cases"]["world"]
+        total_deaths = stats["deaths"]["world"]
+
+        # Add to overall totals
+        external_stats["total_cases"] += total_cases
+        external_stats["total_deaths"] += total_deaths
+
+        # Extract per-country stats
+        country_cases = stats["cases"]["countries"]
+        country_deaths = stats["deaths"]["countries"]
+
+        # Prepare per-country data for each disease
+        country_statistics = {
+            country: {
+                "cases": country_cases.get(country, 0),
+                "deaths": country_deaths.get(country, 0)
+            }
+            for country in set(country_cases) | set(country_deaths)
+        }
+
+        # Add disease-level statistics
+        external_stats["disease_statistics"].append({
+            "disease": disease.replace("_", " ").title(),
+            "total_cases": total_cases,
+            "total_deaths": total_deaths,
+            "country_statistics": country_statistics
+        })
+
+    # Round totals for consistency
+    external_stats["total_cases"] = round(external_stats["total_cases"])
+    external_stats["total_deaths"] = round(external_stats["total_deaths"])
+    for disease in external_stats["disease_statistics"]:
+        disease["total_cases"] = round(disease["total_cases"])
+        disease["total_deaths"] = round(disease["total_deaths"])
+        for country, stats in disease["country_statistics"].items():
+            stats["cases"] = round(stats["cases"])
+            stats["deaths"] = round(stats["deaths"])
 
     return external_stats
+
+
+calculate_external_data_stats()
 
 # Serialization & Output
 def convert_to_serializable(obj):

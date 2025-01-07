@@ -9,3 +9,21 @@
     background-color: #6A1B9A;
     color: white;
 }
+
+.dash-debug-menu__outer--open {
+    bottom: 10px;
+    left: 10px;
+    right: initial;
+    padding: 5px 5px 5px 78px;
+}
+
+.dash-debug-menu__outer--closed {
+    bottom: 18px;
+    left: 21px;
+    right: initial;
+}
+
+.dash-debug-menu {
+    bottom: 18px;
+    left: 21px;
+}
