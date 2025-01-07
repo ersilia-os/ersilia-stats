@@ -79,7 +79,7 @@ events_by_type_fig = px.pie(
     names="Type", 
     values="Count",
     color="Type",
-    color_discrete_sequence=["#aa96fa", "#8cc8fa", "#dca0dc","#faa08c", "#fad782", "#bee6b4"],  # Custom colors  
+    color_discrete_sequence=["#aa96fa", "#8cc8fa", "#dca0dc","#faa08c", "#fad782", "#bee6b4", "#d2d2d0"],  # Custom colors  
 )
 
 events_by_type_fig.update_traces(
