@@ -7,7 +7,7 @@ from dash import html
 import pandas as pd
 
 # Load data from JSON
-data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/main/reports/tables_stats.json"
+data_url = "https://raw.githubusercontent.com/ersilia-os/ersilia-stats/refs/heads/mvp2.1/reports/tables_stats.json"
 data = requests.get(data_url).json()
 
 # Initialize the app
@@ -43,8 +43,8 @@ sidebar = html.Div([
         html.Div([
             html.P("Get involved!", style={"color": "black", "font-weight": "bold", "font-size": "16px", "margin-bottom": "2px", "text-align": "left"}),
             html.P("Join our efforts to make science more equitable.", style={"color": "black", "font-size": "12px", "margin-bottom": "10px", "text-align": "left"}),
-            dbc.Button("Donate", color="primary", style={"background-color": "#6A1B9A", "font-size": "12px", "border": "none", "margin-bottom": "5px", "width": "100%"}),
-            dbc.Button("Volunteer", outline=True, color="primary", className="custom-volunteer-btn")
+            dbc.Button("Donate", href="https://www.ersilia.io/donate", color="primary", style={"background-color": "#6A1B9A", "font-size": "12px", "border": "none", "margin-bottom": "5px", "width": "100%"}),
+            dbc.Button("Volunteer", href="https://www.ersilia.io/about", outline=True, color="primary", className="custom-volunteer-btn")
         ], style={"text-align": "center", "padding": "0px 20px 0px 10px"}),
         html.Hr(style={"border": "1px solid #ccc", "margin": "15px 7px"}),
         html.Div([
@@ -61,25 +61,6 @@ app.layout = html.Div([
     dash.page_container
 ])
 
-# callback to filter table data based on search bar input
-@app.callback(
-    dash.dependencies.Output("models-impact-table", "data"),
-    [dash.dependencies.Input("search-bar", "value")]
-)
-def update_table(search_value):
-    model_list_data = pd.DataFrame(data["models-impact"]["model_list"])
-    if not search_value:  # if search empty, show all
-        return model_list_data.to_dict("records")
-
-    #filter rows if search val
-    filtered_data = model_list_data[
-        model_list_data.apply(
-            lambda row: row.astype(str).str.contains(search_value, case=False).any(),
-            axis=1
-        )
-    ]
-
-    return filtered_data.to_dict("records") 
 
 # # CALLBACKS
 # # Callbacks to handle page navigation
