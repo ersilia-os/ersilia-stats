@@ -97,6 +97,7 @@ def main():
         base_id, table_id, table_name = table["base_id"], table["table_id"], table["table"]
         # Fetch data from Airtable
         records = fetch_table(airtable_api_key, base_id, table_id)
+        print(records)
 
         # directs the CSV to be stored in data
         folder_path = "data" 
