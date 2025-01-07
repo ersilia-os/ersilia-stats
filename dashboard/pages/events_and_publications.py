@@ -387,7 +387,7 @@ layout = html.Div([
             dcc.Graph(id="publications_by_year", figure=publications_by_year_fig)
         ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "49%", "display": "inline-block"}),
         html.Div([
-            html.P("Timeline of Citations", 
+            html.P("Citations For Publications By Year Of Release", 
                 style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "4px"}),
             html.Span("A total of ", style={"font-size": "12px", "color": "#a9a9a9"}),
             html.Span(f"{data['publications']['total_citations']}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),

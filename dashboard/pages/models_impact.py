@@ -108,6 +108,7 @@ model_year_data_fig = px.line(model_year_data,
                                     x="Year", 
                                     y="Count",
                                     color_discrete_sequence=["#aa96fa"])
+
 model_year_data_fig.update_xaxes(linecolor='lightgrey', gridcolor='#FAFAFA', title_text="Year")
 model_year_data_fig.update_yaxes(linecolor='lightgrey', gridcolor='lightgrey', title_text="Number of Publications")
 model_year_data_fig.update_layout(hoverlabel=dict(bgcolor="black", font_size=16, font_family="Arial"), 
@@ -253,6 +254,9 @@ layout = html.Div([
     html.Div([
         # Model Status Donut Chart
         html.Div([
+            html.P("Model Distribution", 
+                style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "8px"}),
+
             dcc.Graph(id="model_status", figure=model_status_fig)
         ], style={
             "width": "49%", 
@@ -266,6 +270,8 @@ layout = html.Div([
 
         # Model Year Data Line Chart
         html.Div([
+            html.P("Models per Year", 
+                style={"font-size": "14px", "font-weight": "bold", "margin-bottom": "8px"}),
             dcc.Graph(id="model_year_data", figure=model_year_data_fig)
         ], style={
             "width": "49%", 
