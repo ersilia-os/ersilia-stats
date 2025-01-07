@@ -122,7 +122,7 @@ pages = {
     "models_impact": "Models' Impact",
     "community_blog": "Community & Blog",
     "events_publications": "Events & Publications",
-    "home": "/"
+    "home": "Home"
 }
 
 for filename, icon_name in pages.items():
