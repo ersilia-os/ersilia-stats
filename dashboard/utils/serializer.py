@@ -2,7 +2,7 @@ from dash.development.base_component import Component
 from ..pages.models_impact import models_impact_page
 from ..pages.community_and_blog import community_blog_page
 from ..pages.events_and_publications import events_publications_page
-from ..pages.home import home_page
+from ..pages.index import home_page
 
 import json
 

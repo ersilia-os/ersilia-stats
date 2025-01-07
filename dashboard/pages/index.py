@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import requests
 from dash import html
 
-# dash.register_page(__name__, path="/")
+dash.register_page(__name__, path="/")
 
 # Main content area for the landing page
 def home_page():
