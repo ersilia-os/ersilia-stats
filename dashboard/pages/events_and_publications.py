@@ -10,7 +10,7 @@ import scripts.dataset_references as ref
 
 import requests
 
-# Register page with main
+# Register page with main ,
 dash.register_page(__name__, path="/events-and-publications")
 
 # Load data from JSON
