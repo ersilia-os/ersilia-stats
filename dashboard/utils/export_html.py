@@ -100,7 +100,35 @@ def json_to_html(component, page_name, graph_count):
 
             # return an <img> tag referencing the exported image with original dimensions
             return f'<img src="{graphs_dir}/{graph_filename}" style="{img_style} margin: 10px 0;" alt="Graph: {graph_title}">'
+        
+          # handle table rendering
+        if tag == "store" and "data" in props:
+            data = props["data"]
 
+            if not data:  
+                return "<div>No data available</div>" #empty data
+
+            headers = "".join(f"<th>{key}</th>" for key in data[0].keys()) #headers
+
+            # gen rows with embedded HTML content
+            rows = ""
+            for row in data:
+                row_html = "".join(f"<td>{row.get(key, '')}</td>" for key in row.keys())
+                rows += f"<tr>{row_html}</tr>"
+
+            # combine into a full table
+            table_html = f"""
+            <table border="1" style="border-collapse: collapse; width: 100%; margin-bottom: 20px;">
+                <thead>
+                    <tr>{headers}</tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+            """
+            return table_html
+        
         # convert everything to HTML attributes
         attributes = []
         for key, value in props.items():
@@ -153,7 +181,7 @@ for filename, icon_name in pages.items():
         </head>
         <body>
             {sidebar}
-            <div style="margin-left: 300px; padding: 20px;">
+            <div style="margin-left: 5px; padding: 20px;">
                 <h1 style="font-size: 24px; font-weight: bold;">{icon_name}</h1>
                 {json_to_html(layout, filename, graph_count)}
             </div>
