@@ -40,24 +40,24 @@ def generate_sidebar():
     <div style="padding: 20px; width: 250px; background-color: #f8f9fa; position: fixed; height: 100%; box-shadow: 2px 0px 5px rgba(0,0,0,0.1);">
         <div style="text-align: center;">
             <a href="/">
-                <img src="../assets/logo.png" style="width: 200px; margin-bottom: 20px;" alt="Ersilia Logo">
+                <img src="icons/logo.png" style="width: 200px; margin-bottom: 20px;" alt="Ersilia Logo">
             </a>
         </div>
         <div style="padding: 10px;">
             <div style="display: flex; align-items: center; margin-bottom: 10px; padding: 5px; border-radius: 40px;">
-                <img src="../assets/icon_impact.png" style="width: 20px; margin-right: 10px;" alt="Icon for Models' Impact">
+                <img src="icons/icon_impact.png" style="width: 20px; margin-right: 10px;" alt="Icon for Models' Impact">
                 <a href="models_impact.html" style="color: black; font-weight: normal; text-decoration: none; font-size: 14px;">
                     Models' Impact
                 </a>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px; padding: 5px; border-radius: 40px;">
-                <img src="../assets/icon_community.png" style="width: 20px; margin-right: 10px;" alt="Icon for Community & Blog">
+                <img src="icons/icon_community.png" style="width: 20px; margin-right: 10px;" alt="Icon for Community & Blog">
                 <a href="community_blog.html" style="color: black; font-weight: normal; text-decoration: none; font-size: 14px;">
                     Community & Blog
                 </a>
             </div>
             <div style="display: flex; align-items: center; margin-bottom: 10px; padding: 5px; border-radius: 40px;">
-                <img src="../assets/icon_publication.png" style="width: 20px; margin-right: 10px;" alt="Icon for Events & Publications">
+                <img src="icons/icon_publication.png" style="width: 20px; margin-right: 10px;" alt="Icon for Events & Publications">
                 <a href="events_publications.html" style="color: black; font-weight: normal; text-decoration: none; font-size: 14px;">
                     Events & Publications
                 </a>
