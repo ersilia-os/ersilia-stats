@@ -375,14 +375,9 @@ def calculate_events_stats():
     # Process each row in the events DataFrame
     events_by_country = []
     for _, row in events_df.iterrows():
-        organisations_id = literal_eval(row['Organisations'])[0] if row['Organisations'] else None
+        if isinstance(row['Country (from Country)'], str):
+            country_name = row['Country (from Country)']
 
-        organisations_row = organisations_df[organisations_df['id'] == organisations_id]
-        organisations_country = literal_eval(organisations_row["Country"].values[0])[0] if not organisations_row.empty else None
-
-        country_name = countries_df[countries_df['id'] == organisations_country]["Country"].values[0] if organisations_country else None
-
-        if country_name:
             organiser = literal_eval(row["Organiser"])[0]
             country_entry = next((item for item in events_by_country if item["Country"] == country_name), None)
             if country_entry:
@@ -390,15 +385,19 @@ def calculate_events_stats():
             else:
                 events_by_country.append({"Country": country_name, "Organisers": [organiser]})
 
+    print(events_by_country)
+
     events_data = {
         "total_events": total(events_df),
         "events_by_year": events_df['Year'].value_counts().reset_index().rename(
             columns={'Count': 'Year', 'count': 'Count'}).to_dict(orient='records'),
-        "events_by_type": event_types_summary,
+        # "events_by_type": event_types_summary,
         "events_by_country": events_by_country
     }
 
     return events_data
+
+calculate_events_stats()
 
 # Publications
 def calculate_publications_stats():
