@@ -14,7 +14,7 @@ import requests
 dash.register_page(__name__, path="/events-and-publications")
 
 # Load data from JSON
-data_url = "https://github.com/ersilia-os/ersilia-stats/raw/refs/heads/mvp2.1/reports/tables_stats.json"
+data_url = "https://github.com/ersilia-os/ersilia-stats/raw/refs/heads/main/reports/tables_stats.json"
 data = requests.get(data_url).json()
 
 global_south_countries = [
@@ -361,7 +361,8 @@ layout = html.Div([
             html.Span(f"{data['events']['total_events']}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
             html.Span(" events were organised by ", style={"font-size": "12px", "color": "#a9a9a9"}),
             html.Span(f"{len(data['events']['events_by_country'])}", style={"font-size": "12px", "color": "#6A1B9A", "font-weight": "bold"}),
-            html.Span(" countries.", style={"font-size": "12px", "color": "#a9a9a9"})
+            html.Span(" countries. A full list of organisers for each country can be found in the full JSON report ", style={"font-size": "12px", "color": "#a9a9a9"}),
+            html.A("here.", href=data_url, target="_blank", style={"font-size": "12px", "color": "#6A1B9A", "text-decoration": "underline"})
         ], style={"line-height": "1.6", "margin-bottom": "10px"}),
         html.P(f"*Global South: Africa, Latin America and the Caribbean, Asia (excluding Israel, Japan, and South Korea), and Oceania (excluding Australia and New Zealand).", 
                 style={"font-size": "12px", "color": "#a9a9a9", "margin-bottom": "10px"}),
