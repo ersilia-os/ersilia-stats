@@ -3,6 +3,8 @@ import numpy as np
 import json
 from ast import literal_eval
 
+GEMINI_API_KEY = sys.argv[1]
+
 # Reading all the specified CSV files into DataFrames
 blogposts_df = pd.read_csv('data/Blogposts.csv')
 community_df = pd.read_csv('data/Community.csv')
@@ -228,7 +230,7 @@ def calculate_blogposts_stats():
 
     load_dotenv()
 
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-1.5-flash")
 
     def generate_tags(input_string):
@@ -312,7 +314,7 @@ def calculate_events_stats():
 
     load_dotenv()
 
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+    genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-1.5-flash")
 
     def generate_tags(input_string):
