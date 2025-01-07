@@ -4547,8 +4547,8 @@
                                                                 {
                                                                     "customdata": [
                                                                         [
-                                                                            34.69387755102041,
-                                                                            17.0
+                                                                            32.6530612244898,
+                                                                            16.0
                                                                         ],
                                                                         [
                                                                             24.489795918367346,
@@ -4571,8 +4571,8 @@
                                                                             3.0
                                                                         ],
                                                                         [
-                                                                            4.081632653061225,
-                                                                            2.0
+                                                                            6.122448979591836,
+                                                                            3.0
                                                                         ]
                                                                     ],
                                                                     "domain": {
@@ -4592,8 +4592,8 @@
                                                                         "Funding & Partnerships",
                                                                         "Personal Reflections",
                                                                         "Open Science",
-                                                                        "Software Development & Tools",
-                                                                        "Global Health"
+                                                                        "Global Health",
+                                                                        "Software Development & Tools"
                                                                     ],
                                                                     "legendgroup": "",
                                                                     "marker": {
@@ -4610,13 +4610,13 @@
                                                                     "name": "",
                                                                     "showlegend": true,
                                                                     "values": [
-                                                                        17,
+                                                                        16,
                                                                         12,
                                                                         6,
                                                                         6,
                                                                         3,
                                                                         3,
-                                                                        2
+                                                                        3
                                                                     ],
                                                                     "type": "pie",
                                                                     "textinfo": "percent+label",

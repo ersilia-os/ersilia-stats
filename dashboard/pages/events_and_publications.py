@@ -331,7 +331,8 @@ events_by_country_map = px.choropleth(
     paper_bgcolor="#FAFAFA"
 )
 
-layout = html.Div([
+def events_publications_page():  
+    return html.Div([
     # Header Section
     html.Div([
         html.P("Events & Publications", 
@@ -423,3 +424,6 @@ layout = html.Div([
         ], style={"border": "1px solid #ddd", "border-radius": "10px", "padding": "20px", "backgroundColor": "#FAFAFA", "margin-bottom": "20px", "width": "58%", "display": "inline-block"})
     ], style={"display": "flex", "justify-content": "space-between"})
 ], style={"margin-left": "320px", "padding": "20px"})
+
+layout = events_publications_page()
+

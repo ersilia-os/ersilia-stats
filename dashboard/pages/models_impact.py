@@ -182,7 +182,8 @@ def preprocess_data(input_data):
 
     return model_list_data
 
-layout = html.Div([
+def models_impact_page():
+    return html.Div([
     dcc.Store(id="processed-data", data=preprocess_data(data["models-impact"]["model_list"])),
     dcc.Store(id="filtered-data"),
 
@@ -558,3 +559,5 @@ def update_map(filtered_data):
     )
 
     return fig
+
+layout = models_impact_page()

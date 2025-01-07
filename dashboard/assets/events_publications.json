@@ -2060,17 +2060,17 @@
                                             "customdata": [
                                                 [
                                                     14.285714285714285,
-                                                    "University of Reading <br>Ineos Oxford Institute<br>Trend In Africa<br>Software Sustainability Institute<br>Open Life Sciences <br><i>and others</i>...",
+                                                    "University of Reading <br>Software Sustainability Institute<br>Trend In Africa<br>Ineos Oxford Institute<br>Open Life Sciences <br><i>and others</i>...",
                                                     9
                                                 ],
                                                 [
                                                     34.92063492063492,
-                                                    "Fast Forward<br>National Institutes of Health<br>United Nations<br>Bill and Melinda Gates Foundation<br>NumFocus <br><i>and others</i>...",
+                                                    "Bill and Melinda Gates Foundation<br>National Institutes of Health<br>United Nations<br>NumFocus<br>Fast Forward <br><i>and others</i>...",
                                                     22
                                                 ],
                                                 [
                                                     11.11111111111111,
-                                                    "Institut de Recerca Biomedica de Barcelona<br>University of Barcelona<br>Konvent<br>Museu Darder<br>Barcelona Supercomputing Centre <br><i>and others</i>...",
+                                                    "University of Barcelona<br>Barcelona Supercomputing Centre<br>Institut de Recerca Biomedica de Barcelona<br>Konvent<br>Museu Darder <br><i>and others</i>...",
                                                     7
                                                 ],
                                                 [
@@ -2140,7 +2140,7 @@
                                             "customdata": [
                                                 [
                                                     15.873015873015872,
-                                                    "H3D Foundation<br>Jembi Health Systems<br>University of Pretoria<br>Holistic Drug Discovery and Development Center <br><i>and others</i>...",
+                                                    "University of Pretoria<br>H3D Foundation<br>Holistic Drug Discovery and Development Center<br>Jembi Health Systems <br><i>and others</i>...",
                                                     10
                                                 ],
                                                 [
@@ -4089,7 +4089,7 @@
                                     {
                                         "type": "P",
                                         "props": {
-                                            "children": "Timeline of Citations",
+                                            "children": "Citations For Publications By Year Of Release",
                                             "style": {
                                                 "font-size": "14px",
                                                 "font-weight": "bold",

@@ -229,7 +229,8 @@ blogposts_topics_fig.update_layout(
     plot_bgcolor="#FAFAFA",
 )
 
-layout = html.Div([
+def community_blog_page():
+    return html.Div([
     # Header Section
     html.Div([
         html.P("Community & Blog", 
@@ -414,3 +415,5 @@ layout = html.Div([
             "backgroundColor": "#FAFAFA", "width": "49%", "display": "inline-block"})
     ])
 ], style={"margin-left": "320px", "padding": "20px"})
+
+layout = community_blog_page()
