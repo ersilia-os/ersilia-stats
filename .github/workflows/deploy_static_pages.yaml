@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - mvp2.1.1-hosting
+      - mvp2.1
 
 jobs:
   prepare-pages:
