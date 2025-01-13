@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-07 11:46:13 GMT_
+_Last updated: 2025-01-13 09:07:15 GMT_
 
 ## 🧬 Models' Impact
 
@@ -19,71 +19,71 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 | Similarity | 16 |
 | Embedding | 16 |
 | Compound generation | 14 |
-| Permeability | 13 |
-| Metabolism | 13 |
 | Fingerprint | 13 |
+| Metabolism | 13 |
+| Permeability | 13 |
 | MoleculeNet | 12 |
 | Chemical language model | 11 |
 | Antimicrobial activity | 11 |
 | ChEMBL | 10 |
-| Chemical synthesis | 7 |
-| Untagged | 7 |
 | Chemical notation | 7 |
+| Chemical synthesis | 7 |
 | Solubility | 7 |
 | IC50 | 7 |
-| Dummy | 6 |
-| Cardiotoxicity | 6 |
-| Human | 6 |
+| Untagged | 7 |
 | P.falciparum | 6 |
 | Malaria | 6 |
+| Cardiotoxicity | 6 |
+| Human | 6 |
 | M.tuberculosis | 6 |
-| Synthetic accessibility | 5 |
-| Natural product | 5 |
-| hERG | 5 |
-| LogP | 5 |
+| Dummy | 6 |
 | CYP450 | 5 |
-| Drug-likeness | 5 |
 | Antiviral activity | 5 |
+| Natural product | 5 |
+| LogP | 5 |
+| Synthetic accessibility | 5 |
+| Drug-likeness | 5 |
+| hERG | 5 |
 | Bioactivity profile | 4 |
-| Lipophilicity | 4 |
-| Half-life | 4 |
-| COVID19 | 4 |
 | Tuberculosis | 4 |
-| Quantum properties | 3 |
+| Lipophilicity | 4 |
+| COVID19 | 4 |
+| Half-life | 4 |
 | Sars-CoV-2 | 3 |
+| Quantum properties | 3 |
 | Microsomal stability | 3 |
-| pKa | 2 |
-| BACE | 2 |
-| LogS | 2 |
-| Target identification | 2 |
-| Papp | 2 |
-| Cytotoxicity | 2 |
-| Side effects | 2 |
-| Alzheimer | 2 |
-| DrugBank | 2 |
-| Fraction bound | 2 |
 | Tox21 | 2 |
-| HIV | 2 |
+| Side effects | 2 |
+| pKa | 2 |
+| DrugBank | 2 |
+| LogS | 2 |
+| BACE | 2 |
 | Cancer | 2 |
-| N.gonorrhoeae | 1 |
-| A.baumannii | 1 |
-| Rat | 1 |
-| HDAC1 | 1 |
-| ESKAPE | 1 |
+| HIV | 2 |
+| Alzheimer | 2 |
+| Fraction bound | 2 |
+| Target identification | 2 |
+| Cytotoxicity | 2 |
+| Papp | 2 |
 | HBV | 1 |
-| MIC90 | 1 |
-| GPCR | 1 |
-| Therapeutic indication | 1 |
-| ToxCast | 1 |
-| Price | 1 |
-| E.coli | 1 |
-| Schistosomiasis | 1 |
-| Neglected tropical disease | 1 |
 | Mycetoma | 1 |
-| LogD | 1 |
+| E.coli | 1 |
+| ToxCast | 1 |
 | Antifungal activity | 1 |
+| Price | 1 |
 | ZINC | 1 |
 | Molecular weight | 1 |
+| LogD | 1 |
+| Schistosomiasis | 1 |
+| Therapeutic indication | 1 |
+| Neglected tropical disease | 1 |
+| MIC90 | 1 |
+| GPCR | 1 |
+| ESKAPE | 1 |
+| HDAC1 | 1 |
+| Rat | 1 |
+| A.baumannii | 1 |
+| N.gonorrhoeae | 1 |
 | Biomedical text | 1 |
 
 
@@ -109,21 +109,21 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 ## 🌍 Community & Blog
 
 - **Countries Represented:** 17
-- **Total Contributors:** 92
+- **Total Contributors:** 94
 
 <details>
 <summary>Role Distribution</summary>
 
 | Role | Count |
 | --- | --- |
-| Volunteer | 47 |
+| Volunteer | 49 |
 | Intern | 28 |
 | Trustee | 5 |
-| OS Maintainer | 4 |
 | Mentor | 4 |
 | MSc Student | 4 |
+| OS Maintainer | 3 |
+| Employee | 3 |
 | Advisor | 2 |
-| Employee | 2 |
 | BSc Student | 2 |
 | Visiting Researcher | 1 |
 
@@ -135,7 +135,7 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 
 | Duration | Count |
 | --- | --- |
-| < 3 Months | 64 |
+| < 3 Months | 66 |
 | 3-6 Months | 14 |
 | > 1 Year | 11 |
 | 6-12 Months | 2 |
@@ -148,7 +148,7 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 
 | Country | Contributors |
 | --- | --- |
-| United States | 48 |
+| United States | 50 |
 | Nigeria | 10 |
 | Spain | 9 |
 | India | 7 |
@@ -217,7 +217,7 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 
 ## 🏢 Organizations in Ersilia's Network
 
-- **Total Organizations:** 209
+- **Total Organizations:** 210
 
 <details>
 <summary>Organization Types</summary>
@@ -226,7 +226,7 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 | --- | --- |
 | Academia | 61 |
 | Foundation | 49 |
-| Nonprofit | 33 |
+| Nonprofit | 34 |
 | Corporate | 31 |
 | Pharma | 14 |
 | Government | 11 |
@@ -245,9 +245,9 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 | Spain | 23 |
 | South Africa | 9 |
 | Switzerland | 8 |
+| Germany | 5 |
 | Cameroon | 5 |
 | Belgium | 5 |
-| Germany | 4 |
 | Brazil | 3 |
 | Ghana | 3 |
 | Kenya | 2 |
@@ -328,7 +328,7 @@ _Last updated: 2025-01-07 11:46:13 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,074,039 | 7,079,129 |
+| Covid | 777,125,657 | 7,079,912 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
