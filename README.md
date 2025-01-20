@@ -1,11 +1,11 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-13 09:07:15 GMT_
+_Last updated: 2025-01-20 09:08:06 GMT_
 
 ## 🧬 Models' Impact
 
 - **Total Models:** 180
-- **Percentage Ready to Use:** 84.44%
+- **Percentage Ready to Use:** 86.67%
 
 <details>
 <summary>Model Categorization</summary>
@@ -97,8 +97,8 @@ _Last updated: 2025-01-13 09:07:15 GMT_
 | Knowledge-guided pre-trained graph transformer | miquelduranfrigola | 2024-12-17 | In progress |
 | Antimicrobial class specificity prediction | miquelduranfrigola | 2024-12-17 | Ready |
 | MolE molecular embeddings | miquelduranfrigola | 2024-11-18 | In progress |
-| Projections against Coconut | miquelduranfrigola | 2024-11-10 | In progress |
-| Chemical space 2D projections against DrugBank | miquelduranfrigola | 2024-11-09 | In progress |
+| Projections against Coconut | miquelduranfrigola | 2024-11-10 | Ready |
+| Chemical space 2D projections against DrugBank | miquelduranfrigola | 2024-11-09 | Ready |
 
 
 </details>
@@ -179,12 +179,12 @@ _Last updated: 2025-01-13 09:07:15 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 14 | 30.43% |
-| Ersilia Open Source Initiative | 12 | 26.09% |
-| Funding & Partnerships | 6 | 13.04% |
-| Personal Reflections | 6 | 13.04% |
+| AI/ML in Drug Discovery | 15 | 32.61% |
+| Ersilia Open Source Initiative | 13 | 28.26% |
+| Funding & Partnerships | 5 | 10.87% |
+| Personal Reflections | 5 | 10.87% |
 | Open Science | 3 | 6.52% |
-| Software Development & Tools | 3 | 6.52% |
+| Software Development & Infrastructure | 3 | 6.52% |
 | Global Health | 2 | 4.35% |
 
 
@@ -328,7 +328,7 @@ _Last updated: 2025-01-13 09:07:15 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,125,657 | 7,079,912 |
+| Covid | 777,309,629 | 7,083,233 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
