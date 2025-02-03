@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-01-27 09:07:38 GMT_
+_Last updated: 2025-02-03 09:07:18 GMT_
 
 ## 🧬 Models' Impact
 
@@ -181,11 +181,11 @@ _Last updated: 2025-01-27 09:07:38 GMT_
 | --- | --- | --- |
 | AI/ML in Drug Discovery | 14 | 30.43% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
-| Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
+| Funding & Partnerships | 5 | 10.87% |
 | Open Science | 3 | 6.52% |
-| Software Development & Tools | 3 | 6.52% |
-| Global Health | 2 | 4.35% |
+| Global Health | 3 | 6.52% |
+| Software Development & Infrastructure | 3 | 6.52% |
 
 
 </details>
@@ -273,7 +273,7 @@ _Last updated: 2025-01-27 09:07:38 GMT_
 
 ## 🏅 Author Highlights
 
-- **Total Authors:** 222
+- **Total Authors:** 223
 - **Top Author:** Patrick Aloy (H-index: 54)
 
 <details>
