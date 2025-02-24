@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-02-17 09:07:52 GMT_
+_Last updated: 2025-02-24 09:09:07 GMT_
 
 ## 🧬 Models' Impact
 
@@ -179,13 +179,13 @@ _Last updated: 2025-02-17 09:07:52 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 14 | 30.43% |
+| AI/ML in Drug Discovery | 13 | 28.26% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
 | Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
 | Open Science | 3 | 6.52% |
+| Global Health | 3 | 6.52% |
 | Software Development & Tools | 3 | 6.52% |
-| Global Health | 2 | 4.35% |
 
 
 </details>
@@ -273,15 +273,15 @@ _Last updated: 2025-02-17 09:07:52 GMT_
 
 ## 🏅 Author Highlights
 
-- **Total Authors:** 223
-- **Top Author:** Patrick Aloy (H-index: 54)
+- **Total Authors:** 228
+- **Top Author:** Patrick Aloy (H-index: 55)
 
 <details>
 <summary>Top Authors</summary>
 
 | Name | Ersilia Pubs | H-index | Total Pubs |
 | --- | --- | --- | --- |
-| Patrick Aloy | 2 | 54.0 | 17 |
+| Patrick Aloy | 2 | 55.0 | 17 |
 | Kelly Chibale | 2 | 39.0 | 2 |
 | Izukanji Sikazwe | 2 | 25.0 | 2 |
 
@@ -328,7 +328,7 @@ _Last updated: 2025-02-17 09:07:52 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,368,165 | 7,087,718 |
+| Covid | 777,384,606 | 7,088,744 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
