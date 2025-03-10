@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-03-03 09:08:37 GMT_
+_Last updated: 2025-03-10 09:07:06 GMT_
 
 ## 🧬 Models' Impact
 
@@ -109,7 +109,7 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 ## 🌍 Community & Blog
 
 - **Countries Represented:** 17
-- **Total Contributors:** 94
+- **Total Contributors:** 95
 
 <details>
 <summary>Role Distribution</summary>
@@ -119,12 +119,13 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | Volunteer | 49 |
 | Intern | 28 |
 | Trustee | 5 |
-| Mentor | 4 |
 | MSc Student | 4 |
+| Mentor | 4 |
 | OS Maintainer | 3 |
 | Employee | 3 |
-| Advisor | 2 |
 | BSc Student | 2 |
+| Advisor | 2 |
+| Researcher | 1 |
 | Visiting Researcher | 1 |
 
 
@@ -150,7 +151,7 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | --- | --- |
 | United States | 50 |
 | Nigeria | 10 |
-| Spain | 9 |
+| Spain | 10 |
 | India | 7 |
 | Australia | 3 |
 | Colombia | 2 |
@@ -179,12 +180,12 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 15 | 32.61% |
+| AI/ML in Drug Discovery | 14 | 30.43% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
+| Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
-| Funding & Partnerships | 5 | 10.87% |
 | Open Science | 3 | 6.52% |
-| Software Development & Infrastructure | 3 | 6.52% |
+| Software Development & Tools | 3 | 6.52% |
 | Global Health | 2 | 4.35% |
 
 
@@ -217,7 +218,7 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 
 ## 🏢 Organizations in Ersilia's Network
 
-- **Total Organizations:** 211
+- **Total Organizations:** 214
 
 <details>
 <summary>Organization Types</summary>
@@ -227,9 +228,9 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | Academia | 62 |
 | Foundation | 49 |
 | Nonprofit | 34 |
-| Corporate | 31 |
-| Pharma | 14 |
-| Government | 11 |
+| Corporate | 32 |
+| Pharma | 15 |
+| Government | 12 |
 | Accelerator | 8 |
 
 
@@ -241,8 +242,8 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | Country | Total Organizations |
 | --- | --- |
 | United States | 102 |
+| Spain | 26 |
 | United Kingdom | 25 |
-| Spain | 24 |
 | South Africa | 9 |
 | Switzerland | 8 |
 | Germany | 5 |
@@ -252,6 +253,7 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | Ghana | 3 |
 | Kenya | 2 |
 | Zambia | 2 |
+| France | 2 |
 | Guinea | 2 |
 | Mexico | 1 |
 | Austria | 1 |
@@ -259,7 +261,6 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | United Arab Emirates | 1 |
 | Netherlands | 1 |
 | Gambia | 1 |
-| France | 1 |
 | Japan | 1 |
 | Italy | 1 |
 | Zimbabwe | 1 |
@@ -328,7 +329,6 @@ _Last updated: 2025-03-03 09:08:37 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,504,038 | 7,089,966 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
