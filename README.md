@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-03-10 09:07:06 GMT_
+_Last updated: 2025-03-17 09:07:27 GMT_
 
 ## 🧬 Models' Impact
 
@@ -109,7 +109,7 @@ _Last updated: 2025-03-10 09:07:06 GMT_
 ## 🌍 Community & Blog
 
 - **Countries Represented:** 17
-- **Total Contributors:** 95
+- **Total Contributors:** 96
 
 <details>
 <summary>Role Distribution</summary>
@@ -122,9 +122,9 @@ _Last updated: 2025-03-10 09:07:06 GMT_
 | MSc Student | 4 |
 | Mentor | 4 |
 | OS Maintainer | 3 |
+| Advisor | 3 |
 | Employee | 3 |
 | BSc Student | 2 |
-| Advisor | 2 |
 | Researcher | 1 |
 | Visiting Researcher | 1 |
 
@@ -137,7 +137,7 @@ _Last updated: 2025-03-10 09:07:06 GMT_
 | Duration | Count |
 | --- | --- |
 | < 3 Months | 66 |
-| 3-6 Months | 14 |
+| 3-6 Months | 15 |
 | > 1 Year | 11 |
 | 6-12 Months | 2 |
 
@@ -156,10 +156,10 @@ _Last updated: 2025-03-10 09:07:06 GMT_
 | Australia | 3 |
 | Colombia | 2 |
 | Pakistan | 2 |
+| South Africa | 2 |
 | Poland | 2 |
 | Kenya | 1 |
 | Uganda | 1 |
-| South Africa | 1 |
 | United Kingdom | 1 |
 | Cameroon | 1 |
 | Italy | 1 |
@@ -180,13 +180,13 @@ _Last updated: 2025-03-10 09:07:06 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 14 | 30.43% |
+| AI/ML in Drug Discovery | 13 | 28.26% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
 | Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
 | Open Science | 3 | 6.52% |
+| Global Health | 3 | 6.52% |
 | Software Development & Tools | 3 | 6.52% |
-| Global Health | 2 | 4.35% |
 
 
 </details>
@@ -275,14 +275,14 @@ _Last updated: 2025-03-10 09:07:06 GMT_
 ## 🏅 Author Highlights
 
 - **Total Authors:** 228
-- **Top Author:** Patrick Aloy (H-index: 55)
+- **Top Author:** Patrick Aloy (H-index: 56)
 
 <details>
 <summary>Top Authors</summary>
 
 | Name | Ersilia Pubs | H-index | Total Pubs |
 | --- | --- | --- | --- |
-| Patrick Aloy | 2 | 55.0 | 17 |
+| Patrick Aloy | 2 | 56.0 | 17 |
 | Kelly Chibale | 2 | 39.0 | 2 |
 | Izukanji Sikazwe | 2 | 25.0 | 2 |
 
