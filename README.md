@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-03-24 09:07:30 GMT_
+_Last updated: 2025-03-31 09:07:36 GMT_
 
 ## 🧬 Models' Impact
 
@@ -329,7 +329,7 @@ _Last updated: 2025-03-24 09:07:30 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,593,567 | 7,089,976 |
+| Covid | 777,575,336 | 7,090,940 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
