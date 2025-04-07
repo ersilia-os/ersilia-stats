@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-03-31 09:07:36 GMT_
+_Last updated: 2025-04-07 09:07:51 GMT_
 
 ## 🧬 Models' Impact
 
@@ -136,10 +136,10 @@ _Last updated: 2025-03-31 09:07:36 GMT_
 
 | Duration | Count |
 | --- | --- |
-| < 3 Months | 66 |
+| < 3 Months | 67 |
 | 3-6 Months | 15 |
 | > 1 Year | 11 |
-| 6-12 Months | 2 |
+| 6-12 Months | 1 |
 
 
 </details>
@@ -149,10 +149,10 @@ _Last updated: 2025-03-31 09:07:36 GMT_
 
 | Country | Contributors |
 | --- | --- |
-| United States | 50 |
+| United States | 51 |
 | Nigeria | 10 |
 | Spain | 10 |
-| India | 7 |
+| India | 6 |
 | Australia | 3 |
 | Colombia | 2 |
 | Pakistan | 2 |
@@ -180,13 +180,13 @@ _Last updated: 2025-03-31 09:07:36 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 13 | 28.26% |
+| AI/ML in Drug Discovery | 14 | 30.43% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
-| Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
+| Funding & Partnerships | 5 | 10.87% |
 | Open Science | 3 | 6.52% |
 | Global Health | 3 | 6.52% |
-| Software Development & Tools | 3 | 6.52% |
+| Software Development & Infrastructure | 3 | 6.52% |
 
 
 </details>
@@ -329,7 +329,7 @@ _Last updated: 2025-03-31 09:07:36 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,575,336 | 7,090,940 |
+| Covid | 777,595,278 | 7,091,872 |
 | Malaria | 5,803,879,735 | 15,317,311 |
 | Tb | 253,467,432 | 44,118,898 |
 | Measles | 47,347,773 | 0 |
