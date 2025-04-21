@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-04-14 09:08:06 GMT_
+_Last updated: 2025-04-21 09:09:07 GMT_
 
 ## 🧬 Models' Impact
 
@@ -180,13 +180,13 @@ _Last updated: 2025-04-14 09:08:06 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 14 | 30.43% |
+| AI/ML in Drug Discovery | 13 | 28.26% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
+| Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
-| Funding & Partnerships | 5 | 10.87% |
 | Open Science | 3 | 6.52% |
 | Global Health | 3 | 6.52% |
-| Software Development & Infrastructure | 3 | 6.52% |
+| Software Development & Tools | 3 | 6.52% |
 
 
 </details>
@@ -283,7 +283,7 @@ _Last updated: 2025-04-14 09:08:06 GMT_
 | Name | Ersilia Pubs | H-index | Total Pubs |
 | --- | --- | --- | --- |
 | Patrick Aloy | 2 | 56.0 | 17 |
-| Kelly Chibale | 2 | 39.0 | 2 |
+| Kelly Chibale | 2 | 40.0 | 2 |
 | Izukanji Sikazwe | 2 | 25.0 | 2 |
 
 
