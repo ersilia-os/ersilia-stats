@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-06-02 09:43:22 GMT_
+_Last updated: 2025-06-09 09:09:12 GMT_
 
 ## 🧬 Models' Impact
 
@@ -109,23 +109,22 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 ## 🌍 Community & Blog
 
 - **Countries Represented:** 17
-- **Total Contributors:** 96
+- **Total Contributors:** 98
 
 <details>
 <summary>Role Distribution</summary>
 
 | Role | Count |
 | --- | --- |
-| Volunteer | 49 |
-| Intern | 28 |
+| Volunteer | 50 |
+| Intern | 29 |
 | Trustee | 5 |
-| MSc Student | 4 |
 | Mentor | 4 |
-| OS Maintainer | 3 |
+| MSc Student | 4 |
+| Employee | 4 |
 | Advisor | 3 |
-| Employee | 3 |
+| OS Maintainer | 3 |
 | BSc Student | 2 |
-| Researcher | 1 |
 | Visiting Researcher | 1 |
 
 
@@ -137,7 +136,7 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 | Duration | Count |
 | --- | --- |
 | < 3 Months | 68 |
-| 3-6 Months | 15 |
+| 3-6 Months | 16 |
 | > 1 Year | 11 |
 | 6-12 Months | 1 |
 
@@ -150,9 +149,9 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 | Country | Contributors |
 | --- | --- |
 | United States | 51 |
+| Spain | 11 |
 | Nigeria | 10 |
-| Spain | 10 |
-| India | 6 |
+| India | 7 |
 | Australia | 3 |
 | Colombia | 2 |
 | Pakistan | 2 |
@@ -182,11 +181,11 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 | --- | --- | --- |
 | AI/ML in Drug Discovery | 14 | 30.43% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
+| Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
-| Funding & Partnerships | 5 | 10.87% |
 | Open Science | 3 | 6.52% |
-| Global Health | 3 | 6.52% |
-| Software Development & Infrastructure | 3 | 6.52% |
+| Software Development & Tools | 3 | 6.52% |
+| Global Health | 2 | 4.35% |
 
 
 </details>
@@ -218,7 +217,7 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 
 ## 🏢 Organizations in Ersilia's Network
 
-- **Total Organizations:** 215
+- **Total Organizations:** 217
 
 <details>
 <summary>Organization Types</summary>
@@ -226,7 +225,7 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 | Type | Count |
 | --- | --- |
 | Academia | 62 |
-| Foundation | 49 |
+| Foundation | 50 |
 | Nonprofit | 34 |
 | Corporate | 33 |
 | Pharma | 15 |
@@ -244,8 +243,8 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 | United States | 103 |
 | Spain | 26 |
 | United Kingdom | 25 |
+| Switzerland | 9 |
 | South Africa | 9 |
-| Switzerland | 8 |
 | Germany | 5 |
 | Cameroon | 5 |
 | Belgium | 5 |
@@ -330,9 +329,9 @@ _Last updated: 2025-06-02 09:43:22 GMT_
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
 | Covid | 777,735,939 | 7,095,055 |
-| Malaria | 5,803,879,735 | 15,317,311 |
+| Malaria | 5,803,879,735 | 16,350,291 |
 | Tb | 253,467,432 | 44,118,898 |
-| Measles | 47,347,773 | 0 |
+| Measles | 48,011,837 | 0 |
 | Polio | 541,429 | 0 |
 
 
