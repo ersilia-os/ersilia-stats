@@ -1,6 +1,6 @@
 # 📊 Ersilia Statistics Report
 
-_Last updated: 2025-06-09 09:09:12 GMT_
+_Last updated: 2025-06-16 09:09:47 GMT_
 
 ## 🧬 Models' Impact
 
@@ -109,14 +109,14 @@ _Last updated: 2025-06-09 09:09:12 GMT_
 ## 🌍 Community & Blog
 
 - **Countries Represented:** 17
-- **Total Contributors:** 98
+- **Total Contributors:** 99
 
 <details>
 <summary>Role Distribution</summary>
 
 | Role | Count |
 | --- | --- |
-| Volunteer | 50 |
+| Volunteer | 51 |
 | Intern | 29 |
 | Trustee | 5 |
 | Mentor | 4 |
@@ -135,7 +135,7 @@ _Last updated: 2025-06-09 09:09:12 GMT_
 
 | Duration | Count |
 | --- | --- |
-| < 3 Months | 68 |
+| < 3 Months | 69 |
 | 3-6 Months | 16 |
 | > 1 Year | 11 |
 | 6-12 Months | 1 |
@@ -148,7 +148,7 @@ _Last updated: 2025-06-09 09:09:12 GMT_
 
 | Country | Contributors |
 | --- | --- |
-| United States | 51 |
+| United States | 52 |
 | Spain | 11 |
 | Nigeria | 10 |
 | India | 7 |
@@ -179,13 +179,13 @@ _Last updated: 2025-06-09 09:09:12 GMT_
 
 | Topic | Count | Percentage |
 | --- | --- | --- |
-| AI/ML in Drug Discovery | 14 | 30.43% |
+| AI/ML in Drug Discovery | 13 | 28.26% |
 | Ersilia Open Source Initiative | 12 | 26.09% |
 | Funding & Partnerships | 6 | 13.04% |
 | Personal Reflections | 6 | 13.04% |
 | Open Science | 3 | 6.52% |
+| Global Health | 3 | 6.52% |
 | Software Development & Tools | 3 | 6.52% |
-| Global Health | 2 | 4.35% |
 
 
 </details>
@@ -283,7 +283,7 @@ _Last updated: 2025-06-09 09:09:12 GMT_
 | --- | --- | --- | --- |
 | Patrick Aloy | 2 | 56.0 | 17 |
 | Kelly Chibale | 2 | 40.0 | 2 |
-| Izukanji Sikazwe | 2 | 25.0 | 2 |
+| Izukanji Sikazwe | 2 | 26.0 | 2 |
 
 
 </details>
@@ -328,9 +328,9 @@ _Last updated: 2025-06-09 09:09:12 GMT_
 | Disease | Estimated Total Cases | Estimated Total Deaths |
 | --- | --- | --- |
 | Hivaids | 39,210,870 | 27,580,837 |
-| Covid | 777,735,939 | 7,095,055 |
+| Covid | 777,861,023 | 7,095,802 |
 | Malaria | 5,803,879,735 | 16,350,291 |
-| Tb | 253,467,432 | 44,118,898 |
+| Tb | 266,223,221 | 45,710,244 |
 | Measles | 48,011,837 | 0 |
 | Polio | 541,429 | 0 |
 
