@@ -1,0 +1,7 @@
+# The site pipeline only. Two dependencies:
+#   pandas     — aggregation in scripts/site_data/
+#   pyairtable — the read-only snapshot fetch
+# The published site itself has no Python at run time: it is static files plus a
+# vendored copy of ECharts.
+pandas==2.2.3
+pyairtable==3.0.1

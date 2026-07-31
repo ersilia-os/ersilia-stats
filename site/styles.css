@@ -1,0 +1,269 @@
+/* ===========================================================================
+   Ersilia in numbers — site layer.
+
+   Cascades AFTER assets/ersilia.css (the canonical house style, which owns the
+   brand tokens, type scale and component library: .card, .stat, .pill, .badge,
+   table.data, .hovertip, .modal, .wip, .credit, .brandhead, .eyebrow).
+   Nothing here redefines a brand token; this file adds only what a routed
+   analytics dashboard needs on top: chart mark colours, the 12-column grid, the
+   panel/lead hierarchy, the nav, and print.
+
+   Single light theme by house rule — there is deliberately no dark palette.
+   =========================================================================== */
+
+:root {
+  /* --- Chart mark colours --------------------------------------------------
+     Derived from the brand data hues in ersilia.css by the `dataviz` snap-to-
+     passing procedure: hue angle held, OKLCH lightness and chroma moved into the
+     legible band, then the slot ORDER chosen to maximise the minimum adjacent
+     colour-vision-deficiency separation. Validated with
+     dataviz/scripts/validate_palette.js against a #FFFFFF card surface:
+
+       adjacent CVD ΔE 15.8 (target >= 8) · normal-vision ΔE 31.0 (floor 15)
+
+     The order is the safety mechanism — never reorder, never cycle past slot 6.
+     --chart-4 (amber) and --chart-6 (lime) sit below 3:1 on white; every chart
+     using them ships direct value labels and a drill-down table, which is the
+     documented relief.
+
+     All-pairs forms (scatter, bubble, choropleth, heatmap, small multiples) can
+     carry at most TWO of these hues, so those charts use one hue or a ramp.
+
+     KNOWN, ACCEPTED CHECKER FINDING: html-formatting's check_html.py reports
+     T1-COLOR-OFFBRAND for the 11 values below, because they are not literal
+     ersilia.css palette entries. They cannot be — the raw brand hues fail the
+     chart-legibility gates (amber sits at OKLCH L 0.84, outside the 0.43–0.77
+     band; cobalt at chroma 0.078, under the 0.10 floor where a hue stops reading
+     as a hue), and color-mix() cannot lift a chroma floor or produce a
+     CVD-validated slot order. These are the brand hues with their hue angles
+     held and their lightness/chroma snapped into the legible band. Do not
+     "fix" this finding by substituting the unvalidated brand hexes: that trades
+     a cosmetic pass for charts colour-blind readers cannot read. Every other
+     colour on the site is a token.  */
+  --chart-1: #6d5de7;  /* periwinkle — brand, always slot 1 */
+  --chart-2: #e63745;  /* crimson   */
+  --chart-3: #247dad;  /* cobalt    */
+  --chart-4: #e2a72e;  /* amber     */
+  --chart-5: #af5cc7;  /* orchid    */
+  --chart-6: #6cbf5a;  /* lime      */
+
+  /* Sequential ramp for magnitude (choropleth, heatmaps, ordinal buckets):
+     one hue, monotone lightness, light end >= 2:1 on white. Validated with
+     --ordinal. */
+  --seq-1: #b2b4d7;
+  --seq-2: #9495d1;
+  --seq-3: #7876ca;
+  --seq-4: #5f55c2;
+  --seq-5: #492eb8;
+
+  /* Neutral for "no data" regions and non-encoding marks — derived from the
+     house neutrals rather than picked, and resolved to rgb() at runtime by
+     js/tokens.js so ECharts can parse them. */
+  --chart-null: color-mix(in srgb, var(--border) 62%, var(--surface));
+  --chart-axis: color-mix(in srgb, var(--border) 78%, var(--surface));
+
+  --maxw: 1160px;
+}
+
+/* ---------- Shell ------------------------------------------------------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.bar {
+  max-width: var(--maxw); margin: 0 auto; padding: 9px 24px 0;
+  display: flex; align-items: center; gap: 12px;
+}
+.bar .brandhead { flex: 0 0 auto; gap: 1px; }
+.bar .brandhead:hover { text-decoration: none; }
+.bar .eyebrow { font-size: 10.5px; }
+/* The site wordmark is the page's single <h1>; it lives in the bar, so it needs
+   the heading margin removed rather than a second heading elsewhere. */
+.bar .wordmark { font-size: 16px; margin: 0; }
+.bar-spacer { flex: 1 1 auto; }
+.snapshot { flex: 0 0 auto; }
+
+.nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+/* Vertical padding gives the active pill room inside the scroll box. */
+.nav ul {
+  display: flex; gap: 2px; list-style: none; margin: 0;
+  padding: 6px 0 7px; overflow-x: auto; scrollbar-width: none;
+}
+.nav ul::-webkit-scrollbar { display: none; }
+.nav a {
+  display: block; color: var(--muted); font-size: 12px; font-weight: 540;
+  padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+  transition: background var(--tap), color var(--tap);
+}
+.nav a:hover { color: var(--brand); background: color-mix(in srgb, var(--brand) 9%, var(--surface)); text-decoration: none; }
+.nav a[aria-current="page"] {
+  color: var(--brand); background: color-mix(in srgb, var(--brand) 13%, var(--surface));
+}
+
+main { max-width: var(--maxw); margin: 0 auto; padding: 26px 24px 8px; }
+footer.credit { max-width: var(--maxw); margin: 0 auto; padding: 14px 24px 40px; }
+
+/* ---------- View header ------------------------------------------------- */
+.viewhead { margin: 0 0 20px; }
+.viewhead h2 {
+  font-size: 21px; font-weight: 700; letter-spacing: -.015em; margin: 0 0 5px;
+}
+.viewhead p { margin: 0; color: var(--muted); max-width: 68ch; }
+.lede { margin: 6px 0 0; color: var(--muted); max-width: 70ch; font-size: 13.5px; }
+
+/* ---------- Stat tiles -------------------------------------------------- */
+.stat-row {
+  display: grid; gap: 12px; margin: 0 0 22px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.stat-row.primary { grid-template-columns: repeat(4, 1fr); gap: 13px; }
+.stat { position: relative; overflow: hidden; }
+.stat.hero { padding: 16px 18px 14px; }
+.stat.hero .v { font-size: 34px; line-height: 1.05; }
+.stat.hero .k { font-size: 11.5px; }
+.stat.small .v { font-size: 21px; }
+.stat .spark { display: block; width: 100%; height: 26px; margin-top: 8px; }
+.stat .d { display: flex; align-items: baseline; gap: 5px; }
+.stat .delta { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; }
+.stat .delta.up { color: var(--good); }
+.stat .delta.flat { color: var(--faint); }
+
+/* ---------- 12-column chart grid ---------------------------------------- */
+/* align-items:start keeps each card at its natural height. Stretching them to
+   match the tallest card in the row left a short card (a single share bar next to
+   a full bar chart) with a large empty area inside its own border. */
+.chart-grid {
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px;
+  align-items: start;
+}
+.span-4 { grid-column: span 4; }
+.span-6 { grid-column: span 6; }
+.span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+@media (max-width: 1000px) {
+  .span-4, .span-6, .span-8 { grid-column: span 6; }
+  .stat-row.primary { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 680px) {
+  .span-4, .span-6, .span-8, .span-12 { grid-column: span 12; }
+  .bar { flex-wrap: wrap; gap: 6px 10px; padding-left: 16px; padding-right: 16px; }
+  .nav-inner { padding: 0 16px; }
+  main { padding-left: 16px; padding-right: 16px; }
+}
+
+/* ---------- Chart panels ----------------------------------------------- */
+.card { display: flex; flex-direction: column; padding: 14px 16px 12px; }
+.card.lead { padding: 17px 20px 14px; }
+.phead { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 2px; }
+.phead h3 { margin: 0; flex: 1; font-size: 12.5px; font-weight: 600; letter-spacing: 0; }
+.card.lead .phead h3 { font-size: 14px; }
+.pmeta { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; padding-top: 1px; }
+.pcount { font-family: var(--mono); font-size: 10.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+
+/* The computed takeaway. Reads as the chart's caption, not as chrome. */
+.insight {
+  margin: 0 0 9px; font-size: 11.5px; line-height: 1.45; color: var(--muted);
+  max-width: 76ch;
+}
+.card.lead .insight { font-size: 12.5px; }
+
+.chart { width: 100%; min-height: 0; }
+/* A single split bar needs no more room than the bar plus its legend. */
+.chart.h-xs { height: 128px; }
+.chart.h-sm { height: 210px; }
+.chart.h-md { height: 268px; }
+.chart.h-lg { height: 330px; }
+.chart.h-xl { height: 420px; }
+.chart.h-map { height: 460px; }
+/* A Gantt needs a row per project, so its height scales with the row count. */
+.chart.h-tall { height: 600px; }
+
+/* Methodology marker — tier 2 of progressive disclosure. */
+.info {
+  flex: 0 0 auto; width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--faint); font: 600 10px/13px var(--sans); text-align: center;
+  cursor: help; padding: 0;
+}
+.info:hover { color: var(--brand); border-color: var(--brand); }
+.hovertip[data-tip]::after { left: auto; right: 0; }
+
+/* Metric toggles. */
+.toggle { display: flex; gap: 3px; }
+.toggle button { padding: 2px 9px; font-size: 11px; border-radius: 999px; }
+.toggle button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--brand) 14%, var(--surface));
+  border-color: var(--brand); color: var(--brand);
+}
+
+/* ---------- Drill-down table (tier 2 disclosure + contrast relief) ------ */
+details.drill { margin-top: 8px; border-top: 1px solid var(--surface-2); }
+details.drill > summary {
+  cursor: pointer; list-style: none; padding: 7px 0 0;
+  font-size: 11px; font-weight: 540; color: var(--muted);
+  display: flex; align-items: center; gap: 5px;
+}
+details.drill > summary::-webkit-details-marker { display: none; }
+details.drill > summary::before { content: "▸"; color: var(--brand); font-size: 9px; }
+details[open].drill > summary::before { content: "▾"; }
+details.drill > summary:hover { color: var(--brand); }
+details.drill > summary:focus-visible { outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px; }
+.drill .scrollwrap { max-height: 260px; margin-top: 6px; }
+.drill .dl { font-size: 11px; margin-top: 7px; display: inline-block; }
+
+/* ---------- Landing: section cards ------------------------------------- */
+.jump-grid { display: grid; gap: 13px; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); }
+a.jump {
+  display: flex; flex-direction: column; gap: 3px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+  box-shadow: var(--shadow-sm); color: var(--ink);
+  transition: border-color var(--tap), box-shadow var(--tap), transform var(--tap);
+}
+a.jump:hover {
+  text-decoration: none; border-color: color-mix(in srgb, var(--brand) 45%, var(--border));
+  box-shadow: var(--shadow); transform: translateY(-1px);
+}
+a.jump .t { font-size: 13px; font-weight: 600; display: flex; align-items: baseline; gap: 7px; }
+a.jump .n { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--brand); font-weight: 600; }
+a.jump .s { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+
+/* ---------- Downloads -------------------------------------------------- */
+.dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px 26px; }
+.dl-group h4 { margin: 0 0 8px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.dl-links { display: flex; flex-direction: column; gap: 6px; }
+a.dl { display: inline-flex; align-items: baseline; gap: 6px; font-size: 12px; color: var(--muted); }
+a.dl::before { content: "↓"; color: var(--brand); font-weight: 700; }
+a.dl:hover { color: var(--ink); text-decoration: none; }
+
+/* ---------- Methods modal --------------------------------------------- */
+.modal h3 { margin: 18px 0 6px; }
+.modal .mrow { font-size: 12px; color: var(--muted); }
+.modal .mrow b { color: var(--ink); font-weight: 600; }
+.modal .close { position: absolute; top: 14px; right: 16px; }
+.methods-btn { font-size: 11.5px; }
+.modal[hidden], .scrim[hidden] { display: none; }
+
+/* ---------- Empty / error states -------------------------------------- */
+.empty {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  color: var(--faint); font-size: 11.5px; padding: 26px 14px;
+  border: 1px dashed var(--border); border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+.loading { color: var(--faint); font-size: 12px; padding: 40px 0; }
+
+/* Charts are canvas: the drill-down table is their accessible equivalent. */
+.chart:focus-visible { outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px; }
+
+/* ---------- Print: one clean page per view ---------------------------- */
+@media print {
+  .topbar, .toggle, details.drill, .jump-grid, .modal, .scrim { display: none !important; }
+  body { background: #fff; }
+  main { max-width: none; padding: 0; }
+  .card { break-inside: avoid; box-shadow: none; border-color: var(--faint); }
+  .chart-grid { gap: 10px; }
+  .span-4, .span-6, .span-8 { grid-column: span 6; }
+}

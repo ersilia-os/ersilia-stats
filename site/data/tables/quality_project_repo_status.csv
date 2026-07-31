@@ -1,0 +1,15 @@
+row,column,value
+Done,Archived,3
+Done,Completed,25
+Done,Discontinued,5
+Done,Idle,1
+Done,In progress,1
+In progress,Archived,4
+In progress,Completed,17
+In progress,Discontinued,1
+In progress,Idle,4
+In progress,In progress,21
+In progress,Todo,3
+Stuck,Completed,2
+Stuck,Idle,3
+Stuck,In progress,1

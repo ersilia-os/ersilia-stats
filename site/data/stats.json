@@ -1,0 +1,6801 @@
+{
+  "generated_at": "2026-07-31 13:59 UTC",
+  "snapshot_date": "2026-07-31",
+  "meta": {
+    "tables": [
+      "blogposts",
+      "community",
+      "conferences",
+      "countries",
+      "events",
+      "models",
+      "organisations",
+      "projects",
+      "publications",
+      "repositories"
+    ],
+    "models_available": true,
+    "private_repositories_excluded": 38,
+    "aggregates_only": true
+  },
+  "kpis": {
+    "community_members": {
+      "value": 113,
+      "series": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          3,
+          3,
+          3,
+          4,
+          4,
+          9,
+          14,
+          20,
+          42,
+          53,
+          60,
+          66,
+          80,
+          86,
+          88,
+          91,
+          95,
+          97,
+          102,
+          105,
+          109,
+          110,
+          113
+        ]
+      },
+      "delta_12m": 11
+    },
+    "repositories": {
+      "value": 140,
+      "series": {
+        "labels": [
+          "2019Q3",
+          "2019Q4",
+          "2020Q1",
+          "2020Q2",
+          "2020Q3",
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          1,
+          1,
+          1,
+          1,
+          3,
+          4,
+          7,
+          9,
+          17,
+          24,
+          30,
+          37,
+          40,
+          45,
+          52,
+          60,
+          62,
+          64,
+          69,
+          79,
+          84,
+          89,
+          94,
+          100,
+          110,
+          121,
+          134,
+          139
+        ]
+      },
+      "delta_12m": 39
+    },
+    "publications": {
+      "value": 42,
+      "series": {
+        "labels": [
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "values": [
+          1,
+          2,
+          2,
+          2,
+          3,
+          7,
+          8,
+          13,
+          18,
+          24,
+          30,
+          37,
+          42
+        ]
+      },
+      "delta_12m": 5
+    },
+    "total_citations": {
+      "value": 1305,
+      "series": {
+        "labels": [
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "values": [
+          54,
+          86,
+          86,
+          86,
+          130,
+          570,
+          589,
+          797,
+          974,
+          1135,
+          1267,
+          1304,
+          1305
+        ]
+      },
+      "delta_12m": 1
+    },
+    "projects": {
+      "value": 36,
+      "series": {
+        "labels": [
+          "2019Q3",
+          "2019Q4",
+          "2020Q1",
+          "2020Q2",
+          "2020Q3",
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          4,
+          5,
+          5,
+          6,
+          10,
+          10,
+          12,
+          13,
+          14,
+          14,
+          15,
+          16,
+          18,
+          19,
+          23,
+          23,
+          26,
+          27,
+          30,
+          34,
+          35,
+          36
+        ]
+      },
+      "delta_12m": 9
+    },
+    "organisations": {
+      "value": 320,
+      "series": {
+        "labels": [],
+        "values": []
+      },
+      "delta_12m": null
+    },
+    "countries_represented": {
+      "value": 25,
+      "series": {
+        "labels": [],
+        "values": []
+      },
+      "delta_12m": null
+    },
+    "total_stars": {
+      "value": 659,
+      "series": {
+        "labels": [],
+        "values": []
+      },
+      "delta_12m": null
+    },
+    "events": {
+      "value": 91,
+      "series": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          2,
+          4,
+          5,
+          6,
+          8,
+          12,
+          21,
+          27,
+          34,
+          41,
+          47,
+          51,
+          54,
+          61,
+          63,
+          65,
+          68,
+          75,
+          77,
+          83,
+          86,
+          88,
+          91
+        ]
+      },
+      "delta_12m": 14
+    },
+    "blogposts": {
+      "value": 54,
+      "series": {
+        "labels": [
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "values": [
+          6,
+          10,
+          12,
+          15,
+          17,
+          20,
+          22,
+          24,
+          27,
+          31,
+          35,
+          38,
+          41,
+          43,
+          46,
+          46,
+          46,
+          48,
+          49,
+          50,
+          53,
+          54
+        ]
+      },
+      "delta_12m": 6
+    },
+    "models": {
+      "value": 240,
+      "series": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "values": [
+          1,
+          1,
+          7,
+          19,
+          35,
+          35,
+          38,
+          66,
+          74,
+          92,
+          99,
+          117,
+          132,
+          145,
+          150,
+          154,
+          162,
+          162,
+          172,
+          184,
+          201,
+          213,
+          235,
+          236
+        ]
+      },
+      "delta_12m": 52
+    }
+  },
+  "sections": {
+    "models": {
+      "cumulative": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "values": [
+          1,
+          1,
+          7,
+          19,
+          35,
+          35,
+          38,
+          66,
+          74,
+          92,
+          99,
+          117,
+          132,
+          145,
+          150,
+          154,
+          162,
+          162,
+          172,
+          184,
+          201,
+          213,
+          235,
+          236
+        ],
+        "n": 236,
+        "insight": "Grew from 1 to 236 models between 2020Q4 and 2026Q3. Busiest quarter was 2022Q3 with 28 models."
+      },
+      "per_quarter": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "values": [
+          1,
+          0,
+          6,
+          12,
+          16,
+          0,
+          3,
+          28,
+          8,
+          18,
+          7,
+          18,
+          15,
+          13,
+          5,
+          4,
+          8,
+          0,
+          10,
+          12,
+          17,
+          12,
+          22,
+          1
+        ],
+        "n": 236,
+        "insight": "Models incorporated in 2026Q3: 1, down from 22 in 2026Q2."
+      },
+      "task_tree": {
+        "tree": [
+          {
+            "name": "Annotation",
+            "children": [
+              {
+                "name": "Activity prediction",
+                "value": 101
+              },
+              {
+                "name": "Property calculation or prediction",
+                "value": 44
+              }
+            ]
+          },
+          {
+            "name": "Representation",
+            "children": [
+              {
+                "name": "Featurization",
+                "value": 56
+              },
+              {
+                "name": "Projection",
+                "value": 6
+              }
+            ]
+          },
+          {
+            "name": "Sampling",
+            "children": [
+              {
+                "name": "Generation",
+                "value": 13
+              },
+              {
+                "name": "Similarity search",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Unspecified",
+            "children": [
+              {
+                "name": "Unspecified",
+                "value": 9
+              }
+            ]
+          }
+        ],
+        "n": 240,
+        "insight": "Annotation is the largest task family (60% of models); its biggest subtask is Activity prediction with 101."
+      },
+      "cohorts_by_status": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "series": [
+          {
+            "name": "Ready",
+            "values": [
+              1,
+              0,
+              6,
+              10,
+              15,
+              0,
+              3,
+              22,
+              7,
+              18,
+              4,
+              16,
+              12,
+              10,
+              5,
+              3,
+              8,
+              0,
+              7,
+              11,
+              16,
+              12,
+              22,
+              1
+            ]
+          },
+          {
+            "name": "In progress",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "In maintenance",
+            "values": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "Archived",
+            "values": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              6,
+              1,
+              0,
+              2,
+              1,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0,
+              3,
+              1,
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "n": 236,
+        "insight": "27 of 236 incorporated models (11%) are not yet marked ready.",
+        "semantics": [
+          "good",
+          "brand",
+          "warn",
+          "neutral"
+        ]
+      },
+      "by_status": {
+        "labels": [
+          "Ready",
+          "Archived",
+          "In maintenance",
+          "In progress"
+        ],
+        "values": [
+          209,
+          21,
+          5,
+          5
+        ],
+        "n": 240,
+        "insight": "209 of 240 models (87%) are ready to run.",
+        "semantics": {
+          "Ready": "good",
+          "Archived": "neutral",
+          "In maintenance": "warn",
+          "In progress": "brand"
+        }
+      },
+      "by_biomedical_area": {
+        "labels": [
+          "Any",
+          "ADMET",
+          "Antimicrobial resistance",
+          "Tuberculosis",
+          "Malaria",
+          "Pneumonia",
+          "Diarrheal diseases",
+          "COVID-19",
+          "Gonorrhea",
+          "Cancer",
+          "Schistosomiasis",
+          "Alzheimer",
+          "AIDS",
+          "Hepatitis B"
+        ],
+        "values": [
+          115,
+          48,
+          30,
+          9,
+          8,
+          6,
+          6,
+          5,
+          3,
+          3,
+          2,
+          2,
+          2,
+          1
+        ],
+        "n": 243,
+        "distinct": 17,
+        "insight": "128 of 243 area assignments (53%) name a specific disease or property rather than 'Any'. Biomedical area is a multi-select, so a model spanning two areas counts in both."
+      },
+      "by_license": {
+        "labels": [
+          "MIT",
+          "GPL-3.0-or-later",
+          "GPL-3.0-only",
+          "Apache-2.0",
+          "BSD-3-Clause",
+          "AGPL-3.0-only",
+          "LGPL-3.0-only",
+          "CC0-1.0",
+          "CC-BY-NC-ND-4.0",
+          "Proprietary"
+        ],
+        "values": [
+          76,
+          52,
+          26,
+          20,
+          16,
+          4,
+          2,
+          1,
+          1,
+          1
+        ],
+        "n": 199,
+        "insight": "MIT leads with 76 of 199 models with a licence on file (38%). 200 of 240 models (83%) record a licence."
+      },
+      "coverage": {
+        "labels": [
+          "Docker image",
+          "S3 bundle",
+          "Source code"
+        ],
+        "values": [
+          234,
+          235,
+          240
+        ],
+        "n": 709,
+        "insight": "Source code reaches the most models: 240 of 240."
+      },
+      "by_source_type": {
+        "labels": [
+          "External",
+          "Internal",
+          "Replicated"
+        ],
+        "values": [
+          172,
+          49,
+          10
+        ],
+        "n": 231,
+        "insight": "172 of 231 models (74%) wrap externally published work rather than being built in-house."
+      }
+    },
+    "projects": {
+      "status": {
+        "labels": [
+          "Done",
+          "In progress",
+          "Stuck",
+          "Todo"
+        ],
+        "values": [
+          17,
+          14,
+          4,
+          1
+        ],
+        "n": 36,
+        "insight": "14 of 36 projects (39%) are currently running.",
+        "semantics": {
+          "Done": "good",
+          "In progress": "brand",
+          "Stuck": "bad",
+          "Todo": "neutral"
+        }
+      },
+      "per_year": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "values": [
+          1,
+          1,
+          4,
+          7,
+          3,
+          7,
+          11,
+          2
+        ],
+        "n": 36,
+        "insight": "Busiest year was 2025 with 11 projects."
+      },
+      "active_over_time": {
+        "labels": [
+          "2019Q3",
+          "2019Q4",
+          "2020Q1",
+          "2020Q2",
+          "2020Q3",
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "values": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          4,
+          5,
+          5,
+          6,
+          10,
+          8,
+          10,
+          10,
+          9,
+          7,
+          7,
+          8,
+          8,
+          9,
+          12,
+          9,
+          11,
+          11,
+          14,
+          17,
+          18,
+          19,
+          19
+        ],
+        "n": 19,
+        "insight": "Peak concurrency was 19 projects in 2026Q2; 19 running now."
+      },
+      "timeline": {
+        "rows": [
+          {
+            "name": "Cervical cancer in WLHIV",
+            "start": "2019-07-01",
+            "end": "2022-12-31",
+            "status": "Done",
+            "open": false,
+            "months": 42.0
+          },
+          {
+            "name": "Record Linkage CxCa",
+            "start": "2020-06-01",
+            "end": "2022-12-31",
+            "status": "Done",
+            "open": false,
+            "months": 31.0
+          },
+          {
+            "name": "Ersilia Model Hub",
+            "start": "2021-01-01",
+            "end": "2026-07-31",
+            "status": "In progress",
+            "open": true,
+            "months": 66.9
+          },
+          {
+            "name": "H3D Virtual Screening Cascade",
+            "start": "2021-01-09",
+            "end": "2023-01-06",
+            "status": "Done",
+            "open": false,
+            "months": 23.9
+          },
+          {
+            "name": "Open Source Antimalarials",
+            "start": "2021-05-01",
+            "end": "2024-04-30",
+            "status": "Done",
+            "open": false,
+            "months": 36.0
+          },
+          {
+            "name": "NiDNA CeDD",
+            "start": "2021-11-01",
+            "end": "2026-11-01",
+            "status": "In progress",
+            "open": false,
+            "months": 60.0
+          },
+          {
+            "name": "RES-BSC Precalculations",
+            "start": "2022-01-01",
+            "end": "2022-03-30",
+            "status": "Done",
+            "open": false,
+            "months": 2.9
+          },
+          {
+            "name": "Chemoproteomics ligand discovery",
+            "start": "2022-01-01",
+            "end": "2023-12-31",
+            "status": "Done",
+            "open": false,
+            "months": 23.9
+          },
+          {
+            "name": "Open Source Antibiotics",
+            "start": "2022-01-06",
+            "end": "2022-01-07",
+            "status": "Done",
+            "open": false,
+            "months": 0.0
+          },
+          {
+            "name": "CHAMPS diagrams",
+            "start": "2022-02-01",
+            "end": "2023-02-01",
+            "status": "Done",
+            "open": false,
+            "months": 12.0
+          },
+          {
+            "name": "Oxidative stress and malaria",
+            "start": "2022-08-01",
+            "end": "2022-09-30",
+            "status": "Done",
+            "open": false,
+            "months": 2.0
+          },
+          {
+            "name": "African pharmacogenomics",
+            "start": "2022-08-01",
+            "end": "2024-08-01",
+            "status": "Done",
+            "open": false,
+            "months": 24.0
+          },
+          {
+            "name": "Stage-specific antimalarial potential",
+            "start": "2022-11-01",
+            "end": "2023-11-01",
+            "status": "Done",
+            "open": false,
+            "months": 12.0
+          },
+          {
+            "name": "Severe malaria biomarkers",
+            "start": "2023-02-01",
+            "end": "2023-05-31",
+            "status": "Done",
+            "open": false,
+            "months": 3.9
+          },
+          {
+            "name": "Scaffold Hopping from Natural Products",
+            "start": "2023-09-01",
+            "end": "2024-09-01",
+            "status": "Stuck",
+            "open": false,
+            "months": 12.0
+          },
+          {
+            "name": "Splunk data store",
+            "start": "2023-12-01",
+            "end": "2026-11-30",
+            "status": "In progress",
+            "open": false,
+            "months": 36.0
+          },
+          {
+            "name": "AI2050 for capacity building at H3D",
+            "start": "2024-01-01",
+            "end": "2026-09-01",
+            "status": "Done",
+            "open": false,
+            "months": 32.0
+          },
+          {
+            "name": "AI2050 for TB Modelling",
+            "start": "2024-01-01",
+            "end": "2026-08-01",
+            "status": "In progress",
+            "open": false,
+            "months": 31.0
+          },
+          {
+            "name": "FAIR-Impact",
+            "start": "2024-04-01",
+            "end": "2024-09-01",
+            "status": "Done",
+            "open": false,
+            "months": 5.0
+          },
+          {
+            "name": "AI Incubator scoping",
+            "start": "2024-07-01",
+            "end": "2025-01-31",
+            "status": "Done",
+            "open": false,
+            "months": 7.0
+          },
+          {
+            "name": "Mozilla Builders",
+            "start": "2024-09-01",
+            "end": "2024-12-31",
+            "status": "Done",
+            "open": false,
+            "months": 4.0
+          },
+          {
+            "name": "The Gambia MRC",
+            "start": "2024-09-01",
+            "end": "2026-07-31",
+            "status": "In progress",
+            "open": true,
+            "months": 22.9
+          },
+          {
+            "name": "Plan Generación Conocimiento",
+            "start": "2024-09-01",
+            "end": "2027-09-30",
+            "status": "In progress",
+            "open": false,
+            "months": 36.9
+          },
+          {
+            "name": "Gram-negative antibiotics discovery with GARDP",
+            "start": "2025-01-01",
+            "end": "2026-12-31",
+            "status": "In progress",
+            "open": false,
+            "months": 23.9
+          },
+          {
+            "name": "Targeted protein degradation for tuberculosis",
+            "start": "2025-01-01",
+            "end": "2026-09-30",
+            "status": "In progress",
+            "open": false,
+            "months": 20.9
+          },
+          {
+            "name": "AI2050 Collaboration Fund",
+            "start": "2025-01-01",
+            "end": "2025-09-01",
+            "status": "Done",
+            "open": false,
+            "months": 8.0
+          },
+          {
+            "name": "ChemPFN",
+            "start": "2025-06-01",
+            "end": "2026-07-31",
+            "status": "Stuck",
+            "open": true,
+            "months": 14.0
+          },
+          {
+            "name": "PREEMI maternal healthcare",
+            "start": "2025-07-01",
+            "end": "2026-07-31",
+            "status": "Stuck",
+            "open": true,
+            "months": 13.0
+          },
+          {
+            "name": "HIV follow up during COVID in Zambia",
+            "start": "2025-08-24",
+            "end": "2026-07-31",
+            "status": "Stuck",
+            "open": true,
+            "months": 11.2
+          },
+          {
+            "name": "H3D Mtb Bioactivity",
+            "start": "2025-09-01",
+            "end": "2026-12-31",
+            "status": "In progress",
+            "open": false,
+            "months": 16.0
+          },
+          {
+            "name": "NPs as schistosoma drugs",
+            "start": "2025-10-01",
+            "end": "2026-07-31",
+            "status": "In progress",
+            "open": true,
+            "months": 10.0
+          },
+          {
+            "name": "PQZ signature reversal",
+            "start": "2025-10-01",
+            "end": "2026-07-31",
+            "status": "In progress",
+            "open": true,
+            "months": 10.0
+          },
+          {
+            "name": "Collaboration Fund BMGF",
+            "start": "2025-11-01",
+            "end": "2026-12-31",
+            "status": "In progress",
+            "open": false,
+            "months": 14.0
+          },
+          {
+            "name": "AID3 molecular glue discovery",
+            "start": "2025-11-01",
+            "end": "2026-07-31",
+            "status": "Todo",
+            "open": true,
+            "months": 8.9
+          },
+          {
+            "name": "AI2050 Compute Fund",
+            "start": "2026-01-01",
+            "end": "2026-12-31",
+            "status": "In progress",
+            "open": false,
+            "months": 12.0
+          },
+          {
+            "name": "Gr-ADI targeted protein degradation for AMR",
+            "start": "2026-04-01",
+            "end": "2029-03-31",
+            "status": "In progress",
+            "open": false,
+            "months": 36.0
+          }
+        ],
+        "n": 36,
+        "today": "2026-07-31",
+        "semantics": {
+          "Todo": "neutral",
+          "Done": "good",
+          "Stuck": "bad",
+          "In progress": "brand"
+        },
+        "insight": "36 projects on the timeline, 2019-07 to 2029-03. 1 past their end date and not marked done."
+      },
+      "duration": {
+        "labels": [
+          "Completed",
+          "Still running"
+        ],
+        "values": [
+          18.4,
+          12.1
+        ],
+        "n": 36,
+        "insight": "Median run length — Completed: 18.4 months, Still running: 12.1 months. Running projects are measured to today.",
+        "unit": "months"
+      }
+    },
+    "publications": {
+      "per_year": {
+        "labels": [
+          "2013",
+          "2014",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "values": [
+          1,
+          1,
+          1,
+          4,
+          1,
+          5,
+          5,
+          6,
+          6,
+          7,
+          5
+        ],
+        "n": 42,
+        "insight": "Busiest year was 2024 with 7 publications."
+      },
+      "citations_per_year": {
+        "labels": [
+          "2013",
+          "2014",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "values": [
+          54,
+          32,
+          44,
+          440,
+          19,
+          208,
+          177,
+          161,
+          132,
+          37,
+          1
+        ],
+        "n": 1305,
+        "insight": "1,305 citations in total; the 2018 cohort has accrued the most (440)."
+      },
+      "output_and_impact": {
+        "labels": [
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "name": "Publications",
+            "values": [
+              1,
+              1,
+              0,
+              0,
+              1,
+              4,
+              1,
+              5,
+              5,
+              6,
+              6,
+              7,
+              5
+            ]
+          },
+          {
+            "name": "Cumulative citations",
+            "values": [
+              54,
+              86,
+              86,
+              86,
+              130,
+              570,
+              589,
+              797,
+              974,
+              1135,
+              1267,
+              1304,
+              1305
+            ]
+          }
+        ],
+        "n": 42,
+        "insight": "42 publications have accrued 1,305 citations to date.",
+        "axes": [
+          "left",
+          "right"
+        ],
+        "kinds": [
+          "bar",
+          "line"
+        ]
+      },
+      "by_topic": {
+        "labels": [
+          "Chemoinformatics",
+          "Bioinformatics",
+          "Medical informatics",
+          "Molecular biology"
+        ],
+        "values": [
+          19,
+          14,
+          7,
+          2
+        ],
+        "n": 42,
+        "insight": "Chemoinformatics leads with 19 of 42 topic assignments (45%).",
+        "distinct": 4
+      },
+      "affiliation": {
+        "labels": [
+          "Yes",
+          "No"
+        ],
+        "values": [
+          25,
+          17
+        ],
+        "n": 42,
+        "insight": "25 of 42 publications (60%) carry a direct Ersilia affiliation.",
+        "semantics": {
+          "Yes": "brand",
+          "No": "neutral"
+        }
+      },
+      "affiliation_by_year": {
+        "labels": [
+          "2013",
+          "2014",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025"
+        ],
+        "series": [
+          {
+            "name": "Ersilia-affiliated",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              5,
+              6,
+              7,
+              4
+            ]
+          },
+          {
+            "name": "External",
+            "values": [
+              1,
+              1,
+              1,
+              4,
+              1,
+              5,
+              2,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        ],
+        "n": 42,
+        "insight": "Publications in 2025: 5, down from 7 in 2024."
+      },
+      "by_type": {
+        "labels": [
+          "Research",
+          "Review"
+        ],
+        "values": [
+          29,
+          13
+        ],
+        "n": 42
+      },
+      "by_african_collab": {
+        "labels": [
+          "Yes",
+          "No"
+        ],
+        "values": [
+          14,
+          12
+        ],
+        "n": 26,
+        "insight": "14 of 26 publications with a recorded answer (54%) involve an African collaboration. Not recorded for 16 publications.",
+        "semantics": {
+          "Yes": "brand",
+          "No": "neutral"
+        }
+      },
+      "top_journals": {
+        "labels": [
+          "Nature Communications",
+          "Plos Computational Biology",
+          "Journal of Cheminformatics",
+          "Genome Medicine"
+        ],
+        "values": [
+          84.4,
+          22,
+          18,
+          17.5
+        ],
+        "n": 4,
+        "counts": [
+          7,
+          2,
+          2,
+          4
+        ],
+        "totals": [
+          591,
+          44,
+          36,
+          70
+        ],
+        "unit": "mean citations per article",
+        "insight": "Nature Communications leads at 84.4 citations per article. 27 single-article venues are excluded."
+      }
+    },
+    "repositories": {
+      "per_quarter": {
+        "labels": [
+          "2019Q3",
+          "2019Q4",
+          "2020Q1",
+          "2020Q2",
+          "2020Q3",
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          1,
+          0,
+          0,
+          0,
+          2,
+          1,
+          3,
+          2,
+          8,
+          7,
+          6,
+          7,
+          3,
+          5,
+          7,
+          8,
+          2,
+          2,
+          5,
+          10,
+          5,
+          5,
+          5,
+          6,
+          10,
+          11,
+          13,
+          5
+        ],
+        "n": 139,
+        "insight": "Busiest quarter was 2026Q1 with 13 repositories."
+      },
+      "cumulative": {
+        "labels": [
+          "2019Q3",
+          "2019Q4",
+          "2020Q1",
+          "2020Q2",
+          "2020Q3",
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          1,
+          1,
+          1,
+          1,
+          3,
+          4,
+          7,
+          9,
+          17,
+          24,
+          30,
+          37,
+          40,
+          45,
+          52,
+          60,
+          62,
+          64,
+          69,
+          79,
+          84,
+          89,
+          94,
+          100,
+          110,
+          121,
+          134,
+          139
+        ],
+        "n": 139,
+        "insight": "Grew from 1 to 139 public repositories between 2019Q3 and 2026Q2. 1 repository has no creation date on file."
+      },
+      "top_by_stars": {
+        "labels": [
+          "ersilia",
+          "eos",
+          "zaira-chem-v1",
+          "chempfn",
+          "chemxor",
+          "event-fund-ai-drug-discovery",
+          "outreachy-contributions",
+          "smiles-to-3d",
+          "lazy-qsar",
+          "compound-embedding",
+          "ersilia-pack",
+          "stylia"
+        ],
+        "values": [
+          306,
+          92,
+          45,
+          35,
+          13,
+          10,
+          9,
+          8,
+          7,
+          6,
+          6,
+          5
+        ],
+        "n": 12,
+        "insight": "The top 3 account for 67% of all stars."
+      },
+      "top_by_forks": {
+        "labels": [
+          "eos",
+          "ersilia",
+          "outreachy-contributions",
+          "zaira-chem-v1",
+          "ersilia-pack",
+          "eos-template",
+          "lazy-qsar",
+          "ersilia.io",
+          "ersilia-client",
+          "ersilia-maintenance",
+          "chemxor",
+          "isaura"
+        ],
+        "values": [
+          190,
+          177,
+          27,
+          16,
+          7,
+          5,
+          4,
+          3,
+          3,
+          2,
+          2,
+          2
+        ],
+        "n": 12,
+        "insight": "49 of 140 public repositories (35%) have ever been forked."
+      },
+      "most_collaborative": {
+        "labels": [
+          "ersilia",
+          "eos",
+          "reinvent4",
+          "eos-template",
+          "ersilia-pack",
+          "tune-tables-light",
+          "ersilia-maintenance",
+          "ersilia-model-request-app",
+          "isaura",
+          "d4g-cohort-2024-hackathon-group3",
+          "ersilia-model-hub-maintained-inputs",
+          "ersilia-skills"
+        ],
+        "values": [
+          92,
+          40,
+          16,
+          15,
+          11,
+          9,
+          9,
+          7,
+          7,
+          7,
+          6,
+          6
+        ],
+        "n": 12,
+        "insight": "43 of 140 public repositories (31%) have a single listed contributor."
+      },
+      "top_contributors": {
+        "labels": [
+          "miquelduranfrigola",
+          "GemmaTuron",
+          "arnaucoma24",
+          "DhanshreeA",
+          "Abellegese",
+          "Marina18",
+          "JHlozek",
+          "HellenNamulinda",
+          "leoank",
+          "Malikbadmus",
+          "carcablop",
+          "GrantBirki",
+          "marcostorrework",
+          "dzumii",
+          "OlawumiSalaam"
+        ],
+        "values": [
+          112,
+          81,
+          27,
+          20,
+          18,
+          16,
+          14,
+          5,
+          5,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "n": 432,
+        "distinct": 111,
+        "insight": "111 distinct contributors across 140 public repositories. The top 3 account for 51% of all repository contributions."
+      },
+      "contributor_concentration": {
+        "labels": [
+          "0",
+          "0.7",
+          "1.4",
+          "2.1",
+          "2.9",
+          "3.6",
+          "4.3",
+          "5.0",
+          "5.7",
+          "6.4",
+          "7.1",
+          "7.9",
+          "8.6",
+          "9.3",
+          "10.0",
+          "10.7",
+          "11.4",
+          "12.1",
+          "12.9",
+          "13.6",
+          "14.3",
+          "15.0",
+          "15.7",
+          "16.4",
+          "17.1",
+          "17.9",
+          "18.6",
+          "19.3",
+          "20.0",
+          "20.7",
+          "21.4",
+          "22.1",
+          "22.9",
+          "23.6",
+          "24.3",
+          "25.0",
+          "25.7",
+          "26.4",
+          "27.1",
+          "27.9",
+          "28.6",
+          "29.3",
+          "30.0",
+          "30.7",
+          "31.4",
+          "32.1",
+          "32.9",
+          "33.6",
+          "34.3",
+          "35.0",
+          "35.7",
+          "36.4",
+          "37.1",
+          "37.9",
+          "38.6",
+          "39.3",
+          "40.0",
+          "40.7",
+          "41.4",
+          "42.1",
+          "42.9",
+          "43.6",
+          "44.3",
+          "45.0",
+          "45.7",
+          "46.4",
+          "47.1",
+          "47.9",
+          "48.6",
+          "49.3",
+          "50.0",
+          "50.7",
+          "51.4",
+          "52.1",
+          "52.9",
+          "53.6",
+          "54.3",
+          "55.0",
+          "55.7",
+          "56.4",
+          "57.1",
+          "57.9",
+          "58.6",
+          "59.3",
+          "60.0",
+          "60.7",
+          "61.4",
+          "62.1",
+          "62.9",
+          "63.6",
+          "64.3",
+          "65.0",
+          "65.7",
+          "66.4",
+          "67.1",
+          "67.9",
+          "68.6",
+          "69.3",
+          "70.0",
+          "70.7",
+          "71.4",
+          "72.1",
+          "72.9",
+          "73.6",
+          "74.3",
+          "75.0",
+          "75.7",
+          "76.4",
+          "77.1",
+          "77.9",
+          "78.6",
+          "79.3",
+          "80.0",
+          "80.7",
+          "81.4",
+          "82.1",
+          "82.9",
+          "83.6",
+          "84.3",
+          "85.0",
+          "85.7",
+          "86.4",
+          "87.1",
+          "87.9",
+          "88.6",
+          "89.3",
+          "90.0",
+          "90.7",
+          "91.4",
+          "92.1",
+          "92.9",
+          "93.6",
+          "94.3",
+          "95.0",
+          "95.7",
+          "96.4",
+          "97.1",
+          "97.9",
+          "98.6",
+          "99.3",
+          "100.0"
+        ],
+        "values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.5,
+          0.5,
+          0.5,
+          0.6,
+          0.6,
+          0.6,
+          0.7,
+          0.7,
+          0.8,
+          0.8,
+          0.8,
+          0.9,
+          0.9,
+          0.9,
+          1,
+          1,
+          1.1,
+          1.1,
+          1.2,
+          1.2,
+          1.3,
+          1.3,
+          1.4,
+          1.4,
+          1.5,
+          1.5,
+          1.6,
+          1.6,
+          1.7,
+          1.8,
+          1.8,
+          1.9,
+          2,
+          2.1,
+          2.1,
+          2.2,
+          2.3,
+          2.4,
+          2.5,
+          2.5,
+          2.6,
+          2.7,
+          2.8,
+          2.9,
+          3,
+          3.1,
+          3.2,
+          3.3,
+          3.4,
+          3.5,
+          3.6,
+          3.7,
+          3.8,
+          3.9,
+          4,
+          4.1,
+          4.2,
+          4.3,
+          4.5,
+          4.6,
+          4.7,
+          4.9,
+          5,
+          5.2,
+          5.3,
+          5.5,
+          5.6,
+          5.8,
+          6,
+          6.2,
+          6.3,
+          6.5,
+          6.8,
+          7,
+          7.2,
+          7.5,
+          7.7,
+          8,
+          8.3,
+          8.6,
+          8.9,
+          9.2,
+          9.6,
+          9.9,
+          10.2,
+          10.6,
+          11,
+          11.4,
+          11.8,
+          12.1,
+          12.5,
+          12.9,
+          13.3,
+          13.8,
+          14.2,
+          14.6,
+          15.1,
+          15.7,
+          16.3,
+          17,
+          17.8,
+          18.6,
+          19.5,
+          20.4,
+          21.5,
+          22.5,
+          23.7,
+          24.8,
+          26.1,
+          27.5,
+          29.1,
+          30.6,
+          32.3,
+          34.2,
+          38.1,
+          52.5,
+          100
+        ],
+        "n": 140,
+        "insight": "The busiest 10% of repositories hold 81% of all commits (Gini 0.86).",
+        "gini": 0.86,
+        "unit": "% of commits"
+      },
+      "by_type": {
+        "labels": [
+          "Package",
+          "Analysis",
+          "Workshop",
+          "Automation",
+          "App",
+          "Template",
+          "Documentation"
+        ],
+        "values": [
+          64,
+          44,
+          10,
+          10,
+          5,
+          4,
+          3
+        ],
+        "n": 140,
+        "insight": "Package leads with 64 of 140 public repositories (46%)."
+      },
+      "by_status": {
+        "labels": [
+          "Completed",
+          "In progress",
+          "Discontinued",
+          "Archived",
+          "Idle",
+          "Todo"
+        ],
+        "values": [
+          62,
+          30,
+          17,
+          17,
+          10,
+          4
+        ],
+        "n": 140,
+        "insight": "40 of 140 public repositories (29%) are in progress or idle rather than closed out."
+      },
+      "scatter": {
+        "points": [
+          [
+            0,
+            0,
+            1,
+            "eos-python-package"
+          ],
+          [
+            4,
+            0,
+            3,
+            "ersilia-assistant"
+          ],
+          [
+            2,
+            0,
+            2,
+            "bioassay-db"
+          ],
+          [
+            0,
+            0,
+            1,
+            "multitask-classifier-qsar"
+          ],
+          [
+            1,
+            1,
+            4,
+            "ersilia-app"
+          ],
+          [
+            0,
+            0,
+            1,
+            "hiv-covid-cidrz"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ersilia-api"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ready-to-screen-enamine-real"
+          ],
+          [
+            0,
+            0,
+            2,
+            "osm-series4-predictive-model"
+          ],
+          [
+            1,
+            0,
+            2,
+            "sars-cov-2-chemspace"
+          ],
+          [
+            0,
+            0,
+            1,
+            "impm-schisto-signature-reversal"
+          ],
+          [
+            10,
+            2,
+            4,
+            "event-fund-ai-drug-discovery"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ersilia-to-cdd"
+          ],
+          [
+            45,
+            16,
+            5,
+            "zaira-chem-v1"
+          ],
+          [
+            7,
+            4,
+            5,
+            "lazy-qsar"
+          ],
+          [
+            4,
+            1,
+            3,
+            "pharmacogx-embeddings"
+          ],
+          [
+            2,
+            0,
+            4,
+            "eosframes"
+          ],
+          [
+            1,
+            1,
+            1,
+            "chemical-library-exploration"
+          ],
+          [
+            1,
+            0,
+            1,
+            "chemical-library-gifs"
+          ],
+          [
+            1,
+            1,
+            5,
+            "ersilia-book"
+          ],
+          [
+            1,
+            1,
+            3,
+            "ai2050-dd-workshop"
+          ],
+          [
+            1,
+            0,
+            1,
+            "tmap-chemistry"
+          ],
+          [
+            0,
+            3,
+            4,
+            "ersilia-client"
+          ],
+          [
+            1,
+            0,
+            2,
+            "ersilia-figures"
+          ],
+          [
+            3,
+            1,
+            3,
+            "ai2050-h3d-symposium-workshop"
+          ],
+          [
+            1,
+            0,
+            2,
+            "auto-tabnet"
+          ],
+          [
+            2,
+            0,
+            2,
+            "cidrz-e2e-linkage"
+          ],
+          [
+            1,
+            0,
+            2,
+            "coadd-binary-tasks"
+          ],
+          [
+            3,
+            0,
+            3,
+            "h3d-screening-cascade-app"
+          ],
+          [
+            0,
+            0,
+            2,
+            "enamine-ecfp"
+          ],
+          [
+            0,
+            0,
+            7,
+            "ersilia-model-request-app"
+          ],
+          [
+            2,
+            0,
+            6,
+            "ersilia-skills"
+          ],
+          [
+            92,
+            190,
+            40,
+            "eos"
+          ],
+          [
+            0,
+            0,
+            6,
+            "ersilia-model-hub-maintained-inputs"
+          ],
+          [
+            1,
+            1,
+            2,
+            "osm-series4-candidates-2"
+          ],
+          [
+            1,
+            1,
+            1,
+            "open-data-cleaning"
+          ],
+          [
+            1,
+            1,
+            1,
+            "osm-series4-synthesis-round-1"
+          ],
+          [
+            2,
+            1,
+            2,
+            "h3d-screening-cascade-code"
+          ],
+          [
+            0,
+            0,
+            2,
+            "anti-hypertension-cedd"
+          ],
+          [
+            1,
+            0,
+            2,
+            "easylinkage"
+          ],
+          [
+            3,
+            2,
+            7,
+            "isaura"
+          ],
+          [
+            1,
+            0,
+            2,
+            "chembl-antimicrobial-tasks"
+          ],
+          [
+            0,
+            0,
+            1,
+            "ondisk-xy"
+          ],
+          [
+            5,
+            0,
+            5,
+            "olinda"
+          ],
+          [
+            0,
+            0,
+            3,
+            "eos-analysis-template"
+          ],
+          [
+            0,
+            0,
+            2,
+            "eos-lite-chem"
+          ],
+          [
+            0,
+            0,
+            2,
+            "molbertfeat"
+          ],
+          [
+            0,
+            0,
+            4,
+            "eosvc"
+          ],
+          [
+            0,
+            0,
+            3,
+            "pubchem-antimicrobial-tasks"
+          ],
+          [
+            0,
+            0,
+            2,
+            "mtb-target-prioritization"
+          ],
+          [
+            0,
+            2,
+            3,
+            "eos-demo"
+          ],
+          [
+            0,
+            0,
+            1,
+            "gradi-target-prioritization"
+          ],
+          [
+            2,
+            1,
+            3,
+            "ai2050-h3d-inhouse-workshop-prep"
+          ],
+          [
+            0,
+            0,
+            1,
+            "osm-series4-synthesis-round-2"
+          ],
+          [
+            1,
+            2,
+            1,
+            "groverfeat"
+          ],
+          [
+            1,
+            2,
+            4,
+            "xai4chem"
+          ],
+          [
+            4,
+            1,
+            4,
+            "chembl-binary-tasks"
+          ],
+          [
+            5,
+            1,
+            5,
+            "stylia"
+          ],
+          [
+            0,
+            0,
+            2,
+            "evc-dev-analysis"
+          ],
+          [
+            0,
+            0,
+            1,
+            "search-engine"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ersilia-metadata-annotation"
+          ],
+          [
+            0,
+            0,
+            16,
+            "reinvent4"
+          ],
+          [
+            3,
+            0,
+            4,
+            "model-inference-pipeline"
+          ],
+          [
+            0,
+            0,
+            1,
+            "champs"
+          ],
+          [
+            0,
+            0,
+            1,
+            "esther-workshop"
+          ],
+          [
+            0,
+            2,
+            9,
+            "ersilia-maintenance"
+          ],
+          [
+            0,
+            0,
+            3,
+            "bentoml-ersilia"
+          ],
+          [
+            0,
+            1,
+            2,
+            "bentolite"
+          ],
+          [
+            1,
+            3,
+            2,
+            "ersilia.io"
+          ],
+          [
+            2,
+            1,
+            1,
+            "chem-sampler"
+          ],
+          [
+            1,
+            1,
+            1,
+            "zeroshot-xgboost"
+          ],
+          [
+            1,
+            0,
+            2,
+            "lazy-chemvis"
+          ],
+          [
+            3,
+            0,
+            2,
+            "osm-series4-candidates"
+          ],
+          [
+            2,
+            1,
+            2,
+            "ersilia-intro-workshop"
+          ],
+          [
+            4,
+            0,
+            3,
+            "griddify"
+          ],
+          [
+            1,
+            0,
+            2,
+            "nn-search"
+          ],
+          [
+            0,
+            0,
+            1,
+            "ai2050-compute-fund"
+          ],
+          [
+            0,
+            0,
+            1,
+            "pharmacogx-app"
+          ],
+          [
+            2,
+            0,
+            1,
+            "digests"
+          ],
+          [
+            1,
+            0,
+            2,
+            "vsflow-ligand-based-3d-screening"
+          ],
+          [
+            0,
+            0,
+            1,
+            "illness-metaphors"
+          ],
+          [
+            0,
+            0,
+            7,
+            "d4g-cohort-2024-hackathon-group3"
+          ],
+          [
+            1,
+            0,
+            2,
+            "ai2050-mtb-penetration"
+          ],
+          [
+            0,
+            0,
+            1,
+            "abaumannii-enamine-real-screening"
+          ],
+          [
+            2,
+            1,
+            4,
+            "antimicrobial-ml-tasks"
+          ],
+          [
+            0,
+            0,
+            2,
+            "compound-embedding-lite"
+          ],
+          [
+            1,
+            0,
+            2,
+            "mock-website"
+          ],
+          [
+            35,
+            1,
+            3,
+            "chempfn"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ersilia-apptainer"
+          ],
+          [
+            1,
+            1,
+            2,
+            "fps-grid"
+          ],
+          [
+            1,
+            0,
+            1,
+            "eosquality"
+          ],
+          [
+            1,
+            1,
+            4,
+            "zairachem-docker"
+          ],
+          [
+            306,
+            177,
+            92,
+            "ersilia"
+          ],
+          [
+            0,
+            1,
+            1,
+            "ffwd-ersilia-game"
+          ],
+          [
+            0,
+            0,
+            5,
+            "ersilia-model-workflows"
+          ],
+          [
+            3,
+            0,
+            1,
+            "chembl-tasks-for-finetuning"
+          ],
+          [
+            9,
+            27,
+            1,
+            "outreachy-contributions"
+          ],
+          [
+            0,
+            2,
+            5,
+            "model-validations"
+          ],
+          [
+            0,
+            0,
+            1,
+            "reinvent-shape-similarity"
+          ],
+          [
+            2,
+            1,
+            5,
+            "ersilia-self-service"
+          ],
+          [
+            1,
+            0,
+            3,
+            "pharmacogx-arsa"
+          ],
+          [
+            0,
+            0,
+            2,
+            "osm-series4-manuscript"
+          ],
+          [
+            0,
+            0,
+            1,
+            "docking-gnina"
+          ],
+          [
+            6,
+            1,
+            3,
+            "compound-embedding"
+          ],
+          [
+            0,
+            0,
+            2,
+            "anpdb-annotation"
+          ],
+          [
+            0,
+            0,
+            1,
+            "3d-analogues"
+          ],
+          [
+            0,
+            0,
+            2,
+            "gardp-kpneumoniae-enamine-real-screening"
+          ],
+          [
+            0,
+            0,
+            1,
+            "keras-tuner-chem"
+          ],
+          [
+            1,
+            1,
+            2,
+            "pabb-docking"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ersilia-tabpfn-client"
+          ],
+          [
+            0,
+            0,
+            2,
+            "chembl-antimicrobial-models"
+          ],
+          [
+            2,
+            1,
+            1,
+            "zaira-chem-tdc"
+          ],
+          [
+            3,
+            1,
+            4,
+            "osa-murd"
+          ],
+          [
+            0,
+            0,
+            2,
+            "dvc-gd-github-test"
+          ],
+          [
+            1,
+            0,
+            2,
+            "few-shot-bioassays"
+          ],
+          [
+            0,
+            0,
+            1,
+            "zeroshot-preprocessing"
+          ],
+          [
+            1,
+            0,
+            1,
+            "ersilia-ml-benchmark"
+          ],
+          [
+            6,
+            7,
+            11,
+            "ersilia-pack"
+          ],
+          [
+            0,
+            0,
+            2,
+            "preemi"
+          ],
+          [
+            0,
+            0,
+            1,
+            "zeroshot-linear"
+          ],
+          [
+            0,
+            0,
+            1,
+            "estherlinkage"
+          ],
+          [
+            1,
+            0,
+            1,
+            "gcadda4tb-enamine-real-screening"
+          ],
+          [
+            13,
+            2,
+            3,
+            "chemxor"
+          ],
+          [
+            1,
+            1,
+            3,
+            "h3d-screening-cascade-models"
+          ],
+          [
+            0,
+            0,
+            9,
+            "tune-tables-light"
+          ],
+          [
+            1,
+            0,
+            3,
+            "chem-sampler-legacy"
+          ],
+          [
+            4,
+            5,
+            15,
+            "eos-template"
+          ],
+          [
+            0,
+            0,
+            1,
+            "eosdev"
+          ],
+          [
+            4,
+            1,
+            1,
+            "python-101"
+          ],
+          [
+            0,
+            0,
+            2,
+            "ersilia-hub"
+          ],
+          [
+            3,
+            0,
+            1,
+            "zaira-chem-tdc-benchmark"
+          ],
+          [
+            1,
+            1,
+            1,
+            "osm-pfatp4-structure"
+          ],
+          [
+            0,
+            0,
+            1,
+            "eosbench"
+          ],
+          [
+            1,
+            1,
+            2,
+            "autocat-chem"
+          ],
+          [
+            3,
+            0,
+            2,
+            "mtb-targeted-protein-degradation"
+          ],
+          [
+            1,
+            0,
+            3,
+            "ersilia-model-hub-paper"
+          ],
+          [
+            0,
+            0,
+            3,
+            "chembl-ml-tools"
+          ],
+          [
+            0,
+            0,
+            1,
+            "eu-openscreen-antimicrobial-tasks"
+          ],
+          [
+            8,
+            1,
+            2,
+            "smiles-to-3d"
+          ],
+          [
+            0,
+            0,
+            2,
+            "olinda-tdc"
+          ]
+        ],
+        "n": 140,
+        "insight": "140 of 140 public repositories have any stars, forks or listed contributors; ersilia leads on stars."
+      },
+      "health": {
+        "points": [
+          {
+            "name": "eos-python-package",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 12,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-assistant",
+            "stars": 4,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 65,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "bioassay-db",
+            "stars": 2,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "multitask-classifier-qsar",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 3,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-app",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 39,
+            "open_issues": 0,
+            "contributors": 4
+          },
+          {
+            "name": "hiv-covid-cidrz",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 14,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-api",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 12,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ready-to-screen-enamine-real",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 20,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "osm-series4-predictive-model",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 23,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "sars-cov-2-chemspace",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 80,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "impm-schisto-signature-reversal",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 6,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "event-fund-ai-drug-discovery",
+            "stars": 10,
+            "forks": 2,
+            "subscribers": 1,
+            "total_commits": 97,
+            "open_issues": 0,
+            "contributors": 4
+          },
+          {
+            "name": "ersilia-to-cdd",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 2,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "zaira-chem-v1",
+            "stars": 45,
+            "forks": 16,
+            "subscribers": 5,
+            "total_commits": 212,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "lazy-qsar",
+            "stars": 7,
+            "forks": 4,
+            "subscribers": 1,
+            "total_commits": 332,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "pharmacogx-embeddings",
+            "stars": 4,
+            "forks": 1,
+            "subscribers": 3,
+            "total_commits": 190,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "eosframes",
+            "stars": 2,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 146,
+            "open_issues": 2,
+            "contributors": 4
+          },
+          {
+            "name": "chemical-library-exploration",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 5,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "chemical-library-gifs",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 13,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-book",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 52,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "ai2050-dd-workshop",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 2,
+            "total_commits": 115,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "tmap-chemistry",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 5,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-client",
+            "stars": 0,
+            "forks": 3,
+            "subscribers": 1,
+            "total_commits": 19,
+            "open_issues": 0,
+            "contributors": 4
+          },
+          {
+            "name": "ersilia-figures",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 23,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ai2050-h3d-symposium-workshop",
+            "stars": 3,
+            "forks": 1,
+            "subscribers": 3,
+            "total_commits": 31,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "auto-tabnet",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 28,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "cidrz-e2e-linkage",
+            "stars": 2,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 81,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "coadd-binary-tasks",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 17,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "h3d-screening-cascade-app",
+            "stars": 3,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 19,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "enamine-ecfp",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 4,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ersilia-model-request-app",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 69,
+            "open_issues": 0,
+            "contributors": 7
+          },
+          {
+            "name": "ersilia-skills",
+            "stars": 2,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 86,
+            "open_issues": 2,
+            "contributors": 6
+          },
+          {
+            "name": "eos",
+            "stars": 92,
+            "forks": 190,
+            "subscribers": 230,
+            "total_commits": 9834,
+            "open_issues": 54,
+            "contributors": 40
+          },
+          {
+            "name": "ersilia-model-hub-maintained-inputs",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 49,
+            "open_issues": 0,
+            "contributors": 6
+          },
+          {
+            "name": "osm-series4-candidates-2",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 66,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "open-data-cleaning",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "osm-series4-synthesis-round-1",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 24,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "h3d-screening-cascade-code",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "anti-hypertension-cedd",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 19,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "easylinkage",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 3,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "isaura",
+            "stars": 3,
+            "forks": 2,
+            "subscribers": 3,
+            "total_commits": 273,
+            "open_issues": 0,
+            "contributors": 7
+          },
+          {
+            "name": "chembl-antimicrobial-tasks",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 235,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ondisk-xy",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "olinda",
+            "stars": 5,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 152,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "eos-analysis-template",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 19,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "eos-lite-chem",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 30,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "molbertfeat",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 37,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "eosvc",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 35,
+            "open_issues": 1,
+            "contributors": 4
+          },
+          {
+            "name": "pubchem-antimicrobial-tasks",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 83,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "mtb-target-prioritization",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 16,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "eos-demo",
+            "stars": 0,
+            "forks": 2,
+            "subscribers": 1,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "gradi-target-prioritization",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 79,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ai2050-h3d-inhouse-workshop-prep",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 0,
+            "total_commits": 24,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "osm-series4-synthesis-round-2",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 15,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "groverfeat",
+            "stars": 1,
+            "forks": 2,
+            "subscribers": 1,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "xai4chem",
+            "stars": 1,
+            "forks": 2,
+            "subscribers": 3,
+            "total_commits": 84,
+            "open_issues": 0,
+            "contributors": 4
+          },
+          {
+            "name": "chembl-binary-tasks",
+            "stars": 4,
+            "forks": 1,
+            "subscribers": 2,
+            "total_commits": 21,
+            "open_issues": 3,
+            "contributors": 4
+          },
+          {
+            "name": "stylia",
+            "stars": 5,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 61,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "evc-dev-analysis",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 5,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "search-engine",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 5,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-metadata-annotation",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 4,
+            "open_issues": 1,
+            "contributors": 2
+          },
+          {
+            "name": "reinvent4",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 324,
+            "open_issues": 0,
+            "contributors": 16
+          },
+          {
+            "name": "model-inference-pipeline",
+            "stars": 3,
+            "forks": 0,
+            "subscribers": 4,
+            "total_commits": 61,
+            "open_issues": 10,
+            "contributors": 4
+          },
+          {
+            "name": "champs",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 1,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "esther-workshop",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-maintenance",
+            "stars": 0,
+            "forks": 2,
+            "subscribers": 2,
+            "total_commits": 805,
+            "open_issues": 2,
+            "contributors": 9
+          },
+          {
+            "name": "bentoml-ersilia",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 17,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "bentolite",
+            "stars": 0,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 18,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ersilia.io",
+            "stars": 1,
+            "forks": 3,
+            "subscribers": 1,
+            "total_commits": 90,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "chem-sampler",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 2,
+            "total_commits": 6,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "zeroshot-xgboost",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 0,
+            "total_commits": 46,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "lazy-chemvis",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 22,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "osm-series4-candidates",
+            "stars": 3,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 65,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ersilia-intro-workshop",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 30,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "griddify",
+            "stars": 4,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 37,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "nn-search",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 23,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ai2050-compute-fund",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "pharmacogx-app",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "digests",
+            "stars": 2,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 45,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "vsflow-ligand-based-3d-screening",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 9,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "illness-metaphors",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 28,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "d4g-cohort-2024-hackathon-group3",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 40,
+            "open_issues": 0,
+            "contributors": 7
+          },
+          {
+            "name": "ai2050-mtb-penetration",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "abaumannii-enamine-real-screening",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 12,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "antimicrobial-ml-tasks",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 31,
+            "open_issues": 0,
+            "contributors": 4
+          },
+          {
+            "name": "compound-embedding-lite",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 7,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "mock-website",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 6,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "chempfn",
+            "stars": 35,
+            "forks": 1,
+            "subscribers": 2,
+            "total_commits": 74,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "ersilia-apptainer",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 15,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "fps-grid",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 4,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "eosquality",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 7,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "zairachem-docker",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 2,
+            "total_commits": 170,
+            "open_issues": 3,
+            "contributors": 4
+          },
+          {
+            "name": "ersilia",
+            "stars": 306,
+            "forks": 177,
+            "subscribers": 19,
+            "total_commits": 2974,
+            "open_issues": 8,
+            "contributors": 92
+          },
+          {
+            "name": "ffwd-ersilia-game",
+            "stars": 0,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 5,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-model-workflows",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 238,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "chembl-tasks-for-finetuning",
+            "stars": 3,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "outreachy-contributions",
+            "stars": 9,
+            "forks": 27,
+            "subscribers": 2,
+            "total_commits": 4,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "model-validations",
+            "stars": 0,
+            "forks": 2,
+            "subscribers": 1,
+            "total_commits": 32,
+            "open_issues": 0,
+            "contributors": 5
+          },
+          {
+            "name": "reinvent-shape-similarity",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 1,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-self-service",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 65,
+            "open_issues": 11,
+            "contributors": 5
+          },
+          {
+            "name": "pharmacogx-arsa",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 32,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "osm-series4-manuscript",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 16,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "docking-gnina",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 4,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "compound-embedding",
+            "stars": 6,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 93,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "anpdb-annotation",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 21,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "3d-analogues",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 6,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "gardp-kpneumoniae-enamine-real-screening",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 20,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "keras-tuner-chem",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 2,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "pabb-docking",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 22,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ersilia-tabpfn-client",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 4,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "chembl-antimicrobial-models",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 136,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "zaira-chem-tdc",
+            "stars": 2,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 3,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "osa-murd",
+            "stars": 3,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 79,
+            "open_issues": 0,
+            "contributors": 4
+          },
+          {
+            "name": "dvc-gd-github-test",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 8,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "few-shot-bioassays",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 2,
+            "total_commits": 49,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "zeroshot-preprocessing",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 9,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-ml-benchmark",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 11,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-pack",
+            "stars": 6,
+            "forks": 7,
+            "subscribers": 3,
+            "total_commits": 289,
+            "open_issues": 3,
+            "contributors": 11
+          },
+          {
+            "name": "preemi",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 15,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "zeroshot-linear",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 6,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "estherlinkage",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 7,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "gcadda4tb-enamine-real-screening",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 7,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "chemxor",
+            "stars": 13,
+            "forks": 2,
+            "subscribers": 2,
+            "total_commits": 195,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "h3d-screening-cascade-models",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "tune-tables-light",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 403,
+            "open_issues": 0,
+            "contributors": 9
+          },
+          {
+            "name": "chem-sampler-legacy",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 75,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "eos-template",
+            "stars": 4,
+            "forks": 5,
+            "subscribers": 2,
+            "total_commits": 223,
+            "open_issues": 0,
+            "contributors": 15
+          },
+          {
+            "name": "eosdev",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 5,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "python-101",
+            "stars": 4,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 17,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "ersilia-hub",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 78,
+            "open_issues": 1,
+            "contributors": 2
+          },
+          {
+            "name": "zaira-chem-tdc-benchmark",
+            "stars": 3,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 10,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "osm-pfatp4-structure",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 16,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "eosbench",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 20,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "autocat-chem",
+            "stars": 1,
+            "forks": 1,
+            "subscribers": 1,
+            "total_commits": 9,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "mtb-targeted-protein-degradation",
+            "stars": 3,
+            "forks": 0,
+            "subscribers": 3,
+            "total_commits": 318,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ersilia-model-hub-paper",
+            "stars": 1,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 15,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "chembl-ml-tools",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 23,
+            "open_issues": 0,
+            "contributors": 3
+          },
+          {
+            "name": "eu-openscreen-antimicrobial-tasks",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 0,
+            "total_commits": 6,
+            "open_issues": 0,
+            "contributors": 1
+          },
+          {
+            "name": "smiles-to-3d",
+            "stars": 8,
+            "forks": 1,
+            "subscribers": 2,
+            "total_commits": 17,
+            "open_issues": 0,
+            "contributors": 2
+          },
+          {
+            "name": "olinda-tdc",
+            "stars": 0,
+            "forks": 0,
+            "subscribers": 1,
+            "total_commits": 7,
+            "open_issues": 0,
+            "contributors": 2
+          }
+        ],
+        "pairs": [
+          {
+            "x": "stars",
+            "y": "forks",
+            "xLabel": "Stars",
+            "yLabel": "Forks"
+          },
+          {
+            "x": "stars",
+            "y": "subscribers",
+            "xLabel": "Stars",
+            "yLabel": "Watchers"
+          },
+          {
+            "x": "total_commits",
+            "y": "open_issues",
+            "xLabel": "Commits",
+            "yLabel": "Open issues"
+          },
+          {
+            "x": "stars",
+            "y": "total_commits",
+            "xLabel": "Stars",
+            "yLabel": "Commits"
+          }
+        ],
+        "n": 140,
+        "insight": "9 repositories with 50+ commits have no stars — activity and visibility are not the same thing."
+      }
+    },
+    "community": {
+      "roles": {
+        "labels": [
+          "Volunteer",
+          "Intern",
+          "Employee",
+          "Trustee",
+          "Mentor",
+          "Advisor",
+          "MSc Student",
+          "OS Maintainer",
+          "BSc Student",
+          "Visiting Researcher"
+        ],
+        "values": [
+          55,
+          35,
+          8,
+          5,
+          4,
+          4,
+          4,
+          3,
+          2,
+          1
+        ],
+        "n": 121,
+        "distinct": 10,
+        "insight": "Volunteer leads with 55 of 121 role assignments (45%). Members can hold more than one role, so shares sum above 100%."
+      },
+      "growth": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          3,
+          3,
+          3,
+          4,
+          4,
+          9,
+          14,
+          20,
+          42,
+          53,
+          60,
+          66,
+          80,
+          86,
+          88,
+          91,
+          95,
+          97,
+          102,
+          105,
+          109,
+          110,
+          113
+        ],
+        "n": 113,
+        "insight": "Grew from 3 to 113 people between 2020Q4 and 2026Q2."
+      },
+      "flow": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "series": [
+          {
+            "name": "Joined",
+            "values": [
+              3,
+              0,
+              0,
+              1,
+              0,
+              5,
+              5,
+              6,
+              22,
+              11,
+              7,
+              6,
+              14,
+              6,
+              2,
+              3,
+              4,
+              2,
+              5,
+              3,
+              4,
+              1,
+              3,
+              0
+            ]
+          },
+          {
+            "name": "Left",
+            "values": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              3,
+              5,
+              7,
+              17,
+              8,
+              7,
+              15,
+              9,
+              7,
+              5,
+              2,
+              1,
+              4,
+              3,
+              5,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "name": "Net change",
+            "values": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              5,
+              2,
+              1,
+              15,
+              -6,
+              -1,
+              -1,
+              -1,
+              -3,
+              -5,
+              -2,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              2,
+              -1
+            ]
+          }
+        ],
+        "n": 113,
+        "insight": "113 joined and 102 left; 10% of joiners are still involved. 9 quarters saw a net loss.",
+        "kinds": [
+          "bar",
+          "bar",
+          "line"
+        ],
+        "semantics": [
+          "good",
+          "bad",
+          "brand"
+        ]
+      },
+      "tenure": {
+        "labels": [
+          "0–3",
+          "3–6",
+          "6–9",
+          "9–12",
+          "12–18",
+          "18–24",
+          "24–36",
+          "36–60"
+        ],
+        "values": [
+          45,
+          48,
+          1,
+          1,
+          0,
+          4,
+          2,
+          1
+        ],
+        "n": 102,
+        "insight": "Median completed collaboration lasted 3.1 months (mean 5.0). Still-active members are excluded.",
+        "mean": 5.0,
+        "median": 3.1,
+        "unit": "months"
+      },
+      "retention": {
+        "x": [
+          "3 mo",
+          "6 mo",
+          "12 mo",
+          "24 mo"
+        ],
+        "y": [
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "cells": [
+          [
+            0,
+            0,
+            100.0
+          ],
+          [
+            1,
+            0,
+            100.0
+          ],
+          [
+            2,
+            0,
+            100.0
+          ],
+          [
+            3,
+            0,
+            100.0
+          ],
+          [
+            0,
+            1,
+            0.0
+          ],
+          [
+            1,
+            1,
+            0.0
+          ],
+          [
+            2,
+            1,
+            0.0
+          ],
+          [
+            3,
+            1,
+            0.0
+          ],
+          [
+            0,
+            2,
+            65.8
+          ],
+          [
+            1,
+            2,
+            15.8
+          ],
+          [
+            2,
+            2,
+            15.8
+          ],
+          [
+            3,
+            2,
+            7.9
+          ],
+          [
+            0,
+            3,
+            55.3
+          ],
+          [
+            1,
+            3,
+            7.9
+          ],
+          [
+            2,
+            3,
+            5.3
+          ],
+          [
+            3,
+            3,
+            5.3
+          ],
+          [
+            0,
+            4,
+            60.0
+          ],
+          [
+            1,
+            4,
+            6.7
+          ],
+          [
+            2,
+            4,
+            6.7
+          ],
+          [
+            3,
+            4,
+            0.0
+          ],
+          [
+            0,
+            5,
+            50.0
+          ],
+          [
+            1,
+            5,
+            28.6
+          ],
+          [
+            2,
+            5,
+            8.3
+          ],
+          [
+            3,
+            5,
+            0.0
+          ],
+          [
+            0,
+            6,
+            50.0
+          ],
+          [
+            1,
+            6,
+            0.0
+          ],
+          [
+            2,
+            6,
+            0.0
+          ],
+          [
+            3,
+            6,
+            0.0
+          ]
+        ],
+        "counts": [
+          [
+            0,
+            0,
+            3,
+            3
+          ],
+          [
+            1,
+            0,
+            3,
+            3
+          ],
+          [
+            2,
+            0,
+            3,
+            3
+          ],
+          [
+            3,
+            0,
+            3,
+            3
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            2,
+            1,
+            0,
+            1
+          ],
+          [
+            3,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            2,
+            25,
+            38
+          ],
+          [
+            1,
+            2,
+            6,
+            38
+          ],
+          [
+            2,
+            2,
+            6,
+            38
+          ],
+          [
+            3,
+            2,
+            3,
+            38
+          ],
+          [
+            0,
+            3,
+            21,
+            38
+          ],
+          [
+            1,
+            3,
+            3,
+            38
+          ],
+          [
+            2,
+            3,
+            2,
+            38
+          ],
+          [
+            3,
+            3,
+            2,
+            38
+          ],
+          [
+            0,
+            4,
+            9,
+            15
+          ],
+          [
+            1,
+            4,
+            1,
+            15
+          ],
+          [
+            2,
+            4,
+            1,
+            15
+          ],
+          [
+            3,
+            4,
+            0,
+            15
+          ],
+          [
+            0,
+            5,
+            7,
+            14
+          ],
+          [
+            1,
+            5,
+            4,
+            14
+          ],
+          [
+            2,
+            5,
+            1,
+            12
+          ],
+          [
+            3,
+            5,
+            0,
+            11
+          ],
+          [
+            0,
+            6,
+            1,
+            2
+          ],
+          [
+            1,
+            6,
+            0,
+            1
+          ],
+          [
+            2,
+            6,
+            0,
+            1
+          ],
+          [
+            3,
+            6,
+            0,
+            1
+          ]
+        ],
+        "n": 113,
+        "unit": "% still involved",
+        "insight": "Across cohorts, 19% of members reach one year. Blank cells are cohorts too recent to judge."
+      },
+      "duration_buckets": {
+        "labels": [
+          "< 3 months",
+          "3–6 months",
+          "6–12 months",
+          "> 1 year"
+        ],
+        "values": [
+          45,
+          48,
+          2,
+          7
+        ],
+        "n": 102,
+        "insight": "93 of 102 completed collaborations (91%) lasted under six months."
+      },
+      "active_status": {
+        "labels": [
+          "Active",
+          "Past"
+        ],
+        "values": [
+          11,
+          102
+        ],
+        "n": 113,
+        "insight": "11 of 113 people who have joined (10%) are still involved.",
+        "semantics": {
+          "Active": "good",
+          "Past": "neutral"
+        }
+      },
+      "by_country": {
+        "labels": [
+          "United States",
+          "Spain",
+          "Nigeria",
+          "India",
+          "Australia",
+          "South Africa",
+          "Poland",
+          "Colombia",
+          "Pakistan",
+          "Cameroon",
+          "Singapore",
+          "Italy"
+        ],
+        "values": [
+          56,
+          18,
+          10,
+          7,
+          3,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1
+        ],
+        "n": 113,
+        "insight": "United States leads with 56 of 113 recorded member countries (50%).",
+        "distinct": 20
+      },
+      "by_gender": {
+        "labels": [
+          "Male",
+          "Female"
+        ],
+        "values": [
+          65,
+          48
+        ],
+        "n": 113,
+        "insight": "Male leads with 65 of 113 members with a recorded gender (58%)."
+      },
+      "by_organisation": {
+        "labels": [
+          "Harvard University",
+          "Outreachy",
+          "Ersilia Open Source Initiative",
+          "Stanford University",
+          "GitHub",
+          "Good Data Institute",
+          "Berkeley University",
+          "Digital Ocean",
+          "Atlassian Foundation",
+          "H3D Foundation"
+        ],
+        "values": [
+          20,
+          17,
+          13,
+          12,
+          11,
+          4,
+          4,
+          4,
+          3,
+          2
+        ],
+        "n": 109,
+        "insight": "Home institutions of community members, as recorded.",
+        "distinct": 28
+      }
+    },
+    "organisations": {
+      "by_type": {
+        "labels": [
+          "Foundation",
+          "Academia",
+          "Corporate",
+          "Civil Society",
+          "Government",
+          "Pharma",
+          "Accelerator",
+          "Individual"
+        ],
+        "values": [
+          104,
+          74,
+          45,
+          38,
+          32,
+          17,
+          9,
+          1
+        ],
+        "n": 320,
+        "insight": "Foundation leads with 104 of 320 organisations (32%)."
+      },
+      "by_country": {
+        "labels": [
+          "United States",
+          "United Kingdom",
+          "Spain",
+          "Switzerland",
+          "South Africa",
+          "Belgium",
+          "Germany",
+          "Cameroon",
+          "Ghana",
+          "Kenya",
+          "Tanzania",
+          "Zambia"
+        ],
+        "values": [
+          146,
+          38,
+          36,
+          15,
+          11,
+          8,
+          7,
+          6,
+          4,
+          4,
+          3,
+          3
+        ],
+        "n": 281,
+        "insight": "United States leads with 146 of 315 organisations with a country on file (46%). 36 countries represented. No country recorded for 5 organisations."
+      },
+      "by_classification": {
+        "labels": [
+          "Funder",
+          "Collaborator",
+          "Network"
+        ],
+        "values": [
+          215,
+          69,
+          36
+        ],
+        "n": 320,
+        "insight": "How each organisation relates to Ersilia — funder, network or collaborator.",
+        "distinct": 3
+      },
+      "by_focus": {
+        "labels": [
+          "Science",
+          "Capacity building",
+          "Healthcare",
+          "Generic",
+          "Open Source",
+          "AI/ML",
+          "Diversity"
+        ],
+        "values": [
+          173,
+          59,
+          53,
+          50,
+          46,
+          42,
+          12
+        ],
+        "n": 435,
+        "insight": "Focus areas are a multi-select, so one organisation contributes to several.",
+        "distinct": 7
+      }
+    },
+    "reach": {
+      "footprint_by_country": {
+        "labels": [
+          "United States",
+          "Spain",
+          "United Kingdom",
+          "South Africa",
+          "Switzerland",
+          "Cameroon",
+          "Nigeria",
+          "Belgium",
+          "Germany",
+          "India",
+          "Kenya",
+          "Ghana",
+          "Zambia",
+          "Brazil",
+          "Australia",
+          "France",
+          "Tanzania",
+          "Netherlands",
+          "Colombia",
+          "Japan",
+          "Canada",
+          "Singapore",
+          "Guinea",
+          "Italy",
+          "Argentina",
+          "Ethiopia",
+          "Norway",
+          "Poland",
+          "Pakistan",
+          "Czech Republic",
+          "Denmark",
+          "Austria",
+          "Mexico",
+          "Gambia",
+          "Europe",
+          "Zimbabwe",
+          "Egypt",
+          "Sweden",
+          "Senegal",
+          "United Arab Emirates",
+          "Namibia",
+          "Serbia",
+          "Portugal",
+          "Uganda",
+          "Costa Rica"
+        ],
+        "values": [
+          208,
+          64,
+          42,
+          19,
+          15,
+          14,
+          11,
+          8,
+          7,
+          7,
+          6,
+          5,
+          4,
+          4,
+          4,
+          4,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 45,
+        "insight": "45 countries with at least one partner organisation, community member or event."
+      },
+      "organisations_by_country": {
+        "labels": [
+          "United States",
+          "United Kingdom",
+          "Spain",
+          "Switzerland",
+          "South Africa",
+          "Belgium",
+          "Germany",
+          "Cameroon",
+          "Ghana",
+          "Kenya",
+          "Tanzania",
+          "Zambia",
+          "Brazil",
+          "France",
+          "Japan",
+          "Netherlands",
+          "Canada",
+          "Guinea",
+          "Argentina",
+          "Norway",
+          "Czech Republic",
+          "Denmark",
+          "Austria",
+          "Mexico",
+          "Nigeria",
+          "Gambia",
+          "Singapore",
+          "Europe",
+          "Zimbabwe",
+          "Australia",
+          "Italy",
+          "Egypt",
+          "Sweden",
+          "Senegal",
+          "Ethiopia",
+          "United Arab Emirates"
+        ],
+        "values": [
+          146,
+          38,
+          36,
+          15,
+          11,
+          8,
+          7,
+          6,
+          4,
+          4,
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 315
+      },
+      "community_by_country": {
+        "labels": [
+          "United States",
+          "Spain",
+          "Nigeria",
+          "India",
+          "Australia",
+          "South Africa",
+          "Poland",
+          "Colombia",
+          "Pakistan",
+          "Cameroon",
+          "Singapore",
+          "Italy",
+          "Ethiopia",
+          "Namibia",
+          "Kenya",
+          "Serbia",
+          "France",
+          "United Kingdom",
+          "Portugal",
+          "Uganda"
+        ],
+        "values": [
+          56,
+          18,
+          10,
+          7,
+          3,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 113
+      },
+      "events_by_country": {
+        "labels": [
+          "Spain",
+          "Cameroon",
+          "South Africa",
+          "United States",
+          "United Kingdom",
+          "Kenya",
+          "Zambia",
+          "Ghana",
+          "Colombia",
+          "Brazil",
+          "Costa Rica",
+          "Netherlands"
+        ],
+        "values": [
+          10,
+          7,
+          6,
+          6,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 39
+      },
+      "engagement_by_income_group": {
+        "labels": [
+          "LIC",
+          "LMIC",
+          "UMIC",
+          "HIC"
+        ],
+        "values": [
+          4,
+          10,
+          9,
+          21
+        ],
+        "n": 44,
+        "insight": "23 of 44 engaged countries (52%) are Global South (LIC, LMIC or UMIC). Income group unknown for 1 country.",
+        "ordinal": true
+      },
+      "engagement_by_region": {
+        "labels": [
+          "Europe",
+          "Africa",
+          "Americas",
+          "Asia",
+          "Oceania"
+        ],
+        "values": [
+          17,
+          15,
+          6,
+          5,
+          1
+        ],
+        "n": 44,
+        "insight": "Europe leads with 17 of 44 engaged countries (39%)."
+      },
+      "south_north": {
+        "labels": [
+          "Global South",
+          "Global North"
+        ],
+        "values": [
+          23,
+          21
+        ],
+        "n": 44,
+        "insight": "23 of 44 engaged countries with a known income group (52%) are Global South.",
+        "semantics": {
+          "Global South": "brand",
+          "Global North": "neutral"
+        }
+      },
+      "reference_by_income_group": {
+        "labels": [
+          "LIC",
+          "LMIC",
+          "UMIC",
+          "HIC"
+        ],
+        "values": [
+          25,
+          45,
+          56,
+          53
+        ],
+        "n": 179,
+        "insight": "All 179 countries in the reference table, for comparison with Ersilia's footprint."
+      }
+    },
+    "events": {
+      "per_year": {
+        "labels": [
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "values": [
+          2,
+          6,
+          26,
+          20,
+          14,
+          18,
+          5
+        ],
+        "n": 91,
+        "insight": "Busiest year was 2022 with 26 events. Events in 2026: 5, down from 18 in 2025."
+      },
+      "by_country": {
+        "labels": [
+          "Spain",
+          "Cameroon",
+          "South Africa",
+          "United States",
+          "United Kingdom",
+          "Kenya",
+          "Zambia",
+          "Ghana",
+          "Colombia",
+          "Brazil",
+          "Costa Rica",
+          "Netherlands"
+        ],
+        "values": [
+          10,
+          7,
+          6,
+          6,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 39,
+        "distinct": 12,
+        "insight": "Spain leads with 10 of 39 events with a country on file (26%). No country recorded for 52 events — many are online."
+      },
+      "by_organiser": {
+        "labels": [
+          "H3D Foundation",
+          "University of Buea",
+          "Fast Forward",
+          "Institut de Recerca Biomedica de Barcelona",
+          "Software Sustainability Institute",
+          "National Institutes of Health",
+          "Bill and Melinda Gates Foundation",
+          "AccessNow",
+          "NumFocus",
+          "University of Reading"
+        ],
+        "values": [
+          8,
+          8,
+          7,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "n": 95,
+        "insight": "Organisations that convened the most events Ersilia took part in.",
+        "distinct": 59
+      }
+    },
+    "blogposts": {
+      "per_year": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "values": [
+          12,
+          10,
+          13,
+          11,
+          3,
+          5
+        ],
+        "n": 54,
+        "insight": "Busiest year was 2023 with 13 posts. Posts in 2026: 5, up from 3 in 2025."
+      },
+      "by_category": {
+        "labels": [
+          "Technology",
+          "Science",
+          "Training",
+          "Global Health",
+          "News"
+        ],
+        "values": [
+          18,
+          16,
+          11,
+          10,
+          9
+        ],
+        "n": 64,
+        "distinct": 5,
+        "insight": "Technology leads with 18 of 64 category assignments (28%)."
+      },
+      "by_publisher": {
+        "labels": [
+          "Ersilia",
+          "Other"
+        ],
+        "values": [
+          44,
+          10
+        ],
+        "n": 54,
+        "insight": "44 of 54 posts (81%) were published on Ersilia's own channels.",
+        "semantics": {
+          "Ersilia": "brand",
+          "Other": "neutral"
+        }
+      }
+    },
+    "quality": {
+      "completeness": {
+        "labels": [
+          "countries",
+          "organisations",
+          "events",
+          "conferences",
+          "projects",
+          "community",
+          "publications",
+          "models",
+          "repositories",
+          "blogposts"
+        ],
+        "values": [
+          51.8,
+          62.9,
+          81.6,
+          82.1,
+          85.6,
+          85.7,
+          93.8,
+          96.2,
+          97.5,
+          98.3
+        ],
+        "n": 10,
+        "insight": "Mean share of populated cells per table. The thinnest is countries at 51.8%.",
+        "unit": "% of cells populated",
+        "detail": {
+          "blogposts": [
+            {
+              "column": "author",
+              "filled": 49,
+              "total": 54,
+              "pct": 90.7
+            },
+            {
+              "column": "category",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "date",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "intro",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "name_(from_author)",
+              "filled": 49,
+              "total": 54,
+              "pct": 90.7
+            },
+            {
+              "column": "publisher",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "quarter",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "slug",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "title",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "url",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            },
+            {
+              "column": "year",
+              "filled": 54,
+              "total": 54,
+              "pct": 100.0
+            }
+          ],
+          "community": [
+            {
+              "column": "blogposts",
+              "filled": 11,
+              "total": 113,
+              "pct": 9.7
+            },
+            {
+              "column": "country",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "country_(from_country)",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "end_date",
+              "filled": 102,
+              "total": 113,
+              "pct": 90.3
+            },
+            {
+              "column": "end_month",
+              "filled": 102,
+              "total": 113,
+              "pct": 90.3
+            },
+            {
+              "column": "end_quarter",
+              "filled": 102,
+              "total": 113,
+              "pct": 90.3
+            },
+            {
+              "column": "end_year",
+              "filled": 102,
+              "total": 113,
+              "pct": 90.3
+            },
+            {
+              "column": "gender",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "name_(from_org)",
+              "filled": 109,
+              "total": 113,
+              "pct": 96.5
+            },
+            {
+              "column": "organisation",
+              "filled": 109,
+              "total": 113,
+              "pct": 96.5
+            },
+            {
+              "column": "projects",
+              "filled": 8,
+              "total": 113,
+              "pct": 7.1
+            },
+            {
+              "column": "role",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "start_date",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "start_month",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "start_quarter",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            },
+            {
+              "column": "start_year",
+              "filled": 113,
+              "total": 113,
+              "pct": 100.0
+            }
+          ],
+          "conferences": [
+            {
+              "column": "cadence",
+              "filled": 21,
+              "total": 21,
+              "pct": 100.0
+            },
+            {
+              "column": "countries",
+              "filled": 19,
+              "total": 21,
+              "pct": 90.5
+            },
+            {
+              "column": "focus",
+              "filled": 21,
+              "total": 21,
+              "pct": 100.0
+            },
+            {
+              "column": "name",
+              "filled": 21,
+              "total": 21,
+              "pct": 100.0
+            },
+            {
+              "column": "organiser",
+              "filled": 7,
+              "total": 21,
+              "pct": 33.3
+            },
+            {
+              "column": "remote_option",
+              "filled": 12,
+              "total": 21,
+              "pct": 57.1
+            },
+            {
+              "column": "upcoming_date",
+              "filled": 16,
+              "total": 21,
+              "pct": 76.2
+            },
+            {
+              "column": "website",
+              "filled": 21,
+              "total": 21,
+              "pct": 100.0
+            }
+          ],
+          "countries": [
+            {
+              "column": "collaborators",
+              "filled": 12,
+              "total": 197,
+              "pct": 6.1
+            },
+            {
+              "column": "community",
+              "filled": 20,
+              "total": 197,
+              "pct": 10.2
+            },
+            {
+              "column": "conferences",
+              "filled": 15,
+              "total": 197,
+              "pct": 7.6
+            },
+            {
+              "column": "country",
+              "filled": 197,
+              "total": 197,
+              "pct": 100.0
+            },
+            {
+              "column": "donations",
+              "filled": 4,
+              "total": 197,
+              "pct": 2.0
+            },
+            {
+              "column": "events",
+              "filled": 12,
+              "total": 197,
+              "pct": 6.1
+            },
+            {
+              "column": "income_group",
+              "filled": 179,
+              "total": 197,
+              "pct": 90.9
+            },
+            {
+              "column": "population",
+              "filled": 196,
+              "total": 197,
+              "pct": 99.5
+            },
+            {
+              "column": "region",
+              "filled": 195,
+              "total": 197,
+              "pct": 99.0
+            },
+            {
+              "column": "subregion",
+              "filled": 191,
+              "total": 197,
+              "pct": 97.0
+            }
+          ],
+          "events": [
+            {
+              "column": "country",
+              "filled": 39,
+              "total": 91,
+              "pct": 42.9
+            },
+            {
+              "column": "country_(from_country)",
+              "filled": 39,
+              "total": 91,
+              "pct": 42.9
+            },
+            {
+              "column": "date",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            },
+            {
+              "column": "description",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            },
+            {
+              "column": "event_url",
+              "filled": 85,
+              "total": 91,
+              "pct": 93.4
+            },
+            {
+              "column": "name",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            },
+            {
+              "column": "organisations",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            },
+            {
+              "column": "organiser",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            },
+            {
+              "column": "quarter",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            },
+            {
+              "column": "videos",
+              "filled": 17,
+              "total": 91,
+              "pct": 18.7
+            },
+            {
+              "column": "year",
+              "filled": 91,
+              "total": 91,
+              "pct": 100.0
+            }
+          ],
+          "models": [
+            {
+              "column": "biomedical_area",
+              "filled": 230,
+              "total": 240,
+              "pct": 95.8
+            },
+            {
+              "column": "computational_performance_1",
+              "filled": 220,
+              "total": 240,
+              "pct": 91.7
+            },
+            {
+              "column": "computational_performance_2",
+              "filled": 220,
+              "total": 240,
+              "pct": 91.7
+            },
+            {
+              "column": "computational_performance_3",
+              "filled": 220,
+              "total": 240,
+              "pct": 91.7
+            },
+            {
+              "column": "computational_performance_4",
+              "filled": 220,
+              "total": 240,
+              "pct": 91.7
+            },
+            {
+              "column": "computational_performance_5",
+              "filled": 220,
+              "total": 240,
+              "pct": 91.7
+            },
+            {
+              "column": "contributor",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "contributor_profile",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "deployment",
+              "filled": 233,
+              "total": 240,
+              "pct": 97.1
+            },
+            {
+              "column": "description",
+              "filled": 235,
+              "total": 240,
+              "pct": 97.9
+            },
+            {
+              "column": "docker_architecture",
+              "filled": 234,
+              "total": 240,
+              "pct": 97.5
+            },
+            {
+              "column": "dockerhub",
+              "filled": 234,
+              "total": 240,
+              "pct": 97.5
+            },
+            {
+              "column": "environment_size",
+              "filled": 223,
+              "total": 240,
+              "pct": 92.9
+            },
+            {
+              "column": "github",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "identifier",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "image_size",
+              "filled": 220,
+              "total": 240,
+              "pct": 91.7
+            },
+            {
+              "column": "incorporation_date",
+              "filled": 236,
+              "total": 240,
+              "pct": 98.3
+            },
+            {
+              "column": "incorporation_quarter",
+              "filled": 236,
+              "total": 240,
+              "pct": 98.3
+            },
+            {
+              "column": "incorporation_year",
+              "filled": 236,
+              "total": 240,
+              "pct": 98.3
+            },
+            {
+              "column": "input",
+              "filled": 237,
+              "total": 240,
+              "pct": 98.8
+            },
+            {
+              "column": "input_dimension",
+              "filled": 231,
+              "total": 240,
+              "pct": 96.2
+            },
+            {
+              "column": "interpretation",
+              "filled": 233,
+              "total": 240,
+              "pct": 97.1
+            },
+            {
+              "column": "last_packaging_date",
+              "filled": 219,
+              "total": 240,
+              "pct": 91.2
+            },
+            {
+              "column": "license",
+              "filled": 200,
+              "total": 240,
+              "pct": 83.3
+            },
+            {
+              "column": "model_size",
+              "filled": 223,
+              "total": 240,
+              "pct": 92.9
+            },
+            {
+              "column": "output",
+              "filled": 233,
+              "total": 240,
+              "pct": 97.1
+            },
+            {
+              "column": "output_consistency",
+              "filled": 230,
+              "total": 240,
+              "pct": 95.8
+            },
+            {
+              "column": "output_dimension",
+              "filled": 230,
+              "total": 240,
+              "pct": 95.8
+            },
+            {
+              "column": "publication",
+              "filled": 239,
+              "total": 240,
+              "pct": 99.6
+            },
+            {
+              "column": "publication_type",
+              "filled": 230,
+              "total": 240,
+              "pct": 95.8
+            },
+            {
+              "column": "publication_year",
+              "filled": 230,
+              "total": 240,
+              "pct": 95.8
+            },
+            {
+              "column": "release",
+              "filled": 219,
+              "total": 240,
+              "pct": 91.2
+            },
+            {
+              "column": "repository",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "s3",
+              "filled": 235,
+              "total": 240,
+              "pct": 97.9
+            },
+            {
+              "column": "slug",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "source",
+              "filled": 231,
+              "total": 240,
+              "pct": 96.2
+            },
+            {
+              "column": "source_code",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "source_type",
+              "filled": 231,
+              "total": 240,
+              "pct": 96.2
+            },
+            {
+              "column": "status",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            },
+            {
+              "column": "subtask",
+              "filled": 231,
+              "total": 240,
+              "pct": 96.2
+            },
+            {
+              "column": "tag",
+              "filled": 233,
+              "total": 240,
+              "pct": 97.1
+            },
+            {
+              "column": "target_organism",
+              "filled": 234,
+              "total": 240,
+              "pct": 97.5
+            },
+            {
+              "column": "task",
+              "filled": 231,
+              "total": 240,
+              "pct": 96.2
+            },
+            {
+              "column": "title",
+              "filled": 240,
+              "total": 240,
+              "pct": 100.0
+            }
+          ],
+          "organisations": [
+            {
+              "column": "acronym",
+              "filled": 291,
+              "total": 320,
+              "pct": 90.9
+            },
+            {
+              "column": "classification",
+              "filled": 320,
+              "total": 320,
+              "pct": 100.0
+            },
+            {
+              "column": "community",
+              "filled": 28,
+              "total": 320,
+              "pct": 8.8
+            },
+            {
+              "column": "conferences",
+              "filled": 6,
+              "total": 320,
+              "pct": 1.9
+            },
+            {
+              "column": "contacts",
+              "filled": 89,
+              "total": 320,
+              "pct": 27.8
+            },
+            {
+              "column": "country",
+              "filled": 312,
+              "total": 320,
+              "pct": 97.5
+            },
+            {
+              "column": "description",
+              "filled": 308,
+              "total": 320,
+              "pct": 96.2
+            },
+            {
+              "column": "events",
+              "filled": 59,
+              "total": 320,
+              "pct": 18.4
+            },
+            {
+              "column": "focus_areas",
+              "filled": 320,
+              "total": 320,
+              "pct": 100.0
+            },
+            {
+              "column": "focus_region",
+              "filled": 288,
+              "total": 320,
+              "pct": 90.0
+            },
+            {
+              "column": "grants",
+              "filled": 96,
+              "total": 320,
+              "pct": 30.0
+            },
+            {
+              "column": "name",
+              "filled": 320,
+              "total": 320,
+              "pct": 100.0
+            },
+            {
+              "column": "opportunities",
+              "filled": 320,
+              "total": 320,
+              "pct": 100.0
+            },
+            {
+              "column": "projects",
+              "filled": 22,
+              "total": 320,
+              "pct": 6.9
+            },
+            {
+              "column": "type",
+              "filled": 320,
+              "total": 320,
+              "pct": 100.0
+            },
+            {
+              "column": "website",
+              "filled": 317,
+              "total": 320,
+              "pct": 99.1
+            },
+            {
+              "column": "workshops",
+              "filled": 8,
+              "total": 320,
+              "pct": 2.5
+            }
+          ],
+          "projects": [
+            {
+              "column": "collaborator",
+              "filled": 28,
+              "total": 36,
+              "pct": 77.8
+            },
+            {
+              "column": "description",
+              "filled": 36,
+              "total": 36,
+              "pct": 100.0
+            },
+            {
+              "column": "drive",
+              "filled": 35,
+              "total": 36,
+              "pct": 97.2
+            },
+            {
+              "column": "end_date",
+              "filled": 28,
+              "total": 36,
+              "pct": 77.8
+            },
+            {
+              "column": "end_quarter",
+              "filled": 28,
+              "total": 36,
+              "pct": 77.8
+            },
+            {
+              "column": "end_year",
+              "filled": 28,
+              "total": 36,
+              "pct": 77.8
+            },
+            {
+              "column": "grant",
+              "filled": 21,
+              "total": 36,
+              "pct": 58.3
+            },
+            {
+              "column": "name",
+              "filled": 36,
+              "total": 36,
+              "pct": 100.0
+            },
+            {
+              "column": "organization",
+              "filled": 30,
+              "total": 36,
+              "pct": 83.3
+            },
+            {
+              "column": "publications",
+              "filled": 14,
+              "total": 36,
+              "pct": 38.9
+            },
+            {
+              "column": "repositories",
+              "filled": 30,
+              "total": 36,
+              "pct": 83.3
+            },
+            {
+              "column": "start_date",
+              "filled": 36,
+              "total": 36,
+              "pct": 100.0
+            },
+            {
+              "column": "start_quarter",
+              "filled": 36,
+              "total": 36,
+              "pct": 100.0
+            },
+            {
+              "column": "start_year",
+              "filled": 36,
+              "total": 36,
+              "pct": 100.0
+            },
+            {
+              "column": "status",
+              "filled": 36,
+              "total": 36,
+              "pct": 100.0
+            },
+            {
+              "column": "team",
+              "filled": 35,
+              "total": 36,
+              "pct": 97.2
+            }
+          ],
+          "publications": [
+            {
+              "column": "abstract",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "african_collaboration",
+              "filled": 26,
+              "total": 42,
+              "pct": 61.9
+            },
+            {
+              "column": "authors",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "citations",
+              "filled": 36,
+              "total": 42,
+              "pct": 85.7
+            },
+            {
+              "column": "ersilia_affiliation",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "google_scholar_id",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "journal",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "projects",
+              "filled": 20,
+              "total": 42,
+              "pct": 47.6
+            },
+            {
+              "column": "senior",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "slug",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "status",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "title",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "topic",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "type",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "url",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "year",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
+              "column": "year_web",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            }
+          ],
+          "repositories": [
+            {
+              "column": "contributor_names",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "contributors",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "creation_date",
+              "filled": 177,
+              "total": 178,
+              "pct": 99.4
+            },
+            {
+              "column": "description",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "forks",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "name",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "open_issues",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "projects",
+              "filled": 107,
+              "total": 178,
+              "pct": 60.1
+            },
+            {
+              "column": "stars",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "status",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "subscribers",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "title",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "total_commits",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "type",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "url",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            },
+            {
+              "column": "visibility",
+              "filled": 178,
+              "total": 178,
+              "pct": 100.0
+            }
+          ]
+        }
+      },
+      "thin_fields": {
+        "labels": [
+          "organisations · conferences",
+          "countries · donations",
+          "organisations · workshops",
+          "countries · collaborators",
+          "countries · events",
+          "organisations · projects",
+          "community · projects",
+          "countries · conferences",
+          "organisations · community",
+          "community · blogposts",
+          "countries · community",
+          "organisations · events",
+          "events · videos",
+          "organisations · contacts",
+          "organisations · grants",
+          "conferences · organiser",
+          "projects · publications",
+          "events · country"
+        ],
+        "values": [
+          1.9,
+          2,
+          2.5,
+          6.1,
+          6.1,
+          6.9,
+          7.1,
+          7.6,
+          8.8,
+          9.7,
+          10.2,
+          18.4,
+          18.7,
+          27.8,
+          30,
+          33.3,
+          38.9,
+          42.9
+        ],
+        "n": 29,
+        "insight": "29 fields are under 80% populated; the 18 thinnest are shown.",
+        "unit": "% populated",
+        "threshold": 80.0
+      },
+      "project_repo_status": {
+        "x": [
+          "Archived",
+          "Completed",
+          "Discontinued",
+          "Idle",
+          "In progress",
+          "Todo"
+        ],
+        "y": [
+          "Done",
+          "In progress",
+          "Stuck"
+        ],
+        "cells": [
+          [
+            0,
+            0,
+            3
+          ],
+          [
+            1,
+            0,
+            25
+          ],
+          [
+            2,
+            0,
+            5
+          ],
+          [
+            3,
+            0,
+            1
+          ],
+          [
+            4,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            1,
+            17
+          ],
+          [
+            2,
+            1,
+            1
+          ],
+          [
+            3,
+            1,
+            4
+          ],
+          [
+            4,
+            1,
+            21
+          ],
+          [
+            5,
+            1,
+            3
+          ],
+          [
+            1,
+            2,
+            2
+          ],
+          [
+            3,
+            2,
+            3
+          ],
+          [
+            4,
+            2,
+            1
+          ]
+        ],
+        "n": 91,
+        "orphans": 54,
+        "insight": "91 repository-project links. 2 links pair a finished project with a repository that is still open. 54 public repositories are linked to no project."
+      },
+      "table_sizes": {
+        "labels": [
+          "organisations",
+          "models",
+          "countries",
+          "repositories",
+          "community",
+          "events",
+          "blogposts",
+          "publications",
+          "projects",
+          "conferences"
+        ],
+        "values": [
+          320,
+          240,
+          197,
+          178,
+          113,
+          91,
+          54,
+          42,
+          36,
+          21
+        ],
+        "n": 10,
+        "insight": "1,292 rows across 10 source tables in this snapshot."
+      }
+    }
+  }
+}

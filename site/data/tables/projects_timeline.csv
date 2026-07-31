@@ -1,0 +1,37 @@
+end,months,name,open,start,status
+2022-12-31,42.0,Cervical cancer in WLHIV,False,2019-07-01,Done
+2022-12-31,31.0,Record Linkage CxCa,False,2020-06-01,Done
+2026-07-31,66.9,Ersilia Model Hub,True,2021-01-01,In progress
+2023-01-06,23.9,H3D Virtual Screening Cascade,False,2021-01-09,Done
+2024-04-30,36.0,Open Source Antimalarials,False,2021-05-01,Done
+2026-11-01,60.0,NiDNA CeDD,False,2021-11-01,In progress
+2022-03-30,2.9,RES-BSC Precalculations,False,2022-01-01,Done
+2023-12-31,23.9,Chemoproteomics ligand discovery,False,2022-01-01,Done
+2022-01-07,0.0,Open Source Antibiotics,False,2022-01-06,Done
+2023-02-01,12.0,CHAMPS diagrams,False,2022-02-01,Done
+2022-09-30,2.0,Oxidative stress and malaria,False,2022-08-01,Done
+2024-08-01,24.0,African pharmacogenomics,False,2022-08-01,Done
+2023-11-01,12.0,Stage-specific antimalarial potential,False,2022-11-01,Done
+2023-05-31,3.9,Severe malaria biomarkers,False,2023-02-01,Done
+2024-09-01,12.0,Scaffold Hopping from Natural Products,False,2023-09-01,Stuck
+2026-11-30,36.0,Splunk data store,False,2023-12-01,In progress
+2026-09-01,32.0,AI2050 for capacity building at H3D,False,2024-01-01,Done
+2026-08-01,31.0,AI2050 for TB Modelling,False,2024-01-01,In progress
+2024-09-01,5.0,FAIR-Impact,False,2024-04-01,Done
+2025-01-31,7.0,AI Incubator scoping,False,2024-07-01,Done
+2024-12-31,4.0,Mozilla Builders,False,2024-09-01,Done
+2026-07-31,22.9,The Gambia MRC,True,2024-09-01,In progress
+2027-09-30,36.9,Plan Generación Conocimiento,False,2024-09-01,In progress
+2026-12-31,23.9,Gram-negative antibiotics discovery with GARDP,False,2025-01-01,In progress
+2026-09-30,20.9,Targeted protein degradation for tuberculosis,False,2025-01-01,In progress
+2025-09-01,8.0,AI2050 Collaboration Fund,False,2025-01-01,Done
+2026-07-31,14.0,ChemPFN,True,2025-06-01,Stuck
+2026-07-31,13.0,PREEMI maternal healthcare,True,2025-07-01,Stuck
+2026-07-31,11.2,HIV follow up during COVID in Zambia,True,2025-08-24,Stuck
+2026-12-31,16.0,H3D Mtb Bioactivity,False,2025-09-01,In progress
+2026-07-31,10.0,NPs as schistosoma drugs,True,2025-10-01,In progress
+2026-07-31,10.0,PQZ signature reversal,True,2025-10-01,In progress
+2026-12-31,14.0,Collaboration Fund BMGF,False,2025-11-01,In progress
+2026-07-31,8.9,AID3 molecular glue discovery,True,2025-11-01,Todo
+2026-12-31,12.0,AI2050 Compute Fund,False,2026-01-01,In progress
+2029-03-31,36.0,Gr-ADI targeted protein degradation for AMR,False,2026-04-01,In progress
