@@ -14,7 +14,7 @@ choice is stated on the page (Methods) rather than left implicit.
 from collections import Counter
 
 from . import insights as ins
-from .parse import EMPTY, col, metric, parse_multi
+from .parse import EMPTY, as_text, col, metric, parse_multi
 from .organisations import country_lookup, resolve_countries
 
 GLOBAL_SOUTH_GROUPS = {"LIC", "LMIC", "UMIC"}
@@ -28,11 +28,13 @@ def _attribute_map(countries, attribute):
         return {}
     if "country" not in countries.columns or attribute not in countries.columns:
         return {}
-    names = countries["country"].astype(str).str.strip()
-    values = countries[attribute].astype(str).str.strip()
+    names = as_text(countries["country"])
+    values = as_text(countries[attribute])
     return {
         name: value for name, value in zip(names, values)
-        if value and value.lower() != "nan"
+        # A row with no country name would otherwise become an "" key that nothing
+        # can ever look up.
+        if name and value and value.lower() != "nan"
     }
 
 
@@ -147,7 +149,7 @@ def _south_north(engaged, income):
 
 def _reference(countries, attribute):
     """The full reference table's composition, for context in the appendix."""
-    values = col(countries, attribute).astype(str).str.strip() if countries is not None else None
+    values = as_text(col(countries, attribute)) if countries is not None else None
     if values is None or values.empty:
         return dict(EMPTY)
     values = values[(values != "") & (values.str.lower() != "nan")]

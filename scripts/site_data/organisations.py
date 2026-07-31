@@ -2,7 +2,7 @@
 from collections import Counter
 
 from . import insights as ins
-from .parse import EMPTY, col, metric, multi_counts, parse_multi, value_counts
+from .parse import EMPTY, as_text, col, metric, multi_counts, parse_multi, value_counts
 
 
 def country_lookup(countries):
@@ -11,7 +11,7 @@ def country_lookup(countries):
         return {}
     if "airtable_id" not in countries.columns or "country" not in countries.columns:
         return {}
-    return dict(zip(countries["airtable_id"].astype(str), countries["country"].astype(str)))
+    return dict(zip(as_text(countries["airtable_id"]), as_text(countries["country"])))
 
 
 def resolve_countries(frame, id_to_name, column="country"):

@@ -7,7 +7,7 @@ overlap, which ran long, and what is running right now.
 import pandas as pd
 
 from . import insights as ins
-from .parse import col, metric, series_metric, value_counts
+from .parse import as_text, col, metric, series_metric, value_counts
 
 # Airtable's project states mapped onto the house semantic tokens, so "in progress"
 # is the same colour in every chart on the site.
@@ -28,7 +28,7 @@ def build(projects, today):
 
     start = pd.to_datetime(col(projects, "start_date"), errors="coerce")
     end = pd.to_datetime(col(projects, "end_date"), errors="coerce")
-    status = col(projects, "status").astype(str).str.strip()
+    status = as_text(col(projects, "status"))
 
     return {
         "status": _status(projects, status),
@@ -84,7 +84,7 @@ def _timeline(projects, start, end, status, today):
     Project names are organisational, not personal, so they are safe to publish —
     unlike anything from the community table.
     """
-    names = col(projects, "name").astype(str)
+    names = as_text(col(projects, "name"))
     rows = []
     for i in range(len(projects)):
         if pd.isna(start.iloc[i]):

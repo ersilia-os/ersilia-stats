@@ -11,7 +11,7 @@ Two deliberate changes from the previous export:
 import pandas as pd
 
 from . import insights as ins
-from .parse import EMPTY, col, metric, multi_counts, series_metric, to_num, value_counts
+from .parse import EMPTY, as_text, col, metric, multi_counts, series_metric, to_num, value_counts
 
 MIN_ARTICLES_FOR_JOURNAL_RANK = 2
 YES = {"yes", "true", "1"}
@@ -106,7 +106,7 @@ def _affiliation(pubs):
 def _affiliation_by_year(pubs, years):
     frame = pd.DataFrame({
         "year": years,
-        "aff": col(pubs, "ersilia_affiliation").astype(str).str.strip().str.lower(),
+        "aff": as_text(col(pubs, "ersilia_affiliation")).str.lower(),
     }).dropna(subset=["year"])
     frame = frame[frame["year"] > 1990]
     if frame.empty:
@@ -125,7 +125,7 @@ def _affiliation_by_year(pubs, years):
 
 
 def _african(pubs):
-    raw = col(pubs, "african_collaboration").astype(str).str.strip()
+    raw = as_text(col(pubs, "african_collaboration"))
     recorded = raw[(raw != "") & (raw.str.lower() != "nan")]
     out = value_counts(recorded)
     yes = int(recorded.str.lower().isin(YES).sum())
@@ -146,7 +146,7 @@ def _top_journals(pubs, citations):
     if "journal" not in pubs.columns:
         return dict(EMPTY)
     frame = pd.DataFrame({
-        "journal": pubs["journal"].astype(str).str.strip(),
+        "journal": as_text(pubs["journal"]),
         "citations": citations,
     })
     frame = frame[(frame["journal"] != "") & (frame["journal"].str.lower() != "nan")]

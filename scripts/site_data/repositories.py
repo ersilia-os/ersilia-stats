@@ -11,6 +11,7 @@ import pandas as pd
 from . import insights as ins
 from .parse import (
     EMPTY,
+    as_text,
     col,
     cumulative,
     dense_quarters,
@@ -42,7 +43,7 @@ def public_only(repos):
         return repos, 0
     if "visibility" not in repos.columns:
         return repos, 0
-    visibility = repos["visibility"].astype(str).str.strip().str.lower()
+    visibility = as_text(repos["visibility"]).str.lower()
     public = repos[visibility == "public"].copy()
     return public, int(len(repos) - len(public))
 
@@ -167,7 +168,7 @@ def _by_status(frame):
     status = col(frame, "status").apply(first_value)
     out = value_counts(status, top=12)
     if out["labels"]:
-        active = int(status.astype(str).str.strip().str.lower().isin(
+        active = int(as_text(status).str.lower().isin(
             {"in progress", "idle"}).sum())
         out["insight"] = ins.share_of(active, len(frame), "public repositories",
                                       "are in progress or idle rather than closed out")

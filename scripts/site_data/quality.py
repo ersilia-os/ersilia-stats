@@ -14,7 +14,7 @@ as good as what is filled in here.
 import pandas as pd
 
 from . import insights as ins
-from .parse import EMPTY, col, first_value, metric, parse_multi
+from .parse import EMPTY, as_text, col, first_value, metric, parse_multi
 
 # Columns that exist for Airtable's own bookkeeping, not as data.
 SKIP_COLUMNS = {"airtable_id"}
@@ -38,7 +38,7 @@ def _column_completeness(df):
     for column in df.columns:
         if column in SKIP_COLUMNS:
             continue
-        values = df[column].astype(str).str.strip()
+        values = as_text(df[column])
         filled = int(((values != "") & (values.str.lower() != "nan")).sum())
         out.append({"column": column, "filled": filled, "total": rows,
                     "pct": round(100.0 * filled / rows, 1)})
@@ -107,8 +107,8 @@ def _project_repo_status(projects, repos):
     if "projects" not in repos.columns or "airtable_id" not in projects.columns:
         return {"x": [], "y": [], "cells": [], "n": 0}
 
-    project_status = dict(zip(projects["airtable_id"].astype(str),
-                              col(projects, "status").astype(str).str.strip()))
+    project_status = dict(zip(as_text(projects["airtable_id"]),
+                              as_text(col(projects, "status"))))
     repo_status = col(repos, "status").apply(first_value)
 
     pairs = []

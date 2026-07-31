@@ -62,6 +62,21 @@ def to_num(series):
     return pd.to_numeric(series, errors="coerce").fillna(0)
 
 
+def as_text(series):
+    """A guaranteed-string, stripped Series. Missing values become ``""``.
+
+    ``series.astype(str)`` is NOT safe here: whether it renders a missing value as
+    the string ``"nan"`` or leaves it as a float differs between pandas versions,
+    and ``.str.strip()`` then reintroduces NaN for any non-string element. That is
+    exactly how a build that passed on pandas 2.3 died on 2.2 with
+    ``'float' object has no attribute 'lower'``. Filling before converting removes
+    the ambiguity, so downstream ``.lower()`` and ``.str`` calls are always safe.
+    """
+    if series is None:
+        return pd.Series(dtype=object)
+    return series.fillna("").astype(str).str.strip()
+
+
 # ---------------------------------------------------------------------------
 # Metric constructors
 # ---------------------------------------------------------------------------
@@ -109,7 +124,7 @@ def multi_counts(series, top=None, insight=None):
 
 def value_counts(series, top=None, insight=None):
     """Count plain single-value cells (no multi-value splitting)."""
-    clean = series.dropna().astype(str).str.strip()
+    clean = as_text(series)
     clean = clean[(clean != "") & (clean.str.lower() != "nan")]
     counts = clean.value_counts()
     if top:
@@ -177,4 +192,4 @@ def top_by(df, value_col, name_col, n=12, insight=None):
     ranked = ranked[ranked["_v"] > 0]
     # n is the number of ranked entries, not the sum of a "top N" column, which
     # would read as a total the chart does not show.
-    return metric(ranked[name_col].astype(str), ranked["_v"], insight, n=int(len(ranked)))
+    return metric(as_text(ranked[name_col]), ranked["_v"], insight, n=int(len(ranked)))

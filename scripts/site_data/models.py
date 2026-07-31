@@ -14,6 +14,7 @@ import pandas as pd
 from . import insights as ins
 from .parse import (
     EMPTY,
+    as_text,
     col,
     cumulative,
     dense_quarters,
@@ -81,7 +82,7 @@ def build(models):
 
     status = col(models, "status").apply(first_value)
     by_status = value_counts(status, insight=None)
-    ready = int((status.astype(str).str.strip().str.lower() == "ready").sum())
+    ready = int((as_text(status).str.lower() == "ready").sum())
     by_status["insight"] = ins.share_of(ready, len(models), "models", "are ready to run")
     by_status["semantics"] = {
         label: STATUS_SEMANTICS.get(str(label).strip().lower(), "neutral")
@@ -180,7 +181,7 @@ def _cohorts_by_status(models, incorporated, status):
         return {"labels": [], "series": [], "n": 0}
 
     periods = dates[valid].dt.to_period("Q")
-    states = status[valid].fillna("Unspecified").astype(str).str.strip()
+    states = as_text(status[valid]).replace("", "Unspecified")
     full = pd.period_range(periods.min(), periods.max(), freq="Q")
     present = _ordered_statuses(set(states.unique()))
 
@@ -235,7 +236,7 @@ def _coverage(models):
         series = col(models, column)
         if series.empty:
             continue
-        filled = series.astype(str).str.strip()
+        filled = as_text(series)
         labels.append(label)
         values.append(int(((filled != "") & (filled.str.lower() != "nan")).sum()))
     if not labels:
