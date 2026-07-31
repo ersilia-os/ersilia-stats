@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 20:57 UTC",
+  "generated_at": "2026-07-31 21:00 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -814,7 +814,7 @@
           151
         ],
         "n": 220,
-        "insight": "151 of 220 benchmarked models ran the largest batch, 10,000 inputs.",
+        "insight": "151 of 220 reached the largest batch, 10,000 inputs.",
         "ordinal": true
       },
       "image_size": {
@@ -833,7 +833,7 @@
           20
         ],
         "n": 220,
-        "insight": "89 of 220 Docker images are under 2 GB; the mean is 3.8 GB.",
+        "insight": "89 of 220 images are under 2 GB; mean 3.8 GB.",
         "mean": 3.8,
         "unit": "GB",
         "countNoun": "models"
@@ -1571,9 +1571,9 @@
         "today": "2026-07-31",
         "semantics": {
           "Todo": "neutral",
-          "Done": "good",
           "In progress": "brand",
-          "Stuck": "bad"
+          "Stuck": "bad",
+          "Done": "good"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 1 past its end date."
       },
@@ -1587,7 +1587,7 @@
           12.1
         ],
         "n": 36,
-        "insight": "Median 18.4 months once finished; 12.1 so far for those running.",
+        "insight": "Median 18.4 months finished, 12.1 so far running.",
         "unit": "months"
       },
       "outputs": {

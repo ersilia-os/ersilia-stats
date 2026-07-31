@@ -233,7 +233,7 @@ def _duration(start, end, status, today):
     # Running projects are measured to today, so their median is a floor, not a length.
     pairs = dict(zip(labels, values))
     if "Completed" in pairs and "Still running" in pairs:
-        insight = ("Median %s months once finished; %s so far for those running."
+        insight = ("Median %s months finished, %s so far running."
                    % (pairs["Completed"], pairs["Still running"]))
     else:
         insight = "Median run length: %s months." % values[0]

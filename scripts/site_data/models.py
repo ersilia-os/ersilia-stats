@@ -291,7 +291,7 @@ def _scaling_limit(models):
     top = labels[-1]
     out = metric(
         labels, values,
-        "%s of %s benchmarked models ran the largest batch, %s inputs." % (
+        "%s of %s reached the largest batch, %s inputs." % (
             ins.num(counts[top]), ins.num(total), top),
         n=total,
     )
@@ -315,7 +315,7 @@ def _image_size(models):
     under_two = int((gb < 2).sum())
     return metric(
         labels, values,
-        "%s of %s Docker images are under 2 GB; the mean is %s GB." % (
+        "%s of %s images are under 2 GB; mean %s GB." % (
             ins.num(under_two), ins.num(len(gb)), round(float(gb.mean()), 1)),
         mean=round(float(gb.mean()), 1),
         unit="GB",

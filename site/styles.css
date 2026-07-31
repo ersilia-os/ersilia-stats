@@ -361,6 +361,14 @@ main > * { max-width: var(--content-w); }
 /* The lead card is distinguished by weight, not by another size — adding a seventh
    step to the scale to make one card bigger is how the old nineteen happened. */
 .card.lead .phead h3 { font-weight: 600; }
+/* The narrowest cards take the smaller of the two text sizes for their caption. This
+   is not a third size — it is the other level of the same two-level scale — and it buys
+   the ~8% of characters that stops a 3-column caption sitting one glyph from the clamp.
+   Font metrics differ between platforms (the CI runner's Linux fonts are slightly wider
+   than macOS's), and a layout should not depend on which machine rendered it. */
+.span-3 .insight, .span-4 .insight { font-size: var(--fs-meta); }
+.span-3 .insight { min-height: calc(2 * 1.4 * var(--fs-meta)); }
+.span-4 .insight { min-height: calc(2 * 1.4 * var(--fs-meta)); }
 .pmeta { display: flex; align-items: center; gap: var(--sp-3); flex: 0 0 auto; }
 .pcount {
   font-family: var(--mono); font-size: var(--fs-meta); color: var(--muted);
