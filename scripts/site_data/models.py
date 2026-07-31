@@ -19,6 +19,7 @@ from .parse import (
     cumulative,
     dense_quarters,
     first_value,
+    growth_pair,
     metric,
     multi_counts,
     parse_multi,
@@ -59,6 +60,12 @@ def build(models):
             "by_license": dict(EMPTY),
             "coverage": dict(EMPTY),
             "by_source_type": dict(EMPTY),
+            "by_target_organism": dict(EMPTY),
+            "publication_lag": dict(EMPTY),
+            "scaling_limit": dict(EMPTY),
+            "image_size": dict(EMPTY),
+            "on_arm": dict(EMPTY),
+            "growth": {"labels": [], "series": [], "n": 0},
         }
 
     incorporated = col(models, "incorporation_date")
@@ -67,13 +74,7 @@ def build(models):
 
     labels = [str(i) for i in dense.index]
     running = list(dense.cumsum().values)
-    cum = cumulative(
-        quarters,
-        ins.join(
-            ins.span(labels, running, "models"),
-            ins.busiest(labels, list(dense.values), "model", "models"),
-        ),
-    )
+    cum = cumulative(quarters, ins.span(labels, running, "models"))
     cum["n"] = int(running[-1]) if running else 0
     per_quarter = metric(
         labels, dense.values,
@@ -92,7 +93,15 @@ def build(models):
     return {
         "cumulative": cum,
         "per_quarter": per_quarter,
+        # Rate and running total on one shared axis, so "how fast" and "how many"
+        # are never a click apart.
+        "growth": growth_pair(labels, list(dense.values), running, "models"),
         "task_tree": _task_tree(models),
+        "by_target_organism": _by_target_organism(models),
+        "publication_lag": _publication_lag(models, incorporated),
+        "scaling_limit": _scaling_limit(models),
+        "image_size": _image_size(models),
+        "on_arm": _on_arm(models),
         "cohorts_by_status": _cohorts_by_status(models, incorporated, status),
         "by_status": by_status,
         "by_biomedical_area": _by_biomedical_area(models),
@@ -113,8 +122,16 @@ def _task_tree(models):
     nested = defaultdict(Counter)
     task_col = col(models, "task")
     subtask_col = col(models, "subtask")
+    unrecorded = 0
     for i in range(len(models)):
-        task = (first_value(task_col.iloc[i]) if len(task_col) else None) or "Unspecified"
+        task = first_value(task_col.iloc[i]) if len(task_col) else None
+        if not task:
+            # Models with no task recorded are left OUT rather than given an
+            # "Unspecified" family: as a block it was too small to label and rendered
+            # as a slice of colour at the edge captioned "Un". The count is stated in
+            # the caption instead, which is honest and legible.
+            unrecorded += 1
+            continue
         subtask = (first_value(subtask_col.iloc[i]) if len(subtask_col) else None) or "Unspecified"
         nested[task][subtask] += 1
 
@@ -132,9 +149,8 @@ def _task_tree(models):
     insight = None
     if leader:
         biggest_leaf = leader[1].most_common(1)[0]
-        insight = "%s is the largest task family (%s of models); its biggest subtask is %s with %s." % (
-            leader[0], ins.pct(sum(leader[1].values()), total),
-            biggest_leaf[0], ins.num(biggest_leaf[1]),
+        insight = "%s is the largest task family, %s of the %s with a task recorded." % (
+            leader[0], ins.pct(sum(leader[1].values()), total), ins.num(total),
         )
     return {"tree": tree, "n": int(total), "insight": insight}
 
@@ -154,12 +170,183 @@ def _by_biomedical_area(models):
     counts = multi_counts(areas)
     generic = dict(zip(counts["labels"], counts["values"])).get("Any", 0)
     disease_specific = counts["n"] - generic
-    out["insight"] = ins.join(
-        ins.share_of(disease_specific, counts["n"], "area assignments",
-                     "name a specific disease or property rather than 'Any'"),
-        "Biomedical area is a multi-select, so a model spanning two areas counts in both.",
+    out["insight"] = ins.share_of(disease_specific, counts["n"], "area assignments",
+                                  "name a specific disease rather than 'Any'")
+    return out
+
+
+def _by_target_organism(models):
+    """Which pathogens the Hub can say something about.
+
+    The most mission-relevant field in the table and it was going unread. Ersilia
+    works on antimicrobial and antipathogen drug discovery, and this names the actual
+    organisms.
+
+    ``Any`` (133 models) and ``Homo sapiens`` (41) are EXCLUDED deliberately. Both
+    are true answers and both would dominate the ranking while saying nothing about
+    pathogen coverage: "Any" means the model is organism-agnostic chemistry, and
+    Homo sapiens means it predicts a human property (toxicity, permeability) rather
+    than acting on a pathogen. What is left is the pathogen-specific Hub.
+    """
+    NOT_A_PATHOGEN = {"any", "homo sapiens"}
+    counts = Counter()
+    organisms = col(models, "target_organism")
+    for value in organisms.dropna() if len(organisms) else []:
+        for token in parse_multi(value):
+            if token.strip().lower() not in NOT_A_PATHOGEN:
+                counts[token.strip()] += 1
+    if not counts:
+        return dict(EMPTY)
+    items = counts.most_common(12)
+    out = metric([k for k, _ in items], [v for _, v in items])
+    out["n"] = sum(counts.values())
+    out["insight"] = "%s models target a named pathogen; %s leads with %s." % (
+        ins.num(sum(counts.values())), items[0][0], ins.num(items[0][1]),
     )
     return out
+
+
+def _publication_lag(models, incorporated):
+    """How long a published model waits before Ersilia wraps it.
+
+    This is the Hub's responsiveness to the literature, and it is the kind of number
+    that only exists once you subtract two columns nobody had subtracted.
+
+    Rows where the incorporation year precedes the stated publication year are
+    dropped (3 of them) — a negative lag means one of the two dates is wrong, not
+    that Ersilia wrapped a paper before it existed.
+    """
+    years = pd.to_numeric(col(models, "publication_year"), errors="coerce")
+    dates = pd.to_datetime(incorporated, errors="coerce")
+    if years.empty or dates.empty:
+        return dict(EMPTY)
+    lag = (dates.dt.year - years).dropna()
+    lag = lag[lag >= 0]
+    if lag.empty:
+        return dict(EMPTY)
+
+    # Open-ended top bin: the tail runs to 33 years and fixed-width bins would be
+    # almost all empty. The en dash and the "+" are load-bearing — optHistogram
+    # parses them to place the mean rule.
+    bins = [(0, 1, "0"), (1, 2, "1"), (2, 3, "2"), (3, 5, "3–4"),
+            (5, 10, "5–9"), (10, float("inf"), "10+")]
+    labels, values = [], []
+    for low, high, label in bins:
+        labels.append(label)
+        values.append(int(((lag >= low) & (lag < high)).sum()))
+    same_year = int((lag == 0).sum())
+    return metric(
+        labels, values,
+        # ~40 characters is all a 3-column card fits on one line.
+        "%s of %s wrapped the same year." % (ins.num(same_year), ins.num(len(lag))),
+        mean=round(float(lag.mean()), 1),
+        median=round(float(lag.median()), 1),
+        unit="years",
+        countNoun="models",
+        n=int(len(lag)),
+    )
+
+
+# The five Computational Performance columns are runtimes at increasing input sizes.
+SCALE_STEPS = [
+    ("1 input", "computational_performance_1"),
+    ("10", "computational_performance_2"),
+    ("100", "computational_performance_3"),
+    ("1,000", "computational_performance_4"),
+    ("10,000", "computational_performance_5"),
+]
+
+
+def _scaling_limit(models):
+    """The largest batch each model actually completed.
+
+    DERIVED, NOT RECORDED, and the derivation rests on one convention: a value of
+    ``-1`` in a Computational Performance column means the model FAILED at that
+    input size. So the largest column holding a positive number is the largest batch
+    the model got through. This is stated in Methods because a reader cannot infer
+    it from the chart.
+    """
+    present = [(label, column) for label, column in SCALE_STEPS
+               if not col(models, column).empty]
+    if not present:
+        return dict(EMPTY)
+    numeric = [(label, pd.to_numeric(col(models, column), errors="coerce"))
+               for label, column in present]
+
+    counts = Counter()
+    for i in range(len(models)):
+        best = None
+        for label, series in numeric:
+            value = series.iloc[i] if i < len(series) else None
+            if pd.notna(value) and value > 0:
+                best = label
+        if best is not None:
+            counts[best] += 1
+    if not counts:
+        return dict(EMPTY)
+
+    labels = [label for label, _ in numeric if label in counts]
+    values = [counts[label] for label in labels]
+    total = sum(values)
+    top = labels[-1]
+    out = metric(
+        labels, values,
+        "%s of %s reached %s inputs." % (ins.num(counts[top]), ins.num(total), top),
+        n=total,
+    )
+    out["ordinal"] = True
+    return out
+
+
+def _image_size(models):
+    """How heavy a model is to pull and run — the low-resource deployment question."""
+    sizes = pd.to_numeric(col(models, "image_size"), errors="coerce").dropna()
+    sizes = sizes[sizes > 0]
+    if sizes.empty:
+        return dict(EMPTY)
+    gb = sizes / 1024.0
+    bins = [(0, 1, "0–1"), (1, 2, "1–2"), (2, 4, "2–4"),
+            (4, 8, "4–8"), (8, float("inf"), "8+")]
+    labels, values = [], []
+    for low, high, label in bins:
+        labels.append(label)
+        values.append(int(((gb >= low) & (gb < high)).sum()))
+    under_two = int((gb < 2).sum())
+    return metric(
+        labels, values,
+        "%s of %s images are under 2 GB." % (ins.num(under_two), ins.num(len(gb))),
+        mean=round(float(gb.mean()), 1),
+        unit="GB",
+        countNoun="models",
+        n=int(len(gb)),
+    )
+
+
+def _on_arm(models):
+    """ARM64 coverage: whether a model runs on cheap and low-power hardware.
+
+    Two categories so it can drive a share row. Every model records AMD64, so AMD64
+    alone is the uninteresting case; ARM64 is the one that says something.
+    """
+    arch = col(models, "docker_architecture")
+    if arch.empty:
+        return dict(EMPTY)
+    with_arch, on_arm = 0, 0
+    for value in arch.dropna():
+        tokens = {t.strip().upper() for t in parse_multi(value)}
+        if not tokens:
+            continue
+        with_arch += 1
+        if "ARM64" in tokens:
+            on_arm += 1
+    if not with_arch:
+        return dict(EMPTY)
+    return metric(
+        ["ARM64 and AMD64", "AMD64 only"], [on_arm, with_arch - on_arm],
+        ins.share_of(on_arm, with_arch, "models with a recorded architecture",
+                     "also build for ARM64"),
+        n=with_arch,
+    )
 
 
 def _by_source_type(models):
@@ -225,10 +412,13 @@ def _coverage(models):
     Presence of a value is the signal — an empty DockerHub cell means the model
     was never pushed there.
     """
+    # No "Hosted API" row: it used to look for a `host_url` column that does not
+    # exist in the table, so the meter was silently absent from every build. The
+    # nearest real field is `deployment`, but it is Local for 233 of 236 models —
+    # no variance, nothing to show.
     checks = [
         ("Docker image", "dockerhub"),
         ("S3 bundle", "s3"),
-        ("Hosted API", "host_url"),
         ("Source code", "source_code"),
     ]
     labels, values = [], []
@@ -244,7 +434,9 @@ def _coverage(models):
     best = max(range(len(values)), key=lambda i: values[i])
     return metric(
         labels, values,
-        insight="%s reaches the most models: %s of %s." % (
+        # Short on purpose: this lands in a 3-column card, where a longer sentence is
+        # clipped by the one-line caption clamp.
+        insight="%s reaches %s of %s models." % (
             labels[best], ins.num(values[best]), ins.num(len(models)),
         ),
         # The whole is every model, so the meters can show a real percentage.

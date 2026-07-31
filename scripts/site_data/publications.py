@@ -32,11 +32,13 @@ def build(pubs):
         "per_year": _per_year(years),
         "citations_per_year": _citations_per_year(years, citations),
         "output_and_impact": _output_and_impact(years, citations),
+        # Short form: a 4-column card clips the full leader sentence.
         "by_topic": multi_counts(col(pubs, "topic"), top=12,
-                                 insight=ins.leader(multi_counts(col(pubs, "topic")), "topic assignments")),
+                                 insight=ins.leader_short(multi_counts(col(pubs, "topic")))),
         "affiliation": _affiliation(pubs),
         "affiliation_by_year": _affiliation_by_year(pubs, years),
-        "by_type": value_counts(col(pubs, "type")),
+        "by_type": value_counts(col(pubs, "type"),
+                                insight=ins.leader(value_counts(col(pubs, "type")), "publications")),
         "by_african_collab": _african(pubs),
         "top_journals": _top_journals(pubs, citations),
     }
@@ -129,12 +131,8 @@ def _african(pubs):
     recorded = raw[(raw != "") & (raw.str.lower() != "nan")]
     out = value_counts(recorded)
     yes = int(recorded.str.lower().isin(YES).sum())
-    out["insight"] = ins.join(
-        ins.share_of(yes, len(recorded), "publications with a recorded answer",
-                     "involve an African collaboration"),
-        "Not recorded for %s." % ins.count_of(len(pubs) - len(recorded),
-                                              "publication", "publications"),
-    )
+    out["insight"] = ins.share_of(yes, len(recorded), "recorded publications",
+                                  "involve an African collaboration")
     # Neutral rather than crimson for "No": the absence of an African
     # collaboration is not a failure state, and a red bar would say it was.
     out["semantics"] = {"Yes": "brand", "No": "neutral"}
@@ -166,7 +164,7 @@ def _top_journals(pubs, citations):
     out["counts"] = [int(c) for c in ranked["count"]]
     out["totals"] = [int(s) for s in ranked["sum"]]
     out["unit"] = "mean citations per article"
-    out["insight"] = "%s leads at %s citations per article. %s single-article venues are excluded." % (
-        ranked.index[0], round(float(ranked["mean"].iloc[0]), 1), ins.num(excluded),
+    out["insight"] = "%s leads at %s citations per article." % (
+        ranked.index[0], round(float(ranked["mean"].iloc[0]), 1),
     )
     return out

@@ -132,7 +132,7 @@ function seriesColors(metric, count) {
    leader back to the label. Reads as a ranking, costs almost no ink, and stays
    legible at any card width. */
 function optLollipop(d) {
-  const prepared = collapseTies(d);
+  const prepared = capRows(collapseTies(d), 11);
   const labels = prepared.labels.slice().reverse();
   const values = prepared.values.slice().reverse();
   const color = accent();
@@ -142,6 +142,15 @@ function optLollipop(d) {
   // Room on the right for the value, and a wide label gutter so names like
   // "Bill and Melinda Gates Foundation" stop truncating to an ellipsis.
   o.grid = { left: 2, right: 46, top: 6, bottom: 2, containLabel: true };
+  // A category axis spreads its rows over the WHOLE plot height, so three or four
+  // rows in a tall card came out as dots marooned in white space with ~90px between
+  // them — it read as a broken chart rather than a short list. Pad the grid so a
+  // short ranking clusters at a sane row pitch and sits centred instead.
+  if (labels.length <= 5) {
+    const pad = Math.round((1 - labels.length / 6) * 50);
+    o.grid.top = pad + "%";
+    o.grid.bottom = pad + "%";
+  }
   o.tooltip.trigger = "item";
   o.tooltip.formatter = (p) =>
     p.name + ": <b>" + fmtNum(p.value) + "</b>" + (d.unit ? " " + d.unit : "");
@@ -151,7 +160,15 @@ function optLollipop(d) {
     axisLine: { show: false }, axisTick: { show: false }, splitLine: { show: false },
     axisLabel: {
       color: T.ink, fontSize: 11, fontFamily: T.sans,
-      width: 190, overflow: "break", lineHeight: 13,
+      // interval 0 = label EVERY row, never thin. ECharts drops alternate category
+      // labels when it thinks the axis is crowded, which silently deleted the LIC and
+      // UMIC rows from the income-group chart — four dots, two labels, and no way to
+      // tell which was which. A ranking must name every row it draws.
+      interval: 0,
+      // One line, ellipsised. "break" wrapped long organisation names onto a second
+      // line that overlapped the row below it — two labels on top of each other is
+      // worse than one shortened label, and the full text is in the tooltip.
+      width: 186, overflow: "truncate", ellipsis: "…", lineHeight: 13,
     },
   };
   o.series = [
@@ -191,6 +208,41 @@ function optOrdinalLollipop(d) {
     },
   }));
   return o;
+}
+
+/* More rows than the card can give them turns a ranking into overlapping text. Keep
+   the top N and summarise the tail, so a lollipop is legible whatever height it
+   lands in. */
+function capRows(d, max) {
+  const labels = d.labels || [];
+  if (labels.length <= max) return d;
+  const values = d.values || [];
+  const kept = max - 1;
+  const rest = values.slice(kept).reduce((a, b) => a + Number(b), 0);
+  return {
+    labels: labels.slice(0, kept).concat(["+" + (labels.length - kept) + " more"]),
+    values: values.slice(0, kept).concat([rest]),
+    unit: d.unit,
+  };
+}
+
+/* Treemap tiles, capped. Returns `[{name, value}]` with the tail folded into one
+   "Other" tile, sorted largest first so the palette runs in size order. Unlike
+   capRows this names the remainder "Other" rather than "+N more": in a treemap the
+   tile IS the category, and "+3 more" reads as a chart artefact where "Other" reads
+   as a category — which is what it is. */
+function capTiles(d, max) {
+  const pairs = (d.labels || [])
+    .map((label, i) => ({ name: label, value: Number((d.values || [])[i]) || 0 }))
+    .sort((a, b) => b.value - a.value);
+  if (pairs.length <= max) return pairs;
+  const kept = pairs.slice(0, max);
+  const rest = pairs.slice(max).reduce((sum, p) => sum + p.value, 0);
+  // Flagged, not just named. "Other" is a remainder rather than a category with an
+  // identity, so it must not take a palette slot — as the 6th tile it was landing on
+  // crimson, which made the leftovers look like a warning.
+  if (rest > 0) kept.push({ name: "Other", value: rest, residual: true });
+  return kept;
 }
 
 /* A long tail of identical values is noise: seven countries each with one event
@@ -435,9 +487,13 @@ function optTreemap(d) {
       formatter: (p) => p.name + "\n" + fmtNum(p.value),
       overflow: "truncate", lineHeight: 13,
     },
-    data: d.labels.map((label, i) => ({
-      name: label, value: d.values[i],
-      itemStyle: { color: catColor(i) },
+    // Capped at 5 named tiles plus "Other". The palette stops at slot 6 (a 7th
+    // category rendered T.faint grey), and beyond five tiles the small ones are
+    // narrower than their own labels — "Networking" came out as "Ne…". Folding the
+    // tail into one honest tile beats five illegible ones.
+    data: capTiles(d, 5).map((tile, i) => ({
+      name: tile.name, value: tile.value,
+      itemStyle: { color: tile.residual ? T.faint : catColor(i) },
       label: { color: "#fff" },
     })),
   }];
@@ -483,19 +539,22 @@ function optTreeMap(d) {
       // One palette slot per parent, then lighter tints for its children: the colour
       // encodes which family a block belongs to, the tint distinguishes within it.
       const parentColor = catColor(i);
-      const parentTint = 0;
       const children = parent.children || [];
       return {
         name: parent.name,
         itemStyle: { color: parentColor },
         children: children.map((child, j) => {
-          const extra = 0.10 + 0.30 * (j / Math.max(children.length - 1, 1));
+          const tint = 0.10 + 0.30 * (j / Math.max(children.length - 1, 1));
           return {
             name: child.name,
             value: child.value,
-            itemStyle: { color: mixWithWhite(parentColor, extra) },
-            // Combined tint decides whether ink or white stays readable.
-            label: { color: (parentTint + extra * (1 - parentTint)) > 0.40 ? T.ink : "#fff" },
+            itemStyle: { color: mixWithWhite(parentColor, tint) },
+            // The tint decides whether ink or white stays readable on the tile. This
+            // used to be compared against a `parentTint` constant of 0, which made
+            // the test `tint > 0.40` on a range that stops AT 0.40 — never true, so
+            // every child label was white, including on the palest tiles where it
+            // vanished into the fill.
+            label: { color: tint > 0.26 ? T.ink : "#fff" },
           };
         }),
       };
@@ -538,7 +597,9 @@ function optLogScatter(d, conf) {
   const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: 10 };
 
   const o = base();
-  o.grid = { left: 6, right: 18, top: 14, bottom: 4, containLabel: true };
+  // top: the outermost point carries a label ABOVE its mark, and at 14 the highest
+  // one ("eos") was clipped off the plot area entirely.
+  o.grid = { left: 6, right: 18, top: 24, bottom: 4, containLabel: true };
   o.tooltip.trigger = "item";
   o.tooltip.formatter = (p) =>
     "<b>" + p.data[2] + "</b><br/>" + c.xLabel + " " + fmtNum(p.data[3]) +
@@ -587,7 +648,11 @@ function optHistogram(d) {
   o.grid.top = 24;
   o.tooltip.trigger = "axis";
   o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(accent(), 0.06) } };
-  o.tooltip.valueFormatter = (v) => fmtNum(v) + " people";
+  // The counted thing is not always people — these bins now hold models by wrap lag
+  // and by image size too, where "3 people" was simply wrong. `countNoun` names the
+  // rows; `unit` describes the x axis and belongs in the caption, not here.
+  const noun = d.countNoun || "";
+  o.tooltip.valueFormatter = (v) => fmtNum(v) + (noun ? " " + noun : "");
   o.xAxis = catAxis(d.labels, { axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono, interval: 0, rotate: 0 } });
   o.yAxis = valAxis({ show: false });
   o.series = [{

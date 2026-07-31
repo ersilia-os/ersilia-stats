@@ -65,9 +65,9 @@ def build(countries, orgs, community, events):
     engaged = sorted(footprint)
     return {
         "footprint_by_country": _footprint(footprint),
-        "organisations_by_country": _sorted_metric(org_counts),
-        "community_by_country": _sorted_metric(community_counts),
-        "events_by_country": _sorted_metric(event_counts),
+        "organisations_by_country": _sorted_metric(org_counts, "partner organisations"),
+        "community_by_country": _sorted_metric(community_counts, "member records"),
+        "events_by_country": _sorted_metric(event_counts, "located events"),
         "engagement_by_income_group": _by_income(engaged, income),
         "engagement_by_region": _by_region(engaged, region),
         "south_north": _south_north(engaged, income),
@@ -75,11 +75,16 @@ def build(countries, orgs, community, events):
     }
 
 
-def _sorted_metric(counter):
+def _sorted_metric(counter, noun="records"):
+    """Every metric carries a caption — these feed the map's toggles, and a card must
+    never render with an empty caption line."""
     items = counter.most_common()
     if not items:
         return dict(EMPTY)
-    return metric([k for k, _ in items], [v for _, v in items])
+    return metric([k for k, _ in items], [v for _, v in items],
+                  "%s leads with %s of %s %s." % (
+                      items[0][0], ins.num(items[0][1]),
+                      ins.num(sum(v for _, v in items)), noun))
 
 
 def _footprint(footprint):
@@ -111,12 +116,7 @@ def _by_income(engaged, income):
     south = sum(counter[g] for g in labels if g in GLOBAL_SOUTH_GROUPS)
     out = metric(
         labels, values,
-        ins.join(
-            ins.share_of(south, sum(values), "engaged countries",
-                         "are Global South (LIC, LMIC or UMIC)"),
-            ("Income group unknown for %s." % ins.count_of(unknown, "country", "countries"))
-            if unknown else None,
-        ),
+        ins.share_of(south, sum(values), "engaged countries", "are Global South"),
     )
     out["ordinal"] = True
     return out
@@ -141,8 +141,9 @@ def _south_north(engaged, income):
         return dict(EMPTY)
     return metric(
         ["Global South", "Global North"], [south, north],
-        ins.share_of(south, south + north, "engaged countries with a known income group",
-                     "are Global South"),
+        # The full definition (which income groups count as which) is in the ⓘ note and
+        # in Methods; the caption has one line in a 4-column card.
+        ins.share_of(south, south + north, "engaged countries", "are Global South"),
         semantics={"Global South": "brand", "Global North": "neutral"},
     )
 

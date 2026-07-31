@@ -7,8 +7,9 @@
 <meta name="generator" content="ersilia html-formatting skill">
 <title>Ersilia in numbers</title>
 <meta name="description" content="Aggregate statistics for the Ersilia Open Source Initiative — the Model Hub, community, code, publications and global reach.">
-<!-- Ersilia "target" mark: plum ring, white band, red centre dot, as an inline SVG data-URI. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Ccircle%20cx='16'%20cy='16'%20r='15'%20fill='%2350285A'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='9'%20fill='none'%20stroke='%23fff'%20stroke-width='2.6'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='3.6'%20fill='%23D8412F'/%3E%3C/svg%3E">
+<!-- The actual Ersilia brand mark — the plum lattice — taken from ersilia.io rather
+     than invented here, so the tab icon matches every other Ersilia property. -->
+<link rel="icon" type="image/png" href="assets/ersilia-mark.png">
 <!--
   Same-origin stylesheets and scripts, deliberately not inlined. The house
   standard inlines everything so a page survives as a Claude Artifact under CSP;
@@ -24,10 +25,17 @@
 <div class="shell">
 
   <aside class="sidebar">
-    <a class="brandhead" href="#/">
-      <span class="eyebrow brand">Ersilia Open Source Initiative</span>
+    <!-- The title itself is not a link — it is where you already are. The organisation
+         name above it is, because ersilia.io is somewhere else worth going. -->
+    <div class="brandhead">
+      <a class="eyebrow brand" href="https://ersilia.io" target="_blank" rel="noopener">Ersilia Open Source Initiative</a>
       <h1 class="wordmark">Ersilia <em>in numbers</em></h1>
-    </a>
+    </div>
+
+    <p class="devnote" role="status">
+      <strong>Under development.</strong> These figures are still being worked on and
+      may contain errors.
+    </p>
 
     <nav aria-label="Sections">
       <ul id="nav-list"></ul>
@@ -66,6 +74,15 @@
   <h2 id="methods-title">How these figures are made</h2>
   <p class="muted">Definitions, provenance, and the choices that shape what you see.</p>
   <div class="methods-body" id="methods-body"></div>
+</div>
+
+<!-- The numbers behind whichever chart you asked about. A dialog rather than an
+     in-card expansion: inline, opening a table grew its card, which grew the grid
+     row, which stretched every chart beside it. -->
+<div class="modal" id="datamodal" role="dialog" aria-modal="true" aria-labelledby="datamodal-title" hidden>
+  <button type="button" class="close" id="datamodal-close" aria-label="Close">Close</button>
+  <h2 id="datamodal-title">Data</h2>
+  <div class="methods-body" id="datamodal-body"></div>
 </div>
 
 <script src="vendor/echarts.min.js"></script>

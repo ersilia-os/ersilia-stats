@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 15:29 UTC",
+  "generated_at": "2026-07-31 19:42 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -536,7 +536,7 @@
           236
         ],
         "n": 236,
-        "insight": "Grew from 1 to 236 models between 2020Q4 and 2026Q3. Busiest quarter was 2022Q3 with 28 models."
+        "insight": "Grew from 1 to 236 models between 2020Q4 and 2026Q3."
       },
       "per_quarter": {
         "labels": [
@@ -594,6 +594,96 @@
         "n": 236,
         "insight": "Models incorporated in 2026Q3: 1, down from 22 in 2026Q2."
       },
+      "growth": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "series": [
+          {
+            "name": "Added per quarter",
+            "values": [
+              1,
+              0,
+              6,
+              12,
+              16,
+              0,
+              3,
+              28,
+              8,
+              18,
+              7,
+              18,
+              15,
+              13,
+              5,
+              4,
+              8,
+              0,
+              10,
+              12,
+              17,
+              12,
+              22,
+              1
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              1,
+              1,
+              7,
+              19,
+              35,
+              35,
+              38,
+              66,
+              74,
+              92,
+              99,
+              117,
+              132,
+              145,
+              150,
+              154,
+              162,
+              162,
+              172,
+              184,
+              201,
+              213,
+              235,
+              236
+            ]
+          }
+        ],
+        "n": 236,
+        "insight": "236 models so far, most in 2022Q3 with 28."
+      },
       "task_tree": {
         "tree": [
           {
@@ -634,19 +724,118 @@
                 "value": 11
               }
             ]
-          },
-          {
-            "name": "Unspecified",
-            "children": [
-              {
-                "name": "Unspecified",
-                "value": 9
-              }
-            ]
           }
         ],
-        "n": 240,
-        "insight": "Annotation is the largest task family (60% of models); its biggest subtask is Activity prediction with 101."
+        "n": 231,
+        "insight": "Annotation is the largest task family, 63% of the 231 with a task recorded."
+      },
+      "by_target_organism": {
+        "labels": [
+          "Escherichia coli",
+          "Mycobacterium tuberculosis",
+          "Plasmodium falciparum",
+          "Staphylococcus aureus",
+          "Acinetobacter baumannii",
+          "SARS-CoV-2",
+          "Pseudomonas aeruginosa",
+          "Klebsiella pneumoniae",
+          "Neisseria gonorrhoeae",
+          "Candida albicans",
+          "Schistosoma mansoni",
+          "Rattus norvegicus"
+        ],
+        "values": [
+          13,
+          9,
+          8,
+          7,
+          5,
+          5,
+          4,
+          4,
+          4,
+          3,
+          2,
+          2
+        ],
+        "n": 118,
+        "insight": "118 models target a named pathogen; Escherichia coli leads with 13."
+      },
+      "publication_lag": {
+        "labels": [
+          "0",
+          "1",
+          "2",
+          "3–4",
+          "5–9",
+          "10+"
+        ],
+        "values": [
+          94,
+          47,
+          39,
+          22,
+          6,
+          19
+        ],
+        "n": 227,
+        "insight": "94 of 227 wrapped the same year.",
+        "mean": 2.2,
+        "median": 1.0,
+        "unit": "years",
+        "countNoun": "models"
+      },
+      "scaling_limit": {
+        "labels": [
+          "1 input",
+          "10",
+          "100",
+          "1,000",
+          "10,000"
+        ],
+        "values": [
+          1,
+          12,
+          19,
+          37,
+          151
+        ],
+        "n": 220,
+        "insight": "151 of 220 reached 10,000 inputs.",
+        "ordinal": true
+      },
+      "image_size": {
+        "labels": [
+          "0–1",
+          "1–2",
+          "2–4",
+          "4–8",
+          "8+"
+        ],
+        "values": [
+          54,
+          35,
+          41,
+          70,
+          20
+        ],
+        "n": 220,
+        "insight": "89 of 220 images are under 2 GB.",
+        "mean": 3.8,
+        "unit": "GB",
+        "countNoun": "models"
+      },
+      "on_arm": {
+        "labels": [
+          "ARM64 and AMD64",
+          "AMD64 only"
+        ],
+        "values": [
+          147,
+          87
+        ],
+        "n": 234,
+        "insight": "147 of 234 models with a recorded architecture (63%) also build for ARM64."
       },
       "cohorts_by_status": {
         "labels": [
@@ -859,7 +1048,7 @@
         ],
         "n": 243,
         "distinct": 17,
-        "insight": "128 of 243 area assignments (53%) name a specific disease or property rather than 'Any'. Biomedical area is a multi-select, so a model spanning two areas counts in both."
+        "insight": "128 of 243 area assignments (53%) name a specific disease rather than 'Any'."
       },
       "by_license": {
         "labels": [
@@ -901,7 +1090,7 @@
           240
         ],
         "n": 709,
-        "insight": "Source code reaches the most models: 240 of 240.",
+        "insight": "Source code reaches 240 of 240 models.",
         "total": 240
       },
       "by_source_type": {
@@ -965,6 +1154,48 @@
         ],
         "n": 36,
         "insight": "Busiest year was 2025 with 11 projects."
+      },
+      "growth": {
+        "labels": [
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "name": "Added per year",
+            "values": [
+              1,
+              1,
+              4,
+              7,
+              3,
+              7,
+              11,
+              2
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              1,
+              2,
+              6,
+              13,
+              16,
+              23,
+              34,
+              36
+            ]
+          }
+        ],
+        "n": 36,
+        "insight": "36 projects so far, most in 2025 with 11."
       },
       "active_over_time": {
         "labels": [
@@ -1326,12 +1557,12 @@
         "n": 36,
         "today": "2026-07-31",
         "semantics": {
+          "Done": "good",
           "Stuck": "bad",
-          "In progress": "brand",
           "Todo": "neutral",
-          "Done": "good"
+          "In progress": "brand"
         },
-        "insight": "36 projects on the timeline, 2019-07 to 2029-03. 1 past their end date and not marked done."
+        "insight": "36 projects, 2019-07 to 2029-03; 1 past its end date."
       },
       "duration": {
         "labels": [
@@ -1343,7 +1574,7 @@
           12.1
         ],
         "n": 36,
-        "insight": "Median run length in months. Running projects are measured to today, so their figure is a floor.",
+        "insight": "Median run length in months.",
         "unit": "months"
       }
     },
@@ -1487,7 +1718,7 @@
           2
         ],
         "n": 42,
-        "insight": "Chemoinformatics leads with 19 of 42 topic assignments (45%).",
+        "insight": "Chemoinformatics leads with 19 of 42.",
         "distinct": 4
       },
       "affiliation": {
@@ -1566,7 +1797,8 @@
           29,
           13
         ],
-        "n": 42
+        "n": 42,
+        "insight": "Research leads with 29 of 42 publications (69%)."
       },
       "by_african_collab": {
         "labels": [
@@ -1578,7 +1810,7 @@
           12
         ],
         "n": 26,
-        "insight": "14 of 26 publications with a recorded answer (54%) involve an African collaboration. Not recorded for 16 publications.",
+        "insight": "14 of 26 recorded publications (54%) involve an African collaboration.",
         "semantics": {
           "Yes": "brand",
           "No": "neutral"
@@ -1611,7 +1843,7 @@
           70
         ],
         "unit": "mean citations per article",
-        "insight": "Nature Communications leads at 84.4 citations per article. 27 single-article venues are excluded."
+        "insight": "Nature Communications leads at 84.4 citations per article."
       }
     },
     "repositories": {
@@ -1741,7 +1973,109 @@
           177
         ],
         "n": 177,
-        "insight": "Grew from 1 to 177 repositories between 2019Q3 and 2026Q2. 1 repository has no creation date on file."
+        "insight": "Grew from 1 to 177 repositories between 2019Q3 and 2026Q2."
+      },
+      "growth": {
+        "labels": [
+          "2019Q3",
+          "2019Q4",
+          "2020Q1",
+          "2020Q2",
+          "2020Q3",
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "series": [
+          {
+            "name": "Added per quarter",
+            "values": [
+              1,
+              0,
+              0,
+              0,
+              2,
+              1,
+              5,
+              2,
+              9,
+              10,
+              6,
+              8,
+              6,
+              7,
+              9,
+              10,
+              4,
+              4,
+              6,
+              10,
+              6,
+              5,
+              5,
+              8,
+              10,
+              16,
+              16,
+              11
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              1,
+              1,
+              1,
+              1,
+              3,
+              4,
+              9,
+              11,
+              20,
+              30,
+              36,
+              44,
+              50,
+              57,
+              66,
+              76,
+              80,
+              84,
+              90,
+              100,
+              106,
+              111,
+              116,
+              124,
+              134,
+              150,
+              166,
+              177
+            ]
+          }
+        ],
+        "n": 177,
+        "insight": "177 repositories so far, most in 2025Q4 with 16."
       },
       "by_type": {
         "labels": [
@@ -1795,7 +2129,7 @@
           38
         ],
         "n": 178,
-        "insight": "140 of 178 repositories (79%) are public. Counts, dates, types and totals on this page cover all of them; anything that names a repository or a contributor covers the public ones only.",
+        "insight": "140 of 178 repositories (79%) are public.",
         "semantics": {
           "Public": "brand",
           "Private": "neutral"
@@ -2257,7 +2591,7 @@
           }
         ],
         "n": 12,
-        "insight": "The top 3 account for 67% of all stars. Public repositories only — ranked by stars."
+        "insight": "The top 3 account for 67% of all stars."
       },
       "top_by_stars": {
         "labels": [
@@ -2384,7 +2718,7 @@
         ],
         "n": 432,
         "distinct": 111,
-        "insight": "111 distinct contributors across 140 public repositories. The top 3 account for 51% of all repository contributions."
+        "insight": "111 distinct contributors; the top 3 hold 51% of contributions."
       },
       "scatter": {
         "points": [
@@ -3510,7 +3844,7 @@
           }
         ],
         "n": 140,
-        "insight": "9 public repositories with 50+ commits have no stars — activity and visibility are not the same thing. Both axes are logarithmic: a handful of repositories account for most of every metric."
+        "insight": "9 public repositories with 50+ commits have no stars."
       }
     },
     "community": {
@@ -3541,7 +3875,7 @@
         ],
         "n": 121,
         "distinct": 10,
-        "insight": "Volunteer leads with 55 of 121 role assignments (45%). Members can hold more than one role, so shares sum above 100%."
+        "insight": "Volunteer leads with 55 of 121 role assignments (45%)."
       },
       "growth": {
         "labels": [
@@ -3597,7 +3931,148 @@
         "n": 113,
         "insight": "Grew from 3 to 113 people between 2020Q4 and 2026Q2."
       },
-      "flow": {
+      "joined_per_quarter": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "values": [
+          3,
+          0,
+          0,
+          1,
+          0,
+          5,
+          5,
+          6,
+          22,
+          11,
+          7,
+          6,
+          14,
+          6,
+          2,
+          3,
+          4,
+          2,
+          5,
+          3,
+          4,
+          1,
+          3
+        ],
+        "n": 113,
+        "insight": "Busiest quarter was 2022Q4 with 22 people."
+      },
+      "participation": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2"
+        ],
+        "series": [
+          {
+            "name": "Added per quarter",
+            "values": [
+              3,
+              0,
+              0,
+              1,
+              0,
+              5,
+              5,
+              6,
+              22,
+              11,
+              7,
+              6,
+              14,
+              6,
+              2,
+              3,
+              4,
+              2,
+              5,
+              3,
+              4,
+              1,
+              3
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              3,
+              3,
+              3,
+              4,
+              4,
+              9,
+              14,
+              20,
+              42,
+              53,
+              60,
+              66,
+              80,
+              86,
+              88,
+              91,
+              95,
+              97,
+              102,
+              105,
+              109,
+              110,
+              113
+            ]
+          }
+        ],
+        "n": 113,
+        "insight": "113 people have contributed to Ersilia since 2020Q4."
+      },
+      "active_over_time": {
         "labels": [
           "2020Q4",
           "2021Q1",
@@ -3624,466 +4099,34 @@
           "2026Q2",
           "2026Q3"
         ],
-        "series": [
-          {
-            "name": "Joined",
-            "values": [
-              3,
-              0,
-              0,
-              1,
-              0,
-              5,
-              5,
-              6,
-              22,
-              11,
-              7,
-              6,
-              14,
-              6,
-              2,
-              3,
-              4,
-              2,
-              5,
-              3,
-              4,
-              1,
-              3,
-              0
-            ]
-          },
-          {
-            "name": "Left",
-            "values": [
-              0,
-              0,
-              0,
-              1,
-              0,
-              0,
-              3,
-              5,
-              7,
-              17,
-              8,
-              7,
-              15,
-              9,
-              7,
-              5,
-              2,
-              1,
-              4,
-              3,
-              5,
-              1,
-              1,
-              1
-            ]
-          },
-          {
-            "name": "Net change",
-            "values": [
-              3,
-              0,
-              0,
-              0,
-              0,
-              5,
-              2,
-              1,
-              15,
-              -6,
-              -1,
-              -1,
-              -1,
-              -3,
-              -5,
-              -2,
-              2,
-              1,
-              1,
-              0,
-              -1,
-              0,
-              2,
-              -1
-            ]
-          }
-        ],
-        "n": 113,
-        "insight": "113 joined and 102 left; 10% of joiners are still involved. 9 quarters saw a net loss.",
-        "kinds": [
-          "bar",
-          "bar",
-          "line"
-        ],
-        "semantics": [
-          "good",
-          "bad",
-          "brand"
-        ]
-      },
-      "tenure": {
-        "labels": [
-          "0–3",
-          "3–6",
-          "6–9",
-          "9–12",
-          "12–18",
-          "18–24",
-          "24–36",
-          "36–60"
-        ],
         "values": [
-          45,
-          48,
-          1,
-          1,
-          0,
+          3,
+          3,
+          3,
           4,
-          2,
-          1
+          3,
+          8,
+          13,
+          16,
+          33,
+          37,
+          27,
+          25,
+          32,
+          23,
+          16,
+          12,
+          11,
+          11,
+          15,
+          14,
+          15,
+          11,
+          13,
+          12
         ],
-        "n": 102,
-        "insight": "Median completed collaboration lasted 3.1 months (mean 5.0). Still-active members are excluded.",
-        "mean": 5.0,
-        "median": 3.1,
-        "unit": "months"
-      },
-      "retention": {
-        "x": [
-          "3 mo",
-          "6 mo",
-          "12 mo",
-          "24 mo"
-        ],
-        "y": [
-          "2020",
-          "2021",
-          "2022",
-          "2023",
-          "2024",
-          "2025",
-          "2026"
-        ],
-        "cells": [
-          [
-            0,
-            0,
-            100.0
-          ],
-          [
-            1,
-            0,
-            100.0
-          ],
-          [
-            2,
-            0,
-            100.0
-          ],
-          [
-            3,
-            0,
-            100.0
-          ],
-          [
-            0,
-            1,
-            0.0
-          ],
-          [
-            1,
-            1,
-            0.0
-          ],
-          [
-            2,
-            1,
-            0.0
-          ],
-          [
-            3,
-            1,
-            0.0
-          ],
-          [
-            0,
-            2,
-            65.8
-          ],
-          [
-            1,
-            2,
-            15.8
-          ],
-          [
-            2,
-            2,
-            15.8
-          ],
-          [
-            3,
-            2,
-            7.9
-          ],
-          [
-            0,
-            3,
-            55.3
-          ],
-          [
-            1,
-            3,
-            7.9
-          ],
-          [
-            2,
-            3,
-            5.3
-          ],
-          [
-            3,
-            3,
-            5.3
-          ],
-          [
-            0,
-            4,
-            60.0
-          ],
-          [
-            1,
-            4,
-            6.7
-          ],
-          [
-            2,
-            4,
-            6.7
-          ],
-          [
-            3,
-            4,
-            0.0
-          ],
-          [
-            0,
-            5,
-            50.0
-          ],
-          [
-            1,
-            5,
-            28.6
-          ],
-          [
-            2,
-            5,
-            8.3
-          ],
-          [
-            3,
-            5,
-            0.0
-          ],
-          [
-            0,
-            6,
-            50.0
-          ],
-          [
-            1,
-            6,
-            0.0
-          ],
-          [
-            2,
-            6,
-            0.0
-          ],
-          [
-            3,
-            6,
-            0.0
-          ]
-        ],
-        "counts": [
-          [
-            0,
-            0,
-            3,
-            3
-          ],
-          [
-            1,
-            0,
-            3,
-            3
-          ],
-          [
-            2,
-            0,
-            3,
-            3
-          ],
-          [
-            3,
-            0,
-            3,
-            3
-          ],
-          [
-            0,
-            1,
-            0,
-            1
-          ],
-          [
-            1,
-            1,
-            0,
-            1
-          ],
-          [
-            2,
-            1,
-            0,
-            1
-          ],
-          [
-            3,
-            1,
-            0,
-            1
-          ],
-          [
-            0,
-            2,
-            25,
-            38
-          ],
-          [
-            1,
-            2,
-            6,
-            38
-          ],
-          [
-            2,
-            2,
-            6,
-            38
-          ],
-          [
-            3,
-            2,
-            3,
-            38
-          ],
-          [
-            0,
-            3,
-            21,
-            38
-          ],
-          [
-            1,
-            3,
-            3,
-            38
-          ],
-          [
-            2,
-            3,
-            2,
-            38
-          ],
-          [
-            3,
-            3,
-            2,
-            38
-          ],
-          [
-            0,
-            4,
-            9,
-            15
-          ],
-          [
-            1,
-            4,
-            1,
-            15
-          ],
-          [
-            2,
-            4,
-            1,
-            15
-          ],
-          [
-            3,
-            4,
-            0,
-            15
-          ],
-          [
-            0,
-            5,
-            7,
-            14
-          ],
-          [
-            1,
-            5,
-            4,
-            14
-          ],
-          [
-            2,
-            5,
-            1,
-            12
-          ],
-          [
-            3,
-            5,
-            0,
-            11
-          ],
-          [
-            0,
-            6,
-            1,
-            2
-          ],
-          [
-            1,
-            6,
-            0,
-            1
-          ],
-          [
-            2,
-            6,
-            0,
-            1
-          ],
-          [
-            3,
-            6,
-            0,
-            1
-          ]
-        ],
-        "n": 113,
-        "unit": "% still involved",
-        "insight": "Across cohorts, 19% of members reach one year. Blank cells are cohorts too recent to judge."
+        "n": 12,
+        "insight": "12 people involved at once now; the peak was 37 in 2023Q1."
       },
       "duration_buckets": {
         "labels": [
@@ -4099,7 +4142,8 @@
           7
         ],
         "n": 102,
-        "insight": "93 of 102 completed collaborations (91%) lasted under six months."
+        "insight": "48 of 102 completed collaborations ran 3–6 months, the most common length.",
+        "ordinal": true
       },
       "active_status": {
         "labels": [
@@ -4147,7 +4191,7 @@
           1
         ],
         "n": 113,
-        "insight": "United States leads with 56 of 113 recorded member countries (50%).",
+        "insight": "United States leads with 56 of 113.",
         "distinct": 20
       },
       "by_gender": {
@@ -4261,7 +4305,7 @@
           36
         ],
         "n": 320,
-        "insight": "How each organisation relates to Ersilia — funder, network or collaborator.",
+        "insight": "Funder leads with 215 of 320.",
         "distinct": 3
       },
       "by_focus": {
@@ -4284,7 +4328,7 @@
           12
         ],
         "n": 435,
-        "insight": "Focus areas are a multi-select, so one organisation contributes to several.",
+        "insight": "Science leads with 173 of 435 focus-area assignments (40%).",
         "distinct": 7
       }
     },
@@ -4464,7 +4508,8 @@
           1,
           1
         ],
-        "n": 315
+        "n": 315,
+        "insight": "United States leads with 146 of 315 partner organisations."
       },
       "community_by_country": {
         "labels": [
@@ -4511,7 +4556,8 @@
           1,
           1
         ],
-        "n": 113
+        "n": 113,
+        "insight": "United States leads with 56 of 113 member records."
       },
       "events_by_country": {
         "labels": [
@@ -4542,7 +4588,8 @@
           1,
           1
         ],
-        "n": 39
+        "n": 39,
+        "insight": "Spain leads with 10 of 39 located events."
       },
       "engagement_by_income_group": {
         "labels": [
@@ -4558,7 +4605,7 @@
           21
         ],
         "n": 44,
-        "insight": "23 of 44 engaged countries (52%) are Global South (LIC, LMIC or UMIC). Income group unknown for 1 country.",
+        "insight": "23 of 44 engaged countries (52%) are Global South.",
         "ordinal": true
       },
       "engagement_by_region": {
@@ -4589,7 +4636,7 @@
           21
         ],
         "n": 44,
-        "insight": "23 of 44 engaged countries with a known income group (52%) are Global South.",
+        "insight": "23 of 44 engaged countries (52%) are Global South.",
         "semantics": {
           "Global South": "brand",
           "Global North": "neutral"
@@ -4633,7 +4680,46 @@
           5
         ],
         "n": 91,
-        "insight": "Busiest year was 2022 with 26 events. Events in 2026: 5, down from 18 in 2025."
+        "insight": "Busiest year was 2022 with 26 events."
+      },
+      "growth": {
+        "labels": [
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "name": "Added per year",
+            "values": [
+              2,
+              6,
+              26,
+              20,
+              14,
+              18,
+              5
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              2,
+              8,
+              34,
+              54,
+              68,
+              86,
+              91
+            ]
+          }
+        ],
+        "n": 91,
+        "insight": "91 events so far, most in 2022 with 26."
       },
       "by_country": {
         "labels": [
@@ -4666,7 +4752,7 @@
         ],
         "n": 39,
         "distinct": 12,
-        "insight": "Spain leads with 10 of 39 events with a country on file (26%). No country recorded for 52 events — many are online."
+        "insight": "Spain leads with 10 of 39 located events (26%)."
       },
       "by_organiser": {
         "labels": [
@@ -4717,7 +4803,43 @@
           5
         ],
         "n": 54,
-        "insight": "Busiest year was 2023 with 13 posts. Posts in 2026: 5, up from 3 in 2025."
+        "insight": "Busiest year was 2023 with 13 posts."
+      },
+      "growth": {
+        "labels": [
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "name": "Added per year",
+            "values": [
+              12,
+              10,
+              13,
+              11,
+              3,
+              5
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              12,
+              22,
+              35,
+              46,
+              49,
+              54
+            ]
+          }
+        ],
+        "n": 54,
+        "insight": "54 posts so far, most in 2023 with 13."
       },
       "by_category": {
         "labels": [
@@ -4753,6 +4875,34 @@
           "Ersilia": "brand",
           "Other": "neutral"
         }
+      }
+    },
+    "conferences": {
+      "by_cadence": {
+        "labels": [
+          "Annual",
+          "Recurring",
+          "Biannual"
+        ],
+        "values": [
+          15,
+          4,
+          2
+        ],
+        "n": 21,
+        "insight": "Annual leads with 15 of 21 tracked conferences (71%)."
+      },
+      "remote": {
+        "labels": [
+          "Remote option",
+          "In person only"
+        ],
+        "values": [
+          4,
+          8
+        ],
+        "n": 12,
+        "insight": "4 of 12 conferences recording the answer (33%) can be attended remotely."
       }
     },
     "quality": {

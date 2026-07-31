@@ -19,22 +19,49 @@
    =========================================================================== */
 
 :root {
-  /* The chrome is NEUTRAL. An earlier version gave each section its own hue and
-     painted that section's charts with it; the result was a monochrome page per
-     section, which reads as a restriction rather than as a palette. Colour now lives
-     only in the data — see the chart steps below — and the navigation, headers and
-     cards are grey. Good dashboards work this way: colour means "this is a category",
-     not "this is page four". */
+  /* --- Tab hues -----------------------------------------------------------
+     Each sidebar tab carries its own colour, applied LIGHTLY: the label is tinted
+     toward its hue but stays quiet, and the hue only comes forward on hover and for
+     the current tab. No dots and no heavy edge — those read as decoration and as a
+     stray dark bar respectively.
+
+     This is navigation colour only. The charts do NOT inherit it: painting a whole
+     page in one hue made every page monochrome, which is the opposite of using a
+     palette. Chart colour is categorical and global — see the chart steps below.
+
+     Same hues as the chart set, in nav order, so the sidebar doubles as a key to
+     the palette. */
+  --tab-overview:     #6B6675;  /* muted — home is not a category */
+  --tab-models:       #6d5de7;  /* periwinkle */
+  --tab-projects:     #22bbad;  /* turquoise  */
+  --tab-publications: #734080;  /* plum       */
+  --tab-repositories: #67bb55;  /* lime       */
+  --tab-community:    #af5cc7;  /* orchid     */
+  --tab-reach:        #d19710;  /* amber      */
+  --tab-outreach:     #1c7db0;  /* cobalt     */
 
   /* --- Multi-series chart marks -------------------------------------------
      The global categorical set. Any chart on any page may draw on it: a one-series
      chart takes slot 1, a composition takes slots in order.
 
-     Snapped from the brand hues by the dataviz procedure and validated against a
-     #FFFFFF card surface: adjacent CVD ΔE 15.8 (target >= 8) · normal-vision
-     ΔE 31.0 (floor 15). The ORDER is the safety mechanism — never reorder, never
-     cycle past slot 6; a 7th series folds into "Other" or the chart gets faceted.
-     All-pairs forms (scatter, choropleth, heatmap) carry at most two of these.
+     Snapped from the brand hues by the dataviz procedure and validated against the
+     card surface: adjacent CVD ΔE 20.0 (target >= 8) · normal-vision ΔE 20.6
+     (floor 15). The ORDER is the safety mechanism — never cycle past slot 6; a 7th
+     series folds into "Other" or the chart gets faceted. All-pairs forms (scatter,
+     choropleth, heatmap) carry at most two of these.
+
+     CRIMSON IS LAST, AND THAT IS THE WHOLE POINT OF THIS ORDER. It used to be slot
+     2, so every two-series chart on the site came out periwinkle-versus-red and
+     half the dashboard read as an alarm: "Left", "External", "Blog posts",
+     "Featurization" and "Science" were all painted the same red as a failure. Red
+     carries a verdict whether or not one is meant, so it now sits where only a
+     genuine sixth category can reach it. Slots 1+2 — the common case — are
+     periwinkle and amber, which say "two different things" and nothing more.
+
+     Reordering is NOT free: the gates above are adjacency-sensitive. Cobalt in slot
+     2 fails the normal-vision floor beside periwinkle (ΔE 14.7, both read blue) and
+     orchid beside cobalt fails deutan (ΔE 5.8). Re-run
+     scripts/validate_palette.js from the dataviz skill before touching this list.
 
      ACCEPTED CHECKER FINDING: check_html.py reports T1-COLOR-OFFBRAND here,
      because these are not literal ersilia.css entries. They cannot be — the raw
@@ -44,11 +71,11 @@
      produce a validated order. Do not "fix" it by substituting the raw hexes:
      that trades a cosmetic pass for charts colourblind readers cannot read. */
   --chart-1: #6d5de7;  /* periwinkle */
-  --chart-2: #e63745;  /* crimson    */
+  --chart-2: #e2a72e;  /* amber      */
   --chart-3: #247dad;  /* cobalt     */
-  --chart-4: #e2a72e;  /* amber      */
+  --chart-4: #6cbf5a;  /* lime       */
   --chart-5: #af5cc7;  /* orchid     */
-  --chart-6: #6cbf5a;  /* lime       */
+  --chart-6: #e63745;  /* crimson — last on purpose; see above */
 
   /* Sequential ramp for magnitude (choropleth, heatmaps, ordinal buckets):
      one hue, monotone lightness, light end >= 2:1 on white. Validated
@@ -83,15 +110,30 @@
   border-right: 1px solid var(--border);
   overflow-y: auto;
 }
-.sidebar .brandhead { padding: 0 8px; margin-bottom: 22px; gap: 2px; }
-.sidebar .eyebrow { font-size: 10.5px; font-weight: 500; }
+.sidebar .brandhead { padding: 0 10px; margin-bottom: 20px; gap: 2px; }
+/* The organisation name links out; the title below it does not — it is where you are. */
+.sidebar .eyebrow { font-size: 10.5px; font-weight: 500; text-decoration: none; }
+.sidebar a.eyebrow:hover { text-decoration: underline; text-underline-offset: 2px; }
 /* The wordmark is the page's single <h1>, so it needs the heading margin off. */
 .sidebar .wordmark { font-size: 17px; margin: 0; letter-spacing: -.015em; }
 
+/* Read before any figure, so it sits under the title rather than at the foot of the
+   column. A caveat, not an alarm: amber on pale amber, with a left rule to catch the
+   eye on the way down the nav. It does not shout and it cannot be missed. */
+.sidebar .devnote {
+  margin: -8px 0 18px; padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--warn);
+  font-size: 11px; line-height: 1.45; color: var(--ink);
+  background: color-mix(in srgb, var(--warn) 14%, var(--surface));
+}
+.sidebar .devnote strong { font-weight: 600; color: color-mix(in srgb, var(--warn) 78%, #000); }
+
 .sidebar nav ul { list-style: none; margin: 0; padding: 0; }
-/* A plain list of links. No leading dots — they encoded nothing a reader could use
-   — and no coloured left edge, which read as a stray dark bar. Selection is shown the
-   way navigation normally shows it: the current item is darker, on a quiet fill. */
+/* Each tab has its own colour, but the WORDS stay neutral — coloured label text
+   reads as decoration and makes a column of eight look busy. The hue lives in the
+   fill behind the current tab and in a light wash on hover, so the colour is
+   present and calm and the type is always plain ink. No dots, no heavy edge. */
 .sidebar nav a {
   display: block;
   padding: 6px 10px; border-radius: var(--radius-sm);
@@ -100,10 +142,19 @@
   transition: color var(--tap), background var(--tap);
 }
 .sidebar nav a:hover {
-  color: var(--ink); text-decoration: none; background: var(--surface-2);
+  text-decoration: none; color: var(--ink);
+  background: color-mix(in srgb, var(--tab, var(--brand)) 9%, var(--surface));
 }
 .sidebar nav a[aria-current="page"] {
-  color: var(--ink); font-weight: 500; background: var(--surface-2);
+  font-weight: 500; color: var(--ink);
+  background: color-mix(in srgb, var(--tab, var(--brand)) 16%, var(--surface));
+}
+/* Keyboard focus must be obvious and must not look like selection. */
+.sidebar nav a:focus-visible,
+.sidebar .foot a:focus-visible, .sidebar .foot button:focus-visible,
+.toggle button:focus-visible, a.jump:focus-visible, a.dl:focus-visible,
+.info:focus-visible, .methods-btn:focus-visible {
+  outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--radius-sm);
 }
 .sidebar .navgroup {
   margin: 16px 0 5px; padding: 0 9px;
@@ -132,15 +183,43 @@ main {
 main > * { max-width: var(--content-w); }
 
 /* ---------- Section header --------------------------------------------- */
-.viewhead { margin: 0 0 18px; }
+/* Title and blurb on the left, "go and see it" links on the right, closed by a
+   hairline that spans both. */
+.viewhead {
+  margin: 0 0 18px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start; column-gap: 20px;
+}
 .viewhead h2 {
   font-size: 19px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 4px;
+  grid-column: 1;
 }
-.viewhead p { margin: 0; color: var(--muted); max-width: 74ch; font-size: 12.5px; }
+.viewhead p { margin: 0; color: var(--muted); max-width: 74ch; font-size: 12.5px;
+  grid-column: 1; }
+.headlinks {
+  grid-column: 2; grid-row: 1 / span 2;
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end;
+  padding-top: 1px;
+}
+.headlinks a {
+  font-size: 11.5px; font-weight: 450; color: var(--muted); text-decoration: none;
+  padding: 3px 9px; border: 1px solid var(--border); border-radius: 999px;
+  white-space: nowrap; background: var(--surface);
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.headlinks a:hover {
+  color: var(--tab, var(--brand));
+  border-color: color-mix(in srgb, var(--tab, var(--brand)) 40%, var(--border));
+  background: color-mix(in srgb, var(--tab, var(--brand)) 7%, var(--surface));
+}
 /* A hairline, not a coloured band. The heading is the signal; the rule just closes it. */
 .viewhead::after {
   content: ""; display: block; height: 1px; margin-top: 14px;
-  background: var(--border);
+  background: var(--border); grid-column: 1 / -1;
+}
+@media (max-width: 720px) {
+  .viewhead { grid-template-columns: minmax(0, 1fr); }
+  .headlinks { grid-column: 1; grid-row: auto; justify-content: flex-start; margin-top: 10px; }
 }
 
 /* ===========================================================================
@@ -170,13 +249,26 @@ main > * { max-width: var(--content-w); }
 .stat .spark { display: block; width: 100%; height: 24px; margin-top: 7px; }
 
 /* ===========================================================================
-   12-column grid. Spans are chosen from the data's own shape in cards.js — a
-   chart with six categories in a full-width card is seven bars adrift in white.
+   Rows of twelve columns.
+
+   The layout is a complete tessellation, not a flow: charts are grouped into rows
+   whose spans sum to 12, and every card in a row stretches to the same height with
+   its chart flexing to fill. That is the difference between a dashboard and a pile
+   of cards — no gaps, no ragged bottoms, every edge aligned.
    =========================================================================== */
-.chart-grid {
+.chart-grid { display: flex; flex-direction: column; gap: var(--gap); }
+.crow {
   display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap);
-  align-items: start;
+  align-items: stretch;
 }
+/* Row heights. The chart inside absorbs whatever the title and caption leave. */
+.crow.h-sm   { min-height: 172px; }
+.crow.h-md   { min-height: 244px; }
+.crow.h-lg   { min-height: 310px; }
+.crow.h-xl   { min-height: 392px; }
+.crow.h-map  { min-height: 440px; }
+.crow.h-tall { min-height: 580px; }
+.crow > .card { height: 100%; }
 .span-3 { grid-column: span 3; }
 .span-4 { grid-column: span 4; }
 .span-5 { grid-column: span 5; }
@@ -202,21 +294,29 @@ main > * { max-width: var(--content-w); }
   font-variant-numeric: tabular-nums;
 }
 
-/* The computed takeaway — the chart's caption, not chrome. */
+/* The computed takeaway — the chart's caption, not chrome. Strictly ONE line: a
+   caption that wraps competes with the chart for attention, and it pushed the card
+   heights out of alignment. Anything longer belongs in the ⓘ note or Methods. */
 .insight {
-  margin: 3px 0 7px; font-size: 11px; line-height: 1.45; color: var(--muted);
-  max-width: 80ch;
+  margin: 2px 0 7px; font-size: 11px; line-height: 1.4; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .card.lead .insight { font-size: 12px; }
 
-.chart { width: 100%; min-height: 0; }
-.chart.h-xs { height: 108px; }
-.chart.h-sm { height: 178px; }
-.chart.h-md { height: 228px; }
-.chart.h-lg { height: 286px; }
-.chart.h-xl { height: 360px; }
-.chart.h-map { height: 420px; }
-.chart.h-tall { height: 560px; }
+/* The chart takes the space the card has left. A floor stops ECharts initialising
+   into a zero-height box before the flex layout settles; a ResizeObserver in
+   cards.js re-fits it once it has real dimensions. */
+/* flex-basis 0, NOT auto. With `auto` the chart's own rendered height counts as its
+   basis, so ECharts resizing the canvas grew the card, which grew the row, which
+   grew the chart again — panels expanded without bound as soon as a drill-down
+   table opened. Basis 0 means the chart takes leftover row space and never feeds
+   its own size back into the layout. */
+.chart { width: 100%; flex: 1 1 0%; min-height: 110px; }
+/* HTML components grow into the card and centre their content. Left at natural
+   height they sat at the top of a stretched card with dead space beneath, which is
+   exactly the ragged look the row tessellation is meant to remove. */
+.meters, .shares { flex: 1 1 auto; justify-content: center; }
+table.ranked { flex: 0 0 auto; }
 
 /* Methodology marker — tier 2 of progressive disclosure. */
 .info {
@@ -300,21 +400,24 @@ table.ranked tbody tr:hover td { background: var(--surface-2); }
    Drill-down table (progressive disclosure + the contrast relief for the two
    sub-3:1 chart hues)
    =========================================================================== */
-details.drill { margin-top: 7px; border-top: 1px solid var(--surface-2); }
-details.drill > summary {
-  cursor: pointer; list-style: none; padding: 6px 0 0;
-  font-size: 10.5px; font-weight: 450; color: var(--faint);
+/* The affordance is a button opening a dialog, so it has a FIXED height: whether or
+   not the table is showing, the card is exactly as tall. That is the point — as a
+   <details> it expanded in place and stretched every chart in its grid row. */
+.drill { margin-top: 7px; border-top: 1px solid var(--surface-2); flex: 0 0 auto; }
+.drill > button {
+  cursor: pointer; padding: 6px 0 0; margin: 0;
+  background: none; border: 0; border-radius: 0;
+  font-family: var(--sans); font-size: 10.5px; font-weight: 450; color: var(--faint);
   display: flex; align-items: center; gap: 5px;
 }
-details.drill > summary::-webkit-details-marker { display: none; }
-details.drill > summary::before { content: "▸"; color: var(--faint); font-size: 8px; }
-details[open].drill > summary::before { content: "▾"; }
-details.drill > summary:hover { color: var(--brand); }
-details.drill > summary:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px;
+.drill > button::before { content: "▤"; color: var(--faint); font-size: 9px; }
+.drill > button:hover { color: var(--brand); background: none; }
+.drill > button:focus-visible {
+  outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--radius-sm);
 }
-.drill .scrollwrap { max-height: 240px; margin-top: 6px; }
-.drill .dl { font-size: 10.5px; margin-top: 6px; display: inline-block; }
+/* In the dialog the table has the whole width, so it can be taller before scrolling. */
+#datamodal .scrollwrap { max-height: 58vh; }
+#datamodal .dl { font-size: 11.5px; margin-top: 12px; display: inline-block; }
 
 /* ===========================================================================
    Landing
@@ -340,7 +443,10 @@ details.drill > summary:focus-visible {
   margin: 22px 0 10px; font-size: 11px; font-weight: 500; color: var(--faint);
 }
 
-.jump-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(4, 1fr); }
+/* 12 columns so seven cards tile as 3+3+3+3 then 4+4+4 — no empty slot. */
+.jump-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(12, 1fr); }
+.jump-grid > a:nth-child(-n+4) { grid-column: span 3; }
+.jump-grid > a:nth-child(n+5) { grid-column: span 4; }
 a.jump {
   display: flex; flex-direction: column; gap: 4px;
   background: var(--surface); border: 1px solid var(--border);
@@ -435,7 +541,7 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
   .sidebar nav ul { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
   .sidebar nav ul::-webkit-scrollbar { display: none; }
   .sidebar nav a { border-bottom: 2px solid transparent; white-space: nowrap; }
-  .sidebar nav a[aria-current="page"] { border-bottom-color: var(--ink); }
+  .sidebar nav a[aria-current="page"] { border-bottom-color: var(--tab, var(--ink)); }
   .sidebar .navgroup { display: none; }
   .sidebar .foot {
     margin: 0; padding: 0; border: 0; display: flex; align-items: center; gap: 12px;
@@ -452,6 +558,56 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
   .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
   .jump-grid { grid-template-columns: 1fr; }
   main { padding-left: 16px; padding-right: 16px; }
+}
+
+/* ===========================================================================
+   Motion
+
+   Navigation should feel continuous rather than like a page reload. The view fades
+   and rises a few pixels; cards follow in a short stagger so a dense page resolves
+   in order instead of snapping into place all at once. Everything is fast enough to
+   feel immediate — nothing here exceeds a quarter of a second.
+   =========================================================================== */
+:root { --ease: cubic-bezier(.2, .7, .2, 1); }
+
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+#view { animation: viewIn .22s var(--ease) both; }
+/* Re-trigger on every route change: app.js flips this attribute. */
+#view[data-entering] { animation: viewIn .22s var(--ease) both; }
+
+.crow > .card { animation: cardIn .26s var(--ease) both; }
+.crow:nth-child(1) > .card { animation-delay: .02s; }
+.crow:nth-child(2) > .card { animation-delay: .06s; }
+.crow:nth-child(3) > .card { animation-delay: .10s; }
+.crow:nth-child(4) > .card { animation-delay: .14s; }
+.crow:nth-child(n+5) > .card { animation-delay: .16s; }
+
+.stat, a.jump, .strip { animation: cardIn .24s var(--ease) both; }
+.stat-row .stat:nth-child(2) { animation-delay: .03s; }
+.stat-row .stat:nth-child(3) { animation-delay: .06s; }
+.stat-row .stat:nth-child(4) { animation-delay: .09s; }
+
+.card { transition: box-shadow .18s var(--ease), border-color .18s var(--ease); }
+.card:hover { box-shadow: var(--shadow); }
+a.jump:hover { transform: translateY(-2px); }
+a.jump { transition: box-shadow .18s var(--ease), transform .18s var(--ease), border-color .18s var(--ease); }
+
+/* The house standard honours prefers-reduced-motion globally for transitions;
+   animations need saying separately. */
+@media (prefers-reduced-motion: reduce) {
+  #view, #view[data-entering], .crow > .card, .stat, a.jump, .strip {
+    animation: none !important;
+  }
+  a.jump:hover { transform: none; }
+  html { scroll-behavior: auto; }
 }
 
 /* ===========================================================================

@@ -46,13 +46,13 @@ Percentages are suppressed below n=10, where a share invites a conclusion the sa
 | Route | What it answers |
 |---|---|
 | `#/` | Headline figures, and how Ersilia has grown across four measures on one indexed axis |
-| `#/models` | The Model Hub: growth, task/subtask mix, biomedical area, curation status |
+| `#/models` | The Model Hub: growth, task mix, pathogens targeted, wrap lag, scaling limit, footprint |
 | `#/projects` | The project portfolio as a timeline — concurrency, overrun, status |
 | `#/publications` | Output and accumulated citations, venue impact, African collaboration |
 | `#/repositories` | Public code: popularity against activity, commit concentration, contributors |
-| `#/community` | Joiners, leavers and net change; tenure; cohort retention. Aggregates only |
-| `#/reach` | Where Ersilia works, and how that maps onto its Global South mission |
-| `#/outreach` | Events and blog activity |
+| `#/community` | Who has taken part: people over time, concurrent involvement, tenure, roles, countries. Aggregates only |
+| `#/reach` | "Countries & partners" — where Ersilia works, how that maps onto its Global South mission, and who its partners are |
+| `#/outreach` | "Events & writing" — events, the blog, and the conferences Ersilia tracks |
 | `#/downloads` | Every aggregate as CSV, plus the full dataset as JSON |
 
 Field completeness and the other data-quality caveats live in the **Methods** dialog rather than in a
@@ -121,31 +121,65 @@ sentence-case chrome, and progressive disclosure (caption → hover note → Met
 `site/assets/ersilia.css` is that standard verbatim; `site/styles.css` adds only what a dashboard
 needs on top.
 
-**Each section owns a hue**, which marks its sidebar entry *and* colours its charts, so a page reads
-as itself:
+**Navigation carries colour; charts carry the palette.** Each sidebar entry has its own light tint,
+but only in the fill behind it — the label text stays plain ink, because eight coloured words in a
+column read as decoration. Charts do *not* inherit the section hue: painting a whole page one colour
+made every page monochrome, which is the opposite of using a palette.
 
-| Section | Hue | Section | Hue |
-|---|---|---|---|
-| Model Hub | periwinkle `#6d5de7` | Community | orchid `#af5cc7` |
-| Projects | turquoise `#22bbad` | Global reach | amber `#d19710` |
-| Publications | plum `#734080` | Outreach | cobalt `#1c7db0` |
-| Code | lime `#67bb55` | | |
+Chart colour is one global categorical set, assigned in a fixed order:
 
-Those are the brand hues snapped into the legible OKLCH band and then **assigned to the nav order by
-optimisation** — in a sidebar the dots are adjacent, so neighbours have to be tellable apart. The
-obvious assignment put lime beside amber, which is ΔE 5.0 under deuteranopia. This order clears
-adjacent CVD ΔE 23.1 against a target of 8. **Re-run
-`dataviz/scripts/validate_palette.js` over the sequence if you reorder the nav or add a section.**
+| slot | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| | periwinkle `#6d5de7` | amber `#e2a72e` | cobalt `#247dad` | lime `#6cbf5a` | orchid `#af5cc7` | crimson `#e63745` |
 
-Turquoise, lime and amber sit below 3:1 contrast on white; the light-ink style labels every value
+**Crimson is last on purpose, and that is the most important thing about this list.** It used to be
+slot 2, so every two-series chart came out periwinkle-versus-red and half the dashboard read as an
+alarm: "Left", "External", "Blog posts", "Featurization" and "Science" were all painted the same red
+as a failure. Red carries a verdict whether or not one is meant, so it now sits where only a genuine
+sixth category reaches it — and `slotColor()` stops at slot 5, so chrome can never reach it at all.
+Green, amber and red are otherwise reserved for real states (a model's curation status, a project's
+status) via the `semantics` mechanism.
+
+The order is also the colour-vision safety mechanism, and it is **adjacency-sensitive**: cobalt in
+slot 2 fails the normal-vision floor beside periwinkle (ΔE 14.7 — both read blue) and orchid beside
+cobalt fails deuteranopia (ΔE 5.8). This order clears adjacent CVD ΔE 20.0 against a target of 8 and
+normal-vision ΔE 20.6 against a floor of 15. **Re-run `dataviz/scripts/validate_palette.js` over the
+sequence before changing it.** Amber and lime sit below 3:1 contrast on white; every value is labelled
 directly and every chart has a table view, which is the documented relief.
 
 **Chart form is deliberately varied.** An earlier version was 62% bar charts, 26 of them the
 identical horizontal bar, which is why it read as a wall of purple. The horizontal bar is now a
 lollipop (a dot and a hairline), three rankings on the Code page are one compact table, and ratios
-that do not need a chart are meter rows. Bars are down to about a tenth of the forms. Card width is
-derived from how many categories a metric has, not from editorial rank — a seven-category chart in a
-full-width card is seven bars adrift in whitespace.
+that do not need a chart are meter rows. Bars are down to about a tenth of the forms. Layout is
+explicit: `config.js` groups charts into rows whose spans must sum to 12, cards in a row share one
+height, and the charts inside flex to fill it, so each page tessellates instead of ending in a ragged
+edge.
+
+**Where something grows, the rate and the total are drawn together** — per-period bars over a
+cumulative line, two panels sharing one time axis (`growth_pair()` in `parse.py`, rendered as
+`facets`). A cumulative curve only ever rises, so on its own it hides whether the rate is rising or
+falling; these used to sit behind a Cumulative/Per-quarter toggle, which meant you could only ever
+see one of them.
+
+**Four Model Hub figures are derived rather than recorded**, and each states its derivation in
+Methods: years from a model's publication to its incorporation; the largest input batch a model
+completed (inferred from the five Computational Performance columns, where `-1` marks a failure at
+that size); Docker image size; and ARM64 coverage. "Pathogens targeted" excludes `Any` and
+`Homo sapiens` — both real answers, but they describe organism-agnostic chemistry and human-property
+prediction, and together they would fill the ranking without saying anything about pathogen coverage.
+
+**The Community section is about participation, not attrition.** It used to lead with a churn ledger
+(joiners vs leavers vs net change, in green and red) and a cohort-retention heatmap. Both were
+correct arithmetic and both were the wrong question: they framed a growing community as a leak, and
+the retention grid's colour scale was set by a single 2020 member at 100%, which squashed every real
+cohort into the pale end. A contributor whose collaboration ended is not a loss — most were students,
+interns and fellows on fixed terms. Both charts are gone.
+
+**Data tables open in a dialog, not in the card.** Inline, a table added its own height to one card,
+which grew the grid row, which stretched every chart beside it — asking to see one chart's numbers
+visibly ballooned its neighbours. Relatedly, `.chart` is `flex: 1 1 0%` and not `auto`: with `auto`
+the chart's rendered height counted as its own flex basis, so ECharts resizing the canvas grew the
+card, which grew the row, which grew the chart again, without bound.
 
 Three charts are deliberately *not* what you might expect. Publications-versus-citations is two
 stacked panels sharing one x axis rather than a dual-axis chart, because the scales are unrelated and

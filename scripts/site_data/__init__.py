@@ -51,6 +51,7 @@ def build_all(data_dir, today=None):
                                      table("community"), table("events")),
         "events": outreach.build_events(table("events")),
         "blogposts": outreach.build_blogposts(table("blogposts")),
+        "conferences": outreach.build_conferences(table("conferences")),
         "quality": quality_section.build(tables, repos_public),
     }
 

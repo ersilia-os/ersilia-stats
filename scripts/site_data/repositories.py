@@ -25,6 +25,7 @@ from .parse import (
     col,
     cumulative,
     dense_quarters,
+    growth_pair,
     first_value,
     metric,
     multi_counts,
@@ -62,6 +63,7 @@ def build(repos):
         return dict(
             {k: dict(EMPTY) for k in (
                 "per_quarter", "cumulative", "by_type", "by_status", "visibility",
+                "growth",
                 "top_by_stars", "top_by_forks", "most_collaborative", "top_contributors",
                 "contributor_concentration", "ranked",
             )},
@@ -80,11 +82,7 @@ def build(repos):
 
     cumulative_metric = cumulative(
         created,
-        ins.join(
-            ins.span(labels, running, "repositories"),
-            ("%s has no creation date on file." %
-             ins.count_of(undated, "repository", "repositories")) if undated else None,
-        ),
+        ins.span(labels, running, "repositories"),
     )
     cumulative_metric["n"] = int(running[-1]) if running else 0
 
@@ -95,6 +93,7 @@ def build(repos):
             ins.busiest(labels, list(dense.values), "repository", "repositories"),
         ),
         "cumulative": cumulative_metric,
+        "growth": growth_pair(labels, list(dense.values), running, "repositories"),
         "by_type": _by_type(every),
         "by_status": _by_status(every),
         "visibility": _visibility(every, private_count),
@@ -116,11 +115,7 @@ def _visibility(every, private_count):
     public_count = int(len(every) - private_count)
     out = metric(
         ["Public", "Private"], [public_count, private_count],
-        ins.join(
-            ins.share_of(public_count, len(every), "repositories", "are public"),
-            "Counts, dates, types and totals on this page cover all of them; "
-            "anything that names a repository or a contributor covers the public ones only.",
-        ),
+        ins.share_of(public_count, len(every), "repositories", "are public"),
         semantics={"Public": "brand", "Private": "neutral"},
     )
     return out
@@ -165,10 +160,7 @@ def _ranked(public, name_col):
     return {
         "rows": rows,
         "n": len(rows),
-        "insight": ins.join(
-            ins.concentration(list(public["stars"]), "stars"),
-            "Public repositories only — ranked by stars.",
-        ),
+        "insight": ins.concentration(list(public["stars"]), "stars"),
     }
 
 
@@ -183,11 +175,9 @@ def _top_contributors(public):
     counts = multi_counts(col(public, "contributor_names"), top=12)
     everyone = multi_counts(col(public, "contributor_names"))
     if counts["labels"]:
-        counts["insight"] = ins.join(
-            "%s distinct contributors across %s public repositories." % (
-                ins.num(everyone.get("distinct", 0)), ins.num(len(public)),
-            ),
-            ins.concentration(everyone["values"], "repository contributions"),
+        counts["insight"] = "%s distinct contributors; the top 3 hold %s of contributions." % (
+            ins.num(everyone.get("distinct", 0)),
+            ins.pct(sum(sorted(everyone["values"], reverse=True)[:3]), sum(everyone["values"])),
         )
     return counts
 
@@ -249,9 +239,5 @@ def _scatter(public, name_col):
     insight = None
     if points:
         quiet = [p for p in points if p["commits"] >= 50 and p["stars"] == 0]
-        insight = ins.join(
-            "%s public repositories with 50+ commits have no stars — activity and visibility are not the same thing." %
-            ins.num(len(quiet)),
-            "Both axes are logarithmic: a handful of repositories account for most of every metric.",
-        )
+        insight = "%s public repositories with 50+ commits have no stars." % ins.num(len(quiet))
     return {"points": points, "n": len(points), "insight": insight}

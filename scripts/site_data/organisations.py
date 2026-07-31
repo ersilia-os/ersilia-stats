@@ -53,9 +53,12 @@ def build(orgs, countries):
     return {
         "by_type": by_type,
         "by_country": by_country,
+        # Short form: this lands in a 3-column card, which fits about forty characters
+        # on the single caption line. The full definition is in the ⓘ note.
         "by_classification": multi_counts(
             col(orgs, "classification"), top=8,
-            insight="How each organisation relates to Ersilia — funder, network or collaborator."),
-        "by_focus": multi_counts(col(orgs, "focus_areas"), top=12,
-                                 insight="Focus areas are a multi-select, so one organisation contributes to several."),
+            insight=ins.leader_short(multi_counts(col(orgs, "classification")))),
+        "by_focus": multi_counts(
+            col(orgs, "focus_areas"), top=12,
+            insight=ins.leader(multi_counts(col(orgs, "focus_areas")), "focus-area assignments")),
     }

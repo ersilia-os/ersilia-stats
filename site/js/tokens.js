@@ -70,9 +70,17 @@ function accent() {
 }
 
 /* Distinct palette slots for a set of sibling items (hero tiles, section cards).
-   Uses the full categorical order rather than one hue. */
+   Uses the categorical order rather than one hue — but STOPS BEFORE THE LAST SLOT.
+
+   Slot 6 is crimson, reserved so that only a genuine sixth data category reaches it.
+   Chrome is never a data category, so it must never reach it either: with the full
+   length here, the "Repositories" hero sparkline and the "Countries & partners" card
+   came out red, which is precisely the false alarm the palette order exists to
+   prevent. Five hues are plenty for eight tiles. */
+const CHROME_SLOTS = 5;
+
 function slotColor(index) {
-  return catColor(index % T.cat.length);
+  return catColor(index % Math.min(CHROME_SLOTS, T.cat.length));
 }
 
 /* Semantic names the exporter emits alongside status metrics, so "in progress"

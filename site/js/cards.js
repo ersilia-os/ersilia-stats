@@ -277,48 +277,31 @@ function drillTable(metric) {
   return wrap;
 }
 
+/* The "Table" affordance under a chart. A button that opens the shared data dialog,
+   NOT a <details> that expands in place: inline, the table added its own height to
+   the card, the card grew the grid row, and the row stretched every chart in it —
+   so asking to see one chart's numbers visibly ballooned its neighbours.
+
+   The table is still built lazily, on click, because 38 tables' worth of DOM is not
+   worth pre-rendering. */
 function drillDown(chart, metric, csvPath) {
-  const details = el("details", "drill");
-  const summary = el("summary", null, "Table");
-  summary.setAttribute("aria-label", "Show the data behind " + chart.title + " as a table");
-  details.appendChild(summary);
-
-  // Built on first open: 35 tables' worth of DOM is not worth pre-rendering.
-  let built = false;
-  details.addEventListener("toggle", () => {
-    if (!details.open || built) return;
-    built = true;
-    details.appendChild(drillTable(metric));
-    if (csvPath) {
-      const link = el("a", "dl", "Download CSV");
-      link.href = csvPath;
-      link.setAttribute("download", "");
-      details.appendChild(link);
-    }
+  const wrap = el("div", "drill");
+  const button = el("button", null, "Table");
+  button.type = "button";
+  button.setAttribute("aria-label", "Show the data behind " + chart.title + " as a table");
+  button.addEventListener("click", () => {
+    if (typeof window.openDataTable !== "function") return;
+    window.openDataTable(chart.title, drillTable(metric), csvPath);
   });
-  return details;
+  wrap.appendChild(button);
+  return wrap;
 }
 
-/* ----------------------------------------------------------- span logic */
-/* How many columns a chart occupies, derived from the DATA rather than editorial
-   rank alone. v2 set spans by importance, which stretched a 7-category chart
-   across 1100px (seven thin bars adrift in white) while squeezing an 18-row
-   ranking into a narrow card until its labels truncated. */
-function spanFor(chart, metric) {
-  if (chart.span) return chart.span;            // explicit wins, for lead charts
-  const n = countCategories(chart, metric);
-  if (chart.type === "lollipop" || chart.type === "ordinallollipop" || chart.type === "ranked") {
-    // A ranking needs vertical room, never horizontal.
-    return n > 12 ? 6 : (n > 6 ? 5 : 4);
-  }
-  if (chart.type === "column" || chart.type === "histogram") {
-    return n > 16 ? 12 : (n > 9 ? 8 : (n > 5 ? 6 : 4));
-  }
-  if (chart.type === "donut" || chart.type === "shares" || chart.type === "meters") return 4;
-  if (chart.type === "treemap" || chart.type === "treehierarchy") return 5;
-  return 6;
-}
-
+/* ------------------------------------------------------------ sizing */
+/* Spans come from config.js, where every row sums to 12. Nothing is derived here
+   any more: an earlier version guessed spans from the data and packed rows
+   afterwards, which left short rows and ragged edges. A dashboard wants a layout
+   decided up front. */
 function countCategories(chart, metric) {
   if (!metric) return 0;
   if (metric.tree) return metric.tree.length;
@@ -326,40 +309,6 @@ function countCategories(chart, metric) {
   if (metric.points) return metric.points.length;
   if (metric.rows) return metric.rows.length;
   return (metric.labels || []).length;
-}
-
-/* Rows should not end with a lone card beside a void. Widen the last card of a
-   short row so every row of 12 columns is filled. */
-function packSpans(cards) {
-  let row = [];
-  let used = 0;
-  const flush = () => {
-    if (!row.length) return;
-    const slack = 12 - used;
-    // Cap the stretch. Widening a share-bar card from 4 columns to 12 filled the
-    // row but left tracks running the whole page width, which looks worse than the
-    // gap it was fixing. Two columns of give is enough to tidy a row.
-    if (slack > 0) {
-      const last = row[row.length - 1];
-      setSpan(last, last._span + Math.min(slack, 2));
-    }
-    row = [];
-    used = 0;
-  };
-  cards.forEach((card) => {
-    if (card._span >= 12) { flush(); return; }
-    if (used + card._span > 12) flush();
-    row.push(card);
-    used += card._span;
-  });
-  flush();
-  return cards;
-}
-
-function setSpan(card, span) {
-  card.classList.remove("span-" + card._span);
-  card._span = Math.min(12, span);
-  card.classList.add("span-" + card._span);
 }
 
 /* --------------------------------------------------------------- card */
@@ -372,9 +321,9 @@ function chartCard(chart, data, registry) {
     ? { labels: ["_"], values: [1] }
     : getByPath(data.sections, sources[0].data);
 
-  const span = chart.type === "shares" ? (chart.span || 4) : spanFor(chart, metric);
+  // Explicit, from config.js, where every row is built to sum to 12.
+  const span = chart.span || 6;
   const card = el("div", "card span-" + span + (chart.lead ? " lead" : ""));
-  card._span = span;
 
   const head = el("div", "phead");
   head.appendChild(el("h3", null, chart.title));
@@ -391,8 +340,12 @@ function chartCard(chart, data, registry) {
     meta.appendChild(el("span", "pcount", "n=" + fmtNum(metric.n)));
   }
 
-  const insight = el("p", "insight", (metric && metric.insight) || chart.blurb || "");
-  if ((metric && metric.insight) || chart.blurb) card.appendChild(insight);
+  // Every card carries a caption, always. Preference order: the takeaway computed
+  // from the data, then the chart's own one-liner, then the first sentence of the
+  // methodology note. A card with no caption left a ragged hole in the row.
+  const insight = el("p", "insight", captionFor(chart, metric));
+  insight.title = insight.textContent;   // the full text on hover, since it is clamped
+  card.appendChild(insight);
 
   if (chart.desc) {
     const info = el("button", "info hovertip", "i");
@@ -413,7 +366,7 @@ function chartCard(chart, data, registry) {
     return card;
   }
 
-  const canvas = el("div", "chart " + (chart.height || heightFor(chart, metric)));
+  const canvas = el("div", "chart");
   canvas.setAttribute("role", "img");
   canvas.setAttribute("aria-label", chart.title + ". " + ((metric && metric.insight) || "") +
     " The same data is available as a table below this chart.");
@@ -425,6 +378,32 @@ function chartCard(chart, data, registry) {
   const instance = echarts.init(canvas, null, { renderer: "canvas" });
   instance.setOption(buildOption(chart, metric));
   registry.push(instance);
+
+  // The chart's height comes from the flex row, which is not known at init. A
+  // ResizeObserver is the only reliable way to catch that — and it also handles the
+  // sidebar collapsing, the card growing when a caption wraps, and window resizes,
+  // all of which previously needed their own handling or were simply missed.
+  //
+  // The callback must be idempotent. instance.resize() can itself change the
+  // observed box, so an unguarded observer re-entered forever; it only resizes when
+  // the box genuinely changed, and once per frame.
+  if (typeof ResizeObserver !== "undefined") {
+    let lastW = 0, lastH = 0, queued = false;
+    const observer = new ResizeObserver((entries) => {
+      const box = entries[entries.length - 1].contentRect;
+      const w = Math.round(box.width), h = Math.round(box.height);
+      if (h <= 0 || (w === lastW && h === lastH)) return;
+      lastW = w; lastH = h;
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        if (canvas.clientHeight > 0) instance.resize();
+      });
+    });
+    observer.observe(canvas);
+    instance.__observer = observer;
+  }
 
   // Metric toggles change WHICH measure the card encodes. They are not filters —
   // a filter would belong in one row above everything it scopes.
@@ -456,17 +435,15 @@ function chartCard(chart, data, registry) {
   return card;
 }
 
-/* Height from the form and the row count, so a 15-row lollipop is not squeezed
-   into the same box as a 4-row one. */
-function heightFor(chart, metric) {
-  const n = countCategories(chart, metric);
-  if (chart.type === "lollipop" || chart.type === "ordinallollipop") {
-    if (n > 13) return "h-lg";
-    if (n > 8) return "h-md";
-    return "h-sm";
+/* One line, always present. */
+function captionFor(chart, metric) {
+  if (metric && metric.insight) return metric.insight;
+  if (chart.blurb) return chart.blurb;
+  if (chart.desc) {
+    const first = String(chart.desc).split(/(?<=\.)\s/)[0];
+    return first.length > 120 ? first.slice(0, 117).trimEnd() + "…" : first;
   }
-  if (chart.lead) return "h-lg";
-  return "h-md";
+  return chart.title;
 }
 
 function csvFor(path) {

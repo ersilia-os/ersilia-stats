@@ -18,7 +18,11 @@ const Router = (() => {
   }
 
   function disposeCharts() {
-    charts.forEach((c) => { try { c.dispose(); } catch (e) { /* already gone */ } });
+    charts.forEach((c) => {
+      // Disconnect the observer before disposing, or it fires on a dead instance.
+      if (c.__observer) { try { c.__observer.disconnect(); } catch (e) { /* gone */ } }
+      try { c.dispose(); } catch (e) { /* already gone */ }
+    });
     charts = [];
   }
 
@@ -37,11 +41,19 @@ const Router = (() => {
     outlet.innerHTML = "";
     markNav(routes.has(path) ? path : "/");
     view(outlet, charts);
-    // Charts initialise while the grid is still resolving; re-fit once the
-    // layout has been flushed, or wide cards render at the wrong width.
+    // Restart the entrance animation. Removing and re-adding the attribute on
+    // separate frames is what forces the browser to replay it — without the reflow
+    // in between, the class change is coalesced and nothing animates.
+    outlet.removeAttribute("data-entering");
+    void outlet.offsetWidth;
+    outlet.setAttribute("data-entering", "");
+    // Charts initialise while the flex rows are still resolving; re-fit once the
+    // layout has been flushed. The per-chart ResizeObserver catches the rest.
     requestAnimationFrame(() => charts.forEach((c) => c.resize()));
     document.title = (view.title ? view.title + " · " : "") + "Ersilia in numbers";
     if (onAfterRender) onAfterRender(path);
+    // Jump, not glide: a smooth scroll competing with the entrance animation reads
+    // as lag. The animation supplies the sense of movement.
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 

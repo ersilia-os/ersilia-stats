@@ -166,6 +166,39 @@ def cumulative(counts, insight=None):
     return metric([str(i) for i in running.index], running.values, insight)
 
 
+def growth_pair(labels, per_period, running, noun_plural, period="quarter", insight=None):
+    """A growth story as ONE metric with two panels: rate on top, total below.
+
+    Every section that grows over time uses this. It exists because a cumulative
+    curve and a per-period count answer different questions — "how big is it now"
+    versus "are we speeding up or slowing down" — and a monotone curve hides the
+    second answer completely. These used to sit behind a Cumulative/Per-quarter
+    toggle, which meant you could only ever see one of them.
+
+    Renders as ``type: "facets"``: two stacked panels sharing one category axis,
+    with the axis pointer linked so hovering reads both at once. The panel forms are
+    fixed by the builder (top = bars, bottom = line), which is exactly this order.
+    Needs ``span: 12`` and ``h: "h-xl"`` — two panels in a short row are unreadable.
+    """
+    labels = [str(x) for x in labels]
+    if not labels:
+        return {"labels": [], "series": [], "n": 0}
+    total = int(running[-1]) if len(running) else 0
+    if insight is None:
+        busiest = max(range(len(per_period)), key=lambda i: per_period[i])
+        insight = "{:,} {} so far, most in {} with {:,}.".format(
+            total, noun_plural, labels[busiest], int(per_period[busiest]),
+        )
+    return series_metric(
+        labels,
+        [{"name": "Added per " + period, "values": list(per_period)},
+         {"name": "Total to date", "values": list(running)}],
+        insight=insight,
+        # Not the sum of both panels, which would double-count and mean nothing.
+        n=total,
+    )
+
+
 def series_metric(labels, series, insight=None, **extra):
     """Multi-series metric: ``series`` is ``[{"name": …, "values": […]}, …]``."""
     out = {

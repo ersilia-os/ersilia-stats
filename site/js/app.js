@@ -37,13 +37,15 @@ function renderLanding(outlet, registry) {
   // so they can share one honest axis.
   if (DATA.sections.__growth) {
     const grid = el("div", "chart-grid");
-    grid.appendChild(chartCard({
+    const crow = el("div", "crow h-lg");
+    crow.appendChild(chartCard({
       title: "How Ersilia has grown", data: "__growth", type: "growth",
-      lead: true, span: 12, height: "h-lg",
+      lead: true, span: 12,
       desc: "Each measure as a share of its own total today, so four series of very " +
             "different size can share one axis. A steep line means that measure grew " +
             "fast in that period; a flat one means it stalled.",
     }, DATA, registry));
+    grid.appendChild(crow);
     outlet.appendChild(grid);
   }
 
@@ -75,7 +77,8 @@ function renderLanding(outlet, registry) {
 /* The card's one-liner: prefer the lead chart's computed takeaway over the static
    blurb, so the landing page says something current. */
 function viewTakeaway(view) {
-  const lead = view.charts.find((c) => c.lead) || view.charts[0];
+  // The first chart of the first row is the view's lead.
+  const lead = view.rows && view.rows[0] && view.rows[0].cells[0];
   const metric = lead && lead.data && getByPath(DATA.sections, lead.data);
   if (metric && metric.insight) return metric.insight;
   return view.blurb;
@@ -155,9 +158,24 @@ function buildOutreachPerYear() {
 /* ------------------------------------------------------------- sections */
 function renderView(view) {
   return function (outlet, registry) {
+    // The section's hue, so header links pick it up on hover exactly as the nav does.
+    outlet.style.setProperty("--tab", "var(--tab-" + view.id + ")");
     const head = el("div", "viewhead");
     head.appendChild(el("h2", null, view.title));
     head.appendChild(el("p", null, view.blurb));
+    // A statistics page should point at the thing it counts, so each view carries
+    // links to where you can go and actually see it.
+    if (view.links && view.links.length) {
+      const links = el("div", "headlinks");
+      view.links.forEach((link) => {
+        const a = el("a", null, link.label + " ↗");
+        a.href = link.href;
+        a.target = "_blank";
+        a.rel = "noopener";
+        links.appendChild(a);
+      });
+      head.appendChild(links);
+    }
     outlet.appendChild(head);
 
     if (view.id === "models" && !DATA.meta.models_available) {
@@ -166,10 +184,13 @@ function renderView(view) {
     }
 
     const grid = el("div", "chart-grid");
-    const cards = view.charts.map((chart) => chartCard(chart, DATA, registry));
-    // Widen the last card of any short row so no view ends beside a void.
-    packSpans(cards);
-    cards.forEach((card) => grid.appendChild(card));
+    // One .crow per configured row: spans sum to 12, cards share a height, and the
+    // charts inside flex to fill it.
+    view.rows.forEach((row) => {
+      const crow = el("div", "crow " + (row.h || "h-md"));
+      row.cells.forEach((chart) => crow.appendChild(chartCard(chart, DATA, registry)));
+      grid.appendChild(crow);
+    });
     outlet.appendChild(grid);
   };
 }
@@ -185,6 +206,7 @@ function renderDownloads(outlet) {
   outlet.appendChild(head);
 
   const card = el("div", "card");
+  card.style.animation = "none";
   const grid = el("div", "dl-grid");
 
   const overview = el("div", "dl-group");
@@ -255,18 +277,40 @@ function fillMethods() {
     ["Global South", "Taken from the World Bank income group on the Countries table: LIC, " +
       "LMIC and UMIC counted as Global South, HIC as Global North. Countries with no income " +
       "group recorded are excluded rather than assumed."],
-    ["Retention", "A joining cohort counts towards a retention horizon only once it is old " +
-      "enough to judge — someone who joined two months ago is not evidence about 3-month " +
-      "retention. Cells with no judgeable members are left blank, not zero."],
+    ["How long people stay", "Only ENDED collaborations are binned by length; including " +
+      "current members would censor every long one downwards. Read the distribution as the " +
+      "shape of the placements Ersilia runs — most are internships, fellowships and student " +
+      "placements with a term fixed before anyone arrived — rather than as a target missed. " +
+      "This section previously led with a churn ledger and a cohort-retention grid; both " +
+      "were correct arithmetic and both framed a growing community as attrition."],
+    ["Pathogens targeted", "Counts models whose target organism is a named pathogen. " +
+      "'Any' and 'Homo sapiens' are excluded: both are real answers, but they describe " +
+      "organism-agnostic chemistry and human-property prediction respectively, and together " +
+      "they would fill the ranking without saying anything about pathogen coverage."],
+    ["Years from paper to Hub", "Incorporation year minus the model's recorded publication " +
+      "year. Models whose incorporation year precedes their publication year are dropped: a " +
+      "negative lag means one of the two dates is wrong, not that a paper was wrapped before " +
+      "it existed."],
+    ["How far models scale", "DERIVED, not recorded. The five Computational Performance " +
+      "columns hold runtimes at increasing input batch sizes, and a value of -1 means the " +
+      "model failed at that size. The largest column holding a positive number is therefore " +
+      "the largest batch the model actually completed. Models with no benchmark are absent."],
+    ["Growth charts", "Where something grows over time, the rate and the running total are " +
+      "drawn as two panels sharing one time axis, never as two y-axes on one plot. A " +
+      "cumulative curve only ever rises, so on its own it hides whether the rate is rising " +
+      "or falling; the two panels are the same data asked two different questions."],
     ["Log axes", "The repository popularity chart uses logarithmic axes because a few " +
       "repositories account for most of every metric; on linear axes the rest collapse into " +
       "the corner. The axis ticks show the real values."],
     ["Small numbers", "Percentages are suppressed below n=10, where a share invites a " +
       "conclusion the sample cannot support."],
-    ["Colour", "Each section owns a hue, which also colours its charts. The set is derived " +
-      "from the Ersilia brand palette and validated for colour-vision deficiency (worst " +
-      "adjacent pair ΔE 23.1 against a target of 8). Every chart also has a table view, so " +
-      "no value is conveyed by colour alone."],
+    ["Colour", "One categorical set, shared by every chart on every page, assigned in a " +
+      "fixed order. Derived from the Ersilia brand palette and validated for colour-vision " +
+      "deficiency (worst adjacent pair ΔE 20.0 against a target of 8). Red sits last in that " +
+      "order on purpose: it carries a verdict whether or not one is meant, so only a genuine " +
+      "sixth category reaches it. Green, amber and red are otherwise reserved for real " +
+      "states — a model's curation status, a project's status. Every chart also has a table " +
+      "view, so no value is conveyed by colour alone."],
   ];
   rows.forEach((row) => {
     const block = el("div", "mrow");
@@ -292,11 +336,12 @@ function fillMethods() {
   }
 }
 
-function wireMethods() {
-  const modal = document.getElementById("methods");
+/* One dialog mechanism, used by both the Methods panel and the per-chart data table.
+   Returns `{show, hide}`; the caller decides what opens it. */
+function makeDialog(modalId, closeId) {
+  const modal = document.getElementById(modalId);
   const scrim = document.getElementById("scrim");
-  const open = document.getElementById("methods-open");
-  const close = document.getElementById("methods-close");
+  const close = document.getElementById(closeId);
   let lastFocus = null;
 
   function show() {
@@ -307,28 +352,113 @@ function wireMethods() {
   }
   function hide() {
     modal.hidden = true;
-    scrim.hidden = true;
-    if (lastFocus) lastFocus.focus();
+    // Only drop the scrim if no other dialog is still using it.
+    const others = Array.from(document.querySelectorAll(".modal"))
+      .filter((m) => m !== modal && !m.hidden);
+    if (!others.length) scrim.hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  open.addEventListener("click", show);
   close.addEventListener("click", hide);
-  scrim.addEventListener("click", hide);
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) hide(); });
+  scrim.addEventListener("click", () => { if (!modal.hidden) hide(); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) hide();
+  });
+  return { show: show, hide: hide };
+}
+
+function wireMethods() {
+  const dialog = makeDialog("methods", "methods-close");
+  document.getElementById("methods-open").addEventListener("click", dialog.show);
+}
+
+/* The per-chart data table lives in a dialog rather than expanding inside its card.
+   Inline, a <details> that opened added ~240px of table to one card, which grew the
+   grid row, which stretched EVERY chart in that row — the panels visibly ballooned.
+   A dialog cannot move the page, and a wide table finally gets room to be read. */
+function wireDataDialog() {
+  const dialog = makeDialog("datamodal", "datamodal-close");
+  const title = document.getElementById("datamodal-title");
+  const body = document.getElementById("datamodal-body");
+
+  window.openDataTable = function (heading, node, csvPath) {
+    title.textContent = heading;
+    body.textContent = "";
+    body.appendChild(node);
+    if (csvPath) {
+      const link = el("a", "dl", "Download CSV");
+      link.href = csvPath;
+      link.setAttribute("download", "");
+      body.appendChild(link);
+    }
+    dialog.show();
+  };
 }
 
 /* ----------------------------------------------------------------- nav */
 function renderNav() {
   const list = document.getElementById("nav-list");
-  // A plain list. No colour dots: they encoded nothing the reader could act on.
-  const add = (path, label) => {
+  // Each tab carries its own hue via --tab; styles.css keeps it light. No dots.
+  const add = (path, label, id) => {
     const item = el("li");
     const link = el("a", null, label);
     link.href = "#" + path;
+    link.style.setProperty("--tab", "var(--tab-" + id + ")");
     item.appendChild(link);
     list.appendChild(item);
   };
-  add("/", "Overview");
-  VIEWS.forEach((view) => add("/" + view.id, view.title));
+  add("/", "Overview", "overview");
+  VIEWS.forEach((view) => add("/" + view.id, view.title, view.id));
+}
+
+/* ------------------------------------------------------------ keyboard */
+/* The sidebar is a real list of links, so Tab and Enter already work. This adds the
+   conventions people expect of a vertical nav: Up/Down to walk it, Home/End to jump
+   to the ends, and left/right bracket to move between views from anywhere on the
+   page without having to focus the nav first. */
+function wireKeyboard() {
+  const links = () => Array.from(document.querySelectorAll("#nav-list a"));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
+
+    const all = links();
+    const current = all.findIndex((a) => a.hasAttribute("aria-current"));
+    const focused = all.indexOf(document.activeElement);
+
+    // Within the nav: move focus.
+    if (focused >= 0 && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+      e.preventDefault();
+      const next = e.key === "ArrowDown"
+        ? Math.min(focused + 1, all.length - 1)
+        : Math.max(focused - 1, 0);
+      all[next].focus();
+      return;
+    }
+    if (focused >= 0 && (e.key === "Home" || e.key === "End")) {
+      e.preventDefault();
+      (e.key === "Home" ? all[0] : all[all.length - 1]).focus();
+      return;
+    }
+
+    // Anywhere: step between views.
+    if (e.key === "[" || e.key === "]") {
+      e.preventDefault();
+      const from = current < 0 ? 0 : current;
+      const to = e.key === "]"
+        ? Math.min(from + 1, all.length - 1)
+        : Math.max(from - 1, 0);
+      if (to !== from) window.location.hash = all[to].getAttribute("href").slice(1);
+      return;
+    }
+
+    // "?" opens Methods, matching the convention for help.
+    if (e.key === "?") {
+      e.preventDefault();
+      document.getElementById("methods-open").click();
+    }
+  });
 }
 
 /* ---------------------------------------------------------------- boot */
@@ -363,6 +493,8 @@ async function main() {
   renderNav();
   fillMethods();
   wireMethods();
+  wireDataDialog();
+  wireKeyboard();
 
   Router.add("/", renderLanding, null);
   VIEWS.forEach((view) => Router.add("/" + view.id, renderView(view), view.title));

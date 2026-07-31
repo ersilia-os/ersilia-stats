@@ -49,6 +49,20 @@ def leader(metric_dict, noun_plural, of_total=None):
     )
 
 
+def leader_short(metric_dict):
+    """"X leads with N of M." — the leader sentence without the noun phrase.
+
+    Cards three or four columns wide fit roughly forty characters on one line, and the
+    full `leader()` sentence ("leads with 56 of 113 recorded member countries (50%)")
+    is clipped there. The noun and the percentage live in the tooltip and the ⓘ note.
+    """
+    labels = metric_dict.get("labels") or []
+    values = metric_dict.get("values") or []
+    if not labels or not values:
+        return None
+    return "%s leads with %s of %s." % (labels[0], num(values[0]), num(sum(values)))
+
+
 def concentration(values, noun_plural, top=3):
     """How much of the total the biggest few account for."""
     ordered = sorted((v for v in values if isinstance(v, (int, float))), reverse=True)

@@ -7,7 +7,7 @@ overlap, which ran long, and what is running right now.
 import pandas as pd
 
 from . import insights as ins
-from .parse import as_text, col, metric, series_metric, value_counts
+from .parse import as_text, col, growth_pair, metric, series_metric, value_counts
 
 # Airtable's project states mapped onto the house semantic tokens, so "in progress"
 # is the same colour in every chart on the site.
@@ -24,7 +24,8 @@ def build(projects, today):
     if projects is None or projects.empty:
         empty = {"labels": [], "values": [], "n": 0}
         return {"status": empty, "per_year": empty, "active_over_time": empty,
-                "timeline": {"rows": [], "n": 0}, "duration": empty}
+                "timeline": {"rows": [], "n": 0}, "duration": empty,
+                "growth": {"labels": [], "series": [], "n": 0}}
 
     start = pd.to_datetime(col(projects, "start_date"), errors="coerce")
     end = pd.to_datetime(col(projects, "end_date"), errors="coerce")
@@ -33,6 +34,7 @@ def build(projects, today):
     return {
         "status": _status(projects, status),
         "per_year": _per_year(start),
+        "growth": _growth(start),
         "active_over_time": _active_over_time(start, end, today),
         "timeline": _timeline(projects, start, end, status, today),
         "duration": _duration(start, end, status, today),
@@ -56,6 +58,22 @@ def _per_year(start):
     labels = [str(int(y)) for y in counts.index]
     return metric(labels, counts.values,
                   ins.busiest(labels, list(counts.values), "project", "projects", period="year"))
+
+
+def _growth(start):
+    """Projects started per year over the running total."""
+    years = start.dropna().dt.year
+    if years.empty:
+        return {"labels": [], "series": [], "n": 0}
+    counts = years.value_counts().sort_index()
+    full = range(int(counts.index.min()), int(counts.index.max()) + 1)
+    per_year = [int(counts.get(y, 0)) for y in full]
+    running, total = [], 0
+    for value in per_year:
+        total += value
+        running.append(total)
+    return growth_pair([str(y) for y in full], per_year, running, "projects",
+                       period="year")
 
 
 def _active_over_time(start, end, today):
@@ -107,11 +125,10 @@ def _timeline(projects, start, end, status, today):
     )
     insight = None
     if rows:
-        insight = "%s projects on the timeline, %s to %s." % (
+        insight = "%s projects, %s to %s%s." % (
             ins.num(len(rows)), rows[0]["start"][:7], max(r["end"] for r in rows)[:7],
+            ("; %s past its end date" % ins.num(overdue)) if overdue else "",
         )
-        if overdue:
-            insight += " %s past their end date and not marked done." % ins.num(overdue)
     return {
         "rows": rows,
         "n": len(rows),
@@ -140,9 +157,7 @@ def _duration(start, end, status, today):
     detail = ", ".join("%s: %s months" % (label, value) for label, value in zip(labels, values))
     # No `total`: these are magnitudes in months, not parts of a whole, so the
     # meters must show the unit rather than a meaningless percentage.
-    out = metric(labels, values,
-                 "Median run length in months. Running projects are measured to "
-                 "today, so their figure is a floor.")
+    out = metric(labels, values, "Median run length in months.")
     out["n"] = int(finished.sum() + running.sum())
     out["unit"] = "months"
     return out
