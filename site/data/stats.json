@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 19:42 UTC",
+  "generated_at": "2026-07-31 20:53 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -14,6 +14,19 @@
       "publications",
       "repositories"
     ],
+    "snapshot_dates": {
+      "blogposts": "2026-07-31",
+      "community": "2026-07-31",
+      "conferences": "2026-07-31",
+      "countries": "2026-07-31",
+      "events": "2026-07-31",
+      "models": "2026-07-31",
+      "organisations": "2026-07-31",
+      "projects": "2026-07-31",
+      "publications": "2026-07-31",
+      "repositories": "2026-07-31"
+    },
+    "stale_tables": {},
     "models_available": true,
     "private_repositories": 38,
     "aggregates_only": true
@@ -779,7 +792,7 @@
           19
         ],
         "n": 227,
-        "insight": "94 of 227 wrapped the same year.",
+        "insight": "94 of 227 wrapped the same year; mean wait 2.2 years.",
         "mean": 2.2,
         "median": 1.0,
         "unit": "years",
@@ -801,7 +814,7 @@
           151
         ],
         "n": 220,
-        "insight": "151 of 220 reached 10,000 inputs.",
+        "insight": "151 of 220 benchmarked models ran the largest batch, 10,000 inputs.",
         "ordinal": true
       },
       "image_size": {
@@ -820,7 +833,7 @@
           20
         ],
         "n": 220,
-        "insight": "89 of 220 images are under 2 GB.",
+        "insight": "89 of 220 Docker images are under 2 GB; the mean is 3.8 GB.",
         "mean": 3.8,
         "unit": "GB",
         "countNoun": "models"
@@ -1090,7 +1103,7 @@
           240
         ],
         "n": 709,
-        "insight": "Source code reaches 240 of 240 models.",
+        "insight": "Source code reaches the most models: 240 of 240.",
         "total": 240
       },
       "by_source_type": {
@@ -1557,10 +1570,10 @@
         "n": 36,
         "today": "2026-07-31",
         "semantics": {
+          "In progress": "brand",
           "Done": "good",
-          "Stuck": "bad",
           "Todo": "neutral",
-          "In progress": "brand"
+          "Stuck": "bad"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 1 past its end date."
       },
@@ -1574,7 +1587,7 @@
           12.1
         ],
         "n": 36,
-        "insight": "Median run length in months.",
+        "insight": "Median 18.4 months once finished; 12.1 so far for those running.",
         "unit": "months"
       }
     },

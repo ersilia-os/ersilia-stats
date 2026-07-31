@@ -92,10 +92,73 @@
   --chart-null: color-mix(in srgb, var(--border) 62%, var(--surface));
   --chart-axis: color-mix(in srgb, var(--border) 78%, var(--surface));
 
+  /* --- Type scale ---------------------------------------------------------
+     SIX sizes, and a 12px floor. This replaced nineteen distinct sizes, eleven of
+     them squeezed between 8px and 14px with half-pixel steps (10.5, 11.5, 12.5,
+     13.5). A half-pixel step is not hierarchy — nobody perceives it — but a dozen
+     of them together read as an unsystematic page, which is most of why this site
+     looked amateur while every individual chart was fine.
+
+     Datawrapper's guidance is two clearly-different levels, "like a 12px gray and
+     a 14px black", and warns that many font sizes "can quickly look messy". Chart
+     text uses exactly two: --fs-meta in --muted for labels, --fs-body in --ink for
+     anything to be read first.
+
+     12px is also the floor every mainstream design system sets for body text; this
+     file previously went down to 8px and set every chart axis label at 10px. Do not
+     add a seventh size, and never go below --fs-meta. If something does not fit,
+     show less of it — shorten the label or drop every other tick. */
+  --fs-meta:  12px;   /* chart axis + value labels, meta chips, legends, table cells */
+  --fs-body:  13px;   /* captions, nav, controls, footer — the workhorse */
+  --fs-title: 15px;   /* card titles */
+  --fs-view:  20px;   /* view heading */
+  --fs-kpi:   26px;   /* hero stat values */
+  --fs-hero:  32px;   /* the single largest number on the landing page */
+
+  /* --- Spacing scale ------------------------------------------------------
+     IBM Carbon's scale. Every padding, margin and gap comes from here. The file
+     previously used 22 different values, 13 of them off any 4px grid (3, 5, 6, 7,
+     9, 10, 11, 13, 14, 15, 18, 22, 26px) — hand-nudged one-offs, which is the
+     visual signature of "adjusted until it looked right".
+
+     1px and 2px still appear directly for hairlines and borders: those are strokes,
+     not spacing. */
+  --sp-1:  2px;
+  --sp-2:  4px;
+  --sp-3:  8px;
+  --sp-4: 12px;
+  --sp-5: 16px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+
+  /* --- Text colour floor --------------------------------------------------
+     --faint (#9A93A6) is 2.96:1 against white. That is below the WCAG AA floor for
+     normal text (4.5:1) and below even the large-text floor (3:1), and it was being
+     used for every chart axis label, every value label and eight kinds of UI text at
+     9.5–11px. It is why the charts looked washed out as well as small.
+
+     --faint is now for MARKS ONLY — gridlines, hairline leaders, the "no data" map
+     fill — where no contrast minimum applies. Any text uses --muted (5.55:1) or
+     --ink (10.98:1). Do not put --faint on a colour property that paints glyphs. */
+
   --sidebar-w: 264px;
   --content-w: 1080px;
-  --gap: 12px;
+  --gap: var(--sp-4);
 }
+
+/* Off-screen until focused. */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 60;
+  padding: var(--sp-3) var(--sp-4); background: var(--surface);
+  border: 1px solid var(--brand); border-radius: var(--radius-sm);
+  font-size: var(--fs-body); color: var(--ink); text-decoration: none;
+}
+.skip:focus { left: var(--sp-3); top: var(--sp-3); }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px;
+  padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+main:focus { outline: none; }
 
 /* ===========================================================================
    Shell — fixed sidebar, content scrolls
@@ -105,26 +168,26 @@
 .sidebar {
   position: fixed; inset: 0 auto 0 0; width: var(--sidebar-w); z-index: 40;
   display: flex; flex-direction: column; gap: 2px;
-  padding: 22px 16px 18px;
+  padding: var(--sp-6) var(--sp-5) var(--sp-5);
   background: var(--surface);
   border-right: 1px solid var(--border);
   overflow-y: auto;
 }
-.sidebar .brandhead { padding: 0 10px; margin-bottom: 20px; gap: 2px; }
+.sidebar .brandhead { padding: 0 var(--sp-4); margin-bottom: var(--sp-6); gap: 2px; }
 /* The organisation name links out; the title below it does not — it is where you are. */
-.sidebar .eyebrow { font-size: 10.5px; font-weight: 500; text-decoration: none; }
+.sidebar .eyebrow { font-size: var(--fs-meta); font-weight: 500; text-decoration: none; }
 .sidebar a.eyebrow:hover { text-decoration: underline; text-underline-offset: 2px; }
 /* The wordmark is the page's single <h1>, so it needs the heading margin off. */
-.sidebar .wordmark { font-size: 17px; margin: 0; letter-spacing: -.015em; }
+.sidebar .wordmark { font-size: var(--fs-title); margin: 0; letter-spacing: -.015em; }
 
 /* Read before any figure, so it sits under the title rather than at the foot of the
    column. A caveat, not an alarm: amber on pale amber, with a left rule to catch the
    eye on the way down the nav. It does not shout and it cannot be missed. */
 .sidebar .devnote {
-  margin: -8px 0 18px; padding: 8px 10px;
+  margin: -var(--sp-3) 0 var(--sp-5); padding: var(--sp-3) var(--sp-4);
   border-radius: var(--radius-sm);
   border-left: 2px solid var(--warn);
-  font-size: 11px; line-height: 1.45; color: var(--ink);
+  font-size: var(--fs-meta); line-height: 1.45; color: var(--ink);
   background: color-mix(in srgb, var(--warn) 14%, var(--surface));
 }
 .sidebar .devnote strong { font-weight: 600; color: color-mix(in srgb, var(--warn) 78%, #000); }
@@ -136,9 +199,9 @@
    present and calm and the type is always plain ink. No dots, no heavy edge. */
 .sidebar nav a {
   display: block;
-  padding: 6px 10px; border-radius: var(--radius-sm);
+  padding: var(--sp-3) var(--sp-4); border-radius: var(--radius-sm);
   /* Light chrome: no semibold anywhere in the furniture. */
-  font-size: 12.5px; font-weight: 450; color: var(--muted);
+  font-size: var(--fs-body); font-weight: 450; color: var(--muted);
   transition: color var(--tap), background var(--tap);
 }
 .sidebar nav a:hover {
@@ -156,20 +219,21 @@
 .info:focus-visible, .methods-btn:focus-visible {
   outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--radius-sm);
 }
-.sidebar .navgroup {
-  margin: 16px 0 5px; padding: 0 9px;
-  font-size: 10.5px; font-weight: 500; color: var(--faint);
-}
 
-.sidebar .foot { margin-top: auto; padding: 14px 9px 0; border-top: 1px solid var(--border); }
+.sidebar .foot { margin-top: auto; padding: var(--sp-5) var(--sp-3) 0; border-top: 1px solid var(--border); }
+.sidebar .stalewarn {
+  display: block; margin-top: var(--sp-1);
+  color: color-mix(in srgb, var(--warn) 80%, #000);
+  font-family: var(--sans); font-size: var(--fs-meta);
+}
 .sidebar .foot .snapshot {
-  display: block; font-family: var(--mono); font-size: 10.5px;
-  color: var(--muted); margin-bottom: 9px;
+  display: block; font-family: var(--mono); font-size: var(--fs-meta);
+  color: var(--muted); margin-bottom: var(--sp-3);
 }
 .sidebar .foot a, .sidebar .foot button {
-  display: block; width: 100%; text-align: left; padding: 0; margin-bottom: 7px;
+  display: block; width: 100%; text-align: left; padding: 0; margin-bottom: var(--sp-3);
   background: none; border: 0; border-radius: 0;
-  font-family: var(--sans); font-size: 11.5px; font-weight: 450; color: var(--muted);
+  font-family: var(--sans); font-size: var(--fs-body); font-weight: 450; color: var(--muted);
   cursor: pointer;
 }
 .sidebar .foot a:hover, .sidebar .foot button:hover {
@@ -178,7 +242,7 @@
 
 main {
   margin-left: var(--sidebar-w);
-  padding: 26px clamp(18px, 3vw, 34px) 40px;
+  padding: var(--sp-6) clamp(var(--sp-5), 3vw, var(--sp-7)) var(--sp-7);
 }
 main > * { max-width: var(--content-w); }
 
@@ -186,24 +250,24 @@ main > * { max-width: var(--content-w); }
 /* Title and blurb on the left, "go and see it" links on the right, closed by a
    hairline that spans both. */
 .viewhead {
-  margin: 0 0 18px;
+  margin: 0 0 var(--sp-5);
   display: grid; grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start; column-gap: 20px;
+  align-items: start; column-gap: var(--sp-6);
 }
 .viewhead h2 {
-  font-size: 19px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 4px;
+  font-size: var(--fs-view); font-weight: 600; letter-spacing: -.015em; margin: 0 0 var(--sp-2);
   grid-column: 1;
 }
-.viewhead p { margin: 0; color: var(--muted); max-width: 74ch; font-size: 12.5px;
+.viewhead p { margin: 0; color: var(--muted); max-width: 74ch; font-size: var(--fs-body);
   grid-column: 1; }
 .headlinks {
   grid-column: 2; grid-row: 1 / span 2;
-  display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end;
+  display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: flex-end;
   padding-top: 1px;
 }
 .headlinks a {
-  font-size: 11.5px; font-weight: 450; color: var(--muted); text-decoration: none;
-  padding: 3px 9px; border: 1px solid var(--border); border-radius: 999px;
+  font-size: var(--fs-body); font-weight: 450; color: var(--muted); text-decoration: none;
+  padding: var(--sp-2) var(--sp-3); border: 1px solid var(--border); border-radius: 999px;
   white-space: nowrap; background: var(--surface);
   transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
@@ -214,39 +278,39 @@ main > * { max-width: var(--content-w); }
 }
 /* A hairline, not a coloured band. The heading is the signal; the rule just closes it. */
 .viewhead::after {
-  content: ""; display: block; height: 1px; margin-top: 14px;
+  content: ""; display: block; height: 1px; margin-top: var(--sp-5);
   background: var(--border); grid-column: 1 / -1;
 }
 @media (max-width: 720px) {
   .viewhead { grid-template-columns: minmax(0, 1fr); }
-  .headlinks { grid-column: 1; grid-row: auto; justify-content: flex-start; margin-top: 10px; }
+  .headlinks { grid-column: 1; grid-row: auto; justify-content: flex-start; margin-top: var(--sp-4); }
 }
 
 /* ===========================================================================
    Stat tiles
    =========================================================================== */
 .stat-row {
-  display: grid; gap: var(--gap); margin: 0 0 18px;
+  display: grid; gap: var(--gap); margin: 0 0 var(--sp-5);
   grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
 }
 .stat-row.primary { grid-template-columns: repeat(4, 1fr); }
-.stat { position: relative; overflow: hidden; padding: 13px 15px 11px; }
-.stat .k { font-size: 11px; font-weight: 500; }
+.stat { position: relative; overflow: hidden; padding: var(--sp-4) var(--sp-5) var(--sp-4); }
+.stat .k { font-size: var(--fs-meta); font-weight: 500; }
 .stat .v {
-  font-size: 23px; margin-top: 1px;
+  font-size: var(--fs-kpi); margin-top: 1px;
   /* Proportional figures on a large standalone number: tabular-nums makes 121
      look loose at display sizes. Tabular alignment is for table rows and ticks. */
   font-variant-numeric: normal;
 }
-.stat.hero { padding: 15px 17px 13px; }
-.stat.hero .v { font-size: 31px; line-height: 1.06; }
-.stat .d { display: flex; align-items: baseline; gap: 4px; margin-top: 2px; }
+.stat.hero { padding: var(--sp-5) var(--sp-5) var(--sp-4); }
+.stat.hero .v { font-size: var(--fs-hero); line-height: 1.06; }
+.stat .d { display: flex; align-items: baseline; gap: var(--sp-2); margin-top: 2px; }
 /* Quiet delta: no mono, no semibold, no loud green. A hue arrow carries direction. */
-.stat .delta { font-size: 11px; font-weight: 450; color: var(--muted); }
-.stat .delta::before { content: "▲ "; color: var(--good); font-size: 8px; }
+.stat .delta { font-size: var(--fs-meta); font-weight: 450; color: var(--muted); }
+.stat .delta::before { content: "▲ "; color: var(--good); font-size: var(--fs-meta); }
 .stat .delta.down::before { content: "▼ "; color: var(--muted); }
-.stat .delta.flat::before { content: "· "; color: var(--faint); }
-.stat .spark { display: block; width: 100%; height: 24px; margin-top: 7px; }
+.stat .delta.flat::before { content: "· "; color: var(--muted); }
+.stat .spark { display: block; width: 100%; height: 24px; margin-top: var(--sp-3); }
 
 /* ===========================================================================
    Rows of twelve columns.
@@ -262,12 +326,12 @@ main > * { max-width: var(--content-w); }
   align-items: stretch;
 }
 /* Row heights. The chart inside absorbs whatever the title and caption leave. */
-.crow.h-sm   { min-height: 172px; }
-.crow.h-md   { min-height: 244px; }
-.crow.h-lg   { min-height: 310px; }
-.crow.h-xl   { min-height: 392px; }
-.crow.h-map  { min-height: 440px; }
-.crow.h-tall { min-height: 580px; }
+.crow.h-sm   { min-height: 188px; }
+.crow.h-md   { min-height: 264px; }
+.crow.h-lg   { min-height: 344px; }
+.crow.h-xl   { min-height: 420px; }
+.crow.h-map  { min-height: 452px; }
+.crow.h-tall { min-height: 640px; }
 .crow > .card { height: 100%; }
 .span-3 { grid-column: span 3; }
 .span-4 { grid-column: span 4; }
@@ -280,28 +344,43 @@ main > * { max-width: var(--content-w); }
 /* ===========================================================================
    Chart panels
    =========================================================================== */
-.card { display: flex; flex-direction: column; padding: 12px 14px 10px; }
-.card.lead { padding: 15px 17px 12px; }
-.phead { display: flex; align-items: flex-start; gap: 7px; margin: 0 0 1px; }
+.card { display: flex; flex-direction: column; padding: var(--sp-4) var(--sp-5) var(--sp-4); }
+.card.lead { padding: var(--sp-5) var(--sp-5) var(--sp-4); }
+.phead { display: flex; align-items: flex-start; gap: var(--sp-3); margin: 0 0 1px; }
 .phead h3 {
-  margin: 0; flex: 1; font-size: 12px; font-weight: 500;
-  letter-spacing: 0; color: var(--ink);
+  margin: 0; flex: 1; font-size: var(--fs-title); font-weight: 500;
+  letter-spacing: -.005em; color: var(--ink);
+  /* Clamped at two lines so a long title can never push the chart out of the card,
+     but with NO reserved height: reserving it left an empty line under every
+     one-line title, which was far more visible than the ~19px of chart-top
+     misalignment it was there to prevent. The card edges still align because
+     .chart absorbs the difference. */
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.card.lead .phead h3 { font-size: 13.5px; font-weight: 600; }
-.pmeta { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; }
+/* The lead card is distinguished by weight, not by another size — adding a seventh
+   step to the scale to make one card bigger is how the old nineteen happened. */
+.card.lead .phead h3 { font-weight: 600; }
+.pmeta { display: flex; align-items: center; gap: var(--sp-3); flex: 0 0 auto; }
 .pcount {
-  font-family: var(--mono); font-size: 10px; color: var(--faint);
+  font-family: var(--mono); font-size: var(--fs-meta); color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
-/* The computed takeaway — the chart's caption, not chrome. Strictly ONE line: a
-   caption that wraps competes with the chart for attention, and it pushed the card
-   heights out of alignment. Anything longer belongs in the ⓘ note or Methods. */
+/* The computed takeaway — the chart's caption, not chrome.
+   TWO lines, always reserved. It used to be clamped to one, which kept the cards
+   aligned but meant a three-column card could only carry ~40 characters before the
+   ellipsis ate the sentence; captions were being written to fit the clamp rather
+   than to say something. Reserving a fixed two-line box gets the alignment without
+   the truncation: a one-line caption simply leaves the second line empty, so every
+   card in a row still starts its chart at the same y. */
 .insight {
-  margin: 2px 0 7px; font-size: 11px; line-height: 1.4; color: var(--muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin: var(--sp-1) 0 var(--sp-3);
+  font-size: var(--fs-body); line-height: 1.4; color: var(--muted);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(2 * 1.4 * var(--fs-body));
 }
-.card.lead .insight { font-size: 12px; }
 
 /* The chart takes the space the card has left. A floor stops ECharts initialising
    into a zero-height box before the flex layout settles; a ResizeObserver in
@@ -320,9 +399,9 @@ table.ranked { flex: 0 0 auto; }
 
 /* Methodology marker — tier 2 of progressive disclosure. */
 .info {
-  flex: 0 0 auto; width: 14px; height: 14px; border-radius: 50%;
+  flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%;
   border: 1px solid var(--border); background: var(--surface-2);
-  color: var(--faint); font: 450 9.5px/12px var(--sans); text-align: center;
+  color: var(--muted); font: 450 var(--fs-meta)/18px var(--sans); text-align: center;
   cursor: help; padding: 0;
 }
 .info:hover { color: var(--brand); border-color: var(--brand); }
@@ -331,7 +410,7 @@ table.ranked { flex: 0 0 auto; }
 /* Metric toggles — quiet until pressed, then the section hue. */
 .toggle { display: flex; gap: 2px; }
 .toggle button {
-  padding: 2px 8px; font-size: 10.5px; font-weight: 450; border-radius: 999px;
+  padding: 2px var(--sp-3); font-size: var(--fs-meta); font-weight: 450; border-radius: 999px;
   color: var(--muted); background: none; border: 1px solid transparent;
 }
 .toggle button:hover { background: var(--surface-2); }
@@ -342,15 +421,15 @@ table.ranked { flex: 0 0 auto; }
 /* ===========================================================================
    Meter rows — a label, a number and a thin bar. Not every ratio is a chart.
    =========================================================================== */
-.meters { display: flex; flex-direction: column; gap: 9px; padding: 4px 0 2px; }
-.meter .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-.meter .lbl { font-size: 11.5px; color: var(--ink); font-weight: 450; }
+.meters { display: flex; flex-direction: column; gap: var(--sp-3); padding: var(--sp-2) 0 2px; }
+.meter .top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-4); }
+.meter .lbl { font-size: var(--fs-body); color: var(--ink); font-weight: 450; }
 .meter .val {
-  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  font-family: var(--mono); font-size: var(--fs-meta); color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 .meter .track {
-  height: 4px; border-radius: 999px; background: var(--surface-2); margin-top: 5px;
+  height: 4px; border-radius: 999px; background: var(--surface-2); margin-top: var(--sp-2);
   overflow: hidden;
 }
 .meter .fill { height: 100%; border-radius: 999px; background: var(--chart-1); }
@@ -358,13 +437,13 @@ table.ranked { flex: 0 0 auto; }
 /* ===========================================================================
    Ranked table — top-N with an inline microbar. Replaces three bar charts.
    =========================================================================== */
-table.ranked { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.ranked { width: 100%; border-collapse: collapse; font-size: var(--fs-body); }
 table.ranked th {
-  font-size: 10px; font-weight: 500; color: var(--faint); text-align: right;
-  padding: 0 0 6px; border-bottom: 1px solid var(--border);
+  font-size: var(--fs-meta); font-weight: 500; color: var(--muted); text-align: right;
+  padding: 0 0 var(--sp-3); border-bottom: 1px solid var(--border);
 }
 table.ranked th:first-child { text-align: left; }
-table.ranked td { padding: 5px 0; border-bottom: 1px solid var(--surface-2); }
+table.ranked td { padding: var(--sp-2) 0; border-bottom: 1px solid var(--surface-2); }
 table.ranked td.name { color: var(--ink); max-width: 0; width: 42%; }
 table.ranked td.name span {
   display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -373,27 +452,27 @@ table.ranked td.num {
   text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums;
   color: var(--muted); width: 52px;
 }
-table.ranked td.barcell { width: 28%; padding-left: 12px; }
+table.ranked td.barcell { width: 28%; padding-left: var(--sp-4); }
 table.ranked .microbar { height: 4px; border-radius: 999px; background: var(--chart-1); min-width: 2px; }
 table.ranked tbody tr:hover td { background: var(--surface-2); }
 
 /* ===========================================================================
    Share rows — several two-category splits stacked compactly in one card.
    =========================================================================== */
-.shares { display: flex; flex-direction: column; gap: 11px; padding: 3px 0 2px; }
+.shares { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-2) 0 2px; }
 .share .top {
   display: flex; align-items: baseline; justify-content: space-between;
-  gap: 10px; margin-bottom: 5px;
+  gap: var(--sp-4); margin-bottom: var(--sp-2);
 }
-.share .lbl { font-size: 11.5px; color: var(--ink); font-weight: 450; }
+.share .lbl { font-size: var(--fs-body); color: var(--ink); font-weight: 450; }
 .share .pct {
-  font-family: var(--mono); font-size: 11px; color: var(--ink);
+  font-family: var(--mono); font-size: var(--fs-meta); color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
-.share .track { display: flex; height: 7px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.share .track { display: flex; height: var(--sp-3); border-radius: 999px; overflow: hidden; gap: 2px; }
 .share .a { background: var(--chart-1); }
 .share .b { background: var(--surface-2); }
-.share .legend { display: flex; gap: 12px; margin-top: 4px; font-size: 10.5px; color: var(--faint); }
+.share .legend { display: flex; gap: var(--sp-4); margin-top: var(--sp-2); font-size: var(--fs-meta); color: var(--muted); }
 .share .legend b { font-weight: 450; color: var(--muted); font-family: var(--mono); }
 
 /* ===========================================================================
@@ -403,44 +482,45 @@ table.ranked tbody tr:hover td { background: var(--surface-2); }
 /* The affordance is a button opening a dialog, so it has a FIXED height: whether or
    not the table is showing, the card is exactly as tall. That is the point — as a
    <details> it expanded in place and stretched every chart in its grid row. */
-.drill { margin-top: 7px; border-top: 1px solid var(--surface-2); flex: 0 0 auto; }
+.drill { margin-top: var(--sp-3); border-top: 1px solid var(--surface-2); flex: 0 0 auto; }
 .drill > button {
-  cursor: pointer; padding: 6px 0 0; margin: 0;
+  cursor: pointer; padding: var(--sp-3) 0 0; margin: 0;
   background: none; border: 0; border-radius: 0;
-  font-family: var(--sans); font-size: 10.5px; font-weight: 450; color: var(--faint);
-  display: flex; align-items: center; gap: 5px;
+  font-family: var(--sans); font-size: var(--fs-meta); font-weight: 450; color: var(--muted);
+  display: flex; align-items: center; gap: var(--sp-2);
 }
-.drill > button::before { content: "▤"; color: var(--faint); font-size: 9px; }
+.drill > button::before { content: "▤"; color: var(--muted); font-size: var(--fs-meta); }
 .drill > button:hover { color: var(--brand); background: none; }
 .drill > button:focus-visible {
   outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--radius-sm);
 }
 /* In the dialog the table has the whole width, so it can be taller before scrolling. */
 #datamodal .scrollwrap { max-height: 58vh; }
-#datamodal .dl { font-size: 11.5px; margin-top: 12px; display: inline-block; }
+/* The methodology note, when the ⓘ is opened rather than hovered. */
+#datamodal .notetext { margin: 0; font-size: var(--fs-body); line-height: 1.55; color: var(--ink); }
+#datamodal .dl { font-size: var(--fs-body); margin-top: var(--sp-4); display: inline-block; }
 
 /* ===========================================================================
    Landing
    =========================================================================== */
-.lede { margin: 4px 0 20px; color: var(--muted); max-width: 76ch; font-size: 13px; }
 .strip {
-  display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 20px;
+  display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 var(--sp-6);
   border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;
 }
 .strip .cell {
-  flex: 1 1 130px; padding: 11px 14px;
+  flex: 1 1 130px; padding: var(--sp-4) var(--sp-5);
   border-right: 1px solid var(--border);
 }
 .strip .cell:last-child { border-right: 0; }
-.strip .k { font-size: 10.5px; color: var(--muted); font-weight: 450; }
+.strip .k { font-size: var(--fs-meta); color: var(--muted); font-weight: 450; }
 .strip .v {
-  font-family: var(--mono); font-size: 17px; color: var(--ink);
+  font-family: var(--mono); font-size: var(--fs-title); color: var(--ink);
   font-variant-numeric: normal; margin-top: 1px;
 }
 
 .section-label {
-  margin: 22px 0 10px; font-size: 11px; font-weight: 500; color: var(--faint);
+  margin: var(--sp-6) 0 var(--sp-4); font-size: var(--fs-meta); font-weight: 500; color: var(--muted);
 }
 
 /* 12 columns so seven cards tile as 3+3+3+3 then 4+4+4 — no empty slot. */
@@ -448,50 +528,50 @@ table.ranked tbody tr:hover td { background: var(--surface-2); }
 .jump-grid > a:nth-child(-n+4) { grid-column: span 3; }
 .jump-grid > a:nth-child(n+5) { grid-column: span 4; }
 a.jump {
-  display: flex; flex-direction: column; gap: 4px;
+  display: flex; flex-direction: column; gap: var(--sp-2);
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 13px 15px 11px;
+  border-radius: var(--radius); padding: var(--sp-4) var(--sp-5) var(--sp-4);
   box-shadow: var(--shadow-sm); color: var(--ink);
   border-top: 2px solid var(--slot, var(--chart-1));
   transition: box-shadow var(--tap), transform var(--tap);
 }
 a.jump:hover { text-decoration: none; box-shadow: var(--shadow); transform: translateY(-1px); }
 a.jump .t {
-  font-size: 12.5px; font-weight: 500; display: flex;
-  align-items: baseline; justify-content: space-between; gap: 8px;
+  font-size: var(--fs-body); font-weight: 500; display: flex;
+  align-items: baseline; justify-content: space-between; gap: var(--sp-3);
 }
 a.jump .n {
   font-family: var(--mono); font-variant-numeric: normal;
-  color: var(--slot, var(--chart-1)); font-size: 14px;
+  color: var(--slot, var(--chart-1)); font-size: var(--fs-title);
 }
-a.jump .s { font-size: 11px; color: var(--muted); line-height: 1.45; }
+a.jump .s { font-size: var(--fs-meta); color: var(--muted); line-height: 1.45; }
 a.jump .spark { height: 20px; margin-top: 2px; }
 
 /* ===========================================================================
    Downloads
    =========================================================================== */
-.dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 24px; }
-.dl-group h4 { margin: 0 0 7px; font-size: 11.5px; font-weight: 500; color: var(--ink); }
+.dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-5) var(--sp-6); }
+.dl-group h4 { margin: 0 0 var(--sp-3); font-size: var(--fs-body); font-weight: 500; color: var(--ink); }
 .dl-group h4::before {
-  content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--slot, var(--chart-1)); margin-right: 7px;
+  content: ""; display: inline-block; width: var(--sp-3); height: var(--sp-3); border-radius: 50%;
+  background: var(--slot, var(--chart-1)); margin-right: var(--sp-3);
 }
-.dl-links { display: flex; flex-direction: column; gap: 5px; }
-a.dl { display: inline-flex; align-items: baseline; gap: 6px; font-size: 11.5px; color: var(--muted); }
-a.dl::before { content: "↓"; color: var(--faint); }
+.dl-links { display: flex; flex-direction: column; gap: var(--sp-2); }
+a.dl { display: inline-flex; align-items: baseline; gap: var(--sp-3); font-size: var(--fs-body); color: var(--muted); }
+a.dl::before { content: "↓"; color: var(--muted); }
 a.dl:hover { color: var(--ink); text-decoration: none; }
 
 /* ===========================================================================
    Methods dialog
    =========================================================================== */
-.modal h3 { margin: 16px 0 5px; font-size: 12.5px; font-weight: 600; }
-.modal .mrow { font-size: 11.5px; color: var(--muted); }
+.modal h3 { margin: var(--sp-5) 0 var(--sp-2); font-size: var(--fs-body); font-weight: 600; }
+.modal .mrow { font-size: var(--fs-body); color: var(--muted); }
 .modal .mrow b { color: var(--ink); font-weight: 500; }
 .modal .close {
-  position: absolute; top: 13px; right: 15px;
-  font-weight: 450; font-size: 11.5px;
+  position: absolute; top: var(--sp-4); right: var(--sp-5);
+  font-weight: 450; font-size: var(--fs-body);
 }
-.methods-body .meters { margin-top: 8px; }
+.methods-body .meters { margin-top: var(--sp-3); }
 .modal[hidden], .scrim[hidden] { display: none; }
 
 /* ===========================================================================
@@ -499,21 +579,18 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
    =========================================================================== */
 .empty {
   display: flex; align-items: center; justify-content: center; text-align: center;
-  color: var(--faint); font-size: 11px; padding: 22px 12px;
+  color: var(--muted); font-size: var(--fs-meta); padding: var(--sp-6) var(--sp-4);
   border: 1px dashed var(--border); border-radius: var(--radius-sm);
   background: var(--surface-2);
 }
-.loading { color: var(--faint); font-size: 12px; padding: 40px 0; }
+.loading { color: var(--muted); font-size: var(--fs-meta); padding: var(--sp-7) 0; }
 /* A neutral note. Deliberately NOT .wip — that is amber and reads as a warning,
    which is wrong for "this table is not in the snapshot yet". */
 .note {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 11px; font-weight: 450; color: var(--muted);
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  font-size: var(--fs-meta); font-weight: 450; color: var(--muted);
   background: var(--surface-2); border: 1px solid var(--border);
-  border-radius: 999px; padding: 4px 11px; margin-bottom: 14px;
-}
-.chart:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px;
+  border-radius: 999px; padding: var(--sp-2) var(--sp-4); margin-bottom: var(--sp-5);
 }
 
 /* ===========================================================================
@@ -527,37 +604,56 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
 @media (max-width: 900px) {
   .sidebar {
     position: static; width: auto; inset: auto;
-    flex-direction: row; align-items: center; gap: 8px 12px;
+    flex-direction: row; align-items: center; gap: var(--sp-3) var(--sp-4);
     /* Wrap, so the nav gets its own full-width line. Without this the footer links
        claimed the row and pushed the section nav off-screen entirely — the nav was
        unreachable on a phone. */
     flex-wrap: wrap; overflow: visible;
     border-right: 0; border-bottom: 1px solid var(--border);
-    padding: 10px 16px;
+    padding: var(--sp-4) var(--sp-5);
   }
   .sidebar .brandhead { margin: 0; flex: 1 1 auto; }
   /* Full-width second line. */
   .sidebar nav { flex: 1 0 100%; order: 3; min-width: 0; }
   .sidebar nav ul { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
   .sidebar nav ul::-webkit-scrollbar { display: none; }
+  /* Wrap rather than scroll: with eight tabs and both scrollbars suppressed, the
+     later sections were simply invisible with nothing to hint they existed. */
+  .sidebar nav ul { flex-wrap: wrap; overflow-x: visible; }
   .sidebar nav a { border-bottom: 2px solid transparent; white-space: nowrap; }
   .sidebar nav a[aria-current="page"] { border-bottom-color: var(--tab, var(--ink)); }
-  .sidebar .navgroup { display: none; }
   .sidebar .foot {
-    margin: 0; padding: 0; border: 0; display: flex; align-items: center; gap: 12px;
+    margin: 0; padding: 0; border: 0; display: flex; align-items: center; gap: var(--sp-4);
     flex: 0 0 auto; order: 2;
   }
   .sidebar .foot .snapshot, .sidebar .foot a, .sidebar .foot button { margin: 0; width: auto; }
   /* Only the snapshot and Methods survive the narrow bar; Downloads is reachable
      from the nav and the source link from the footer. */
-  .sidebar .foot a { display: none; }
-  main { margin-left: 0; padding-top: 20px; }
+  /* These were `display: none`, on the assumption that Downloads was reachable from
+     the nav. It is not — renderNav() only adds the eight views — so hiding them made
+     the Downloads view and the source link unreachable on a phone except by typing
+     the hash. They stay, laid out inline to cost one line rather than three. */
+  /* flex: 1 0 100% gives the footer its own full-width line in the sidebar's flex row.
+     Without it the row sized to its content and pushed the page 184px wider than the
+     viewport, which is horizontal scroll on a phone. */
+  .sidebar .foot {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-4);
+    flex: 1 0 100%; min-width: 0; order: 4;
+  }
+  .sidebar .foot a, .sidebar .foot button { display: inline; width: auto; margin: 0; }
+  main { margin-left: 0; padding-top: var(--sp-6); }
   .stat-row.primary { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 620px) {
   .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
   .jump-grid { grid-template-columns: 1fr; }
-  main { padding-left: 16px; padding-right: 16px; }
+  /* Cards stack one per row here, so a row's min-height would be split across all of
+     them and every chart would collapse to its 110px floor. Give each stacked card a
+     real height of its own instead. */
+  .crow.h-sm, .crow.h-md, .crow.h-lg, .crow.h-xl, .crow.h-map { min-height: 0; }
+  .crow > .card { min-height: 300px; }
+  .crow.h-tall > .card { min-height: 560px; }
+  main { padding-left: var(--sp-5); padding-right: var(--sp-5); }
 }
 
 /* ===========================================================================
@@ -614,7 +710,7 @@ a.jump { transition: box-shadow .18s var(--ease), transform .18s var(--ease), bo
    Print
    =========================================================================== */
 @media print {
-  .sidebar, .toggle, details.drill, .jump-grid, .modal, .scrim { display: none !important; }
+  .sidebar, .toggle, .drill, .jump-grid, .modal, .scrim { display: none !important; }
   body { background: #fff; }
   main { margin: 0; padding: 0; max-width: none; }
   main > * { max-width: none; }

@@ -72,7 +72,13 @@ def main():
     parser.add_argument("--config", default="site/config.js")
     parser.add_argument("--stats", default="site/data/stats.json")
     parser.add_argument("--strict", action="store_true",
-                        help="Also fail on empty metrics and unused exports.")
+                        help="Also fail on empty metrics AND unused exports.")
+    parser.add_argument("--fail-on-empty", action="store_true",
+                        help="Fail on empty metrics only. This is the CI gate: an empty "
+                             "metric means a table came back with no usable rows, and the "
+                             "card would deploy showing its empty state. Unused exports are "
+                             "deliberate — they are the CSVs offered on the Downloads view — "
+                             "so --strict is too blunt for a build gate.")
     args = parser.parse_args()
 
     with open(args.config, encoding="utf-8") as handle:
@@ -111,6 +117,8 @@ def main():
         raise SystemExit("FAIL: %d chart data path(s) missing from stats.json." % len(missing))
     if args.strict and (empty or unused):
         raise SystemExit("FAIL (strict): %d empty, %d unused." % (len(empty), len(unused)))
+    if args.fail_on_empty and empty:
+        raise SystemExit("FAIL: %d chart(s) point at an empty metric." % len(empty))
     return 0
 
 

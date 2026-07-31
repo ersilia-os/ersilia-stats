@@ -259,6 +259,10 @@ function fillMethods() {
       "community, publications, repositories, organisations, events, blog posts and " +
       "countries — read only. Snapshot: " + (DATA.snapshot_date || "unknown") +
       ". Built: " + (DATA.generated_at || "unknown") + "."],
+    ["Snapshot dates", "Each table is fetched separately, so the date in the sidebar is " +
+      "the newest stamp across all of them. If a fetch fails for one table its previous " +
+      "snapshot is kept, and any table behind the others is named next to that date " +
+      "rather than left to look current."],
     ["Aggregates only", "Nothing here is row-level personal data. The community table's " +
       "names, emails and social handles are dropped when the snapshot is fetched, dropped " +
       "again when it is read, and the build aborts if anything email-shaped reaches the " +
@@ -304,6 +308,11 @@ function fillMethods() {
       "the corner. The axis ticks show the real values."],
     ["Small numbers", "Percentages are suppressed below n=10, where a share invites a " +
       "conclusion the sample cannot support."],
+    ["Keyboard", "Up and Down walk the section list once it has focus, Home and End jump " +
+      "to its ends, [ and ] step between views from anywhere on the page, and ? opens " +
+      "this dialog. Every chart also has a Table button that opens its numbers as a " +
+      "table, and the ⓘ beside each title opens the note explaining how that figure " +
+      "is measured."],
     ["Colour", "One categorical set, shared by every chart on every page, assigned in a " +
       "fixed order. Derived from the Ersilia brand palette and validated for colour-vision " +
       "deficiency (worst adjacent pair ΔE 20.0 against a target of 8). Red sits last in that " +
@@ -336,32 +345,85 @@ function fillMethods() {
   }
 }
 
+/* Is any dialog currently open? The keyboard handler needs to know: stepping the
+   route from under an open dialog leaves it showing a table for a card that no
+   longer exists, with `lastFocus` pointing at a detached node. */
+function dialogOpen() {
+  return Array.from(document.querySelectorAll(".modal")).some((m) => !m.hidden);
+}
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 /* One dialog mechanism, used by both the Methods panel and the per-chart data table.
-   Returns `{show, hide}`; the caller decides what opens it. */
+   Returns `{show, hide}`; the caller decides what opens it.
+
+   These are divs with role="dialog" aria-modal="true" rather than <dialog>, so the
+   three things the platform would give us for free have to be done by hand — and
+   until now only one of them was. `aria-modal="true"` on a background that is still
+   focusable and still in the accessibility tree is a claim that isn't true. */
 function makeDialog(modalId, closeId) {
   const modal = document.getElementById(modalId);
   const scrim = document.getElementById("scrim");
   const close = document.getElementById(closeId);
+  const shell = document.querySelector(".shell");
   let lastFocus = null;
 
   function show() {
     lastFocus = document.activeElement;
     modal.hidden = false;
     scrim.hidden = false;
+    // Take the page behind out of the tab order AND out of the accessibility tree.
+    // `inert` does both; aria-hidden covers browsers without it.
+    if (shell) {
+      shell.inert = true;
+      shell.setAttribute("aria-hidden", "true");
+    }
+    // Stop the page behind scrolling under the dialog on wheel/trackpad.
+    document.body.style.overflow = "hidden";
     close.focus();
   }
+
   function hide() {
     modal.hidden = true;
-    // Only drop the scrim if no other dialog is still using it.
+    // Only drop the scrim, the inert flag and the scroll lock if no OTHER dialog is
+    // still using them.
     const others = Array.from(document.querySelectorAll(".modal"))
       .filter((m) => m !== modal && !m.hidden);
-    if (!others.length) scrim.hidden = true;
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    if (!others.length) {
+      scrim.hidden = true;
+      if (shell) {
+        shell.inert = false;
+        shell.removeAttribute("aria-hidden");
+      }
+      document.body.style.overflow = "";
+    }
+    // The node may have been detached while the dialog was open.
+    if (lastFocus && lastFocus.focus && lastFocus.isConnected) lastFocus.focus();
+    else if (shell) (shell.querySelector("#methods-open") || document.body).focus();
   }
+
   close.addEventListener("click", hide);
   scrim.addEventListener("click", () => { if (!modal.hidden) hide(); });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.hidden) hide();
+    if (modal.hidden) return;
+    if (e.key === "Escape") { hide(); return; }
+    // Focus trap. Without this, Tab walked out of the dialog and straight into the
+    // nav and every chart's Table button behind the scrim, all still clickable.
+    if (e.key !== "Tab") return;
+    const items = Array.from(modal.querySelectorAll(FOCUSABLE))
+      .filter((el) => el.offsetParent !== null);
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
   return { show: show, hide: hide };
 }
@@ -379,6 +441,16 @@ function wireDataDialog() {
   const dialog = makeDialog("datamodal", "datamodal-close");
   const title = document.getElementById("datamodal-title");
   const body = document.getElementById("datamodal-body");
+
+  // The ⓘ methodology note, in the same dialog. Kept separate from openDataTable so
+  // the caller does not have to build a node just to show a sentence.
+  window.openNote = function (heading, text) {
+    title.textContent = heading;
+    body.textContent = "";
+    const para = el("p", "notetext", text);
+    body.appendChild(para);
+    dialog.show();
+  };
 
   window.openDataTable = function (heading, node, csvPath) {
     title.textContent = heading;
@@ -415,11 +487,46 @@ function renderNav() {
    conventions people expect of a vertical nav: Up/Down to walk it, Home/End to jump
    to the ends, and left/right bracket to move between views from anywhere on the
    page without having to focus the nav first. */
+/* The skip link must NOT be allowed to set location.hash: this is a hash-routed
+   page, so "#main" would be read as an unknown route and bounce the reader to the
+   Overview. Focus the region directly and leave the URL alone. */
+function wireSkipLink() {
+  const link = document.querySelector("a.skip");
+  const main = document.getElementById("main");
+  if (!link || !main) return;
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    main.focus();
+    main.scrollIntoView({ block: "start", behavior: "auto" });
+  });
+}
+
+/* Announce the view after a route change. Activating a nav link previously changed
+   the whole content area with no announcement and no focus move, so a screen-reader
+   user heard nothing happen. */
+function announceView() {
+  const live = document.getElementById("route-status");
+  const heading = document.querySelector("#view .viewhead h2");
+  if (live && heading) live.textContent = heading.textContent + " — view loaded";
+}
+
 function wireKeyboard() {
   const links = () => Array.from(document.querySelectorAll("#nav-list a"));
 
   document.addEventListener("keydown", (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    // A dialog owns the keyboard while it is open. Without this, "]" behind an open
+    // data dialog re-rendered the view underneath it, leaving the dialog showing a
+    // table for a card that no longer existed.
+    if (dialogOpen()) return;
+
+    // AltGr is reported as ctrlKey+altKey, and on most European layouts "[" and "]"
+    // ARE AltGr combinations — so bailing on any modifier silently removed the
+    // view-stepping shortcuts for anyone not on a US layout. Let AltGr through and
+    // only bail on a real Ctrl/Cmd/Alt chord.
+    const altGr = typeof e.getModifierState === "function" && e.getModifierState("AltGraph");
+    if (!altGr && (e.metaKey || e.ctrlKey || e.altKey)) return;
+    if (e.metaKey) return;
+
     const tag = (e.target.tagName || "").toLowerCase();
     if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
 
@@ -478,16 +585,20 @@ async function main() {
   Object.assign(DATA.sections, syntheticSections());
 
   if (DATA.snapshot_date) {
-    document.getElementById("snapshot").textContent = "Snapshot " + DATA.snapshot_date;
-  }
-
-  // World geometry is only needed by the reach view, but registering it once up
-  // front is simpler than coordinating a lazy load with the router.
-  try {
-    const geo = await (await fetch("vendor/world.geo.json", { cache: "force-cache" })).json();
-    echarts.registerMap("world", geo);
-  } catch (e) {
-    console.warn("World map geometry unavailable; the map card will show an empty state.", e);
+    const el0 = document.getElementById("snapshot");
+    el0.textContent = "Snapshot " + DATA.snapshot_date;
+    // A partial fetch leaves one table older than the rest, and the headline date is
+    // the NEWEST stamp — so without this the page would present mixed-age data under
+    // today's date and say nothing. Name the stale tables where the date is shown.
+    const stale = (DATA.meta && DATA.meta.stale_tables) || {};
+    const names = Object.keys(stale);
+    if (names.length) {
+      const warn = el("span", "stalewarn",
+        names.length + (names.length === 1 ? " table is" : " tables are") + " older: " +
+        names.map((n) => n + " (" + stale[n] + ")").join(", "));
+      warn.title = "The snapshot date above is the newest across all tables. These are behind it.";
+      el0.appendChild(warn);
+    }
   }
 
   renderNav();
@@ -495,11 +606,45 @@ async function main() {
   wireMethods();
   wireDataDialog();
   wireKeyboard();
+  wireSkipLink();
 
   Router.add("/", renderLanding, null);
   VIEWS.forEach((view) => Router.add("/" + view.id, renderView(view), view.title));
   Router.add("/downloads", renderDownloads, "Downloads");
-  Router.start(outlet);
+  // The router's afterRender hook existed and had never been used. It does two jobs:
+  // announce the new view, and pull in the map geometry only for the view that needs it.
+  Router.start(outlet, (path) => {
+    announceView();
+    if (path === "/reach") ensureWorldMap(outlet);
+  });
+}
+
+/* 1 MB of world geometry, fetched once, on demand.
+
+   This used to be awaited in main() BEFORE anything rendered — so every visitor
+   downloaded and JSON-parsed a megabyte of coastlines to look at the Overview page,
+   which has no map, and saw nothing at all until it finished. It is 43% of the
+   Overview page's transferred bytes for a chart that appears on one of eight views.
+
+   Now: the reach view renders immediately with the map card in its empty state, the
+   geometry arrives, and that one card is re-rendered. Every other view never asks
+   for it. */
+let worldMapState = null;   // null = untried, "loading", "ready", "failed"
+
+async function ensureWorldMap(outlet) {
+  if (worldMapState === "ready" || worldMapState === "loading") return;
+  worldMapState = "loading";
+  try {
+    const geo = await (await fetch("vendor/world.geo.json", { cache: "force-cache" })).json();
+    echarts.registerMap("world", geo);
+    worldMapState = "ready";
+    // Re-render so the map card picks up the now-registered geometry. Guard on the
+    // route: the reader may have navigated away while the megabyte was in flight.
+    if (Router.current() === "/reach") Router.rerender();
+  } catch (e) {
+    worldMapState = "failed";
+    console.warn("World map geometry unavailable; the map card shows an empty state.", e);
+  }
 }
 
 main();

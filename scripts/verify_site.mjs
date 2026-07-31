@@ -1,0 +1,302 @@
+#!/usr/bin/env node
+/* Smoke-test the built site in a real browser, and fail the build if it is broken.
+ *
+ * WHY THIS EXISTS. The deploy pipeline validated the Python and the data and then
+ * shipped the JavaScript unexamined. Nothing parsed it, nothing ran it. A single
+ * stray character in config.js deploys a page that renders "Loading figures…"
+ * forever, and the workflow reports success — which happened twice during
+ * development, caught only because someone happened to look.
+ *
+ * WHAT IT CHECKS, per route:
+ *   1. the view renders at least one card          (catches any JS that throws)
+ *   2. no uncaught exception and no console error   (catches silent breakage)
+ *   3. every chart row's spans sum to 12            (the config.js invariant)
+ *   4. every card carries a caption that fits       (the layout contract)
+ *   5. exactly one <h1>                             (document structure)
+ *
+ * DELIBERATELY SELF-CONTAINED: no npm install, no package.json, no Playwright. It
+ * serves site/ itself, drives Chrome over the DevTools protocol using the WebSocket
+ * built into Node 22+, and cleans both up. The only external requirement is a Chrome
+ * or Chromium binary, which ubuntu-latest already has.
+ *
+ *   node scripts/verify_site.mjs [--site site] [--keep-open]
+ */
+import { createServer } from "node:http";
+import { spawn } from "node:child_process";
+import { readFile, mkdtemp, rm } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, extname, normalize } from "node:path";
+
+const args = process.argv.slice(2);
+const argOf = (flag, fallback) => {
+  const i = args.indexOf(flag);
+  return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
+};
+const SITE = argOf("--site", "site");
+
+const ROUTES = ["/", "/models", "/projects", "/publications", "/repositories",
+                "/community", "/reach", "/outreach", "/downloads"];
+
+const MIME = {
+  ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8",
+  ".csv": "text/csv; charset=utf-8", ".png": "image/png", ".svg": "image/svg+xml",
+};
+
+/* ----------------------------------------------------------- static server */
+function serve(root) {
+  const server = createServer(async (req, res) => {
+    // Strip the query and the hash; "?bust=" is how we defeat the HTTP cache.
+    const path = decodeURIComponent(req.url.split("?")[0].split("#")[0]);
+    const rel = normalize(path === "/" ? "/index.html" : path).replace(/^(\.\.[/\\])+/, "");
+    const file = join(root, rel);
+    try {
+      const body = await readFile(file);
+      res.writeHead(200, {
+        "content-type": MIME[extname(file)] || "application/octet-stream",
+        "cache-control": "no-store",
+      });
+      res.end(body);
+    } catch {
+      res.writeHead(404).end("not found");
+    }
+  });
+  return new Promise((resolve) => {
+    server.listen(0, "127.0.0.1", () => resolve({ server, port: server.address().port }));
+  });
+}
+
+/* ------------------------------------------------------------------ chrome */
+const CHROME_CANDIDATES = [
+  process.env.CHROME_PATH,
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "google-chrome-stable", "google-chrome", "chromium-browser", "chromium",
+].filter(Boolean);
+
+function chromeBinary() {
+  for (const c of CHROME_CANDIDATES) {
+    if (c.includes("/") ? existsSync(c) : true) return c;
+  }
+  return "google-chrome";
+}
+
+async function launchChrome(port, profile) {
+  const child = spawn(chromeBinary(), [
+    "--headless=new", "--remote-debugging-port=" + port,
+    "--user-data-dir=" + profile,
+    "--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage",
+    "--hide-scrollbars", "--window-size=1440,1200", "about:blank",
+  ], { stdio: "ignore" });
+
+  // Poll the DevTools endpoint rather than sleeping a fixed time.
+  for (let i = 0; i < 100; i++) {
+    try {
+      const r = await fetch(`http://127.0.0.1:${port}/json/list`);
+      const targets = await r.json();
+      const page = targets.find((t) => t.type === "page");
+      if (page) return { child, page };
+    } catch { /* not up yet */ }
+    await new Promise((r) => setTimeout(r, 150));
+  }
+  throw new Error("Chrome did not expose a DevTools page within 15s");
+}
+
+/* --------------------------------------------------------------------- cdp */
+function connect(wsUrl) {
+  // Node 22+ ships a global WebSocket, so this needs no dependency.
+  if (typeof WebSocket !== "function") {
+    throw new Error("Node 22+ required (needs the built-in WebSocket)");
+  }
+  const ws = new WebSocket(wsUrl);
+  let id = 0;
+  const pending = new Map();
+  const problems = [];
+
+  ws.addEventListener("message", (event) => {
+    const msg = JSON.parse(event.data);
+    if (msg.id && pending.has(msg.id)) {
+      pending.get(msg.id)(msg);
+      pending.delete(msg.id);
+    }
+    if (msg.method === "Runtime.exceptionThrown") {
+      const d = msg.params.exceptionDetails;
+      problems.push("exception: " + (d.exception?.description || d.text || "?").split("\n")[0]);
+    }
+    if (msg.method === "Runtime.consoleAPICalled" && msg.params.type === "error") {
+      problems.push("console.error: " +
+        msg.params.args.map((a) => a.value ?? a.description ?? "?").join(" "));
+    }
+  });
+
+  const ready = new Promise((resolve, reject) => {
+    ws.addEventListener("open", resolve);
+    ws.addEventListener("error", () => reject(new Error("CDP socket failed")));
+  });
+
+  const send = (method, params = {}) => new Promise((resolve) => {
+    const i = ++id;
+    pending.set(i, resolve);
+    ws.send(JSON.stringify({ id: i, method, params }));
+  });
+
+  const evaluate = async (expression) => {
+    const r = await send("Runtime.evaluate", {
+      expression: `JSON.stringify(${expression})`,
+      returnByValue: true, awaitPromise: true,
+    });
+    const value = r.result?.result?.value;
+    if (value === undefined) {
+      throw new Error("evaluate failed: " + JSON.stringify(r).slice(0, 300));
+    }
+    return JSON.parse(value);
+  };
+
+  return { ws, ready, send, evaluate, problems };
+}
+
+/* -------------------------------------------------------------------- main */
+let failures = 0;
+const check = (name, ok, detail) => {
+  if (!ok) failures++;
+  console.log(`${ok ? "PASS" : "FAIL"}  ${name}${detail ? "  — " + detail : ""}`);
+};
+
+const profile = await mkdtemp(join(tmpdir(), "ersilia-verify-"));
+const { server, port } = await serve(SITE);
+const { child, page } = await launchChrome(9411, profile);
+const cdp = connect(page.webSocketDebuggerUrl);
+await cdp.ready;
+
+try {
+  await cdp.send("Runtime.enable");
+  await cdp.send("Page.enable");
+  await cdp.send("Network.enable");
+  // MANDATORY. Without it the checks run against a cached bundle and report failures
+  // that are not real, or worse, pass on stale code.
+  await cdp.send("Network.setCacheDisabled", { cacheDisabled: true });
+
+  // Two widths. The desktop pass checks structure and content; the phone pass exists
+  // because a layout can be perfect at 1440 and scroll sideways at 390 — which it did.
+  for (const route of ROUTES) {
+    cdp.problems.length = 0;
+    // A fresh query string per route so nothing can be served from memory cache.
+    await cdp.send("Page.navigate", {
+      url: `http://127.0.0.1:${port}/index.html?v=${Date.now()}${route === "/" ? "" : "#" + route}`,
+    });
+
+    // Poll until the app has mounted rather than sleeping a fixed time — but give up
+    // quickly, because the failure mode this test exists to catch (JS that throws)
+    // leaves ".loading" on screen forever, and waiting the full window for each of
+    // nine routes turned a known-broken build into a two-minute run.
+    let state = null;
+    for (let i = 0; i < 14; i++) {
+      await new Promise((r) => setTimeout(r, 250));
+      try {
+        state = await cdp.evaluate(`(() => {
+          // Two different populations. All cards prove the page rendered at all;
+          // only cards inside a chart row carry the caption contract, because the
+          // Downloads view's single card is a list of links.
+          const cards = [...document.querySelectorAll('.card')];
+          const chartCards = [...document.querySelectorAll('.crow > .card')];
+          const rows = [...document.querySelectorAll('.crow')].map(row =>
+            [...row.children].reduce((sum, card) => {
+              const m = /span-(\\d+)/.exec(card.className);
+              return sum + (m ? Number(m[1]) : 0);
+            }, 0));
+          return {
+            loading: !!document.querySelector('.loading'),
+            cards: cards.length,
+            h1: document.querySelectorAll('h1').length,
+            badRows: rows.filter(n => n !== 12),
+            noCaption: chartCards.filter(c => {
+              if (c.querySelector('.empty')) return false;
+              const p = c.querySelector('.insight');
+              return !p || !p.textContent.trim();
+            }).length,
+            overflowing: chartCards.filter(c => {
+              const p = c.querySelector('.insight');
+              return p && p.scrollHeight > p.clientHeight + 1;
+            }).length,
+            overflowX: document.documentElement.scrollWidth > window.innerWidth + 1,
+          };
+        })()`);
+      } catch { /* context still swapping */ }
+      if (state && !state.loading && state.cards > 0) break;
+    }
+
+    const label = route.padEnd(15);
+    if (!state) { check(label + "renders", false, "no state could be read"); continue; }
+
+    // /downloads is a list, not a chart grid, so it legitimately has one card.
+    check(label + "renders cards", state.cards > 0, `${state.cards} cards`);
+    check(label + "no console errors", cdp.problems.length === 0,
+      cdp.problems.slice(0, 2).join(" | ") || "clean");
+    check(label + "rows sum to 12", state.badRows.length === 0,
+      state.badRows.length ? "bad rows: " + state.badRows.join(",") : "all rows exact");
+    check(label + "captions present and fit", state.noCaption === 0 && state.overflowing === 0,
+      `${state.noCaption} missing, ${state.overflowing} overflowing`);
+    check(label + "one h1, no h-overflow", state.h1 === 1 && !state.overflowX,
+      `h1=${state.h1} overflowX=${state.overflowX}`);
+  }
+  // ---- narrow pass -------------------------------------------------------------
+  await cdp.send("Emulation.setDeviceMetricsOverride",
+                 { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  for (const route of ["/", "/models", "/community", "/projects", "/reach"]) {
+    cdp.problems.length = 0;
+    await cdp.send("Page.navigate", {
+      url: `http://127.0.0.1:${port}/index.html?v=${Date.now()}${route === "/" ? "" : "#" + route}`,
+    });
+    let narrow = null;
+    for (let i = 0; i < 14; i++) {
+      await new Promise((r) => setTimeout(r, 250));
+      try {
+        narrow = await cdp.evaluate(`(() => {
+          const vw = document.documentElement.clientWidth;
+          const wide = [];
+          document.querySelectorAll('.shell *').forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.width > 0 && r.right > vw + 1) {
+              wide.push(el.tagName.toLowerCase() +
+                (typeof el.className === 'string' && el.className
+                  ? '.' + el.className.split(' ')[0] : ''));
+            }
+          });
+          return {
+            loading: !!document.querySelector('.loading'),
+            cards: document.querySelectorAll('.card').length,
+            scrollW: document.documentElement.scrollWidth, vw,
+            wide: [...new Set(wide)].slice(0, 4),
+          };
+        })()`);
+      } catch { /* context swapping */ }
+      if (narrow && !narrow.loading && narrow.cards > 0) break;
+    }
+    const label = ("390px " + route).padEnd(15);
+    if (!narrow) { check(label + "renders", false, "no state"); continue; }
+    check(label + "no sideways scroll",
+      narrow.scrollW <= narrow.vw + 1 && narrow.wide.length === 0,
+      narrow.wide.length ? `${narrow.scrollW}>${narrow.vw} via ${narrow.wide.join(", ")}`
+                         : `scrollWidth ${narrow.scrollW} = viewport`);
+    check(label + "renders cards", narrow.cards > 0, `${narrow.cards} cards`);
+  }
+  await cdp.send("Emulation.clearDeviceMetricsOverride");
+
+} finally {
+  cdp.ws.close();
+  child.kill();
+  server.close();
+  // Let Chrome actually exit before removing its profile: deleting the directory
+  // underneath a live browser threw ENOENT and masked the real result. And a failure
+  // to clean up a temp directory must never fail the build.
+  await new Promise((resolve) => {
+    child.once("exit", resolve);
+    setTimeout(resolve, 3000);
+  });
+  try {
+    await rm(profile, { recursive: true, force: true, maxRetries: 3 });
+  } catch { /* a leftover temp profile is not a build failure */ }
+}
+
+console.log(failures ? `\n${failures} check(s) failed` : "\nAll checks passed");
+process.exit(failures ? 1 : 0);

@@ -27,6 +27,8 @@ on:
       - "scripts/site_data/**"
       - "scripts/fetch_airtable.py"
       - "scripts/check_config_paths.py"
+      - "scripts/verify_site.mjs"
+      - "requirements.txt"
       - "data/airtable_api_identifiers.csv"
       - ".github/workflows/pages.yml"
 
@@ -55,8 +57,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      # requirements.txt is the pin, and CI must actually use it. It previously ran
+      # `pip install pandas pyairtable==3.0.1` — pandas unpinned — so the runner and
+      # the developer's machine could disagree on pandas behaviour. They did, and it
+      # broke the first two builds.
       - name: Install dependencies
-        run: pip install pandas pyairtable==3.0.1
+        run: pip install -r requirements.txt
 
       # Read-only. Fails the job on a partial fetch rather than quietly publishing
       # a site that under-reports.
@@ -68,13 +74,38 @@ jobs:
             -t data/airtable_api_identifiers.csv \
             -o data/air_tables/
 
+      # Nothing here used to look at the JavaScript at all: no parse, no run. A single
+      # stray character in config.js deployed a page stuck on "Loading figures…" and
+      # the workflow reported success.
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check the JavaScript parses
+        run: |
+          for f in site/config.js site/js/*.js; do
+            node --check "$f" || { echo "::error file=$f::does not parse"; exit 1; }
+          done
+
       - name: Build site data
         run: python scripts/export_site_data.py --data-dir data/air_tables --out site/data/stats.json
 
       # Fails the build if any chart in config.js points at a metric the exporter no
       # longer produces. Without this, a renamed metric silently drops a card.
+      # --fail-on-empty, not --strict: an empty metric means a table came back with no
+      # usable rows and the card would ship showing its empty state, which must fail the
+      # build. Unused exports are deliberate (they are the Downloads CSVs), and --strict
+      # fails on those too.
       - name: Check every chart has data
-        run: python scripts/check_config_paths.py
+        run: python scripts/check_config_paths.py --fail-on-empty
+
+      # Renders every route in headless Chrome and fails the build if a view shows no
+      # cards, logs a console error, has a row whose spans do not sum to 12, or has a
+      # caption that does not fit. This is the check that catches broken JavaScript,
+      # which no amount of Python validation can see.
+      - name: Smoke-test the rendered site
+        run: node scripts/verify_site.mjs --site site
 
       # Belt and braces on top of the export's own guards: whatever else happens,
       # the artifact that goes public must contain no raw snapshot and no address.

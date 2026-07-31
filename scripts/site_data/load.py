@@ -78,6 +78,34 @@ def snapshot_date(data_dir):
     return "%s-%s-%s" % (newest[:4], newest[4:6], newest[6:])
 
 
+def snapshot_dates(data_dir):
+    """``{table_name: "YYYY-MM-DD"}`` — the stamp of the snapshot ACTUALLY read.
+
+    ``snapshot_date()`` returns the max across tables, so it reports the freshest
+    table and structurally cannot reveal a stale one. That matters because a partial
+    fetch leaves a mixed-age directory: ``fetch_airtable.py`` writes and prunes before
+    it raises, so a table that failed keeps its previous CSV, and
+    ``newest_snapshots()`` will happily pair today's Community with last month's
+    Repositories — published under today's date, with nothing to say otherwise.
+
+    Emitting one stamp per table is what lets the page and the maintainer see that.
+    """
+    out = {}
+    for name, (stamp, _path) in newest_snapshots(data_dir).items():
+        if stamp:
+            out[name] = "%s-%s-%s" % (stamp[:4], stamp[4:6], stamp[6:])
+    return out
+
+
+def stale_tables(data_dir):
+    """Tables whose snapshot is older than the newest one present."""
+    dates = snapshot_dates(data_dir)
+    if not dates:
+        return {}
+    newest = max(dates.values())
+    return {name: date for name, date in dates.items() if date != newest}
+
+
 def superseded_snapshots(data_dir):
     """Paths of snapshots that are no longer the newest for their table."""
     keep = {path for _stamp, path in newest_snapshots(data_dir).values()}

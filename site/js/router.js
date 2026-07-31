@@ -76,5 +76,9 @@ const Router = (() => {
     },
     has(path) { return routes.has(path); },
     current: currentPath,
+    /* Re-run the current view. Used when an async dependency the view needed (the
+       map geometry) arrives after the first paint. Safe against recursion only
+       because the caller flips its own "already loaded" flag first. */
+    rerender() { if (outlet) render(); },
   };
 })();

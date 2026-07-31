@@ -237,8 +237,8 @@ def _publication_lag(models, incorporated):
     same_year = int((lag == 0).sum())
     return metric(
         labels, values,
-        # ~40 characters is all a 3-column card fits on one line.
-        "%s of %s wrapped the same year." % (ins.num(same_year), ins.num(len(lag))),
+        "%s of %s wrapped the same year; mean wait %s years." % (
+            ins.num(same_year), ins.num(len(lag)), round(float(lag.mean()), 1)),
         mean=round(float(lag.mean()), 1),
         median=round(float(lag.median()), 1),
         unit="years",
@@ -291,7 +291,8 @@ def _scaling_limit(models):
     top = labels[-1]
     out = metric(
         labels, values,
-        "%s of %s reached %s inputs." % (ins.num(counts[top]), ins.num(total), top),
+        "%s of %s benchmarked models ran the largest batch, %s inputs." % (
+            ins.num(counts[top]), ins.num(total), top),
         n=total,
     )
     out["ordinal"] = True
@@ -314,7 +315,8 @@ def _image_size(models):
     under_two = int((gb < 2).sum())
     return metric(
         labels, values,
-        "%s of %s images are under 2 GB." % (ins.num(under_two), ins.num(len(gb))),
+        "%s of %s Docker images are under 2 GB; the mean is %s GB." % (
+            ins.num(under_two), ins.num(len(gb)), round(float(gb.mean()), 1)),
         mean=round(float(gb.mean()), 1),
         unit="GB",
         countNoun="models",
@@ -436,7 +438,7 @@ def _coverage(models):
         labels, values,
         # Short on purpose: this lands in a 3-column card, where a longer sentence is
         # clipped by the one-line caption clamp.
-        insight="%s reaches %s of %s models." % (
+        insight="%s reaches the most models: %s of %s." % (
             labels[best], ins.num(values[best]), ins.num(len(models)),
         ),
         # The whole is every model, so the meters can show a real percentage.

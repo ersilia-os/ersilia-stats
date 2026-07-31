@@ -154,10 +154,17 @@ def _duration(start, end, status, today):
         values.append(round(((today - start)[running].dt.days / 30.44).median(), 1))
     if not labels:
         return {"labels": [], "values": [], "n": 0}
-    detail = ", ".join("%s: %s months" % (label, value) for label, value in zip(labels, values))
+    # A caption that restates its own title tells the reader nothing; give the figures.
+    # Running projects are measured to today, so their median is a floor, not a length.
+    pairs = dict(zip(labels, values))
+    if "Completed" in pairs and "Still running" in pairs:
+        insight = ("Median %s months once finished; %s so far for those running."
+                   % (pairs["Completed"], pairs["Still running"]))
+    else:
+        insight = "Median run length: %s months." % values[0]
     # No `total`: these are magnitudes in months, not parts of a whole, so the
     # meters must show the unit rather than a meaningless percentage.
-    out = metric(labels, values, "Median run length in months.")
+    out = metric(labels, values, insight)
     out["n"] = int(finished.sum() + running.sum())
     out["unit"] = "months"
     return out

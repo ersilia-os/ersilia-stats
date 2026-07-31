@@ -21,16 +21,35 @@
    slots that sit below 3:1 on white. */
 
 /* ---------------------------------------------------------------- basics */
+/* Is the chart being drawn into a narrow box?
+ *
+ * ECharts has no media queries, and the geometry that makes a chart legible at 1100px
+ * makes it unreadable at 390px: a 210px label gutter is a comfortable fifth of a wide
+ * card and almost the entire width of a phone, which pushed every dot and value off
+ * the right edge — labels with no data beside them.
+ *
+ * cards.js sets this from the measured container width before building the option, and
+ * rebuilds when the answer changes. Builders read it for gutters and tick density only;
+ * nothing about WHAT is drawn depends on it. */
+// Below this container width a chart is treated as narrow. 460px is just above a
+// phone-width card (390px viewport minus padding), and just below the narrowest
+// desktop card (a 3-of-12 span in a 1080px column is ~250px, so those are narrow too —
+// which is correct, they had the same problem in miniature).
+const NARROW_WIDTH = 460;
+let NARROW = false;
+function setNarrow(value) { NARROW = !!value; }
+function isNarrow() { return NARROW; }
+
 function base() {
   return {
-    animationDuration: 240,
-    textStyle: { fontFamily: T.sans, color: T.ink, fontSize: 11 },
+    animationDuration: T.calm ? 0 : 240,
+    textStyle: { fontFamily: T.sans, color: T.ink, fontSize: T.fs.body },
     grid: { left: 2, right: 12, top: 10, bottom: 0, containLabel: true },
     tooltip: {
       backgroundColor: T.ink,
       borderWidth: 0,
       padding: [7, 10],
-      textStyle: { color: "#fff", fontSize: 11.5, fontFamily: T.sans },
+      textStyle: { color: "#fff", fontSize: T.fs.body, fontFamily: T.sans },
       extraCssText: "box-shadow:0 6px 20px rgba(44,62,80,.16);border-radius:8px;",
     },
   };
@@ -57,23 +76,31 @@ function catAxis(labels, extra) {
       const year = l.slice(0, 4);
       if (!seen.has(year)) { seen.add(year); firstOfYear.add(l); }
     });
+    const yearsShown = Array.from(firstOfYear);
+    const everyOther = NARROW && yearsShown.length > 4;
     axisLabel = {
-      color: T.faint, fontSize: 10, fontFamily: T.mono,
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
       interval: 0, rotate: 0, margin: 9,
-      formatter: (value) => (firstOfYear.has(value) ? value.slice(0, 4) : ""),
+      formatter: (value) => {
+        if (!firstOfYear.has(value)) return "";
+        // Every other year on a narrow axis: adjacent quarters put two year labels
+        // side by side, which ran together into one unreadable number.
+        if (everyOther && yearsShown.indexOf(value) % 2 === 1) return "";
+        return value.slice(0, 4);
+      },
     };
   } else if (yearly) {
     axisLabel = {
-      color: T.faint, fontSize: 10, fontFamily: T.mono,
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
       // Every year, horizontal, unless there are so many that they would collide.
       interval: strings.length > 18 ? 1 : 0, rotate: 0, margin: 8,
     };
   } else {
     // Plain categories: keep them all, truncate rather than rotate.
     axisLabel = {
-      color: T.faint, fontSize: 10, fontFamily: T.sans,
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.sans,
       interval: 0, rotate: strings.length > 8 ? 30 : 0,
-      width: 76, overflow: "truncate", margin: 8,
+      width: 92, overflow: "truncate", margin: 8,
     };
   }
 
@@ -92,10 +119,13 @@ function catAxis(labels, extra) {
 function valAxis(extra) {
   return Object.assign({
     type: "value",
+    // A stacked facet panel is ~110px tall on a phone; the default tick count put six
+    // labels in it, which merged into a single column of digits.
+    splitNumber: NARROW ? 3 : 5,
     axisLine: { show: false },
     axisTick: { show: false },
     splitLine: { lineStyle: { color: T.axis, type: "solid", width: 1 } },
-    axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono, formatter: fmtCompact },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, formatter: fmtCompact },
   }, extra || {});
 }
 
@@ -103,14 +133,14 @@ function legend(names) {
   return {
     top: 0, right: 0, itemWidth: 8, itemHeight: 8, itemGap: 12, icon: "circle",
     data: names,
-    textStyle: { color: T.muted, fontSize: 10.5, fontFamily: T.sans },
+    textStyle: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.sans },
   };
 }
 
 function valueLabel(position, formatter) {
   return {
     show: true, position: position || "right",
-    color: T.muted, fontSize: 10, fontFamily: T.mono,
+    color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
     formatter: formatter || ((p) => fmtNum(p.value)),
   };
 }
@@ -132,7 +162,7 @@ function seriesColors(metric, count) {
    leader back to the label. Reads as a ranking, costs almost no ink, and stays
    legible at any card width. */
 function optLollipop(d) {
-  const prepared = capRows(collapseTies(d), 11);
+  const prepared = capRows(collapseTies(d), 9);
   const labels = prepared.labels.slice().reverse();
   const values = prepared.values.slice().reverse();
   const color = accent();
@@ -141,7 +171,7 @@ function optLollipop(d) {
   const o = base();
   // Room on the right for the value, and a wide label gutter so names like
   // "Bill and Melinda Gates Foundation" stop truncating to an ellipsis.
-  o.grid = { left: 2, right: 46, top: 6, bottom: 2, containLabel: true };
+  o.grid = { left: 2, right: NARROW ? 38 : 54, top: 6, bottom: 2, containLabel: true };
   // A category axis spreads its rows over the WHOLE plot height, so three or four
   // rows in a tall card came out as dots marooned in white space with ~90px between
   // them — it read as a broken chart rather than a short list. Pad the grid so a
@@ -159,7 +189,7 @@ function optLollipop(d) {
     type: "category", data: labels,
     axisLine: { show: false }, axisTick: { show: false }, splitLine: { show: false },
     axisLabel: {
-      color: T.ink, fontSize: 11, fontFamily: T.sans,
+      color: T.ink, fontSize: T.fs.body, fontFamily: T.sans,
       // interval 0 = label EVERY row, never thin. ECharts drops alternate category
       // labels when it thinks the axis is crowded, which silently deleted the LIC and
       // UMIC rows from the income-group chart — four dots, two labels, and no way to
@@ -168,7 +198,7 @@ function optLollipop(d) {
       // One line, ellipsised. "break" wrapped long organisation names onto a second
       // line that overlapped the row below it — two labels on top of each other is
       // worse than one shortened label, and the full text is in the tooltip.
-      width: 186, overflow: "truncate", ellipsis: "…", lineHeight: 13,
+      width: NARROW ? 104 : 210, overflow: "truncate", ellipsis: "…", lineHeight: 15,
     },
   };
   o.series = [
@@ -178,9 +208,17 @@ function optLollipop(d) {
       itemStyle: { color: alpha(color, 0.28) },
       z: 1,
     },
-    // The dot, carrying the value.
+    // The dot, carrying the value. A folded "+N more" row is drawn in the neutral:
+    // its value is a SUM, so it can sit further right than any real category and
+    // would otherwise read as the largest one.
     {
-      type: "scatter", data: values.map((v, i) => [v, i]),
+      type: "scatter",
+      data: values.map((v, i) => ({
+        value: [v, i],
+        itemStyle: /^\+\d+ more/.test(String(labels[i]))
+          ? { color: T.faint, borderColor: T.surface, borderWidth: 1.5 }
+          : undefined,
+      })),
       symbolSize: 8, z: 2,
       itemStyle: { color: color, borderColor: T.surface, borderWidth: 1.5 },
       // The bare number only. Repeating a unit like "mean citations per article" on
@@ -199,14 +237,21 @@ function optLollipop(d) {
 function optOrdinalLollipop(d) {
   const o = optLollipop(d);
   const n = d.labels.length;
+  // Re-colour the dots along the sequential ramp, keeping whatever shape optLollipop
+  // produced. It emits `{value: [v, i], itemStyle}` objects (so a folded "+N more" row
+  // can be greyed), and this used to wrap that object in ANOTHER `{value: …}`, giving
+  // ECharts `{value: {value: [...]}}` — a nested shape it cannot read.
   // Reversed, because optLollipop reverses to draw top-down.
-  o.series[1].data = o.series[1].data.map((point, i) => ({
-    value: point,
-    itemStyle: {
-      color: seqAt(n > 1 ? (n - 1 - i) / (n - 1) : 0),
-      borderColor: T.surface, borderWidth: 1.5,
-    },
-  }));
+  o.series[1].data = o.series[1].data.map((point, i) => {
+    const pair = point && point.value !== undefined ? point.value : point;
+    return {
+      value: pair,
+      itemStyle: {
+        color: seqAt(n > 1 ? (n - 1 - i) / (n - 1) : 0),
+        borderColor: T.surface, borderWidth: 1.5,
+      },
+    };
+  });
   return o;
 }
 
@@ -340,7 +385,7 @@ function optArea(d) {
     },
     // A cumulative curve is about where it ends, so only the endpoint is labelled.
     endLabel: {
-      show: true, color: T.muted, fontSize: 10.5, fontFamily: T.mono,
+      show: true, color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
       formatter: (p) => fmtNum(p.value),
     },
   }];
@@ -360,7 +405,7 @@ function optIndexedGrowth(d) {
   o.xAxis = catAxis(d.labels, { boundaryGap: false });
   o.yAxis = valAxis({
     max: 100,
-    axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono, formatter: "{value}%" },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, formatter: "{value}%" },
   });
   o.series = d.series.map((s, i) => ({
     type: "line", name: s.name, data: s.values, smooth: 0.24,
@@ -380,7 +425,7 @@ function optFacets(d) {
   o.tooltip.axisPointer = { type: "line", lineStyle: { color: T.border, width: 1 } };
   o.axisPointer = { link: [{ xAxisIndex: "all" }] };
   o.tooltip.valueFormatter = fmtNum;
-  const nameStyle = { color: T.muted, fontSize: 10, align: "left" };
+  const nameStyle = { color: T.muted, fontSize: T.fs.meta, align: "left" };
   o.grid = [
     { left: 2, right: 14, top: 20, height: "34%", containLabel: true },
     { left: 2, right: 14, top: "58%", height: "32%", containLabel: true },
@@ -437,7 +482,7 @@ function optDonut(d) {
     itemStyle: { borderColor: T.surface, borderWidth: 2 },
     label: {
       show: true, position: "outer", alignTo: "edge", edgeDistance: 2,
-      color: T.muted, fontSize: 10.5, fontFamily: T.sans,
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.sans,
       // alignTo:edge pins labels to the card's inner edge and wraps them, instead
       // of letting them run past it and clip to "In progr…".
       width: 78, overflow: "break", lineHeight: 12,
@@ -466,7 +511,7 @@ function optDonut(d) {
   o.graphic = [{
     type: "text", left: "center", top: "middle", silent: true,
     style: {
-      text: fmtNum(total), fill: T.ink, fontFamily: T.mono, fontSize: 19,
+      text: fmtNum(total), fill: T.ink, fontFamily: T.mono, fontSize: T.fs.view,
       textAlign: "center", textVerticalAlign: "middle",
     },
   }];
@@ -483,7 +528,7 @@ function optTreemap(d) {
     width: "100%", height: "100%", top: 0, left: 0, right: 0, bottom: 0,
     itemStyle: { borderColor: T.surface, borderWidth: 2, gapWidth: 2 },
     label: {
-      show: true, fontFamily: T.sans, fontSize: 11,
+      show: true, fontFamily: T.sans, fontSize: T.fs.body,
       formatter: (p) => p.name + "\n" + fmtNum(p.value),
       overflow: "truncate", lineHeight: 13,
     },
@@ -525,13 +570,13 @@ function optTreeMap(d) {
       {
         itemStyle: { borderColor: T.surface, borderWidth: 1.5, gapWidth: 1.5 },
         upperLabel: {
-          show: true, height: 17, color: T.ink, fontFamily: T.sans, fontSize: 10.5,
+          show: true, height: 17, color: T.ink, fontFamily: T.sans, fontSize: T.fs.meta,
           overflow: "truncate",
         },
       },
     ],
     label: {
-      show: true, fontFamily: T.sans, fontSize: 10.5,
+      show: true, fontFamily: T.sans, fontSize: T.fs.meta,
       formatter: (p) => p.name + "\n" + fmtNum(p.value),
       overflow: "truncate", lineHeight: 13,
     },
@@ -594,7 +639,7 @@ function optLogScatter(d, conf) {
       .map((r) => r.name)
   );
   const color = accent();
-  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: 10 };
+  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta };
 
   const o = base();
   // top: the outermost point carries a label ABOVE its mark, and at 14 the highest
@@ -610,7 +655,7 @@ function optLogScatter(d, conf) {
     axisLine: { show: false }, axisTick: { show: false },
     splitLine: { lineStyle: { color: T.axis, type: "solid" } },
     axisLabel: {
-      color: T.faint, fontSize: 10, fontFamily: T.mono,
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
       // Undo the +1 shift in the tick labels so the axis tells the truth.
       formatter: (v) => fmtCompact(v - 1),
     },
@@ -627,7 +672,7 @@ function optLogScatter(d, conf) {
     // labelled dozens of points and turned the chart into a pile of overlapping
     // text, so this takes a fixed top-N by the product of both measures instead.
     label: {
-      show: true, position: "top", color: T.muted, fontSize: 9.5, fontFamily: T.sans,
+      show: true, position: "top", color: T.muted, fontSize: T.fs.meta, fontFamily: T.sans,
       formatter: (p) => (named.has(p.data[2]) ? p.data[2] : ""),
     },
     // Quadrant guides, unlabelled. A rotated "median" caption on a vertical rule
@@ -653,7 +698,7 @@ function optHistogram(d) {
   // rows; `unit` describes the x axis and belongs in the caption, not here.
   const noun = d.countNoun || "";
   o.tooltip.valueFormatter = (v) => fmtNum(v) + (noun ? " " + noun : "");
-  o.xAxis = catAxis(d.labels, { axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono, interval: 0, rotate: 0 } });
+  o.xAxis = catAxis(d.labels, { axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, interval: 0, rotate: 0 } });
   o.yAxis = valAxis({ show: false });
   o.series = [{
     type: "bar", data: d.values, barCategoryGap: "18%",
@@ -671,13 +716,7 @@ function optHistogram(d) {
       o.series[0].markLine = {
         symbol: ["none", "none"], symbolSize: 0, silent: true,
         lineStyle: { color: T.ink, width: 1, type: "dashed" },
-        label: {
-          show: true, position: "end", rotate: 0, distance: 4,
-          align: "center", verticalAlign: "bottom",
-          color: T.ink, fontSize: 9.5, fontFamily: T.sans,
-          backgroundColor: T.surface, padding: [2, 3],
-          formatter: "mean " + d.mean + (d.unit ? " " + d.unit : ""),
-        },
+        label: { show: false },
         data: [{ xAxis: index }],
       };
     }
@@ -691,7 +730,7 @@ function optLorenz(d) {
   o.grid = { left: 4, right: 12, top: 10, bottom: 4, containLabel: true };
   o.tooltip.trigger = "axis";
   o.tooltip.axisPointer = { type: "line", lineStyle: { color: T.border, width: 1 } };
-  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: 10 };
+  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta };
   o.tooltip.formatter = (params) => {
     const p = params[params.length - 1];
     return "Least active " + Number(p.axisValue).toFixed(0) + "%<br/>hold <b>" +
@@ -702,7 +741,7 @@ function optLorenz(d) {
     nameTextStyle: nameStyle,
     axisLine: { show: false }, axisTick: { show: false },
     splitLine: { lineStyle: { color: T.axis, type: "solid" } },
-    axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono, formatter: "{value}%" },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, formatter: "{value}%" },
   });
   o.xAxis = pctAxis("% of repositories", 25);
   o.yAxis = pctAxis("% of commits", 34);
@@ -747,7 +786,7 @@ function optHeatmap(d) {
   };
   const catStyle = {
     axisLine: { show: false }, axisTick: { show: false }, splitLine: { show: false },
-    axisLabel: { color: T.muted, fontSize: 10.5, fontFamily: T.sans },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.sans },
   };
   o.xAxis = Object.assign({ type: "category", data: d.x }, catStyle, {
     axisLabel: Object.assign({}, catStyle.axisLabel, { rotate: d.x.length > 5 ? 26 : 0 }),
@@ -772,7 +811,7 @@ function optHeatmap(d) {
     })),
     itemStyle: { borderColor: T.surface, borderWidth: 2, borderRadius: 3 },
     label: {
-      show: true, fontSize: 10, fontFamily: T.mono,
+      show: true, fontSize: T.fs.meta, fontFamily: T.mono,
       formatter: (p) => (percent ? p.value[2] + "%" : fmtNum(p.value[2])),
     },
     emphasis: { itemStyle: { borderColor: T.ink, borderWidth: 2 } },
@@ -802,7 +841,7 @@ function optGantt(d) {
     type: "time",
     axisLine: { show: false }, axisTick: { show: false },
     splitLine: { lineStyle: { color: T.axis, type: "solid" } },
-    axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono },
   };
   o.yAxis = {
     type: "category", data: names, inverse: true,
@@ -812,7 +851,7 @@ function optGantt(d) {
       // half the projects become unlabelled bars.
       interval: 0,
       color: T.ink, fontSize: names.length > 28 ? 9.5 : 10.5, fontFamily: T.sans,
-      width: 150, overflow: "truncate",
+      width: NARROW ? 116 : 224, overflow: "truncate",
     },
   };
   o.series = [{
@@ -843,7 +882,7 @@ function optGantt(d) {
       symbol: ["none", "none"], symbolSize: 0, silent: true,
       lineStyle: { color: T.ink, width: 1, type: "dashed" },
       label: {
-        show: true, position: "start", color: T.ink, fontSize: 9.5,
+        show: true, position: "start", color: T.ink, fontSize: T.fs.meta,
         fontFamily: T.sans, formatter: "today",
       },
       data: [{ xAxis: toDay(d.today) }],
@@ -893,10 +932,10 @@ function optMap(d, label) {
   });
   return {
     textStyle: { fontFamily: T.sans, color: T.ink },
-    animationDuration: 240,
+    animationDuration: T.calm ? 0 : 240,
     tooltip: {
       trigger: "item", backgroundColor: T.ink, borderWidth: 0, padding: [7, 10],
-      textStyle: { color: "#fff", fontSize: 11.5, fontFamily: T.sans },
+      textStyle: { color: "#fff", fontSize: T.fs.body, fontFamily: T.sans },
       extraCssText: "box-shadow:0 6px 20px rgba(44,62,80,.16);border-radius:8px;",
       formatter: (p) => p.name + "<br/><b>" +
         (p.value == null || Number.isNaN(p.value)
@@ -909,7 +948,7 @@ function optMap(d, label) {
       itemWidth: 13, itemHeight: 9, itemGap: 7,
       // No `text`: with pieces, a text array duplicates the endpoint labels and the
       // two sets overlap.
-      textStyle: { color: T.muted, fontSize: 10, fontFamily: T.mono },
+      textStyle: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono },
     },
     series: [{
       type: "map", map: "world", roam: false,

@@ -51,6 +51,23 @@ const T = (() => {
     /* Sequential, light -> dark. Magnitude only. */
     seq: [1, 2, 3, 4, 5].map((i) => v("--seq-" + i)),
 
+    /* The type scale, read from CSS so the stylesheet stays the single source of
+       truth. Two levels for chart text and nothing else: `meta` for axis and value
+       labels, `body` for anything that must be read first. Charts previously set
+       9.5/10/10.5/11/11.5px inline — five sizes, all below the 12px floor every
+       mainstream design system uses for body text. */
+    fs: {
+      meta: parseFloat(v("--fs-meta", "12px")),
+      body: parseFloat(v("--fs-body", "13px")),
+      title: parseFloat(v("--fs-title", "15px")),
+      view: parseFloat(v("--fs-view", "20px")),
+    },
+
+    /* True for a visitor who has asked for less motion. Read once at load: ECharts
+       takes a duration at option-build time, so there is nothing to react to later. */
+    calm: typeof matchMedia === "function" &&
+          matchMedia("(prefers-reduced-motion: reduce)").matches,
+
   };
 })();
 

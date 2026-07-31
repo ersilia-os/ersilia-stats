@@ -60,6 +60,11 @@ def build_all(data_dir, today=None):
         "snapshot_date": load.snapshot_date(data_dir),
         "meta": {
             "tables": sorted(tables),
+            # One stamp per table, not just the max. `snapshot_date` above is the
+            # NEWEST stamp across all tables, so on a mixed-age directory it reports
+            # the most optimistic date available and hides the stale table completely.
+            "snapshot_dates": load.snapshot_dates(data_dir),
+            "stale_tables": load.stale_tables(data_dir),
             "models_available": bool(models is not None and not models.empty),
             "private_repositories": private_excluded,
             "aggregates_only": True,

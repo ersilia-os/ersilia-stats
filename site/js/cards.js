@@ -336,6 +336,17 @@ function chartCard(chart, data, registry) {
     return card;
   }
 
+  // A map cannot be built before its geometry is registered: ECharts throws inside
+  // setOption ("Cannot read properties of undefined (reading 'regions')"), and since
+  // that happens mid-render it took the WHOLE view down with it — every other card on
+  // the page vanished. The 1 MB of world geometry is now fetched only for this view,
+  // so this is the normal first-paint state, not an error. app.js re-renders the view
+  // once it arrives.
+  if (chart.type === "map" && !(window.echarts && echarts.getMap && echarts.getMap("world"))) {
+    card.appendChild(el("div", "empty", "Loading map…"));
+    return card;
+  }
+
   if (metric && metric.n != null && chart.type !== "shares") {
     meta.appendChild(el("span", "pcount", "n=" + fmtNum(metric.n)));
   }
@@ -352,6 +363,12 @@ function chartCard(chart, data, registry) {
     info.type = "button";
     info.setAttribute("data-tip", chart.desc);
     info.setAttribute("aria-label", "How this is measured: " + chart.desc);
+    info.setAttribute("aria-haspopup", "dialog");
+    // Clicking (or tapping, or pressing Enter) opens the note in the shared dialog.
+    // The hover tooltip stays for pointer users as the faster path.
+    info.addEventListener("click", () => {
+      if (typeof window.openNote === "function") window.openNote(chart.title, chart.desc);
+    });
     meta.appendChild(info);
   }
 
@@ -369,13 +386,18 @@ function chartCard(chart, data, registry) {
   const canvas = el("div", "chart");
   canvas.setAttribute("role", "img");
   canvas.setAttribute("aria-label", chart.title + ". " + ((metric && metric.insight) || "") +
-    " The same data is available as a table below this chart.");
+    " Use the Table button on this card to read the same data as a table.");
   card.appendChild(canvas);
 
   let drill = drillDown(chart, metric, csvFor(sources[0].data));
   card.appendChild(drill);
 
   const instance = echarts.init(canvas, null, { renderer: "canvas" });
+  // Track what this instance is drawing, so the resize handler can rebuild it when the
+  // box crosses the narrow/wide threshold and the toggle can keep that in sync.
+  instance.__chart = chart;
+  instance.__metric = metric;
+  instance.__narrow = isNarrow();
   instance.setOption(buildOption(chart, metric));
   registry.push(instance);
 
@@ -398,7 +420,18 @@ function chartCard(chart, data, registry) {
       queued = true;
       requestAnimationFrame(() => {
         queued = false;
-        if (canvas.clientHeight > 0) instance.resize();
+        if (canvas.clientHeight <= 0) return;
+        // Crossing the threshold changes the GEOMETRY, not just the scale, so a plain
+        // resize() is not enough: the option has to be rebuilt with the narrow gutters.
+        // Without this, a phone-width lollipop kept its 210px label gutter and drew its
+        // dots off the right-hand edge.
+        const narrow = w < NARROW_WIDTH;
+        if (narrow !== instance.__narrow) {
+          instance.__narrow = narrow;
+          setNarrow(narrow);
+          instance.setOption(buildOption(instance.__chart, instance.__metric), true);
+        }
+        instance.resize();
       });
     });
     observer.observe(canvas);
@@ -420,6 +453,7 @@ function chartCard(chart, data, registry) {
         toggle.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
         const next = getByPath(data.sections, source.data);
         if (!hasData(chart, next)) return;
+        instance.__metric = next;
         instance.setOption(buildOption(chart, next), true);
         insight.textContent = next.insight || "";
         canvas.setAttribute("aria-label", chart.title + " — " + source.label + ". " + (next.insight || ""));
