@@ -153,6 +153,27 @@ const VIEWS = [
           desc: "Projects by the year they started: new starts on top, the running total below. The Gantt above says when each ran; this says whether the portfolio is still growing.",
         },
       ] },
+      { h: "h-lg", cells: [
+        {
+          title: "What each project produced", span: 7, data: "projects.outputs",
+          type: "ranked", nameLabel: "Project", top: 10,
+          columns: [
+            { key: "repositories", label: "Repos" },
+            { key: "public", label: "Public" },
+            { key: "publications", label: "Papers" },
+          ],
+          desc: "Repositories and publications linked to each project, from the Airtable link columns. Repository counts cover public and private alike — a count is not disclosure — and the public column says how many can be named; no private repository name is ever resolved. Projects with neither are omitted.",
+        },
+        {
+          title: "Repository coverage", span: 5, type: "shares",
+          blurb: "How much of the code is tied to a project.",
+          sources: [
+            { label: "Repositories linked to a project", data: "quality.repo_project_link", highlight: "Linked" },
+            { label: "Projects with an output recorded", data: "projects.has_outputs", highlight: "With an output" },
+          ],
+          desc: "Public repositories that are linked to a project against those that are not. An unlinked repository is not wrong — plenty of tooling stands on its own — but it does mean the portfolio view cannot see it.",
+        },
+      ] },
       { h: "h-md", cells: [
         {
           title: "Running at the same time", span: 5, data: "projects.active_over_time", type: "area",

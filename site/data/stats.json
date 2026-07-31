@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 20:53 UTC",
+  "generated_at": "2026-07-31 20:57 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -1570,9 +1570,9 @@
         "n": 36,
         "today": "2026-07-31",
         "semantics": {
-          "In progress": "brand",
-          "Done": "good",
           "Todo": "neutral",
+          "Done": "good",
+          "In progress": "brand",
           "Stuck": "bad"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 1 past its end date."
@@ -1589,6 +1589,228 @@
         "n": 36,
         "insight": "Median 18.4 months once finished; 12.1 so far for those running.",
         "unit": "months"
+      },
+      "outputs": {
+        "rows": [
+          {
+            "name": "Ersilia Model Hub",
+            "repositories": 27,
+            "public": 23,
+            "publications": 1
+          },
+          {
+            "name": "H3D Virtual Screening Cascade",
+            "repositories": 12,
+            "public": 11,
+            "publications": 1
+          },
+          {
+            "name": "Open Source Antimalarials",
+            "repositories": 7,
+            "public": 7,
+            "publications": 1
+          },
+          {
+            "name": "Plan Generación Conocimiento",
+            "repositories": 6,
+            "public": 6,
+            "publications": 0
+          },
+          {
+            "name": "AI2050 for capacity building at H3D",
+            "repositories": 5,
+            "public": 3,
+            "publications": 1
+          },
+          {
+            "name": "Record Linkage CxCa",
+            "repositories": 5,
+            "public": 4,
+            "publications": 0
+          },
+          {
+            "name": "Splunk data store",
+            "repositories": 5,
+            "public": 5,
+            "publications": 0
+          },
+          {
+            "name": "AI2050 for TB Modelling",
+            "repositories": 4,
+            "public": 3,
+            "publications": 0
+          },
+          {
+            "name": "Gram-negative antibiotics discovery with GARDP",
+            "repositories": 4,
+            "public": 3,
+            "publications": 0
+          },
+          {
+            "name": "Scaffold Hopping from Natural Products",
+            "repositories": 4,
+            "public": 3,
+            "publications": 0
+          },
+          {
+            "name": "Targeted protein degradation for tuberculosis",
+            "repositories": 4,
+            "public": 4,
+            "publications": 0
+          },
+          {
+            "name": "NiDNA CeDD",
+            "repositories": 3,
+            "public": 3,
+            "publications": 4
+          },
+          {
+            "name": "African pharmacogenomics",
+            "repositories": 3,
+            "public": 3,
+            "publications": 2
+          },
+          {
+            "name": "Chemoproteomics ligand discovery",
+            "repositories": 2,
+            "public": 1,
+            "publications": 2
+          },
+          {
+            "name": "Severe malaria biomarkers",
+            "repositories": 2,
+            "public": 0,
+            "publications": 2
+          },
+          {
+            "name": "AI2050 Collaboration Fund",
+            "repositories": 2,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "ChemPFN",
+            "repositories": 2,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "PREEMI maternal healthcare",
+            "repositories": 2,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "RES-BSC Precalculations",
+            "repositories": 2,
+            "public": 2,
+            "publications": 0
+          },
+          {
+            "name": "CHAMPS diagrams",
+            "repositories": 1,
+            "public": 1,
+            "publications": 1
+          },
+          {
+            "name": "Mozilla Builders",
+            "repositories": 1,
+            "public": 1,
+            "publications": 1
+          },
+          {
+            "name": "AI2050 Compute Fund",
+            "repositories": 1,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "AID3 molecular glue discovery",
+            "repositories": 1,
+            "public": 0,
+            "publications": 0
+          },
+          {
+            "name": "Collaboration Fund BMGF",
+            "repositories": 1,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "H3D Mtb Bioactivity",
+            "repositories": 1,
+            "public": 0,
+            "publications": 0
+          },
+          {
+            "name": "HIV follow up during COVID in Zambia",
+            "repositories": 1,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "NPs as schistosoma drugs",
+            "repositories": 1,
+            "public": 0,
+            "publications": 0
+          },
+          {
+            "name": "Open Source Antibiotics",
+            "repositories": 1,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "PQZ signature reversal",
+            "repositories": 1,
+            "public": 1,
+            "publications": 0
+          },
+          {
+            "name": "The Gambia MRC",
+            "repositories": 1,
+            "public": 0,
+            "publications": 0
+          },
+          {
+            "name": "Cervical cancer in WLHIV",
+            "repositories": 0,
+            "public": 0,
+            "publications": 1
+          },
+          {
+            "name": "FAIR-Impact",
+            "repositories": 0,
+            "public": 0,
+            "publications": 1
+          },
+          {
+            "name": "Oxidative stress and malaria",
+            "repositories": 0,
+            "public": 0,
+            "publications": 1
+          },
+          {
+            "name": "Stage-specific antimalarial potential",
+            "repositories": 0,
+            "public": 0,
+            "publications": 1
+          }
+        ],
+        "n": 34,
+        "insight": "34 of 36 projects have a repository or a publication linked to them."
+      },
+      "has_outputs": {
+        "labels": [
+          "With an output",
+          "None recorded"
+        ],
+        "values": [
+          34,
+          2
+        ],
+        "n": 36,
+        "insight": "34 of 36 projects (94%) have a repository or publication linked."
       }
     },
     "publications": {
@@ -6101,6 +6323,18 @@
         "n": 91,
         "orphans": 54,
         "insight": "91 repository-project links. 2 links pair a finished project with a repository that is still open. 54 public repositories are linked to no project."
+      },
+      "repo_project_link": {
+        "labels": [
+          "Linked",
+          "Not linked"
+        ],
+        "values": [
+          86,
+          54
+        ],
+        "n": 140,
+        "insight": "86 of 140 public repositories (61%) are linked to a project."
       },
       "table_sizes": {
         "labels": [

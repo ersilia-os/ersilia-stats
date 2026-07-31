@@ -26,6 +26,7 @@ def build(tables, repos_public):
         "completeness": _completeness(tables),
         "thin_fields": _thin_fields(tables),
         "project_repo_status": _project_repo_status(tables.get("projects"), repos_public),
+        "repo_project_link": _repo_project_link(repos_public),
         "table_sizes": _table_sizes(tables),
     }
 
@@ -98,6 +99,29 @@ def _thin_fields(tables, top=18):
     out["unit"] = "% populated"
     out["threshold"] = THIN_THRESHOLD
     return out
+
+
+def _repo_project_link(repos):
+    """Public repositories linked to a project, against those that are not.
+
+    The orphan count already existed inside the project/repo heatmap's insight, which
+    no chart used, so a real coverage figure was being computed and thrown away. It is
+    not a fault to be unlinked — plenty of tooling stands alone — but it does mean the
+    portfolio view cannot see that repository.
+    """
+    if repos is None or repos.empty or "projects" not in repos.columns:
+        return dict(EMPTY)
+    linked = 0
+    for i in range(len(repos)):
+        if parse_multi(repos["projects"].iloc[i]):
+            linked += 1
+    total = int(len(repos))
+    if not total:
+        return dict(EMPTY)
+    return metric(
+        ["Linked", "Not linked"], [linked, total - linked],
+        ins.share_of(linked, total, "public repositories", "are linked to a project"),
+    )
 
 
 def _project_repo_status(projects, repos):

@@ -85,9 +85,46 @@ snapshot per table is kept.
 
 ## Deploying
 
-`.github/workflows/pages.yml` is the whole pipeline in one job — fetch → build → check → verify →
-deploy. Weekly, on demand, and on pushes that touch the site or the scripts. It needs
-`AIRTABLE_API_KEY` in repository secrets.
+`.github/workflows/pages.yml` is the whole pipeline in one job. Weekly, on demand, and on pushes that
+touch the site, the scripts or `requirements.txt`. It needs `AIRTABLE_API_KEY` in repository secrets.
+
+Each step is a gate, and everything before the upload can stop a deploy:
+
+| Step | Fails the build when |
+|---|---|
+| `pip install -r requirements.txt` | — (but the pin matters: see the note in that file) |
+| `fetch_airtable.py` | any table fails to fetch |
+| `node --check` on `config.js` and `js/*.js` | any shipped script does not parse |
+| `export_site_data.py` | a PII guard trips, or an email-shaped string reaches the output |
+| `check_config_paths.py --fail-on-empty` | a chart points at a missing **or empty** metric |
+| `verify_site.mjs` | a route renders no cards, logs a console error, has a row not summing to 12, has a caption that does not fit, or scrolls sideways at 390px |
+| the artifact grep | a raw snapshot or an address is inside `site/` |
+
+`verify_site.mjs` exists because none of the Python checks can see broken JavaScript: a single stray
+character in `config.js` used to deploy a page stuck on "Loading figures…" while the workflow
+reported success. It is self-contained — it serves `site/`, drives headless Chrome over the DevTools
+protocol using Node 22's built-in WebSocket, and needs no `npm install`. Run it locally the same way
+CI does:
+
+```bash
+node scripts/verify_site.mjs
+```
+
+**There is still no `pull_request` trigger**, and there cannot easily be one: the build needs
+`data/air_tables/`, which is gitignored, so a fork cannot build. Committing a small synthetic
+fixture snapshot would unlock a secret-free PR check; that has not been done.
+
+### A partial fetch cannot be trusted to announce itself
+
+`fetch_airtable.py` writes what it got and prunes superseded files **before** it raises, so a table
+that failed keeps its previous CSV. `load.newest_snapshots()` then takes the newest stamp *per table*,
+which will happily pair today's Community with last month's Repositories. In CI this is harmless —
+the job stops and the previous deployment stays live — but a local `fetch → export → commit → push`
+would publish mixed-age data.
+
+`meta.snapshot_dates` therefore records one date per table and `meta.stale_tables` names any that are
+behind, which the sidebar prints next to the snapshot date. `snapshot_date` on its own is the **max**
+across tables, so it always reports the freshest one and can never reveal a stale one.
 
 ## Layout
 
@@ -143,9 +180,24 @@ status) via the `semantics` mechanism.
 The order is also the colour-vision safety mechanism, and it is **adjacency-sensitive**: cobalt in
 slot 2 fails the normal-vision floor beside periwinkle (ΔE 14.7 — both read blue) and orchid beside
 cobalt fails deuteranopia (ΔE 5.8). This order clears adjacent CVD ΔE 20.0 against a target of 8 and
-normal-vision ΔE 20.6 against a floor of 15. **Re-run `dataviz/scripts/validate_palette.js` over the
-sequence before changing it.** Amber and lime sit below 3:1 contrast on white; every value is labelled
-directly and every chart has a table view, which is the documented relief.
+normal-vision ΔE 20.6 against a floor of 15.
+
+**These thresholds were measured with an external tool, not one in this repository.** The validator
+lives in the `dataviz` Claude skill (`scripts/validate_palette.js`) and is not vendored here, so the
+numbers above are the reference values to reproduce rather than something a clone can re-run. If you
+change the palette and cannot run that validator, the fallback is to keep the hues and only permute
+their order, then check the adjacent pairs by hand in OKLab — the gates that bite are adjacent-pair
+CVD ΔE ≥ 8 and adjacent-pair normal-vision ΔE ≥ 15.
+
+Amber and lime sit below 3:1 contrast on white; every value is labelled directly and every chart has
+a table view, which is the documented relief. Text is a separate matter: `--faint` (2.96:1) is for
+marks only, and anything that paints glyphs uses `--muted` (5.55:1) or `--ink` (10.98:1).
+
+**Type and spacing come from scales, not from taste.** Six font sizes with a 12px floor
+(`--fs-meta` … `--fs-hero`) and IBM Carbon's spacing scale (`--sp-1` … `--sp-7` = 2/4/8/12/16/24/32).
+Before this there were nineteen font sizes, eleven of them between 8px and 14px, and 22 spacing
+values of which 13 were off any 4px grid. Do not add a seventh size or an off-scale margin; if
+something does not fit, show less of it.
 
 **Chart form is deliberately varied.** An earlier version was 62% bar charts, 26 of them the
 identical horizontal bar, which is why it read as a wall of purple. The horizontal bar is now a

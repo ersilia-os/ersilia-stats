@@ -42,7 +42,11 @@ def build_all(data_dir, today=None):
 
     sections = {
         "models": models_section.build(models),
-        "projects": projects_section.build(table("projects"), today),
+        # Projects needs the repositories and publications tables to resolve its own
+        # link columns — the only cross-table roll-up in the build.
+        "projects": projects_section.build(table("projects"), today,
+                                           repos=table("repositories"),
+                                           publications=table("publications")),
         "publications": publications_section.build(table("publications")),
         "repositories": repositories_section.build(table("repositories")),
         "community": community_section.build(table("community"), today),

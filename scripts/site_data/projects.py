@@ -7,7 +7,8 @@ overlap, which ran long, and what is running right now.
 import pandas as pd
 
 from . import insights as ins
-from .parse import as_text, col, growth_pair, metric, series_metric, value_counts
+from .parse import (EMPTY, as_text, col, growth_pair, metric, parse_multi,
+                    series_metric, value_counts)
 
 # Airtable's project states mapped onto the house semantic tokens, so "in progress"
 # is the same colour in every chart on the site.
@@ -20,12 +21,84 @@ STATUS_SEMANTICS = {
 }
 
 
-def build(projects, today):
+def _has_outputs(projects, repos, publications):
+    """Projects with at least one repository or publication linked, against those with
+    none. The mirror of quality.repo_project_link: that one asks how much of the code is
+    accounted for, this asks how much of the portfolio has a recorded output."""
+    table = outputs_table(projects, repos, publications)
+    total = int(len(projects)) if projects is not None else 0
+    linked = int(table.get("n", 0))
+    if not total:
+        return dict(EMPTY)
+    return metric(
+        ["With an output", "None recorded"], [linked, total - linked],
+        ins.share_of(linked, total, "projects", "have a repository or publication linked"),
+    )
+
+
+def outputs_table(projects, repos, publications):
+    """What each project actually produced: repositories and publications.
+
+    THE ONLY CROSS-TABLE ROLL-UP ON THE SITE, and the largest thing the dataset could
+    say that it was not saying. ``projects.repositories`` and ``projects.publications``
+    are Airtable link columns holding record ids; 30 of 36 projects link at least one
+    repository and 14 link at least one publication, and every id resolves.
+
+    DISCLOSURE. Repository counts cover every linked repository, public and private —
+    a count is not disclosure. The count of PUBLIC ones is what is shown, alongside the
+    total, so a project with private work reads as "4 repositories, 3 public" and no
+    private name is ever resolved or emitted. Publication titles are not emitted either;
+    only how many.
+    """
+    if projects is None or projects.empty:
+        return {"rows": [], "n": 0}
+
+    visibility = {}
+    if repos is not None and not repos.empty and "airtable_id" in repos.columns:
+        vis = as_text(col(repos, "visibility")).str.lower()
+        visibility = dict(zip(repos["airtable_id"], vis))
+    known_pubs = set()
+    if publications is not None and not publications.empty and "airtable_id" in publications.columns:
+        known_pubs = set(publications["airtable_id"])
+
+    rows = []
+    for _, project in projects.iterrows():
+        name = str(project.get("name", "")).strip()
+        if not name:
+            continue
+        repo_ids = parse_multi(project.get("repositories"))
+        pub_ids = [i for i in parse_multi(project.get("publications")) if i in known_pubs]
+        public = sum(1 for i in repo_ids if visibility.get(i) == "public")
+        if not repo_ids and not pub_ids:
+            continue
+        rows.append({
+            "name": name,
+            "repositories": len(repo_ids),
+            "public": public,
+            "publications": len(pub_ids),
+        })
+    rows.sort(key=lambda r: (-r["repositories"], -r["publications"], r["name"]))
+    if not rows:
+        return {"rows": [], "n": 0}
+
+    linked = len(rows)
+    total = int(len(projects))
+    return {
+        "rows": rows,
+        "n": linked,
+        "insight": "%s of %s projects have a repository or a publication linked to them." % (
+            ins.num(linked), ins.num(total),
+        ),
+    }
+
+
+def build(projects, today, repos=None, publications=None):
     if projects is None or projects.empty:
         empty = {"labels": [], "values": [], "n": 0}
         return {"status": empty, "per_year": empty, "active_over_time": empty,
                 "timeline": {"rows": [], "n": 0}, "duration": empty,
-                "growth": {"labels": [], "series": [], "n": 0}}
+                "growth": {"labels": [], "series": [], "n": 0},
+                "outputs": {"rows": [], "n": 0}, "has_outputs": empty}
 
     start = pd.to_datetime(col(projects, "start_date"), errors="coerce")
     end = pd.to_datetime(col(projects, "end_date"), errors="coerce")
@@ -38,6 +111,8 @@ def build(projects, today):
         "active_over_time": _active_over_time(start, end, today),
         "timeline": _timeline(projects, start, end, status, today),
         "duration": _duration(start, end, status, today),
+        "outputs": outputs_table(projects, repos, publications),
+        "has_outputs": _has_outputs(projects, repos, publications),
     }
 
 
