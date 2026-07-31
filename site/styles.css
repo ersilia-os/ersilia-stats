@@ -2,268 +2,512 @@
    Ersilia in numbers — site layer.
 
    Cascades AFTER assets/ersilia.css (the canonical house style, which owns the
-   brand tokens, type scale and component library: .card, .stat, .pill, .badge,
-   table.data, .hovertip, .modal, .wip, .credit, .brandhead, .eyebrow).
-   Nothing here redefines a brand token; this file adds only what a routed
-   analytics dashboard needs on top: chart mark colours, the 12-column grid, the
-   panel/lead hierarchy, the nav, and print.
+   brand tokens and the component library: .card, .stat, .pill, .badge,
+   table.data, .hovertip, .modal, .credit, .brandhead, .eyebrow).
 
    Single light theme by house rule — there is deliberately no dark palette.
+
+   Two things this layer does that the house standard does not anticipate, both
+   deliberate and both documented where they happen:
+     1. Every section owns a hue (--sec), which colours its nav entry AND its
+        charts. See the note above --sec-models.
+     2. Chart marks use snapped brand hues, because the raw ones fail the
+        colour-vision gates. See the note above --chart-1.
+
+   Chrome is deliberately LIGHT: nav, buttons and pills sit at weight 450 and let
+   colour carry state. Weight belongs on data, not on furniture.
    =========================================================================== */
 
 :root {
-  /* --- Chart mark colours --------------------------------------------------
-     Derived from the brand data hues in ersilia.css by the `dataviz` snap-to-
-     passing procedure: hue angle held, OKLCH lightness and chroma moved into the
-     legible band, then the slot ORDER chosen to maximise the minimum adjacent
-     colour-vision-deficiency separation. Validated with
-     dataviz/scripts/validate_palette.js against a #FFFFFF card surface:
+  /* --- Section identity hues ----------------------------------------------
+     One hue per section. It marks the sidebar entry and becomes the single
+     series colour for that section's own charts, so a page reads as itself.
 
-       adjacent CVD ΔE 15.8 (target >= 8) · normal-vision ΔE 31.0 (floor 15)
+     Derived from the ersilia.css brand hues, snapped into the legible OKLCH band
+     (hue angle held), then ASSIGNED TO THE NAV ORDER BY OPTIMISATION. That last
+     step matters: in a sidebar the dots are adjacent, so neighbouring hues must
+     be tellable apart. The obvious assignment put lime next to amber, which is
+     ΔE 5.0 under deuteranopia — indistinguishable for a red-green colourblind
+     reader. This order clears both gates:
 
-     The order is the safety mechanism — never reorder, never cycle past slot 6.
-     --chart-4 (amber) and --chart-6 (lime) sit below 3:1 on white; every chart
-     using them ships direct value labels and a drill-down table, which is the
-     documented relief.
+       adjacent CVD ΔE 23.1 (target >= 8) · normal-vision ΔE 28.7 (floor 15)
 
-     All-pairs forms (scatter, bubble, choropleth, heatmap, small multiples) can
-     carry at most TWO of these hues, so those charts use one hue or a ramp.
+     So do not reorder the nav without re-running
+     dataviz/scripts/validate_palette.js over the resulting sequence.
 
-     KNOWN, ACCEPTED CHECKER FINDING: html-formatting's check_html.py reports
-     T1-COLOR-OFFBRAND for the 11 values below, because they are not literal
-     ersilia.css palette entries. They cannot be — the raw brand hues fail the
-     chart-legibility gates (amber sits at OKLCH L 0.84, outside the 0.43–0.77
-     band; cobalt at chroma 0.078, under the 0.10 floor where a hue stops reading
-     as a hue), and color-mix() cannot lift a chroma floor or produce a
-     CVD-validated slot order. These are the brand hues with their hue angles
-     held and their lightness/chroma snapped into the legible band. Do not
-     "fix" this finding by substituting the unvalidated brand hexes: that trades
-     a cosmetic pass for charts colour-blind readers cannot read. Every other
-     colour on the site is a token.  */
-  --chart-1: #6d5de7;  /* periwinkle — brand, always slot 1 */
-  --chart-2: #e63745;  /* crimson   */
-  --chart-3: #247dad;  /* cobalt    */
-  --chart-4: #e2a72e;  /* amber     */
-  --chart-5: #af5cc7;  /* orchid    */
-  --chart-6: #6cbf5a;  /* lime      */
+     A NOTE ON THE HOUSE RULE: the standard's T2-ACCENT-SPRAWL caps a page at four
+     data hues, on the reasoning that flat accents sprinkled across chrome look
+     noisy. Seven section hues is a deliberate, user-chosen departure — here the
+     hue navigates AND encodes, which is the work the rule wants colour to be
+     doing. In practice the checker does not flag it, because it counts uses of
+     the ersilia.css hue *variables* and these are separate tokens; the finding it
+     does raise is T1-COLOR-OFFBRAND, below. Do not treat that silence as
+     endorsement: if you add an eighth section, re-run the validator. */
+  --sec-models:       #6d5de7;  /* periwinkle */
+  --sec-projects:     #22bbad;  /* turquoise  */
+  --sec-publications: #734080;  /* plum       */
+  --sec-repositories: #67bb55;  /* lime       */
+  --sec-community:    #af5cc7;  /* orchid     */
+  --sec-reach:        #d19710;  /* amber      */
+  --sec-outreach:     #1c7db0;  /* cobalt     */
+  --sec-overview:     #2C3E50;  /* ink — home reads as home, not as a section */
+
+  /* The active section's hue. app.js sets this per view on <main>; everything
+     downstream inherits it, so no component needs to know which section it is
+     in. Defaults to the brand so a card outside a section still renders. */
+  --sec: var(--brand);
+
+  /* --- Multi-series chart marks -------------------------------------------
+     For charts that genuinely carry several series at once (stacked, grouped,
+     multi-line). Single-series charts use var(--sec) instead.
+
+     Snapped from the brand hues by the dataviz procedure and validated against a
+     #FFFFFF card surface: adjacent CVD ΔE 15.8 (target >= 8) · normal-vision
+     ΔE 31.0 (floor 15). The ORDER is the safety mechanism — never reorder, never
+     cycle past slot 6; a 7th series folds into "Other" or the chart gets faceted.
+     All-pairs forms (scatter, choropleth, heatmap) carry at most two of these.
+
+     ACCEPTED CHECKER FINDING: check_html.py reports T1-COLOR-OFFBRAND here,
+     because these are not literal ersilia.css entries. They cannot be — the raw
+     brand hues fail the legibility gates (amber at OKLCH L 0.84 is outside the
+     0.43–0.77 band; cobalt at chroma 0.078 is under the 0.10 floor where a hue
+     stops reading as a hue) and color-mix() can lift neither a chroma floor nor
+     produce a validated order. Do not "fix" it by substituting the raw hexes:
+     that trades a cosmetic pass for charts colourblind readers cannot read. */
+  --chart-1: #6d5de7;  /* periwinkle */
+  --chart-2: #e63745;  /* crimson    */
+  --chart-3: #247dad;  /* cobalt     */
+  --chart-4: #e2a72e;  /* amber      */
+  --chart-5: #af5cc7;  /* orchid     */
+  --chart-6: #6cbf5a;  /* lime       */
 
   /* Sequential ramp for magnitude (choropleth, heatmaps, ordinal buckets):
-     one hue, monotone lightness, light end >= 2:1 on white. Validated with
-     --ordinal. */
+     one hue, monotone lightness, light end >= 2:1 on white. Validated
+     with --ordinal. */
   --seq-1: #b2b4d7;
   --seq-2: #9495d1;
   --seq-3: #7876ca;
   --seq-4: #5f55c2;
   --seq-5: #492eb8;
 
-  /* Neutral for "no data" regions and non-encoding marks — derived from the
+  /* Neutrals for "no data" regions and non-encoding marks — derived from the
      house neutrals rather than picked, and resolved to rgb() at runtime by
      js/tokens.js so ECharts can parse them. */
   --chart-null: color-mix(in srgb, var(--border) 62%, var(--surface));
   --chart-axis: color-mix(in srgb, var(--border) 78%, var(--surface));
 
-  --maxw: 1160px;
+  --sidebar-w: 264px;
+  --content-w: 1080px;
+  --gap: 12px;
 }
 
-/* ---------- Shell ------------------------------------------------------- */
-.topbar {
-  position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid var(--border);
-}
-.bar {
-  max-width: var(--maxw); margin: 0 auto; padding: 9px 24px 0;
-  display: flex; align-items: center; gap: 12px;
-}
-.bar .brandhead { flex: 0 0 auto; gap: 1px; }
-.bar .brandhead:hover { text-decoration: none; }
-.bar .eyebrow { font-size: 10.5px; }
-/* The site wordmark is the page's single <h1>; it lives in the bar, so it needs
-   the heading margin removed rather than a second heading elsewhere. */
-.bar .wordmark { font-size: 16px; margin: 0; }
-.bar-spacer { flex: 1 1 auto; }
-.snapshot { flex: 0 0 auto; }
+/* ===========================================================================
+   Shell — fixed sidebar, content scrolls
+   =========================================================================== */
+.shell { min-height: 100vh; }
 
-.nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-/* Vertical padding gives the active pill room inside the scroll box. */
-.nav ul {
-  display: flex; gap: 2px; list-style: none; margin: 0;
-  padding: 6px 0 7px; overflow-x: auto; scrollbar-width: none;
+.sidebar {
+  position: fixed; inset: 0 auto 0 0; width: var(--sidebar-w); z-index: 40;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 22px 16px 18px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
 }
-.nav ul::-webkit-scrollbar { display: none; }
-.nav a {
-  display: block; color: var(--muted); font-size: 12px; font-weight: 540;
-  padding: 5px 10px; border-radius: 999px; white-space: nowrap;
-  transition: background var(--tap), color var(--tap);
+.sidebar .brandhead { padding: 0 8px; margin-bottom: 22px; gap: 2px; }
+.sidebar .eyebrow { font-size: 10.5px; font-weight: 500; }
+/* The wordmark is the page's single <h1>, so it needs the heading margin off. */
+.sidebar .wordmark { font-size: 17px; margin: 0; letter-spacing: -.015em; }
+
+.sidebar nav ul { list-style: none; margin: 0; padding: 0; }
+.sidebar nav a {
+  display: flex; align-items: center; gap: 9px;
+  padding: 6px 8px 6px 9px; border-radius: var(--radius-sm);
+  /* Light chrome: no semibold anywhere in the furniture. */
+  font-size: 12.5px; font-weight: 450; color: var(--muted);
+  border-left: 2px solid transparent;
+  transition: color var(--tap), background var(--tap), border-color var(--tap);
 }
-.nav a:hover { color: var(--brand); background: color-mix(in srgb, var(--brand) 9%, var(--surface)); text-decoration: none; }
-.nav a[aria-current="page"] {
-  color: var(--brand); background: color-mix(in srgb, var(--brand) 13%, var(--surface));
+.sidebar nav a .dot {
+  width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto;
+  background: var(--dot, var(--faint));
+  transition: transform var(--tap);
+}
+.sidebar nav a:hover {
+  color: var(--ink); text-decoration: none;
+  background: color-mix(in srgb, var(--dot, var(--brand)) 7%, var(--surface));
+}
+/* Active state is colour + a rule + a faint tint. No filled pill, no bold. */
+.sidebar nav a[aria-current="page"] {
+  color: var(--dot, var(--brand));
+  border-left-color: var(--dot, var(--brand));
+  background: color-mix(in srgb, var(--dot, var(--brand)) 9%, var(--surface));
+}
+.sidebar nav a[aria-current="page"] .dot { transform: scale(1.25); }
+.sidebar .navgroup {
+  margin: 16px 0 5px; padding: 0 9px;
+  font-size: 10.5px; font-weight: 500; color: var(--faint);
 }
 
-main { max-width: var(--maxw); margin: 0 auto; padding: 26px 24px 8px; }
-footer.credit { max-width: var(--maxw); margin: 0 auto; padding: 14px 24px 40px; }
+.sidebar .foot { margin-top: auto; padding: 14px 9px 0; border-top: 1px solid var(--border); }
+.sidebar .foot .snapshot {
+  display: block; font-family: var(--mono); font-size: 10.5px;
+  color: var(--muted); margin-bottom: 9px;
+}
+.sidebar .foot a, .sidebar .foot button {
+  display: block; width: 100%; text-align: left; padding: 0; margin-bottom: 7px;
+  background: none; border: 0; border-radius: 0;
+  font-family: var(--sans); font-size: 11.5px; font-weight: 450; color: var(--muted);
+  cursor: pointer;
+}
+.sidebar .foot a:hover, .sidebar .foot button:hover {
+  color: var(--brand); background: none; text-decoration: none;
+}
 
-/* ---------- View header ------------------------------------------------- */
-.viewhead { margin: 0 0 20px; }
+main {
+  margin-left: var(--sidebar-w);
+  padding: 26px clamp(18px, 3vw, 34px) 40px;
+}
+main > * { max-width: var(--content-w); }
+
+/* ---------- Section header --------------------------------------------- */
+.viewhead { margin: 0 0 18px; }
 .viewhead h2 {
-  font-size: 21px; font-weight: 700; letter-spacing: -.015em; margin: 0 0 5px;
+  display: flex; align-items: center; gap: 9px;
+  font-size: 19px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 4px;
 }
-.viewhead p { margin: 0; color: var(--muted); max-width: 68ch; }
-.lede { margin: 6px 0 0; color: var(--muted); max-width: 70ch; font-size: 13.5px; }
+.viewhead h2::before {
+  content: ""; width: 9px; height: 9px; border-radius: 3px;
+  background: var(--sec); flex: 0 0 auto;
+}
+.viewhead p { margin: 0; color: var(--muted); max-width: 74ch; font-size: 12.5px; }
+/* The one large block of section colour on the page. */
+.viewhead::after {
+  content: ""; display: block; height: 2px; margin-top: 13px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--sec), color-mix(in srgb, var(--sec) 8%, transparent));
+}
 
-/* ---------- Stat tiles -------------------------------------------------- */
+/* ===========================================================================
+   Stat tiles
+   =========================================================================== */
 .stat-row {
-  display: grid; gap: 12px; margin: 0 0 22px;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: grid; gap: var(--gap); margin: 0 0 18px;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
 }
-.stat-row.primary { grid-template-columns: repeat(4, 1fr); gap: 13px; }
-.stat { position: relative; overflow: hidden; }
-.stat.hero { padding: 16px 18px 14px; }
-.stat.hero .v { font-size: 34px; line-height: 1.05; }
-.stat.hero .k { font-size: 11.5px; }
-.stat.small .v { font-size: 21px; }
-.stat .spark { display: block; width: 100%; height: 26px; margin-top: 8px; }
-.stat .d { display: flex; align-items: baseline; gap: 5px; }
-.stat .delta { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; }
-.stat .delta.up { color: var(--good); }
-.stat .delta.flat { color: var(--faint); }
+.stat-row.primary { grid-template-columns: repeat(4, 1fr); }
+.stat { position: relative; overflow: hidden; padding: 13px 15px 11px; }
+.stat .k { font-size: 11px; font-weight: 500; }
+.stat .v {
+  font-size: 23px; margin-top: 1px;
+  /* Proportional figures on a large standalone number: tabular-nums makes 121
+     look loose at display sizes. Tabular alignment is for table rows and ticks. */
+  font-variant-numeric: normal;
+}
+.stat.hero { padding: 15px 17px 13px; }
+.stat.hero .v { font-size: 31px; line-height: 1.06; }
+.stat .d { display: flex; align-items: baseline; gap: 4px; margin-top: 2px; }
+/* Quiet delta: no mono, no semibold, no loud green. A hue arrow carries direction. */
+.stat .delta { font-size: 11px; font-weight: 450; color: var(--muted); }
+.stat .delta::before { content: "▲ "; color: var(--sec); font-size: 8px; }
+.stat .delta.down::before { content: "▼ "; color: var(--muted); }
+.stat .delta.flat::before { content: "· "; color: var(--faint); }
+.stat .spark { display: block; width: 100%; height: 24px; margin-top: 7px; }
 
-/* ---------- 12-column chart grid ---------------------------------------- */
-/* align-items:start keeps each card at its natural height. Stretching them to
-   match the tallest card in the row left a short card (a single share bar next to
-   a full bar chart) with a large empty area inside its own border. */
+/* ===========================================================================
+   12-column grid. Spans are chosen from the data's own shape in cards.js — a
+   chart with six categories in a full-width card is seven bars adrift in white.
+   =========================================================================== */
 .chart-grid {
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: 15px;
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gap);
   align-items: start;
 }
+.span-3 { grid-column: span 3; }
 .span-4 { grid-column: span 4; }
+.span-5 { grid-column: span 5; }
 .span-6 { grid-column: span 6; }
+.span-7 { grid-column: span 7; }
 .span-8 { grid-column: span 8; }
 .span-12 { grid-column: span 12; }
-@media (max-width: 1000px) {
-  .span-4, .span-6, .span-8 { grid-column: span 6; }
-  .stat-row.primary { grid-template-columns: repeat(2, 1fr); }
+
+/* ===========================================================================
+   Chart panels
+   =========================================================================== */
+.card { display: flex; flex-direction: column; padding: 12px 14px 10px; }
+.card.lead { padding: 15px 17px 12px; }
+.phead { display: flex; align-items: flex-start; gap: 7px; margin: 0 0 1px; }
+.phead h3 {
+  margin: 0; flex: 1; font-size: 12px; font-weight: 500;
+  letter-spacing: 0; color: var(--ink);
 }
-@media (max-width: 680px) {
-  .span-4, .span-6, .span-8, .span-12 { grid-column: span 12; }
-  .bar { flex-wrap: wrap; gap: 6px 10px; padding-left: 16px; padding-right: 16px; }
-  .nav-inner { padding: 0 16px; }
-  main { padding-left: 16px; padding-right: 16px; }
+.card.lead .phead h3 { font-size: 13.5px; font-weight: 600; }
+.pmeta { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; }
+.pcount {
+  font-family: var(--mono); font-size: 10px; color: var(--faint);
+  font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Chart panels ----------------------------------------------- */
-.card { display: flex; flex-direction: column; padding: 14px 16px 12px; }
-.card.lead { padding: 17px 20px 14px; }
-.phead { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 2px; }
-.phead h3 { margin: 0; flex: 1; font-size: 12.5px; font-weight: 600; letter-spacing: 0; }
-.card.lead .phead h3 { font-size: 14px; }
-.pmeta { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; padding-top: 1px; }
-.pcount { font-family: var(--mono); font-size: 10.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
-
-/* The computed takeaway. Reads as the chart's caption, not as chrome. */
+/* The computed takeaway — the chart's caption, not chrome. */
 .insight {
-  margin: 0 0 9px; font-size: 11.5px; line-height: 1.45; color: var(--muted);
-  max-width: 76ch;
+  margin: 3px 0 7px; font-size: 11px; line-height: 1.45; color: var(--muted);
+  max-width: 80ch;
 }
-.card.lead .insight { font-size: 12.5px; }
+.card.lead .insight { font-size: 12px; }
 
 .chart { width: 100%; min-height: 0; }
-/* A single split bar needs no more room than the bar plus its legend. */
-.chart.h-xs { height: 128px; }
-.chart.h-sm { height: 210px; }
-.chart.h-md { height: 268px; }
-.chart.h-lg { height: 330px; }
-.chart.h-xl { height: 420px; }
-.chart.h-map { height: 460px; }
-/* A Gantt needs a row per project, so its height scales with the row count. */
-.chart.h-tall { height: 600px; }
+.chart.h-xs { height: 108px; }
+.chart.h-sm { height: 178px; }
+.chart.h-md { height: 228px; }
+.chart.h-lg { height: 286px; }
+.chart.h-xl { height: 360px; }
+.chart.h-map { height: 420px; }
+.chart.h-tall { height: 560px; }
 
 /* Methodology marker — tier 2 of progressive disclosure. */
 .info {
-  flex: 0 0 auto; width: 15px; height: 15px; border-radius: 50%;
+  flex: 0 0 auto; width: 14px; height: 14px; border-radius: 50%;
   border: 1px solid var(--border); background: var(--surface-2);
-  color: var(--faint); font: 600 10px/13px var(--sans); text-align: center;
+  color: var(--faint); font: 450 9.5px/12px var(--sans); text-align: center;
   cursor: help; padding: 0;
 }
-.info:hover { color: var(--brand); border-color: var(--brand); }
+.info:hover { color: var(--sec); border-color: var(--sec); }
 .hovertip[data-tip]::after { left: auto; right: 0; }
 
-/* Metric toggles. */
-.toggle { display: flex; gap: 3px; }
-.toggle button { padding: 2px 9px; font-size: 11px; border-radius: 999px; }
+/* Metric toggles — quiet until pressed, then the section hue. */
+.toggle { display: flex; gap: 2px; }
+.toggle button {
+  padding: 2px 8px; font-size: 10.5px; font-weight: 450; border-radius: 999px;
+  color: var(--muted); background: none; border: 1px solid transparent;
+}
+.toggle button:hover { background: var(--surface-2); }
 .toggle button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--brand) 14%, var(--surface));
-  border-color: var(--brand); color: var(--brand);
+  background: color-mix(in srgb, var(--sec) 12%, var(--surface));
+  border-color: color-mix(in srgb, var(--sec) 40%, var(--surface));
+  color: color-mix(in srgb, var(--sec) 78%, #000);
 }
 
-/* ---------- Drill-down table (tier 2 disclosure + contrast relief) ------ */
-details.drill { margin-top: 8px; border-top: 1px solid var(--surface-2); }
+/* ===========================================================================
+   Meter rows — a label, a number and a thin bar. Not every ratio is a chart.
+   =========================================================================== */
+.meters { display: flex; flex-direction: column; gap: 9px; padding: 4px 0 2px; }
+.meter .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.meter .lbl { font-size: 11.5px; color: var(--ink); font-weight: 450; }
+.meter .val {
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.meter .track {
+  height: 4px; border-radius: 999px; background: var(--surface-2); margin-top: 5px;
+  overflow: hidden;
+}
+.meter .fill { height: 100%; border-radius: 999px; background: var(--sec); }
+
+/* ===========================================================================
+   Ranked table — top-N with an inline microbar. Replaces three bar charts.
+   =========================================================================== */
+table.ranked { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.ranked th {
+  font-size: 10px; font-weight: 500; color: var(--faint); text-align: right;
+  padding: 0 0 6px; border-bottom: 1px solid var(--border);
+}
+table.ranked th:first-child { text-align: left; }
+table.ranked td { padding: 5px 0; border-bottom: 1px solid var(--surface-2); }
+table.ranked td.name { color: var(--ink); max-width: 0; width: 42%; }
+table.ranked td.name span {
+  display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+table.ranked td.num {
+  text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums;
+  color: var(--muted); width: 52px;
+}
+table.ranked td.barcell { width: 28%; padding-left: 12px; }
+table.ranked .microbar { height: 4px; border-radius: 999px; background: var(--sec); min-width: 2px; }
+table.ranked tbody tr:hover td { background: color-mix(in srgb, var(--sec) 5%, var(--surface)); }
+
+/* ===========================================================================
+   Share rows — several two-category splits stacked compactly in one card.
+   =========================================================================== */
+.shares { display: flex; flex-direction: column; gap: 11px; padding: 3px 0 2px; }
+.share .top {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px; margin-bottom: 5px;
+}
+.share .lbl { font-size: 11.5px; color: var(--ink); font-weight: 450; }
+.share .pct {
+  font-family: var(--mono); font-size: 11px; color: var(--sec);
+  font-variant-numeric: tabular-nums;
+}
+.share .track { display: flex; height: 7px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.share .a { background: var(--sec); }
+.share .b { background: var(--surface-2); }
+.share .legend { display: flex; gap: 12px; margin-top: 4px; font-size: 10.5px; color: var(--faint); }
+.share .legend b { font-weight: 450; color: var(--muted); font-family: var(--mono); }
+
+/* ===========================================================================
+   Drill-down table (progressive disclosure + the contrast relief for the two
+   sub-3:1 chart hues)
+   =========================================================================== */
+details.drill { margin-top: 7px; border-top: 1px solid var(--surface-2); }
 details.drill > summary {
-  cursor: pointer; list-style: none; padding: 7px 0 0;
-  font-size: 11px; font-weight: 540; color: var(--muted);
+  cursor: pointer; list-style: none; padding: 6px 0 0;
+  font-size: 10.5px; font-weight: 450; color: var(--faint);
   display: flex; align-items: center; gap: 5px;
 }
 details.drill > summary::-webkit-details-marker { display: none; }
-details.drill > summary::before { content: "▸"; color: var(--brand); font-size: 9px; }
+details.drill > summary::before { content: "▸"; color: var(--sec); font-size: 8px; }
 details[open].drill > summary::before { content: "▾"; }
-details.drill > summary:hover { color: var(--brand); }
-details.drill > summary:focus-visible { outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px; }
-.drill .scrollwrap { max-height: 260px; margin-top: 6px; }
-.drill .dl { font-size: 11px; margin-top: 7px; display: inline-block; }
+details.drill > summary:hover { color: var(--sec); }
+details.drill > summary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sec) 55%, #fff); outline-offset: 2px;
+}
+.drill .scrollwrap { max-height: 240px; margin-top: 6px; }
+.drill .dl { font-size: 10.5px; margin-top: 6px; display: inline-block; }
 
-/* ---------- Landing: section cards ------------------------------------- */
-.jump-grid { display: grid; gap: 13px; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); }
+/* ===========================================================================
+   Landing
+   =========================================================================== */
+.lede { margin: 4px 0 20px; color: var(--muted); max-width: 76ch; font-size: 13px; }
+.strip {
+  display: flex; flex-wrap: wrap; gap: 0; margin: 0 0 20px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.strip .cell {
+  flex: 1 1 130px; padding: 11px 14px;
+  border-right: 1px solid var(--border);
+}
+.strip .cell:last-child { border-right: 0; }
+.strip .k { font-size: 10.5px; color: var(--muted); font-weight: 450; }
+.strip .v {
+  font-family: var(--mono); font-size: 17px; color: var(--ink);
+  font-variant-numeric: normal; margin-top: 1px;
+}
+
+.section-label {
+  margin: 22px 0 10px; font-size: 11px; font-weight: 500; color: var(--faint);
+}
+
+.jump-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(4, 1fr); }
 a.jump {
-  display: flex; flex-direction: column; gap: 3px;
+  display: flex; flex-direction: column; gap: 4px;
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 14px 16px;
+  border-radius: var(--radius); padding: 13px 15px 11px;
   box-shadow: var(--shadow-sm); color: var(--ink);
-  transition: border-color var(--tap), box-shadow var(--tap), transform var(--tap);
+  border-top: 2px solid var(--dot, var(--brand));
+  transition: box-shadow var(--tap), transform var(--tap);
 }
-a.jump:hover {
-  text-decoration: none; border-color: color-mix(in srgb, var(--brand) 45%, var(--border));
-  box-shadow: var(--shadow); transform: translateY(-1px);
+a.jump:hover { text-decoration: none; box-shadow: var(--shadow); transform: translateY(-1px); }
+a.jump .t {
+  font-size: 12.5px; font-weight: 500; display: flex;
+  align-items: baseline; justify-content: space-between; gap: 8px;
 }
-a.jump .t { font-size: 13px; font-weight: 600; display: flex; align-items: baseline; gap: 7px; }
-a.jump .n { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--brand); font-weight: 600; }
-a.jump .s { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+a.jump .n {
+  font-family: var(--mono); font-variant-numeric: normal;
+  color: var(--dot, var(--brand)); font-size: 14px;
+}
+a.jump .s { font-size: 11px; color: var(--muted); line-height: 1.45; }
+a.jump .spark { height: 20px; margin-top: 2px; }
 
-/* ---------- Downloads -------------------------------------------------- */
-.dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px 26px; }
-.dl-group h4 { margin: 0 0 8px; font-size: 12px; font-weight: 600; color: var(--ink); }
-.dl-links { display: flex; flex-direction: column; gap: 6px; }
-a.dl { display: inline-flex; align-items: baseline; gap: 6px; font-size: 12px; color: var(--muted); }
-a.dl::before { content: "↓"; color: var(--brand); font-weight: 700; }
+/* ===========================================================================
+   Downloads
+   =========================================================================== */
+.dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 24px; }
+.dl-group h4 { margin: 0 0 7px; font-size: 11.5px; font-weight: 500; color: var(--ink); }
+.dl-group h4::before {
+  content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--dot, var(--brand)); margin-right: 7px;
+}
+.dl-links { display: flex; flex-direction: column; gap: 5px; }
+a.dl { display: inline-flex; align-items: baseline; gap: 6px; font-size: 11.5px; color: var(--muted); }
+a.dl::before { content: "↓"; color: var(--sec); }
 a.dl:hover { color: var(--ink); text-decoration: none; }
 
-/* ---------- Methods modal --------------------------------------------- */
-.modal h3 { margin: 18px 0 6px; }
-.modal .mrow { font-size: 12px; color: var(--muted); }
-.modal .mrow b { color: var(--ink); font-weight: 600; }
-.modal .close { position: absolute; top: 14px; right: 16px; }
-.methods-btn { font-size: 11.5px; }
+/* ===========================================================================
+   Methods dialog
+   =========================================================================== */
+.modal h3 { margin: 16px 0 5px; font-size: 12.5px; font-weight: 600; }
+.modal .mrow { font-size: 11.5px; color: var(--muted); }
+.modal .mrow b { color: var(--ink); font-weight: 500; }
+.modal .close {
+  position: absolute; top: 13px; right: 15px;
+  font-weight: 450; font-size: 11.5px;
+}
+.methods-body .meters { margin-top: 8px; }
 .modal[hidden], .scrim[hidden] { display: none; }
 
-/* ---------- Empty / error states -------------------------------------- */
+/* ===========================================================================
+   States
+   =========================================================================== */
 .empty {
   display: flex; align-items: center; justify-content: center; text-align: center;
-  color: var(--faint); font-size: 11.5px; padding: 26px 14px;
+  color: var(--faint); font-size: 11px; padding: 22px 12px;
   border: 1px dashed var(--border); border-radius: var(--radius-sm);
   background: var(--surface-2);
 }
 .loading { color: var(--faint); font-size: 12px; padding: 40px 0; }
+/* A neutral note. Deliberately NOT .wip — that is amber and reads as a warning,
+   which is wrong for "this table is not in the snapshot yet". */
+.note {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 450; color: var(--muted);
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 11px; margin-bottom: 14px;
+}
+.chart:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sec) 55%, #fff); outline-offset: 2px;
+}
 
-/* Charts are canvas: the drill-down table is their accessible equivalent. */
-.chart:focus-visible { outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px; }
+/* ===========================================================================
+   Responsive — the sidebar becomes a scrolling strip above the content
+   =========================================================================== */
+@media (max-width: 1100px) {
+  .jump-grid { grid-template-columns: repeat(2, 1fr); }
+  .span-3, .span-4, .span-5 { grid-column: span 6; }
+  .span-7, .span-8 { grid-column: span 12; }
+}
+@media (max-width: 900px) {
+  .sidebar {
+    position: static; width: auto; inset: auto;
+    flex-direction: row; align-items: center; gap: 8px 12px;
+    /* Wrap, so the nav gets its own full-width line. Without this the footer links
+       claimed the row and pushed the section nav off-screen entirely — the nav was
+       unreachable on a phone. */
+    flex-wrap: wrap; overflow: visible;
+    border-right: 0; border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+  }
+  .sidebar .brandhead { margin: 0; flex: 1 1 auto; }
+  /* Full-width second line. */
+  .sidebar nav { flex: 1 0 100%; order: 3; min-width: 0; }
+  .sidebar nav ul { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+  .sidebar nav ul::-webkit-scrollbar { display: none; }
+  .sidebar nav a { border-left: 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .sidebar nav a[aria-current="page"] { border-left: 0; border-bottom-color: var(--dot, var(--brand)); }
+  .sidebar .navgroup { display: none; }
+  .sidebar .foot {
+    margin: 0; padding: 0; border: 0; display: flex; align-items: center; gap: 12px;
+    flex: 0 0 auto; order: 2;
+  }
+  .sidebar .foot .snapshot, .sidebar .foot a, .sidebar .foot button { margin: 0; width: auto; }
+  /* Only the snapshot and Methods survive the narrow bar; Downloads is reachable
+     from the nav and the source link from the footer. */
+  .sidebar .foot a { display: none; }
+  main { margin-left: 0; padding-top: 20px; }
+  .stat-row.primary { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
+  .jump-grid { grid-template-columns: 1fr; }
+  main { padding-left: 16px; padding-right: 16px; }
+}
 
-/* ---------- Print: one clean page per view ---------------------------- */
+/* ===========================================================================
+   Print
+   =========================================================================== */
 @media print {
-  .topbar, .toggle, details.drill, .jump-grid, .modal, .scrim { display: none !important; }
+  .sidebar, .toggle, details.drill, .jump-grid, .modal, .scrim { display: none !important; }
   body { background: #fff; }
-  main { max-width: none; padding: 0; }
+  main { margin: 0; padding: 0; max-width: none; }
+  main > * { max-width: none; }
   .card { break-inside: avoid; box-shadow: none; border-color: var(--faint); }
-  .chart-grid { gap: 10px; }
-  .span-4, .span-6, .span-8 { grid-column: span 6; }
+  .span-3, .span-4, .span-5 { grid-column: span 6; }
 }

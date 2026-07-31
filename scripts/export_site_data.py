@@ -189,13 +189,17 @@ def main():
         with open(os.path.join(tables_dir, fname), encoding="utf-8") as handle:
             assert_no_pii(handle.read(), "site/data/tables/%s" % fname)
 
-    excluded = payload["meta"]["private_repositories_excluded"]
     print("Wrote %s (%s bytes) + %d chart CSVs; snapshot %s." % (
         args.out, format(len(text), ","), count, payload["snapshot_date"]))
     if removed:
         print("Removed %d stale chart CSV(s): %s" % (len(removed), ", ".join(removed)))
-    print("Excluded %d private repositories. Models table: %s." % (
-        excluded, "present" if payload["meta"]["models_available"] else "ABSENT (run fetch_airtable.py)"))
+    # Aggregates cover every repository; only name-bearing figures are restricted
+    # to the public ones, so this is a note about scope, not an exclusion count.
+    print("Repositories: %d total, %d private (named figures use public only)." % (
+        payload["kpis"]["repositories"]["value"],
+        payload["meta"]["private_repositories"]))
+    print("Models table: %s." % (
+        "present" if payload["meta"]["models_available"] else "ABSENT (run fetch_airtable.py)"))
 
 
 if __name__ == "__main__":

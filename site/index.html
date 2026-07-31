@@ -13,55 +13,59 @@
   Same-origin stylesheets and scripts, deliberately not inlined. The house
   standard inlines everything so a page survives as a Claude Artifact under CSP;
   this is a hosted GitHub Pages site, and inlining a 1 MB chart library plus 1 MB
-  of world geometry into the HTML would trade a real page-weight cost for a
-  portability we do not need here. Nothing loads from an off-document host.
+  of world geometry into the HTML would trade real page weight for a portability
+  we do not need here. Nothing loads from an off-document host.
 -->
 <link rel="stylesheet" href="assets/ersilia.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="topbar">
-  <div class="bar">
+<div class="shell">
+
+  <aside class="sidebar">
     <a class="brandhead" href="#/">
       <span class="eyebrow brand">Ersilia Open Source Initiative</span>
       <h1 class="wordmark">Ersilia <em>in numbers</em></h1>
     </a>
-    <span class="bar-spacer"></span>
-    <button type="button" class="pill methods-btn" id="methods-open">Methods</button>
-    <span class="pill snapshot" id="snapshot">Loading…</span>
-  </div>
-  <!-- The nav sits on its own row: ten section labels plus the wordmark and two
-       pills do not fit on one line, and squeezing them clipped the first items. -->
-  <nav class="nav" aria-label="Sections">
-    <div class="nav-inner"><ul id="nav-list"></ul></div>
-  </nav>
-</header>
 
-<main>
-  <div id="view"><p class="loading">Loading figures…</p></div>
-  <noscript>
-    <p class="empty">
-      This page renders its charts in the browser, so it needs JavaScript. The
-      underlying aggregates are plain files you can read without it:
-      <a href="data/stats.json">data/stats.json</a>, plus one CSV per chart under
-      <code>data/tables/</code>.
-    </p>
-  </noscript>
-</main>
+    <nav aria-label="Sections">
+      <ul id="nav-list"></ul>
+    </nav>
 
-<footer class="credit">
-  Brought to you by the <a href="https://ersilia.io" target="_blank" rel="noopener">Ersilia Open Source Initiative</a>
-  — a tech-nonprofit fueling sustainable research in the Global South.<br>
-  <a href="https://github.com/ersilia-os/ersilia-stats" target="_blank" rel="noopener">⌥ Source code on GitHub ↗</a>
-</footer>
+    <div class="foot">
+      <span class="snapshot" id="snapshot">Loading…</span>
+      <button type="button" id="methods-open">Methods and definitions</button>
+      <a href="#/downloads">Download the data</a>
+      <a href="https://github.com/ersilia-os/ersilia-stats" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    </div>
+  </aside>
+
+  <main>
+    <div id="view"><p class="loading">Loading figures…</p></div>
+    <noscript>
+      <p class="empty">
+        This page renders its charts in the browser, so it needs JavaScript. The
+        underlying aggregates are plain files you can read without it:
+        <a href="data/stats.json">data/stats.json</a>, plus one CSV per chart under
+        <code>data/tables/</code>.
+      </p>
+    </noscript>
+
+    <footer class="credit">
+      Brought to you by the <a href="https://ersilia.io" target="_blank" rel="noopener">Ersilia Open Source Initiative</a>
+      — a tech-nonprofit fueling sustainable research in the Global South.
+    </footer>
+  </main>
+
+</div>
 
 <div class="scrim" id="scrim" hidden></div>
 <div class="modal" id="methods" role="dialog" aria-modal="true" aria-labelledby="methods-title" hidden>
   <button type="button" class="close" id="methods-close" aria-label="Close">Close</button>
   <h2 id="methods-title">How these figures are made</h2>
   <p class="muted">Definitions, provenance, and the choices that shape what you see.</p>
-  <div id="methods-body"></div>
+  <div class="methods-body" id="methods-body"></div>
 </div>
 
 <script src="vendor/echarts.min.js"></script>

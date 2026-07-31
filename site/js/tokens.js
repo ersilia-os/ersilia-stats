@@ -41,15 +41,52 @@ const T = (() => {
     sans: v("--sans", 'system-ui, sans-serif'),
     mono: v("--mono", "ui-monospace, Menlo, monospace"),
 
-    /* Categorical identity. FIXED ORDER — this ordering is what makes the palette
-       colour-vision safe (adjacent ΔE 15.8). Never reorder it, and never cycle
-       past the end: a 7th series folds into "Other" or the chart gets faceted. */
+    /* Categorical identity, for charts that carry several series at once. FIXED
+       ORDER — the ordering is what makes the palette colour-vision safe (adjacent
+       ΔE 15.8). Never reorder it, and never cycle past the end: a 7th series
+       folds into "Other" or the chart gets faceted. Single-series charts use the
+       section hue instead (see sectionColor). */
     cat: [1, 2, 3, 4, 5, 6].map((i) => v("--chart-" + i)),
 
     /* Sequential, light -> dark. Magnitude only. */
     seq: [1, 2, 3, 4, 5].map((i) => v("--seq-" + i)),
+
+    /* Section identity hues, keyed by route id. Assigned to the nav order by
+       optimisation so adjacent sidebar dots stay distinguishable — see the note
+       in styles.css before changing anything here. */
+    sec: {
+      overview: v("--sec-overview"),
+      models: v("--sec-models"),
+      projects: v("--sec-projects"),
+      publications: v("--sec-publications"),
+      repositories: v("--sec-repositories"),
+      community: v("--sec-community"),
+      reach: v("--sec-reach"),
+      outreach: v("--sec-outreach"),
+    },
   };
 })();
+
+/* The hue of the section currently being rendered. Charts read this rather than
+   being told, so a single-series chart is automatically "its section's colour". */
+let ACTIVE_SEC = T.brand;
+
+function sectionColor(id) {
+  return (T.sec && T.sec[id]) || T.brand;
+}
+
+/* Called by the router before a view renders: sets the CSS custom property the
+   whole stylesheet inherits from, and the value chart builders pick up. */
+function setActiveSection(id) {
+  ACTIVE_SEC = sectionColor(id);
+  document.documentElement.style.setProperty("--sec", ACTIVE_SEC);
+  return ACTIVE_SEC;
+}
+
+/* The section hue, for any chart that draws a single series. */
+function secColor() {
+  return ACTIVE_SEC;
+}
 
 /* Semantic names the exporter emits alongside status metrics, so "in progress"
    is the same colour in every chart on the site. */
@@ -84,4 +121,36 @@ function seqAt(t) {
 function alpha(hex, a) {
   const value = Math.round(Math.max(0, Math.min(1, a)) * 255).toString(16).padStart(2, "0");
   return hex.length === 7 ? hex + value : hex;
+}
+
+/* Mix a colour towards white. `amount` is how much WHITE to add, so 0 returns the
+   colour untouched and 1 returns white. Used to build tints of a section hue for
+   compositions (donut segments, treemap tiles, choropleth ramps) — a composition
+   should read as one family rather than as several unrelated accents.
+
+   Opaque tints rather than alpha, so marks stay solid over gridlines. */
+function mixWithWhite(color, amount) {
+  const rgb = toRgb(color);
+  if (!rgb) return color;
+  const t = Math.max(0, Math.min(1, amount));
+  const mixed = rgb.map((c) => Math.round(c + (255 - c) * t));
+  return "#" + mixed.map((c) => c.toString(16).padStart(2, "0")).join("");
+}
+
+/* Accepts "#rgb", "#rrggbb" and the "rgb(r, g, b)" that getComputedStyle returns
+   once a color-mix() token has been resolved. */
+function toRgb(color) {
+  const text = String(color).trim();
+  const hex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(text);
+  if (hex) {
+    const h = hex[1].length === 3 ? hex[1].replace(/./g, (c) => c + c) : hex[1];
+    const n = parseInt(h, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  const fn = /rgba?\(([^)]+)\)/i.exec(text);
+  if (fn) {
+    const parts = fn[1].split(/[,\s/]+/).filter(Boolean).slice(0, 3).map(Number);
+    if (parts.length === 3 && parts.every((p) => !Number.isNaN(p))) return parts;
+  }
+  return null;
 }

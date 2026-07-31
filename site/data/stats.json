@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 14:41 UTC",
+  "generated_at": "2026-07-31 15:29 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -15,7 +15,7 @@
       "repositories"
     ],
     "models_available": true,
-    "private_repositories_excluded": 38,
+    "private_repositories": 38,
     "aggregates_only": true
   },
   "kpis": {
@@ -76,7 +76,7 @@
       "delta_12m": 11
     },
     "repositories": {
-      "value": 140,
+      "value": 178,
       "series": {
         "labels": [
           "2019Q3",
@@ -115,31 +115,39 @@
           1,
           3,
           4,
-          7,
           9,
-          17,
-          24,
+          11,
+          20,
           30,
-          37,
-          40,
-          45,
-          52,
-          60,
-          62,
-          64,
-          69,
-          79,
+          36,
+          44,
+          50,
+          57,
+          66,
+          76,
+          80,
           84,
-          89,
-          94,
+          90,
           100,
-          110,
-          121,
+          106,
+          111,
+          116,
+          124,
           134,
-          139
+          150,
+          166,
+          177
         ]
       },
-      "delta_12m": 39
+      "delta_12m": 53
+    },
+    "repositories_public": {
+      "value": 140,
+      "series": {
+        "labels": [],
+        "values": []
+      },
+      "delta_12m": null
     },
     "publications": {
       "value": 42,
@@ -296,7 +304,7 @@
       "delta_12m": null
     },
     "total_stars": {
-      "value": 659,
+      "value": 664,
       "series": {
         "labels": [],
         "values": []
@@ -893,7 +901,8 @@
           240
         ],
         "n": 709,
-        "insight": "Source code reaches the most models: 240 of 240."
+        "insight": "Source code reaches the most models: 240 of 240.",
+        "total": 240
       },
       "by_source_type": {
         "labels": [
@@ -1318,9 +1327,9 @@
         "today": "2026-07-31",
         "semantics": {
           "Stuck": "bad",
-          "Done": "good",
           "In progress": "brand",
-          "Todo": "neutral"
+          "Todo": "neutral",
+          "Done": "good"
         },
         "insight": "36 projects on the timeline, 2019-07 to 2029-03. 1 past their end date and not marked done."
       },
@@ -1334,7 +1343,7 @@
           12.1
         ],
         "n": 36,
-        "insight": "Median run length — Completed: 18.4 months, Still running: 12.1 months. Running projects are measured to today.",
+        "insight": "Median run length in months. Running projects are measured to today, so their figure is a floor.",
         "unit": "months"
       }
     },
@@ -1644,31 +1653,31 @@
           0,
           2,
           1,
-          3,
+          5,
           2,
+          9,
+          10,
+          6,
           8,
-          7,
           6,
           7,
-          3,
-          5,
-          7,
-          8,
-          2,
-          2,
-          5,
+          9,
           10,
-          5,
-          5,
-          5,
+          4,
+          4,
           6,
           10,
-          11,
-          13,
-          5
+          6,
+          5,
+          5,
+          8,
+          10,
+          16,
+          16,
+          11
         ],
-        "n": 139,
-        "insight": "Busiest quarter was 2026Q1 with 13 repositories."
+        "n": 177,
+        "insight": "Busiest quarter was 2025Q4 with 16 repositories."
       },
       "cumulative": {
         "labels": [
@@ -1708,31 +1717,547 @@
           1,
           3,
           4,
-          7,
           9,
-          17,
-          24,
+          11,
+          20,
           30,
-          37,
-          40,
-          45,
-          52,
-          60,
-          62,
-          64,
-          69,
-          79,
+          36,
+          44,
+          50,
+          57,
+          66,
+          76,
+          80,
           84,
-          89,
-          94,
+          90,
           100,
-          110,
-          121,
+          106,
+          111,
+          116,
+          124,
           134,
-          139
+          150,
+          166,
+          177
         ],
-        "n": 139,
-        "insight": "Grew from 1 to 139 public repositories between 2019Q3 and 2026Q2. 1 repository has no creation date on file."
+        "n": 177,
+        "insight": "Grew from 1 to 177 repositories between 2019Q3 and 2026Q2. 1 repository has no creation date on file."
+      },
+      "by_type": {
+        "labels": [
+          "Package",
+          "Analysis",
+          "Automation",
+          "Workshop",
+          "App",
+          "Template",
+          "Documentation"
+        ],
+        "values": [
+          71,
+          69,
+          13,
+          10,
+          7,
+          5,
+          3
+        ],
+        "n": 178,
+        "insight": "Package leads with 71 of 178 repositories (40%)."
+      },
+      "by_status": {
+        "labels": [
+          "Completed",
+          "In progress",
+          "Discontinued",
+          "Archived",
+          "Idle",
+          "Todo"
+        ],
+        "values": [
+          78,
+          43,
+          19,
+          19,
+          15,
+          4
+        ],
+        "n": 178,
+        "insight": "58 of 178 repositories (33%) are in progress or idle rather than closed out."
+      },
+      "visibility": {
+        "labels": [
+          "Public",
+          "Private"
+        ],
+        "values": [
+          140,
+          38
+        ],
+        "n": 178,
+        "insight": "140 of 178 repositories (79%) are public. Counts, dates, types and totals on this page cover all of them; anything that names a repository or a contributor covers the public ones only.",
+        "semantics": {
+          "Public": "brand",
+          "Private": "neutral"
+        }
+      },
+      "contributor_concentration": {
+        "labels": [
+          "0",
+          "0.6",
+          "1.1",
+          "1.7",
+          "2.2",
+          "2.8",
+          "3.4",
+          "3.9",
+          "4.5",
+          "5.1",
+          "5.6",
+          "6.2",
+          "6.7",
+          "7.3",
+          "7.9",
+          "8.4",
+          "9.0",
+          "9.6",
+          "10.1",
+          "10.7",
+          "11.2",
+          "11.8",
+          "12.4",
+          "12.9",
+          "13.5",
+          "14.0",
+          "14.6",
+          "15.2",
+          "15.7",
+          "16.3",
+          "16.9",
+          "17.4",
+          "18.0",
+          "18.5",
+          "19.1",
+          "19.7",
+          "20.2",
+          "20.8",
+          "21.3",
+          "21.9",
+          "22.5",
+          "23.0",
+          "23.6",
+          "24.2",
+          "24.7",
+          "25.3",
+          "25.8",
+          "26.4",
+          "27.0",
+          "27.5",
+          "28.1",
+          "28.7",
+          "29.2",
+          "29.8",
+          "30.3",
+          "30.9",
+          "31.5",
+          "32.0",
+          "32.6",
+          "33.1",
+          "33.7",
+          "34.3",
+          "34.8",
+          "35.4",
+          "36.0",
+          "36.5",
+          "37.1",
+          "37.6",
+          "38.2",
+          "38.8",
+          "39.3",
+          "39.9",
+          "40.4",
+          "41.0",
+          "41.6",
+          "42.1",
+          "42.7",
+          "43.3",
+          "43.8",
+          "44.4",
+          "44.9",
+          "45.5",
+          "46.1",
+          "46.6",
+          "47.2",
+          "47.8",
+          "48.3",
+          "48.9",
+          "49.4",
+          "50.0",
+          "50.6",
+          "51.1",
+          "51.7",
+          "52.2",
+          "52.8",
+          "53.4",
+          "53.9",
+          "54.5",
+          "55.1",
+          "55.6",
+          "56.2",
+          "56.7",
+          "57.3",
+          "57.9",
+          "58.4",
+          "59.0",
+          "59.6",
+          "60.1",
+          "60.7",
+          "61.2",
+          "61.8",
+          "62.4",
+          "62.9",
+          "63.5",
+          "64.0",
+          "64.6",
+          "65.2",
+          "65.7",
+          "66.3",
+          "66.9",
+          "67.4",
+          "68.0",
+          "68.5",
+          "69.1",
+          "69.7",
+          "70.2",
+          "70.8",
+          "71.3",
+          "71.9",
+          "72.5",
+          "73.0",
+          "73.6",
+          "74.2",
+          "74.7",
+          "75.3",
+          "75.8",
+          "76.4",
+          "77.0",
+          "77.5",
+          "78.1",
+          "78.7",
+          "79.2",
+          "79.8",
+          "80.3",
+          "80.9",
+          "81.5",
+          "82.0",
+          "82.6",
+          "83.1",
+          "83.7",
+          "84.3",
+          "84.8",
+          "85.4",
+          "86.0",
+          "86.5",
+          "87.1",
+          "87.6",
+          "88.2",
+          "88.8",
+          "89.3",
+          "89.9",
+          "90.4",
+          "91.0",
+          "91.6",
+          "92.1",
+          "92.7",
+          "93.3",
+          "93.8",
+          "94.4",
+          "94.9",
+          "95.5",
+          "96.1",
+          "96.6",
+          "97.2",
+          "97.8",
+          "98.3",
+          "98.9",
+          "99.4",
+          "100.0"
+        ],
+        "values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.4,
+          0.4,
+          0.4,
+          0.4,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.6,
+          0.6,
+          0.6,
+          0.6,
+          0.7,
+          0.7,
+          0.7,
+          0.8,
+          0.8,
+          0.8,
+          0.9,
+          0.9,
+          0.9,
+          1,
+          1,
+          1.1,
+          1.1,
+          1.1,
+          1.2,
+          1.2,
+          1.3,
+          1.3,
+          1.3,
+          1.4,
+          1.4,
+          1.5,
+          1.5,
+          1.6,
+          1.6,
+          1.7,
+          1.7,
+          1.8,
+          1.8,
+          1.9,
+          1.9,
+          2,
+          2,
+          2.1,
+          2.2,
+          2.2,
+          2.3,
+          2.4,
+          2.4,
+          2.5,
+          2.6,
+          2.6,
+          2.7,
+          2.8,
+          2.8,
+          2.9,
+          3,
+          3.1,
+          3.1,
+          3.2,
+          3.3,
+          3.4,
+          3.5,
+          3.5,
+          3.6,
+          3.7,
+          3.8,
+          3.9,
+          4,
+          4.1,
+          4.2,
+          4.3,
+          4.4,
+          4.5,
+          4.6,
+          4.7,
+          4.8,
+          4.9,
+          5,
+          5.1,
+          5.3,
+          5.4,
+          5.5,
+          5.6,
+          5.8,
+          5.9,
+          6,
+          6.2,
+          6.3,
+          6.5,
+          6.6,
+          6.8,
+          6.9,
+          7.1,
+          7.2,
+          7.4,
+          7.6,
+          7.7,
+          7.9,
+          8.1,
+          8.3,
+          8.6,
+          8.8,
+          9,
+          9.2,
+          9.5,
+          9.7,
+          10,
+          10.3,
+          10.6,
+          10.8,
+          11.1,
+          11.4,
+          11.7,
+          12.1,
+          12.4,
+          12.8,
+          13.1,
+          13.5,
+          13.8,
+          14.2,
+          14.6,
+          14.9,
+          15.3,
+          15.7,
+          16.2,
+          16.6,
+          17.1,
+          17.7,
+          18.2,
+          18.8,
+          19.5,
+          20.2,
+          20.9,
+          21.8,
+          22.7,
+          23.6,
+          24.5,
+          25.5,
+          26.6,
+          27.7,
+          28.8,
+          30,
+          31.3,
+          32.7,
+          34.1,
+          35.6,
+          37,
+          38.9,
+          42.5,
+          55.8,
+          100
+        ],
+        "n": 178,
+        "insight": "The busiest 10% of repositories hold 78% of all commits (Gini 0.85).",
+        "gini": 0.85,
+        "unit": "% of commits"
+      },
+      "ranked": {
+        "rows": [
+          {
+            "name": "ersilia",
+            "stars": 306,
+            "forks": 177,
+            "contributors": 92,
+            "commits": 2974
+          },
+          {
+            "name": "eos",
+            "stars": 92,
+            "forks": 190,
+            "contributors": 40,
+            "commits": 9834
+          },
+          {
+            "name": "zaira-chem-v1",
+            "stars": 45,
+            "forks": 16,
+            "contributors": 5,
+            "commits": 212
+          },
+          {
+            "name": "chempfn",
+            "stars": 35,
+            "forks": 1,
+            "contributors": 3,
+            "commits": 74
+          },
+          {
+            "name": "chemxor",
+            "stars": 13,
+            "forks": 2,
+            "contributors": 3,
+            "commits": 195
+          },
+          {
+            "name": "event-fund-ai-drug-discovery",
+            "stars": 10,
+            "forks": 2,
+            "contributors": 4,
+            "commits": 97
+          },
+          {
+            "name": "outreachy-contributions",
+            "stars": 9,
+            "forks": 27,
+            "contributors": 1,
+            "commits": 4
+          },
+          {
+            "name": "smiles-to-3d",
+            "stars": 8,
+            "forks": 1,
+            "contributors": 2,
+            "commits": 17
+          },
+          {
+            "name": "lazy-qsar",
+            "stars": 7,
+            "forks": 4,
+            "contributors": 5,
+            "commits": 332
+          },
+          {
+            "name": "compound-embedding",
+            "stars": 6,
+            "forks": 1,
+            "contributors": 3,
+            "commits": 93
+          },
+          {
+            "name": "ersilia-pack",
+            "stars": 6,
+            "forks": 7,
+            "contributors": 11,
+            "commits": 289
+          },
+          {
+            "name": "stylia",
+            "stars": 5,
+            "forks": 1,
+            "contributors": 5,
+            "commits": 61
+          }
+        ],
+        "n": 12,
+        "insight": "The top 3 account for 67% of all stars. Public repositories only — ranked by stars."
       },
       "top_by_stars": {
         "labels": [
@@ -1795,8 +2320,7 @@
           2,
           2
         ],
-        "n": 12,
-        "insight": "49 of 140 public repositories (35%) have ever been forked."
+        "n": 12
       },
       "most_collaborative": {
         "labels": [
@@ -1827,8 +2351,7 @@
           6,
           6
         ],
-        "n": 12,
-        "insight": "43 of 140 public repositories (31%) have a single listed contributor."
+        "n": 12
       },
       "top_contributors": {
         "labels": [
@@ -1843,10 +2366,7 @@
           "leoank",
           "Malikbadmus",
           "carcablop",
-          "GrantBirki",
-          "marcostorrework",
-          "dzumii",
-          "OlawumiSalaam"
+          "GrantBirki"
         ],
         "values": [
           112,
@@ -1860,2486 +2380,1137 @@
           5,
           4,
           3,
-          3,
-          3,
-          3,
           3
         ],
         "n": 432,
         "distinct": 111,
         "insight": "111 distinct contributors across 140 public repositories. The top 3 account for 51% of all repository contributions."
       },
-      "contributor_concentration": {
-        "labels": [
-          "0",
-          "0.7",
-          "1.4",
-          "2.1",
-          "2.9",
-          "3.6",
-          "4.3",
-          "5.0",
-          "5.7",
-          "6.4",
-          "7.1",
-          "7.9",
-          "8.6",
-          "9.3",
-          "10.0",
-          "10.7",
-          "11.4",
-          "12.1",
-          "12.9",
-          "13.6",
-          "14.3",
-          "15.0",
-          "15.7",
-          "16.4",
-          "17.1",
-          "17.9",
-          "18.6",
-          "19.3",
-          "20.0",
-          "20.7",
-          "21.4",
-          "22.1",
-          "22.9",
-          "23.6",
-          "24.3",
-          "25.0",
-          "25.7",
-          "26.4",
-          "27.1",
-          "27.9",
-          "28.6",
-          "29.3",
-          "30.0",
-          "30.7",
-          "31.4",
-          "32.1",
-          "32.9",
-          "33.6",
-          "34.3",
-          "35.0",
-          "35.7",
-          "36.4",
-          "37.1",
-          "37.9",
-          "38.6",
-          "39.3",
-          "40.0",
-          "40.7",
-          "41.4",
-          "42.1",
-          "42.9",
-          "43.6",
-          "44.3",
-          "45.0",
-          "45.7",
-          "46.4",
-          "47.1",
-          "47.9",
-          "48.6",
-          "49.3",
-          "50.0",
-          "50.7",
-          "51.4",
-          "52.1",
-          "52.9",
-          "53.6",
-          "54.3",
-          "55.0",
-          "55.7",
-          "56.4",
-          "57.1",
-          "57.9",
-          "58.6",
-          "59.3",
-          "60.0",
-          "60.7",
-          "61.4",
-          "62.1",
-          "62.9",
-          "63.6",
-          "64.3",
-          "65.0",
-          "65.7",
-          "66.4",
-          "67.1",
-          "67.9",
-          "68.6",
-          "69.3",
-          "70.0",
-          "70.7",
-          "71.4",
-          "72.1",
-          "72.9",
-          "73.6",
-          "74.3",
-          "75.0",
-          "75.7",
-          "76.4",
-          "77.1",
-          "77.9",
-          "78.6",
-          "79.3",
-          "80.0",
-          "80.7",
-          "81.4",
-          "82.1",
-          "82.9",
-          "83.6",
-          "84.3",
-          "85.0",
-          "85.7",
-          "86.4",
-          "87.1",
-          "87.9",
-          "88.6",
-          "89.3",
-          "90.0",
-          "90.7",
-          "91.4",
-          "92.1",
-          "92.9",
-          "93.6",
-          "94.3",
-          "95.0",
-          "95.7",
-          "96.4",
-          "97.1",
-          "97.9",
-          "98.6",
-          "99.3",
-          "100.0"
-        ],
-        "values": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2,
-          0.2,
-          0.2,
-          0.2,
-          0.3,
-          0.3,
-          0.3,
-          0.3,
-          0.4,
-          0.4,
-          0.4,
-          0.4,
-          0.5,
-          0.5,
-          0.5,
-          0.6,
-          0.6,
-          0.6,
-          0.7,
-          0.7,
-          0.8,
-          0.8,
-          0.8,
-          0.9,
-          0.9,
-          0.9,
-          1,
-          1,
-          1.1,
-          1.1,
-          1.2,
-          1.2,
-          1.3,
-          1.3,
-          1.4,
-          1.4,
-          1.5,
-          1.5,
-          1.6,
-          1.6,
-          1.7,
-          1.8,
-          1.8,
-          1.9,
-          2,
-          2.1,
-          2.1,
-          2.2,
-          2.3,
-          2.4,
-          2.5,
-          2.5,
-          2.6,
-          2.7,
-          2.8,
-          2.9,
-          3,
-          3.1,
-          3.2,
-          3.3,
-          3.4,
-          3.5,
-          3.6,
-          3.7,
-          3.8,
-          3.9,
-          4,
-          4.1,
-          4.2,
-          4.3,
-          4.5,
-          4.6,
-          4.7,
-          4.9,
-          5,
-          5.2,
-          5.3,
-          5.5,
-          5.6,
-          5.8,
-          6,
-          6.2,
-          6.3,
-          6.5,
-          6.8,
-          7,
-          7.2,
-          7.5,
-          7.7,
-          8,
-          8.3,
-          8.6,
-          8.9,
-          9.2,
-          9.6,
-          9.9,
-          10.2,
-          10.6,
-          11,
-          11.4,
-          11.8,
-          12.1,
-          12.5,
-          12.9,
-          13.3,
-          13.8,
-          14.2,
-          14.6,
-          15.1,
-          15.7,
-          16.3,
-          17,
-          17.8,
-          18.6,
-          19.5,
-          20.4,
-          21.5,
-          22.5,
-          23.7,
-          24.8,
-          26.1,
-          27.5,
-          29.1,
-          30.6,
-          32.3,
-          34.2,
-          38.1,
-          52.5,
-          100
-        ],
-        "n": 140,
-        "insight": "The busiest 10% of repositories hold 81% of all commits (Gini 0.86).",
-        "gini": 0.86,
-        "unit": "% of commits"
-      },
-      "by_type": {
-        "labels": [
-          "Package",
-          "Analysis",
-          "Workshop",
-          "Automation",
-          "App",
-          "Template",
-          "Documentation"
-        ],
-        "values": [
-          64,
-          44,
-          10,
-          10,
-          5,
-          4,
-          3
-        ],
-        "n": 140,
-        "insight": "Package leads with 64 of 140 public repositories (46%)."
-      },
-      "by_status": {
-        "labels": [
-          "Completed",
-          "In progress",
-          "Discontinued",
-          "Archived",
-          "Idle",
-          "Todo"
-        ],
-        "values": [
-          62,
-          30,
-          17,
-          17,
-          10,
-          4
-        ],
-        "n": 140,
-        "insight": "40 of 140 public repositories (29%) are in progress or idle rather than closed out."
-      },
       "scatter": {
-        "points": [
-          [
-            0,
-            0,
-            1,
-            "eos-python-package"
-          ],
-          [
-            4,
-            0,
-            3,
-            "ersilia-assistant"
-          ],
-          [
-            2,
-            0,
-            2,
-            "bioassay-db"
-          ],
-          [
-            0,
-            0,
-            1,
-            "multitask-classifier-qsar"
-          ],
-          [
-            1,
-            1,
-            4,
-            "ersilia-app"
-          ],
-          [
-            0,
-            0,
-            1,
-            "hiv-covid-cidrz"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ersilia-api"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ready-to-screen-enamine-real"
-          ],
-          [
-            0,
-            0,
-            2,
-            "osm-series4-predictive-model"
-          ],
-          [
-            1,
-            0,
-            2,
-            "sars-cov-2-chemspace"
-          ],
-          [
-            0,
-            0,
-            1,
-            "impm-schisto-signature-reversal"
-          ],
-          [
-            10,
-            2,
-            4,
-            "event-fund-ai-drug-discovery"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ersilia-to-cdd"
-          ],
-          [
-            45,
-            16,
-            5,
-            "zaira-chem-v1"
-          ],
-          [
-            7,
-            4,
-            5,
-            "lazy-qsar"
-          ],
-          [
-            4,
-            1,
-            3,
-            "pharmacogx-embeddings"
-          ],
-          [
-            2,
-            0,
-            4,
-            "eosframes"
-          ],
-          [
-            1,
-            1,
-            1,
-            "chemical-library-exploration"
-          ],
-          [
-            1,
-            0,
-            1,
-            "chemical-library-gifs"
-          ],
-          [
-            1,
-            1,
-            5,
-            "ersilia-book"
-          ],
-          [
-            1,
-            1,
-            3,
-            "ai2050-dd-workshop"
-          ],
-          [
-            1,
-            0,
-            1,
-            "tmap-chemistry"
-          ],
-          [
-            0,
-            3,
-            4,
-            "ersilia-client"
-          ],
-          [
-            1,
-            0,
-            2,
-            "ersilia-figures"
-          ],
-          [
-            3,
-            1,
-            3,
-            "ai2050-h3d-symposium-workshop"
-          ],
-          [
-            1,
-            0,
-            2,
-            "auto-tabnet"
-          ],
-          [
-            2,
-            0,
-            2,
-            "cidrz-e2e-linkage"
-          ],
-          [
-            1,
-            0,
-            2,
-            "coadd-binary-tasks"
-          ],
-          [
-            3,
-            0,
-            3,
-            "h3d-screening-cascade-app"
-          ],
-          [
-            0,
-            0,
-            2,
-            "enamine-ecfp"
-          ],
-          [
-            0,
-            0,
-            7,
-            "ersilia-model-request-app"
-          ],
-          [
-            2,
-            0,
-            6,
-            "ersilia-skills"
-          ],
-          [
-            92,
-            190,
-            40,
-            "eos"
-          ],
-          [
-            0,
-            0,
-            6,
-            "ersilia-model-hub-maintained-inputs"
-          ],
-          [
-            1,
-            1,
-            2,
-            "osm-series4-candidates-2"
-          ],
-          [
-            1,
-            1,
-            1,
-            "open-data-cleaning"
-          ],
-          [
-            1,
-            1,
-            1,
-            "osm-series4-synthesis-round-1"
-          ],
-          [
-            2,
-            1,
-            2,
-            "h3d-screening-cascade-code"
-          ],
-          [
-            0,
-            0,
-            2,
-            "anti-hypertension-cedd"
-          ],
-          [
-            1,
-            0,
-            2,
-            "easylinkage"
-          ],
-          [
-            3,
-            2,
-            7,
-            "isaura"
-          ],
-          [
-            1,
-            0,
-            2,
-            "chembl-antimicrobial-tasks"
-          ],
-          [
-            0,
-            0,
-            1,
-            "ondisk-xy"
-          ],
-          [
-            5,
-            0,
-            5,
-            "olinda"
-          ],
-          [
-            0,
-            0,
-            3,
-            "eos-analysis-template"
-          ],
-          [
-            0,
-            0,
-            2,
-            "eos-lite-chem"
-          ],
-          [
-            0,
-            0,
-            2,
-            "molbertfeat"
-          ],
-          [
-            0,
-            0,
-            4,
-            "eosvc"
-          ],
-          [
-            0,
-            0,
-            3,
-            "pubchem-antimicrobial-tasks"
-          ],
-          [
-            0,
-            0,
-            2,
-            "mtb-target-prioritization"
-          ],
-          [
-            0,
-            2,
-            3,
-            "eos-demo"
-          ],
-          [
-            0,
-            0,
-            1,
-            "gradi-target-prioritization"
-          ],
-          [
-            2,
-            1,
-            3,
-            "ai2050-h3d-inhouse-workshop-prep"
-          ],
-          [
-            0,
-            0,
-            1,
-            "osm-series4-synthesis-round-2"
-          ],
-          [
-            1,
-            2,
-            1,
-            "groverfeat"
-          ],
-          [
-            1,
-            2,
-            4,
-            "xai4chem"
-          ],
-          [
-            4,
-            1,
-            4,
-            "chembl-binary-tasks"
-          ],
-          [
-            5,
-            1,
-            5,
-            "stylia"
-          ],
-          [
-            0,
-            0,
-            2,
-            "evc-dev-analysis"
-          ],
-          [
-            0,
-            0,
-            1,
-            "search-engine"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ersilia-metadata-annotation"
-          ],
-          [
-            0,
-            0,
-            16,
-            "reinvent4"
-          ],
-          [
-            3,
-            0,
-            4,
-            "model-inference-pipeline"
-          ],
-          [
-            0,
-            0,
-            1,
-            "champs"
-          ],
-          [
-            0,
-            0,
-            1,
-            "esther-workshop"
-          ],
-          [
-            0,
-            2,
-            9,
-            "ersilia-maintenance"
-          ],
-          [
-            0,
-            0,
-            3,
-            "bentoml-ersilia"
-          ],
-          [
-            0,
-            1,
-            2,
-            "bentolite"
-          ],
-          [
-            1,
-            3,
-            2,
-            "ersilia.io"
-          ],
-          [
-            2,
-            1,
-            1,
-            "chem-sampler"
-          ],
-          [
-            1,
-            1,
-            1,
-            "zeroshot-xgboost"
-          ],
-          [
-            1,
-            0,
-            2,
-            "lazy-chemvis"
-          ],
-          [
-            3,
-            0,
-            2,
-            "osm-series4-candidates"
-          ],
-          [
-            2,
-            1,
-            2,
-            "ersilia-intro-workshop"
-          ],
-          [
-            4,
-            0,
-            3,
-            "griddify"
-          ],
-          [
-            1,
-            0,
-            2,
-            "nn-search"
-          ],
-          [
-            0,
-            0,
-            1,
-            "ai2050-compute-fund"
-          ],
-          [
-            0,
-            0,
-            1,
-            "pharmacogx-app"
-          ],
-          [
-            2,
-            0,
-            1,
-            "digests"
-          ],
-          [
-            1,
-            0,
-            2,
-            "vsflow-ligand-based-3d-screening"
-          ],
-          [
-            0,
-            0,
-            1,
-            "illness-metaphors"
-          ],
-          [
-            0,
-            0,
-            7,
-            "d4g-cohort-2024-hackathon-group3"
-          ],
-          [
-            1,
-            0,
-            2,
-            "ai2050-mtb-penetration"
-          ],
-          [
-            0,
-            0,
-            1,
-            "abaumannii-enamine-real-screening"
-          ],
-          [
-            2,
-            1,
-            4,
-            "antimicrobial-ml-tasks"
-          ],
-          [
-            0,
-            0,
-            2,
-            "compound-embedding-lite"
-          ],
-          [
-            1,
-            0,
-            2,
-            "mock-website"
-          ],
-          [
-            35,
-            1,
-            3,
-            "chempfn"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ersilia-apptainer"
-          ],
-          [
-            1,
-            1,
-            2,
-            "fps-grid"
-          ],
-          [
-            1,
-            0,
-            1,
-            "eosquality"
-          ],
-          [
-            1,
-            1,
-            4,
-            "zairachem-docker"
-          ],
-          [
-            306,
-            177,
-            92,
-            "ersilia"
-          ],
-          [
-            0,
-            1,
-            1,
-            "ffwd-ersilia-game"
-          ],
-          [
-            0,
-            0,
-            5,
-            "ersilia-model-workflows"
-          ],
-          [
-            3,
-            0,
-            1,
-            "chembl-tasks-for-finetuning"
-          ],
-          [
-            9,
-            27,
-            1,
-            "outreachy-contributions"
-          ],
-          [
-            0,
-            2,
-            5,
-            "model-validations"
-          ],
-          [
-            0,
-            0,
-            1,
-            "reinvent-shape-similarity"
-          ],
-          [
-            2,
-            1,
-            5,
-            "ersilia-self-service"
-          ],
-          [
-            1,
-            0,
-            3,
-            "pharmacogx-arsa"
-          ],
-          [
-            0,
-            0,
-            2,
-            "osm-series4-manuscript"
-          ],
-          [
-            0,
-            0,
-            1,
-            "docking-gnina"
-          ],
-          [
-            6,
-            1,
-            3,
-            "compound-embedding"
-          ],
-          [
-            0,
-            0,
-            2,
-            "anpdb-annotation"
-          ],
-          [
-            0,
-            0,
-            1,
-            "3d-analogues"
-          ],
-          [
-            0,
-            0,
-            2,
-            "gardp-kpneumoniae-enamine-real-screening"
-          ],
-          [
-            0,
-            0,
-            1,
-            "keras-tuner-chem"
-          ],
-          [
-            1,
-            1,
-            2,
-            "pabb-docking"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ersilia-tabpfn-client"
-          ],
-          [
-            0,
-            0,
-            2,
-            "chembl-antimicrobial-models"
-          ],
-          [
-            2,
-            1,
-            1,
-            "zaira-chem-tdc"
-          ],
-          [
-            3,
-            1,
-            4,
-            "osa-murd"
-          ],
-          [
-            0,
-            0,
-            2,
-            "dvc-gd-github-test"
-          ],
-          [
-            1,
-            0,
-            2,
-            "few-shot-bioassays"
-          ],
-          [
-            0,
-            0,
-            1,
-            "zeroshot-preprocessing"
-          ],
-          [
-            1,
-            0,
-            1,
-            "ersilia-ml-benchmark"
-          ],
-          [
-            6,
-            7,
-            11,
-            "ersilia-pack"
-          ],
-          [
-            0,
-            0,
-            2,
-            "preemi"
-          ],
-          [
-            0,
-            0,
-            1,
-            "zeroshot-linear"
-          ],
-          [
-            0,
-            0,
-            1,
-            "estherlinkage"
-          ],
-          [
-            1,
-            0,
-            1,
-            "gcadda4tb-enamine-real-screening"
-          ],
-          [
-            13,
-            2,
-            3,
-            "chemxor"
-          ],
-          [
-            1,
-            1,
-            3,
-            "h3d-screening-cascade-models"
-          ],
-          [
-            0,
-            0,
-            9,
-            "tune-tables-light"
-          ],
-          [
-            1,
-            0,
-            3,
-            "chem-sampler-legacy"
-          ],
-          [
-            4,
-            5,
-            15,
-            "eos-template"
-          ],
-          [
-            0,
-            0,
-            1,
-            "eosdev"
-          ],
-          [
-            4,
-            1,
-            1,
-            "python-101"
-          ],
-          [
-            0,
-            0,
-            2,
-            "ersilia-hub"
-          ],
-          [
-            3,
-            0,
-            1,
-            "zaira-chem-tdc-benchmark"
-          ],
-          [
-            1,
-            1,
-            1,
-            "osm-pfatp4-structure"
-          ],
-          [
-            0,
-            0,
-            1,
-            "eosbench"
-          ],
-          [
-            1,
-            1,
-            2,
-            "autocat-chem"
-          ],
-          [
-            3,
-            0,
-            2,
-            "mtb-targeted-protein-degradation"
-          ],
-          [
-            1,
-            0,
-            3,
-            "ersilia-model-hub-paper"
-          ],
-          [
-            0,
-            0,
-            3,
-            "chembl-ml-tools"
-          ],
-          [
-            0,
-            0,
-            1,
-            "eu-openscreen-antimicrobial-tasks"
-          ],
-          [
-            8,
-            1,
-            2,
-            "smiles-to-3d"
-          ],
-          [
-            0,
-            0,
-            2,
-            "olinda-tdc"
-          ]
-        ],
-        "n": 140,
-        "insight": "140 of 140 public repositories have any stars, forks or listed contributors; ersilia leads on stars."
-      },
-      "health": {
         "points": [
           {
             "name": "eos-python-package",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 12,
-            "open_issues": 0,
+            "commits": 12,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-assistant",
             "stars": 4,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 65,
-            "open_issues": 0,
+            "commits": 65,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "bioassay-db",
             "stars": 2,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "multitask-classifier-qsar",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 3,
-            "open_issues": 0,
+            "commits": 3,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-app",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 39,
-            "open_issues": 0,
+            "commits": 39,
+            "issues": 0,
             "contributors": 4
           },
           {
             "name": "hiv-covid-cidrz",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 14,
-            "open_issues": 0,
+            "commits": 14,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-api",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 12,
-            "open_issues": 0,
+            "commits": 12,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ready-to-screen-enamine-real",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 20,
-            "open_issues": 0,
+            "commits": 20,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "osm-series4-predictive-model",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 23,
-            "open_issues": 0,
+            "commits": 23,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "sars-cov-2-chemspace",
             "stars": 1,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 80,
-            "open_issues": 0,
+            "commits": 80,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "impm-schisto-signature-reversal",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 6,
-            "open_issues": 0,
+            "commits": 6,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "event-fund-ai-drug-discovery",
             "stars": 10,
             "forks": 2,
-            "subscribers": 1,
-            "total_commits": 97,
-            "open_issues": 0,
+            "commits": 97,
+            "issues": 0,
             "contributors": 4
           },
           {
             "name": "ersilia-to-cdd",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 2,
-            "open_issues": 0,
+            "commits": 2,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "zaira-chem-v1",
             "stars": 45,
             "forks": 16,
-            "subscribers": 5,
-            "total_commits": 212,
-            "open_issues": 0,
+            "commits": 212,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "lazy-qsar",
             "stars": 7,
             "forks": 4,
-            "subscribers": 1,
-            "total_commits": 332,
-            "open_issues": 0,
+            "commits": 332,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "pharmacogx-embeddings",
             "stars": 4,
             "forks": 1,
-            "subscribers": 3,
-            "total_commits": 190,
-            "open_issues": 0,
+            "commits": 190,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "eosframes",
             "stars": 2,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 146,
-            "open_issues": 2,
+            "commits": 146,
+            "issues": 2,
             "contributors": 4
           },
           {
             "name": "chemical-library-exploration",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 5,
-            "open_issues": 0,
+            "commits": 5,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "chemical-library-gifs",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 13,
-            "open_issues": 0,
+            "commits": 13,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-book",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 52,
-            "open_issues": 0,
+            "commits": 52,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "ai2050-dd-workshop",
             "stars": 1,
             "forks": 1,
-            "subscribers": 2,
-            "total_commits": 115,
-            "open_issues": 0,
+            "commits": 115,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "tmap-chemistry",
             "stars": 1,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 5,
-            "open_issues": 0,
+            "commits": 5,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-client",
             "stars": 0,
             "forks": 3,
-            "subscribers": 1,
-            "total_commits": 19,
-            "open_issues": 0,
+            "commits": 19,
+            "issues": 0,
             "contributors": 4
           },
           {
             "name": "ersilia-figures",
             "stars": 1,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 23,
-            "open_issues": 0,
+            "commits": 23,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ai2050-h3d-symposium-workshop",
             "stars": 3,
             "forks": 1,
-            "subscribers": 3,
-            "total_commits": 31,
-            "open_issues": 0,
+            "commits": 31,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "auto-tabnet",
             "stars": 1,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 28,
-            "open_issues": 0,
+            "commits": 28,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "cidrz-e2e-linkage",
             "stars": 2,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 81,
-            "open_issues": 0,
+            "commits": 81,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "coadd-binary-tasks",
             "stars": 1,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 17,
-            "open_issues": 0,
+            "commits": 17,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "h3d-screening-cascade-app",
             "stars": 3,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 19,
-            "open_issues": 0,
+            "commits": 19,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "enamine-ecfp",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 4,
-            "open_issues": 0,
+            "commits": 4,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ersilia-model-request-app",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 69,
-            "open_issues": 0,
+            "commits": 69,
+            "issues": 0,
             "contributors": 7
           },
           {
             "name": "ersilia-skills",
             "stars": 2,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 86,
-            "open_issues": 2,
+            "commits": 86,
+            "issues": 2,
             "contributors": 6
           },
           {
             "name": "eos",
             "stars": 92,
             "forks": 190,
-            "subscribers": 230,
-            "total_commits": 9834,
-            "open_issues": 54,
+            "commits": 9834,
+            "issues": 54,
             "contributors": 40
           },
           {
             "name": "ersilia-model-hub-maintained-inputs",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 49,
-            "open_issues": 0,
+            "commits": 49,
+            "issues": 0,
             "contributors": 6
           },
           {
             "name": "osm-series4-candidates-2",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 66,
-            "open_issues": 0,
+            "commits": 66,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "open-data-cleaning",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "osm-series4-synthesis-round-1",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 24,
-            "open_issues": 0,
+            "commits": 24,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "h3d-screening-cascade-code",
             "stars": 2,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "anti-hypertension-cedd",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 19,
-            "open_issues": 0,
+            "commits": 19,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "easylinkage",
             "stars": 1,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 3,
-            "open_issues": 0,
+            "commits": 3,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "isaura",
             "stars": 3,
             "forks": 2,
-            "subscribers": 3,
-            "total_commits": 273,
-            "open_issues": 0,
+            "commits": 273,
+            "issues": 0,
             "contributors": 7
           },
           {
             "name": "chembl-antimicrobial-tasks",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 235,
-            "open_issues": 0,
+            "commits": 235,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ondisk-xy",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "olinda",
             "stars": 5,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 152,
-            "open_issues": 0,
+            "commits": 152,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "eos-analysis-template",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 19,
-            "open_issues": 0,
+            "commits": 19,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "eos-lite-chem",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 30,
-            "open_issues": 0,
+            "commits": 30,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "molbertfeat",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 37,
-            "open_issues": 0,
+            "commits": 37,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "eosvc",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 35,
-            "open_issues": 1,
+            "commits": 35,
+            "issues": 1,
             "contributors": 4
           },
           {
             "name": "pubchem-antimicrobial-tasks",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 83,
-            "open_issues": 0,
+            "commits": 83,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "mtb-target-prioritization",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 16,
-            "open_issues": 0,
+            "commits": 16,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "eos-demo",
             "stars": 0,
             "forks": 2,
-            "subscribers": 1,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "gradi-target-prioritization",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 79,
-            "open_issues": 0,
+            "commits": 79,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ai2050-h3d-inhouse-workshop-prep",
             "stars": 2,
             "forks": 1,
-            "subscribers": 0,
-            "total_commits": 24,
-            "open_issues": 0,
+            "commits": 24,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "osm-series4-synthesis-round-2",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 15,
-            "open_issues": 0,
+            "commits": 15,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "groverfeat",
             "stars": 1,
             "forks": 2,
-            "subscribers": 1,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "xai4chem",
             "stars": 1,
             "forks": 2,
-            "subscribers": 3,
-            "total_commits": 84,
-            "open_issues": 0,
+            "commits": 84,
+            "issues": 0,
             "contributors": 4
           },
           {
             "name": "chembl-binary-tasks",
             "stars": 4,
             "forks": 1,
-            "subscribers": 2,
-            "total_commits": 21,
-            "open_issues": 3,
+            "commits": 21,
+            "issues": 3,
             "contributors": 4
           },
           {
             "name": "stylia",
             "stars": 5,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 61,
-            "open_issues": 0,
+            "commits": 61,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "evc-dev-analysis",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 5,
-            "open_issues": 0,
+            "commits": 5,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "search-engine",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 5,
-            "open_issues": 0,
+            "commits": 5,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-metadata-annotation",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 4,
-            "open_issues": 1,
+            "commits": 4,
+            "issues": 1,
             "contributors": 2
           },
           {
             "name": "reinvent4",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 324,
-            "open_issues": 0,
+            "commits": 324,
+            "issues": 0,
             "contributors": 16
           },
           {
             "name": "model-inference-pipeline",
             "stars": 3,
             "forks": 0,
-            "subscribers": 4,
-            "total_commits": 61,
-            "open_issues": 10,
+            "commits": 61,
+            "issues": 10,
             "contributors": 4
           },
           {
             "name": "champs",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 1,
-            "open_issues": 0,
+            "commits": 1,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "esther-workshop",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-maintenance",
             "stars": 0,
             "forks": 2,
-            "subscribers": 2,
-            "total_commits": 805,
-            "open_issues": 2,
+            "commits": 805,
+            "issues": 2,
             "contributors": 9
           },
           {
             "name": "bentoml-ersilia",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 17,
-            "open_issues": 0,
+            "commits": 17,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "bentolite",
             "stars": 0,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 18,
-            "open_issues": 0,
+            "commits": 18,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ersilia.io",
             "stars": 1,
             "forks": 3,
-            "subscribers": 1,
-            "total_commits": 90,
-            "open_issues": 0,
+            "commits": 90,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "chem-sampler",
             "stars": 2,
             "forks": 1,
-            "subscribers": 2,
-            "total_commits": 6,
-            "open_issues": 0,
+            "commits": 6,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "zeroshot-xgboost",
             "stars": 1,
             "forks": 1,
-            "subscribers": 0,
-            "total_commits": 46,
-            "open_issues": 0,
+            "commits": 46,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "lazy-chemvis",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 22,
-            "open_issues": 0,
+            "commits": 22,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "osm-series4-candidates",
             "stars": 3,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 65,
-            "open_issues": 0,
+            "commits": 65,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ersilia-intro-workshop",
             "stars": 2,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 30,
-            "open_issues": 0,
+            "commits": 30,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "griddify",
             "stars": 4,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 37,
-            "open_issues": 0,
+            "commits": 37,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "nn-search",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 23,
-            "open_issues": 0,
+            "commits": 23,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ai2050-compute-fund",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "pharmacogx-app",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "digests",
             "stars": 2,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 45,
-            "open_issues": 0,
+            "commits": 45,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "vsflow-ligand-based-3d-screening",
             "stars": 1,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 9,
-            "open_issues": 0,
+            "commits": 9,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "illness-metaphors",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 28,
-            "open_issues": 0,
+            "commits": 28,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "d4g-cohort-2024-hackathon-group3",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 40,
-            "open_issues": 0,
+            "commits": 40,
+            "issues": 0,
             "contributors": 7
           },
           {
             "name": "ai2050-mtb-penetration",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "abaumannii-enamine-real-screening",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 12,
-            "open_issues": 0,
+            "commits": 12,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "antimicrobial-ml-tasks",
             "stars": 2,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 31,
-            "open_issues": 0,
+            "commits": 31,
+            "issues": 0,
             "contributors": 4
           },
           {
             "name": "compound-embedding-lite",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 7,
-            "open_issues": 0,
+            "commits": 7,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "mock-website",
             "stars": 1,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 6,
-            "open_issues": 0,
+            "commits": 6,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "chempfn",
             "stars": 35,
             "forks": 1,
-            "subscribers": 2,
-            "total_commits": 74,
-            "open_issues": 0,
+            "commits": 74,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "ersilia-apptainer",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 15,
-            "open_issues": 0,
+            "commits": 15,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "fps-grid",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 4,
-            "open_issues": 0,
+            "commits": 4,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "eosquality",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 7,
-            "open_issues": 0,
+            "commits": 7,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "zairachem-docker",
             "stars": 1,
             "forks": 1,
-            "subscribers": 2,
-            "total_commits": 170,
-            "open_issues": 3,
+            "commits": 170,
+            "issues": 3,
             "contributors": 4
           },
           {
             "name": "ersilia",
             "stars": 306,
             "forks": 177,
-            "subscribers": 19,
-            "total_commits": 2974,
-            "open_issues": 8,
+            "commits": 2974,
+            "issues": 8,
             "contributors": 92
           },
           {
             "name": "ffwd-ersilia-game",
             "stars": 0,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 5,
-            "open_issues": 0,
+            "commits": 5,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-model-workflows",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 238,
-            "open_issues": 0,
+            "commits": 238,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "chembl-tasks-for-finetuning",
             "stars": 3,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "outreachy-contributions",
             "stars": 9,
             "forks": 27,
-            "subscribers": 2,
-            "total_commits": 4,
-            "open_issues": 0,
+            "commits": 4,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "model-validations",
             "stars": 0,
             "forks": 2,
-            "subscribers": 1,
-            "total_commits": 32,
-            "open_issues": 0,
+            "commits": 32,
+            "issues": 0,
             "contributors": 5
           },
           {
             "name": "reinvent-shape-similarity",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 1,
-            "open_issues": 0,
+            "commits": 1,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-self-service",
             "stars": 2,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 65,
-            "open_issues": 11,
+            "commits": 65,
+            "issues": 11,
             "contributors": 5
           },
           {
             "name": "pharmacogx-arsa",
             "stars": 1,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 32,
-            "open_issues": 0,
+            "commits": 32,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "osm-series4-manuscript",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 16,
-            "open_issues": 0,
+            "commits": 16,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "docking-gnina",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 4,
-            "open_issues": 0,
+            "commits": 4,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "compound-embedding",
             "stars": 6,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 93,
-            "open_issues": 0,
+            "commits": 93,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "anpdb-annotation",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 21,
-            "open_issues": 0,
+            "commits": 21,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "3d-analogues",
             "stars": 0,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 6,
-            "open_issues": 0,
+            "commits": 6,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "gardp-kpneumoniae-enamine-real-screening",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 20,
-            "open_issues": 0,
+            "commits": 20,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "keras-tuner-chem",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 2,
-            "open_issues": 0,
+            "commits": 2,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "pabb-docking",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 22,
-            "open_issues": 0,
+            "commits": 22,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ersilia-tabpfn-client",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 4,
-            "open_issues": 0,
+            "commits": 4,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "chembl-antimicrobial-models",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 136,
-            "open_issues": 0,
+            "commits": 136,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "zaira-chem-tdc",
             "stars": 2,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 3,
-            "open_issues": 0,
+            "commits": 3,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "osa-murd",
             "stars": 3,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 79,
-            "open_issues": 0,
+            "commits": 79,
+            "issues": 0,
             "contributors": 4
           },
           {
             "name": "dvc-gd-github-test",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 8,
-            "open_issues": 0,
+            "commits": 8,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "few-shot-bioassays",
             "stars": 1,
             "forks": 0,
-            "subscribers": 2,
-            "total_commits": 49,
-            "open_issues": 0,
+            "commits": 49,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "zeroshot-preprocessing",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 9,
-            "open_issues": 0,
+            "commits": 9,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-ml-benchmark",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 11,
-            "open_issues": 0,
+            "commits": 11,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-pack",
             "stars": 6,
             "forks": 7,
-            "subscribers": 3,
-            "total_commits": 289,
-            "open_issues": 3,
+            "commits": 289,
+            "issues": 3,
             "contributors": 11
           },
           {
             "name": "preemi",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 15,
-            "open_issues": 0,
+            "commits": 15,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "zeroshot-linear",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 6,
-            "open_issues": 0,
+            "commits": 6,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "estherlinkage",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 7,
-            "open_issues": 0,
+            "commits": 7,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "gcadda4tb-enamine-real-screening",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 7,
-            "open_issues": 0,
+            "commits": 7,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "chemxor",
             "stars": 13,
             "forks": 2,
-            "subscribers": 2,
-            "total_commits": 195,
-            "open_issues": 0,
+            "commits": 195,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "h3d-screening-cascade-models",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "tune-tables-light",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 403,
-            "open_issues": 0,
+            "commits": 403,
+            "issues": 0,
             "contributors": 9
           },
           {
             "name": "chem-sampler-legacy",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 75,
-            "open_issues": 0,
+            "commits": 75,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "eos-template",
             "stars": 4,
             "forks": 5,
-            "subscribers": 2,
-            "total_commits": 223,
-            "open_issues": 0,
+            "commits": 223,
+            "issues": 0,
             "contributors": 15
           },
           {
             "name": "eosdev",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 5,
-            "open_issues": 0,
+            "commits": 5,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "python-101",
             "stars": 4,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 17,
-            "open_issues": 0,
+            "commits": 17,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "ersilia-hub",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 78,
-            "open_issues": 1,
+            "commits": 78,
+            "issues": 1,
             "contributors": 2
           },
           {
             "name": "zaira-chem-tdc-benchmark",
             "stars": 3,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 10,
-            "open_issues": 0,
+            "commits": 10,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "osm-pfatp4-structure",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 16,
-            "open_issues": 0,
+            "commits": 16,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "eosbench",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 20,
-            "open_issues": 0,
+            "commits": 20,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "autocat-chem",
             "stars": 1,
             "forks": 1,
-            "subscribers": 1,
-            "total_commits": 9,
-            "open_issues": 0,
+            "commits": 9,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "mtb-targeted-protein-degradation",
             "stars": 3,
             "forks": 0,
-            "subscribers": 3,
-            "total_commits": 318,
-            "open_issues": 0,
+            "commits": 318,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "ersilia-model-hub-paper",
             "stars": 1,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 15,
-            "open_issues": 0,
+            "commits": 15,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "chembl-ml-tools",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 23,
-            "open_issues": 0,
+            "commits": 23,
+            "issues": 0,
             "contributors": 3
           },
           {
             "name": "eu-openscreen-antimicrobial-tasks",
             "stars": 0,
             "forks": 0,
-            "subscribers": 0,
-            "total_commits": 6,
-            "open_issues": 0,
+            "commits": 6,
+            "issues": 0,
             "contributors": 1
           },
           {
             "name": "smiles-to-3d",
             "stars": 8,
             "forks": 1,
-            "subscribers": 2,
-            "total_commits": 17,
-            "open_issues": 0,
+            "commits": 17,
+            "issues": 0,
             "contributors": 2
           },
           {
             "name": "olinda-tdc",
             "stars": 0,
             "forks": 0,
-            "subscribers": 1,
-            "total_commits": 7,
-            "open_issues": 0,
+            "commits": 7,
+            "issues": 0,
             "contributors": 2
           }
         ],
-        "pairs": [
-          {
-            "x": "stars",
-            "y": "forks",
-            "xLabel": "Stars",
-            "yLabel": "Forks"
-          },
-          {
-            "x": "stars",
-            "y": "subscribers",
-            "xLabel": "Stars",
-            "yLabel": "Watchers"
-          },
-          {
-            "x": "total_commits",
-            "y": "open_issues",
-            "xLabel": "Commits",
-            "yLabel": "Open issues"
-          },
-          {
-            "x": "stars",
-            "y": "total_commits",
-            "xLabel": "Stars",
-            "yLabel": "Commits"
-          }
-        ],
         "n": 140,
-        "insight": "9 repositories with 50+ commits have no stars — activity and visibility are not the same thing."
+        "insight": "9 public repositories with 50+ commits have no stars — activity and visibility are not the same thing. Both axes are logarithmic: a handful of repositories account for most of every metric."
       }
     },
     "community": {

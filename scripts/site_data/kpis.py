@@ -55,7 +55,7 @@ def _kpi(value, series=None, per_period=QUARTERS_PER_YEAR):
     return {"value": int(value), "series": series, "delta_12m": delta}
 
 
-def build(tables, repos_public, models):
+def build(tables, repos_public, models, repos_all=None):
     projects = tables.get("projects", pd.DataFrame())
     pubs = tables.get("publications", pd.DataFrame())
     community = tables.get("community", pd.DataFrame())
@@ -71,14 +71,20 @@ def build(tables, repos_public, models):
             for value in frame[column].dropna():
                 footprint.update(parse_multi(value))
 
+    # Counts and totals cover every repository — a count is not disclosure. Only
+    # figures that would name a repository are restricted to the public ones.
+    every_repo = repos_all if repos_all is not None else repos_public
+    has_repos = every_repo is not None and not every_repo.empty
+
     citations = int(to_num(col(pubs, "citations")).sum()) if not pubs.empty else 0
-    stars = int(to_num(col(repos_public, "stars")).sum()) if repos_public is not None and not repos_public.empty else 0
+    stars = int(to_num(col(every_repo, "stars")).sum()) if has_repos else 0
 
     out = {
         "community_members": _kpi(len(community), _cumulative_series(col(community, "start_date"))),
-        "repositories": _kpi(len(repos_public) if repos_public is not None else 0,
-                             _cumulative_series(col(repos_public, "creation_date")
-                                                if repos_public is not None else pd.Series(dtype=object))),
+        "repositories": _kpi(len(every_repo) if has_repos else 0,
+                             _cumulative_series(col(every_repo, "creation_date")
+                                                if has_repos else pd.Series(dtype=object))),
+        "repositories_public": _kpi(len(repos_public) if repos_public is not None else 0),
         # Yearly, not quarterly: publications only carry a year. One year back,
         # accordingly.
         "publications": _kpi(len(pubs), _yearly_cumulative(col(pubs, "year")), per_period=1),

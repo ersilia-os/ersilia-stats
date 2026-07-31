@@ -60,9 +60,9 @@ def build_all(data_dir, today=None):
         "meta": {
             "tables": sorted(tables),
             "models_available": bool(models is not None and not models.empty),
-            "private_repositories_excluded": private_excluded,
+            "private_repositories": private_excluded,
             "aggregates_only": True,
         },
-        "kpis": kpis_section.build(tables, repos_public, models),
+        "kpis": kpis_section.build(tables, repos_public, models, repos_all=table("repositories")),
         "sections": sections,
     }

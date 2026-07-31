@@ -32,8 +32,10 @@ Grants, donations, contacts, news and videos are never fetched.
   embed names) are dropped when snapshots are fetched (`scripts/fetch_airtable.py`), dropped again
   when they are read (`scripts/site_data/load.py`), and the export **aborts** if anything
   email-shaped reaches the output.
-- **Public repositories only.** The repository figures exclude private repositories — a private
-  repository's name is itself disclosure.
+- **A count is not disclosure, a name is.** Repository counts, dates, types and totals cover *all*
+  repositories including the private ones — excluding them made the totals quietly wrong. Anything
+  that names a repository or a contributor covers the public ones only. The public/private split is
+  published rather than hidden.
 - **The deploy re-checks the artifact** before publishing: no raw snapshot, no address, or the job
   fails.
 
@@ -51,8 +53,10 @@ Percentages are suppressed below n=10, where a share invites a conclusion the sa
 | `#/community` | Joiners, leavers and net change; tenure; cohort retention. Aggregates only |
 | `#/reach` | Where Ersilia works, and how that maps onto its Global South mission |
 | `#/outreach` | Events and blog activity |
-| `#/data` | Data quality — field completeness, registry inconsistencies |
 | `#/downloads` | Every aggregate as CSV, plus the full dataset as JSON |
+
+Field completeness and the other data-quality caveats live in the **Methods** dialog rather than in a
+view of their own — they are caveats about the numbers, so they belong beside the definitions.
 
 Each chart carries a **takeaway computed at build time** — so it cannot go stale — a methodology note
 behind the ⓘ, and a table view of the same numbers. Definitions and provenance live in the **Methods**
@@ -89,7 +93,7 @@ deploy. Weekly, on demand, and on pushes that touch the site or the scripts. It 
 
 ```
 site/
-  index.html          app shell: wordmark, nav, route outlet, Methods dialog, footer
+  index.html          app shell: fixed sidebar, route outlet, Methods dialog, footer
   config.js           declarative dashboard — views, charts, spans, methodology notes
   js/
     tokens.js         design tokens read from CSS at run time (no hex in JS)
@@ -117,17 +121,37 @@ sentence-case chrome, and progressive disclosure (caption → hover note → Met
 `site/assets/ersilia.css` is that standard verbatim; `site/styles.css` adds only what a dashboard
 needs on top.
 
-Chart colours are derived from the Ersilia brand hues and **validated** for colour-vision deficiency:
-worst adjacent pair ΔE 15.8 against a target of 8. The raw brand hues do not pass on their own (one
-sits outside the legible lightness band, another below the chroma floor), so the steps are snapped
-with the hue angles held. **The slot order in `site/styles.css` is what makes that hold — do not
-reorder it.** Two slots sit below 3:1 contrast on white; every chart using them ships direct value
-labels and a table view, which is the documented relief.
+**Each section owns a hue**, which marks its sidebar entry *and* colours its charts, so a page reads
+as itself:
 
-Two charts are deliberately *not* what you might expect. Publications-versus-citations is two stacked
-panels sharing one x axis rather than a dual-axis chart, because the scales are unrelated and
-overlaying them would invent a correlation. Two-category splits are single split bars, not two-slice
-pie charts.
+| Section | Hue | Section | Hue |
+|---|---|---|---|
+| Model Hub | periwinkle `#6d5de7` | Community | orchid `#af5cc7` |
+| Projects | turquoise `#22bbad` | Global reach | amber `#d19710` |
+| Publications | plum `#734080` | Outreach | cobalt `#1c7db0` |
+| Code | lime `#67bb55` | | |
+
+Those are the brand hues snapped into the legible OKLCH band and then **assigned to the nav order by
+optimisation** — in a sidebar the dots are adjacent, so neighbours have to be tellable apart. The
+obvious assignment put lime beside amber, which is ΔE 5.0 under deuteranopia. This order clears
+adjacent CVD ΔE 23.1 against a target of 8. **Re-run
+`dataviz/scripts/validate_palette.js` over the sequence if you reorder the nav or add a section.**
+
+Turquoise, lime and amber sit below 3:1 contrast on white; the light-ink style labels every value
+directly and every chart has a table view, which is the documented relief.
+
+**Chart form is deliberately varied.** An earlier version was 62% bar charts, 26 of them the
+identical horizontal bar, which is why it read as a wall of purple. The horizontal bar is now a
+lollipop (a dot and a hairline), three rankings on the Code page are one compact table, and ratios
+that do not need a chart are meter rows. Bars are down to about a tenth of the forms. Card width is
+derived from how many categories a metric has, not from editorial rank — a seven-category chart in a
+full-width card is seven bars adrift in whitespace.
+
+Three charts are deliberately *not* what you might expect. Publications-versus-citations is two
+stacked panels sharing one x axis rather than a dual-axis chart, because the scales are unrelated and
+overlaying them would invent a correlation. Repository popularity uses logarithmic axes, because a
+handful of repositories account for most of every metric and on linear axes the rest collapse into
+the corner. Two-category splits are single split bars, not two-slice pie charts.
 
 The stylesheet and scripts are linked same-origin files rather than inlined, which is a deliberate
 departure from the house standard's inline-everything rule: that rule exists so a page survives as a

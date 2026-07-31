@@ -36,6 +36,9 @@ const Router = (() => {
     disposeCharts();
     outlet.innerHTML = "";
     markNav(routes.has(path) ? path : "/");
+    // The section hue must be live BEFORE anything builds: the whole stylesheet
+    // inherits it, and every single-series chart reads it at construction time.
+    setActiveSection(view.section || "overview");
     view(outlet, charts);
     // Charts initialise while the grid is still resolving; re-fit once the
     // layout has been flushed, or wide cards render at the wrong width.
@@ -51,8 +54,9 @@ const Router = (() => {
   }
 
   return {
-    add(path, view, title) {
+    add(path, view, title, section) {
       view.title = title;
+      view.section = section || "overview";
       routes.set(path, view);
     },
     start(outletEl, afterRender) {

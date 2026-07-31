@@ -138,8 +138,11 @@ def _duration(start, end, status, today):
     if not labels:
         return {"labels": [], "values": [], "n": 0}
     detail = ", ".join("%s: %s months" % (label, value) for label, value in zip(labels, values))
+    # No `total`: these are magnitudes in months, not parts of a whole, so the
+    # meters must show the unit rather than a meaningless percentage.
     out = metric(labels, values,
-                 "Median run length — %s. Running projects are measured to today." % detail)
+                 "Median run length in months. Running projects are measured to "
+                 "today, so their figure is a floor.")
     out["n"] = int(finished.sum() + running.sum())
     out["unit"] = "months"
     return out

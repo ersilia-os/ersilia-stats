@@ -1,10 +1,20 @@
 """Repositories section — open-source output and its health.
 
-PUBLIC REPOSITORIES ONLY. The Airtable table tracks private repos too (38 of 179 in
-the July 2026 snapshot), and the previous export published their names in the
-top-by-stars, top-by-forks, most-collaborative and scatter charts, plus their
-contributors. A private repository's *name* is itself disclosure, so everything here
-is filtered to ``visibility == "Public"`` and the excluded count is reported instead.
+DISCLOSURE RULE, and it is a distinction worth being precise about: **a count is
+not disclosure, a name is.**
+
+So this module splits the two:
+
+* **Aggregates cover every repository**, public and private — how many there are,
+  when they were created, the type and status mix, how commits concentrate, the
+  totals. Knowing that Ersilia has 38 private repositories reveals nothing about
+  any of them, and excluding them made the totals quietly wrong.
+* **Anything that names a repository or a contributor covers public repositories
+  only** — the rankings, the scatter points, the contributor handles. A private
+  repository's *name* is disclosure, and so is who works on it.
+
+The public/private split is itself published (``visibility``), because the honest
+way to handle the exclusion is to state its size rather than hide it.
 """
 import pandas as pd
 
@@ -26,19 +36,9 @@ from .parse import (
 
 NUMERIC_FIELDS = ("stars", "forks", "subscribers", "total_commits", "open_issues", "contributors")
 
-# Pairs for the repo-health small-multiples panel. Popularity and activity are
-# different things; plotting them against each other is the only way to see a repo
-# with 400 commits and no stars, or 40 stars and no maintenance.
-HEALTH_PAIRS = [
-    {"x": "stars", "y": "forks", "xLabel": "Stars", "yLabel": "Forks"},
-    {"x": "stars", "y": "subscribers", "xLabel": "Stars", "yLabel": "Watchers"},
-    {"x": "total_commits", "y": "open_issues", "xLabel": "Commits", "yLabel": "Open issues"},
-    {"x": "stars", "y": "total_commits", "xLabel": "Stars", "yLabel": "Commits"},
-]
-
 
 def public_only(repos):
-    """Filter to public repositories, returning ``(frame, excluded_count)``."""
+    """Split into ``(public_frame, private_count)``."""
     if repos is None or repos.empty:
         return repos, 0
     if "visibility" not in repos.columns:
@@ -48,96 +48,160 @@ def public_only(repos):
     return public, int(len(repos) - len(public))
 
 
+def _numeric(frame):
+    """Coerce the count columns so arithmetic is safe."""
+    out = frame.copy()
+    for field in NUMERIC_FIELDS:
+        out[field] = to_num(col(out, field)).astype(int)
+    return out
+
+
 def build(repos):
-    public, private_count = public_only(repos)
-    if public is None or public.empty:
+    public_raw, private_count = public_only(repos)
+    if repos is None or repos.empty:
         return dict(
             {k: dict(EMPTY) for k in (
-                "per_quarter", "cumulative", "top_by_stars", "top_by_forks",
-                "most_collaborative", "top_contributors", "by_type", "by_status",
-                "contributor_concentration",
+                "per_quarter", "cumulative", "by_type", "by_status", "visibility",
+                "top_by_stars", "top_by_forks", "most_collaborative", "top_contributors",
+                "contributor_concentration", "ranked",
             )},
             scatter={"points": [], "n": 0},
-            health={"points": [], "pairs": HEALTH_PAIRS, "n": 0},
         )
 
-    frame = public.copy()
-    for field in NUMERIC_FIELDS:
-        frame[field] = to_num(col(frame, field)).astype(int)
-    name_col = "name" if "name" in frame.columns else "title"
+    every = _numeric(repos)                        # aggregates: all repositories
+    public = _numeric(public_raw) if public_raw is not None and not public_raw.empty else every.head(0)
+    name_col = "name" if "name" in every.columns else "title"
 
-    created = quarter_counts(col(frame, "creation_date"))
+    created = quarter_counts(col(every, "creation_date"))
     dense = dense_quarters(created)
     labels = [str(i) for i in dense.index]
     running = list(dense.cumsum().values)
-    undated = int(len(frame) - int(dense.sum()))
+    undated = int(len(every) - int(dense.sum()))
 
     cumulative_metric = cumulative(
         created,
         ins.join(
-            ins.span(labels, running, "public repositories"),
-            ("%s has no creation date on file." % ins.count_of(undated, "repository", "repositories"))
-            if undated else None,
+            ins.span(labels, running, "repositories"),
+            ("%s has no creation date on file." %
+             ins.count_of(undated, "repository", "repositories")) if undated else None,
         ),
     )
     cumulative_metric["n"] = int(running[-1]) if running else 0
 
     return {
+        # ---- aggregates: every repository -------------------------------------
         "per_quarter": metric(
             labels, dense.values,
             ins.busiest(labels, list(dense.values), "repository", "repositories"),
         ),
         "cumulative": cumulative_metric,
-        "top_by_stars": top_by(frame, "stars", name_col,
-                              insight=ins.concentration(list(frame["stars"]), "stars")),
-        "top_by_forks": top_by(frame, "forks", name_col,
-                               insight=ins.share_of(
-                                   int((frame["forks"] > 0).sum()), len(frame),
-                                   "public repositories", "have ever been forked")),
-        "most_collaborative": top_by(frame, "contributors", name_col,
-                                     insight=ins.share_of(
-                                         int((frame["contributors"] <= 1).sum()), len(frame),
-                                         "public repositories",
-                                         "have a single listed contributor")),
-        "top_contributors": _top_contributors(frame),
-        "contributor_concentration": _concentration_curve(frame),
-        "by_type": value_counts(col(frame, "type").apply(first_value), top=12,
-                                insight=ins.leader(
-                                    value_counts(col(frame, "type").apply(first_value)),
-                                    "public repositories")),
-        "by_status": _by_status(frame),
-        "scatter": _scatter(frame, name_col),
-        "health": _health(frame, name_col),
+        "by_type": _by_type(every),
+        "by_status": _by_status(every),
+        "visibility": _visibility(every, private_count),
+        "contributor_concentration": _concentration_curve(every),
+        # ---- name-bearing: public repositories only ---------------------------
+        "ranked": _ranked(public, name_col),
+        "top_by_stars": top_by(public, "stars", name_col,
+                               insight=ins.concentration(list(public["stars"]), "stars")
+                               if len(public) else None),
+        "top_by_forks": top_by(public, "forks", name_col),
+        "most_collaborative": top_by(public, "contributors", name_col),
+        "top_contributors": _top_contributors(public),
+        "scatter": _scatter(public, name_col),
     }
 
 
-def _top_contributors(frame):
+def _visibility(every, private_count):
+    """Published deliberately: the honest way to handle an exclusion is to size it."""
+    public_count = int(len(every) - private_count)
+    out = metric(
+        ["Public", "Private"], [public_count, private_count],
+        ins.join(
+            ins.share_of(public_count, len(every), "repositories", "are public"),
+            "Counts, dates, types and totals on this page cover all of them; "
+            "anything that names a repository or a contributor covers the public ones only.",
+        ),
+        semantics={"Public": "brand", "Private": "neutral"},
+    )
+    return out
+
+
+def _by_type(every):
+    kinds = col(every, "type").apply(first_value)
+    out = value_counts(kinds, top=12)
+    if out["labels"]:
+        out["insight"] = ins.leader(value_counts(kinds), "repositories")
+    return out
+
+
+def _by_status(every):
+    status = col(every, "status").apply(first_value)
+    out = value_counts(status, top=12)
+    if out["labels"]:
+        active = int(as_text(status).str.lower().isin({"in progress", "idle"}).sum())
+        out["insight"] = ins.share_of(active, len(every), "repositories",
+                                      "are in progress or idle rather than closed out")
+    return out
+
+
+def _ranked(public, name_col):
+    """One table replacing three ranking charts: stars, forks and contributors
+    side by side, so a repository's whole profile is on one row."""
+    if public is None or public.empty or name_col not in public.columns:
+        return dict(EMPTY)
+    ranked = public.sort_values("stars", ascending=False).head(12)
+    rows = []
+    for _, row in ranked.iterrows():
+        name = str(row.get(name_col, "")).strip()
+        if not name:
+            continue
+        rows.append({
+            "name": name,
+            "stars": int(row["stars"]),
+            "forks": int(row["forks"]),
+            "contributors": int(row["contributors"]),
+            "commits": int(row["total_commits"]),
+        })
+    return {
+        "rows": rows,
+        "n": len(rows),
+        "insight": ins.join(
+            ins.concentration(list(public["stars"]), "stars"),
+            "Public repositories only — ranked by stars.",
+        ),
+    }
+
+
+def _top_contributors(public):
     """GitHub handles by number of public repositories touched.
 
-    These are public GitHub handles attached to public repositories, so they are
-    already public information — unlike the community table's handles, which are
-    dropped at load.
+    Public handles on public repositories, so already public information — unlike
+    the community table's handles, which are dropped at load.
     """
-    counts = multi_counts(col(frame, "contributor_names"), top=15)
-    everyone = multi_counts(col(frame, "contributor_names"))
+    if public is None or public.empty:
+        return dict(EMPTY)
+    counts = multi_counts(col(public, "contributor_names"), top=12)
+    everyone = multi_counts(col(public, "contributor_names"))
     if counts["labels"]:
         counts["insight"] = ins.join(
             "%s distinct contributors across %s public repositories." % (
-                ins.num(everyone.get("distinct", 0)), ins.num(len(frame)),
+                ins.num(everyone.get("distinct", 0)), ins.num(len(public)),
             ),
             ins.concentration(everyone["values"], "repository contributions"),
         )
     return counts
 
 
-def _concentration_curve(frame):
+def _concentration_curve(every):
     """Lorenz curve of commits across repositories — the bus-factor question.
 
-    x = cumulative share of repositories (least active first), y = cumulative share
-    of commits. A curve hugging the bottom-right means a few repositories carry
-    almost everything.
+    No names involved, so this covers every repository.
+
+    x = cumulative share of repositories (least active first), y = cumulative
+    share of commits. A curve hugging the bottom-right means a few repositories
+    carry almost everything.
     """
-    commits = sorted(int(v) for v in frame["total_commits"] if v > 0)
+    commits = sorted(int(v) for v in every["total_commits"] if v > 0)
     total = sum(commits)
     if not commits or total == 0:
         return dict(EMPTY)
@@ -158,56 +222,36 @@ def _concentration_curve(frame):
         "The busiest 10%% of repositories hold %s of all commits (Gini %s)." % (
             ins.pct(top_decile, total), gini,
         ),
-        gini=gini,
-        unit="% of commits",
-        n=len(commits),
+        gini=gini, unit="% of commits", n=len(commits),
     )
 
 
-def _by_status(frame):
-    status = col(frame, "status").apply(first_value)
-    out = value_counts(status, top=12)
-    if out["labels"]:
-        active = int(as_text(status).str.lower().isin(
-            {"in progress", "idle"}).sum())
-        out["insight"] = ins.share_of(active, len(frame), "public repositories",
-                                      "are in progress or idle rather than closed out")
-    return out
+def _scatter(public, name_col):
+    """Per-repository points for the log-log popularity/activity chart.
 
-
-def _scatter(frame, name_col):
-    """[stars, forks, contributors, name] per repository."""
+    Public only: each point carries a name in its tooltip.
+    """
+    if public is None or public.empty:
+        return {"points": [], "n": 0}
     points = []
-    for _, row in frame.iterrows():
-        name = str(row.get(name_col, "")).strip()
-        stars, forks, contributors = int(row["stars"]), int(row["forks"]), int(row["contributors"])
-        if name and (stars or forks or contributors):
-            points.append([stars, forks, contributors, name])
-    insight = None
-    if points:
-        loudest = max(points, key=lambda p: p[0])
-        insight = "%s of %s public repositories have any stars, forks or listed contributors; %s leads on stars." % (
-            ins.num(len(points)), ins.num(len(frame)), loudest[3],
-        )
-    return {"points": points, "n": len(points), "insight": insight}
-
-
-def _health(frame, name_col):
-    """Per-repo metric bundle; the client builds the four scatter panels from it."""
-    points = []
-    for _, row in frame.iterrows():
+    for _, row in public.iterrows():
         name = str(row.get(name_col, "")).strip()
         if not name:
             continue
-        record = {"name": name}
-        for field in NUMERIC_FIELDS:
-            record[field] = int(row[field])
-        if any(record[f] for f in NUMERIC_FIELDS):
-            points.append(record)
+        points.append({
+            "name": name,
+            "stars": int(row["stars"]),
+            "forks": int(row["forks"]),
+            "commits": int(row["total_commits"]),
+            "issues": int(row["open_issues"]),
+            "contributors": int(row["contributors"]),
+        })
     insight = None
     if points:
-        quiet = [p for p in points if p["total_commits"] >= 50 and p["stars"] == 0]
-        insight = "%s repositories with 50+ commits have no stars — activity and visibility are not the same thing." % (
+        quiet = [p for p in points if p["commits"] >= 50 and p["stars"] == 0]
+        insight = ins.join(
+            "%s public repositories with 50+ commits have no stars — activity and visibility are not the same thing." %
             ins.num(len(quiet)),
+            "Both axes are logarithmic: a handful of repositories account for most of every metric.",
         )
-    return {"points": points, "pairs": HEALTH_PAIRS, "n": len(points), "insight": insight}
+    return {"points": points, "n": len(points), "insight": insight}

@@ -1,39 +1,64 @@
 /* Declarative dashboard definition.
 
-   One entry per view; each view has ONE lead chart answering its primary
-   question, then supporting charts on a 12-column grid (span 4 / 6 / 8 / 12).
-   `data` is a dot path under `sections` in data/stats.json; `type` picks a
-   builder in js/charts.js; `desc` is the methodology note behind the ⓘ.
+   One entry per view: a lead chart answering the view's primary question, then a
+   handful of supporting charts. `data` is a dot path under `sections` in
+   data/stats.json; `type` picks a builder in js/charts.js (or an HTML component in
+   js/cards.js); `desc` is the methodology note behind the ⓘ.
 
-   Colour note: sections no longer carry a decorative hue. Periwinkle carries all
-   interaction and plum is the identity signature; the data hues live inside the
-   charts, where they encode a variable. Six flat accent colours spread across the
-   chrome read as noise, which is the house rule this replaces.
+   ── Two rules this file exists to enforce ────────────────────────────────────
 
-   Form notes worth keeping in mind when editing:
-     - two categories are a `share` bar, never a 2-slice donut;
-     - more than ~6 categories is an `hbar`, not a donut;
-     - ordered buckets use `ordinalbar` (one-hue ramp) so the order shows;
-     - two measures of different scale use `facets`, never a second y-axis. */
+   1. FORM VARIETY. v2 was 62% bar charts and 26 of them were the identical
+      horizontal bar, which is precisely why it read as a wall of purple. Every
+      section here uses a different form for each of its charts. Before adding a
+      chart, check what the section already has:
 
+        lollipop   a ranking. The default. Replaces the horizontal bar.
+        column     an amount per period, on a time axis. Not for rankings.
+        area       a running total over time.
+        facets     two measures whose scales do not compare (never a 2nd y-axis).
+        donut      part-to-whole at a glance, <= 6 segments.
+        treemap    a composition where the sizes matter more than the order.
+        treehierarchy a two-level hierarchy, as a nested treemap.
+        heatmap    a matrix.
+        histogram  a distribution.
+        logscatter two measures with a long tail (linear axes would collapse it).
+        lorenz     how unevenly a total is spread.
+        gantt      spans in time.
+        map        geography.
+        shares     several two-category splits, compactly (HTML).
+        meters     "how many of the whole" figures (HTML).
+        ranked     a top-N table with several columns and a microbar (HTML).
+
+   2. SIZE FOLLOWS THE DATA. Do not set `span` except on a lead chart. cards.js
+      derives it from how many categories the metric actually has, because a
+      seven-category chart in a full-width card is seven bars adrift in white.
+
+   Colour: each section owns a hue (see styles.css). Single-series charts take it
+   automatically; only genuinely multi-series charts touch the categorical palette.
+   Nothing here needs to name a colour. */
+
+/* `hue` names the section each headline number belongs to, so the landing page's
+   sparklines carry that section's colour instead of a neutral grey. It doubles as a
+   visual key to the sidebar. */
 const PRIMARY_KPIS = [
-  { key: "models", label: "Models in the Hub" },
-  { key: "community_members", label: "People involved" },
-  { key: "repositories", label: "Public repositories" },
-  { key: "total_citations", label: "Citations", note: "across all publications" },
+  { key: "models", label: "Models in the Hub", hue: "models" },
+  { key: "community_members", label: "People involved", hue: "community" },
+  { key: "repositories", label: "Repositories", hue: "repositories" },
+  { key: "total_citations", label: "Citations", hue: "publications" },
 ];
 
-// Shown when the Models table has not been fetched yet, so the hero row still
-// has four tiles rather than a gap.
+// Shown when the Models table has not been fetched yet, so the hero row still has
+// four tiles rather than a gap.
 const PRIMARY_KPIS_FALLBACK = [
-  { key: "community_members", label: "People involved" },
-  { key: "repositories", label: "Public repositories" },
-  { key: "publications", label: "Publications" },
-  { key: "total_citations", label: "Citations", note: "across all publications" },
+  { key: "community_members", label: "People involved", hue: "community" },
+  { key: "repositories", label: "Repositories", hue: "repositories" },
+  { key: "publications", label: "Publications", hue: "publications" },
+  { key: "total_citations", label: "Citations", hue: "publications" },
 ];
 
 const SECONDARY_KPIS = [
   { key: "projects", label: "Projects" },
+  { key: "publications", label: "Publications" },
   { key: "organisations", label: "Partner organisations" },
   { key: "countries_represented", label: "Countries" },
   { key: "total_stars", label: "GitHub stars" },
@@ -45,9 +70,8 @@ const VIEWS = [
   {
     id: "models",
     title: "Model Hub",
-    blurb: "The Ersilia Model Hub — what is in it, and how ready it is to run.",
+    blurb: "What is in the Ersilia Model Hub, what it is for, and how much of it is ready to run.",
     headlineKpi: "models",
-    takeaway: "models published for reuse",
     charts: [
       {
         title: "Models incorporated over time", data: "models.cumulative", type: "area",
@@ -59,35 +83,23 @@ const VIEWS = [
         desc: "Models in the Hub by the quarter they were incorporated. Cumulative shows total size; per quarter shows the rate of addition.",
       },
       {
-        title: "What the models do", data: "models.task_tree", type: "sunburst",
-        span: 6, height: "h-lg",
-        desc: "Inner ring is the model's task, outer ring its subtask. Both are single-valued, so every model sits on exactly one leaf and the rings sum to the model count.",
+        title: "Biomedical area", data: "models.by_biomedical_area", type: "lollipop",
+        desc: "What each model is for. The most mission-relevant cut the Hub records: Ersilia works on antimicrobial and antipathogen drug discovery, and this says how much of the Hub serves a named disease versus general-purpose chemistry. A multi-select, so a model spanning two areas counts in both.",
       },
       {
-        title: "Curation status by cohort", data: "models.cohorts_by_status", type: "stackbar",
-        span: 6, height: "h-lg",
-        desc: "Each quarter's incorporated models, split by curation status. Shows whether older cohorts were finished or left behind.",
+        title: "What the models do", data: "models.task_tree", type: "treehierarchy",
+        desc: "Outer blocks are the model's task, inner ones its subtask. Both are single-valued, so every model sits in exactly one block and the areas sum to the model count.",
       },
       {
-        title: "Biomedical area", data: "models.by_biomedical_area", type: "hbar",
-        span: 8, height: "h-lg",
-        desc: "What each model is for. This is the most mission-relevant cut the Hub records: Ersilia works on antimicrobial and antipathogen drug discovery, and this says how much of the Hub serves a named disease versus general-purpose chemistry. A multi-select, so a model spanning two areas counts in both.",
+        title: "Curation status", data: "models.by_status", type: "donut",
+        desc: "Every model by curation status. Colours follow the house status scale, so 'ready' is the same green wherever it appears.",
       },
       {
-        title: "Status", data: "models.by_status", type: "donut", span: 4,
-        desc: "All models grouped by curation status. Colours follow the house status scale.",
-      },
-      {
-        title: "Licences", data: "models.by_license", type: "hbar", span: 4,
-        desc: "Licence recorded for each model. Models with no licence on file are not counted.",
-      },
-      {
-        title: "Where models can be run", data: "models.coverage", type: "hbar", span: 4,
+        title: "Where models can be run", data: "models.coverage", type: "meters",
         desc: "How many models have each distribution route on file — a Docker image, an S3 bundle, or source code.",
       },
       {
-        title: "Built in-house or wrapped", data: "models.by_source_type", type: "hbar",
-        span: 4,
+        title: "Built in-house or wrapped", data: "models.by_source_type", type: "lollipop",
         desc: "Whether a model was developed by Ersilia or packaged from externally published work. Wrapping external models is much of what the Hub is for.",
       },
     ],
@@ -95,9 +107,8 @@ const VIEWS = [
   {
     id: "projects",
     title: "Projects",
-    blurb: "Ersilia's research and delivery projects, and how they overlap.",
+    blurb: "The project portfolio — what ran when, what overlapped, and what is still open.",
     headlineKpi: "projects",
-    takeaway: "projects tracked end to end",
     charts: [
       {
         title: "Project timeline", data: "projects.timeline", type: "gantt",
@@ -105,19 +116,16 @@ const VIEWS = [
         desc: "One bar per project from start to end date, coloured by status, against a 'today' rule. Projects with no end date are drawn to today and marked open.",
       },
       {
-        title: "Projects running concurrently", data: "projects.active_over_time", type: "area",
-        span: 8, desc: "Projects started and not yet ended, counted in each quarter.",
+        title: "Running at the same time", data: "projects.active_over_time", type: "area",
+        span: 8,
+        desc: "Projects started and not yet ended, counted in each quarter. The peak is how much was in flight at once.",
       },
       {
-        title: "Status", data: "projects.status", type: "donut", span: 4,
-        desc: "All projects by current status. Colours follow the house status scale and match the timeline.",
+        title: "Status", data: "projects.status", type: "donut",
+        desc: "Every project by current status, on the same colour scale as the timeline above.",
       },
       {
-        title: "Projects started per year", data: "projects.per_year", type: "bar", span: 6,
-        desc: "Projects by the calendar year they started.",
-      },
-      {
-        title: "Median run length", data: "projects.duration", type: "bar", span: 6,
+        title: "Median run length", data: "projects.duration", type: "meters",
         desc: "Median months per project, split between finished projects and those still running. Running projects are measured to today, so their figure is a floor.",
       },
     ],
@@ -125,64 +133,51 @@ const VIEWS = [
   {
     id: "publications",
     title: "Publications",
-    blurb: "Peer-reviewed papers and preprints linked to Ersilia, and their reach.",
+    blurb: "Peer-reviewed papers and preprints linked to Ersilia, and how far they reach.",
     headlineKpi: "publications",
-    takeaway: "papers and preprints",
     charts: [
       {
-        title: "Output and accumulated citations", data: "publications.output_and_impact", type: "facets",
-        lead: true, span: 12, height: "h-xl",
-        desc: "Publications per year (top) against citations accumulated to date (bottom), sharing one time axis. Deliberately two panels rather than two y-axes: the scales are unrelated, and overlaying them would invent a correlation.",
+        title: "Output and accumulated citations", data: "publications.output_and_impact",
+        type: "facets", lead: true, span: 12, height: "h-xl",
+        desc: "Publications per year (top) against citations accumulated to date (bottom), sharing one time axis. Deliberately two panels rather than two y-axes: the scales are unrelated, and overlaying them would invent a correlation that is not in the data.",
       },
       {
-        title: "Citations by publication year", data: "publications.citations_per_year", type: "bar",
-        span: 8, desc: "Citations summed by the year the cited paper appeared — older cohorts have had longer to accrue them.",
+        title: "Highest-impact venues", data: "publications.top_journals", type: "lollipop",
+        span: 7,
+        desc: "Mean citations per Ersilia article, for venues with at least two Ersilia articles. The two-article floor stops one lucky paper topping the ranking.",
       },
       {
-        title: "Ersilia affiliation", data: "publications.affiliation", type: "share", span: 4,
-        height: "h-xs", desc: "Share of publications with a direct Ersilia affiliation, versus work by collaborators and advisors.",
+        title: "How the work is framed", type: "shares", span: 5,
+        sources: [
+          { label: "Direct Ersilia affiliation", data: "publications.affiliation", highlight: "Yes" },
+          { label: "African collaboration", data: "publications.by_african_collab", highlight: "Yes" },
+          { label: "Primary research", data: "publications.by_type", highlight: "Research" },
+        ],
+        desc: "Three splits that say what kind of body of work this is. African collaboration is recorded on some papers only; the share is of those where it is recorded.",
       },
       {
-        title: "Highest-impact venues", data: "publications.top_journals", type: "hbar",
-        span: 8, desc: "Mean citations per Ersilia article, for venues with at least two Ersilia articles. The two-article floor keeps a single lucky paper from topping the ranking.",
+        title: "Research topics", data: "publications.by_topic", type: "donut",
+        desc: "Publications grouped by research topic. Topic is a multi-select. Four categories where one is very small: a treemap gave the smallest an unlabelled sliver, so this is a ring.",
       },
       {
-        title: "African collaboration", data: "publications.by_african_collab", type: "share",
-        span: 4, height: "h-xs",
-        desc: "Publications involving an African collaboration, among those where the field is recorded. Not recorded on every paper.",
-      },
-      {
-        title: "Ersilia-affiliated vs external, per year", data: "publications.affiliation_by_year",
-        type: "stackbar", span: 8,
+        title: "Ersilia-affiliated against external, per year",
+        data: "publications.affiliation_by_year", type: "stackbar", span: 7,
         desc: "Publications per year split by whether they carry a direct Ersilia affiliation.",
-      },
-      {
-        title: "Research topics", data: "publications.by_topic", type: "hbar", span: 4,
-        desc: "Publications grouped by research topic. Topic is a multi-select.",
-      },
-      {
-        title: "Publications per year", data: "publications.per_year", type: "bar", span: 6,
-        desc: "Papers and preprints by year of publication — the top panel of the lead chart, on its own scale.",
-      },
-      {
-        title: "Research versus review", data: "publications.by_type", type: "share",
-        span: 6, height: "h-xs",
-        desc: "Split between primary research and review articles.",
       },
     ],
   },
   {
     id: "repositories",
     title: "Code",
-    blurb: "Ersilia's public open-source repositories, their reach and their health. " +
-           "Private repositories are excluded — their names alone would be disclosure.",
+    blurb: "Ersilia's open-source repositories. Counts, dates and totals cover all of them; " +
+           "anything that names a repository or a contributor covers the public ones only.",
     headlineKpi: "repositories",
-    takeaway: "public repositories on GitHub",
     charts: [
       {
-        title: "Popularity against activity", data: "repositories.health", type: "smallmultiples",
-        lead: true, span: 12, height: "h-tall",
-        desc: "The same repositories under four metric pairs. Popularity (stars, forks, watchers) and development activity (commits, open issues) are different things; plotting them against each other exposes the repositories where they disagree. Both distributions are heavily skewed — a handful of repositories account for most of every metric — so most points cluster near the origin and the axes are linear rather than rescaled to hide that.",
+        title: "Popularity against activity", data: "repositories.scatter", type: "logscatter",
+        lead: true, span: 12, height: "h-xl",
+        scatter: { x: "stars", y: "commits", xLabel: "Stars", yLabel: "Commits" },
+        desc: "One dot per public repository: stars against commits, both on logarithmic axes because a handful of repositories account for most of every metric — on linear axes the other 130 collapse into the corner. Dashed lines mark the medians, so the quadrants separate 'popular but quiet' from 'busy but unknown'. Only outliers are labelled.",
       },
       {
         title: "Repositories over time", data: "repositories.cumulative", type: "area",
@@ -191,41 +186,36 @@ const VIEWS = [
           { label: "Cumulative", data: "repositories.cumulative" },
           { label: "Per quarter", data: "repositories.per_quarter" },
         ],
-        desc: "Public repositories by the quarter they were created.",
+        desc: "Every repository by the quarter it was created, public and private alike.",
       },
       {
-        title: "Commit concentration", data: "repositories.contributor_concentration", type: "lorenz",
-        span: 4, desc: "Cumulative share of all commits held by the least active repositories. The straight line is perfect evenness; the further the curve sits below it, the more the work concentrates in a few repositories.",
+        title: "Public and private", data: "repositories.visibility", type: "shares", span: 4,
+        sources: [{ label: "Public", data: "repositories.visibility", highlight: "Public" }],
+        desc: "How the repositories split. Published deliberately: the honest way to handle an exclusion is to state its size rather than hide it.",
       },
       {
-        title: "Most starred", data: "repositories.top_by_stars", type: "hbar", span: 6,
-        desc: "Public repositories ranked by GitHub stars.",
+        title: "Most starred public repositories", data: "repositories.ranked", type: "ranked",
+        span: 7, nameLabel: "Repository", top: 10,
+        columns: [
+          { key: "stars", label: "Stars" },
+          { key: "forks", label: "Forks" },
+          { key: "contributors", label: "People" },
+        ],
+        desc: "One table rather than three ranking charts, so a repository's whole profile sits on one row. Ranked by stars.",
       },
       {
-        title: "Most forked", data: "repositories.top_by_forks", type: "hbar", span: 6,
-        desc: "Public repositories ranked by forks — a better signal of reuse than stars, which cost nothing.",
+        title: "Commit concentration", data: "repositories.contributor_concentration",
+        type: "lorenz", span: 5,
+        desc: "Cumulative share of all commits held by the least active repositories. The dashed diagonal is perfect evenness; the further the curve sits below it, the more the work concentrates in a few repositories.",
       },
       {
-        title: "Stars, forks and contributors", data: "repositories.scatter", type: "scatter",
-        span: 6, height: "h-lg",
-        scatter: { x: "stars", y: "forks", size: "contributors", xLabel: "Stars", yLabel: "Forks", sizeLabel: "contributors" },
-        desc: "One dot per public repository: stars against forks, sized by number of contributors. Only the extremes are labelled; hover or open the table for the rest.",
+        title: "Contributors by repository count", data: "repositories.top_contributors",
+        type: "lollipop",
+        desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to. Public repository metadata, not community records.",
       },
       {
-        title: "Contributors by repository count", data: "repositories.top_contributors", type: "hbar",
-        span: 6, desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to. These are public repository contributions, not community records.",
-      },
-      {
-        title: "Most collaborative repositories", data: "repositories.most_collaborative", type: "hbar",
-        span: 6, desc: "Public repositories with the most individual contributors.",
-      },
-      {
-        title: "Repository type", data: "repositories.by_type", type: "hbar", span: 6,
-        desc: "Public repositories grouped by type — package, model, analysis, app, template and so on.",
-      },
-      {
-        title: "Maintenance status", data: "repositories.by_status", type: "hbar", span: 6,
-        desc: "Public repositories grouped by maintenance status.",
+        title: "Repository type", data: "repositories.by_type", type: "treemap",
+        desc: "Every repository grouped by type; area is proportional to count. Seven categories with a long tail is more than a donut can carry legibly.",
       },
     ],
   },
@@ -235,59 +225,45 @@ const VIEWS = [
     blurb: "The people who have contributed to Ersilia. Aggregate figures only — " +
            "no individual is identifiable anywhere on this site.",
     headlineKpi: "community_members",
-    takeaway: "people have contributed",
     charts: [
       {
         title: "Joiners, leavers and net change", data: "community.flow", type: "groupbar",
         lead: true, span: 12, height: "h-lg",
-        desc: "People who joined versus people whose involvement ended, each quarter, with the net change as a line. Answers whether the community is compounding or recycling.",
-      },
-      {
-        title: "Community over time", data: "community.growth", type: "area", span: 8,
-        desc: "Cumulative count of everyone who has ever joined, by the quarter they started. It only goes up — it is a total, not a headcount.",
-      },
-      {
-        title: "Still involved", data: "community.active_status", type: "share", span: 4,
-        height: "h-xs", desc: "People currently involved versus those whose collaboration has ended.",
-      },
-      {
-        title: "How long collaborations last", data: "community.tenure", type: "histogram",
-        span: 8, desc: "Completed collaborations binned by length in months, with the mean marked. People still involved are excluded — including them would drag every long tenure down.",
-      },
-      {
-        title: "Involvement length", data: "community.duration_buckets", type: "ordinalbar",
-        span: 4, desc: "Completed collaborations in four bands. Ordered bands, so the colour ramp follows the order.",
+        desc: "People who joined against people whose involvement ended, each quarter, with the net change as a line. Answers whether the community is compounding or recycling.",
       },
       {
         title: "Cohort retention", data: "community.retention", type: "heatmap",
-        span: 8, height: "h-lg",
+        span: 7, height: "h-md",
         desc: "For each joining year, the share still involved at 3, 6, 12 and 24 months. A cohort only counts towards a horizon once it is old enough to judge, so recent years have blank cells rather than misleading zeroes.",
       },
       {
-        title: "Roles held", data: "community.roles", type: "hbar", span: 4,
-        desc: "Roles across the community. Roles are a multi-select — someone who was both mentor and maintainer counts in both, so shares sum above 100%.",
+        title: "How long collaborations last", data: "community.tenure", type: "histogram",
+        span: 5,
+        desc: "Completed collaborations binned by length in months, with the mean marked. People still involved are excluded — including them would drag every long tenure down.",
       },
       {
-        title: "Countries represented", data: "community.by_country", type: "hbar", span: 6,
-        desc: "Community members grouped by country of residence, as recorded.",
+        title: "Roles held", data: "community.roles", type: "lollipop",
+        desc: "Roles across the community. A multi-select — someone who was both mentor and maintainer counts in both, so the shares sum above 100%.",
       },
       {
-        title: "Gender", data: "community.by_gender", type: "share", span: 6, height: "h-xs",
-        desc: "Recorded gender across the community, in aggregate only. Reported because representation is something Ersilia holds itself to.",
+        title: "Countries represented", data: "community.by_country", type: "lollipop",
+        desc: "Community members by country of residence, as recorded.",
       },
       {
-        title: "Home institutions", data: "community.by_organisation", type: "hbar", span: 12,
-        desc: "Where community members come from. Institution names only — no individual is named.",
+        title: "Composition", type: "shares", span: 4,
+        sources: [
+          { label: "Still involved", data: "community.active_status", highlight: "Active" },
+          { label: "Recorded as female", data: "community.by_gender", highlight: "Female" },
+        ],
+        desc: "Aggregate composition only. Gender is reported because representation is something Ersilia holds itself to.",
       },
     ],
   },
   {
     id: "reach",
     title: "Global reach",
-    blurb: "Where Ersilia actually works, and how that maps onto the Global South " +
-           "mission it states.",
+    blurb: "Where Ersilia actually works, and how that maps onto the Global South mission it states.",
     headlineKpi: "countries_represented",
-    takeaway: "countries with people or events",
     charts: [
       {
         title: "Where Ersilia works", data: "reach.footprint_by_country", type: "map",
@@ -298,37 +274,31 @@ const VIEWS = [
           { label: "Community", data: "reach.community_by_country" },
           { label: "Events", data: "reach.events_by_country" },
         ],
-        desc: "Countries shaded by how many partner organisations, community members or events are recorded there. Countries with no record keep the neutral fill rather than being shaded as zero.",
+        desc: "Countries shaded by how many partner organisations, community members or events are recorded there. Countries with no record keep the neutral fill rather than being shaded as though they were a zero.",
       },
       {
-        title: "Global South and North", data: "reach.south_north", type: "share",
-        span: 6, height: "h-xs",
-        desc: "Engaged countries split by World Bank income group: LIC, LMIC and UMIC counted as Global South, HIC as Global North. Countries with no income group recorded are excluded.",
+        title: "Global South and North", data: "reach.south_north", type: "shares", span: 4,
+        sources: [{ label: "Global South", data: "reach.south_north", highlight: "Global South" }],
+        desc: "Engaged countries split by World Bank income group: LIC, LMIC and UMIC counted as Global South, HIC as Global North. Countries with no income group recorded are excluded rather than assumed.",
       },
       {
-        title: "By income group", data: "reach.engagement_by_income_group", type: "ordinalbar",
-        span: 6, desc: "Countries Ersilia engages with, by World Bank income group. Ordered from low to high income, so the ramp follows the order.",
+        title: "By income group", data: "reach.engagement_by_income_group",
+        type: "ordinallollipop", span: 4,
+        desc: "Countries Ersilia engages with, by World Bank income group, ordered low to high income so the colour ramp follows the order.",
       },
       {
-        title: "By world region", data: "reach.engagement_by_region", type: "hbar", span: 6,
+        title: "By world region", data: "reach.engagement_by_region", type: "donut", span: 4,
         desc: "Countries Ersilia engages with, grouped by world region.",
       },
       {
-        title: "Partner organisations by country", data: "organisations.by_country", type: "hbar",
-        span: 6, desc: "Organisations in Ersilia's network, by the country on file.",
+        title: "What partners work on", data: "organisations.by_focus", type: "treemap",
+        span: 7,
+        desc: "Focus areas across the partner network; area is proportional to count. A multi-select, so one organisation contributes to several.",
       },
       {
-        title: "Organisation type", data: "organisations.by_type", type: "hbar", span: 6,
+        title: "Partner organisations", data: "organisations.by_type", type: "lollipop",
+        span: 5,
         desc: "Network organisations grouped by type — foundation, academia, corporate, civil society and so on.",
-      },
-      {
-        title: "Focus areas", data: "organisations.by_focus", type: "hbar", span: 6,
-        desc: "What partner organisations work on. A multi-select, so one organisation contributes to several.",
-      },
-      {
-        title: "How partners relate to Ersilia", data: "organisations.by_classification",
-        type: "hbar", span: 6,
-        desc: "Each organisation classified as funder, network or collaborator.",
       },
     ],
   },
@@ -337,66 +307,25 @@ const VIEWS = [
     title: "Outreach",
     blurb: "Events Ersilia convened or took part in, and what it publishes.",
     headlineKpi: "events",
-    takeaway: "events attended or hosted",
     charts: [
       {
-        title: "Events per year", data: "events.per_year", type: "bar",
+        title: "Events and blog posts per year", data: "__outreach_per_year", type: "groupbar",
         lead: true, span: 12, height: "h-lg",
-        desc: "Talks, workshops and conferences per year. Counted from the event date on file.",
+        desc: "Both measures are yearly counts, so they share one axis and one chart rather than sitting in two — which makes them comparable instead of merely adjacent.",
       },
       {
-        title: "Events by host country", data: "events.by_country", type: "hbar", span: 6,
-        desc: "Events grouped by host country. Many events are online and have no country recorded.",
+        title: "Post topics", data: "blogposts.by_category", type: "treemap", span: 5,
+        desc: "Blog posts grouped by topic category; area is proportional to count. A multi-select.",
       },
       {
-        title: "Who convened them", data: "events.by_organiser", type: "hbar", span: 6,
+        title: "Who convened the events", data: "events.by_organiser", type: "lollipop",
+        span: 7,
         desc: "Organisations that convened the most events Ersilia took part in.",
       },
       {
-        title: "Blog posts per year", data: "blogposts.per_year", type: "bar", span: 6,
-        desc: "Posts published per year, on Ersilia's own channels and elsewhere.",
-      },
-      {
-        title: "Where posts appear", data: "blogposts.by_publisher", type: "share", span: 6,
-        height: "h-xs", desc: "Posts on Ersilia's own channels versus those published by others.",
-      },
-      {
-        title: "Post topics", data: "blogposts.by_category", type: "hbar", span: 12,
-        desc: "Blog posts grouped by topic category. Category is a multi-select.",
-      },
-    ],
-  },
-  {
-    id: "data",
-    title: "Data quality",
-    blurb: "Every chart on this site is only as good as the registry behind it. " +
-           "This is what that registry looks like.",
-    headlineKpi: null,
-    charts: [
-      {
-        title: "Field completeness by table", data: "quality.completeness", type: "hbar",
-        lead: true, span: 12, height: "h-lg", unit: "%",
-        desc: "Mean share of populated cells per source table, thinnest first. A thin table produces short charts elsewhere on this site.",
-      },
-      {
-        title: "Project status against repository status", data: "quality.project_repo_status",
-        type: "heatmap", span: 8, height: "h-lg",
-        desc: "Every repository-to-project link, cross-tabulated by both statuses. Off-diagonal cells are inconsistencies worth fixing — an open repository under a finished project, for instance.",
-      },
-      {
-        title: "Rows per table", data: "quality.table_sizes", type: "hbar", span: 4,
-        height: "h-lg", desc: "Record count per source table in this snapshot.",
-      },
-      {
-        title: "Thinnest fields", data: "quality.thin_fields", type: "hbar",
-        span: 12, height: "h-xl", unit: "%",
-        desc: "Every field under 80% populated, thinnest first. These are the fields to fix in Airtable if a chart elsewhere looks short.",
-        emptyNote: "Every field is at least 80% populated.",
-      },
-      {
-        title: "All countries by income group", data: "reach.reference_by_income_group",
-        type: "ordinalbar", span: 6,
-        desc: "The full reference table's composition, for comparison with the countries Ersilia actually engages with on the Global reach view.",
+        title: "Where posts appear", data: "blogposts.by_publisher", type: "shares", span: 4,
+        sources: [{ label: "On Ersilia's own channels", data: "blogposts.by_publisher", highlight: "Ersilia" }],
+        desc: "Posts on Ersilia's own channels against those published by others.",
       },
     ],
   },

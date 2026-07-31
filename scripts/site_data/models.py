@@ -247,4 +247,6 @@ def _coverage(models):
         insight="%s reaches the most models: %s of %s." % (
             labels[best], ins.num(values[best]), ins.num(len(models)),
         ),
+        # The whole is every model, so the meters can show a real percentage.
+        total=int(len(models)),
     )
