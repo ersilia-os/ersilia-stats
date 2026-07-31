@@ -1,0 +1,4 @@
+airtable_id,Title,Year,Citations,Journal,Topic,Type,Ersilia Affiliation,African collaboration,Senior,Status,Abstract,Authors,Google Scholar ID,Projects,Slug,URL,Year Web
+recPUBL000000001,A fixture paper on antimicrobial models,2021,42,Journal of Fixtures,['Chemoinformatics'],Research,Yes,Yes,Yes,Peer reviewed,,,,,,,2021
+recPUBL000000002,A second fixture paper,2023,7,Journal of Fixtures,['Bioinformatics'],Research,Yes,No,No,Peer reviewed,,,,,,,2023
+recPUBL000000003,A fixture review,2025,,Sample Reviews,['Medical informatics'],Review,No,,No,Peer reviewed,,,,,,,2025

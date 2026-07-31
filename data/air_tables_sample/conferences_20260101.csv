@@ -1,0 +1,4 @@
+airtable_id,Name,Cadence,Remote option,Upcoming date,Countries,Focus,Organiser,Website
+recCONF000000001,Fixture Summit,Annual,Yes,2026-09-01,['recCTRY000000001'],,['recORGX000000001'],
+recCONF000000002,Sample Symposium,Recurring,No,,['recCTRY000000002'],,['recORGX000000002'],
+recCONF000000003,Example Plenary,Biannual,,2026-11-15,['recCTRY000000003'],,['recORGX000000003'],

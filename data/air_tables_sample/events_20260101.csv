@@ -1,0 +1,5 @@
+airtable_id,Name,Date,Country (from Country),Country,Organiser,Year,Quarter,Description,Event URL,Organisations,Videos
+recEVNT000000001,Fixture Symposium,2022-04-05,['Testland'],,['Testland Research Institute'],2022,,,,,
+recEVNT000000002,Sample Workshop,2023-06-12,['Sampleia'],,['Sampleia Health Foundation'],2023,,,,,
+recEVNT000000003,Example Conference,2024-02-20,['Exampleland'],,['Example Open Network'],2024,,,,,
+recEVNT000000004,Remote Fixture Talk,2025-05-01,,,['Example Open Network'],2025,,,,,

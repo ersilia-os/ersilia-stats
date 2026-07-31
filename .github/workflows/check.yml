@@ -1,0 +1,94 @@
+# Pre-merge check. No secrets, no Airtable, no deploy.
+#
+# The deploy workflow can only run after a merge, because it needs an Airtable key to
+# fetch the snapshot it builds from — so until now nothing validated a pull request and
+# every regression was found in production.
+#
+# This builds the site from `data/air_tables_sample/`, a committed SYNTHETIC snapshot
+# with the same columns and encodings as the real extract and entirely invented
+# contents (see scripts/make_fixture.py). That makes the full pipeline runnable by a
+# fork, which is the whole point.
+#
+# What it therefore CANNOT tell you: anything about the real numbers. A metric can be
+# correct on five fabricated rows and wrong on 240 real ones. This checks that the code
+# runs, the JavaScript parses, every route renders, and the layout holds.
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check the JavaScript parses
+        run: |
+          for f in site/config.js site/js/*.js; do
+            node --check "$f" || { echo "::error file=$f::does not parse"; exit 1; }
+          done
+
+      # If the generator and its committed output disagree, one of them was edited
+      # without the other. The fixture is deterministic, so any diff is a real change.
+      - name: Fixture is up to date with its generator
+        run: |
+          python scripts/make_fixture.py -o /tmp/fixture-check/
+          if ! diff -r data/air_tables_sample/ /tmp/fixture-check/; then
+            echo "::error::data/air_tables_sample/ does not match scripts/make_fixture.py."
+            echo "Re-run: python3 scripts/make_fixture.py -o data/air_tables_sample/"
+            exit 1
+          fi
+
+      - name: Build the site from the synthetic fixture
+        run: |
+          mkdir -p /tmp/checksite
+          cp -r site/. /tmp/checksite/
+          python scripts/export_site_data.py \
+            --data-dir data/air_tables_sample \
+            --out /tmp/checksite/data/stats.json
+
+      - name: Check every chart has data
+        run: python scripts/check_config_paths.py --stats /tmp/checksite/data/stats.json --fail-on-empty
+
+      - name: Smoke-test the rendered site
+        run: node scripts/verify_site.mjs --site /tmp/checksite
+
+      # The disclosure guards must hold on the fixture too, or they are not being
+      # exercised until deploy time.
+      - name: Verify the build is aggregate-only
+        run: |
+          if grep -rlEI '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' /tmp/checksite/data/; then
+            echo "::error::An email-like string reached the build output."
+            exit 1
+          fi
+          # The fixture's one private repository is named "internal-fixture". It is
+          # counted in every aggregate and must appear in no output at all, since no
+          # metric emits a repository name for a private repo.
+          if grep -rl 'internal-fixture' /tmp/checksite/data/; then
+            echo "::error::A private repository name reached the build output."
+            exit 1
+          fi

@@ -1,0 +1,6 @@
+airtable_id,Name,Title,Visibility,Creation Date,Stars,Forks,Subscribers,Total Commits,Open Issues,Contributors,Type,Status,Contributor Names,Projects,Description,URL
+recREPO000000001,fixture-hub,fixture-hub,public,2021-02-01,120,40,9,2400,3,7,['Package'],In progress,"alpha-dev, beta-dev, gamma-dev",['recPROJ000000001'],,https://example.invalid/fixture-hub
+recREPO000000002,fixture-tools,fixture-tools,public,2022-05-10,18,4,2,310,1,3,['Analysis'],Completed,"alpha-dev, delta-dev",['recPROJ000000001'],,https://example.invalid/fixture-tools
+recREPO000000003,sample-cascade,sample-cascade,public,2022-09-01,6,1,1,95,0,2,['Analysis'],Completed,beta-dev,['recPROJ000000002'],,https://example.invalid/sample-cascade
+recREPO000000004,test-amr-models,test-amr-models,public,2023-04-01,0,0,0,140,2,1,['Package'],Idle,gamma-dev,['recPROJ000000003'],,https://example.invalid/test-amr-models
+recREPO000000005,internal-fixture,internal-fixture,private,2023-11-01,0,0,0,55,0,2,['Automation'],In progress,alpha-dev,['recPROJ000000001'],,https://example.invalid/internal-fixture

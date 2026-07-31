@@ -1,0 +1,6 @@
+airtable_id,Country,Income Group,Region,Subregion,Population,Collaborators,Community,Conferences,Donations,Events
+recCTRY000000001,Testland,LIC,Africa,Eastern Africa,12000000,,,,,
+recCTRY000000002,Sampleia,LMIC,Africa,Western Africa,34000000,,,,,
+recCTRY000000003,Fixtureland,UMIC,Americas,South America,8000000,,,,,
+recCTRY000000004,Exampleland,HIC,Europe,Southern Europe,47000000,,,,,
+recCTRY000000005,Unusedia,,Asia,Southern Asia,900000,,,,,

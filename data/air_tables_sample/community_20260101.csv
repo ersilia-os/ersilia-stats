@@ -1,0 +1,7 @@
+airtable_id,Role,Gender,Country (from Country),Country,Name (from Org),Organisation,Start Date,End Date,Start Month,Start Quarter,Start Year,End Month,End Quarter,End Year,Blogposts,Projects
+recCOMM000000001,['Intern'],Female,['Testland'],,['Testland Research Institute'],,2021-03-01,2021-09-01,,,,,,,,
+recCOMM000000002,"['Volunteer', 'Mentor']",Male,['Sampleia'],,['Sampleia Health Foundation'],,2022-01-10,2022-07-10,,,,,,,,
+recCOMM000000003,['Employee'],Female,['Exampleland'],,['Example Open Network'],,2022-06-01,,,,,,,,,
+recCOMM000000004,['Volunteer'],Male,['Fixtureland'],,['Fixture Pharma'],,2023-02-01,2024-08-01,,,,,,,,
+recCOMM000000005,['Trustee'],,['Exampleland'],,['Example Open Network'],,2023-09-15,,,,,,,,,
+recCOMM000000006,['Intern'],Female,['Testland'],,['Testland Research Institute'],,2024-01-08,2024-04-08,,,,,,,,

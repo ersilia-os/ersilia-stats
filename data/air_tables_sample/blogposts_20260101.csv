@@ -1,0 +1,4 @@
+airtable_id,Title,Date,Category,Publisher,Year,Quarter,Author,Name (from Author),Intro,Slug,URL
+recBLOG000000001,A fixture blog post,2022-08-01,['Technology'],Ersilia,2022,,,,,,
+recBLOG000000002,Another fixture post,2023-03-15,"['Training', 'Global Health']",Ersilia,2023,,,,,,
+recBLOG000000003,A guest fixture post,2024-11-02,['Science'],Other,2024,,,,,,

@@ -1,8 +1,14 @@
 """Organisations section — the partner network."""
+import re
 from collections import Counter
 
 from . import insights as ins
 from .parse import EMPTY, as_text, col, metric, multi_counts, parse_multi, value_counts
+
+
+# Airtable record ids look like recXXXXXXXXXXXXXX. Used to tell an unresolved link
+# from a table that stores the country name directly.
+RECORD_ID_RE = re.compile(r"^rec[A-Za-z0-9]{10,}$")
 
 
 def country_lookup(countries):
@@ -15,13 +21,25 @@ def country_lookup(countries):
 
 
 def resolve_countries(frame, id_to_name, column="country"):
-    """Count organisations per country, resolving record ids to names."""
+    """Count organisations per country, resolving record ids to names.
+
+    An id that does NOT resolve is dropped rather than used as its own label. It used to
+    fall through unchanged, which put a raw ``recXXXXXXXXXXXXXX`` on the axis of the
+    country ranking and shaded nothing on the map — a database key presented to the
+    reader as though it were a place. The count of unresolved ids is still published in
+    the insight, so the gap is stated rather than hidden.
+    """
     counter = Counter()
     if frame is None or frame.empty or column not in frame.columns:
         return counter
     for value in frame[column].dropna():
         for token in parse_multi(value):
-            counter[id_to_name.get(token, token)] += 1
+            name = id_to_name.get(token)
+            if name:
+                counter[name] += 1
+            elif not RECORD_ID_RE.match(token):
+                # Not an id at all — some tables hold the country name directly.
+                counter[token] += 1
     return counter
 
 

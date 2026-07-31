@@ -1,0 +1,6 @@
+airtable_id,Name,Acronym,Type,Classification,Country,Focus Areas,Focus Region,Community,Conferences,Contacts,Description,Events,Grants,Opportunities,Website,Projects,Workshops
+recORGX000000001,Testland Research Institute,TRI,Academia,['Collaborator'],['recCTRY000000001'],['Science'],['Global'],,,,,,,,,,
+recORGX000000002,Sampleia Health Foundation,SHF,Foundation,['Funder'],['recCTRY000000002'],"['Capacity building', 'Science']",['Global'],,,,,,,,,,
+recORGX000000003,Fixture Pharma,FP,Corporate,['Collaborator'],['recCTRY000000003'],['Healthcare'],['Global'],,,,,,,,,,
+recORGX000000004,Example Open Network,EON,Civil Society,"['Network', 'Funder']",['recCTRY000000004'],['Open Source'],['Global'],,,,,,,,,,
+recORGX000000005,Orphan Org,OO,Academia,['Collaborator'],['recMISSING000001'],,['Global'],,,,,,,,,,
