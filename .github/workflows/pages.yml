@@ -1,0 +1,103 @@
+name: Deploy site
+
+# Fetches the Airtable snapshots into the runner, builds site/data from them, and
+# deploys site/ to GitHub Pages.
+#
+# The snapshots are deliberately NOT committed (see .gitignore): the community table
+# in raw form carries personal data, and a public repository has no reason to hold a
+# copy of the registry. They live only in the runner for the length of this job, so
+# the fetch and the build have to happen in the same workflow.
+#
+# This needs AIRTABLE_API_KEY (a read-only personal access token is sufficient). The
+# aggregation drops identifying columns and the export aborts if anything
+# email-shaped reaches the output, so the published files stay aggregate-only.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays 06:00 UTC — refresh the published figures weekly.
+    - cron: "0 6 * * 1"
+  push:
+    # Note: the weekly `schedule` above only ever fires from the default branch,
+    # so main must stay the default branch for the automatic refresh to run.
+    branches: [main]
+    paths:
+      - "site/**"
+      - "scripts/export_site_data.py"
+      - "scripts/site_data/**"
+      - "scripts/fetch_airtable.py"
+      - "scripts/check_config_paths.py"
+      - "data/airtable_api_identifiers.csv"
+      - ".github/workflows/pages.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress run.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pandas pyairtable==3.0.1
+
+      # Read-only. Fails the job on a partial fetch rather than quietly publishing
+      # a site that under-reports.
+      - name: Fetch Airtable snapshots into the runner
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+        run: |
+          python scripts/fetch_airtable.py \
+            -t data/airtable_api_identifiers.csv \
+            -o data/air_tables/
+
+      - name: Build site data
+        run: python scripts/export_site_data.py --data-dir data/air_tables --out site/data/stats.json
+
+      # Fails the build if any chart in config.js points at a metric the exporter no
+      # longer produces. Without this, a renamed metric silently drops a card.
+      - name: Check every chart has data
+        run: python scripts/check_config_paths.py
+
+      # Belt and braces on top of the export's own guards: whatever else happens,
+      # the artifact that goes public must contain no raw snapshot and no address.
+      - name: Verify the artifact is aggregate-only
+        run: |
+          if find site -path '*air_tables*' | grep -q .; then
+            echo "::error::A raw snapshot ended up under site/ — refusing to publish."
+            exit 1
+          fi
+          if grep -rlEI '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' site/; then
+            echo "::error::An email-like string reached site/ — refusing to publish."
+            exit 1
+          fi
+          echo "Artifact is aggregate-only: no snapshots, no addresses."
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
