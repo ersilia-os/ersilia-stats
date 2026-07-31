@@ -277,6 +277,39 @@ function drillTable(metric) {
   return wrap;
 }
 
+/* A shares card has no single metric, so its table is assembled from its sources —
+   one row per split, with both sides and the share. This was the only card type
+   offering no Table button, which made it the one place the affordance was missing. */
+function sharesTable(sources, data) {
+  const wrap = el("div", "scrollwrap");
+  const table = el("table", "data");
+  const thead = el("thead");
+  const headRow = el("tr");
+  ["Split", "Yes", "No", "Share"].forEach((h) => headRow.appendChild(el("th", null, h)));
+  thead.appendChild(headRow);
+  table.appendChild(thead);
+
+  const body = el("tbody");
+  (sources || []).forEach((source) => {
+    const metric = getByPath(data.sections, source.data);
+    if (!metric || !metric.labels || metric.labels.length < 2) return;
+    const total = metric.values.reduce((a, b) => a + Number(b), 0);
+    if (!total) return;
+    let index = source.highlight ? metric.labels.indexOf(source.highlight) : 0;
+    if (index < 0) index = 0;
+    const value = Number(metric.values[index]);
+    const tr = el("tr");
+    tr.appendChild(el("td", null, source.label));
+    tr.appendChild(el("td", "num", fmtNum(value)));
+    tr.appendChild(el("td", "num", fmtNum(total - value)));
+    tr.appendChild(el("td", "num", fmtPct(value, total)));
+    body.appendChild(tr);
+  });
+  table.appendChild(body);
+  wrap.appendChild(table);
+  return wrap;
+}
+
 /* The "Table" affordance under a chart. A button that opens the shared data dialog,
    NOT a <details> that expands in place: inline, the table added its own height to
    the card, the card grew the grid row, and the row stretched every chart in it —
@@ -377,7 +410,20 @@ function chartCard(chart, data, registry) {
     if (chart.type === "meters") card.appendChild(meterRow(metric));
     else if (chart.type === "ranked") card.appendChild(rankedTable(metric, chart));
     else if (chart.type === "shares") card.appendChild(shareRow(chart.sources || [], data));
-    if (chart.type !== "shares") {
+    if (chart.type === "shares") {
+      // No CSV link: a shares card draws on several exported metrics, so there is no
+      // single file to offer. The table carries all of them.
+      const wrap = el("div", "drill");
+      const button = el("button", null, "Table");
+      button.type = "button";
+      button.setAttribute("aria-label", "Show the data behind " + chart.title + " as a table");
+      button.addEventListener("click", () => {
+        if (typeof window.openDataTable !== "function") return;
+        window.openDataTable(chart.title, sharesTable(chart.sources || [], data), null);
+      });
+      wrap.appendChild(button);
+      card.appendChild(wrap);
+    } else {
       card.appendChild(drillDown(chart, metric, csvFor(sources[0].data)));
     }
     return card;

@@ -76,18 +76,42 @@ function catAxis(labels, extra) {
       const year = l.slice(0, 4);
       if (!seen.has(year)) { seen.add(year); firstOfYear.add(l); }
     });
-    const yearsShown = Array.from(firstOfYear);
-    const everyOther = NARROW && yearsShown.length > 4;
+    // Which year labels can actually be drawn without touching.
+    //
+    // The naive rule — label the first quarter of every year — collides whenever a
+    // series starts mid-year: 2020Q4 and 2021Q1 are ADJACENT columns, so "2020" and
+    // "2021" were printed one column apart and ran together into "20202021". That is
+    // a function of column spacing, not of screen width, so it happened at 1024px on
+    // a wide card too.
+    //
+    // Instead: keep a year only if it is far enough along the axis from the last one
+    // kept. `gap` is in columns, and a 4-character mono label needs roughly three
+    // quarter-columns of room at 12px — more when the whole axis is narrow.
+    const gap = NARROW ? 5 : 3;
+    const candidates = strings
+      .map((label, index) => ({ label, index }))
+      .filter((c) => firstOfYear.has(c.label));
+
+    // If the FIRST year is a stub — the series begins in 2020Q4, so "2020" owns one
+    // column — drop it rather than the year after it. Thinning forwards kept 2020 and
+    // dropped 2021, leaving "2020, 2022, 2023…", a sequence with a hole in it that
+    // reads as a mistake. Dropping the stub gives an unbroken run of full years, and
+    // the axis loses nothing: the first bar is still there, just unlabelled.
+    if (candidates.length > 1 && candidates[1].index - candidates[0].index < gap) {
+      candidates.shift();
+    }
+
+    const keep = new Set();
+    let lastKept = -Infinity;
+    candidates.forEach((c) => {
+      if (c.index - lastKept < gap) return;
+      keep.add(c.label);
+      lastKept = c.index;
+    });
     axisLabel = {
       color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
       interval: 0, rotate: 0, margin: 9,
-      formatter: (value) => {
-        if (!firstOfYear.has(value)) return "";
-        // Every other year on a narrow axis: adjacent quarters put two year labels
-        // side by side, which ran together into one unreadable number.
-        if (everyOther && yearsShown.indexOf(value) % 2 === 1) return "";
-        return value.slice(0, 4);
-      },
+      formatter: (value) => (keep.has(value) ? value.slice(0, 4) : ""),
     };
   } else if (yearly) {
     axisLabel = {

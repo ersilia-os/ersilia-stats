@@ -606,8 +606,26 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
    =========================================================================== */
 @media (max-width: 1100px) {
   .jump-grid { grid-template-columns: repeat(2, 1fr); }
-  .span-3, .span-4, .span-5 { grid-column: span 6; }
-  .span-7, .span-8 { grid-column: span 12; }
+
+  /* ONE COLUMN, and this is deliberate rather than lazy.
+     The previous mapping halved some spans and full-widthed others (3/4/5 -> 6,
+     7/8 -> 12), which meant a row built to sum to 12 now summed to 18 and wrapped —
+     leaving an orphan card beside an empty half. An incomplete tessellation is the
+     specific thing this layout exists to avoid, and no per-card CSS mapping can
+     preserve it, because the collapse cannot see which cards shared a row: a
+     three-cell row orphans one card under any two-column scheme.
+     At 1024px a single column is still ~740px wide, which is more than any of these
+     charts had at 12 columns on a 1440px screen. */
+  .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
+  /* One card per line means a row's min-height would be divided between them and every
+     chart would fall to its 110px floor, so the height moves to the card. */
+  .crow.h-sm, .crow.h-md, .crow.h-lg, .crow.h-xl, .crow.h-map { min-height: 0; }
+  .crow > .card { min-height: 320px; }
+  /* A facets card holds two stacked panels, so it needs the height it had in the grid;
+     at 320px each panel was ~90px and the axis labels ate most of that. */
+  .crow.h-xl > .card { min-height: 430px; }
+  .crow.h-map > .card { min-height: 420px; }
+  .crow.h-tall > .card { min-height: 620px; }
 }
 @media (max-width: 900px) {
   .sidebar {
@@ -630,24 +648,19 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
   .sidebar nav ul { flex-wrap: wrap; overflow-x: visible; }
   .sidebar nav a { border-bottom: 2px solid transparent; white-space: nowrap; }
   .sidebar nav a[aria-current="page"] { border-bottom-color: var(--tab, var(--ink)); }
+  /* The footer links used to be `display: none` here, on the assumption that Downloads
+     was reachable from the nav. It is not — renderNav() only adds the views — so hiding
+     them made the Downloads view and the source link unreachable on a phone except by
+     typing the hash. They stay, inline, costing one line rather than three.
+     `flex: 1 0 100%` gives them their own full-width line in the sidebar's flex row;
+     without it the row sized to its content and pushed the page 184px wider than the
+     viewport, which is sideways scroll. */
   .sidebar .foot {
-    margin: 0; padding: 0; border: 0; display: flex; align-items: center; gap: var(--sp-4);
-    flex: 0 0 auto; order: 2;
-  }
-  .sidebar .foot .snapshot, .sidebar .foot a, .sidebar .foot button { margin: 0; width: auto; }
-  /* Only the snapshot and Methods survive the narrow bar; Downloads is reachable
-     from the nav and the source link from the footer. */
-  /* These were `display: none`, on the assumption that Downloads was reachable from
-     the nav. It is not — renderNav() only adds the eight views — so hiding them made
-     the Downloads view and the source link unreachable on a phone except by typing
-     the hash. They stay, laid out inline to cost one line rather than three. */
-  /* flex: 1 0 100% gives the footer its own full-width line in the sidebar's flex row.
-     Without it the row sized to its content and pushed the page 184px wider than the
-     viewport, which is horizontal scroll on a phone. */
-  .sidebar .foot {
+    margin: 0; padding: 0; border: 0;
     display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-4);
     flex: 1 0 100%; min-width: 0; order: 4;
   }
+  .sidebar .foot .snapshot { margin: 0; }
   .sidebar .foot a, .sidebar .foot button { display: inline; width: auto; margin: 0; }
   main { margin-left: 0; padding-top: var(--sp-6); }
   .stat-row.primary { grid-template-columns: repeat(2, 1fr); }
@@ -660,6 +673,11 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
      real height of its own instead. */
   .crow.h-sm, .crow.h-md, .crow.h-lg, .crow.h-xl, .crow.h-map { min-height: 0; }
   .crow > .card { min-height: 300px; }
+  /* The choropleth needs the height more than anything else here: at 300px the map
+     itself got ~150px, which on a phone is a world where most countries are a few
+     pixels across. It cannot pan or zoom (roam is off, so it never fights the page
+     scroll), so size is the only lever. */
+  .crow.h-map > .card { min-height: 400px; }
   .crow.h-tall > .card { min-height: 560px; }
   main { padding-left: var(--sp-5); padding-right: var(--sp-5); }
 }
