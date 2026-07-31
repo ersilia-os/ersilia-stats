@@ -52,11 +52,11 @@ function renderLanding(outlet, registry) {
 
   outlet.appendChild(el("div", "section-label", "Explore"));
   const jumps = el("div", "jump-grid");
-  VIEWS.forEach((view) => {
-    const hue = sectionColor(view.id);
+  VIEWS.forEach((view, index) => {
+    const hue = slotColor(index);
     const link = el("a", "jump");
     link.href = "#/" + view.id;
-    link.style.setProperty("--dot", hue);
+    link.style.setProperty("--slot", hue);
 
     const title = el("div", "t");
     title.appendChild(el("span", null, view.title));
@@ -197,11 +197,11 @@ function renderDownloads(outlet) {
 
   // Grouped by exported section rather than by view, so metrics the site no
   // longer charts are still reachable.
-  Object.keys(DATA.sections).sort().forEach((section) => {
+  Object.keys(DATA.sections).sort().forEach((section, index) => {
     if (section.indexOf("__") === 0) return;
     const metrics = DATA.sections[section];
     const group = el("div", "dl-group");
-    group.style.setProperty("--dot", sectionColor(section));
+    group.style.setProperty("--slot", slotColor(index));
     group.appendChild(el("h4", null, titleCase(section)));
     const list = el("div", "dl-links");
     Object.keys(metrics).sort().forEach((name) => {
@@ -319,18 +319,16 @@ function wireMethods() {
 /* ----------------------------------------------------------------- nav */
 function renderNav() {
   const list = document.getElementById("nav-list");
-  const add = (path, label, hue) => {
+  // A plain list. No colour dots: they encoded nothing the reader could act on.
+  const add = (path, label) => {
     const item = el("li");
-    const link = el("a", null);
+    const link = el("a", null, label);
     link.href = "#" + path;
-    if (hue) link.style.setProperty("--dot", hue);
-    link.appendChild(el("span", "dot"));
-    link.appendChild(el("span", null, label));
     item.appendChild(link);
     list.appendChild(item);
   };
-  add("/", "Overview", sectionColor("overview"));
-  VIEWS.forEach((view) => add("/" + view.id, view.title, sectionColor(view.id)));
+  add("/", "Overview");
+  VIEWS.forEach((view) => add("/" + view.id, view.title));
 }
 
 /* ---------------------------------------------------------------- boot */
@@ -366,9 +364,9 @@ async function main() {
   fillMethods();
   wireMethods();
 
-  Router.add("/", renderLanding, null, "overview");
-  VIEWS.forEach((view) => Router.add("/" + view.id, renderView(view), view.title, view.id));
-  Router.add("/downloads", renderDownloads, "Downloads", "overview");
+  Router.add("/", renderLanding, null);
+  VIEWS.forEach((view) => Router.add("/" + view.id, renderView(view), view.title));
+  Router.add("/downloads", renderDownloads, "Downloads");
   Router.start(outlet);
 }
 

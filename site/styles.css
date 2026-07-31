@@ -7,59 +7,28 @@
 
    Single light theme by house rule — there is deliberately no dark palette.
 
-   Two things this layer does that the house standard does not anticipate, both
-   deliberate and both documented where they happen:
-     1. Every section owns a hue (--sec), which colours its nav entry AND its
-        charts. See the note above --sec-models.
+   Two principles, both deliberate:
+     1. NEUTRAL CHROME, COLOUR IN THE DATA. Navigation, headers and cards are grey;
+        the palette belongs to the marks. So colour always means "this is a
+        category" and never "this is page four".
      2. Chart marks use snapped brand hues, because the raw ones fail the
         colour-vision gates. See the note above --chart-1.
 
-   Chrome is deliberately LIGHT: nav, buttons and pills sit at weight 450 and let
-   colour carry state. Weight belongs on data, not on furniture.
+   Chrome is also LIGHT: nav, buttons and pills sit at weight 450, and selection is
+   shown with a quiet fill rather than a filled pill. Weight belongs on data.
    =========================================================================== */
 
 :root {
-  /* --- Section identity hues ----------------------------------------------
-     One hue per section. It marks the sidebar entry and becomes the single
-     series colour for that section's own charts, so a page reads as itself.
-
-     Derived from the ersilia.css brand hues, snapped into the legible OKLCH band
-     (hue angle held), then ASSIGNED TO THE NAV ORDER BY OPTIMISATION. That last
-     step matters: in a sidebar the dots are adjacent, so neighbouring hues must
-     be tellable apart. The obvious assignment put lime next to amber, which is
-     ΔE 5.0 under deuteranopia — indistinguishable for a red-green colourblind
-     reader. This order clears both gates:
-
-       adjacent CVD ΔE 23.1 (target >= 8) · normal-vision ΔE 28.7 (floor 15)
-
-     So do not reorder the nav without re-running
-     dataviz/scripts/validate_palette.js over the resulting sequence.
-
-     A NOTE ON THE HOUSE RULE: the standard's T2-ACCENT-SPRAWL caps a page at four
-     data hues, on the reasoning that flat accents sprinkled across chrome look
-     noisy. Seven section hues is a deliberate, user-chosen departure — here the
-     hue navigates AND encodes, which is the work the rule wants colour to be
-     doing. In practice the checker does not flag it, because it counts uses of
-     the ersilia.css hue *variables* and these are separate tokens; the finding it
-     does raise is T1-COLOR-OFFBRAND, below. Do not treat that silence as
-     endorsement: if you add an eighth section, re-run the validator. */
-  --sec-models:       #6d5de7;  /* periwinkle */
-  --sec-projects:     #22bbad;  /* turquoise  */
-  --sec-publications: #734080;  /* plum       */
-  --sec-repositories: #67bb55;  /* lime       */
-  --sec-community:    #af5cc7;  /* orchid     */
-  --sec-reach:        #d19710;  /* amber      */
-  --sec-outreach:     #1c7db0;  /* cobalt     */
-  --sec-overview:     #2C3E50;  /* ink — home reads as home, not as a section */
-
-  /* The active section's hue. app.js sets this per view on <main>; everything
-     downstream inherits it, so no component needs to know which section it is
-     in. Defaults to the brand so a card outside a section still renders. */
-  --sec: var(--brand);
+  /* The chrome is NEUTRAL. An earlier version gave each section its own hue and
+     painted that section's charts with it; the result was a monochrome page per
+     section, which reads as a restriction rather than as a palette. Colour now lives
+     only in the data — see the chart steps below — and the navigation, headers and
+     cards are grey. Good dashboards work this way: colour means "this is a category",
+     not "this is page four". */
 
   /* --- Multi-series chart marks -------------------------------------------
-     For charts that genuinely carry several series at once (stacked, grouped,
-     multi-line). Single-series charts use var(--sec) instead.
+     The global categorical set. Any chart on any page may draw on it: a one-series
+     chart takes slot 1, a composition takes slots in order.
 
      Snapped from the brand hues by the dataviz procedure and validated against a
      #FFFFFF card surface: adjacent CVD ΔE 15.8 (target >= 8) · normal-vision
@@ -120,30 +89,22 @@
 .sidebar .wordmark { font-size: 17px; margin: 0; letter-spacing: -.015em; }
 
 .sidebar nav ul { list-style: none; margin: 0; padding: 0; }
+/* A plain list of links. No leading dots — they encoded nothing a reader could use
+   — and no coloured left edge, which read as a stray dark bar. Selection is shown the
+   way navigation normally shows it: the current item is darker, on a quiet fill. */
 .sidebar nav a {
-  display: flex; align-items: center; gap: 9px;
-  padding: 6px 8px 6px 9px; border-radius: var(--radius-sm);
+  display: block;
+  padding: 6px 10px; border-radius: var(--radius-sm);
   /* Light chrome: no semibold anywhere in the furniture. */
   font-size: 12.5px; font-weight: 450; color: var(--muted);
-  border-left: 2px solid transparent;
-  transition: color var(--tap), background var(--tap), border-color var(--tap);
-}
-.sidebar nav a .dot {
-  width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto;
-  background: var(--dot, var(--faint));
-  transition: transform var(--tap);
+  transition: color var(--tap), background var(--tap);
 }
 .sidebar nav a:hover {
-  color: var(--ink); text-decoration: none;
-  background: color-mix(in srgb, var(--dot, var(--brand)) 7%, var(--surface));
+  color: var(--ink); text-decoration: none; background: var(--surface-2);
 }
-/* Active state is colour + a rule + a faint tint. No filled pill, no bold. */
 .sidebar nav a[aria-current="page"] {
-  color: var(--dot, var(--brand));
-  border-left-color: var(--dot, var(--brand));
-  background: color-mix(in srgb, var(--dot, var(--brand)) 9%, var(--surface));
+  color: var(--ink); font-weight: 500; background: var(--surface-2);
 }
-.sidebar nav a[aria-current="page"] .dot { transform: scale(1.25); }
 .sidebar .navgroup {
   margin: 16px 0 5px; padding: 0 9px;
   font-size: 10.5px; font-weight: 500; color: var(--faint);
@@ -173,18 +134,13 @@ main > * { max-width: var(--content-w); }
 /* ---------- Section header --------------------------------------------- */
 .viewhead { margin: 0 0 18px; }
 .viewhead h2 {
-  display: flex; align-items: center; gap: 9px;
   font-size: 19px; font-weight: 600; letter-spacing: -.015em; margin: 0 0 4px;
 }
-.viewhead h2::before {
-  content: ""; width: 9px; height: 9px; border-radius: 3px;
-  background: var(--sec); flex: 0 0 auto;
-}
 .viewhead p { margin: 0; color: var(--muted); max-width: 74ch; font-size: 12.5px; }
-/* The one large block of section colour on the page. */
+/* A hairline, not a coloured band. The heading is the signal; the rule just closes it. */
 .viewhead::after {
-  content: ""; display: block; height: 2px; margin-top: 13px; border-radius: 2px;
-  background: linear-gradient(90deg, var(--sec), color-mix(in srgb, var(--sec) 8%, transparent));
+  content: ""; display: block; height: 1px; margin-top: 14px;
+  background: var(--border);
 }
 
 /* ===========================================================================
@@ -208,7 +164,7 @@ main > * { max-width: var(--content-w); }
 .stat .d { display: flex; align-items: baseline; gap: 4px; margin-top: 2px; }
 /* Quiet delta: no mono, no semibold, no loud green. A hue arrow carries direction. */
 .stat .delta { font-size: 11px; font-weight: 450; color: var(--muted); }
-.stat .delta::before { content: "▲ "; color: var(--sec); font-size: 8px; }
+.stat .delta::before { content: "▲ "; color: var(--good); font-size: 8px; }
 .stat .delta.down::before { content: "▼ "; color: var(--muted); }
 .stat .delta.flat::before { content: "· "; color: var(--faint); }
 .stat .spark { display: block; width: 100%; height: 24px; margin-top: 7px; }
@@ -269,7 +225,7 @@ main > * { max-width: var(--content-w); }
   color: var(--faint); font: 450 9.5px/12px var(--sans); text-align: center;
   cursor: help; padding: 0;
 }
-.info:hover { color: var(--sec); border-color: var(--sec); }
+.info:hover { color: var(--brand); border-color: var(--brand); }
 .hovertip[data-tip]::after { left: auto; right: 0; }
 
 /* Metric toggles — quiet until pressed, then the section hue. */
@@ -280,9 +236,7 @@ main > * { max-width: var(--content-w); }
 }
 .toggle button:hover { background: var(--surface-2); }
 .toggle button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--sec) 12%, var(--surface));
-  border-color: color-mix(in srgb, var(--sec) 40%, var(--surface));
-  color: color-mix(in srgb, var(--sec) 78%, #000);
+  background: var(--surface-2); border-color: var(--border); color: var(--ink);
 }
 
 /* ===========================================================================
@@ -299,7 +253,7 @@ main > * { max-width: var(--content-w); }
   height: 4px; border-radius: 999px; background: var(--surface-2); margin-top: 5px;
   overflow: hidden;
 }
-.meter .fill { height: 100%; border-radius: 999px; background: var(--sec); }
+.meter .fill { height: 100%; border-radius: 999px; background: var(--chart-1); }
 
 /* ===========================================================================
    Ranked table — top-N with an inline microbar. Replaces three bar charts.
@@ -320,8 +274,8 @@ table.ranked td.num {
   color: var(--muted); width: 52px;
 }
 table.ranked td.barcell { width: 28%; padding-left: 12px; }
-table.ranked .microbar { height: 4px; border-radius: 999px; background: var(--sec); min-width: 2px; }
-table.ranked tbody tr:hover td { background: color-mix(in srgb, var(--sec) 5%, var(--surface)); }
+table.ranked .microbar { height: 4px; border-radius: 999px; background: var(--chart-1); min-width: 2px; }
+table.ranked tbody tr:hover td { background: var(--surface-2); }
 
 /* ===========================================================================
    Share rows — several two-category splits stacked compactly in one card.
@@ -333,11 +287,11 @@ table.ranked tbody tr:hover td { background: color-mix(in srgb, var(--sec) 5%, v
 }
 .share .lbl { font-size: 11.5px; color: var(--ink); font-weight: 450; }
 .share .pct {
-  font-family: var(--mono); font-size: 11px; color: var(--sec);
+  font-family: var(--mono); font-size: 11px; color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 .share .track { display: flex; height: 7px; border-radius: 999px; overflow: hidden; gap: 2px; }
-.share .a { background: var(--sec); }
+.share .a { background: var(--chart-1); }
 .share .b { background: var(--surface-2); }
 .share .legend { display: flex; gap: 12px; margin-top: 4px; font-size: 10.5px; color: var(--faint); }
 .share .legend b { font-weight: 450; color: var(--muted); font-family: var(--mono); }
@@ -353,11 +307,11 @@ details.drill > summary {
   display: flex; align-items: center; gap: 5px;
 }
 details.drill > summary::-webkit-details-marker { display: none; }
-details.drill > summary::before { content: "▸"; color: var(--sec); font-size: 8px; }
+details.drill > summary::before { content: "▸"; color: var(--faint); font-size: 8px; }
 details[open].drill > summary::before { content: "▾"; }
-details.drill > summary:hover { color: var(--sec); }
+details.drill > summary:hover { color: var(--brand); }
 details.drill > summary:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--sec) 55%, #fff); outline-offset: 2px;
+  outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px;
 }
 .drill .scrollwrap { max-height: 240px; margin-top: 6px; }
 .drill .dl { font-size: 10.5px; margin-top: 6px; display: inline-block; }
@@ -392,7 +346,7 @@ a.jump {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 13px 15px 11px;
   box-shadow: var(--shadow-sm); color: var(--ink);
-  border-top: 2px solid var(--dot, var(--brand));
+  border-top: 2px solid var(--slot, var(--chart-1));
   transition: box-shadow var(--tap), transform var(--tap);
 }
 a.jump:hover { text-decoration: none; box-shadow: var(--shadow); transform: translateY(-1px); }
@@ -402,7 +356,7 @@ a.jump .t {
 }
 a.jump .n {
   font-family: var(--mono); font-variant-numeric: normal;
-  color: var(--dot, var(--brand)); font-size: 14px;
+  color: var(--slot, var(--chart-1)); font-size: 14px;
 }
 a.jump .s { font-size: 11px; color: var(--muted); line-height: 1.45; }
 a.jump .spark { height: 20px; margin-top: 2px; }
@@ -414,11 +368,11 @@ a.jump .spark { height: 20px; margin-top: 2px; }
 .dl-group h4 { margin: 0 0 7px; font-size: 11.5px; font-weight: 500; color: var(--ink); }
 .dl-group h4::before {
   content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--dot, var(--brand)); margin-right: 7px;
+  background: var(--slot, var(--chart-1)); margin-right: 7px;
 }
 .dl-links { display: flex; flex-direction: column; gap: 5px; }
 a.dl { display: inline-flex; align-items: baseline; gap: 6px; font-size: 11.5px; color: var(--muted); }
-a.dl::before { content: "↓"; color: var(--sec); }
+a.dl::before { content: "↓"; color: var(--faint); }
 a.dl:hover { color: var(--ink); text-decoration: none; }
 
 /* ===========================================================================
@@ -453,7 +407,7 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
   border-radius: 999px; padding: 4px 11px; margin-bottom: 14px;
 }
 .chart:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--sec) 55%, #fff); outline-offset: 2px;
+  outline: 2px solid color-mix(in srgb, var(--brand) 55%, #fff); outline-offset: 2px;
 }
 
 /* ===========================================================================
@@ -480,8 +434,8 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
   .sidebar nav { flex: 1 0 100%; order: 3; min-width: 0; }
   .sidebar nav ul { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
   .sidebar nav ul::-webkit-scrollbar { display: none; }
-  .sidebar nav a { border-left: 0; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .sidebar nav a[aria-current="page"] { border-left: 0; border-bottom-color: var(--dot, var(--brand)); }
+  .sidebar nav a { border-bottom: 2px solid transparent; white-space: nowrap; }
+  .sidebar nav a[aria-current="page"] { border-bottom-color: var(--ink); }
   .sidebar .navgroup { display: none; }
   .sidebar .foot {
     margin: 0; padding: 0; border: 0; display: flex; align-items: center; gap: 12px;

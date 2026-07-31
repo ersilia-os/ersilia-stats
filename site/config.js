@@ -33,27 +33,26 @@
       derives it from how many categories the metric actually has, because a
       seven-category chart in a full-width card is seven bars adrift in white.
 
-   Colour: each section owns a hue (see styles.css). Single-series charts take it
-   automatically; only genuinely multi-series charts touch the categorical palette.
+   Colour: the chrome is neutral and the palette belongs to the marks. A one-series
+   chart takes the single accent; anything categorical takes the palette in order.
    Nothing here needs to name a colour. */
 
-/* `hue` names the section each headline number belongs to, so the landing page's
-   sparklines carry that section's colour instead of a neutral grey. It doubles as a
-   visual key to the sidebar. */
+/* `slot` picks a palette slot for the tile's sparkline, so the headline row is
+   polychrome. Chrome elsewhere stays neutral. */
 const PRIMARY_KPIS = [
-  { key: "models", label: "Models in the Hub", hue: "models" },
-  { key: "community_members", label: "People involved", hue: "community" },
-  { key: "repositories", label: "Repositories", hue: "repositories" },
-  { key: "total_citations", label: "Citations", hue: "publications" },
+  { key: "models", label: "Models in the Hub", slot: 0 },
+  { key: "community_members", label: "People involved", slot: 2 },
+  { key: "repositories", label: "Repositories", slot: 5 },
+  { key: "total_citations", label: "Citations", slot: 4 },
 ];
 
 // Shown when the Models table has not been fetched yet, so the hero row still has
 // four tiles rather than a gap.
 const PRIMARY_KPIS_FALLBACK = [
-  { key: "community_members", label: "People involved", hue: "community" },
-  { key: "repositories", label: "Repositories", hue: "repositories" },
-  { key: "publications", label: "Publications", hue: "publications" },
-  { key: "total_citations", label: "Citations", hue: "publications" },
+  { key: "community_members", label: "People involved", slot: 0 },
+  { key: "repositories", label: "Repositories", slot: 2 },
+  { key: "publications", label: "Publications", slot: 5 },
+  { key: "total_citations", label: "Citations", slot: 4 },
 ];
 
 const SECONDARY_KPIS = [

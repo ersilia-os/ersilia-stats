@@ -9,15 +9,16 @@
        it does not turn into a 1000px smear when the card is wide.
      - Axis lines are gone. Gridlines are gone or reduced to one faint baseline.
        Values are labelled on the mark, so the axis often has nothing left to do.
-     - Single-series charts take the SECTION hue (`secColor()`), so a page reads as
-       itself. Only genuinely multi-series charts touch the categorical palette.
+     - Colour lives in the DATA, never in the chrome. A one-series chart takes the
+       single `accent()`; anything categorical takes the fixed palette order. The
+       navigation and headers stay grey.
      - No dual-axis charts ever: two measures of different scale become stacked
        facets sharing one x, or an index to a common base.
      - Text wears ink tokens, never the series colour.
 
    Every chart also ships a drill-down table (cards.js), which is the accessible
-   equivalent for a canvas and the documented contrast relief for the three
-   section hues that sit below 3:1 on white. */
+   equivalent for a canvas and the documented contrast relief for the two palette
+   slots that sit below 3:1 on white. */
 
 /* ---------------------------------------------------------------- basics */
 function base() {
@@ -35,24 +36,55 @@ function base() {
   };
 }
 
-/* A category axis with nothing but labels — no line, no ticks, no grid. */
+/* A category axis with nothing but labels — no line, no ticks, no grid.
+
+   Time axes are YEAR-AWARE. Thinning a 24-quarter axis with `interval: 1` dropped
+   every other quarter and rotating what was left made it unreadable, so most of the
+   time labels on this site were effectively invisible. Instead: mark each year once,
+   at its first quarter, horizontally. The reader gets an unambiguous year scale, the
+   series keeps its quarterly resolution, and nothing is rotated. */
 function catAxis(labels, extra) {
-  const compact = labels.length > 10;
-  // A long quarterly axis becomes a wall of rotated text; thin it out and let the
-  // tooltip carry the rest.
-  const stride = labels.length > 40 ? 3 : (labels.length > 26 ? 2 : (labels.length > 14 ? 1 : 0));
+  const strings = labels.map(String);
+  const quarterly = strings.length > 0 && strings.every((l) => /^\d{4}Q[1-4]$/.test(l));
+  const yearly = !quarterly && strings.length > 0 && strings.every((l) => /^\d{4}$/.test(l));
+
+  let axisLabel;
+  if (quarterly) {
+    // One label per year, at the first quarter present for that year.
+    const firstOfYear = new Set();
+    const seen = new Set();
+    strings.forEach((l) => {
+      const year = l.slice(0, 4);
+      if (!seen.has(year)) { seen.add(year); firstOfYear.add(l); }
+    });
+    axisLabel = {
+      color: T.faint, fontSize: 10, fontFamily: T.mono,
+      interval: 0, rotate: 0, margin: 9,
+      formatter: (value) => (firstOfYear.has(value) ? value.slice(0, 4) : ""),
+    };
+  } else if (yearly) {
+    axisLabel = {
+      color: T.faint, fontSize: 10, fontFamily: T.mono,
+      // Every year, horizontal, unless there are so many that they would collide.
+      interval: strings.length > 18 ? 1 : 0, rotate: 0, margin: 8,
+    };
+  } else {
+    // Plain categories: keep them all, truncate rather than rotate.
+    axisLabel = {
+      color: T.faint, fontSize: 10, fontFamily: T.sans,
+      interval: 0, rotate: strings.length > 8 ? 30 : 0,
+      width: 76, overflow: "truncate", margin: 8,
+    };
+  }
+
   return Object.assign({
     type: "category",
-    data: labels.map(String),
+    data: strings,
     axisLine: { show: false },
     axisTick: { show: false },
     splitLine: { show: false },
-    axisLabel: {
-      color: T.faint, fontSize: 10, fontFamily: T.mono,
-      interval: stride,
-      rotate: labels.length > 9 ? 34 : 0,
-      formatter: compact ? shortQuarter : undefined,
-    },
+    // A faint tick per year on a quarterly axis, so the year labels have anchors.
+    axisLabel: axisLabel,
   }, extra || {});
 }
 
@@ -87,20 +119,11 @@ function valueLabel(position, formatter) {
 
    1. Semantics the exporter named (joined/left, done/stuck) — so a state keeps one
       colour everywhere on the site.
-   2. For exactly TWO unnamed series, the section hue and a pale tint of it. Two
-      series do not need two identities; keeping them in one hue family means a
-      cobalt page stays cobalt instead of sprouting purple and red bars.
-   3. For three or more, the fixed categorical slots, whose ORDER is what makes
-      them colour-vision safe. */
+   2. Otherwise the fixed categorical slots, whose ORDER is what makes them
+      colour-vision safe. */
 function seriesColors(metric, count) {
   const semantics = metric && metric.semantics;
   if (Array.isArray(semantics)) return semantics.map((s, i) => semanticColor(s, i));
-  if (count === 2) {
-    const hue = secColor();
-    // A wide lightness gap, so the pair separates even under any colour-vision
-    // deficiency — the difference is value, not hue.
-    return [hue, mixWithWhite(hue, 0.58)];
-  }
   return Array.from({ length: count }, (_, i) => catColor(i));
 }
 
@@ -112,7 +135,7 @@ function optLollipop(d) {
   const prepared = collapseTies(d);
   const labels = prepared.labels.slice().reverse();
   const values = prepared.values.slice().reverse();
-  const color = secColor();
+  const color = accent();
   const max = Math.max.apply(null, values.map(Number));
 
   const o = base();
@@ -153,18 +176,17 @@ function optLollipop(d) {
   return o;
 }
 
-/* An ordered lollipop (income bands, tenure bands): the dot takes its step from
-   the sequential ramp, so the reader sees the order in the colour too. */
+/* An ordered lollipop (income bands, tenure bands): the dot takes its step from the
+   sequential ramp, so the reader sees the order in the colour as well as the
+   position. One hue, light to dark — that is what a ramp is for. */
 function optOrdinalLollipop(d) {
   const o = optLollipop(d);
   const n = d.labels.length;
-  // A ramp built from the section hue, not the fixed periwinkle sequential steps —
-  // periwinkle dots on an amber page read as a different chart entirely.
   // Reversed, because optLollipop reverses to draw top-down.
   o.series[1].data = o.series[1].data.map((point, i) => ({
     value: point,
     itemStyle: {
-      color: shadeOf(secColor(), n - 1 - i, n),
+      color: seqAt(n > 1 ? (n - 1 - i) / (n - 1) : 0),
       borderColor: T.surface, borderWidth: 1.5,
     },
   }));
@@ -196,13 +218,13 @@ function optColumn(d) {
   const o = base();
   o.grid.top = 22;
   o.tooltip.trigger = "axis";
-  o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(secColor(), 0.06) } };
+  o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(accent(), 0.06) } };
   o.tooltip.valueFormatter = fmtNum;
   o.xAxis = catAxis(d.labels);
   o.yAxis = valAxis({ show: false });
   o.series = [{
     type: "bar", data: d.values, barMaxWidth: 26,
-    itemStyle: { color: secColor(), borderRadius: [3, 3, 0, 0] },
+    itemStyle: { color: accent(), borderRadius: [3, 3, 0, 0] },
     // Every column labelled: with the axis hidden, the label IS the value.
     label: valueLabel("top", (p) => fmtCompact(p.value)),
   }];
@@ -213,7 +235,7 @@ function optMultiBar(d, stacked) {
   const o = base();
   o.grid.top = 28;
   o.tooltip.trigger = "axis";
-  o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(secColor(), 0.06) } };
+  o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(accent(), 0.06) } };
   o.tooltip.valueFormatter = fmtNum;
   o.legend = legend(d.series.map((s) => s.name));
   o.xAxis = catAxis(d.labels);
@@ -253,7 +275,7 @@ function optArea(d) {
   o.tooltip.valueFormatter = fmtNum;
   o.xAxis = catAxis(d.labels, { boundaryGap: false });
   o.yAxis = valAxis();
-  const color = secColor();
+  const color = accent();
   o.series = [{
     type: "line", data: d.values, smooth: 0.24, showSymbol: false, symbolSize: 8,
     lineStyle: { color: color, width: 2 },
@@ -319,7 +341,7 @@ function optFacets(d) {
     valAxis({ gridIndex: 0, name: names[0], nameLocation: "end", nameGap: 7, nameTextStyle: nameStyle }),
     valAxis({ gridIndex: 1, name: names[1], nameLocation: "end", nameGap: 7, nameTextStyle: nameStyle }),
   ];
-  const color = secColor();
+  const color = accent();
   o.series = [
     {
       type: "bar", name: names[0], data: d.series[0].values,
@@ -354,7 +376,6 @@ function optDonut(d) {
     p.name + "<br/><b>" + fmtNum(p.value) + "</b>" + (withPct ? " · " + fmtPct(p.value, total) : "");
 
   const bySemantics = d.semantics && !Array.isArray(d.semantics);
-  const ramp = !bySemantics && d.labels.length > 2;
   // A dominant slice crowds every small one into the same corner. Label only the
   // slices with room for a label; the rest are in the tooltip and the table.
   const minShare = 0.045;
@@ -383,9 +404,9 @@ function optDonut(d) {
       itemStyle: {
         // Semantics win; otherwise shade the section hue so a composition reads
         // as one family rather than six unrelated accents.
-        color: bySemantics
-          ? semanticColor(d.semantics[label], i)
-          : (ramp ? shadeOf(secColor(), i, d.labels.length) : catColor(i)),
+        // Semantics win; otherwise the categorical palette, so a composition is
+        // legible as a set of distinct categories rather than shades of one hue.
+        color: bySemantics ? semanticColor(d.semantics[label], i) : catColor(i),
       },
     })),
   }];
@@ -400,22 +421,11 @@ function optDonut(d) {
   return o;
 }
 
-/* Tints of one hue for a composition, DARKEST FIRST.
-
-   Index 0 is the largest slice or tile, so it takes the strongest tint and the
-   tail fades out. Getting this backwards made the biggest treemap tile pure white
-   with white text on it — invisible. The pale end stops at 0.70 so the lightest
-   tile still holds a readable dark label. */
-function shadeOf(hex, index, count) {
-  const t = count <= 1 ? 0 : index / (count - 1);
-  return mixWithWhite(hex, 0.06 + 0.64 * t);
-}
-
 function optTreemap(d) {
   const o = base();
   o.tooltip.trigger = "item";
   o.tooltip.formatter = (p) => p.name + ": <b>" + fmtNum(p.value) + "</b>";
-  const color = secColor();
+  const color = accent();
   o.series = [{
     type: "treemap", roam: false, nodeClick: false, breadcrumb: { show: false },
     width: "100%", height: "100%", top: 0, left: 0, right: 0, bottom: 0,
@@ -427,19 +437,11 @@ function optTreemap(d) {
     },
     data: d.labels.map((label, i) => ({
       name: label, value: d.values[i],
-      itemStyle: { color: shadeOf(color, i, d.labels.length) },
-      // Ink on the pale end of the ramp, white on the strong end — a fixed white
-      // label disappears entirely on the lightest tiles.
-      label: { color: labelInkFor(i, d.labels.length) },
+      itemStyle: { color: catColor(i) },
+      label: { color: "#fff" },
     })),
   }];
   return o;
-}
-
-/* Which label colour survives on tint `index` of `count`. Mirrors shadeOf. */
-function labelInkFor(index, count) {
-  const t = count <= 1 ? 0 : index / (count - 1);
-  return (0.06 + 0.64 * t) > 0.40 ? T.ink : "#fff";
 }
 
 /* A two-level hierarchy as a nested treemap.
@@ -457,7 +459,6 @@ function optTreeMap(d) {
     (p.treePathInfo && p.treePathInfo.length > 2
       ? p.treePathInfo[1].name + " · " + p.name
       : p.name) + ": <b>" + fmtNum(p.value) + "</b>";
-  const color = secColor();
   const tree = d.tree || [];
   o.series = [{
     type: "treemap", roam: false, nodeClick: false, breadcrumb: { show: false },
@@ -479,9 +480,10 @@ function optTreeMap(d) {
       overflow: "truncate", lineHeight: 13,
     },
     data: tree.map((parent, i) => {
-      const parents = Math.max(tree.length, 3);
-      const parentColor = shadeOf(color, i, parents);
-      const parentTint = 0.06 + 0.64 * (i / Math.max(parents - 1, 1));
+      // One palette slot per parent, then lighter tints for its children: the colour
+      // encodes which family a block belongs to, the tint distinguishes within it.
+      const parentColor = catColor(i);
+      const parentTint = 0;
       const children = parent.children || [];
       return {
         name: parent.name,
@@ -532,7 +534,7 @@ function optLogScatter(d, conf) {
       .slice(0, 6)
       .map((r) => r.name)
   );
-  const color = secColor();
+  const color = accent();
   const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: 10 };
 
   const o = base();
@@ -570,7 +572,7 @@ function optLogScatter(d, conf) {
     // Quadrant guides, unlabelled. A rotated "median" caption on a vertical rule
     // reads as debris; the tooltip and the methodology note carry the meaning.
     markLine: {
-      symbol: "none", silent: true,
+      symbol: ["none", "none"], symbolSize: 0, silent: true,
       label: { show: false },
       lineStyle: { color: T.border, width: 1, type: "dashed" },
       data: [{ xAxis: mx }, { yAxis: my }],
@@ -584,13 +586,13 @@ function optHistogram(d) {
   const o = base();
   o.grid.top = 24;
   o.tooltip.trigger = "axis";
-  o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(secColor(), 0.06) } };
+  o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(accent(), 0.06) } };
   o.tooltip.valueFormatter = (v) => fmtNum(v) + " people";
   o.xAxis = catAxis(d.labels, { axisLabel: { color: T.faint, fontSize: 10, fontFamily: T.mono, interval: 0, rotate: 0 } });
   o.yAxis = valAxis({ show: false });
   o.series = [{
     type: "bar", data: d.values, barCategoryGap: "18%",
-    itemStyle: { color: secColor(), borderRadius: [3, 3, 0, 0], borderColor: T.surface, borderWidth: 1 },
+    itemStyle: { color: accent(), borderRadius: [3, 3, 0, 0], borderColor: T.surface, borderWidth: 1 },
     label: valueLabel("top", (p) => (p.value ? fmtNum(p.value) : "")),
   }];
   if (d.mean != null) {
@@ -602,7 +604,7 @@ function optHistogram(d) {
     });
     if (index >= 0) {
       o.series[0].markLine = {
-        symbol: "none", silent: true,
+        symbol: ["none", "none"], symbolSize: 0, silent: true,
         lineStyle: { color: T.ink, width: 1, type: "dashed" },
         label: {
           show: true, position: "end", rotate: 0, distance: 4,
@@ -639,7 +641,7 @@ function optLorenz(d) {
   });
   o.xAxis = pctAxis("% of repositories", 25);
   o.yAxis = pctAxis("% of commits", 34);
-  const color = secColor();
+  const color = accent();
   o.series = [
     {
       type: "line", name: "Even", data: [[0, 0], [100, 100]],
@@ -692,7 +694,7 @@ function optHeatmap(d) {
     // legend is redundant ink — and at a narrow card width it collided with the
     // cells it was meant to explain. The mapping still applies; only the key goes.
     show: false,
-    inRange: { color: [0.88, 0.66, 0.44, 0.22, 0.04].map((t) => mixWithWhite(secColor(), t)) },
+    inRange: { color: T.seq },
   };
   o.series = [{
     type: "heatmap",
@@ -773,7 +775,7 @@ function optGantt(d) {
       itemStyle: { color: semanticColor(semantics[r.status], 0) },
     })),
     markLine: d.today ? {
-      symbol: "none", silent: true,
+      symbol: ["none", "none"], symbolSize: 0, silent: true,
       lineStyle: { color: T.ink, width: 1, type: "dashed" },
       label: {
         show: true, position: "start", color: T.ink, fontSize: 9.5,
@@ -808,10 +810,9 @@ function mapName(name) {
 
 function optMap(d, label) {
   const max = Math.max(1, ...d.values.map(Number));
-  // A single-hue ramp built from the section colour, so the map belongs to its
-  // page rather than being permanently periwinkle.
-  const color = secColor();
-  const ramp = [0.86, 0.66, 0.46, 0.26, 0.06].map((t) => mixWithWhite(color, t));
+  // Magnitude is a single-hue ramp, light to dark — the documented sequential steps.
+  const color = accent();
+  const ramp = T.seq;
 
   /* Piecewise buckets rather than a continuous scale. One country with 208 records
      against a median of 2 flattens a linear ramp: everything except the outlier

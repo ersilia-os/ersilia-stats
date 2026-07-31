@@ -44,48 +44,35 @@ const T = (() => {
     /* Categorical identity, for charts that carry several series at once. FIXED
        ORDER — the ordering is what makes the palette colour-vision safe (adjacent
        ΔE 15.8). Never reorder it, and never cycle past the end: a 7th series
-       folds into "Other" or the chart gets faceted. Single-series charts use the
-       section hue instead (see sectionColor). */
+       folds into "Other" or the chart gets faceted. A one-series chart takes
+       slot 1 via accent(). */
     cat: [1, 2, 3, 4, 5, 6].map((i) => v("--chart-" + i)),
 
     /* Sequential, light -> dark. Magnitude only. */
     seq: [1, 2, 3, 4, 5].map((i) => v("--seq-" + i)),
 
-    /* Section identity hues, keyed by route id. Assigned to the nav order by
-       optimisation so adjacent sidebar dots stay distinguishable — see the note
-       in styles.css before changing anything here. */
-    sec: {
-      overview: v("--sec-overview"),
-      models: v("--sec-models"),
-      projects: v("--sec-projects"),
-      publications: v("--sec-publications"),
-      repositories: v("--sec-repositories"),
-      community: v("--sec-community"),
-      reach: v("--sec-reach"),
-      outreach: v("--sec-outreach"),
-    },
   };
 })();
 
-/* The hue of the section currently being rendered. Charts read this rather than
-   being told, so a single-series chart is automatically "its section's colour". */
-let ACTIVE_SEC = T.brand;
+/* The chrome is NEUTRAL and colour lives in the data.
 
-function sectionColor(id) {
-  return (T.sec && T.sec[id]) || T.brand;
+   An earlier version gave each section its own hue and painted that section's charts
+   with it. It made every page monochrome, which is the opposite of using a palette:
+   one colour per page reads as a restriction, not as a system. So the palette is now
+   global — any chart may draw on the full categorical set — and the navigation,
+   headers and cards stay grey. That is the convention good dashboards follow, and it
+   keeps colour meaning "this is a category" rather than "this is page four". */
+
+/* The single accent for a one-series chart. Consistent everywhere, so a bar chart
+   never changes colour just because it moved page. */
+function accent() {
+  return catColor(0);
 }
 
-/* Called by the router before a view renders: sets the CSS custom property the
-   whole stylesheet inherits from, and the value chart builders pick up. */
-function setActiveSection(id) {
-  ACTIVE_SEC = sectionColor(id);
-  document.documentElement.style.setProperty("--sec", ACTIVE_SEC);
-  return ACTIVE_SEC;
-}
-
-/* The section hue, for any chart that draws a single series. */
-function secColor() {
-  return ACTIVE_SEC;
+/* Distinct palette slots for a set of sibling items (hero tiles, section cards).
+   Uses the full categorical order rather than one hue. */
+function slotColor(index) {
+  return catColor(index % T.cat.length);
 }
 
 /* Semantic names the exporter emits alongside status metrics, so "in progress"

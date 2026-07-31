@@ -60,11 +60,9 @@ function sparkline(values, color, height) {
 
 function statTile(kpi, spec, size) {
   const tile = el("div", "stat " + (size || ""));
-  // A headline number can name the section it belongs to, which colours its
-  // sparkline and its delta arrow — on the landing page the active hue is neutral
-  // ink, so without this every tile would look grey and identical.
-  const hue = spec.hue ? sectionColor(spec.hue) : secColor();
-  if (spec.hue) tile.style.setProperty("--sec", hue);
+  // Each headline tile takes its own palette slot, so the row is polychrome rather
+  // than four copies of one accent.
+  const hue = spec.slot != null ? slotColor(spec.slot) : accent();
   tile.appendChild(el("div", "k", spec.label));
   tile.appendChild(el("div", "v", fmtNum(kpi.value)));
 
