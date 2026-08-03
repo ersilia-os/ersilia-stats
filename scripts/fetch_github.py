@@ -41,6 +41,8 @@ import os
 import re
 import sys
 import time
+import urllib.request
+from datetime import datetime, timedelta, timezone
 
 from collect_common import (CONTACT, check_freshness, get_json, prune_superseded,
                             write_snapshot)
@@ -54,6 +56,8 @@ MODEL_RE = re.compile(r"^eos[0-9a-z]{4}$")
 REPO_FIELDS = ["name", "is_model", "created_at", "pushed_at", "archived", "fork",
                "language", "license", "topics", "size_kb", "stars", "forks",
                "watchers", "open_issues", "has_issues", "default_branch"]
+# `week_start` is now a quarter label ("2026Q2"); the column name is kept so the
+# committed file's shape does not change.
 ACTIVITY_FIELDS = ["name", "week_start", "commits"]
 STAR_FIELDS = ["name", "starred_at"]
 
@@ -110,38 +114,95 @@ def list_public_repos(org, headers):
     return rows
 
 
-def commit_activity(org, names, headers, attempts=3, pause=2.0):
-    """52 weekly commit totals per repository.
+GRAPHQL = "https://api.github.com/graphql"
 
-    Returns `(rows, missed)`. A repository whose statistics were still being computed
-    after `attempts` is reported as missed rather than written as zero — the difference
-    between "no commits" and "we did not find out" is the whole point.
+
+def post_graphql(query, headers, variables=None):
+    """One GraphQL POST. The only non-GET request in any collector, and it is a read."""
+    import json as _json
+    payload = _json.dumps({"query": query, "variables": variables or {}}).encode()
+    request = urllib.request.Request(GRAPHQL, data=payload, headers={
+        **headers, "Content-Type": "application/json"})
+    with urllib.request.urlopen(request, timeout=60) as response:
+        body = _json.loads(response.read())
+    if body.get("errors"):
+        raise RuntimeError("GraphQL: %s" % body["errors"][0].get("message"))
+    return body.get("data") or {}
+
+
+def quarter_windows(quarters):
+    """`[(label, since_iso, until_iso)]`, most recent first, aligned to calendar quarters.
+
+    The FIRST window is the current quarter, partial. Excluding it would leave the most
+    recent activity off the chart, and every other time series on this site shows its
+    current quarter partial too.
     """
-    rows, missed = [], []
-    for index, name in enumerate(names, start=1):
-        weeks = None
-        for attempt in range(attempts):
-            weeks = get_json("%s/repos/%s/%s/stats/commit_activity" % (API, org, name),
-                             headers=headers, accept_empty=True)
-            if weeks:
-                break
-            time.sleep(pause * (attempt + 1))     # 202: GitHub is still computing
-        if not weeks:
-            missed.append(name)
-            continue
-        for week in weeks:
-            total = week.get("total") or 0
-            if not total:
-                continue                          # a zero week carries no information
-            rows.append({
-                "name": name,
-                "week_start": time.strftime("%Y-%m-%d", time.gmtime(week.get("week", 0))),
-                "commits": total,
-            })
-        if index % 25 == 0:
-            logging.info("  commit activity: %d/%d repositories", index, len(names))
+    now = datetime.now(timezone.utc)
+    edge = now
+    windows = []
+    for _ in range(quarters):
+        quarter_start = datetime(edge.year, ((edge.month - 1) // 3) * 3 + 1, 1,
+                                 tzinfo=timezone.utc)
+        windows.append(("%dQ%d" % (quarter_start.year, (quarter_start.month - 1) // 3 + 1),
+                        quarter_start.isoformat().replace("+00:00", "Z"),
+                        edge.isoformat().replace("+00:00", "Z")))
+        edge = quarter_start - timedelta(seconds=1)
+    return windows
+
+
+def commit_activity(org, names, headers, quarters=12, batch=20):
+    """Commits per calendar quarter per repository, via GraphQL.
+
+    THIS USED TO USE THE REST `stats/commit_activity` ENDPOINT AND IT DID NOT WORK.
+    That endpoint computes on demand and answers 202 with an empty body until the cache is
+    warm — so the obvious fix was to warm it and wait. It was not the answer: 20 of 20
+    repositories returned 202 after a 40-second wait and two retries, and the one
+    repository that ever produced data was the one whose cache had been warmed by hand.
+
+    GraphQL showed why. `ersilia` has 60 commits since May and 42 the quarter before;
+    `ersilia-app` and `3d-analogues` have **0 and 0**. The repositories stuck on 202 are the
+    ones with nothing to report, and GitHub appears never to populate a cache for those. So
+    "still computing" was mostly "nothing to compute", and no amount of waiting would have
+    fixed it.
+
+    `history(since:, until:) { totalCount }` is exact, needs no precomputation, and costs
+    almost nothing: 3 repositories over 2 windows cost **1 point** of a 5,000/hour budget,
+    so all 143 repositories over 12 quarters fit in a handful of requests.
+
+    Quarterly rather than weekly on purpose — every other time series on this site is
+    quarterly, and 52 weekly buckets across 143 repositories is mostly zeros.
+    """
+    windows = quarter_windows(quarters)
+    rows, missing = [], []
+
+    for offset in range(0, len(names), batch):
+        chunk = names[offset:offset + batch]
+        parts = []
+        for index, name in enumerate(chunk):
+            fields = " ".join(
+                'w%d: history(since: "%s", until: "%s") { totalCount }' % (w, since, until)
+                for w, (_label, since, until) in enumerate(windows))
+            parts.append(
+                'r%d: repository(owner: $o, name: "%s") { '
+                'defaultBranchRef { target { ... on Commit { %s } } } }' % (index, name, fields))
+        query = "query($o: String!) { %s rateLimit { cost remaining } }" % " ".join(parts)
+        data = post_graphql(query, headers, {"o": org})
+
+        for index, name in enumerate(chunk):
+            repo = data.get("r%d" % index) or {}
+            branch = (repo.get("defaultBranchRef") or {})
+            target = branch.get("target") or {}
+            if not target:
+                missing.append(name)          # empty repository, or no default branch
+                continue
+            for w, (label, _since, _until) in enumerate(windows):
+                total = (target.get("w%d" % w) or {}).get("totalCount") or 0
+                if total:
+                    rows.append({"name": name, "week_start": label, "commits": total})
+        logging.info("  commits: %d/%d repositories", min(offset + batch, len(names)), len(names))
+
     rows.sort(key=lambda r: (r["name"], r["week_start"]))
-    return rows, missed
+    return rows, missing
 
 
 def star_history(org, repos, headers, top=20):
@@ -228,11 +289,11 @@ def main():
         if activity:
             written.append(write_snapshot(args.out_dir, "commit_activity",
                                           ACTIVITY_FIELDS, activity))
-            logging.info("commit activity: %d non-empty weeks across %d repositories",
+            logging.info("commit activity: %d non-empty quarters across %d repositories",
                          len(activity), len({r["name"] for r in activity}))
         if missed:
-            logging.warning("statistics still computing for %d repositories: %s",
-                            len(missed), ", ".join(missed[:8]))
+            logging.info("%d repositories have no default branch (empty): %s",
+                         len(missed), ", ".join(missed[:6]))
 
     prune_superseded(args.out_dir, written)
     return 0

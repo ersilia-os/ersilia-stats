@@ -168,7 +168,7 @@ eos5cl7,yes,2024-01-03,2026-05-19,no,no,Jupyter Notebook,GPL-3.0,,39658,0,0,0,0,
 eos5dti,yes,2025-06-13,2025-12-09,yes,no,Python,GPL-3.0,,63,0,0,0,0,yes,main
 eos5eya,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,258701,0,0,0,0,yes,main
 eos5f0j,yes,2026-06-02,2026-06-02,no,no,Pascal,GPL-3.0,,815,0,0,0,0,yes,main
-eos5g6m,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,126,0,1,0,0,yes,main
+eos5g6m,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,131,0,1,0,0,yes,main
 eos5gge,yes,2024-02-19,2026-05-18,no,no,Python,GPL-3.0,,12809,0,0,0,0,yes,main
 eos5guo,yes,2024-03-06,2026-07-07,no,no,Python,GPL-3.0,,50,0,0,0,0,yes,main
 eos5jv3,yes,2026-07-09,2026-07-10,no,no,Python,GPL-3.0,,37,1,2,0,0,yes,main
@@ -199,7 +199,7 @@ eos6ojg,yes,2025-07-19,2026-05-18,no,no,Python,GPL-3.0,,368,0,0,0,0,yes,main
 eos6oli,yes,2021-10-19,2026-05-18,no,no,Python,GPL-3.0,,68,1,5,0,0,yes,main
 eos6ost,yes,2024-04-18,2026-05-18,no,no,Python,GPL-3.0,,86077,0,1,0,1,yes,main
 eos6pbf,yes,2022-07-14,2026-05-18,no,no,Python,GPL-3.0,,61,0,1,0,0,yes,main
-eos6pj2,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,0,0,1,0,0,yes,main
+eos6pj2,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,20,0,1,0,0,yes,main
 eos6ru3,yes,2024-04-22,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,2150,0,0,0,1,yes,main
 eos6tg8,yes,2021-11-03,2026-05-18,no,no,Python,GPL-3.0,,58604,0,1,0,0,yes,main
 eos6tpo,yes,2025-08-22,2026-07-07,no,no,Python,GPL-3.0,,174,1,0,0,0,yes,main
@@ -301,7 +301,7 @@ ersilia-intro-workshop,no,2023-09-05,2023-10-02,no,no,Jupyter Notebook,GPL-3.0,a
 ersilia-maintenance,no,2024-03-05,2026-08-03,no,no,Python,GPL-3.0,,10045,0,2,0,2,yes,main
 ersilia-mcp,no,2026-06-04,2026-07-29,no,no,Python,GPL-3.0,,331,0,2,0,5,yes,main
 ersilia-metadata-annotation,no,2025-04-02,2025-04-17,yes,no,Python,GPL-3.0,,21,0,0,0,1,yes,main
-ersilia-ml-benchmark,no,2025-10-25,2026-08-03,no,no,Jupyter Notebook,GPL-3.0,,213092,1,0,0,0,yes,main
+ersilia-ml-benchmark,no,2025-10-25,2026-08-03,no,no,Jupyter Notebook,GPL-3.0,,213103,1,0,0,0,yes,main
 ersilia-model-hub-maintained-inputs,no,2022-10-14,2026-05-15,no,no,Jupyter Notebook,GPL-3.0,,234132,0,0,0,0,yes,main
 ersilia-model-hub-paper,no,2026-01-14,2026-07-30,no,no,Python,GPL-3.0,,340,1,0,0,0,yes,main
 ersilia-model-request-app,no,2025-10-06,2026-03-26,no,no,TypeScript,,,1171,0,0,0,1,yes,main
