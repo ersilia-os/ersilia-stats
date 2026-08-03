@@ -197,17 +197,10 @@ const VIEWS = [
     links: [{ label: "Publications", href: "https://ersilia.io/publications" }],
     headlineKpi: "publications",
     rows: [
-      { h: "h-xl", cells: [
+      { h: "h-lg", cells: [
         {
-          title: "Output and accumulated citations", span: 12, data: "publications.output_and_impact",
-          type: "facets",
-          desc: "Publications per year (top) against citations accumulated to date (bottom), sharing one time axis. Deliberately two panels rather than two y-axes: the scales are unrelated, and overlaying them would invent a correlation that is not in the data.",
-        },
-      ] },
-      { h: "h-md", cells: [
-        {
-          title: "Highest-impact venues", span: 7, data: "publications.top_journals", type: "lollipop",
-          desc: "Mean citations per Ersilia article, for venues with at least two Ersilia articles. The two-article floor stops one lucky paper topping the ranking.",
+          title: "Publications over time", span: 7, data: "publications.growth", type: "growthcombo",
+          desc: "Papers and preprints by year of publication: bars for the year, a line for the running total. The bars can be hidden from the legend to read the total on its own.",
         },
         {
           title: "How the work is framed", span: 5, type: "shares",
@@ -220,10 +213,21 @@ const VIEWS = [
           desc: "Three splits that say what kind of body of work this is. African collaboration is recorded on some papers only; the share is of those where it is recorded.",
         },
       ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Citations accumulated", span: 7, data: "publications.citation_growth",
+          type: "growthcombo",
+          desc: "Citations attributed to the YEAR THE PAPER WAS PUBLISHED, not the year the citation was made — that is what the source records. Recent years are therefore necessarily low: a paper from last year has had months to be cited, one from 2018 has had years. Kept separate from the publication count above rather than sharing a plot with it, because publications and citations are different measures and putting two different measures on two axes is what invites a reader to see a relationship the data does not assert.",
+        },
+        {
+          title: "Highest-impact venues", span: 5, data: "publications.top_journals", type: "lollipop",
+          desc: "Mean citations per Ersilia article, for venues with at least two Ersilia articles. The two-article floor stops one lucky paper topping the ranking.",
+        },
+      ] },
       { h: "h-md", cells: [
         {
           title: "Research topics", span: 4, data: "publications.by_topic", type: "lollipop",
-          desc: "Publications grouped by research topic. A multi-select, so a paper spanning two topics counts in both. Drawn as a ranking rather than a ring because the topic names are long enough that a donut wrapped them into unreadable stacks.",
+          desc: "Publications grouped by research topic. A multi-select, so a paper spanning two topics counts in both.",
         },
         {
           title: "Ersilia-affiliated against external, per year", span: 8,

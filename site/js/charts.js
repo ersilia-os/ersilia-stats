@@ -817,10 +817,10 @@ function optGrowthCombo(d) {
                        { offset: 1, color: alpha(color, 0.01) }],
         },
       },
-      endLabel: {
-        show: true, color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
-        formatter: (p) => fmtNum(p.value),
-      },
+      // No end label. In the single-axis version it was the only place the final total
+      // appeared; here the right-hand axis occupies exactly that spot and the two
+      // collided ("42" printed over the tick "6"). The total is in the caption and at
+      // the top of the left axis, so the label was redundant as well as in the way.
     },
   ];
   return o;

@@ -11,7 +11,8 @@ Two deliberate changes from the previous export:
 import pandas as pd
 
 from . import insights as ins
-from .parse import EMPTY, as_text, col, metric, multi_counts, series_metric, to_num, value_counts
+from .parse import (EMPTY, as_text, col, growth_pair, metric, multi_counts,
+                    series_metric, to_num, value_counts)
 
 MIN_ARTICLES_FOR_JOURNAL_RANK = 2
 YES = {"yes", "true", "1"}
@@ -19,11 +20,15 @@ YES = {"yes", "true", "1"}
 
 def build(pubs):
     if pubs is None or pubs.empty:
-        return {k: dict(EMPTY) for k in (
-            "per_year", "citations_per_year", "output_and_impact", "by_topic",
-            "affiliation", "affiliation_by_year", "by_type", "by_african_collab",
-            "top_journals",
-        )}
+        empty_series = {"labels": [], "series": [], "n": 0}
+        return dict(
+            {k: dict(EMPTY) for k in (
+                "per_year", "citations_per_year", "output_and_impact", "by_topic",
+                "affiliation", "affiliation_by_year", "by_type", "by_african_collab",
+                "top_journals",
+            )},
+            growth=dict(empty_series), citation_growth=dict(empty_series),
+        )
 
     citations = to_num(col(pubs, "citations"))
     years = pd.to_numeric(col(pubs, "year"), errors="coerce")
@@ -32,6 +37,8 @@ def build(pubs):
         "per_year": _per_year(years),
         "citations_per_year": _citations_per_year(years, citations),
         "output_and_impact": _output_and_impact(years, citations),
+        "growth": _growth(years),
+        "citation_growth": _citation_growth(years, citations),
         # Short form: a 4-column card clips the full leader sentence.
         "by_topic": multi_counts(col(pubs, "topic"), top=12,
                                  insight=ins.leader_short(multi_counts(col(pubs, "topic")))),
@@ -93,6 +100,55 @@ def _output_and_impact(years, citations):
         kinds=["bar", "line"],
         n=int(sum(per_year)),
     )
+
+
+def _growth(years):
+    """Publications per year with the running total — same measure, so one identity."""
+    frame = years.dropna()
+    frame = frame[frame > 1990]
+    if frame.empty:
+        return {"labels": [], "series": [], "n": 0}
+    full = range(int(frame.min()), int(frame.max()) + 1)
+    per_year = [int((frame == y).sum()) for y in full]
+    running, total = [], 0
+    for value in per_year:
+        total += value
+        running.append(total)
+    return growth_pair([str(y) for y in full], per_year, running, "publications",
+                       period="year")
+
+
+def _citation_growth(years, citations):
+    """Citations earned per publication year, with the running total.
+
+    Kept SEPARATE from publication counts rather than sharing one plot with them.
+    Publications and citations are different measures, and a dual axis across two
+    different measures is exactly the chart that invites a reader to see a
+    relationship the data does not assert — "citations track output" — when the only
+    honest statement is that each accumulates. Within this chart the two series are one
+    measure and the total is the running sum, which is what makes its second axis fair.
+
+    Citations are attributed to the year the PAPER was published, not the year the
+    citation was made, because that is what the source records. So the recent years are
+    necessarily low: a 2025 paper has had months to be cited, a 2018 paper has had years.
+    """
+    frame = pd.DataFrame({"year": years, "citations": citations}).dropna(subset=["year"])
+    frame = frame[frame["year"] > 1990]
+    if frame.empty:
+        return {"labels": [], "series": [], "n": 0}
+    frame["year"] = frame["year"].astype(int)
+    full = range(int(frame["year"].min()), int(frame["year"].max()) + 1)
+    per_year = [int(frame.loc[frame["year"] == y, "citations"].sum()) for y in full]
+    running, total = [], 0
+    for value in per_year:
+        total += value
+        running.append(total)
+    return growth_pair([str(y) for y in full], per_year, running, "citations",
+                       period="year",
+                       insight="%s citations to date, most for work published in %s." % (
+                           ins.num(total),
+                           str(list(full)[per_year.index(max(per_year))]),
+                       ))
 
 
 def _affiliation(pubs):
