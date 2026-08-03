@@ -63,6 +63,11 @@ jobs:
             exit 1
           fi
 
+      # The committed index.html must carry current stamps. Editing styles.css without
+      # restamping would ship a URL browsers already have cached.
+      - name: Asset stamps are current
+        run: python scripts/stamp_assets.py --site site --check
+
       - name: Build the site from the synthetic fixture
         run: |
           mkdir -p /tmp/checksite

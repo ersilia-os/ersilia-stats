@@ -100,6 +100,13 @@ jobs:
       - name: Check every chart has data
         run: python scripts/check_config_paths.py --fail-on-empty
 
+      # Per-file content hashes on every asset URL. GitHub Pages sends max-age=600 for
+      # scripts and stylesheets alike, so without this a returning visitor can hold an
+      # old styles.css while fetching a new cards.js — and a fix that spans both files
+      # then appears not to have worked, because half of it is missing.
+      - name: Stamp asset URLs with content hashes
+        run: python scripts/stamp_assets.py --site site
+
       # Renders every route in headless Chrome and fails the build if a view shows no
       # cards, logs a console error, has a row whose spans do not sum to 12, or has a
       # caption that does not fit. This is the check that catches broken JavaScript,
