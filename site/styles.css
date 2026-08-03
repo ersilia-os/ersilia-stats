@@ -393,12 +393,46 @@ main > * { max-width: var(--content-w); }
 /* The chart takes the space the card has left. A floor stops ECharts initialising
    into a zero-height box before the flex layout settles; a ResizeObserver in
    cards.js re-fits it once it has real dimensions. */
-/* flex-basis 0, NOT auto. With `auto` the chart's own rendered height counts as its
-   basis, so ECharts resizing the canvas grew the card, which grew the row, which
-   grew the chart again — panels expanded without bound as soon as a drill-down
-   table opened. Basis 0 means the chart takes leftover row space and never feeds
-   its own size back into the layout. */
-.chart { width: 100%; flex: 1 1 0%; min-height: 110px; }
+/* The chart box takes the space the card has left; the chart itself is taken OUT OF
+   FLOW inside it.
+   
+   Both halves matter. flex-basis 0 (not auto) stops the box asking for as much room as
+   its content. Absolute positioning stops the content asking at all: echarts.init()
+   writes an explicit pixel height onto an in-flow inner div, and because card heights
+   are fractional, every resize() rounded that up by a pixel, which grew the card, the
+   row, and therefore the chart — a ratchet that took a row from 309px past 800px and
+   kept climbing. Out of flow, the wrapper's height comes from the row and nothing
+   inside it can push back. */
+/* overflow: hidden is the load-bearing declaration, not decoration.
+   A flex item that clips cannot be inflated by its own content, and the content here
+   inflates: echarts.init() appends an IN-FLOW inner div and writes an explicit pixel
+   height onto it. Card heights are fractional (a 410.594px card leaves the chart
+   290.59px), so every resize() rounded that up by a pixel and rewrote the div; in flow,
+   that pixel counted toward the card's content height, grew the auto-sized grid row,
+   gave the chart a bigger share, and rounded up again next frame. A 1px-per-frame
+   ratchet took one row from 309px past 800px and kept climbing — the panels looked like
+   they were leaking.
+   Clipping breaks the feedback path: the box's height comes from the row, its content
+   cannot push back, and a stray rounded-up pixel is simply cut off.
+   Do NOT position .chart absolutely to achieve this — echarts.init() writes
+   `position: relative` inline on its container and would override it, which collapses
+   the chart to zero height and renders nothing at all. */
+.chartbox {
+  position: relative; width: 100%;
+  flex: 1 1 0%; min-height: 110px;
+  overflow: hidden;
+}
+/* `position: absolute` takes the chart OUT OF FLOW, which is the only thing that
+   actually breaks the loop — clipping the wrapper is not enough, because the wrapper
+   still sizes to its in-flow content.
+   
+   The !important is deliberate and is the one place in this stylesheet that needs it:
+   echarts.init() writes `position: relative` as an INLINE style on its container, and an
+   inline style beats a normal author rule. An important author rule beats an inline one,
+   which is exactly the cascade level this calls for — overriding a library's inline
+   style. Dropping the !important collapses the chart to zero height and it renders
+   nothing; dropping `absolute` restores the ratchet. Both were observed. */
+.chart { position: absolute !important; inset: 0; }
 /* HTML components grow into the card and centre their content. Left at natural
    height they sat at the top of a stretched card with dead space beneath, which is
    exactly the ragged look the row tessellation is meant to remove. */

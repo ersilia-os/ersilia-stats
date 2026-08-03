@@ -429,11 +429,27 @@ function chartCard(chart, data, registry) {
     return card;
   }
 
+  // The chart lives in an ABSOLUTELY POSITIONED box inside a relative wrapper, and
+  // that is load-bearing rather than cosmetic.
+  //
+  // echarts.init() appends an inner div to its container and writes an explicit pixel
+  // height onto it — in flow. Card heights are fractional (a 410.594px card gives the
+  // chart 290.59px), and resize() rounds that up to 291 when it rewrites the inner
+  // div. In flow, that 1px lands in the card's content height, which grows the grid
+  // row, which grows the chart's share, which rounds up again on the next resize: a
+  // 1px-per-frame ratchet that grew a row from 309px to 800px and kept going. The
+  // panels appeared to be "leaking".
+  //
+  // flex-basis: 0 does not prevent it, because the inner div is real in-flow content.
+  // Taking the chart out of flow makes the feedback path structurally impossible: the
+  // wrapper's height comes from the row, and nothing inside can push back.
+  const chartBox = el("div", "chartbox");
   const canvas = el("div", "chart");
   canvas.setAttribute("role", "img");
   canvas.setAttribute("aria-label", chart.title + ". " + ((metric && metric.insight) || "") +
     " Use the Table button on this card to read the same data as a table.");
-  card.appendChild(canvas);
+  chartBox.appendChild(canvas);
+  card.appendChild(chartBox);
 
   let drill = drillDown(chart, metric, csvFor(sources[0].data));
   card.appendChild(drill);
@@ -443,7 +459,7 @@ function chartCard(chart, data, registry) {
   // box crosses the narrow/wide threshold and the toggle can keep that in sync.
   instance.__chart = chart;
   instance.__metric = metric;
-  instance.__narrow = isNarrow();
+  instance.__band = widthBand(0);
   instance.setOption(buildOption(chart, metric));
   registry.push(instance);
 
@@ -471,10 +487,13 @@ function chartCard(chart, data, registry) {
         // resize() is not enough: the option has to be rebuilt with the narrow gutters.
         // Without this, a phone-width lollipop kept its 210px label gutter and drew its
         // dots off the right-hand edge.
-        const narrow = w < NARROW_WIDTH;
-        if (narrow !== instance.__narrow) {
-          instance.__narrow = narrow;
-          setNarrow(narrow);
+        // Geometry (label gutters, tick density) is derived from the box width, so a
+        // meaningful width change needs a REBUILD, not just a resize. Banded to 80px so
+        // this fires a handful of times, not every frame.
+        const band = widthBand(w);
+        if (band !== instance.__band) {
+          instance.__band = band;
+          setChartWidth(w);
           instance.setOption(buildOption(instance.__chart, instance.__metric), true);
         }
         instance.resize();

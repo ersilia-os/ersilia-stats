@@ -31,14 +31,39 @@
  * cards.js sets this from the measured container width before building the option, and
  * rebuilds when the answer changes. Builders read it for gutters and tick density only;
  * nothing about WHAT is drawn depends on it. */
-// Below this container width a chart is treated as narrow. 460px is just above a
-// phone-width card (390px viewport minus padding), and just below the narrowest
-// desktop card (a 3-of-12 span in a 1080px column is ~250px, so those are narrow too —
-// which is correct, they had the same problem in miniature).
-const NARROW_WIDTH = 460;
+// The measured width of the box currently being drawn into, and the label gutter
+// derived from it.
+//
+// A single boolean threshold was wrong: at 460px it classified a 5-of-12 desktop card
+// (~430px) as "narrow" and cut its gutter to 104px, which truncated
+// "Mycobacterium tuberculosis" on a card with room to spare. Width is continuous, so
+// the gutter should be too — a proportion of the box, clamped at both ends.
+//
+// NARROW survives for the handful of decisions that really are binary (tick density),
+// and its threshold is now genuinely phone-sized: a 390px viewport leaves a card about
+// 330px wide.
+const NARROW_WIDTH = 360;
+let CHART_WIDTH = 900;
 let NARROW = false;
-function setNarrow(value) { NARROW = !!value; }
+
+function setChartWidth(width) {
+  CHART_WIDTH = width > 0 ? width : 900;
+  NARROW = CHART_WIDTH < NARROW_WIDTH;
+}
 function isNarrow() { return NARROW; }
+
+/* The label gutter for a horizontal ranking: ~42% of the box, never less than 96px
+   (below that even "United States" will not fit) and never more than 210px (beyond
+   that the labels win space the marks need). */
+function labelGutter() {
+  return Math.round(Math.min(210, Math.max(96, CHART_WIDTH * 0.42)));
+}
+
+/* Rebuilding on every pixel would thrash, so charts only rebuild when the width moves
+   into a different 80px band — enough to change the gutter meaningfully. */
+function widthBand(width) {
+  return Math.round((width > 0 ? width : 900) / 80);
+}
 
 function base() {
   return {
@@ -222,7 +247,7 @@ function optLollipop(d) {
       // One line, ellipsised. "break" wrapped long organisation names onto a second
       // line that overlapped the row below it — two labels on top of each other is
       // worse than one shortened label, and the full text is in the tooltip.
-      width: NARROW ? 104 : 210, overflow: "truncate", ellipsis: "…", lineHeight: 15,
+      width: labelGutter(), overflow: "truncate", ellipsis: "…", lineHeight: 15,
     },
   };
   o.series = [
@@ -361,8 +386,16 @@ function optMultiBar(d, stacked) {
   o.legend = legend(d.series.map((s) => s.name));
   o.xAxis = catAxis(d.labels);
   o.yAxis = valAxis();
-  const colors = seriesColors(d, d.series.length);
+  let colors = seriesColors(d, d.series.length);
   const kinds = d.kinds || [];
+  // Two views of ONE measure (a per-period rate and its running total) are not two
+  // categories, so they should not take two categorical hues: that reads as "these are
+  // different things". A pale tint for the bars and the accent for the line reads as
+  // "the same thing, twice" — and it keeps the line on the one hue that is legible as a
+  // 2px stroke, where amber at 2.14:1 on white would not be.
+  if (d.same_measure && d.series.length === 2) {
+    colors = [mixWithWhite(accent(), 0.55), accent()];
+  }
   o.series = d.series.map((s, i) => {
     if (kinds[i] === "line") {
       return {
@@ -875,7 +908,7 @@ function optGantt(d) {
       // half the projects become unlabelled bars.
       interval: 0,
       color: T.ink, fontSize: names.length > 28 ? 9.5 : 10.5, fontFamily: T.sans,
-      width: NARROW ? 116 : 224, overflow: "truncate",
+      width: Math.round(Math.min(240, Math.max(110, CHART_WIDTH * 0.24))), overflow: "truncate",
     },
   };
   o.series = [{

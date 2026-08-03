@@ -176,6 +176,24 @@ try {
   // that are not real, or worse, pass on stale code.
   await cdp.send("Network.setCacheDisabled", { cacheDisabled: true });
 
+  // ---- layout stability -------------------------------------------------------
+  // Charts once grew a pixel per animation frame, without bound: echarts.init() writes
+  // an explicit height onto an IN-FLOW inner div, fractional card heights meant every
+  // resize() rounded it up, and that pixel grew the row, which grew the chart's share,
+  // which rounded up again. One row went from 309px past 800px while being watched.
+  // Nothing in a static snapshot can catch that, so measure twice and compare.
+  await cdp.send("Page.navigate", {
+    url: `http://127.0.0.1:${port}/index.html?v=${Date.now()}#/models`,
+  });
+  await new Promise((r) => setTimeout(r, 2500));
+  const shot = () => cdp.evaluate(
+    `[...document.querySelectorAll('.crow')].map(r => Math.round(r.getBoundingClientRect().height)).join(',')`);
+  const first = await shot();
+  await new Promise((r) => setTimeout(r, 2500));
+  const second = await shot();
+  check("row heights are stable over time", first === second,
+    first === second ? `steady at ${first}` : `${first} -> ${second} (growing)`);
+
   // Two widths. The desktop pass checks structure and content; the phone pass exists
   // because a layout can be perfect at 1440 and scroll sideways at 390 — which it did.
   for (const route of ROUTES) {

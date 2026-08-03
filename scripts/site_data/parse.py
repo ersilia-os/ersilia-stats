@@ -175,10 +175,16 @@ def growth_pair(labels, per_period, running, noun_plural, period="quarter", insi
     second answer completely. These used to sit behind a Cumulative/Per-quarter
     toggle, which meant you could only ever see one of them.
 
-    Renders as ``type: "facets"``: two stacked panels sharing one category axis,
-    with the axis pointer linked so hovering reads both at once. The panel forms are
-    fixed by the builder (top = bars, bottom = line), which is exactly this order.
-    Needs ``span: 12`` and ``h: "h-xl"`` — two panels in a short row are unreadable.
+    Renders as ``type: "groupbar"`` with ``kinds=["bar", "line"]``: ONE panel, one
+    axis, per-period bars behind the running total, and a legend entry per series so a
+    reader can hide either. They shared one x axis as two stacked panels before; one
+    panel is easier to read across and the legend gives back the ability to isolate
+    the rate, which the two-panel version did not have.
+
+    One axis for two magnitudes is legitimate HERE and only here, because they are the
+    same measure: the total is the sum of the bars. The bars are necessarily short
+    beside it — 28 against 236 — which is a true statement about the data, and hiding
+    the total rescales the axis so the rate can be read on its own.
     """
     labels = [str(x) for x in labels]
     if not labels:
@@ -194,7 +200,11 @@ def growth_pair(labels, per_period, running, noun_plural, period="quarter", insi
         [{"name": "Added per " + period, "values": list(per_period)},
          {"name": "Total to date", "values": list(running)}],
         insight=insight,
-        # Not the sum of both panels, which would double-count and mean nothing.
+        kinds=["bar", "line"],
+        # Colour them as ONE measure — a tint and the accent — rather than as two
+        # categories in two different hues, which would imply they are unrelated.
+        same_measure=True,
+        # Not the sum of both series, which would double-count and mean nothing.
         n=total,
     )
 

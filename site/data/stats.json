@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 21:00 UTC",
+  "generated_at": "2026-08-03 06:17 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -695,7 +695,12 @@
           }
         ],
         "n": 236,
-        "insight": "236 models so far, most in 2022Q3 with 28."
+        "insight": "236 models so far, most in 2022Q3 with 28.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
       },
       "task_tree": {
         "tree": [
@@ -1208,7 +1213,12 @@
           }
         ],
         "n": 36,
-        "insight": "36 projects so far, most in 2025 with 11."
+        "insight": "36 projects so far, most in 2025 with 11.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
       },
       "active_over_time": {
         "labels": [
@@ -1297,10 +1307,10 @@
           {
             "name": "Ersilia Model Hub",
             "start": "2021-01-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "In progress",
             "open": true,
-            "months": 66.9
+            "months": 67.0
           },
           {
             "name": "H3D Virtual Screening Cascade",
@@ -1449,10 +1459,10 @@
           {
             "name": "The Gambia MRC",
             "start": "2024-09-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "In progress",
             "open": true,
-            "months": 22.9
+            "months": 23.0
           },
           {
             "name": "Plan Generación Conocimiento",
@@ -1489,26 +1499,26 @@
           {
             "name": "ChemPFN",
             "start": "2025-06-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "Stuck",
             "open": true,
-            "months": 14.0
+            "months": 14.1
           },
           {
             "name": "PREEMI maternal healthcare",
             "start": "2025-07-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "Stuck",
             "open": true,
-            "months": 13.0
+            "months": 13.1
           },
           {
             "name": "HIV follow up during COVID in Zambia",
             "start": "2025-08-24",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "Stuck",
             "open": true,
-            "months": 11.2
+            "months": 11.3
           },
           {
             "name": "H3D Mtb Bioactivity",
@@ -1521,18 +1531,18 @@
           {
             "name": "NPs as schistosoma drugs",
             "start": "2025-10-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "In progress",
             "open": true,
-            "months": 10.0
+            "months": 10.1
           },
           {
             "name": "PQZ signature reversal",
             "start": "2025-10-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "In progress",
             "open": true,
-            "months": 10.0
+            "months": 10.1
           },
           {
             "name": "Collaboration Fund BMGF",
@@ -1545,10 +1555,10 @@
           {
             "name": "AID3 molecular glue discovery",
             "start": "2025-11-01",
-            "end": "2026-07-31",
+            "end": "2026-08-03",
             "status": "Todo",
             "open": true,
-            "months": 8.9
+            "months": 9.0
           },
           {
             "name": "AI2050 Compute Fund",
@@ -1568,14 +1578,14 @@
           }
         ],
         "n": 36,
-        "today": "2026-07-31",
+        "today": "2026-08-03",
         "semantics": {
-          "Todo": "neutral",
-          "In progress": "brand",
           "Stuck": "bad",
-          "Done": "good"
+          "Done": "good",
+          "Todo": "neutral",
+          "In progress": "brand"
         },
-        "insight": "36 projects, 2019-07 to 2029-03; 1 past its end date."
+        "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
       "duration": {
         "labels": [
@@ -1584,10 +1594,10 @@
         ],
         "values": [
           18.4,
-          12.1
+          12.2
         ],
         "n": 36,
-        "insight": "Median 18.4 months finished, 12.1 so far running.",
+        "insight": "Median 18.4 months finished, 12.2 so far running.",
         "unit": "months"
       },
       "outputs": {
@@ -2310,7 +2320,12 @@
           }
         ],
         "n": 177,
-        "insight": "177 repositories so far, most in 2025Q4 with 16."
+        "insight": "177 repositories so far, most in 2025Q4 with 16.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
       },
       "by_type": {
         "labels": [
@@ -4305,7 +4320,12 @@
           }
         ],
         "n": 113,
-        "insight": "113 people have contributed to Ersilia since 2020Q4."
+        "insight": "113 people have contributed to Ersilia since 2020Q4.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
       },
       "active_over_time": {
         "labels": [
@@ -4954,7 +4974,12 @@
           }
         ],
         "n": 91,
-        "insight": "91 events so far, most in 2022 with 26."
+        "insight": "91 events so far, most in 2022 with 26.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
       },
       "by_country": {
         "labels": [
@@ -5074,7 +5099,12 @@
           }
         ],
         "n": 54,
-        "insight": "54 posts so far, most in 2023 with 13."
+        "insight": "54 posts so far, most in 2023 with 13.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
       },
       "by_category": {
         "labels": [
