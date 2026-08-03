@@ -81,7 +81,7 @@ const VIEWS = [
     rows: [
       { h: "h-xl", cells: [
         {
-          title: "Models added over time", span: 12, data: "models.growth", type: "groupbar",
+          title: "Models added over time", span: 12, data: "models.growth", type: "growthcombo",
           desc: "Models by the quarter they were incorporated: the top panel is how many were added in each quarter, the lower one the running total. Both are drawn together because a cumulative curve only ever goes up and so hides whether the rate is rising or falling.",
         },
       ] },
@@ -149,7 +149,7 @@ const VIEWS = [
       ] },
       { h: "h-xl", cells: [
         {
-          title: "Projects started over time", span: 12, data: "projects.growth", type: "groupbar",
+          title: "Projects started over time", span: 12, data: "projects.growth", type: "growthcombo",
           desc: "Projects by the year they started: new starts on top, the running total below. The Gantt above says when each ran; this says whether the portfolio is still growing.",
         },
       ] },
@@ -250,7 +250,7 @@ const VIEWS = [
       ] },
       { h: "h-xl", cells: [
         {
-          title: "Repositories created over time", span: 8, data: "repositories.growth", type: "groupbar",
+          title: "Repositories created over time", span: 8, data: "repositories.growth", type: "growthcombo",
           desc: "Every repository by the quarter it was created, public and private alike: new repositories on top, the running total below.",
         },
         {
@@ -302,7 +302,7 @@ const VIEWS = [
     rows: [
       { h: "h-xl", cells: [
         {
-          title: "People involved over time", span: 12, data: "community.participation", type: "groupbar",
+          title: "People involved over time", span: 12, data: "community.participation", type: "growthcombo",
           desc: "People by the quarter they joined: new joiners on top, the running total below. This section used to lead with a churn ledger and a cohort-retention grid; both were correct arithmetic and both framed a growing community as an attrition problem, when most collaborations here are internships and fellowships with a term fixed before anyone arrived.",
         },
       ] },
@@ -411,7 +411,7 @@ const VIEWS = [
       ] },
       { h: "h-xl", cells: [
         {
-          title: "Events over time", span: 7, data: "events.growth", type: "groupbar",
+          title: "Events over time", span: 7, data: "events.growth", type: "growthcombo",
           desc: "Events per year on top, the running total below, so the rate of activity and the accumulated total read together.",
         },
         {

@@ -744,6 +744,88 @@ function optLogScatter(d, conf) {
   return o;
 }
 
+
+/* ------------------------------------------------- growth: rate + total */
+/* Per-period bars and the running total, in ONE panel.
+ *
+ * THIS IS THE ONE DUAL-AXIS CHART ON THE SITE, and the rule it breaks is worth
+ * stating. "Never two y-scales" exists because a second axis lets an author line up
+ * two unrelated measures and imply a relationship the data does not contain. Neither
+ * half of that applies here:
+ *
+ *   - The two series are the SAME measure in the same unit — models, repositories,
+ *     people. Not one thing against another.
+ *   - Their relationship is arithmetic and fixed: the total IS the running sum of the
+ *     bars. There is no correlation to insinuate, because it is an identity.
+ *
+ * What forced it: on a shared axis the bars are unreadable. A quarter's 28 against a
+ * total of 236 is 12% of the plot height, so the rate — half of what the chart is for —
+ * became a row of stubs. Both axes are labelled with the measure so the difference in
+ * scale is visible rather than hidden.
+ *
+ * The total cannot be switched off. It is the spine of the chart, and a legend that
+ * lets you remove it leaves an axis with nothing on it; the bars remain toggleable,
+ * which is what isolating the rate needs. */
+function optGrowthCombo(d) {
+  const series = d.series || [];
+  if (series.length < 2) return optArea({ labels: d.labels, values: (series[0] || {}).values || [] });
+
+  const rate = series[0];
+  const total = series[1];
+  const color = accent();
+  const barColor = mixWithWhite(color, 0.58);
+
+  const o = base();
+  o.grid = { left: 2, right: 8, top: 34, bottom: 2, containLabel: true };
+  o.tooltip.trigger = "axis";
+  o.tooltip.axisPointer = { type: "line", lineStyle: { color: T.border, width: 1 } };
+  o.tooltip.valueFormatter = fmtNum;
+  // ONLY the bars get a legend entry, and that is how the total is pinned rather than
+  // by intercepting clicks. A legendselectchanged handler that re-selects the series was
+  // tried first and did not hold — the deselection had already been applied. No control,
+  // no way to remove it. The total keeps its identity from the left axis name and from
+  // the value labelled at the end of the curve, and it is the only line on the plot.
+  o.legend = legend([rate.name]);
+  o.xAxis = catAxis(d.labels);
+  o.yAxis = [
+    // Left: the running total, which owns the gridlines.
+    valAxis({ name: total.name, nameLocation: "end", nameGap: 8,
+              nameTextStyle: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.sans, align: "left" } }),
+    // Right: the per-period rate. Deliberately UNNAMED — the legend sits directly above
+    // it and names it, and printing the same words twice in the same corner had them
+    // overlapping. No gridlines either: two sets of horizontal rules on one plot is the
+    // visual noise that makes dual axes look untrustworthy even when they are not.
+    valAxis({ splitLine: { show: false } }),
+  ];
+  o.series = [
+    {
+      type: "bar", name: rate.name, data: rate.values, yAxisIndex: 1,
+      barMaxWidth: 26, z: 1,
+      itemStyle: { color: barColor, borderRadius: [3, 3, 0, 0] },
+    },
+    {
+      type: "line", name: total.name, data: total.values, yAxisIndex: 0,
+      smooth: 0.22, showSymbol: false, z: 3,
+      lineStyle: { color: color, width: 2 },
+      itemStyle: { color: color },
+      // The shade under the curve: it reads as an accumulating quantity rather than
+      // just a rising line, and it separates the total from the bars behind it.
+      areaStyle: {
+        color: {
+          type: "linear", x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [{ offset: 0, color: alpha(color, 0.18) },
+                       { offset: 1, color: alpha(color, 0.01) }],
+        },
+      },
+      endLabel: {
+        show: true, color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
+        formatter: (p) => fmtNum(p.value),
+      },
+    },
+  ];
+  return o;
+}
+
 /* ------------------------------------------------------- distribution */
 function optHistogram(d) {
   const o = base();
@@ -1033,6 +1115,7 @@ const BUILDERS = {
   stackbar: (d) => optMultiBar(d, true),
   groupbar: (d) => optMultiBar(d, false),
   facets: optFacets,
+  growthcombo: optGrowthCombo,
   histogram: optHistogram,
   lorenz: optLorenz,
   heatmap: optHeatmap,
