@@ -43,10 +43,57 @@ def resolve_countries(frame, id_to_name, column="country"):
     return counter
 
 
+# The link columns that record an organisation actually doing something with Ersilia.
+# `grants` is a fifth such column and is deliberately absent: grant data is out of scope
+# for this site, so counting it here would leak its shape through the back door.
+ACTIVITY_LINKS = ("projects", "events", "conferences", "community")
+
+
+def _engagement_depth(orgs):
+    """How many KINDS of recorded activity each partner has.
+
+    This is the figure that qualifies the other three partner charts. `by_type`,
+    `by_classification` and `by_focus` all treat 320 rows as "partners", and on the
+    current snapshot 229 of them — 72% — have no recorded project, event, conference or
+    community member at all. Either the directory is largely prospects or the link fields
+    are unfilled; either way a reader of those three charts needs to know which kind of
+    320 this is.
+
+    A count, but a count of depth rather than volume.
+    """
+    if orgs is None or orgs.empty:
+        return dict(EMPTY)
+    present = [name for name in ACTIVITY_LINKS if name in orgs.columns]
+    if not present:
+        return dict(EMPTY)
+
+    buckets = [0] * (len(ACTIVITY_LINKS) + 1)
+    for i in range(len(orgs)):
+        kinds = sum(1 for name in present if parse_multi(orgs[name].iloc[i]))
+        buckets[kinds] += 1
+
+    labels = ["None recorded", "One kind", "Two kinds", "Three kinds", "All four"]
+    # Trailing empty bands are dropped: "All four: 0" is a row that says nothing.
+    highest = max((i for i, count in enumerate(buckets) if count), default=0)
+    labels, values = labels[:highest + 1], buckets[:highest + 1]
+
+    total = sum(values)
+    engaged = total - values[0]
+    out = metric(
+        labels, values,
+        ins.share_of(engaged, total, "partner organisations",
+                     "have at least one recorded project, event, conference or member"),
+    )
+    out["ordinal"] = True
+    out["n"] = total
+    return out
+
+
 def build(orgs, countries):
     if orgs is None or orgs.empty:
         return {"by_type": dict(EMPTY), "by_country": dict(EMPTY),
-                "by_classification": dict(EMPTY), "by_focus": dict(EMPTY)}
+                "by_classification": dict(EMPTY), "by_focus": dict(EMPTY),
+                "engagement_depth": dict(EMPTY)}
 
     per_country = resolve_countries(orgs, country_lookup(countries))
     top = per_country.most_common(12)
@@ -73,6 +120,7 @@ def build(orgs, countries):
         "by_country": by_country,
         # Short form: this lands in a 3-column card, which fits about forty characters
         # on the single caption line. The full definition is in the ⓘ note.
+        "engagement_depth": _engagement_depth(orgs),
         "by_classification": multi_counts(
             col(orgs, "classification"), top=8,
             insight=ins.leader_short(multi_counts(col(orgs, "classification")))),

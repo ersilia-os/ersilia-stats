@@ -28,6 +28,7 @@ def build(pubs):
                 "top_journals",
             )},
             growth=dict(empty_series), citation_growth=dict(empty_series),
+            most_cited={"rows": [], "n": 0},
         )
 
     citations = to_num(col(pubs, "citations"))
@@ -38,6 +39,7 @@ def build(pubs):
         "citations_per_year": _citations_per_year(years, citations),
         "output_and_impact": _output_and_impact(years, citations),
         "growth": _growth(years),
+        "most_cited": _most_cited(pubs, citations),
         "citation_growth": _citation_growth(years, citations),
         # Short form: a 4-column card clips the full leader sentence.
         "by_topic": multi_counts(col(pubs, "topic"), top=12,
@@ -100,6 +102,60 @@ def _output_and_impact(years, citations):
         kinds=["bar", "line"],
         n=int(sum(per_year)),
     )
+
+
+def _most_cited(pubs, citations):
+    """The individual papers, named, ranked by citations.
+
+    The site aggregates publications six ways and never named a single one, which for a
+    research organisation's statistics page is a conspicuous gap.
+
+    THE AFFILIATION COLUMN IS WHY THIS IS PUBLISHABLE, not decoration. Ranked by
+    citations alone the top four papers all carry ``Ersilia Affiliation = No`` — 389,
+    123, 66 and 54 citations, which are the founders' pre-Ersilia careers. The most
+    cited *affiliated* paper has 53. A bare citation ranking under an Ersilia heading
+    would therefore claim credit the data does not support, so the flag is shown as a
+    column and the caption says what it means. Filtering the unaffiliated papers out
+    silently would be the less honest fix, since it hides that the distinction exists.
+
+    Titles, journals and years are public bibliographic facts. No author names are
+    emitted, so this adds no disclosure surface.
+    """
+    if pubs is None or pubs.empty:
+        return {"rows": [], "n": 0}
+    titles = as_text(col(pubs, "title"))
+    if titles.empty:
+        return {"rows": [], "n": 0}
+    years = pd.to_numeric(col(pubs, "year"), errors="coerce")
+    affiliation = as_text(col(pubs, "ersilia_affiliation"))
+
+    rows = []
+    for i in range(len(pubs)):
+        title = titles.iloc[i] if i < len(titles) else ""
+        if not title:
+            continue
+        cites = citations.iloc[i] if i < len(citations) else 0
+        year = years.iloc[i] if i < len(years) else None
+        flag = (affiliation.iloc[i] if i < len(affiliation) else "").strip().lower()
+        rows.append({
+            "title": title,
+            "year": int(year) if pd.notna(year) else "",
+            "citations": int(cites) if pd.notna(cites) else 0,
+            "ersilia": "Yes" if flag in YES else "No",
+        })
+    if not rows:
+        return {"rows": [], "n": 0}
+    rows.sort(key=lambda r: (-r["citations"], r["title"]))
+
+    affiliated = [r for r in rows if r["ersilia"] == "Yes"]
+    top_affiliated = affiliated[0]["citations"] if affiliated else 0
+    return {
+        "rows": rows[:12],
+        "n": len(rows),
+        "insight": "Most cited overall is %s citations; most cited with a direct Ersilia "
+                   "affiliation is %s." % (ins.num(rows[0]["citations"]),
+                                           ins.num(top_affiliated)),
+    }
 
 
 def _growth(years):

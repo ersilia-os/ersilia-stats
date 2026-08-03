@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03 06:36 UTC",
+  "generated_at": "2026-08-03 08:31 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -1096,6 +1096,18 @@
         "n": 199,
         "insight": "MIT leads with 76 of 199 models with a licence on file (38%). 200 of 240 models (83%) record a licence."
       },
+      "licence_openness": {
+        "labels": [
+          "Permissive",
+          "Conditions apply"
+        ],
+        "values": [
+          114,
+          86
+        ],
+        "n": 200,
+        "insight": "114 of 200 models with a licence on file (57%) carry a permissive licence. 40 record no licence."
+      },
       "coverage": {
         "labels": [
           "Docker image",
@@ -1580,10 +1592,10 @@
         "n": 36,
         "today": "2026-08-03",
         "semantics": {
-          "Done": "good",
-          "In progress": "brand",
           "Stuck": "bad",
-          "Todo": "neutral"
+          "Todo": "neutral",
+          "In progress": "brand",
+          "Done": "good"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -2010,6 +2022,84 @@
           "line"
         ],
         "same_measure": true
+      },
+      "most_cited": {
+        "rows": [
+          {
+            "title": "Systems analysis of intracellular pH vulnerabilities for cancer therapy",
+            "year": 2018,
+            "citations": 389,
+            "ersilia": "No"
+          },
+          {
+            "title": "Extending the small-molecule similarity principle to all levels of biology with the Chemical Checker",
+            "year": 2020,
+            "citations": 123,
+            "ersilia": "No"
+          },
+          {
+            "title": "Bioactivity descriptors for uncharacterized chemical compounds",
+            "year": 2021,
+            "citations": 66,
+            "ersilia": "No"
+          },
+          {
+            "title": "Structural systems pharmacology: the role of 3D structures in next-generation drug development",
+            "year": 2013,
+            "citations": 54,
+            "ersilia": "No"
+          },
+          {
+            "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
+            "year": 2022,
+            "citations": 53,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "Connecting chemistry and biology through molecular descriptors",
+            "year": 2021,
+            "citations": 52,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa",
+            "year": 2023,
+            "citations": 50,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "A community challenge for a pancancer drug mechanism of action inference from perturbational profile data",
+            "year": 2022,
+            "citations": 49,
+            "ersilia": "No"
+          },
+          {
+            "title": "Causes of Death Among Infants and Children in the Child Health and Mortality Prevention Surveillance (CHAMPS) Network",
+            "year": 2023,
+            "citations": 46,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "Detecting similar binding pockets to enable systems polypharmacology",
+            "year": 2017,
+            "citations": 44,
+            "ersilia": "No"
+          },
+          {
+            "title": "Antigen-stimulated PBMC transcriptional protective signatures for malaria immunization",
+            "year": 2020,
+            "citations": 40,
+            "ersilia": "No"
+          },
+          {
+            "title": "Cervical cancer screening outcomes in Zambia, 2010–19: a cohort study",
+            "year": 2021,
+            "citations": 33,
+            "ersilia": "Yes"
+          }
+        ],
+        "n": 42,
+        "insight": "Most cited overall is 389 citations; most cited with a direct Ersilia affiliation is 53."
       },
       "citation_growth": {
         "labels": [
@@ -4671,6 +4761,23 @@
         ],
         "n": 281,
         "insight": "United States leads with 146 of 315 organisations with a country on file (46%). 36 countries represented. No country recorded for 5 organisations."
+      },
+      "engagement_depth": {
+        "labels": [
+          "None recorded",
+          "One kind",
+          "Two kinds",
+          "Three kinds"
+        ],
+        "values": [
+          229,
+          70,
+          18,
+          3
+        ],
+        "n": 320,
+        "insight": "91 of 320 partner organisations (28%) have at least one recorded project, event, conference or member.",
+        "ordinal": true
       },
       "by_classification": {
         "labels": [

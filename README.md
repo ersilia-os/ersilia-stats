@@ -83,6 +83,36 @@ python scripts/check_config_paths.py    # every chart still has data behind it
 Each fetch writes `<table>_<YYYYMMDD>.csv` and prunes the snapshot it supersedes, so exactly one
 snapshot per table is kept.
 
+### What the legacy Streamlit app had, and what was taken from it
+
+The predecessor (`ersilia-stats-capstone`, private, archived) was re-read in full against
+this dashboard — every section, `scripts/plots.py`, and all 57 notebook cells including the
+markdown ones that state intentions never implemented. **It is now the thinner dashboard**;
+almost everything it draws, this site draws in a better form. Three things were missing and
+have been added: the most-cited publications table, partner engagement depth, and licence
+openness.
+
+The more useful outcome was a list of tempting analyses the data does not support, recorded
+so they are not rebuilt:
+
+- **Composite indices are rejected on principle.** The capstone's headline publications
+  chart was `0.25·citations_percentile + 0.20·senior + 0.35·african_collaboration +
+  0.20·research`, with the weights as live sliders — a metric invented rather than measured,
+  and a ranking the viewer can dial to taste. The notebook proposes a *different* weighting
+  for the same idea, which is the argument against both. The same applies to the never-built
+  "repository health score".
+- **Repository health scatters** are outlier artefacts: Pearson stars-vs-subscribers is 0.88
+  but Spearman is 0.43. The log-log stars-vs-commits scatter here is the honest version.
+- **Repository age vs attention**: Spearman 0.36 / 0.43 / 0.13. Too weak to chart.
+- **Open-issue counts** carry no signal — 162 of 178 repositories have exactly zero — and
+  Ersilia uses issues as a task tracker, so "many open issues" means active, not unhealthy.
+- **The stakeholder network map** the notebook wanted is infeasible on the data, not for
+  want of plumbing: only 6 of 36 projects list two organisations and none lists more, so the
+  graph is 6 disjoint edges over 12 of 320 nodes and "most central partner" is undefined.
+- **Linking contributors to their outputs** is impossible by design: the community table has
+  no person identifier at all, since name, email, handle and contribution are dropped at
+  fetch. That is the privacy rule working as intended.
+
 ## Deploying
 
 `.github/workflows/pages.yml` is the whole pipeline in one job. Weekly, on demand, and on pushes that

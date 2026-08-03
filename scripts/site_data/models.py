@@ -65,6 +65,7 @@ def build(models):
             "scaling_limit": dict(EMPTY),
             "image_size": dict(EMPTY),
             "on_arm": dict(EMPTY),
+            "licence_openness": dict(EMPTY),
             "growth": {"labels": [], "series": [], "n": 0},
         }
 
@@ -106,6 +107,7 @@ def build(models):
         "by_status": by_status,
         "by_biomedical_area": _by_biomedical_area(models),
         "by_license": _by_license(models),
+        "licence_openness": _licence_openness(models),
         "coverage": _coverage(models),
         "by_source_type": _by_source_type(models),
     }
@@ -394,6 +396,57 @@ def _cohorts_by_status(models, incorporated, status):
         # status donut. Without this the two charts on this page gave one state
         # two different colours.
         semantics=[STATUS_SEMANTICS.get(s["name"].strip().lower(), "neutral") for s in series],
+    )
+
+
+# A permissive licence imposes no condition on a downstream user beyond attribution.
+# For a model hub the distinction is practical rather than ideological: it decides who can
+# build on a model, and whether they can ship the result.
+#
+# The two exclusions matter and were both caught misclassifying real rows. A prefix test
+# alone put CC-BY-NC-ND-4.0 in the permissive bucket, when non-commercial plus
+# no-derivatives is the MOST restrictive Creative Commons combination there is — the
+# opposite of the claim. And "Proprietary" is not copyleft; it is not a share-alike
+# obligation but a closed licence, so the other bucket cannot be called "Copyleft"
+# either. It is "Conditions apply", which is true of all of GPL, AGPL, LGPL,
+# proprietary and the NC/ND variants.
+PERMISSIVE_LICENCES = ("mit", "apache", "bsd", "isc", "unlicense", "cc0", "cc-by")
+RESTRICTIVE_MARKERS = ("-nc", "-nd")
+
+
+def _is_permissive(licence):
+    text = licence.lower()
+    if not text.startswith(PERMISSIVE_LICENCES):
+        return False
+    return not any(marker in text for marker in RESTRICTIVE_MARKERS)
+
+
+def _licence_openness(models):
+    """Permissive against copyleft, over the models that record a licence at all.
+
+    Two categories so it can sit as a row in the "how the Hub is built" share card.
+    Models with no licence recorded are excluded from the ratio and named in the caption
+    rather than folded into either side — an unrecorded licence is not a permissive one,
+    and for a reuser it is the most restrictive state of all.
+    """
+    licences = col(models, "license").apply(first_value)
+    if licences.empty:
+        return dict(EMPTY)
+    text = as_text(licences).str.lower()
+    recorded = text[text != ""]
+    if recorded.empty:
+        return dict(EMPTY)
+    permissive = int(recorded.apply(_is_permissive).sum())
+    total = int(len(recorded))
+    unrecorded = int(len(text) - total)
+    return metric(
+        ["Permissive", "Conditions apply"], [permissive, total - permissive],
+        ins.join(
+            ins.share_of(permissive, total, "models with a licence on file",
+                         "carry a permissive licence"),
+            "%s record no licence." % ins.num(unrecorded) if unrecorded else None,
+        ),
+        n=total,
     )
 
 

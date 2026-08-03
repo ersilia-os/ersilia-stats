@@ -139,6 +139,12 @@ function meterRow(metric) {
    ranking charts, and it shows the secondary columns a bar chart has to hide. */
 function rankedTable(metric, spec) {
   const columns = spec.columns || [{ key: "value", label: "Value" }];
+  // Which field holds the row's name, and which columns are text rather than numbers.
+  // Both were previously assumed: `name`, and "everything is a number". A table of
+  // publications broke on both — the rows key their name as `title`, the year came out
+  // thousands-separated as "2,018", and a Yes/No column rendered as an em-dash because
+  // fmtNum had nothing numeric to format.
+  const nameKey = spec.nameKey || "name";
   const table = el("table", "ranked");
   const thead = el("thead");
   const headRow = el("tr");
@@ -151,7 +157,7 @@ function rankedTable(metric, spec) {
   const body = el("tbody");
   const primary = columns[0].key;
   const rows = metric.rows || metric.labels.map((label, i) => {
-    const row = { name: label, value: metric.values[i] };
+    const row = { [nameKey]: label, value: metric.values[i] };
     (metric.extra || []).forEach((ex) => { row[ex.key] = ex.values[i]; });
     return row;
   });
@@ -160,10 +166,17 @@ function rankedTable(metric, spec) {
   rows.slice(0, spec.top || 12).forEach((row) => {
     const tr = el("tr");
     const name = el("td", "name");
-    name.appendChild(el("span", null, String(row.name)));
-    name.title = String(row.name);
+    name.appendChild(el("span", null, String(row[nameKey])));
+    name.title = String(row[nameKey]);
     tr.appendChild(name);
-    columns.forEach((c) => tr.appendChild(el("td", "num", fmtNum(row[c.key]))));
+    columns.forEach((c) => {
+      // `raw` columns print verbatim and align left: a year is not a quantity to be
+      // thousands-separated, and a Yes/No is not a number at all.
+      const value = row[c.key];
+      tr.appendChild(c.raw
+        ? el("td", "txt", value == null ? "" : String(value))
+        : el("td", "num", fmtNum(value)));
+    });
     const barCell = el("td", "barcell");
     const bar = el("div", "microbar");
     bar.style.width = (max ? Math.max(2, 100 * (Number(row[primary]) || 0) / max) : 0) + "%";

@@ -128,8 +128,9 @@ const VIEWS = [
           sources: [
             { label: "Wraps external work", data: "models.by_source_type", highlight: "External" },
             { label: "Also builds for ARM64", data: "models.on_arm", highlight: "ARM64 and AMD64" },
+            { label: "Permissively licensed", data: "models.licence_openness", highlight: "Permissive" },
           ],
-          desc: "Two things about how the Hub is assembled: how much of it packages externally published models rather than Ersilia's own, and how much of it builds for ARM64 as well as AMD64 — ARM being the cheap, low-power hardware.",
+          desc: "Three things about how the Hub is assembled and who can reuse it. How much packages externally published models rather than Ersilia's own; how much builds for ARM64 as well as AMD64, ARM being the cheap low-power hardware; and how much carries a permissive licence — MIT, Apache, BSD or CC0/CC-BY — as against a licence that imposes conditions, which covers GPL, AGPL, LGPL, proprietary and the non-commercial or no-derivatives Creative Commons variants. The share is of the models that record a licence at all; 40 record none, which for a reuser is the most restrictive state of the three.",
         },
       ] },
     ],
@@ -233,6 +234,18 @@ const VIEWS = [
           title: "Ersilia-affiliated against external, per year", span: 8,
           data: "publications.affiliation_by_year", type: "stackbar",
           desc: "Publications per year split by whether they carry a direct Ersilia affiliation.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Most cited publications", span: 12, data: "publications.most_cited",
+          type: "ranked", nameLabel: "Title", nameKey: "title", top: 10,
+          columns: [
+            { key: "citations", label: "Citations" },
+            { key: "year", label: "Year", raw: true },
+            { key: "ersilia", label: "Ersilia", raw: true },
+          ],
+          desc: "Individual papers ranked by citation count. The Ersilia column is the point of this table rather than an aside: the four most-cited papers here carry no direct Ersilia affiliation — they are earlier work by people who later founded or joined Ersilia — and the most-cited affiliated paper has 53 citations. Ranking by citations alone under an Ersilia heading would claim credit the data does not support, and quietly dropping the unaffiliated papers would hide that the distinction exists.",
         },
       ] },
     ],
@@ -384,15 +397,22 @@ const VIEWS = [
       ] },
       { h: "h-lg", cells: [
         {
-          title: "What partners work on", span: 5, data: "organisations.by_focus", type: "treemap",
+          title: "What partners work on", span: 7, data: "organisations.by_focus", type: "treemap",
           desc: "Focus areas across the partner network; area is proportional to count. A multi-select, so one organisation contributes to several.",
         },
         {
-          title: "Partner organisations", span: 4, data: "organisations.by_type", type: "lollipop",
+          title: "Partner organisations", span: 5, data: "organisations.by_type", type: "lollipop",
           desc: "Network organisations grouped by type — foundation, academia, corporate, civil society and so on.",
         },
+      ] },
+      { h: "h-lg", cells: [
         {
-          title: "How partners are involved", span: 3, data: "organisations.by_classification",
+          title: "How much partners are involved", span: 7, data: "organisations.engagement_depth",
+          type: "ordinallollipop",
+          desc: "How many KINDS of recorded activity each partner has, out of four: a linked project, event, conference or community member. Read it alongside the three charts above, which count all 320 organisations equally — most of them have no recorded activity of any kind, so the directory is either largely prospective or the link fields are unfilled. Grants are a fifth link type and are deliberately excluded, since grant data is out of scope for this site.",
+        },
+        {
+          title: "How partners are involved", span: 5, data: "organisations.by_classification",
           type: "lollipop",
           desc: "Whether an organisation funds the work, collaborates on it, or belongs to a network Ersilia is part of. A multi-select: an organisation can be both a funder and a collaborator, and several are.",
         },

@@ -494,6 +494,21 @@ table.ranked td.num {
   text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums;
   color: var(--muted); width: 52px;
 }
+/* Adjacent right-aligned columns need a gutter or they touch: at 390px "389" and "2018"
+   rendered as "3892018", which is not a near-miss but an unreadable number. */
+table.ranked th + th, table.ranked td.num, table.ranked td.txt { padding-left: var(--sp-3); }
+/* A verbatim column: a year or a Yes/No. Right-aligned like the numbers so the columns
+   line up, but not thousands-separated and not treated as a quantity. */
+table.ranked td.txt {
+  text-align: right; font-family: var(--mono); color: var(--muted); width: 52px;
+}
+/* On a phone the microbar is the first thing to go. It is a redundant encoding — the
+   number it duplicates is in the adjacent column — and it was taking 28% of the width
+   that four columns of text needed. */
+@media (max-width: 720px) {
+  table.ranked td.barcell, table.ranked th:last-child { display: none; }
+  table.ranked td.name { width: 44%; }
+}
 table.ranked td.barcell { width: 28%; padding-left: var(--sp-4); }
 table.ranked .microbar { height: 4px; border-radius: 999px; background: var(--chart-1); min-width: 2px; }
 table.ranked tbody tr:hover td { background: var(--surface-2); }

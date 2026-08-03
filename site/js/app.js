@@ -308,6 +308,20 @@ function fillMethods() {
       "the corner. The axis ticks show the real values."],
     ["Small numbers", "Percentages are suppressed below n=10, where a share invites a " +
       "conclusion the sample cannot support."],
+    ["Registry consistency", (() => {
+      const prs = (DATA.sections.quality || {}).project_repo_status || {};
+      const thin = (DATA.sections.quality || {}).thin_fields || {};
+      const parts = [];
+      if (prs.insight) parts.push(prs.insight);
+      if (thin.labels && thin.labels.length) {
+        parts.push("Fields under " + (thin.threshold || 80) + "% filled, thinnest first: " +
+          thin.labels.slice(0, 8).join(", ") +
+          (thin.labels.length > 8 ? ", and " + (thin.labels.length - 8) + " more" : "") + ".");
+      }
+      parts.push("These are caveats about the records rather than findings about the work, " +
+        "which is why they are here and not on a page of their own.");
+      return parts.join(" ");
+    })()],
     ["Keyboard", "Up and Down walk the section list once it has focus, Home and End jump " +
       "to its ends, [ and ] step between views from anywhere on the page, and ? opens " +
       "this dialog. Every chart also has a Table button that opens its numbers as a " +
