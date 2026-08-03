@@ -55,7 +55,43 @@ def _kpi(value, series=None, per_period=QUARTERS_PER_YEAR):
     return {"value": int(value), "series": series, "delta_12m": delta}
 
 
-def build(tables, repos_public, models, repos_all=None):
+def _openalex_totals(collected):
+    """``(per_year, total)`` from the collected OpenAlex citation series, or ``(None, None)``."""
+    years = (collected or {}).get("scholar_citations_by_year")
+    if years is None or years.empty:
+        return None, None
+    counts = to_num(years.get("citations"))
+    totals = {}
+    for i in range(len(years)):
+        year = str(years["year"].iloc[i]).strip()[:4]
+        if year.isdigit():
+            totals[int(year)] = totals.get(int(year), 0) + int(counts.iloc[i])
+    if not totals:
+        return None, None
+    return totals, sum(totals.values())
+
+
+def _citation_total(pubs, collected):
+    _per_year, total = _openalex_totals(collected)
+    if total:
+        return int(total)
+    return int(to_num(col(pubs, "citations")).sum())
+
+
+def _citation_series(pubs, collected):
+    """Cumulative citations by the year the citation happened."""
+    per_year, _total = _openalex_totals(collected)
+    if not per_year:
+        return _yearly_cumulative(col(pubs, "year"), col(pubs, "citations"))
+    labels, values, running = [], [], 0
+    for year in range(min(per_year), max(per_year) + 1):
+        running += per_year.get(year, 0)
+        labels.append(str(year))
+        values.append(running)
+    return {"labels": labels, "values": values}
+
+
+def build(tables, repos_public, models, repos_all=None, collected=None):
     projects = tables.get("projects", pd.DataFrame())
     pubs = tables.get("publications", pd.DataFrame())
     community = tables.get("community", pd.DataFrame())
@@ -76,7 +112,11 @@ def build(tables, repos_public, models, repos_all=None):
     every_repo = repos_all if repos_all is not None else repos_public
     has_repos = every_repo is not None and not every_repo.empty
 
-    citations = int(to_num(col(pubs, "citations")).sum()) if not pubs.empty else 0
+    # The headline citation figure comes from OpenAlex when it is available, so it agrees
+    # with the Publications page. The stored column understates the total by 31% — 1,305
+    # against 1,713 — and a site that prints both numbers in two places is worse than one
+    # that prints the wrong one consistently.
+    citations = _citation_total(pubs, collected)
     stars = int(to_num(col(every_repo, "stars")).sum()) if has_repos else 0
 
     out = {
@@ -88,11 +128,11 @@ def build(tables, repos_public, models, repos_all=None):
         # Yearly, not quarterly: publications only carry a year. One year back,
         # accordingly.
         "publications": _kpi(len(pubs), _yearly_cumulative(col(pubs, "year")), per_period=1),
-        "total_citations": _kpi(
-            citations,
-            _yearly_cumulative(col(pubs, "year"), col(pubs, "citations")),
-            per_period=1,
-        ),
+        # The series is the REAL accrual — citations by the year they were made, which
+        # OpenAlex records — not citations attributed to their paper's publication year.
+        # The two differ a lot at the recent end, and only one of them is what a reader
+        # assumes a citation curve means.
+        "total_citations": _kpi(citations, _citation_series(pubs, collected), per_period=1),
         "projects": _kpi(len(projects), _cumulative_series(col(projects, "start_date"))),
         "organisations": _kpi(len(orgs)),
         "countries_represented": _kpi(len(footprint)),

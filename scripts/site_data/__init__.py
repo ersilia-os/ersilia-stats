@@ -54,7 +54,7 @@ def build_all(data_dir, today=None):
         "projects": projects_section.build(table("projects"), today,
                                            repos=table("repositories"),
                                            publications=table("publications")),
-        "publications": publications_section.build(table("publications")),
+        "publications": publications_section.build(table("publications"), collected),
         "repositories": repositories_section.build(table("repositories")),
         "community": community_section.build(table("community"), today),
         "organisations": organisations_section.build(table("organisations"), table("countries")),
@@ -85,6 +85,7 @@ def build_all(data_dir, today=None):
             "private_repositories": private_excluded,
             "aggregates_only": True,
         },
-        "kpis": kpis_section.build(tables, repos_public, models, repos_all=table("repositories")),
+        "kpis": kpis_section.build(tables, repos_public, models,
+                                   repos_all=table("repositories"), collected=collected),
         "sections": sections,
     }

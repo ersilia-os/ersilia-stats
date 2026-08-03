@@ -216,9 +216,9 @@ const VIEWS = [
       ] },
       { h: "h-lg", cells: [
         {
-          title: "Citations accumulated", span: 7, data: "publications.citation_growth",
+          title: "Citations accumulated", span: 7, data: "publications.citation_accrual",
           type: "growthcombo",
-          desc: "Citations attributed to the YEAR THE PAPER WAS PUBLISHED, not the year the citation was made — that is what the source records. Recent years are therefore necessarily low: a paper from last year has had months to be cited, one from 2018 has had years. Kept separate from the publication count above rather than sharing a plot with it, because publications and citations are different measures and putting two different measures on two axes is what invites a reader to see a relationship the data does not assert.",
+          desc: "Citations by the year each citation was MADE, from OpenAlex — real accrual, not citations attributed to their paper's publication year. That distinction used to require a caveat here, because the previous source only recorded the paper's year and made recent years look artificially thin. Kept separate from the publication count above rather than sharing a plot with it: publications and citations are different measures, and two different measures on two axes is what invites a reader to see a relationship the data does not assert.",
         },
         {
           title: "Highest-impact venues", span: 5, data: "publications.top_journals", type: "lollipop",
@@ -234,6 +234,26 @@ const VIEWS = [
           title: "Ersilia-affiliated against external, per year", span: 8,
           data: "publications.affiliation_by_year", type: "stackbar",
           desc: "Publications per year split by whether they carry a direct Ersilia affiliation.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Who can read it", span: 4, type: "shares",
+          blurb: "Whether the work is behind a paywall.",
+          sources: [
+            { label: "Open access", data: "publications.open_access", highlight: "Open access" },
+            { label: "Direct Ersilia affiliation", data: "publications.affiliation", highlight: "Yes" },
+          ],
+          desc: "Whether each paper can be read without a subscription, classified by OpenAlex. This is a mission figure rather than a vanity one: an organisation whose purpose is to serve researchers in low-resource settings has a direct interest in whether its own output is reachable by them. The routes are not equivalent — gold means published open, while bronze is readable at the publisher's discretion and can be withdrawn — and the breakdown is in the table.",
+        },
+        {
+          title: "Routes to open access", span: 3, data: "publications.oa_routes", type: "lollipop",
+          desc: "How the open papers are open. Gold is published open access; green is a repository copy; hybrid is an open article in a subscription journal; bronze is free to read at the publisher's discretion and can be withdrawn without notice.",
+        },
+        {
+          title: "Where co-authors are based", span: 5,
+          data: "publications.collaboration_countries", type: "lollipop",
+          desc: "Countries of the author institutions across all papers, from OpenAlex. This measures international collaboration instead of asserting it: the publications table also carries a hand-set African-collaboration flag, and this counts the institutions, so South Africa, Cameroon and Mozambique appear as themselves. Institution countries only — no author names are collected or published.",
         },
       ] },
       { h: "h-lg", cells: [

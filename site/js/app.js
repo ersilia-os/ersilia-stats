@@ -275,6 +275,22 @@ function fillMethods() {
     ["Multi-select fields", "Roles, tags, topics, categories, biomedical areas and focus " +
       "areas allow several values per record. Those charts count assignments, not records, " +
       "so their shares can sum above 100%. Each chart says so where it matters."],
+    ["Citations come from OpenAlex", "Citation counts, the per-year accrual, open-access " +
+      "status and the countries of author institutions are collected from OpenAlex against " +
+      "each paper's DOI, not entered by hand. That matters because citation counts are " +
+      "source-dependent — one paper reads 43 in OpenAlex, 37 in Semantic Scholar and 44 in " +
+      "the older manual record — so the source is named rather than a bare number printed. " +
+      "The manual figures understated the total by 31%, 1,305 against 1,712, with 38 of 42 " +
+      "papers differing. Google Scholar is not used: it has no API and its robots.txt " +
+      "disallows the paths that carry per-paper counts, so the Scholar links here point at " +
+      "its citing-works page rather than being read from it."],
+    ["African collaboration, two ways", "The publications table carries a hand-set " +
+      "African-collaboration flag, and OpenAlex separately gives the countries of the author " +
+      "institutions. They agree on 24 of the 26 papers where the flag is set, and the two " +
+      "disagreements show the flag means something slightly different: one paper is about " +
+      "drug discovery for Africa with no African author institution, and one has a South " +
+      "African institution and no flag. 16 of 42 papers have at least one African author " +
+      "institution. Neither figure is wrong; they answer different questions."],
     ["Journal ranking", "Venues are ranked by mean citations per Ersilia article and need at " +
       "least two Ersilia articles to appear. Without that floor a single well-cited paper " +
       "tops the ranking and says nothing about the venue."],

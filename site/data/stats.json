@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-03 14:40 UTC",
-  "snapshot_date": "2026-07-31",
+  "generated_at": "2026-08-03 22:01 UTC",
+  "snapshot_date": "2026-08-03",
   "meta": {
     "tables": [
       "blogposts",
@@ -15,16 +15,16 @@
       "repositories"
     ],
     "snapshot_dates": {
-      "blogposts": "2026-07-31",
-      "community": "2026-07-31",
-      "conferences": "2026-07-31",
-      "countries": "2026-07-31",
-      "events": "2026-07-31",
-      "models": "2026-07-31",
-      "organisations": "2026-07-31",
-      "projects": "2026-07-31",
-      "publications": "2026-07-31",
-      "repositories": "2026-07-31"
+      "blogposts": "2026-08-03",
+      "community": "2026-08-03",
+      "conferences": "2026-08-03",
+      "countries": "2026-08-03",
+      "events": "2026-08-03",
+      "models": "2026-08-03",
+      "organisations": "2026-08-03",
+      "projects": "2026-08-03",
+      "publications": "2026-08-03",
+      "repositories": "2026-08-03"
     },
     "collected_dates": {
       "dockerhub": "2026-08-03",
@@ -94,7 +94,7 @@
       "delta_12m": 11
     },
     "repositories": {
-      "value": 178,
+      "value": 179,
       "series": {
         "labels": [
           "2019Q3",
@@ -144,23 +144,23 @@
           66,
           76,
           80,
-          84,
-          90,
-          100,
-          106,
-          111,
-          116,
-          124,
-          134,
-          150,
-          166,
-          177
+          85,
+          91,
+          101,
+          107,
+          112,
+          117,
+          125,
+          135,
+          151,
+          167,
+          178
         ]
       },
       "delta_12m": 53
     },
     "repositories_public": {
-      "value": 140,
+      "value": 141,
       "series": {
         "labels": [],
         "values": []
@@ -204,7 +204,7 @@
       "delta_12m": 5
     },
     "total_citations": {
-      "value": 1305,
+      "value": 1712,
       "series": {
         "labels": [
           "2013",
@@ -219,25 +219,27 @@
           "2022",
           "2023",
           "2024",
-          "2025"
+          "2025",
+          "2026"
         ],
         "values": [
-          54,
-          86,
-          86,
-          86,
-          130,
-          570,
-          589,
-          797,
-          974,
-          1135,
-          1267,
-          1304,
-          1305
+          3,
+          8,
+          21,
+          29,
+          37,
+          59,
+          120,
+          210,
+          351,
+          544,
+          800,
+          1156,
+          1501,
+          1712
         ]
       },
-      "delta_12m": 1
+      "delta_12m": 211
     },
     "projects": {
       "value": 36,
@@ -322,7 +324,7 @@
       "delta_12m": null
     },
     "total_stars": {
-      "value": 664,
+      "value": 665,
       "series": {
         "labels": [],
         "values": []
@@ -440,7 +442,7 @@
       "delta_12m": 6
     },
     "models": {
-      "value": 240,
+      "value": 243,
       "series": {
         "labels": [
           "2020Q4",
@@ -492,10 +494,10 @@
           201,
           213,
           235,
-          236
+          239
         ]
       },
-      "delta_12m": 52
+      "delta_12m": 55
     }
   },
   "sections": {
@@ -551,10 +553,10 @@
           201,
           213,
           235,
-          236
+          239
         ],
-        "n": 236,
-        "insight": "Grew from 1 to 236 models between 2020Q4 and 2026Q3."
+        "n": 239,
+        "insight": "Grew from 1 to 239 models between 2020Q4 and 2026Q3."
       },
       "per_quarter": {
         "labels": [
@@ -607,10 +609,10 @@
           17,
           12,
           22,
-          1
+          4
         ],
-        "n": 236,
-        "insight": "Models incorporated in 2026Q3: 1, down from 22 in 2026Q2."
+        "n": 239,
+        "insight": "Models incorporated in 2026Q3: 4, down from 22 in 2026Q2."
       },
       "growth": {
         "labels": [
@@ -666,7 +668,7 @@
               17,
               12,
               22,
-              1
+              4
             ]
           },
           {
@@ -695,12 +697,12 @@
               201,
               213,
               235,
-              236
+              239
             ]
           }
         ],
-        "n": 236,
-        "insight": "236 models so far, most in 2022Q3 with 28.",
+        "n": 239,
+        "insight": "239 models so far, most in 2022Q3 with 28.",
         "kinds": [
           "bar",
           "line"
@@ -727,7 +729,7 @@
             "children": [
               {
                 "name": "Featurization",
-                "value": 56
+                "value": 59
               },
               {
                 "name": "Projection",
@@ -749,8 +751,8 @@
             ]
           }
         ],
-        "n": 231,
-        "insight": "Annotation is the largest task family, 63% of the 231 with a task recorded."
+        "n": 234,
+        "insight": "Annotation is the largest task family, 62% of the 234 with a task recorded."
       },
       "by_target_organism": {
         "labels": [
@@ -794,15 +796,15 @@
           "10+"
         ],
         "values": [
-          94,
+          97,
           47,
           39,
           22,
           6,
           19
         ],
-        "n": 227,
-        "insight": "94 of 227 wrapped the same year; mean wait 2.2 years.",
+        "n": 230,
+        "insight": "97 of 230 wrapped the same year; mean wait 2.2 years.",
         "mean": 2.2,
         "median": 1.0,
         "unit": "years",
@@ -818,13 +820,13 @@
         ],
         "values": [
           1,
-          12,
+          13,
           19,
           37,
-          151
+          153
         ],
-        "n": 220,
-        "insight": "151 of 220 reached the largest batch, 10,000 inputs.",
+        "n": 223,
+        "insight": "153 of 223 reached the largest batch, 10,000 inputs.",
         "ordinal": true
       },
       "image_size": {
@@ -837,13 +839,13 @@
         ],
         "values": [
           54,
-          35,
+          38,
           41,
           70,
           20
         ],
-        "n": 220,
-        "insight": "89 of 220 images are under 2 GB; mean 3.8 GB.",
+        "n": 223,
+        "insight": "92 of 223 images are under 2 GB; mean 3.8 GB.",
         "mean": 3.8,
         "unit": "GB",
         "countNoun": "models"
@@ -854,11 +856,11 @@
           "AMD64 only"
         ],
         "values": [
-          147,
+          150,
           87
         ],
-        "n": 234,
-        "insight": "147 of 234 models with a recorded architecture (63%) also build for ARM64."
+        "n": 237,
+        "insight": "150 of 237 models with a recorded architecture (63%) also build for ARM64."
       },
       "cohorts_by_status": {
         "labels": [
@@ -902,19 +904,19 @@
               7,
               18,
               4,
-              16,
+              17,
               12,
-              10,
+              9,
               5,
               3,
               8,
               0,
               7,
               11,
-              16,
+              15,
               12,
               22,
-              1
+              4
             ]
           },
           {
@@ -960,16 +962,16 @@
               0,
               0,
               1,
-              1,
-              1,
-              0,
               0,
               1,
+              1,
+              0,
+              1,
               0,
               0,
               0,
               0,
-              0,
+              1,
               0,
               0,
               0
@@ -1005,8 +1007,8 @@
             ]
           }
         ],
-        "n": 236,
-        "insight": "27 of 236 incorporated models (11%) are not yet marked ready.",
+        "n": 239,
+        "insight": "28 of 239 incorporated models (12%) are not yet marked ready.",
         "semantics": [
           "good",
           "brand",
@@ -1022,13 +1024,13 @@
           "In progress"
         ],
         "values": [
-          209,
+          211,
           21,
-          5,
+          6,
           5
         ],
-        "n": 240,
-        "insight": "209 of 240 models (87%) are ready to run.",
+        "n": 243,
+        "insight": "211 of 243 models (87%) are ready to run.",
         "semantics": {
           "Ready": "good",
           "Archived": "neutral",
@@ -1054,7 +1056,7 @@
           "Hepatitis B"
         ],
         "values": [
-          115,
+          118,
           48,
           30,
           9,
@@ -1069,9 +1071,9 @@
           2,
           1
         ],
-        "n": 243,
+        "n": 246,
         "distinct": 17,
-        "insight": "128 of 243 area assignments (53%) name a specific disease rather than 'Any'."
+        "insight": "128 of 246 area assignments (52%) name a specific disease rather than 'Any'."
       },
       "by_license": {
         "labels": [
@@ -1087,10 +1089,10 @@
           "Proprietary"
         ],
         "values": [
-          76,
+          78,
           52,
           26,
-          20,
+          21,
           16,
           4,
           2,
@@ -1098,8 +1100,8 @@
           1,
           1
         ],
-        "n": 199,
-        "insight": "MIT leads with 76 of 199 models with a licence on file (38%). 200 of 240 models (83%) record a licence."
+        "n": 202,
+        "insight": "MIT leads with 78 of 202 models with a licence on file (39%). 203 of 243 models (84%) record a licence."
       },
       "licence_openness": {
         "labels": [
@@ -1107,11 +1109,11 @@
           "Conditions apply"
         ],
         "values": [
-          114,
+          117,
           86
         ],
-        "n": 200,
-        "insight": "114 of 200 models with a licence on file (57%) carry a permissive licence. 40 record no licence."
+        "n": 203,
+        "insight": "117 of 203 models with a licence on file (58%) carry a permissive licence. 40 record no licence."
       },
       "coverage": {
         "labels": [
@@ -1120,13 +1122,13 @@
           "Source code"
         ],
         "values": [
-          234,
-          235,
-          240
+          237,
+          238,
+          243
         ],
-        "n": 709,
-        "insight": "Source code reaches the most models: 240 of 240.",
-        "total": 240
+        "n": 718,
+        "insight": "Source code reaches the most models: 243 of 243.",
+        "total": 243
       },
       "by_source_type": {
         "labels": [
@@ -1135,12 +1137,12 @@
           "Replicated"
         ],
         "values": [
-          172,
+          175,
           49,
           10
         ],
-        "n": 231,
-        "insight": "172 of 231 models (74%) wrap externally published work rather than being built in-house."
+        "n": 234,
+        "insight": "175 of 234 models (75%) wrap externally published work rather than being built in-house."
       }
     },
     "projects": {
@@ -1324,7 +1326,7 @@
           {
             "name": "Ersilia Model Hub",
             "start": "2021-01-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "In progress",
             "open": true,
             "months": 67.0
@@ -1476,10 +1478,10 @@
           {
             "name": "The Gambia MRC",
             "start": "2024-09-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "In progress",
             "open": true,
-            "months": 23.0
+            "months": 23.1
           },
           {
             "name": "Plan Generación Conocimiento",
@@ -1516,7 +1518,7 @@
           {
             "name": "ChemPFN",
             "start": "2025-06-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "Stuck",
             "open": true,
             "months": 14.1
@@ -1524,7 +1526,7 @@
           {
             "name": "PREEMI maternal healthcare",
             "start": "2025-07-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "Stuck",
             "open": true,
             "months": 13.1
@@ -1532,7 +1534,7 @@
           {
             "name": "HIV follow up during COVID in Zambia",
             "start": "2025-08-24",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "Stuck",
             "open": true,
             "months": 11.3
@@ -1548,7 +1550,7 @@
           {
             "name": "NPs as schistosoma drugs",
             "start": "2025-10-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "In progress",
             "open": true,
             "months": 10.1
@@ -1556,7 +1558,7 @@
           {
             "name": "PQZ signature reversal",
             "start": "2025-10-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "In progress",
             "open": true,
             "months": 10.1
@@ -1572,10 +1574,10 @@
           {
             "name": "AID3 molecular glue discovery",
             "start": "2025-11-01",
-            "end": "2026-08-03",
+            "end": "2026-08-04",
             "status": "Todo",
             "open": true,
-            "months": 9.0
+            "months": 9.1
           },
           {
             "name": "AI2050 Compute Fund",
@@ -1595,12 +1597,12 @@
           }
         ],
         "n": 36,
-        "today": "2026-08-03",
+        "today": "2026-08-04",
         "semantics": {
-          "In progress": "brand",
           "Stuck": "bad",
-          "Todo": "neutral",
-          "Done": "good"
+          "Done": "good",
+          "In progress": "brand",
+          "Todo": "neutral"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -1886,20 +1888,20 @@
           "2025"
         ],
         "values": [
-          54,
-          32,
           44,
-          440,
-          19,
-          208,
-          177,
-          161,
-          132,
-          37,
-          1
+          28,
+          43,
+          466,
+          25,
+          219,
+          247,
+          213,
+          272,
+          120,
+          36
         ],
-        "n": 1305,
-        "insight": "1,305 citations in total; the 2018 cohort has accrued the most (440)."
+        "n": 1713,
+        "insight": "1,713 citations in total; the 2018 cohort has accrued the most (466)."
       },
       "output_and_impact": {
         "labels": [
@@ -1939,24 +1941,24 @@
           {
             "name": "Cumulative citations",
             "values": [
-              54,
-              86,
-              86,
-              86,
-              130,
-              570,
-              589,
-              797,
-              974,
-              1135,
-              1267,
-              1304,
-              1305
+              44,
+              72,
+              72,
+              72,
+              115,
+              581,
+              606,
+              825,
+              1072,
+              1285,
+              1557,
+              1677,
+              1713
             ]
           }
         ],
         "n": 42,
-        "insight": "42 publications have accrued 1,305 citations to date.",
+        "insight": "42 publications have accrued 1,713 citations to date.",
         "axes": [
           "left",
           "right"
@@ -2028,83 +2030,208 @@
         ],
         "same_measure": true
       },
+      "citation_accrual": {
+        "labels": [
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "series": [
+          {
+            "name": "Added per year",
+            "values": [
+              3,
+              5,
+              13,
+              8,
+              8,
+              22,
+              61,
+              90,
+              141,
+              193,
+              256,
+              356,
+              345,
+              211
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              3,
+              8,
+              21,
+              29,
+              37,
+              59,
+              120,
+              210,
+              351,
+              544,
+              800,
+              1156,
+              1501,
+              1712
+            ]
+          }
+        ],
+        "n": 1712,
+        "insight": "1,712 citations to date, 356 of them in 2024.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
+      },
+      "open_access": {
+        "labels": [
+          "Open access",
+          "Paywalled"
+        ],
+        "values": [
+          35,
+          7
+        ],
+        "n": 42,
+        "insight": "35 of 42 papers (83%) can be read without a subscription."
+      },
+      "oa_routes": {
+        "labels": [
+          "Gold",
+          "Green",
+          "Hybrid",
+          "Bronze"
+        ],
+        "values": [
+          26,
+          3,
+          3,
+          3
+        ],
+        "n": 35,
+        "insight": "Gold is the most common route to open access."
+      },
+      "collaboration_countries": {
+        "labels": [
+          "Spain",
+          "United States",
+          "United Kingdom",
+          "South Africa",
+          "Germany",
+          "Austria",
+          "Cameroon",
+          "Israel",
+          "Mozambique",
+          "Italy",
+          "Switzerland",
+          "Zambia"
+        ],
+        "values": [
+          33,
+          18,
+          8,
+          8,
+          7,
+          4,
+          4,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "n": 37,
+        "insight": "37 countries appear among the author institutions; Spain on the most papers."
+      },
       "most_cited": {
         "rows": [
           {
             "title": "Systems analysis of intracellular pH vulnerabilities for cancer therapy",
             "year": 2018,
-            "citations": 389,
+            "citations": 420,
             "ersilia": "No"
           },
           {
             "title": "Extending the small-molecule similarity principle to all levels of biology with the Chemical Checker",
             "year": 2020,
-            "citations": 123,
-            "ersilia": "No"
-          },
-          {
-            "title": "Bioactivity descriptors for uncharacterized chemical compounds",
-            "year": 2021,
-            "citations": 66,
-            "ersilia": "No"
-          },
-          {
-            "title": "Structural systems pharmacology: the role of 3D structures in next-generation drug development",
-            "year": 2013,
-            "citations": 54,
-            "ersilia": "No"
-          },
-          {
-            "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
-            "year": 2022,
-            "citations": 53,
-            "ersilia": "Yes"
-          },
-          {
-            "title": "Connecting chemistry and biology through molecular descriptors",
-            "year": 2021,
-            "citations": 52,
-            "ersilia": "Yes"
-          },
-          {
-            "title": "First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa",
-            "year": 2023,
-            "citations": 50,
-            "ersilia": "Yes"
-          },
-          {
-            "title": "A community challenge for a pancancer drug mechanism of action inference from perturbational profile data",
-            "year": 2022,
-            "citations": 49,
+            "citations": 132,
             "ersilia": "No"
           },
           {
             "title": "Causes of Death Among Infants and Children in the Child Health and Mortality Prevention Surveillance (CHAMPS) Network",
             "year": 2023,
-            "citations": 46,
+            "citations": 115,
             "ersilia": "Yes"
           },
           {
-            "title": "Detecting similar binding pockets to enable systems polypharmacology",
-            "year": 2017,
+            "title": "Bioactivity descriptors for uncharacterized chemical compounds",
+            "year": 2021,
+            "citations": 101,
+            "ersilia": "No"
+          },
+          {
+            "title": "Large-scale chemoproteomics expedites ligand discovery and predicts ligand behavior in cells",
+            "year": 2024,
+            "citations": 92,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa",
+            "year": 2023,
+            "citations": 81,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "Connecting chemistry and biology through molecular descriptors",
+            "year": 2021,
+            "citations": 76,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "A community challenge for a pancancer drug mechanism of action inference from perturbational profile data",
+            "year": 2022,
+            "citations": 69,
+            "ersilia": "No"
+          },
+          {
+            "title": "Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque",
+            "year": 2022,
+            "citations": 63,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "Advancing Targeted Protein Degradation via Multiomics Profiling and Artificial Intelligence",
+            "year": 2023,
+            "citations": 47,
+            "ersilia": "Yes"
+          },
+          {
+            "title": "Structural systems pharmacology: the role of 3D structures in next-generation drug development",
+            "year": 2013,
             "citations": 44,
             "ersilia": "No"
           },
           {
-            "title": "Antigen-stimulated PBMC transcriptional protective signatures for malaria immunization",
-            "year": 2020,
-            "citations": 40,
+            "title": "Detecting similar binding pockets to enable systems polypharmacology",
+            "year": 2017,
+            "citations": 43,
             "ersilia": "No"
-          },
-          {
-            "title": "Cervical cancer screening outcomes in Zambia, 2010–19: a cohort study",
-            "year": 2021,
-            "citations": 33,
-            "ersilia": "Yes"
           }
         ],
         "n": 42,
-        "insight": "Most cited overall is 389 citations; most cited with a direct Ersilia affiliation is 53."
+        "insight": "Most cited overall is 420 citations; most cited with a direct Ersilia affiliation is 115."
       },
       "citation_growth": {
         "labels": [
@@ -2126,42 +2253,42 @@
           {
             "name": "Added per year",
             "values": [
-              54,
-              32,
-              0,
-              0,
               44,
-              440,
-              19,
-              208,
-              177,
-              161,
-              132,
-              37,
-              1
+              28,
+              0,
+              0,
+              43,
+              466,
+              25,
+              219,
+              247,
+              213,
+              272,
+              120,
+              36
             ]
           },
           {
             "name": "Total to date",
             "values": [
-              54,
-              86,
-              86,
-              86,
-              130,
-              570,
-              589,
-              797,
-              974,
-              1135,
-              1267,
-              1304,
-              1305
+              44,
+              72,
+              72,
+              72,
+              115,
+              581,
+              606,
+              825,
+              1072,
+              1285,
+              1557,
+              1677,
+              1713
             ]
           }
         ],
-        "n": 1305,
-        "insight": "1,305 citations to date, most for work published in 2018.",
+        "n": 1713,
+        "insight": "1,713 citations to date, most for work published in 2018.",
         "kinds": [
           "bar",
           "line"
@@ -2288,10 +2415,10 @@
           "Genome Medicine"
         ],
         "values": [
-          84.4,
+          103.3,
+          23,
           22,
-          18,
-          17.5
+          19.2
         ],
         "n": 4,
         "counts": [
@@ -2301,13 +2428,13 @@
           4
         ],
         "totals": [
-          591,
+          723,
+          46,
           44,
-          36,
-          70
+          77
         ],
         "unit": "mean citations per article",
-        "insight": "Nature Communications leads at 84.4 citations per article."
+        "insight": "Nature Communications leads at 103.3 citations per article."
       }
     },
     "repositories": {
@@ -2360,7 +2487,7 @@
           9,
           10,
           4,
-          4,
+          5,
           6,
           10,
           6,
@@ -2372,7 +2499,7 @@
           16,
           11
         ],
-        "n": 177,
+        "n": 178,
         "insight": "Busiest quarter was 2025Q4 with 16 repositories."
       },
       "cumulative": {
@@ -2424,20 +2551,20 @@
           66,
           76,
           80,
-          84,
-          90,
-          100,
-          106,
-          111,
-          116,
-          124,
-          134,
-          150,
-          166,
-          177
+          85,
+          91,
+          101,
+          107,
+          112,
+          117,
+          125,
+          135,
+          151,
+          167,
+          178
         ],
-        "n": 177,
-        "insight": "Grew from 1 to 177 repositories between 2019Q3 and 2026Q2."
+        "n": 178,
+        "insight": "Grew from 1 to 178 repositories between 2019Q3 and 2026Q2."
       },
       "growth": {
         "labels": [
@@ -2491,7 +2618,7 @@
               9,
               10,
               4,
-              4,
+              5,
               6,
               10,
               6,
@@ -2524,22 +2651,22 @@
               66,
               76,
               80,
-              84,
-              90,
-              100,
-              106,
-              111,
-              116,
-              124,
-              134,
-              150,
-              166,
-              177
+              85,
+              91,
+              101,
+              107,
+              112,
+              117,
+              125,
+              135,
+              151,
+              167,
+              178
             ]
           }
         ],
-        "n": 177,
-        "insight": "177 repositories so far, most in 2025Q4 with 16.",
+        "n": 178,
+        "insight": "178 repositories so far, most in 2025Q4 with 16.",
         "kinds": [
           "bar",
           "line"
@@ -2558,35 +2685,35 @@
         ],
         "values": [
           71,
-          69,
+          70,
           13,
           10,
           7,
           5,
           3
         ],
-        "n": 178,
-        "insight": "Package leads with 71 of 178 repositories (40%)."
+        "n": 179,
+        "insight": "Package leads with 71 of 179 repositories (40%)."
       },
       "by_status": {
         "labels": [
           "Completed",
           "In progress",
-          "Discontinued",
           "Archived",
+          "Discontinued",
           "Idle",
           "Todo"
         ],
         "values": [
           78,
           43,
-          19,
+          20,
           19,
           15,
           4
         ],
-        "n": 178,
-        "insight": "58 of 178 repositories (33%) are in progress or idle rather than closed out."
+        "n": 179,
+        "insight": "58 of 179 repositories (32%) are in progress or idle rather than closed out."
       },
       "visibility": {
         "labels": [
@@ -2594,11 +2721,11 @@
           "Private"
         ],
         "values": [
-          140,
+          141,
           38
         ],
-        "n": 178,
-        "insight": "140 of 178 repositories (79%) are public.",
+        "n": 179,
+        "insight": "141 of 179 repositories (79%) are public.",
         "semantics": {
           "Public": "brand",
           "Private": "neutral"
@@ -2615,167 +2742,168 @@
           "3.4",
           "3.9",
           "4.5",
-          "5.1",
+          "5.0",
           "5.6",
-          "6.2",
+          "6.1",
           "6.7",
           "7.3",
-          "7.9",
+          "7.8",
           "8.4",
-          "9.0",
-          "9.6",
+          "8.9",
+          "9.5",
           "10.1",
-          "10.7",
+          "10.6",
           "11.2",
-          "11.8",
-          "12.4",
-          "12.9",
-          "13.5",
+          "11.7",
+          "12.3",
+          "12.8",
+          "13.4",
           "14.0",
-          "14.6",
-          "15.2",
-          "15.7",
-          "16.3",
-          "16.9",
-          "17.4",
-          "18.0",
-          "18.5",
-          "19.1",
-          "19.7",
-          "20.2",
-          "20.8",
-          "21.3",
-          "21.9",
-          "22.5",
-          "23.0",
-          "23.6",
-          "24.2",
-          "24.7",
-          "25.3",
-          "25.8",
-          "26.4",
-          "27.0",
-          "27.5",
-          "28.1",
-          "28.7",
-          "29.2",
-          "29.8",
-          "30.3",
-          "30.9",
-          "31.5",
-          "32.0",
-          "32.6",
-          "33.1",
-          "33.7",
-          "34.3",
-          "34.8",
-          "35.4",
-          "36.0",
-          "36.5",
-          "37.1",
-          "37.6",
-          "38.2",
-          "38.8",
-          "39.3",
-          "39.9",
-          "40.4",
-          "41.0",
-          "41.6",
-          "42.1",
-          "42.7",
-          "43.3",
-          "43.8",
-          "44.4",
-          "44.9",
-          "45.5",
-          "46.1",
-          "46.6",
-          "47.2",
-          "47.8",
-          "48.3",
-          "48.9",
-          "49.4",
-          "50.0",
-          "50.6",
-          "51.1",
-          "51.7",
-          "52.2",
-          "52.8",
-          "53.4",
-          "53.9",
-          "54.5",
-          "55.1",
-          "55.6",
-          "56.2",
-          "56.7",
-          "57.3",
-          "57.9",
-          "58.4",
-          "59.0",
-          "59.6",
-          "60.1",
-          "60.7",
-          "61.2",
-          "61.8",
-          "62.4",
-          "62.9",
-          "63.5",
-          "64.0",
-          "64.6",
-          "65.2",
-          "65.7",
-          "66.3",
-          "66.9",
-          "67.4",
-          "68.0",
-          "68.5",
-          "69.1",
-          "69.7",
-          "70.2",
-          "70.8",
-          "71.3",
-          "71.9",
-          "72.5",
-          "73.0",
-          "73.6",
-          "74.2",
-          "74.7",
-          "75.3",
-          "75.8",
-          "76.4",
-          "77.0",
-          "77.5",
-          "78.1",
-          "78.7",
-          "79.2",
-          "79.8",
-          "80.3",
-          "80.9",
-          "81.5",
-          "82.0",
-          "82.6",
-          "83.1",
-          "83.7",
-          "84.3",
-          "84.8",
-          "85.4",
+          "14.5",
+          "15.1",
+          "15.6",
+          "16.2",
+          "16.8",
+          "17.3",
+          "17.9",
+          "18.4",
+          "19.0",
+          "19.6",
+          "20.1",
+          "20.7",
+          "21.2",
+          "21.8",
+          "22.3",
+          "22.9",
+          "23.5",
+          "24.0",
+          "24.6",
+          "25.1",
+          "25.7",
+          "26.3",
+          "26.8",
+          "27.4",
+          "27.9",
+          "28.5",
+          "29.1",
+          "29.6",
+          "30.2",
+          "30.7",
+          "31.3",
+          "31.8",
+          "32.4",
+          "33.0",
+          "33.5",
+          "34.1",
+          "34.6",
+          "35.2",
+          "35.8",
+          "36.3",
+          "36.9",
+          "37.4",
+          "38.0",
+          "38.5",
+          "39.1",
+          "39.7",
+          "40.2",
+          "40.8",
+          "41.3",
+          "41.9",
+          "42.5",
+          "43.0",
+          "43.6",
+          "44.1",
+          "44.7",
+          "45.3",
+          "45.8",
+          "46.4",
+          "46.9",
+          "47.5",
+          "48.0",
+          "48.6",
+          "49.2",
+          "49.7",
+          "50.3",
+          "50.8",
+          "51.4",
+          "52.0",
+          "52.5",
+          "53.1",
+          "53.6",
+          "54.2",
+          "54.7",
+          "55.3",
+          "55.9",
+          "56.4",
+          "57.0",
+          "57.5",
+          "58.1",
+          "58.7",
+          "59.2",
+          "59.8",
+          "60.3",
+          "60.9",
+          "61.5",
+          "62.0",
+          "62.6",
+          "63.1",
+          "63.7",
+          "64.2",
+          "64.8",
+          "65.4",
+          "65.9",
+          "66.5",
+          "67.0",
+          "67.6",
+          "68.2",
+          "68.7",
+          "69.3",
+          "69.8",
+          "70.4",
+          "70.9",
+          "71.5",
+          "72.1",
+          "72.6",
+          "73.2",
+          "73.7",
+          "74.3",
+          "74.9",
+          "75.4",
+          "76.0",
+          "76.5",
+          "77.1",
+          "77.7",
+          "78.2",
+          "78.8",
+          "79.3",
+          "79.9",
+          "80.4",
+          "81.0",
+          "81.6",
+          "82.1",
+          "82.7",
+          "83.2",
+          "83.8",
+          "84.4",
+          "84.9",
+          "85.5",
           "86.0",
-          "86.5",
-          "87.1",
-          "87.6",
-          "88.2",
+          "86.6",
+          "87.2",
+          "87.7",
+          "88.3",
           "88.8",
-          "89.3",
+          "89.4",
           "89.9",
-          "90.4",
-          "91.0",
+          "90.5",
+          "91.1",
           "91.6",
-          "92.1",
+          "92.2",
           "92.7",
           "93.3",
-          "93.8",
+          "93.9",
           "94.4",
-          "94.9",
+          "95.0",
           "95.5",
           "96.1",
           "96.6",
@@ -2807,7 +2935,7 @@
           0.2,
           0.2,
           0.2,
-          0.3,
+          0.2,
           0.3,
           0.3,
           0.3,
@@ -2835,16 +2963,17 @@
           0.9,
           1,
           1,
-          1.1,
+          1,
           1.1,
           1.1,
           1.2,
           1.2,
-          1.3,
+          1.2,
           1.3,
           1.3,
           1.4,
           1.4,
+          1.5,
           1.5,
           1.5,
           1.6,
@@ -2853,33 +2982,33 @@
           1.7,
           1.8,
           1.8,
-          1.9,
           1.9,
           2,
           2,
           2.1,
-          2.2,
+          2.1,
           2.2,
           2.3,
-          2.4,
+          2.3,
           2.4,
           2.5,
-          2.6,
+          2.5,
           2.6,
           2.7,
+          2.7,
           2.8,
-          2.8,
+          2.9,
           2.9,
           3,
           3.1,
-          3.1,
+          3.2,
           3.2,
           3.3,
           3.4,
           3.5,
-          3.5,
           3.6,
           3.7,
+          3.8,
           3.8,
           3.9,
           4,
@@ -2890,84 +3019,84 @@
           4.5,
           4.6,
           4.7,
-          4.8,
           4.9,
           5,
           5.1,
+          5.2,
           5.3,
           5.4,
-          5.5,
           5.6,
+          5.7,
           5.8,
-          5.9,
           6,
+          6.1,
           6.2,
-          6.3,
+          6.4,
           6.5,
-          6.6,
+          6.7,
           6.8,
-          6.9,
+          7,
           7.1,
-          7.2,
-          7.4,
+          7.3,
+          7.5,
           7.6,
-          7.7,
-          7.9,
-          8.1,
-          8.3,
-          8.6,
-          8.8,
-          9,
-          9.2,
-          9.5,
-          9.7,
-          10,
-          10.3,
-          10.6,
-          10.8,
-          11.1,
-          11.4,
-          11.7,
-          12.1,
-          12.4,
-          12.8,
-          13.1,
-          13.5,
-          13.8,
-          14.2,
-          14.6,
-          14.9,
-          15.3,
-          15.7,
-          16.2,
-          16.6,
-          17.1,
-          17.7,
-          18.2,
-          18.8,
-          19.5,
-          20.2,
-          20.9,
-          21.8,
-          22.7,
-          23.6,
-          24.5,
-          25.5,
-          26.6,
-          27.7,
-          28.8,
-          30,
-          31.3,
-          32.7,
-          34.1,
-          35.6,
-          37,
-          38.9,
-          42.5,
-          55.8,
+          7.8,
+          8,
+          8.2,
+          8.4,
+          8.7,
+          8.9,
+          9.1,
+          9.3,
+          9.6,
+          9.8,
+          10.1,
+          10.4,
+          10.7,
+          11,
+          11.3,
+          11.6,
+          11.9,
+          12.2,
+          12.6,
+          12.9,
+          13.3,
+          13.6,
+          14,
+          14.4,
+          14.7,
+          15.1,
+          15.5,
+          15.9,
+          16.4,
+          16.9,
+          17.4,
+          18,
+          18.6,
+          19.2,
+          19.9,
+          20.6,
+          21.5,
+          22.3,
+          23.2,
+          24.2,
+          25.2,
+          26.2,
+          27.3,
+          28.4,
+          29.6,
+          30.8,
+          32.2,
+          33.6,
+          35,
+          36.4,
+          37.9,
+          39.7,
+          43.3,
+          56.4,
           100
         ],
-        "n": 178,
+        "n": 179,
         "insight": "The busiest 10% of repositories hold 78% of all commits (Gini 0.85).",
         "gini": 0.85,
         "unit": "% of commits"
@@ -3052,11 +3181,11 @@
             "commits": 289
           },
           {
-            "name": "stylia",
+            "name": "olinda",
             "stars": 5,
-            "forks": 1,
+            "forks": 0,
             "contributors": 5,
-            "commits": 61
+            "commits": 152
           }
         ],
         "n": 12,
@@ -3075,7 +3204,7 @@
           "lazy-qsar",
           "compound-embedding",
           "ersilia-pack",
-          "stylia"
+          "olinda"
         ],
         "values": [
           306,
@@ -3105,9 +3234,9 @@
           "lazy-qsar",
           "ersilia.io",
           "ersilia-client",
-          "ersilia-maintenance",
-          "chemxor",
-          "isaura"
+          "event-fund-ai-drug-discovery",
+          "groverfeat",
+          "eos-demo"
         ],
         "values": [
           190,
@@ -3132,13 +3261,13 @@
           "reinvent4",
           "eos-template",
           "ersilia-pack",
+          "ersilia-stats",
           "tune-tables-light",
           "ersilia-maintenance",
-          "ersilia-model-request-app",
           "isaura",
+          "ersilia-model-request-app",
           "d4g-cohort-2024-hackathon-group3",
-          "ersilia-model-hub-maintained-inputs",
-          "ersilia-skills"
+          "ersilia-model-hub-maintained-inputs"
         ],
         "values": [
           92,
@@ -3148,10 +3277,10 @@
           11,
           9,
           9,
+          9,
           7,
           7,
           7,
-          6,
           6
         ],
         "n": 12
@@ -3172,8 +3301,8 @@
           "GrantBirki"
         ],
         "values": [
-          112,
-          81,
+          113,
+          82,
           27,
           20,
           18,
@@ -3185,9 +3314,9 @@
           3,
           3
         ],
-        "n": 432,
-        "distinct": 111,
-        "insight": "111 distinct contributors; the top 3 hold 51% of contributions."
+        "n": 441,
+        "distinct": 118,
+        "insight": "118 distinct contributors; the top 3 hold 50% of contributions."
       },
       "scatter": {
         "points": [
@@ -3614,6 +3743,14 @@
             "commits": 24,
             "issues": 0,
             "contributors": 3
+          },
+          {
+            "name": "ersilia-stats",
+            "stars": 1,
+            "forks": 0,
+            "commits": 310,
+            "issues": 0,
+            "contributors": 9
           },
           {
             "name": "osm-series4-synthesis-round-2",
@@ -4312,7 +4449,7 @@
             "contributors": 2
           }
         ],
-        "n": 140,
+        "n": 141,
         "insight": "9 public repositories with 50+ commits have no stars."
       }
     },
@@ -5427,9 +5564,9 @@
           82.1,
           85.6,
           85.7,
-          93.8,
+          94.2,
           96.2,
-          97.5,
+          97.4,
           98.3
         ],
         "n": 10,
@@ -5785,266 +5922,266 @@
           "models": [
             {
               "column": "biomedical_area",
-              "filled": 230,
-              "total": 240,
-              "pct": 95.8
+              "filled": 233,
+              "total": 243,
+              "pct": 95.9
             },
             {
               "column": "computational_performance_1",
-              "filled": 220,
-              "total": 240,
-              "pct": 91.7
+              "filled": 223,
+              "total": 243,
+              "pct": 91.8
             },
             {
               "column": "computational_performance_2",
-              "filled": 220,
-              "total": 240,
-              "pct": 91.7
+              "filled": 223,
+              "total": 243,
+              "pct": 91.8
             },
             {
               "column": "computational_performance_3",
-              "filled": 220,
-              "total": 240,
-              "pct": 91.7
+              "filled": 223,
+              "total": 243,
+              "pct": 91.8
             },
             {
               "column": "computational_performance_4",
-              "filled": 220,
-              "total": 240,
-              "pct": 91.7
+              "filled": 223,
+              "total": 243,
+              "pct": 91.8
             },
             {
               "column": "computational_performance_5",
-              "filled": 220,
-              "total": 240,
-              "pct": 91.7
+              "filled": 223,
+              "total": 243,
+              "pct": 91.8
             },
             {
               "column": "contributor",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "contributor_profile",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "deployment",
-              "filled": 233,
-              "total": 240,
+              "filled": 236,
+              "total": 243,
               "pct": 97.1
             },
             {
               "column": "description",
-              "filled": 235,
-              "total": 240,
+              "filled": 238,
+              "total": 243,
               "pct": 97.9
             },
             {
               "column": "docker_architecture",
-              "filled": 234,
-              "total": 240,
+              "filled": 237,
+              "total": 243,
               "pct": 97.5
             },
             {
               "column": "dockerhub",
-              "filled": 234,
-              "total": 240,
+              "filled": 237,
+              "total": 243,
               "pct": 97.5
             },
             {
               "column": "environment_size",
-              "filled": 223,
-              "total": 240,
-              "pct": 92.9
+              "filled": 226,
+              "total": 243,
+              "pct": 93.0
             },
             {
               "column": "github",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "identifier",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "image_size",
-              "filled": 220,
-              "total": 240,
-              "pct": 91.7
+              "filled": 223,
+              "total": 243,
+              "pct": 91.8
             },
             {
               "column": "incorporation_date",
-              "filled": 236,
-              "total": 240,
-              "pct": 98.3
+              "filled": 239,
+              "total": 243,
+              "pct": 98.4
             },
             {
               "column": "incorporation_quarter",
-              "filled": 236,
-              "total": 240,
-              "pct": 98.3
+              "filled": 239,
+              "total": 243,
+              "pct": 98.4
             },
             {
               "column": "incorporation_year",
-              "filled": 236,
-              "total": 240,
-              "pct": 98.3
+              "filled": 239,
+              "total": 243,
+              "pct": 98.4
             },
             {
               "column": "input",
-              "filled": 237,
-              "total": 240,
+              "filled": 240,
+              "total": 243,
               "pct": 98.8
             },
             {
               "column": "input_dimension",
-              "filled": 231,
-              "total": 240,
-              "pct": 96.2
+              "filled": 234,
+              "total": 243,
+              "pct": 96.3
             },
             {
               "column": "interpretation",
-              "filled": 233,
-              "total": 240,
+              "filled": 236,
+              "total": 243,
               "pct": 97.1
             },
             {
               "column": "last_packaging_date",
-              "filled": 219,
-              "total": 240,
-              "pct": 91.2
+              "filled": 222,
+              "total": 243,
+              "pct": 91.4
             },
             {
               "column": "license",
-              "filled": 200,
-              "total": 240,
-              "pct": 83.3
+              "filled": 203,
+              "total": 243,
+              "pct": 83.5
             },
             {
               "column": "model_size",
-              "filled": 223,
-              "total": 240,
-              "pct": 92.9
+              "filled": 226,
+              "total": 243,
+              "pct": 93.0
             },
             {
               "column": "output",
-              "filled": 233,
-              "total": 240,
+              "filled": 236,
+              "total": 243,
               "pct": 97.1
             },
             {
               "column": "output_consistency",
-              "filled": 230,
-              "total": 240,
-              "pct": 95.8
+              "filled": 233,
+              "total": 243,
+              "pct": 95.9
             },
             {
               "column": "output_dimension",
-              "filled": 230,
-              "total": 240,
-              "pct": 95.8
+              "filled": 233,
+              "total": 243,
+              "pct": 95.9
             },
             {
               "column": "publication",
-              "filled": 239,
-              "total": 240,
+              "filled": 242,
+              "total": 243,
               "pct": 99.6
             },
             {
               "column": "publication_type",
-              "filled": 230,
-              "total": 240,
-              "pct": 95.8
+              "filled": 233,
+              "total": 243,
+              "pct": 95.9
             },
             {
               "column": "publication_year",
-              "filled": 230,
-              "total": 240,
-              "pct": 95.8
+              "filled": 233,
+              "total": 243,
+              "pct": 95.9
             },
             {
               "column": "release",
-              "filled": 219,
-              "total": 240,
-              "pct": 91.2
+              "filled": 222,
+              "total": 243,
+              "pct": 91.4
             },
             {
               "column": "repository",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "s3",
-              "filled": 235,
-              "total": 240,
+              "filled": 238,
+              "total": 243,
               "pct": 97.9
             },
             {
               "column": "slug",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "source",
-              "filled": 231,
-              "total": 240,
-              "pct": 96.2
+              "filled": 234,
+              "total": 243,
+              "pct": 96.3
             },
             {
               "column": "source_code",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "source_type",
-              "filled": 231,
-              "total": 240,
-              "pct": 96.2
+              "filled": 234,
+              "total": 243,
+              "pct": 96.3
             },
             {
               "column": "status",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             },
             {
               "column": "subtask",
-              "filled": 231,
-              "total": 240,
-              "pct": 96.2
+              "filled": 234,
+              "total": 243,
+              "pct": 96.3
             },
             {
               "column": "tag",
-              "filled": 233,
-              "total": 240,
+              "filled": 236,
+              "total": 243,
               "pct": 97.1
             },
             {
               "column": "target_organism",
-              "filled": 234,
-              "total": 240,
+              "filled": 237,
+              "total": 243,
               "pct": 97.5
             },
             {
               "column": "task",
-              "filled": 231,
-              "total": 240,
-              "pct": 96.2
+              "filled": 234,
+              "total": 243,
+              "pct": 96.3
             },
             {
               "column": "title",
-              "filled": 240,
-              "total": 240,
+              "filled": 243,
+              "total": 243,
               "pct": 100.0
             }
           ],
@@ -6276,6 +6413,12 @@
               "pct": 85.7
             },
             {
+              "column": "doi",
+              "filled": 42,
+              "total": 42,
+              "pct": 100.0
+            },
+            {
               "column": "ersilia_affiliation",
               "filled": 42,
               "total": 42,
@@ -6357,98 +6500,98 @@
           "repositories": [
             {
               "column": "contributor_names",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "contributors",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "creation_date",
-              "filled": 177,
-              "total": 178,
+              "filled": 178,
+              "total": 179,
               "pct": 99.4
             },
             {
               "column": "description",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "forks",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "name",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "open_issues",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "projects",
               "filled": 107,
-              "total": 178,
-              "pct": 60.1
+              "total": 179,
+              "pct": 59.8
             },
             {
               "column": "stars",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "status",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "subscribers",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "title",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "total_commits",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "type",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "url",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             },
             {
               "column": "visibility",
-              "filled": 178,
-              "total": 178,
+              "filled": 179,
+              "total": 179,
               "pct": 100.0
             }
           ]
@@ -6587,8 +6730,8 @@
           ]
         ],
         "n": 91,
-        "orphans": 54,
-        "insight": "91 repository-project links. 2 links pair a finished project with a repository that is still open. 54 public repositories are linked to no project."
+        "orphans": 55,
+        "insight": "91 repository-project links. 2 links pair a finished project with a repository that is still open. 55 public repositories are linked to no project."
       },
       "repo_project_link": {
         "labels": [
@@ -6597,10 +6740,10 @@
         ],
         "values": [
           86,
-          54
+          55
         ],
-        "n": 140,
-        "insight": "86 of 140 public repositories (61%) are linked to a project."
+        "n": 141,
+        "insight": "86 of 141 public repositories (61%) are linked to a project."
       },
       "table_sizes": {
         "labels": [
@@ -6617,9 +6760,9 @@
         ],
         "values": [
           320,
-          240,
+          243,
           197,
-          178,
+          179,
           113,
           91,
           54,
@@ -6628,7 +6771,7 @@
           21
         ],
         "n": 10,
-        "insight": "1,292 rows across 10 source tables in this snapshot."
+        "insight": "1,296 rows across 10 source tables in this snapshot."
       }
     },
     "usage": {
@@ -6699,11 +6842,11 @@
           "No image published"
         ],
         "values": [
-          235,
-          5
+          237,
+          6
         ],
-        "n": 240,
-        "insight": "235 of 240 models in the registry (98%) have a published Docker image. 12 image(s) have no matching model record."
+        "n": 243,
+        "insight": "237 of 243 models in the registry (98%) have a published Docker image. 10 image(s) have no matching model record."
       }
     }
   }

@@ -8,30 +8,52 @@ Two deliberate changes from the previous export:
 * publications per year and cumulative citations share one combo chart, so the
   two series can actually be compared.
 """
+from collections import Counter
+
 import pandas as pd
 
 from . import insights as ins
 from .parse import (EMPTY, as_text, col, growth_pair, metric, multi_counts,
                     series_metric, to_num, value_counts)
 
+# ISO codes are not readable on an axis. Only the codes that actually appear need naming;
+# anything unmapped falls through as its code rather than being dropped.
+COUNTRY_NAMES = {
+    "ES": "Spain", "US": "United States", "GB": "United Kingdom", "ZA": "South Africa",
+    "DE": "Germany", "AT": "Austria", "CM": "Cameroon", "IL": "Israel",
+    "MZ": "Mozambique", "IT": "Italy", "FR": "France", "NL": "Netherlands",
+    "CH": "Switzerland", "SE": "Sweden", "BE": "Belgium", "PT": "Portugal",
+    "IN": "India", "CN": "China", "JP": "Japan", "AU": "Australia", "CA": "Canada",
+    "BR": "Brazil", "KE": "Kenya", "NG": "Nigeria", "GH": "Ghana", "UG": "Uganda",
+    "TZ": "Tanzania", "ET": "Ethiopia", "ZM": "Zambia", "MW": "Malawi",
+    "SN": "Senegal", "ML": "Mali", "BF": "Burkina Faso", "CI": "Côte d'Ivoire",
+    "DK": "Denmark", "NO": "Norway", "FI": "Finland", "IE": "Ireland", "PL": "Poland",
+}
+
 MIN_ARTICLES_FOR_JOURNAL_RANK = 2
 YES = {"yes", "true", "1"}
 
 
-def build(pubs):
+def build(pubs, collected=None):
     if pubs is None or pubs.empty:
         empty_series = {"labels": [], "series": [], "n": 0}
         return dict(
             {k: dict(EMPTY) for k in (
                 "per_year", "citations_per_year", "output_and_impact", "by_topic",
                 "affiliation", "affiliation_by_year", "by_type", "by_african_collab",
-                "top_journals",
+                "top_journals", "open_access", "oa_routes", "collaboration_countries",
             )},
             growth=dict(empty_series), citation_growth=dict(empty_series),
             most_cited={"rows": [], "n": 0},
+            citation_accrual={"labels": [], "series": [], "n": 0},
         )
 
-    citations = to_num(col(pubs, "citations"))
+    # OpenAlex citation counts, keyed by DOI, replace the hand-maintained column where
+    # they exist. The manual figures understate the total by 31% — 1,305 against 1,713 —
+    # and 38 of 42 papers differ, which is what happens to a number that is written down
+    # once and then goes on being true for a while.
+    live = _openalex_citations(collected)
+    citations = _merge_citations(pubs, live)
     years = pd.to_numeric(col(pubs, "year"), errors="coerce")
 
     return {
@@ -39,6 +61,10 @@ def build(pubs):
         "citations_per_year": _citations_per_year(years, citations),
         "output_and_impact": _output_and_impact(years, citations),
         "growth": _growth(years),
+        "citation_accrual": _citation_accrual(collected),
+        "open_access": _open_access(collected),
+        "oa_routes": _oa_routes(collected),
+        "collaboration_countries": _collaboration_countries(collected),
         "most_cited": _most_cited(pubs, citations),
         "citation_growth": _citation_growth(years, citations),
         # Short form: a 4-column card clips the full leader sentence.
@@ -101,6 +127,145 @@ def _output_and_impact(years, citations):
         axes=["left", "right"],
         kinds=["bar", "line"],
         n=int(sum(per_year)),
+    )
+
+
+def _openalex_citations(collected):
+    """``{doi: citations}`` from the collected OpenAlex snapshot, or empty."""
+    works = (collected or {}).get("scholar_works")
+    if works is None or works.empty or "doi" not in works.columns:
+        return {}
+    counts = to_num(works.get("citations"))
+    return {_bare_doi(works["doi"].iloc[i]): int(counts.iloc[i])
+            for i in range(len(works))}
+
+
+def _bare_doi(value):
+    """A DOI with any resolver prefix stripped. Airtable stores the full URL form."""
+    text = str(value or "").strip()
+    for prefix in ("https://doi.org/", "http://doi.org/", "doi:"):
+        if text.lower().startswith(prefix):
+            text = text[len(prefix):]
+    return text.strip().lower()
+
+
+def _merge_citations(pubs, live):
+    """OpenAlex where the DOI resolves, the stored column where it does not.
+
+    Falling back rather than blanking matters: if the collector has not run, or a paper
+    has no DOI, the page should show the older number rather than zero. A zero would read
+    as "never cited", which is a different and false claim.
+    """
+    stored = to_num(col(pubs, "citations"))
+    if not live:
+        return stored
+    dois = as_text(col(pubs, "doi"))
+    merged = []
+    for i in range(len(pubs)):
+        key = _bare_doi(dois.iloc[i]) if i < len(dois) else ""
+        merged.append(live.get(key, stored.iloc[i] if i < len(stored) else 0))
+    import pandas as _pd
+    return _pd.Series(merged, index=pubs.index)
+
+
+def _open_access(collected):
+    """Whether Ersilia's own papers can be read without paying.
+
+    Mission-relevant rather than decorative: an organisation whose purpose is to serve
+    researchers in low-resource settings has a direct interest in whether its own output
+    is behind a paywall. OpenAlex classifies each work as gold, green, hybrid, bronze or
+    closed; the first four are all readable, so the split is readable against not.
+    """
+    works = (collected or {}).get("scholar_works")
+    if works is None or works.empty or "oa_status" not in works.columns:
+        return dict(EMPTY)
+    status = as_text(works["oa_status"]).str.lower()
+    status = status[status != ""]
+    if status.empty:
+        return dict(EMPTY)
+    closed = int((status == "closed").sum())
+    openly = int(len(status) - closed)
+    return metric(
+        ["Open access", "Paywalled"], [openly, closed],
+        ins.share_of(openly, len(status), "papers", "can be read without a subscription"),
+        n=int(len(status)),
+    )
+
+
+def _oa_routes(collected):
+    """How the open ones are open: gold, green, hybrid, bronze.
+
+    Worth separating because the routes are not equivalent. Gold is published open;
+    bronze is readable at the publisher's discretion and can be withdrawn.
+    """
+    works = (collected or {}).get("scholar_works")
+    if works is None or works.empty or "oa_status" not in works.columns:
+        return dict(EMPTY)
+    status = as_text(works["oa_status"]).str.lower()
+    counts = status[(status != "") & (status != "closed")].value_counts()
+    if counts.empty:
+        return dict(EMPTY)
+    labels = [str(k).title() for k in counts.index]
+    return metric(labels, [int(v) for v in counts.values],
+                  "%s is the most common route to open access." % labels[0])
+
+
+def _collaboration_countries(collected):
+    """Countries of the author institutions, across all papers.
+
+    This measures international collaboration instead of asserting it. The publications
+    table carries a hand-set "African collaboration" yes/no; this counts the institutions,
+    so South Africa, Cameroon and Mozambique appear as themselves rather than as a flag.
+    Institution countries only — author names are never collected.
+    """
+    works = (collected or {}).get("scholar_works")
+    if works is None or works.empty or "institution_countries" not in works.columns:
+        return dict(EMPTY)
+    counter = Counter()
+    for value in as_text(works["institution_countries"]):
+        for code in value.split():
+            if code:
+                counter[code.upper()] += 1
+    if not counter:
+        return dict(EMPTY)
+    items = counter.most_common(12)
+    out = metric([COUNTRY_NAMES.get(k, k) for k, _ in items], [v for _, v in items])
+    out["n"] = len(counter)
+    out["insight"] = "%s countries appear among the author institutions; %s on the most papers." % (
+        ins.num(len(counter)), COUNTRY_NAMES.get(items[0][0], items[0][0]))
+    return out
+
+
+def _citation_accrual(collected):
+    """Citations by the year they were MADE, with the running total.
+
+    This is the honest version of a chart the site already had. The existing one attributes
+    citations to the year the paper was published, because that is all the source held,
+    which forced a caveat: recent years necessarily look thin. OpenAlex records when each
+    citation happened, so the curve can show real accrual and the caveat can go.
+    """
+    years = (collected or {}).get("scholar_citations_by_year")
+    if years is None or years.empty:
+        return {"labels": [], "series": [], "n": 0}
+    totals = {}
+    counts = to_num(years.get("citations"))
+    for i in range(len(years)):
+        year = str(years["year"].iloc[i]).strip()[:4]
+        if year.isdigit():
+            totals[int(year)] = totals.get(int(year), 0) + int(counts.iloc[i])
+    if not totals:
+        return {"labels": [], "series": [], "n": 0}
+    span = range(min(totals), max(totals) + 1)
+    per_year = [totals.get(y, 0) for y in span]
+    running, total = [], 0
+    for value in per_year:
+        total += value
+        running.append(total)
+    return growth_pair(
+        [str(y) for y in span], per_year, running, "citations", period="year",
+        insight="%s citations to date, %s of them in %s." % (
+            ins.num(total), ins.num(max(per_year)),
+            str(list(span)[per_year.index(max(per_year))])),
     )
 
 
