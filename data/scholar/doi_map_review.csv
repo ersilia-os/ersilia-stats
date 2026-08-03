@@ -1,0 +1,43 @@
+title,year,doi,source,confidence,matched_title,stored_citations,openalex_citations
+Detecting similar binding pockets to enable systems polypharmacology,2017,10.1371/journal.pcbi.1005522,url,high,,44,
+Encircling the regions of the pharmacogenomic landscape that determine drug response,2019,10.1186/s13073-019-0626-x,url,high,,19,
+Causes of Death Among Infants and Children in the Child Health and Mortality Prevention Surveillance (CHAMPS) Network,2023,10.1001/jamanetworkopen.2023.22494,title-exact,medium,Causes of Death Among Infants and Children in the Child Health and Mortality Prevention Surveillance (CHAMPS) Network,46,115
+Antigen-stimulated PBMC transcriptional protective signatures for malaria immunization,2020,10.1126/scitranslmed.aay8924,title-exact,medium,Antigen-stimulated PBMC transcriptional protective signatures for malaria immunization,40,40
+"Cervical cancer screening outcomes in Zambia, 2010–19: a cohort study",2021,10.1016/s2214-109x(21)00062-0,title-exact,medium,"Cervical cancer screening outcomes in Zambia, 2010–19: a cohort study",33,42
+A chemo-centric view of human health and disease,2014,10.1038/ncomms6676,title-exact,medium,A chemo-centric view of human health and disease,32,28
+Machine learning approaches identify chemical features for stage-specific antimalarial compounds,2023,10.1021/acsomega.3c05664,url,high,,6,
+The workshops on computational applications in secondary metabolite discovery (CAiSMD),2024,10.1515/psr-2024-0015,url,high,,0,
+Systems analysis of intracellular pH vulnerabilities for cancer therapy,2018,10.1038/s41467-018-05261-x,title-exact,medium,Systems analysis of intracellular pH vulnerabilities for cancer therapy,389,420
+Learning and actioning general principles of cancer cell drug sensitivity,2025,10.1038/s41467-025-56827-5,title-exact,medium,Learning and actioning general principles of cancer cell drug sensitivity,1,26
+Evaluation of kidney function among people living with HIV initiating antiretroviral therapy in Zambia,2022,10.1371/journal.pgph.0000124,url,high,,4,
+Bioactivity descriptors for uncharacterized chemical compounds,2021,10.1038/s41467-021-24150-4,title-exact,medium,Bioactivity descriptors for uncharacterized chemical compounds,66,101
+Advancing Targeted Protein Degradation via Multiomics Profiling and Artificial Intelligence,2023,10.1021/jacs.2c11098,url,high,,22,
+Rationalizing drug response in cancer cell lines,2018,10.1016/j.jmb.2018.03.021,title-exact,medium,Rationalizing Drug Response in Cancer Cell Lines,13,12
+Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque,2022,10.1038/s41467-022-33026-0,title-exact,medium,Integrating and formatting biomedical data as pre-calculated knowledge graph embeddings in the Bioteque,53,63
+"Identification and drug-induced reversion of molecular signatures of Alzheimers disease onset and progression in AppNL-GF, AppNL-F and 3xTg-AD mouse models",2021,10.1186/s13073-021-00983-y,url,high,,19,
+Large-scale chemoproteomics expedites ligand discovery and predicts ligand behavior in cells,2024,10.1126/science.adk5864,url,high,,28,
+Chemoinformatics and Artificial Intelligence Colloquium: Progress and Challenges to Develop Bioactive Compounds,2022,10.1186/s13321-022-00661-0,url,high,,29,
+Exploring the OncoGenomic Landscape of cancer,2018,10.1186/s13073-018-0571-0,url,high,,10,
+First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa,2023,10.1038/s41467-023-41512-2,title-exact,medium,First fully-automated AI/ML virtual screening cascade implemented at a drug discovery centre in Africa,50,81
+Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria,2023,10.1038/s41598-023-41764-4,title-exact,medium,Xanthine oxidase levels and immune dysregulation are independently associated with anemia in Plasmodium falciparum malaria,6,6
+Artificial intelligence for antiviral drug discovery in low resourced settings: A perspective,2022,10.3389/fddsv.2022.1013285,url,high,,14,
+AI coupled to pharmacometric modelling to tailor malaria and tuberculosis treatment in Africa,2025,10.1038/s41467-025-64304-2,title-fuzzy,low,Artificial intelligence coupled to pharmacometrics modelling to tailor malaria and tuberculosis treatment in Africa,0,4
+Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria,2023,10.1172/jci.insight.172845,title-exact,medium,Endothelial transcriptomic analysis identifies biomarkers of severe and cerebral malaria,2,12
+Connecting chemistry and biology through molecular descriptors,2021,10.1016/j.cbpa.2021.09.001,title-exact,medium,Connecting chemistry and biology through molecular descriptors,52,76
+"Patient‐reported reasons for declining same‐day antiretroviral therapy initiation in routine HIV care settings in Lusaka, Zambia: results from a mixed‐effects regression analysis",2020,10.1002/jia2.25560,url,high,,17,
+Addressing infectious diseases in Africaby accelerating drug discovery throughdata science,2025,,none,none,,0,
+AI can help to tailor drugs for Africa — but Africans should lead the way,2024,10.1038/d41586-024-01001-y,title-exact,medium,AI can help to tailor drugs for Africa — but Africans should lead the way,6,11
+Personalized cancer therapy prioritization based on driver alteration co-occurrence patterns,2020,10.1186/s13073-020-00774-x,url,high,,22,
+Computational Applications in Secondary Metabolite Discovery (CAiSMD): an online workshop,2021,10.1186/s13321-021-00546-8,title-exact,medium,Computational Applications in Secondary Metabolite Discovery (CAiSMD): an online workshop,7,6
+Formatting biological big data for modern machine learning in drug discovery,2018,10.1002/wcms.1408,url,high,,28,
+A community challenge for a pancancer drug mechanism of action inference from perturbational profile data,2022,10.1016/j.xcrm.2021.100492,title-exact,medium,A community challenge for a pancancer drug mechanism of action inference from perturbational profile data,49,69
+"IL-4, IL-10, CCL2 and TGF-β as potential biomarkers for severity in Plasmodium vivax malaria",2022,10.1371/journal.pntd.0010798,url,high,,12,
+The path to adoption of open source AI for drug discovery in Africa,2024,10.1016/j.tele.2018.11.006,title-fuzzy,low,"A systematic literature review of blockchain-based applications: Current status, classification and open issues",0,2460
+Extending the small-molecule similarity principle to all levels of biology with the Chemical Checker,2020,10.1038/s41587-020-0502-7,title-exact,medium,Extending the small-molecule similarity principle to all levels of biology with the Chemical Checker,123,132
+Infectious Disease Research Laboratories in Africa Are Not Using AI Yet Large Language Models May Facilitate Adoption,2024,10.1021/acsinfecdis.4c00585,url,high,,1,
+Bioactivity Profile Similarities to Expand the Repertoire of COVID-19 Drugs,2020,10.1021/acs.jcim.0c00420,url,high,,6,
+Integration of diverse bioactivity data into the Chemical Checker compound universe,2025,10.1038/s41596-025-01167-3,title-exact,medium,Integration of diverse bioactivity data into the Chemical Checker compound universe,0,2
+Ten quick tips to build a model life cycle,2025,10.1371/journal.pcbi.1012731,url,high,,0,
+Structural systems pharmacology: the role of 3D structures in next-generation drug development,2013,10.1016/j.chembiol.2013.03.004,title-exact,medium,Structural Systems Pharmacology: The Role of 3D Structures in Next-Generation Drug Development,54,44
+Open Source Code Contributions to Global Health: The Case of Antimalarial Drug Discovery,2024,10.1021/acsmedchemlett.4c00131,url,high,,1,
+The chemical space spanned by manually curated datasets of natural and synthetic compounds with activities against SARS-CoV-2,2024,10.1002/minf.202400293,url,high,,1,

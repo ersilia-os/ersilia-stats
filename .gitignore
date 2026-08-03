@@ -170,9 +170,29 @@ ersilia-stats/
 # hold a copy of the registry. CI fetches them fresh into the runner and throws
 # them away; keep them locally for development.
 #   python scripts/fetch_airtable.py -t data/airtable_api_identifiers.csv -o data/air_tables/
+
+# The three PUBLIC data sources are the opposite case: data/dockerhub/, data/github/ and
+# data/scholar/ ARE committed, deliberately. They come from Docker Hub, the GitHub API and
+# OpenAlex, none of which returns personal data here — fetch_github.py reads public
+# repositories only, so no private repository name is ever written, and fetch_openalex.py
+# records the COUNTRIES of author institutions and never author names.
+#
+# Committing them buys three things: the site builds from a clone with no secret at all,
+# every published figure has an audit trail in the diff, and a collector that fails leaves
+# the previous numbers in place rather than emptying the page.
 # The base/table id config (data/airtable_api_identifiers.csv) IS committed — it is
 # configuration, not data.
 data/air_tables/
+
+# The three PUBLIC data sources are the opposite case: data/dockerhub/, data/github/ and
+# data/scholar/ ARE committed, deliberately. They come from Docker Hub, the GitHub API and
+# OpenAlex, none of which returns personal data here — fetch_github.py reads public
+# repositories only, so no private repository name is ever written, and fetch_openalex.py
+# records the COUNTRIES of author institutions and never author names.
+#
+# Committing them buys three things: the site builds from a clone with no secret at all,
+# every published figure has an audit trail in the diff, and a collector that fails leaves
+# the previous numbers in place rather than emptying the page.
 
 # Exploratory notebooks are NOT published: eda.ipynb's cell outputs contained real
 # grant and donation figures (confidential) and a contributor's home directory

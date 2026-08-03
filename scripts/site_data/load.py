@@ -69,6 +69,53 @@ def load_tables(data_dir):
     return tables
 
 
+def load_collected(root="data"):
+    """Load the committed PUBLIC snapshots: Docker Hub, GitHub and OpenAlex.
+
+    Kept separate from ``load_tables`` because these are a different kind of source. The
+    Airtable snapshot is gitignored, refetched on every deploy, and carries personal data
+    that has to be stripped. These are committed, public, and need no filtering — so
+    treating them the same would mean either running PII rules over data that has none, or
+    weakening the rules that protect the data that does.
+
+    A missing directory is not an error. If a collector has never run, or its snapshot was
+    removed, the section builders fall back to the Airtable figures and the site still
+    builds — which is the whole reason these are separate directories.
+    """
+    out = {}
+    for key, subdir in (("dockerhub", "dockerhub"), ("github", "github"),
+                        ("scholar", "scholar")):
+        path = os.path.join(root, subdir)
+        if not os.path.isdir(path):
+            continue
+        for name, (stamp, file_path) in newest_snapshots(path).items():
+            # Dated files only. An undated CSV in one of these directories is a working
+            # artefact, not a snapshot — `doi_map_review.csv` is there for a person to
+            # read, and loading it as data would be a category error.
+            if not stamp:
+                continue
+            frame = pd.read_csv(file_path)
+            frame.columns = [_slug(c) for c in frame.columns]
+            out["%s_%s" % (key, name)] = frame
+    return out
+
+
+def collected_dates(root="data"):
+    """``{source: YYYY-MM-DD}`` for each collected source, for the Methods note.
+
+    The site names its sources, so it has to be able to say when each was last read.
+    """
+    dates = {}
+    for key, subdir in (("dockerhub", "dockerhub"), ("github", "github"),
+                        ("scholar", "scholar")):
+        path = os.path.join(root, subdir)
+        stamps = [s for s, _ in newest_snapshots(path).values() if s] if os.path.isdir(path) else []
+        if stamps:
+            newest = max(stamps)
+            dates[key] = "%s-%s-%s" % (newest[:4], newest[4:6], newest[6:])
+    return dates
+
+
 def snapshot_date(data_dir):
     """Newest snapshot stamp across all tables, as ``YYYY-MM-DD``."""
     stamps = [s for s, _ in newest_snapshots(data_dir).values() if s]

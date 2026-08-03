@@ -10,6 +10,8 @@ CLI aborts the build if anything email-shaped survives into the output.
 """
 from datetime import datetime, timezone
 
+import os
+
 import pandas as pd
 
 from . import (
@@ -19,6 +21,7 @@ from . import (
     models as models_section,
     organisations as organisations_section,
     outreach,
+    usage as usage_section,
     projects as projects_section,
     publications as publications_section,
     quality as quality_section,
@@ -32,6 +35,10 @@ __all__ = ["build_all", "load"]
 def build_all(data_dir, today=None):
     """Load the newest snapshots and return the full ``stats.json`` payload."""
     tables = load.load_tables(data_dir)
+    # The committed public snapshots live beside the Airtable one rather than inside it.
+    # `data_dir` points at data/air_tables, so the collected data sits one level up.
+    collected_root = os.path.dirname(os.path.normpath(data_dir)) or "data"
+    collected = load.load_collected(collected_root)
     today = pd.Timestamp(today) if today is not None else pd.Timestamp.today().normalize()
 
     def table(name):
@@ -57,6 +64,9 @@ def build_all(data_dir, today=None):
         "blogposts": outreach.build_blogposts(table("blogposts")),
         "conferences": outreach.build_conferences(table("conferences")),
         "quality": quality_section.build(tables, repos_public),
+        # From the committed public snapshots rather than Airtable. Degrades to empty
+        # metrics when a collector has not run, so a clone still builds.
+        "usage": usage_section.build(collected, models=models),
     }
 
     return {
@@ -68,6 +78,8 @@ def build_all(data_dir, today=None):
             # NEWEST stamp across all tables, so on a mixed-age directory it reports
             # the most optimistic date available and hides the stale table completely.
             "snapshot_dates": load.snapshot_dates(data_dir),
+            # Each collected source names itself and its date, because the site cites them.
+            "collected_dates": load.collected_dates(collected_root),
             "stale_tables": load.stale_tables(data_dir),
             "models_available": bool(models is not None and not models.empty),
             "private_repositories": private_excluded,

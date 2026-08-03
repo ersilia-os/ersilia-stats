@@ -1,0 +1,272 @@
+name,is_model,pull_count,star_count,last_updated,description
+base,no,31704,2,2024-03-12T12:48:59,This is the base image for the Ersilia Model Hub. It is used as a shared layer between models.
+eos3b5e,yes,29293,2,2026-04-06T12:39:13,Ersilia Model Hub Identifier: eos3b5e
+base-multistage-condapack,no,10405,0,2025-07-01T03:46:57,
+base-legacy-bentoml,no,10060,0,2025-07-01T03:47:09,
+eos5axz,yes,7317,0,2025-12-24T10:29:04,Ersilia Model Hub Identifier: eos5axz
+eos4e40,yes,7253,2,2026-05-13T11:49:51,Ersilia Model Hub Identifier: eos4e40
+eos92sw,yes,6302,0,2025-10-08T10:00:01,Ersilia Model Hub Identifier: eos92sw
+eos2r5a,yes,5721,0,2025-09-15T13:28:09,Ersilia Model Hub Identifier: eos2r5a
+ersiliapack-conda-py310,no,5687,0,2026-04-13T11:08:33,
+ersiliapack-conda-py38,no,5645,0,2026-04-13T11:09:37,
+ersiliapack-py310,no,5637,0,2026-04-13T11:00:46,
+eos4ex3,yes,5580,0,2026-06-22T18:33:17,Ersilia Model Hub Identifier: eos4ex3
+ersiliapack-conda-py311,no,5429,0,2026-04-13T11:08:16,
+eos8aa5,yes,5427,0,2026-02-16T15:22:25,Ersilia Model Hub Identifier: eos8aa5
+ersiliapack-conda-py39,no,5417,0,2026-04-13T11:07:47,
+ersiliapack-conda-py312,no,5414,0,2026-04-13T11:08:03,
+eos4u6p,yes,5326,0,2026-05-13T09:32:47,Ersilia Model Hub Identifier: eos4u6p
+ersiliapack-py312,no,5296,0,2026-04-13T11:00:01,
+eos4qda,yes,5270,0,2026-07-31T16:38:19,Ersilia Model Hub Identifier: eos4qda
+eos9o72,yes,5194,0,2026-02-16T15:22:48,Ersilia Model Hub Identifier: eos9o72
+eos4zfy,yes,5151,0,2026-04-14T14:03:03,Ersilia Model Hub Identifier: eos4zfy
+ersiliapack-py38,no,5123,0,2026-04-13T11:01:30,
+eos39co,yes,5122,0,2026-04-14T14:36:33,Ersilia Model Hub Identifier: eos39co
+eos5cl7,yes,5087,0,2025-11-19T07:39:33,Ersilia Model Hub Identifier: eos5cl7
+eos4e41,yes,5018,1,2024-12-05T08:36:35,Ersilia Model Hub Identifier: eos4e41
+eos2db3,yes,5017,0,2026-03-09T15:24:11,Ersilia Model Hub Identifier: eos2db3
+eos1lb5,yes,5008,0,2026-04-30T09:42:25,Ersilia Model Hub Identifier: eos1lb5
+eos3l5f,yes,5008,0,2026-02-24T17:54:23,Ersilia Model Hub Identifier: eos3l5f
+eos7asg,yes,4976,0,2026-04-14T14:52:49,Ersilia Model Hub Identifier: eos7asg
+eos633t,yes,4972,0,2026-07-31T14:39:41,Ersilia Model Hub Identifier: eos633t
+eos9gg2,yes,4965,0,2026-02-24T18:19:46,Ersilia Model Hub Identifier: eos9gg2
+ersiliapack-py311,no,4929,0,2026-04-13T11:00:32,
+eos1ut3,yes,4861,0,2026-03-19T17:17:36,Ersilia Model Hub Identifier: eos1ut3
+base-v2,no,4860,0,2024-07-09T13:18:12,
+eos4wt0,yes,4855,0,2025-12-24T11:33:47,Ersilia Model Hub Identifier: eos4wt0
+eos7ike,yes,4845,0,2026-07-06T12:08:33,Ersilia Model Hub Identifier: eos7ike
+eos6tpo,yes,4827,0,2026-04-14T15:44:28,Ersilia Model Hub Identifier: eos6tpo
+ersiliapack-py39,no,4824,0,2026-04-13T11:01:33,
+eos6ojg,yes,4820,0,2026-03-23T11:18:56,Ersilia Model Hub Identifier: eos6ojg
+eos8a4x,yes,4815,0,2025-12-24T09:06:44,Ersilia Model Hub Identifier: eos8a4x
+eos42ez,yes,4779,0,2026-05-13T12:58:35,Ersilia Model Hub Identifier: eos42ez
+eos4f95,yes,4756,0,2025-12-10T17:25:11,Ersilia Model Hub Identifier: eos4f95
+eos19mt,yes,4733,0,2026-04-20T13:24:48,Ersilia Model Hub Identifier: eos19mt
+eos2gw4,yes,4706,0,2025-12-24T10:46:09,Ersilia Model Hub Identifier: eos2gw4
+eos8ub5,yes,4690,0,2026-02-24T18:53:47,Ersilia Model Hub Identifier: eos8ub5
+eos2401,yes,4678,0,2026-02-19T17:11:40,Ersilia Model Hub Identifier: eos2401
+eos7w6n,yes,4671,0,2026-04-01T11:29:03,Ersilia Model Hub Identifier: eos7w6n
+eos18ie,yes,4661,0,2026-03-23T13:48:25,Ersilia Model Hub Identifier: eos18ie
+eos9ivc,yes,4651,0,2026-05-23T14:06:10,Ersilia Model Hub Identifier: eos9ivc
+eos82v1,yes,4640,0,2026-02-16T15:23:43,Ersilia Model Hub Identifier: eos82v1
+eos57bx,yes,4639,0,2026-03-20T14:28:29,Ersilia Model Hub Identifier: eos57bx
+eos1d7r,yes,4632,0,2026-07-21T17:58:14,Ersilia Model Hub Identifier: eos1d7r
+eos2fy6,yes,4629,0,2026-03-11T10:15:05,Ersilia Model Hub Identifier: eos2fy6
+eos1noy,yes,4605,0,2025-10-22T15:18:28,Ersilia Model Hub Identifier: eos1noy
+eos2b6f,yes,4601,0,2026-04-14T14:17:43,Ersilia Model Hub Identifier: eos2b6f
+eos21dr,yes,4576,0,2026-07-22T12:39:22,Ersilia Model Hub Identifier: eos21dr
+eos2hzy,yes,4567,0,2026-04-27T09:27:46,Ersilia Model Hub Identifier: eos2hzy
+eos4rw4,yes,4560,0,2025-12-25T21:15:37,Ersilia Model Hub Identifier: eos4rw4
+eos1pu1,yes,4544,0,2026-03-19T16:50:57,Ersilia Model Hub Identifier: eos1pu1
+eos694w,yes,4540,0,2026-03-20T12:26:38,Ersilia Model Hub Identifier: eos694w
+eos9ueu,yes,4513,0,2026-04-14T14:52:20,Ersilia Model Hub Identifier: eos9ueu
+eos8d8a,yes,4512,0,2025-12-28T10:51:23,Ersilia Model Hub Identifier: eos8d8a
+eos8fma,yes,4503,0,2026-04-01T17:29:29,Ersilia Model Hub Identifier: eos8fma
+eos11sr,yes,4497,0,2025-12-24T11:33:13,Ersilia Model Hub Identifier: eos11sr
+eos6ost,yes,4477,0,2026-02-19T14:21:38,Ersilia Model Hub Identifier: eos6ost
+eos9ei3,yes,4471,0,2025-09-15T06:35:06,Ersilia Model Hub Identifier: eos9ei3
+eos7d58,yes,4467,0,2026-04-14T11:16:59,Ersilia Model Hub Identifier: eos7d58
+eos935d,yes,4465,0,2026-04-14T14:38:57,Ersilia Model Hub Identifier: eos935d
+eos7ye0,yes,4458,0,2026-07-06T16:20:32,Ersilia Model Hub Identifier: eos7ye0
+eos6ru3,yes,4456,0,2026-04-23T09:36:59,Ersilia Model Hub Identifier: eos6ru3
+eos6fza,yes,4454,0,2026-05-20T14:29:58,Ersilia Model Hub Identifier: eos6fza
+eos2l0q,yes,4453,0,2025-11-25T16:49:51,Ersilia Model Hub Identifier: eos2l0q
+eos3ae6,yes,4431,0,2026-04-22T16:06:05,Ersilia Model Hub Identifier: eos3ae6
+eos3wzy,yes,4427,0,2026-07-31T14:32:32,Ersilia Model Hub Identifier: eos3wzy
+eos2lqb,yes,4426,0,2026-03-10T18:43:52,Ersilia Model Hub Identifier: eos2lqb
+ersilia-model-browser,no,4418,0,2026-02-13T14:41:18,
+eos4ywv,yes,4417,0,2025-12-24T10:36:56,Ersilia Model Hub Identifier: eos4ywv
+eos77w8,yes,4417,0,2026-07-06T11:26:25,Ersilia Model Hub Identifier: eos77w8
+base-v1,no,4414,0,2024-07-09T13:17:43,
+eos7qga,yes,4412,0,2026-03-26T23:46:29,Ersilia Model Hub Identifier: eos7qga
+eos4k4f,yes,4409,0,2026-03-19T17:13:39,Ersilia Model Hub Identifier: eos4k4f
+eos3kcw,yes,4404,0,2026-07-27T13:23:26,Ersilia Model Hub Identifier: eos3kcw
+eos5pt8,yes,4396,0,2025-11-16T01:03:51,Ersilia Model Hub Identifier: eos5pt8
+eos1af5,yes,4392,0,2026-03-19T16:56:56,Ersilia Model Hub Identifier: eos1af5
+eos21q7,yes,4392,0,2025-11-20T07:53:36,Ersilia Model Hub Identifier: eos21q7
+eos5nqn,yes,4380,0,2026-05-20T11:42:46,Ersilia Model Hub Identifier: eos5nqn
+eos8g50,yes,4377,0,2026-03-23T12:17:52,Ersilia Model Hub Identifier: eos8g50
+eos24ci,yes,4366,0,2026-03-10T17:27:54,Ersilia Model Hub Identifier: eos24ci
+eos6pbf,yes,4361,0,2026-03-20T10:28:28,Ersilia Model Hub Identifier: eos6pbf
+eos4x30,yes,4360,0,2026-03-20T11:35:35,Ersilia Model Hub Identifier: eos4x30
+eos8451,yes,4360,0,2026-07-06T11:44:42,Ersilia Model Hub Identifier: eos8451
+eos3804,yes,4354,0,2025-09-17T08:13:35,Ersilia Model Hub Identifier: eos3804
+eos80k1,yes,4340,0,2026-04-22T15:44:27,Ersilia Model Hub Identifier: eos80k1
+eos7kpb,yes,4337,1,2026-07-06T16:56:16,Ersilia Model Hub Identifier: eos7kpb
+eos78ao,yes,4328,0,2025-10-22T11:50:01,Ersilia Model Hub Identifier: eos78ao
+eos2mxh,yes,4324,0,2025-12-30T12:58:22,Ersilia Model Hub Identifier: eos2mxh
+eos11sm,yes,4321,0,2026-03-23T15:11:05,Ersilia Model Hub Identifier: eos11sm
+eos85a3,yes,4321,0,2026-07-06T11:41:49,Ersilia Model Hub Identifier: eos85a3
+eos4avb,yes,4314,0,2026-03-10T17:58:50,Ersilia Model Hub Identifier: eos4avb
+eos2a9n,yes,4292,0,2026-02-11T16:23:13,Ersilia Model Hub Identifier: eos2a9n
+eos481p,yes,4287,0,2026-03-10T18:18:42,Ersilia Model Hub Identifier: eos481p
+eos7yti,yes,4283,0,2025-11-19T09:36:29,Ersilia Model Hub Identifier: eos7yti
+eos1amr,yes,4275,0,2026-03-10T17:45:52,Ersilia Model Hub Identifier: eos1amr
+eos1vms,yes,4273,0,2026-03-09T12:10:35,Ersilia Model Hub Identifier: eos1vms
+eos96ia,yes,4273,0,2026-03-20T12:25:32,Ersilia Model Hub Identifier: eos96ia
+eos6ao8,yes,4271,0,2026-03-20T11:45:52,Ersilia Model Hub Identifier: eos6ao8
+eos9ym3,yes,4270,0,2026-07-23T08:41:34,Ersilia Model Hub Identifier: eos9ym3
+eos93h2,yes,4269,0,2026-03-10T18:30:17,Ersilia Model Hub Identifier: eos93h2
+eos6hy3,yes,4264,0,2026-03-10T18:07:02,Ersilia Model Hub Identifier: eos6hy3
+eos2mhp,yes,4263,0,2026-03-10T18:10:42,Ersilia Model Hub Identifier: eos2mhp
+eos157v,yes,4262,0,2026-03-10T17:28:14,Ersilia Model Hub Identifier: eos157v
+eos2xeq,yes,4258,0,2026-03-26T15:18:01,Ersilia Model Hub Identifier: eos2xeq
+eos4cxk,yes,4257,0,2026-03-10T19:25:38,Ersilia Model Hub Identifier: eos4cxk
+eos1klk,yes,4256,0,2026-06-22T10:18:46,Ersilia Model Hub Identifier: eos1klk
+eos8lok,yes,4253,0,2026-03-10T17:43:58,Ersilia Model Hub Identifier: eos8lok
+eos9p4a,yes,4253,0,2026-04-23T10:39:25,Ersilia Model Hub Identifier: eos9p4a
+eos3mk2,yes,4241,0,2026-04-13T15:08:39,Ersilia Model Hub Identifier: eos3mk2
+eos45di,yes,4237,0,2026-06-22T11:33:56,Ersilia Model Hub Identifier: eos45di
+eos4djh,yes,4237,0,2025-12-24T10:48:08,Ersilia Model Hub Identifier: eos4djh
+eos3xip,yes,4231,0,2026-03-10T17:51:38,Ersilia Model Hub Identifier: eos3xip
+eos8c0o,yes,4230,0,2026-03-10T18:01:20,Ersilia Model Hub Identifier: eos8c0o
+eos2h1r,yes,4226,0,2025-12-30T16:10:01,Ersilia Model Hub Identifier: eos2h1r
+eos26a4,yes,4221,0,2026-06-22T11:40:36,Ersilia Model Hub Identifier: eos26a4
+eos8vud,yes,4220,0,2026-07-31T14:59:19,Ersilia Model Hub Identifier: eos8vud
+eos6m2k,yes,4219,0,2026-07-07T12:42:54,Ersilia Model Hub Identifier: eos6m2k
+eos81zy,yes,4206,0,2026-07-22T14:10:10,Ersilia Model Hub Identifier: eos81zy
+eos77jk,yes,4202,0,2025-12-30T15:53:15,Ersilia Model Hub Identifier: eos77jk
+eos5gge,yes,4197,0,2025-12-01T16:23:09,Ersilia Model Hub Identifier: eos5gge
+eos526j,yes,4190,0,2025-12-01T13:13:29,Ersilia Model Hub Identifier: eos526j
+eos43at,yes,4187,0,2025-09-17T13:20:29,Ersilia Model Hub Identifier: eos43at
+eos4jcv,yes,4185,0,2025-12-30T15:50:54,Ersilia Model Hub Identifier: eos4jcv
+eos30gr,yes,4184,0,2025-10-14T14:17:53,Ersilia Model Hub Identifier: eos30gr
+eos8ioa,yes,4180,0,2026-07-06T09:23:16,Ersilia Model Hub Identifier: eos8ioa
+shell,no,4178,0,2024-02-15T17:31:34,
+eos6o0z,yes,4163,0,2026-03-10T18:17:59,Ersilia Model Hub Identifier: eos6o0z
+eos9f6t,yes,4162,0,2025-10-08T08:34:36,Ersilia Model Hub Identifier: eos9f6t
+eos4an7,yes,4160,0,2026-07-22T16:36:36,Ersilia Model Hub Identifier: eos4an7
+eos2sbn,yes,4157,0,2025-12-24T14:50:45,Ersilia Model Hub Identifier: eos2sbn
+eos4n4d,yes,4157,0,2026-04-23T07:47:59,Ersilia Model Hub Identifier: eos4n4d
+eos9zw0,yes,4155,0,2026-05-13T16:09:38,Ersilia Model Hub Identifier: eos9zw0
+eos5smc,yes,4154,0,2026-03-10T18:17:14,Ersilia Model Hub Identifier: eos5smc
+eos74km,yes,4150,0,2026-03-26T15:25:41,Ersilia Model Hub Identifier: eos74km
+eos2gth,yes,4141,0,2025-11-19T08:32:43,Ersilia Model Hub Identifier: eos2gth
+eos7a45,yes,4140,0,2026-07-07T12:44:45,Ersilia Model Hub Identifier: eos7a45
+eos2hbd,yes,4139,0,2025-11-14T15:29:45,Ersilia Model Hub Identifier: eos2hbd
+eos9yui,yes,4139,0,2025-09-15T06:49:02,Ersilia Model Hub Identifier: eos9yui
+eos46ev,yes,4133,0,2025-12-04T11:54:00,Ersilia Model Hub Identifier: eos46ev
+eos80ch,yes,4130,0,2025-10-17T14:20:44,Ersilia Model Hub Identifier: eos80ch
+eos96f4,yes,4127,0,2026-03-23T13:42:41,Ersilia Model Hub Identifier: eos96f4
+eos9c7k,yes,4125,0,2025-10-22T11:39:42,Ersilia Model Hub Identifier: eos9c7k
+eos7jlv,yes,4121,0,2026-07-06T11:38:26,Ersilia Model Hub Identifier: eos7jlv
+eos12x7,yes,4102,0,2026-03-23T14:23:52,Ersilia Model Hub Identifier: eos12x7
+eos4se9,yes,4095,0,2026-04-22T18:47:39,Ersilia Model Hub Identifier: eos4se9
+eos2ta5,yes,4094,0,2026-07-21T17:03:31,Ersilia Model Hub Identifier: eos2ta5
+eos2zmb,yes,4093,0,2025-11-20T09:44:03,Ersilia Model Hub Identifier: eos2zmb
+eos3cf4,yes,4093,0,2025-12-03T10:28:50,Ersilia Model Hub Identifier: eos3cf4
+eos9n1s,yes,4091,0,2026-02-04T13:15:45,Ersilia Model Hub Identifier: eos9n1s
+eos7jio,yes,4084,0,2025-10-09T17:20:46,Ersilia Model Hub Identifier: eos7jio
+eos4rta,yes,4078,0,2025-11-24T19:50:41,Ersilia Model Hub Identifier: eos4rta
+eos3zur,yes,4069,0,2025-10-17T14:26:20,Ersilia Model Hub Identifier: eos3zur
+eos3le9,yes,4067,0,2025-11-21T17:47:40,Ersilia Model Hub Identifier: eos3le9
+eos9bpi,yes,4059,0,2026-07-22T14:10:13,Ersilia Model Hub Identifier: eos9bpi
+eos3ujl,yes,4058,0,2025-10-23T15:14:46,Ersilia Model Hub Identifier: eos3ujl
+eos6oli,yes,4054,0,2025-10-13T15:41:36,Ersilia Model Hub Identifier: eos6oli
+eos5guo,yes,4042,0,2025-10-23T13:55:21,Ersilia Model Hub Identifier: eos5guo
+eos238c,yes,4030,0,2025-11-22T12:21:04,Ersilia Model Hub Identifier: eos238c
+eos2mrz,yes,4028,0,2025-10-14T13:52:07,Ersilia Model Hub Identifier: eos2mrz
+eos5q52,yes,4013,0,2026-07-22T15:29:42,Ersilia Model Hub Identifier: eos5q52
+eos59rr,yes,4006,0,2025-10-17T14:39:26,Ersilia Model Hub Identifier: eos59rr
+eos9cvt,yes,3991,0,2026-03-03T18:16:31,Ersilia Model Hub Identifier: eos9cvt
+eos8a5g,yes,3986,0,2025-10-14T14:44:40,Ersilia Model Hub Identifier: eos8a5g
+eos8jx6,yes,3986,0,2026-07-22T14:10:12,Ersilia Model Hub Identifier: eos8jx6
+eos4q1a,yes,3977,1,2026-04-01T17:06:28,Ersilia Model Hub Identifier: eos4q1a
+eos30f3,yes,3963,0,2025-10-23T14:25:54,Ersilia Model Hub Identifier: eos30f3
+eos9taz,yes,3963,0,2025-10-22T14:18:43,Ersilia Model Hub Identifier: eos9taz
+eos7m30,yes,3961,0,2026-07-06T10:59:46,Ersilia Model Hub Identifier: eos7m30
+eos7pw8,yes,3954,0,2025-10-13T17:14:14,Ersilia Model Hub Identifier: eos7pw8
+eos74bo,yes,3945,0,2025-10-28T14:42:38,Ersilia Model Hub Identifier: eos74bo
+eos3nn9,yes,3941,0,2025-10-23T14:09:17,Ersilia Model Hub Identifier: eos3nn9
+eos81ew,yes,3934,0,2026-07-06T09:57:01,Ersilia Model Hub Identifier: eos81ew
+eos4r1g,yes,3922,0,2025-12-27T19:56:23,Ersilia Model Hub Identifier: eos4r1g
+eos9yy1,yes,3919,0,2025-10-16T12:10:46,Ersilia Model Hub Identifier: eos9yy1
+eos9li5,yes,3916,0,2026-03-24T14:58:09,Ersilia Model Hub Identifier: eos9li5
+eos8h6g,yes,3915,0,2025-10-09T13:57:53,Ersilia Model Hub Identifier: eos8h6g
+eos69p9,yes,3908,0,2026-05-20T13:21:53,Ersilia Model Hub Identifier: eos69p9
+eos6m4j,yes,3907,0,2025-10-14T15:32:45,Ersilia Model Hub Identifier: eos6m4j
+eos8aox,yes,3896,0,2025-06-13T11:35:11,Ersilia Model Hub Identifier: eos8aox
+eos4tcc,yes,3887,0,2025-10-14T14:11:20,Ersilia Model Hub Identifier: eos4tcc
+eos31ve,yes,3883,0,2025-10-16T14:20:10,Ersilia Model Hub Identifier: eos31ve
+eos43d6,yes,3883,0,2026-07-22T15:29:38,Ersilia Model Hub Identifier: eos43d6
+eos3lyd,yes,3863,0,2025-12-15T14:23:57,Ersilia Model Hub Identifier: eos3lyd
+eos1n4b,yes,3855,0,2025-10-10T16:08:50,Ersilia Model Hub Identifier: eos1n4b
+eos6wb7,yes,3854,0,2026-07-22T14:10:15,Ersilia Model Hub Identifier: eos6wb7
+eos7iak,yes,3850,0,2026-07-22T13:23:19,Ersilia Model Hub Identifier: eos7iak
+eos3ev6,yes,3844,0,2025-10-17T15:08:18,Ersilia Model Hub Identifier: eos3ev6
+eos9tyg,yes,3844,0,2025-10-16T14:22:38,Ersilia Model Hub Identifier: eos9tyg
+eos2rd8,yes,3841,0,2025-10-15T14:25:56,Ersilia Model Hub Identifier: eos2rd8
+eos5xng,yes,3841,0,2025-09-15T15:04:13,Ersilia Model Hub Identifier: eos5xng
+eos8fth,yes,3840,0,2025-10-16T13:46:56,Ersilia Model Hub Identifier: eos8fth
+eos6tg8,yes,3835,0,2025-10-13T15:59:31,Ersilia Model Hub Identifier: eos6tg8
+eos24jm,yes,3831,0,2025-10-16T14:11:43,Ersilia Model Hub Identifier: eos24jm
+eos4b8j,yes,3828,0,2025-10-21T16:27:46,Ersilia Model Hub Identifier: eos4b8j
+eos2lm8,yes,3811,0,2025-10-22T13:13:15,Ersilia Model Hub Identifier: eos2lm8
+eos7nno,yes,3806,0,2025-10-17T14:43:48,Ersilia Model Hub Identifier: eos7nno
+eos6aun,yes,3795,0,2025-10-16T15:01:37,Ersilia Model Hub Identifier: eos6aun
+eos5505,yes,3794,0,2025-10-15T13:23:24,Ersilia Model Hub Identifier: eos5505
+eos5jz9,yes,3783,0,2025-10-17T14:33:12,Ersilia Model Hub Identifier: eos5jz9
+eos5eya,yes,3777,0,2026-07-22T13:23:19,Ersilia Model Hub Identifier: eos5eya
+eos22io,yes,3776,0,2025-10-16T12:19:46,Ersilia Model Hub Identifier: eos22io
+eos1mxi,yes,3775,0,2025-10-17T14:10:33,Ersilia Model Hub Identifier: eos1mxi
+eos44zp,yes,3758,0,2025-10-16T14:25:47,Ersilia Model Hub Identifier: eos44zp
+eos2e3s,yes,3753,0,2026-07-22T15:29:35,Ersilia Model Hub Identifier: eos2e3s
+eos8lcw,yes,3751,0,2026-07-22T15:29:40,Ersilia Model Hub Identifier: eos8lcw
+eos9f7c,yes,3731,0,2025-12-15T14:18:32,Ersilia Model Hub Identifier: eos9f7c
+eos65rt,yes,3720,0,2025-10-13T16:00:39,Ersilia Model Hub Identifier: eos65rt
+eos9eyo,yes,3719,0,2026-07-22T14:10:06,Ersilia Model Hub Identifier: eos9eyo
+eos39dp,yes,3709,0,2025-10-10T15:02:36,Ersilia Model Hub Identifier: eos39dp
+eos5qya,yes,3703,0,2026-07-22T15:29:34,Ersilia Model Hub Identifier: eos5qya
+eos7l5m,yes,3698,0,2026-07-06T11:01:00,Ersilia Model Hub Identifier: eos7l5m
+eos2thm,yes,3681,0,2025-10-09T16:31:29,Ersilia Model Hub Identifier: eos2thm
+eos3dys,yes,3678,0,2026-05-20T09:32:04,Ersilia Model Hub Identifier: eos3dys
+eos60mw,yes,3660,0,2026-04-24T09:34:06,Ersilia Model Hub Identifier: eos60mw
+eos4xb1,yes,3657,0,2025-11-27T16:01:33,Ersilia Model Hub Identifier: eos4xb1
+eos9x3z,yes,3638,0,2025-12-11T00:52:32,Ersilia Model Hub Identifier: eos9x3z
+eos97yu,yes,3636,0,2025-05-21T11:26:57,Ersilia Model Hub Identifier: eos97yu
+eos3e6s,yes,3623,0,2025-11-24T19:24:15,Ersilia Model Hub Identifier: eos3e6s
+eos69e6,yes,3605,0,2026-08-03T09:46:55,
+eos8v1a,yes,3594,0,2026-07-22T15:29:44,Ersilia Model Hub Identifier: eos8v1a
+eos5bsw,yes,3582,0,2025-12-15T16:16:42,Ersilia Model Hub Identifier: eos5bsw
+eos5jv3,yes,3558,0,2026-07-10T14:31:59,Ersilia Model Hub Identifier: eos5jv3
+eos85mn,yes,3558,0,2026-06-03T18:27:36,Ersilia Model Hub Identifier: eos85mn
+eos2v11,yes,3540,0,2024-04-11T13:57:40,Ersilia Model Hub Identifier: eos2v11
+eos9wao,yes,3521,0,2025-06-25T14:09:46,Ersilia Model Hub Identifier: eos9wao
+eos1soi,yes,3511,0,2025-12-18T13:18:48,Ersilia Model Hub Identifier: eos1soi
+conda,no,3507,0,2020-12-10T19:13:23,
+ersilia-assistant,no,3507,0,2024-11-12T14:47:49,
+eos5iy5,yes,3506,0,2024-07-15T10:43:29,Ersilia Model Hub Identifier: eos5iy5
+eos5f0j,yes,3488,0,2026-06-02T16:08:22,Ersilia Model Hub Identifier: eos5f0j
+eos7dg4,yes,3486,0,2026-06-04T10:08:50,Ersilia Model Hub Identifier: eos7dg4
+eos1xje,yes,3475,0,2024-04-10T10:52:09,Ersilia Model Hub Identifier: eos1xje
+eos2re5,yes,3475,0,2023-07-11T20:26:27,Ersilia Model Hub Identifier: eos2re5
+eos1579,yes,3462,0,2024-04-25T12:16:04,Ersilia Model Hub Identifier: eos1579
+eos8bhe,yes,3459,0,2024-04-18T13:55:44,Ersilia Model Hub Identifier: eos8bhe
+eos7a04,yes,3454,0,2024-05-08T09:24:19,Ersilia Model Hub Identifier: eos7a04
+eos24ur,yes,3422,0,2024-06-03T11:59:37,Ersilia Model Hub Identifier: eos24ur
+nns,no,3419,0,2026-01-19T11:52:14,
+eos3ae7,yes,3418,0,2024-04-11T21:25:47,Ersilia Model Hub Identifier: eos3ae7
+eos4xq2,yes,3377,0,2024-09-29T19:41:09,Ersilia Model Hub Identifier: eos4xq2
+eos7e3s,yes,3377,0,2024-01-29T02:38:16,Ersilia Model Hub Identifier: eos7e3s
+eos7pnm,yes,3349,0,2023-06-01T14:54:30,Ersilia Model Hub Identifier: eos7pnm
+eos7emx,yes,3342,0,2023-10-30T13:36:47,Ersilia Model Hub Identifier: eos7emx
+eos9sa2,yes,3342,0,2024-04-25T10:43:40,Ersilia Model Hub Identifier: eos9sa2
+eos54c7,yes,3335,0,2023-08-17T08:31:32,Ersilia Model Hub Identifier: eos54c7
+eos5qfo,yes,3331,0,2024-04-24T10:28:24,Ersilia Model Hub Identifier: eos5qfo
+eos3tpo,yes,3329,0,2023-06-21T05:55:20,Ersilia Model Hub Identifier: eos3tpo
+eos1bba,yes,3308,0,2023-08-01T07:05:21,Ersilia Model Hub Identifier: eos1bba
+eos9be7,yes,3290,0,2023-08-21T17:06:02,Ersilia Model Hub Identifier: eos9be7
+eos817d,yes,3235,0,2026-05-20T10:52:24,Ersilia Model Hub Identifier: eos817d
+emb,no,3187,0,2025-11-28T11:53:47,
+eos2egp,yes,3149,0,2026-06-04T09:28:57,Ersilia Model Hub Identifier: eos2egp
+eos69jj,yes,3108,0,2026-06-26T09:22:38,Ersilia Model Hub Identifier: eos69jj
+eos3wac,yes,3097,0,2026-07-01T12:16:52,Ersilia Model Hub Identifier: eos3wac
+ersilia,no,2769,1,2022-11-09T10:25:21,
+ersilia-hub-server,no,2166,0,2026-03-16T16:07:25,
+ersilia-hub-ui,no,1435,0,2026-03-16T16:01:51,
+eos37l0,yes,678,0,2025-08-27T15:57:59,Ersilia Model Hub Identifier: eos37l0
+eos2m0f,yes,645,0,2025-08-27T16:41:26,Ersilia Model Hub Identifier: eos2m0f
+eos5dti,yes,632,0,2025-08-27T15:59:01,Ersilia Model Hub Identifier: eos5dti
+eos2i82,yes,337,0,2026-03-04T11:47:13,
+eos5mnx,yes,155,0,2026-08-03T12:54:29,Ersilia Model Hub Identifier: eos5mnx
+eos5g6m,yes,65,0,2026-08-03T13:28:53,

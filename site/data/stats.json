@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03 08:31 UTC",
+  "generated_at": "2026-08-03 14:15 UTC",
   "snapshot_date": "2026-07-31",
   "meta": {
     "tables": [
@@ -25,6 +25,11 @@
       "projects": "2026-07-31",
       "publications": "2026-07-31",
       "repositories": "2026-07-31"
+    },
+    "collected_dates": {
+      "dockerhub": "2026-08-03",
+      "github": "2026-08-03",
+      "scholar": "2026-08-03"
     },
     "stale_tables": {},
     "models_available": true,
@@ -1592,10 +1597,10 @@
         "n": 36,
         "today": "2026-08-03",
         "semantics": {
-          "Stuck": "bad",
-          "Todo": "neutral",
           "In progress": "brand",
-          "Done": "good"
+          "Done": "good",
+          "Stuck": "bad",
+          "Todo": "neutral"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -6624,6 +6629,81 @@
         ],
         "n": 10,
         "insight": "1,292 rows across 10 source tables in this snapshot."
+      }
+    },
+    "usage": {
+      "model_pulls_total": {
+        "labels": [
+          "Image pulls, automated included",
+          "Models with an image",
+          "Pulled well above the baseline"
+        ],
+        "values": [
+          1035531,
+          247,
+          4
+        ],
+        "n": 247,
+        "insight": "1,035,531 image pulls to date, but 231 models sit within a narrow band around 4,154 — a scheduled build, not demand. 4 stand clearly above it.",
+        "unit": "pulls"
+      },
+      "most_pulled_models": {
+        "rows": [
+          {
+            "name": "eos3b5e",
+            "pulls": 29293,
+            "times_baseline": 7.1
+          },
+          {
+            "name": "eos5axz",
+            "pulls": 7317,
+            "times_baseline": 1.8
+          },
+          {
+            "name": "eos4e40",
+            "pulls": 7253,
+            "times_baseline": 1.7
+          },
+          {
+            "name": "eos92sw",
+            "pulls": 6302,
+            "times_baseline": 1.5
+          }
+        ],
+        "n": 4,
+        "insight": "4 models exceed the ~4,154 baseline; eos3b5e leads at 7.1x it."
+      },
+      "pull_distribution": {
+        "labels": [
+          "under 1k",
+          "1k–2.5k",
+          "2.5k–5k",
+          "5k–10k",
+          "10k+"
+        ],
+        "values": [
+          6,
+          0,
+          224,
+          16,
+          1
+        ],
+        "n": 247,
+        "insight": "231 of 247 models fall in one narrow band, which is the automated build; the tail above it is the part that reflects interest.",
+        "countNoun": "models",
+        "ordinal": true
+      },
+      "image_coverage": {
+        "labels": [
+          "Model has an image",
+          "No image published"
+        ],
+        "values": [
+          235,
+          5
+        ],
+        "n": 240,
+        "insight": "235 of 240 models in the registry (98%) have a published Docker image. 12 image(s) have no matching model record."
       }
     }
   }

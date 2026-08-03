@@ -1,0 +1,110 @@
+# Weekly data-freshness check. Fetches nothing, commits nothing, deploys nothing.
+#
+# WHY IT ONLY CHECKS
+# ------------------
+# Three of the four data sources are public (Docker Hub, GitHub, OpenAlex) and their
+# collected CSVs are committed to the repository, which is what makes the build
+# reproducible without any secret. Keeping them current therefore needs either a bot that
+# commits back — which means giving CI write access to the default branch — or a human who
+# runs the collectors and commits. This project chose the human.
+#
+# So this workflow's job is to notice when that has not happened. It fails loudly when a
+# committed snapshot is older than three weeks, which is the nudge; it cannot fix anything
+# itself, which is the point.
+#
+# To refresh, locally:
+#
+#     export GH_STATS_TOKEN=...        # fine-grained, read-only, metadata on ersilia-os
+#     python3 scripts/fetch_dockerhub.py -o data/dockerhub/
+#     python3 scripts/fetch_github.py    -o data/github/
+#     python3 scripts/fetch_openalex.py  -o data/scholar/
+#     python3 scripts/export_site_data.py && python3 scripts/stamp_assets.py
+#     git add data site && git commit -m "Refresh collected data"
+#
+# The Airtable snapshot is deliberately absent from this workflow: it is gitignored
+# because it carries personal data, and pages.yml fetches it fresh on every deploy.
+name: Data freshness
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"        # Mondays, an hour after the deploy cron
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "data/dockerhub/**"
+      - "data/github/**"
+      - "data/scholar/**"
+      - "scripts/fetch_*.py"
+      - "scripts/collect_common.py"
+
+permissions:
+  contents: read
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Each source is checked separately so the log names the stale one rather than
+      # reporting a single unhelpful failure.
+      - name: Docker Hub snapshot is current
+        run: PYTHONPATH=scripts python scripts/fetch_dockerhub.py --check --max-age-days 21
+
+      - name: GitHub snapshot is current
+        run: PYTHONPATH=scripts python scripts/fetch_github.py --check --max-age-days 21
+
+      - name: OpenAlex snapshot is current
+        run: PYTHONPATH=scripts python scripts/fetch_openalex.py --check --max-age-days 21
+
+      # A snapshot can be fresh and still unusable. This catches a truncated or
+      # mis-columned CSV, which a date check cannot see.
+      - name: Collected data parses and is non-empty
+        run: |
+          PYTHONPATH=scripts python - <<'PY'
+          import csv, glob, sys
+          expected = {
+              "data/dockerhub/images_*.csv": ("name", "pull_count", "is_model"),
+              "data/github/repos_*.csv": ("name", "pushed_at", "archived", "stars"),
+              "data/scholar/works_*.csv": ("doi", "citations", "is_open_access"),
+          }
+          failed = False
+          for pattern, columns in expected.items():
+              paths = sorted(glob.glob(pattern))
+              if not paths:
+                  print("::error::no file matching %s" % pattern); failed = True; continue
+              with open(paths[-1], newline="", encoding="utf-8") as handle:
+                  rows = list(csv.DictReader(handle))
+              missing = [c for c in columns if not rows or c not in rows[0]]
+              if missing:
+                  print("::error::%s is missing column(s): %s" % (paths[-1], ", ".join(missing)))
+                  failed = True
+              elif len(rows) < 5:
+                  print("::error::%s has only %d rows" % (paths[-1], len(rows)))
+                  failed = True
+              else:
+                  print("%s: %d rows, columns present" % (paths[-1], len(rows)))
+          sys.exit(1 if failed else 0)
+          PY
+
+      # The collected files are committed, so the disclosure rules apply to them directly
+      # rather than only to the built site.
+      - name: Collected data carries no personal data
+        run: |
+          if grep -rlEI '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' data/dockerhub data/github data/scholar; then
+            echo "::error::An email-like string is in the collected data."
+            exit 1
+          fi
+          # fetch_github.py reads only public repositories precisely so that this holds.
+          if awk -F, 'NR>1 && $0 ~ /,private,/ {print FILENAME; exit 1}' data/github/repos_*.csv; then
+            echo "collected GitHub data contains public repositories only."
+          fi

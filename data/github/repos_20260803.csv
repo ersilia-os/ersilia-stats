@@ -1,0 +1,385 @@
+name,is_model,created_at,pushed_at,archived,fork,language,license,topics,size_kb,stars,forks,watchers,open_issues,has_issues,default_branch
+.github,no,2022-05-19,2024-12-29,no,no,,GPL-3.0,,22,0,0,0,0,yes,main
+3d-analogues,no,2024-06-12,2024-07-12,no,no,Python,GPL-3.0,,5255,0,0,0,0,yes,main
+abaumannii-enamine-real-screening,no,2025-01-21,2025-03-06,no,no,Python,GPL-3.0,,3354,0,0,0,0,yes,main
+ai2050-compute-fund,no,2026-02-23,2026-07-09,no,no,Shell,GPL-3.0,,174,0,0,0,0,yes,main
+ai2050-dd-workshop,no,2024-08-19,2026-03-11,no,no,Jupyter Notebook,GPL-3.0,,163785,1,1,0,0,yes,main
+ai2050-h3d-inhouse-workshop-prep,no,2025-06-16,2025-06-19,no,no,Jupyter Notebook,,,119234,2,1,0,0,yes,main
+ai2050-h3d-symposium-workshop,no,2024-05-08,2024-06-06,no,no,Jupyter Notebook,GPL-3.0,,16974,3,1,0,0,yes,main
+ai2050-mtb-penetration,no,2025-10-28,2026-03-02,no,no,Jupyter Notebook,GPL-3.0,,24932,1,0,0,0,yes,main
+anpdb-annotation,no,2024-11-08,2024-11-13,no,no,Jupyter Notebook,GPL-3.0,,16637,0,0,0,0,yes,main
+anti-hypertension-cedd,no,2025-04-25,2026-03-02,no,no,Jupyter Notebook,GPL-3.0,,828135,0,0,0,0,yes,main
+antimicrobial-ml-tasks,no,2023-01-13,2024-04-08,yes,no,Jupyter Notebook,GPL-3.0,,16018,2,1,0,0,yes,main
+auto-tabnet,no,2023-02-09,2023-11-01,no,no,Python,GPL-3.0,,1528,1,0,0,0,yes,main
+autocat-chem,no,2021-11-18,2021-12-06,no,no,Python,MIT,,23,1,1,0,0,yes,main
+bentolite,no,2023-07-31,2023-08-08,yes,no,Python,GPL-3.0,,92,0,1,0,0,yes,main
+bentoml-ersilia,no,2023-01-17,2024-07-29,no,no,Python,GPL-3.0,,3207,0,0,0,0,yes,main
+bioassay-db,no,2022-01-12,2026-03-02,no,no,Python,MIT,,1258,2,0,0,0,yes,main
+champs,no,2021-01-02,2025-12-17,no,no,Jupyter Notebook,MIT,,124494,0,0,0,0,yes,main
+chem-sampler,no,2024-04-09,2024-12-16,no,no,Python,GPL-3.0,,35,2,1,0,0,yes,main
+chem-sampler-legacy,no,2023-11-17,2023-09-15,yes,yes,,GPL-3.0,,407162,1,0,0,0,no,main
+chembl-antimicrobial-models,no,2026-04-13,2026-07-27,no,no,Jupyter Notebook,GPL-3.0,,9483,0,0,0,0,yes,main
+chembl-antimicrobial-tasks,no,2025-09-15,2026-07-27,no,no,Jupyter Notebook,GPL-3.0,,14395,1,0,0,0,yes,main
+chembl-binary-tasks,no,2024-04-05,2025-03-19,no,no,Python,GPL-3.0,,10617,4,1,0,0,yes,main
+chembl-ml-tools,no,2022-09-29,2024-04-08,yes,no,Python,GPL-3.0,,53,0,0,0,0,yes,main
+chembl-tasks-for-finetuning,no,2025-02-19,2025-03-11,no,no,Python,GPL-3.0,,399,3,0,0,0,yes,main
+chemical-library-exploration,no,2022-02-17,2024-11-19,no,no,Python,GPL-3.0,,31154,1,1,0,0,yes,main
+chemical-library-gifs,no,2025-11-04,2026-07-15,no,no,Python,GPL-3.0,,11320,1,0,0,1,yes,main
+chempfn,no,2023-01-13,2024-05-18,no,no,Jupyter Notebook,GPL-3.0,classification ensemble machine-learning tabpfn,42972,35,1,0,0,yes,main
+chemxor,no,2022-04-04,2026-03-02,no,no,Python,GPL-3.0,,18347,13,2,0,0,yes,main
+cidrz-e2e-linkage,no,2021-01-19,2021-12-13,no,no,Python,MIT,,2065,2,0,0,0,yes,main
+coadd-binary-tasks,no,2025-01-14,2026-06-15,no,no,Python,GPL-3.0,,125,1,0,0,0,yes,main
+compound-embedding,no,2022-12-20,2023-04-11,no,no,Jupyter Notebook,GPL-3.0,,121493,6,1,0,0,yes,main
+compound-embedding-lite,no,2023-04-05,2024-04-09,no,no,Python,GPL-3.0,,44015,0,0,0,0,yes,main
+d4g-cohort-2024-hackathon-group3,no,2024-08-12,2024-07-17,no,yes,,,,1242,0,0,0,0,no,main
+digests,no,2026-05-20,2026-07-28,no,no,CSS,GPL-3.0,,166,2,0,0,0,yes,main
+docking-gnina,no,2025-07-02,2026-03-05,yes,no,Python,MIT,,1794,0,0,0,0,yes,main
+dvc-gd-github-test,no,2025-09-08,2026-03-02,yes,no,,,,17,0,0,0,0,yes,main
+easylinkage,no,2019-08-19,2020-07-30,no,no,Python,MIT,,70,1,0,0,0,yes,master
+enamine-ecfp,no,2025-07-15,2026-03-02,yes,no,Jupyter Notebook,MIT,,4,0,0,0,0,yes,main
+eos-analysis-template,no,2025-08-20,2026-05-20,no,no,,GPL-3.0,,92,0,0,0,0,yes,main
+eos-demo,no,2023-05-09,2025-06-26,no,no,Python,GPL-3.0,,2700,0,2,0,0,yes,main
+eos-lite-chem,no,2021-11-08,2022-01-24,no,no,Python,MIT,,59,0,0,0,0,yes,main
+eos-python-package,no,2025-08-20,2026-05-20,no,no,Python,GPL-3.0,,109,0,0,0,0,yes,main
+eos-template,no,2021-09-17,2026-05-20,no,no,Python,GPL-3.0,template,231,4,5,0,0,yes,main
+eos11sm,yes,2025-11-24,2026-04-23,no,no,Python,GPL-3.0,,1256,0,0,0,0,yes,main
+eos11sr,yes,2025-07-03,2025-12-24,yes,no,Python,GPL-3.0,,91,0,0,0,0,yes,main
+eos12x7,yes,2026-01-20,2026-04-23,no,no,Python,GPL-3.0,,45,0,0,0,0,yes,main
+eos1579,yes,2022-08-18,2025-05-30,yes,no,Python,GPL-3.0,,60,2,1,0,0,yes,main
+eos157v,yes,2022-07-13,2026-05-18,no,no,Python,GPL-3.0,,143,1,2,0,0,yes,main
+eos18ie,yes,2024-01-26,2026-08-03,no,no,Python,GPL-3.0,,2834,0,0,0,1,yes,main
+eos19mt,yes,2025-08-26,2026-05-18,no,no,Python,GPL-3.0,,9022,0,0,0,0,yes,main
+eos1af5,yes,2021-10-19,2026-05-18,no,no,Jupyter Notebook,NOASSERTION,,4584,3,4,0,0,yes,main
+eos1amr,yes,2021-05-07,2026-05-18,no,no,Python,NOASSERTION,,2091,2,2,0,0,yes,main
+eos1d7r,yes,2023-11-02,2026-07-21,no,no,Python,GPL-3.0,,74,0,0,0,0,yes,main
+eos1klk,yes,2026-03-10,2026-06-22,no,no,Python,GPL-3.0,,71,0,0,0,0,yes,main
+eos1lb5,yes,2025-11-25,2026-08-03,no,no,Python,GPL-3.0,,1935,0,0,0,1,yes,main
+eos1mxi,yes,2023-08-02,2026-05-18,no,no,Python,GPL-3.0,,77,0,1,0,0,yes,main
+eos1n4b,yes,2023-12-14,2026-05-18,no,no,Python,GPL-3.0,,137,0,0,0,0,yes,main
+eos1noy,yes,2023-09-04,2026-05-18,no,no,Python,GPL-3.0,,57,0,1,0,0,yes,main
+eos1pu1,yes,2024-06-29,2026-05-18,no,no,Python,GPL-3.0,,848,0,1,0,0,yes,main
+eos1soi,yes,2025-12-17,2026-05-18,no,no,Python,GPL-3.0,,994,0,0,0,0,yes,main
+eos1tt2,yes,2025-06-23,2026-05-18,no,no,Python,GPL-3.0,,21,0,0,0,0,yes,main
+eos1ut3,yes,2023-11-28,2026-05-18,no,no,Python,GPL-3.0,,60,0,0,0,0,yes,main
+eos1vms,yes,2021-05-07,2026-03-09,no,no,Python,NOASSERTION,,8572,1,1,0,0,yes,main
+eos1xje,yes,2023-08-30,2024-04-10,yes,no,Python,GPL-3.0,,40,2,1,0,1,yes,main
+eos21dr,yes,2026-05-15,2026-07-22,no,no,Python,GPL-3.0,,104713,0,0,0,0,yes,main
+eos21q7,yes,2024-01-30,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,6028,0,0,0,0,yes,main
+eos22io,yes,2023-02-03,2026-05-18,no,no,Python,GPL-3.0,,3355,0,0,0,0,yes,main
+eos238c,yes,2022-10-12,2026-05-18,no,no,Python,GPL-3.0,,57211,1,0,0,0,yes,main
+eos2401,yes,2024-02-20,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,528,0,0,0,0,yes,main
+eos24ci,yes,2022-12-20,2026-05-18,no,no,Python,GPL-3.0,,97,0,1,0,0,yes,main
+eos24jm,yes,2023-04-06,2026-05-19,no,no,Python,GPL-3.0,,60,0,0,0,0,yes,main
+eos24ur,yes,2024-03-05,2025-04-27,yes,no,Python,GPL-3.0,,50,0,0,0,0,yes,main
+eos26a4,yes,2026-03-23,2026-06-22,no,no,Python,GPL-3.0,,58,0,0,0,0,yes,main
+eos2a9n,yes,2022-08-20,2026-05-18,no,no,Python,GPL-3.0,,94,0,1,0,0,yes,main
+eos2b6f,yes,2022-07-13,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,96842,1,2,0,0,yes,main
+eos2db3,yes,2024-11-09,2026-03-09,no,no,Python,GPL-3.0,,2466,0,0,0,0,yes,main
+eos2e3s,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,138007,0,0,0,0,yes,main
+eos2egp,yes,2026-06-02,2026-06-04,no,no,Python,GPL-3.0,,35,0,0,0,0,yes,main
+eos2fy6,yes,2023-03-27,2026-05-18,no,no,Python,GPL-3.0,,12225,1,0,0,0,yes,main
+eos2gth,yes,2021-11-02,2026-05-19,no,no,Python,GPL-3.0,,2744,0,2,0,0,yes,main
+eos2gw4,yes,2023-04-13,2026-05-18,no,no,Python,GPL-3.0,,117,0,0,0,0,yes,main
+eos2h1r,yes,2025-06-25,2026-05-18,no,no,Python,GPL-3.0,,84,0,0,0,0,yes,main
+eos2hbd,yes,2021-11-10,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,1454,0,2,0,0,yes,main
+eos2hzy,yes,2023-08-10,2026-05-18,no,no,Python,GPL-3.0,,87,0,0,0,0,yes,main
+eos2i82,yes,2025-12-27,2026-03-16,yes,no,Python,GPL-3.0,,41984,0,0,0,1,yes,main
+eos2l0q,yes,2023-08-24,2026-05-19,no,no,Python,GPL-3.0,,4138,0,0,0,0,yes,main
+eos2lm8,yes,2021-09-28,2026-05-18,no,no,Python,GPL-3.0,,145,4,5,0,0,yes,main
+eos2lqb,yes,2023-03-27,2026-05-18,no,no,Python,GPL-3.0,,574,1,0,0,0,yes,main
+eos2m0f,yes,2025-06-13,2025-12-09,yes,no,Python,GPL-3.0,,54,0,0,0,0,yes,main
+eos2mhp,yes,2022-07-13,2026-05-18,no,no,Python,GPL-3.0,,154,0,0,0,0,yes,main
+eos2mrz,yes,2022-07-21,2026-05-18,no,no,Python,MIT,,61,1,2,0,0,yes,main
+eos2mxh,yes,2025-06-25,2026-05-18,no,no,Python,GPL-3.0,,86,0,0,0,0,yes,main
+eos2r5a,yes,2021-10-19,2026-05-18,no,no,Python,NOASSERTION,,10748,1,6,0,0,yes,main
+eos2rd8,yes,2022-11-14,2026-05-18,no,no,Python,GPL-3.0,,67,0,0,0,0,yes,main
+eos2re5,yes,2022-07-28,2024-04-24,yes,no,Python,GPL-3.0,,6602,2,2,0,0,yes,main
+eos2sbn,yes,2025-06-25,2026-05-18,no,no,Python,GPL-3.0,,64,0,0,0,0,yes,main
+eos2ta5,yes,2021-10-18,2026-07-21,no,no,Python,GPL-3.0,,183087,2,3,0,0,yes,main
+eos2thm,yes,2021-09-28,2026-05-18,no,no,Python,GPL-3.0,,144,1,3,0,0,yes,main
+eos2v11,yes,2022-09-16,2025-07-16,yes,no,Python,GPL-3.0,,66,10,3,0,0,yes,main
+eos2xeq,yes,2025-09-17,2026-05-18,no,no,Python,GPL-3.0,,63,0,0,0,0,yes,main
+eos2zmb,yes,2023-09-27,2026-05-19,no,no,Python,GPL-3.0,,3419,0,1,0,0,yes,main
+eos30f3,yes,2023-12-04,2026-05-18,no,no,Python,GPL-3.0,,15989,0,2,0,0,yes,main
+eos30gr,yes,2022-07-14,2026-05-18,no,no,Python,GPL-3.0,,36061,0,1,0,0,yes,main
+eos31ve,yes,2023-03-27,2026-05-18,no,no,Python,GPL-3.0,,40806,1,0,0,0,yes,main
+eos37l0,yes,2025-06-13,2025-12-09,yes,no,Python,GPL-3.0,,53,0,0,0,0,yes,main
+eos3804,yes,2023-08-23,2026-05-19,no,no,Python,GPL-3.0,,2769,0,0,0,0,yes,main
+eos39co,yes,2024-07-22,2026-05-18,no,no,Python,GPL-3.0,,94,0,0,0,0,yes,main
+eos39dp,yes,2024-05-03,2026-05-18,no,no,Python,GPL-3.0,,25903,0,2,0,0,yes,main
+eos3ae6,yes,2021-07-15,2026-05-18,no,no,Python,GPL-3.0,,92,2,3,0,0,yes,main
+eos3ae7,yes,2022-08-11,2025-05-08,yes,no,Python,GPL-3.0,,23941,2,3,0,0,yes,main
+eos3b5e,yes,2021-09-13,2026-04-06,no,no,Python,GPL-3.0,,70,0,6,0,0,yes,main
+eos3cf4,yes,2023-04-11,2025-12-09,yes,no,Python,GPL-3.0,,76,0,0,0,0,yes,main
+eos3dys,yes,2026-05-19,2026-05-29,no,no,Python,GPL-3.0,,101004,0,0,0,0,yes,main
+eos3e6s,yes,2025-11-16,2026-07-20,no,no,Python,GPL-3.0,,51,0,0,0,0,yes,main
+eos3ev6,yes,2023-07-06,2026-05-18,no,no,Python,GPL-3.0,,402786,1,0,0,0,yes,main
+eos3kcw,yes,2023-11-02,2026-07-27,no,no,Python,GPL-3.0,,72,0,0,0,0,yes,main
+eos3l5f,yes,2025-08-26,2026-05-18,no,no,Python,GPL-3.0,,77,0,0,0,0,yes,main
+eos3le9,yes,2023-08-24,2025-11-21,no,no,Python,GPL-3.0,,5919,0,0,0,0,yes,main
+eos3lyd,yes,2025-12-12,2026-05-19,no,no,Python,GPL-3.0,,561,0,0,0,0,yes,main
+eos3mk2,yes,2024-10-23,2026-05-18,no,no,Python,GPL-3.0,,2896,0,0,0,0,yes,main
+eos3nl8,yes,2023-12-05,2024-03-04,yes,no,Jupyter Notebook,GPL-3.0,,436204,0,0,0,0,yes,main
+eos3nn9,yes,2024-07-01,2026-05-19,yes,no,Python,GPL-3.0,,27636,0,1,0,1,yes,main
+eos3ujl,yes,2024-10-16,2026-05-19,no,no,Python,GPL-3.0,,61728,0,0,0,0,yes,main
+eos3wac,yes,2026-06-30,2026-07-01,no,no,Python,GPL-3.0,,50,0,0,0,0,yes,main
+eos3wzy,yes,2024-07-17,2026-07-30,no,no,Fortran,GPL-3.0,,82690,0,1,0,1,yes,main
+eos3xip,yes,2022-07-20,2026-05-18,no,no,Python,GPL-3.0,,153,0,1,0,0,yes,main
+eos3zur,yes,2023-04-11,2026-05-18,no,no,Python,GPL-3.0,,93,0,0,0,0,yes,main
+eos42ez,yes,2024-02-05,2026-05-18,no,no,Python,GPL-3.0,,2763,0,0,0,0,yes,main
+eos43at,yes,2021-10-19,2026-05-18,no,no,Python,GPL-3.0,,2103,2,3,0,0,yes,main
+eos43d6,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,685632,0,0,0,0,yes,main
+eos44zp,yes,2023-04-06,2025-10-16,yes,no,Python,GPL-3.0,,40877,0,0,0,0,yes,main
+eos45di,yes,2026-03-20,2026-06-22,no,no,Python,GPL-3.0,,41126,0,0,0,0,yes,main
+eos46ev,yes,2022-06-28,2026-05-19,no,no,Python,GPL-3.0,,21806,0,2,0,0,yes,main
+eos481p,yes,2022-07-13,2026-05-18,no,no,Python,GPL-3.0,,166,2,1,0,0,yes,main
+eos48ue,yes,2026-06-30,2026-06-30,no,no,Python,GPL-3.0,,20,0,1,0,0,yes,main
+eos4an7,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,1321796,0,0,0,0,yes,main
+eos4avb,yes,2023-01-25,2026-05-18,no,no,Python,GPL-3.0,,127,0,0,0,0,yes,main
+eos4b8j,yes,2022-08-15,2026-05-18,no,no,Python,GPL-3.0,,83,0,1,0,0,yes,main
+eos4cxk,yes,2023-01-25,2026-05-19,no,no,Python,GPL-3.0,,70,1,0,0,0,yes,main
+eos4djh,yes,2024-11-09,2025-12-24,no,no,Python,GPL-3.0,,57,1,0,0,0,yes,main
+eos4e40,yes,2020-11-04,2026-05-19,no,no,Python,GPL-3.0,,193,2,5,0,0,yes,main
+eos4ex3,yes,2025-06-23,2026-06-22,no,no,Python,GPL-3.0,,107,0,0,0,0,yes,main
+eos4f95,yes,2023-09-27,2026-05-19,no,no,Jupyter Notebook,GPL-3.0,,5195,0,1,0,0,yes,main
+eos4jcv,yes,2025-06-25,2026-05-18,no,no,Python,GPL-3.0,,81,0,0,0,0,yes,main
+eos4k4f,yes,2026-01-08,2026-04-23,no,no,Python,GPL-3.0,,50,0,0,0,0,yes,main
+eos4n4d,yes,2026-03-24,2026-05-19,no,no,Python,GPL-3.0,,2820,0,0,0,0,yes,main
+eos4q1a,yes,2022-12-15,2026-05-18,no,no,Python,GPL-3.0,,111,0,1,0,0,yes,main
+eos4qda,yes,2023-08-01,2026-07-31,no,no,Python,GPL-3.0,,16109,0,0,0,1,yes,main
+eos4r1g,yes,2025-12-27,2026-05-19,no,no,Python,GPL-3.0,,152,0,0,0,0,yes,main
+eos4rta,yes,2023-08-24,2026-05-19,no,no,Python,GPL-3.0,,15939,0,0,0,0,yes,main
+eos4rw4,yes,2025-11-29,2026-05-18,no,no,Python,GPL-3.0,,95,0,0,0,0,yes,main
+eos4se9,yes,2023-01-05,2026-05-18,no,no,Python,MIT,,2954,0,1,0,0,yes,main
+eos4tcc,yes,2022-07-25,2026-05-18,no,no,Python,GPL-3.0,,565,0,2,0,0,yes,main
+eos4u6p,yes,2021-05-03,2026-05-18,no,no,Python,GPL-3.0,,202,4,3,0,0,yes,main
+eos4wt0,yes,2023-12-01,2026-05-18,no,no,Python,GPL-3.0,,105,0,2,0,0,yes,main
+eos4x30,yes,2023-11-28,2026-05-18,no,no,Python,GPL-3.0,,102,0,0,0,0,yes,main
+eos4xb1,yes,2025-11-25,2026-04-23,no,no,Python,GPL-3.0,,1454,0,1,0,0,yes,main
+eos4ywv,yes,2025-10-13,2026-05-18,no,no,Python,GPL-3.0,,1015,0,0,0,0,yes,main
+eos4zfy,yes,2022-08-23,2026-05-19,no,no,Python,GPL-3.0,,47,0,0,0,0,yes,main
+eos526j,yes,2022-07-18,2026-05-18,no,no,Python,GPL-3.0,,33315,1,1,0,0,yes,main
+eos5505,yes,2023-01-02,2026-05-19,no,no,Python,MIT,,42990,0,1,0,0,yes,main
+eos57bx,yes,2024-03-08,2026-05-18,no,no,Python,GPL-3.0,,145160,0,1,0,0,yes,main
+eos59rr,yes,2023-07-03,2026-05-18,no,no,Python,GPL-3.0,,43831,0,0,0,0,yes,main
+eos5axz,yes,2021-09-09,2026-05-18,no,no,Python,GPL-3.0,,124,1,3,0,0,yes,main
+eos5bsw,yes,2025-12-12,2026-05-19,no,no,Python,GPL-3.0,,1094,0,0,0,0,yes,main
+eos5cl7,yes,2024-01-03,2026-05-19,no,no,Jupyter Notebook,GPL-3.0,,39658,0,0,0,0,yes,main
+eos5dti,yes,2025-06-13,2025-12-09,yes,no,Python,GPL-3.0,,63,0,0,0,0,yes,main
+eos5eya,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,258701,0,0,0,0,yes,main
+eos5f0j,yes,2026-06-02,2026-06-02,no,no,Pascal,GPL-3.0,,815,0,0,0,0,yes,main
+eos5g6m,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,126,0,1,0,0,yes,main
+eos5gge,yes,2024-02-19,2026-05-18,no,no,Python,GPL-3.0,,12809,0,0,0,0,yes,main
+eos5guo,yes,2024-03-06,2026-07-07,no,no,Python,GPL-3.0,,50,0,0,0,0,yes,main
+eos5jv3,yes,2026-07-09,2026-07-10,no,no,Python,GPL-3.0,,37,1,2,0,0,yes,main
+eos5jz9,yes,2023-07-05,2026-07-07,no,no,Python,GPL-3.0,,333779,0,0,0,0,yes,main
+eos5mnx,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,86,0,1,0,0,yes,main
+eos5nqn,yes,2025-12-10,2026-05-22,no,no,Python,GPL-3.0,,6400,0,0,0,0,yes,main
+eos5pt8,yes,2025-07-09,2026-05-18,no,no,Python,GPL-3.0,,62,0,0,0,0,yes,main
+eos5q52,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,98799,0,0,0,0,yes,main
+eos5qfo,yes,2022-08-07,2024-04-24,yes,no,Python,MIT,,270688,0,1,0,0,yes,main
+eos5qya,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,22658,0,0,0,0,yes,main
+eos5smc,yes,2022-07-12,2026-05-18,no,no,Python,GPL-3.0,,173,2,2,0,0,yes,main
+eos5xng,yes,2023-12-03,2026-05-18,no,no,Python,GPL-3.0,,2712,0,0,0,0,yes,main
+eos60mw,yes,2026-03-25,2026-06-10,no,no,Python,GPL-3.0,,49,0,0,0,0,yes,main
+eos633t,yes,2023-11-03,2026-07-30,no,no,Python,GPL-3.0,,2749,0,0,0,0,yes,main
+eos65rt,yes,2021-11-10,2026-05-18,no,no,Python,GPL-3.0,,1659,0,2,0,0,yes,main
+eos694w,yes,2024-02-07,2026-05-18,no,no,Python,GPL-3.0,,158867,0,1,0,0,yes,main
+eos69e6,yes,2023-12-01,2026-08-03,no,no,Python,GPL-3.0,,24782,0,0,0,1,yes,main
+eos69jj,yes,2026-06-24,2026-06-26,no,no,Python,GPL-3.0,,34,0,1,0,0,yes,main
+eos69p9,yes,2022-06-16,2026-05-20,no,no,Python,GPL-3.0,,10974,1,3,0,0,yes,main
+eos6ao8,yes,2021-10-19,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,2126,1,1,0,0,yes,main
+eos6aun,yes,2023-03-28,2026-05-18,no,no,Python,GPL-3.0,,61,0,0,0,0,yes,main
+eos6fza,yes,2022-07-13,2026-05-22,no,no,Python,GPL-3.0,,193,1,1,0,0,yes,main
+eos6hy3,yes,2023-01-11,2026-05-19,no,no,Python,MIT,,66,0,0,0,0,yes,main
+eos6m2k,yes,2025-08-21,2026-07-07,no,no,Python,GPL-3.0,,169,0,0,0,0,yes,main
+eos6m4j,yes,2022-08-25,2026-05-18,no,no,Jupyter Notebook,MIT,,43180,0,0,0,0,yes,main
+eos6o0z,yes,2022-07-19,2026-07-06,no,no,Python,GPL-3.0,,160,0,0,0,0,yes,main
+eos6ojg,yes,2025-07-19,2026-05-18,no,no,Python,GPL-3.0,,368,0,0,0,0,yes,main
+eos6oli,yes,2021-10-19,2026-05-18,no,no,Python,GPL-3.0,,68,1,5,0,0,yes,main
+eos6ost,yes,2024-04-18,2026-05-18,no,no,Python,GPL-3.0,,86077,0,1,0,1,yes,main
+eos6pbf,yes,2022-07-14,2026-05-18,no,no,Python,GPL-3.0,,61,0,1,0,0,yes,main
+eos6pj2,yes,2026-08-03,2026-08-03,no,no,Python,GPL-3.0,,0,0,1,0,0,yes,main
+eos6ru3,yes,2024-04-22,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,2150,0,0,0,1,yes,main
+eos6tg8,yes,2021-11-03,2026-05-18,no,no,Python,GPL-3.0,,58604,0,1,0,0,yes,main
+eos6tpo,yes,2025-08-22,2026-07-07,no,no,Python,GPL-3.0,,174,1,0,0,0,yes,main
+eos6wb7,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,93990,0,0,0,0,yes,main
+eos74bo,yes,2023-01-31,2026-05-18,no,no,Python,GPL-3.0,,42242,0,1,0,0,yes,main
+eos74km,yes,2024-12-17,2026-05-19,no,no,Python,GPL-3.0,,50,1,0,0,1,yes,main
+eos77jk,yes,2025-06-25,2026-05-18,no,no,Python,GPL-3.0,,83,0,0,0,0,yes,main
+eos77w8,yes,2021-05-12,2026-07-06,no,no,Python,GPL-3.0,,2158,2,3,0,0,yes,main
+eos78ao,yes,2021-09-28,2026-05-18,no,no,Python,GPL-3.0,,403,2,2,0,0,yes,main
+eos7a04,yes,2021-09-15,2025-05-30,yes,no,Python,GPL-3.0,,191,1,3,0,0,yes,main
+eos7a45,yes,2022-04-11,2026-07-07,no,no,Python,GPL-3.0,,188426,0,3,0,0,yes,main
+eos7asg,yes,2021-09-27,2026-05-18,yes,no,Python,GPL-3.0,,157,3,2,0,1,yes,main
+eos7d58,yes,2024-02-07,2026-05-18,no,no,Python,GPL-3.0,,95,0,1,0,0,yes,main
+eos7dg4,yes,2026-06-02,2026-06-04,no,no,Python,GPL-3.0,,41,0,0,0,0,yes,main
+eos7e3s,yes,2024-01-02,2024-02-08,yes,no,Jupyter Notebook,GPL-3.0,,621354,0,0,0,0,yes,main
+eos7iak,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,8797,0,0,0,0,yes,main
+eos7ike,yes,2025-12-04,2026-07-06,no,no,Python,GPL-3.0,,63,0,0,0,0,yes,main
+eos7jio,yes,2021-09-17,2025-10-09,no,no,Python,GPL-3.0,,44,1,3,0,0,yes,main
+eos7jlv,yes,2022-08-18,2026-07-06,no,no,Python,GPL-3.0,,65,0,2,0,0,yes,main
+eos7kpb,yes,2023-05-09,2026-07-07,no,no,Python,GPL-3.0,,29826,0,0,0,0,yes,main
+eos7l5m,yes,2025-12-12,2026-07-06,no,no,Python,GPL-3.0,,6840,0,0,0,0,yes,main
+eos7m30,yes,2025-06-17,2026-07-06,no,no,Python,GPL-3.0,,64,0,0,0,0,yes,main
+eos7nno,yes,2023-07-06,2026-05-18,no,no,Python,GPL-3.0,,335040,0,0,0,0,yes,main
+eos7pw8,yes,2021-10-25,2026-05-18,no,no,Python,GPL-3.0,,100,2,2,0,0,yes,main
+eos7qga,yes,2023-01-25,2026-05-18,no,no,Python,GPL-3.0,,86,0,0,0,0,yes,main
+eos7w6n,yes,2021-09-22,2026-05-18,no,no,Python,GPL-3.0,,2291,4,3,0,0,yes,main
+eos7ye0,yes,2025-08-23,2026-07-06,no,no,JavaScript,GPL-3.0,,82652,0,0,0,0,yes,main
+eos7yti,yes,2023-08-02,2026-05-19,no,no,Jupyter Notebook,GPL-3.0,,2025,0,0,0,0,yes,main
+eos80ch,yes,2023-07-10,2026-05-19,no,no,Python,GPL-3.0,,39,0,0,0,0,yes,main
+eos80k1,yes,2026-03-03,2026-06-10,no,no,Python,GPL-3.0,,1164,0,0,0,0,yes,main
+eos817d,yes,2026-05-20,2026-06-10,no,no,Python,GPL-3.0,,43,1,0,0,0,yes,main
+eos81ew,yes,2023-01-29,2026-07-06,no,no,Python,GPL-3.0,,43466,0,1,0,0,yes,main
+eos81zy,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,47690,0,0,0,0,yes,main
+eos82v1,yes,2025-11-29,2026-05-18,no,no,Python,GPL-3.0,,151,0,0,0,0,yes,main
+eos8451,yes,2022-07-19,2026-07-06,no,no,Python,GPL-3.0,,135,1,2,0,0,yes,main
+eos85a3,yes,2022-07-19,2026-07-06,no,no,Python,GPL-3.0,,2134,0,1,0,0,yes,main
+eos85mn,yes,2025-08-27,2026-06-03,no,no,Python,GPL-3.0,,73,0,1,0,0,yes,main
+eos8a4x,yes,2021-09-17,2025-12-24,no,no,Python,GPL-3.0,,115,2,2,0,0,yes,main
+eos8a5g,yes,2022-11-02,2026-05-18,no,no,Python,GPL-3.0,,78,0,0,0,0,yes,main
+eos8aa5,yes,2024-12-17,2026-05-18,no,no,Python,GPL-3.0,,615,1,0,0,0,yes,main
+eos8bhe,yes,2024-01-12,2026-02-04,yes,no,Python,GPL-3.0,,1554,1,0,0,0,yes,main
+eos8c0o,yes,2023-01-11,2026-05-18,no,no,Python,GPL-3.0,,74,0,0,0,0,yes,main
+eos8d8a,yes,2021-10-14,2026-05-19,no,no,Python,GPL-3.0,,8268,1,2,0,0,yes,main
+eos8fma,yes,2023-08-08,2026-05-18,no,no,Python,GPL-3.0,,170,0,0,0,0,yes,main
+eos8fth,yes,2023-03-27,2026-05-19,no,no,HTML,GPL-3.0,,73277,0,0,0,0,yes,main
+eos8g50,yes,2025-08-27,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,9040,0,0,0,0,yes,main
+eos8h6g,yes,2021-09-14,2026-05-18,no,no,Python,MIT,,49,2,3,0,0,yes,main
+eos8ioa,yes,2021-10-19,2026-07-06,no,no,Python,NOASSERTION,,2109,1,1,0,0,yes,main
+eos8jx6,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,285280,0,0,0,0,yes,main
+eos8lcw,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,576525,0,0,0,0,yes,main
+eos8lok,yes,2023-03-24,2026-05-19,no,no,Python,GPL-3.0,,79,1,0,0,0,yes,main
+eos8ub5,yes,2024-11-10,2026-05-18,no,no,Python,GPL-3.0,,56,0,1,0,0,yes,main
+eos8v1a,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,42711,0,0,0,0,yes,main
+eos8vud,yes,2024-05-01,2026-08-03,no,no,Python,GPL-3.0,,38086,0,0,0,0,yes,main
+eos92sw,yes,2021-04-30,2026-05-18,no,no,Python,NOASSERTION,,341,1,2,0,0,yes,main
+eos935d,yes,2022-12-16,2026-05-18,no,no,Python,GPL-3.0,,309,0,0,0,0,yes,main
+eos93h2,yes,2023-01-25,2026-07-30,no,no,Python,GPL-3.0,,66,0,0,0,0,yes,main
+eos96f4,yes,2026-01-30,2026-04-23,no,no,Python,GPL-3.0,,313496,0,0,0,0,yes,main
+eos96ia,yes,2021-10-19,2026-05-18,no,no,Jupyter Notebook,NOASSERTION,,4592,0,1,0,0,yes,main
+eos97yu,yes,2021-11-10,2025-07-17,yes,no,Jupyter Notebook,GPL-3.0,,212,0,2,0,1,yes,main
+eos9be7,yes,2022-08-11,2024-05-15,yes,no,Python,GPL-3.0,,62,1,2,0,0,yes,main
+eos9bpi,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,29046,0,0,0,0,yes,main
+eos9c7k,yes,2022-08-18,2026-05-18,no,no,Python,GPL-3.0,,91,1,1,0,0,yes,main
+eos9cvt,yes,2026-02-23,2026-07-07,no,no,Python,GPL-3.0,,1202,0,0,0,0,yes,main
+eos9ei3,yes,2022-07-12,2026-05-18,no,no,Python,GPL-3.0,,3851,2,2,0,0,yes,main
+eos9eyo,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,16989,0,0,0,0,yes,main
+eos9f6t,yes,2021-04-29,2026-05-19,no,no,Python,GPL-3.0,,79,0,2,0,0,yes,main
+eos9f7c,yes,2025-12-12,2026-05-19,no,no,Python,GPL-3.0,,360,0,0,0,0,yes,main
+eos9gg2,yes,2024-11-09,2026-05-18,no,no,Python,GPL-3.0,,69468,0,0,0,0,yes,main
+eos9ivc,yes,2023-11-24,2026-07-20,no,no,Python,GPL-3.0,,803,0,0,0,1,yes,main
+eos9li5,yes,2026-02-23,2026-05-18,no,no,Python,GPL-3.0,,41,0,0,0,0,yes,main
+eos9n1s,yes,2026-02-03,2026-06-10,no,no,Python,GPL-3.0,,37,0,0,0,0,yes,main
+eos9o72,yes,2025-07-01,2026-05-18,no,no,Python,GPL-3.0,,76,0,0,0,0,yes,main
+eos9p4a,yes,2024-09-04,2026-05-18,no,no,Python,GPL-3.0,,92005,0,0,0,0,yes,main
+eos9sa2,yes,2022-11-09,2025-06-30,yes,no,Python,GPL-3.0,,11570,0,0,0,1,yes,main
+eos9taz,yes,2022-12-06,2026-05-18,no,no,Python,GPL-3.0,,1110,0,0,0,0,yes,main
+eos9tyg,yes,2023-04-07,2026-07-27,no,no,Python,GPL-3.0,,40813,0,1,0,1,yes,main
+eos9ueu,yes,2023-11-01,2026-05-18,no,no,Python,GPL-3.0,,81,0,0,0,0,yes,main
+eos9x3z,yes,2025-12-10,2026-05-18,no,no,Python,GPL-3.0,,70,0,0,0,0,yes,main
+eos9ym3,yes,2023-12-12,2026-07-23,no,no,Python,GPL-3.0,,21929,0,1,0,0,yes,main
+eos9yui,yes,2021-10-22,2026-05-18,no,no,Python,GPL-3.0,,121,0,2,0,0,yes,main
+eos9yy1,yes,2023-03-01,2026-08-03,no,no,Python,GPL-3.0,,43330,0,0,0,1,yes,main
+eos9zw0,yes,2023-11-06,2026-05-18,no,no,Python,GPL-3.0,,118,0,0,0,0,yes,main
+eosbench,no,2026-03-19,2026-08-03,no,no,Python,GPL-3.0,,1418,0,0,0,0,yes,main
+eosdev,no,2026-01-06,2026-01-22,yes,no,Python,GPL-3.0,,22,0,0,0,0,yes,main
+eosframes,no,2025-07-22,2026-06-24,no,no,Python,MIT,,20623,2,0,0,2,yes,main
+eosquality,no,2026-04-16,2026-05-29,no,no,Python,GPL-3.0,,491,1,0,0,0,yes,main
+eosvc,no,2025-12-23,2026-06-25,no,no,Python,GPL-3.0,,203,0,0,0,0,yes,main
+ersilia,no,2020-07-04,2026-08-01,no,no,Python,GPL-3.0,drug-discovery global-south machine-learning model-hub neglected-tropical-disease open-source,44202,306,177,0,16,yes,master
+ersilia-api,no,2023-06-11,2023-09-04,no,no,Python,GPL-3.0,api ersilia python rest,85,0,0,0,0,yes,main
+ersilia-app,no,2020-07-23,2024-09-03,no,no,Python,GPL-3.0,,511,1,1,0,0,yes,master
+ersilia-apptainer,no,2026-01-16,2026-07-20,no,no,Python,GPL-3.0,,47,0,0,0,0,yes,main
+ersilia-assistant,no,2024-09-25,2024-12-05,no,no,Python,GPL-3.0,,30517,4,0,0,0,yes,main
+ersilia-book,no,2022-03-30,2026-07-29,no,no,,GPL-3.0,,28395,1,1,0,0,yes,main
+ersilia-client,no,2023-05-15,2024-10-10,no,no,Python,GPL-3.0,,40,0,3,0,0,yes,main
+ersilia-figures,no,2021-01-02,2026-04-29,no,no,Jupyter Notebook,,,29811,1,0,0,0,yes,main
+ersilia-hub,no,2025-05-22,2026-03-16,no,no,Python,GPL-3.0,,3002,0,0,0,1,yes,main
+ersilia-intro-workshop,no,2023-09-05,2023-10-02,no,no,Jupyter Notebook,GPL-3.0,artificial-intelligence drug-discovery ersilia workshop,61861,2,1,0,0,yes,main
+ersilia-maintenance,no,2024-03-05,2026-08-03,no,no,Python,GPL-3.0,,10045,0,2,0,2,yes,main
+ersilia-mcp,no,2026-06-04,2026-07-29,no,no,Python,GPL-3.0,,331,0,2,0,5,yes,main
+ersilia-metadata-annotation,no,2025-04-02,2025-04-17,yes,no,Python,GPL-3.0,,21,0,0,0,1,yes,main
+ersilia-ml-benchmark,no,2025-10-25,2026-08-03,no,no,Jupyter Notebook,GPL-3.0,,213092,1,0,0,0,yes,main
+ersilia-model-hub-maintained-inputs,no,2022-10-14,2026-05-15,no,no,Jupyter Notebook,GPL-3.0,,234132,0,0,0,0,yes,main
+ersilia-model-hub-paper,no,2026-01-14,2026-07-30,no,no,Python,GPL-3.0,,340,1,0,0,0,yes,main
+ersilia-model-request-app,no,2025-10-06,2026-03-26,no,no,TypeScript,,,1171,0,0,0,1,yes,main
+ersilia-model-workflows,no,2025-02-27,2026-07-21,no,no,,GPL-3.0,,284,0,0,0,0,yes,main
+ersilia-pack,no,2024-05-29,2026-04-13,no,no,Python,GPL-3.0,,4955,6,7,0,3,yes,main
+ersilia-self-service,no,2024-04-23,2025-04-23,no,no,Python,GPL-3.0,,218,2,1,0,11,yes,main
+ersilia-skills,no,2026-03-06,2026-07-31,no,no,Python,,,1546,2,0,0,3,yes,main
+ersilia-stats,no,2026-07-31,2026-08-03,no,no,JavaScript,GPL-3.0,,1102,0,0,0,0,yes,main
+ersilia-tabpfn-client,no,2026-03-18,2026-03-19,no,no,Python,GPL-3.0,,137,0,0,0,0,yes,main
+ersilia-to-cdd,no,2024-07-25,2024-11-19,no,no,,GPL-3.0,,17,0,0,0,0,yes,main
+ersilia.io,no,2020-11-19,2021-06-02,yes,no,Vue,MIT,ersilia model-hub,83603,1,3,0,0,yes,main
+esther-workshop,no,2021-09-05,2021-09-07,no,no,,MIT,,38576,0,0,0,0,yes,master
+estherlinkage,no,2021-09-06,2021-09-07,no,no,Python,MIT,,10,0,0,0,0,yes,main
+eu-openscreen-antimicrobial-tasks,no,2026-05-18,2026-05-29,no,no,Python,GPL-3.0,,67,0,0,0,0,yes,main
+evc-dev-analysis,no,2025-12-30,2026-01-05,yes,no,Shell,GPL-3.0,,30,0,0,0,0,yes,main
+event-fund-ai-drug-discovery,no,2022-09-12,2026-03-02,no,no,Jupyter Notebook,GPL-3.0,,92787,10,2,0,0,yes,main
+few-shot-bioassays,no,2024-02-23,2024-05-11,no,no,Python,GPL-3.0,,270140,1,0,0,0,yes,main
+ffwd-ersilia-game,no,2022-05-05,2022-05-06,no,no,Python,GPL-3.0,,342,0,1,0,0,yes,main
+fps-grid,no,2022-06-27,2022-06-27,no,no,Jupyter Notebook,GPL-3.0,,196,1,1,0,0,yes,main
+gardp-kpneumoniae-enamine-real-screening,no,2025-12-16,2025-12-30,no,no,Python,GPL-3.0,,3136,0,0,0,0,yes,main
+gcadda4tb-enamine-real-screening,no,2026-01-08,2026-03-06,no,no,Python,GPL-3.0,,2192,1,0,0,0,yes,main
+gradi-target-prioritization,no,2026-04-24,2026-07-24,no,no,Python,GPL-3.0,,44349,0,0,0,0,yes,main
+griddify,no,2022-03-31,2024-07-16,no,no,Jupyter Notebook,GPL-3.0,,10795,4,0,0,0,yes,main
+groverfeat,no,2021-12-21,2021-12-22,no,no,Python,MIT,,78,1,2,0,0,yes,main
+h3d-screening-cascade-app,no,2023-04-21,2025-12-28,no,no,Python,GPL-3.0,,29776,3,0,0,0,yes,main
+h3d-screening-cascade-code,no,2022-11-25,2022-12-08,no,no,Python,GPL-3.0,,425,2,1,0,0,yes,main
+h3d-screening-cascade-models,no,2022-11-25,2023-05-11,no,no,,GPL-3.0,,1022,1,1,0,0,yes,main
+hiv-covid-cidrz,no,2025-08-21,2025-09-01,no,no,Jupyter Notebook,GPL-3.0,,24090,0,0,0,0,yes,main
+illness-metaphors,no,2024-06-19,2024-06-26,no,no,Python,GPL-3.0,,569719,0,0,0,0,yes,main
+impm-schisto-signature-reversal,no,2026-01-16,2026-03-03,no,no,Jupyter Notebook,GPL-3.0,,633,0,0,0,0,yes,main
+isaura,no,2021-09-08,2026-07-20,no,no,Python,MIT,,16616,3,2,0,0,yes,main
+keras-tuner-chem,no,2022-05-27,2022-05-27,yes,no,Python,GPL-3.0,,2115,0,0,0,0,yes,main
+lazy-chemvis,no,2025-11-19,2026-08-03,no,no,Python,GPL-3.0,,22449,1,0,0,0,yes,main
+lazy-qsar,no,2021-11-10,2026-07-02,no,no,Python,GPL-3.0,,191365,7,4,0,0,yes,main
+mock-website,no,2022-05-12,2022-06-04,yes,no,SCSS,GPL-3.0,,21474,1,0,0,0,yes,main
+model-inference-pipeline,no,2023-11-22,2025-05-05,no,no,Python,MIT,,578,3,0,0,0,yes,main
+model-validations,no,2024-01-04,2026-03-02,no,no,Jupyter Notebook,GPL-3.0,,94776,0,2,0,0,yes,main
+molbertfeat,no,2021-11-20,2021-12-22,no,no,Python,MIT,,102,0,0,0,0,yes,main
+mtb-target-prioritization,no,2025-11-26,2026-05-18,no,no,Python,GPL-3.0,,1371,0,0,0,0,yes,main
+mtb-targeted-protein-degradation,no,2024-11-21,2026-07-28,no,no,Python,GPL-3.0,,1923318,3,0,0,0,yes,main
+multitask-classifier-qsar,no,2024-12-16,2024-12-16,yes,no,Python,GPL-3.0,,536,0,0,0,0,yes,main
+nn-search,no,2025-08-13,2026-01-19,no,no,Python,GPL-3.0,,51148,1,0,0,0,yes,main
+olinda,no,2022-09-09,2026-07-07,no,no,Python,,,8385,5,0,0,0,yes,main
+olinda-tdc,no,2024-11-04,2026-03-02,no,no,Jupyter Notebook,,,473927,0,0,0,0,yes,main
+ondisk-xy,no,2022-05-04,2022-06-06,no,no,Python,GPL-3.0,,36,0,0,0,0,yes,main
+open-data-cleaning,no,2023-04-09,2024-06-03,no,no,Jupyter Notebook,GPL-3.0,,8926,1,1,0,0,yes,main
+osa-murd,no,2022-05-20,2022-07-06,no,no,Jupyter Notebook,,,192459,3,1,0,0,yes,main
+osm-pfatp4-structure,no,2021-07-22,2022-05-16,no,no,Jupyter Notebook,MIT,,6432,1,1,0,0,yes,main
+osm-series4-candidates,no,2021-05-27,2021-07-20,no,no,Python,MIT,,150053,3,0,0,0,yes,main
+osm-series4-candidates-2,no,2021-07-20,2024-05-18,no,no,Python,MIT,,108636,1,1,0,0,yes,main
+osm-series4-manuscript,no,2024-03-06,2024-06-03,no,no,Jupyter Notebook,GPL-3.0,,109436,0,0,0,0,yes,main
+osm-series4-predictive-model,no,2021-07-03,2024-04-15,no,no,Python,MIT,,28093,0,0,0,0,yes,main
+osm-series4-synthesis-round-1,no,2022-02-08,2024-04-05,no,no,HTML,MIT,,110019,1,1,0,0,yes,main
+osm-series4-synthesis-round-2,no,2023-03-21,2024-06-10,no,no,Jupyter Notebook,GPL-3.0,,9995,0,0,0,0,yes,main
+outreachy-contributions,no,2025-03-16,2025-03-16,no,no,,GPL-3.0,,23,9,27,0,0,yes,main
+pabb-docking,no,2023-03-17,2023-10-02,no,no,Jupyter Notebook,GPL-3.0,,32579,1,1,0,0,yes,main
+pharmacogx-app,no,2024-05-16,2024-05-18,no,no,Python,GPL-3.0,,24,0,0,0,0,yes,main
+pharmacogx-arsa,no,2023-05-30,2025-08-19,no,no,Jupyter Notebook,GPL-3.0,,24066,1,0,0,0,yes,main
+pharmacogx-embeddings,no,2023-01-24,2025-08-21,no,no,Jupyter Notebook,GPL-3.0,,617096,4,1,0,0,yes,main
+preemi,no,2021-09-26,2026-04-17,no,no,HTML,MIT,,55822,0,0,0,0,yes,main
+pubchem-antimicrobial-tasks,no,2025-10-27,2026-07-28,no,no,Jupyter Notebook,GPL-3.0,,5618,0,0,0,0,yes,main
+python-101,no,2021-10-07,2026-02-18,no,no,Jupyter Notebook,MIT,,3876,4,1,0,0,yes,main
+ready-to-screen-enamine-real,no,2025-10-27,2026-01-04,no,no,Jupyter Notebook,MIT,,100,0,0,0,0,yes,main
+reinvent-shape-similarity,no,2025-06-01,2026-02-02,no,no,,GPL-3.0,,27,0,0,0,0,yes,main
+reinvent4,no,2026-02-02,2026-02-02,no,yes,,Apache-2.0,,1559332,0,0,0,0,no,main
+sars-cov-2-chemspace,no,2024-07-08,2024-10-26,no,no,Jupyter Notebook,GPL-3.0,,398864,1,0,0,0,yes,main
+search-engine,no,2026-06-15,2026-06-18,no,no,Python,GPL-3.0,,57,0,0,0,0,yes,main
+smiles-to-3d,no,2024-04-23,2024-07-12,no,no,Python,GPL-3.0,,36,8,1,0,0,yes,main
+stylia,no,2022-02-11,2026-03-12,no,no,Python,GPL-3.0,,13409,5,1,0,0,yes,main
+tmap-chemistry,no,2021-11-03,2021-12-09,no,no,Python,MIT,,9,1,0,0,0,yes,main
+tuimux,no,2026-06-17,2026-07-29,no,no,Python,GPL-3.0,,432,1,0,0,0,yes,main
+tune-tables-light,no,2025-07-08,2025-07-17,no,yes,Python,Apache-2.0,,434806,0,0,0,0,no,main
+vsflow-ligand-based-3d-screening,no,2024-04-23,2024-06-13,no,no,Python,GPL-3.0,,1298,1,0,0,0,yes,main
+xai4chem,no,2024-02-20,2026-02-11,no,no,Jupyter Notebook,GPL-3.0,,142325,1,2,0,0,yes,main
+zaira-chem-tdc,no,2023-04-18,2023-05-12,no,no,Jupyter Notebook,GPL-3.0,,233382,2,1,0,0,yes,main
+zaira-chem-tdc-benchmark,no,2022-12-03,2023-05-12,yes,no,Jupyter Notebook,GPL-3.0,,345402,3,0,0,0,yes,main
+zaira-chem-v1,no,2021-06-23,2026-07-07,no,no,Python,GPL-3.0,automl machine-learning qsar,1065237,45,16,0,0,yes,main
+zairachem-docker,no,2024-11-20,2026-07-07,no,no,Python,GPL-3.0,,9845,1,1,0,4,yes,main
+zeroshot-linear,no,2026-03-20,2026-04-09,yes,no,Python,GPL-3.0,,54,0,0,0,0,yes,main
+zeroshot-preprocessing,no,2026-03-19,2026-04-09,yes,no,Python,GPL-3.0,,73,0,0,0,0,yes,main
+zeroshot-xgboost,no,2026-03-05,2026-04-09,yes,no,Jupyter Notebook,GPL-3.0,,22181,1,1,0,0,yes,main
