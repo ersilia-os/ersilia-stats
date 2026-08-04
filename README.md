@@ -279,6 +279,71 @@ would publish mixed-age data.
 behind, which the sidebar prints next to the snapshot date. `snapshot_date` on its own is the **max**
 across tables, so it always reports the freshest one and can never reveal a stale one.
 
+## What is deliberately not plotted
+
+Every column in every source was cross-referenced against every `scripts/site_data/*.py`, and the
+distribution of each unreferenced one measured. What survived is on the site. What did not is
+recorded here so it is not proposed again.
+
+**Unusable as recorded** — the numbers are the reason, not taste:
+
+| Field | Measured | Verdict |
+|---|---|---|
+| `Input Dimension` (models) | **all 234 values are "1"** | zero variance |
+| `Model Size`, `Environment Size` | **mixed units** — 47 models at "1", 5 at "2728" | not comparable; Docker image size answers the real question |
+| `topics` (GitHub) | **7 of 384** repositories have any | too sparse to chart |
+| `star_count` (Docker Hub) | max 2, non-zero on 7 of 271 | no signal |
+| `Interpretation` (models) | free text, ~236 near-distinct values | not a distribution |
+| `Focus Region` (organisations) | **three spellings of one region** — "Subsaharan Africa" 64, "Africa" 31, "Sub-Saharan Africa" 26 | needs cleaning before it can be counted |
+
+**Excluded on policy, not merit.** `Opportunities` (organisations) is a fundraising pipeline —
+Grants 181, In-kind 109, Fellowship 42 — and grants and donations are never published here.
+`Team` (projects), `Authors`, `Abstract` and `Senior` (publications) are personal data or curated
+narrative.
+
+**Correctly redundant.** Airtable formula duplicates of dates already in use
+(`Incorporation Quarter`/`Year`, `Start`/`End Quarter`/`Year`/`Month`, `Year Web`); scholar
+`is_open_access` (superseded by `oa_status`, which also distinguishes closed),
+`institution_count` (a weaker form of the countries-per-paper chart), `referenced_works_count`,
+`publication_date`; GitHub `fork`, `size_kb`, `has_issues`, `default_branch`, and `created_at`
+(the Airtable `Creation Date` already drives that series).
+
+**Three model-level analyses that looked good and are wrong.** All measured on the 237 models that
+resolve in Airtable, GitHub and Docker Hub together; the detail is in
+`scripts/site_data/model_activity.py`:
+
+* **effort per model by incorporation year** — raw median commits fall 60 → 30 from the 2021 cohort
+  to 2026, which reads as declining effort. Normalising by months since incorporation *inverts* it,
+  1.03 → 10.06 per month. Both are exposure artefacts, because a model's commits arrive in a burst
+  around packaging. Neither measures effort.
+* **effort by biomedical area** — 35 to 55 median commits, groups as small as eight, confounded by
+  cohort age.
+* **pull counts against commits** — Spearman 0.52, which looks like attention following effort and
+  is almost certainly CI rebuilding busier repositories more often. Pulls appear as a table column
+  so no relationship is implied.
+
+Note that `check_config_paths.py`'s "exported but unused" list is **not** a to-do list. Most entries
+are components of a `growthcombo` pair (`models.cumulative` + `models.per_quarter` feed
+`models.growth`) or forms superseded by a better one (`repositories.top_by_stars` by
+`repositories.ranked`). It cannot tell those from real orphans.
+
+### Data-quality figures, computed and kept off the site
+
+`quality.completeness`, `quality.thin_fields`, `quality.table_sizes` and
+`quality.project_repo_status` are computed on every build and charted nowhere, by decision. They are
+useful internally:
+
+* mean populated cells per table — **countries 51.8%**, organisations 62.9%, events 81.6%
+* **29 fields are under 80% populated**
+* 1,296 rows across 10 source tables
+* **55 public repositories are linked to no project**; 2 links pair a finished project with a
+  still-open repository
+
+Five things worth fixing at source, which no chart can compensate for: the mixed units in
+`Model Size`/`Environment Size` across 226 models; the three spellings of Sub-Saharan Africa in
+`Focus Region`; only 7 of 384 repositories carrying GitHub topics (a cheap discoverability win);
+21 of 243 models with no `Last Packaging Date`; and the 51.8%-populated `countries` table.
+
 ## Layout
 
 ```

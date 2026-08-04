@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04 15:34 UTC",
+  "generated_at": "2026-08-04 16:19 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -1101,7 +1101,7 @@
           1
         ],
         "n": 202,
-        "insight": "MIT leads with 78 of 202 models with a licence on file (39%). 203 of 243 models (84%) record a licence."
+        "insight": "MIT leads with 78 of 202 models with a licence on file (39%)."
       },
       "licence_openness": {
         "labels": [
@@ -1143,6 +1143,36 @@
         ],
         "n": 234,
         "insight": "175 of 234 models (75%) wrap externally published work rather than being built in-house."
+      },
+      "output_consistency": {
+        "labels": [
+          "Fixed",
+          "Variable"
+        ],
+        "values": [
+          215,
+          18
+        ],
+        "n": 233,
+        "insight": "215 of 233 models with a value (92%) give the same answer on a re-run.",
+        "semantics": {
+          "Fixed": "brand",
+          "Variable": "neutral"
+        }
+      },
+      "publication_type": {
+        "labels": [
+          "Peer reviewed",
+          "Other",
+          "Preprint"
+        ],
+        "values": [
+          172,
+          36,
+          25
+        ],
+        "n": 233,
+        "insight": "172 of 233 models with a recorded source (74%) are based on peer-reviewed work."
       }
     },
     "projects": {
@@ -1599,10 +1629,10 @@
         "n": 36,
         "today": "2026-08-04",
         "semantics": {
+          "Todo": "neutral",
           "Stuck": "bad",
           "In progress": "brand",
-          "Done": "good",
-          "Todo": "neutral"
+          "Done": "good"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -5274,6 +5304,38 @@
         "n": 44,
         "insight": "Europe leads with 17 of 44 engaged countries (39%)."
       },
+      "engagement_by_subregion": {
+        "labels": [
+          "Sub-Saharan Africa",
+          "Western Europe",
+          "Latin America and the Caribbean",
+          "Northern Europe",
+          "Southern Europe",
+          "Northern America",
+          "Eastern Europe",
+          "Southern Asia",
+          "Australia and New Zealand",
+          "Northern Africa",
+          "Eastern Asia",
+          "South-Eastern Asia"
+        ],
+        "values": [
+          14,
+          6,
+          4,
+          4,
+          4,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 43,
+        "insight": "Sub-Saharan Africa leads with 14 of 42 engaged countries (33%). 13 subregions in total."
+      },
       "south_north": {
         "labels": [
           "Global South",
@@ -7164,7 +7226,8 @@
             "merged_prs": 526,
             "closed_issues": 1170,
             "releases": 32,
-            "contributors": 108
+            "contributors": 108,
+            "watchers": 19
           },
           {
             "name": "ersilia-maintenance",
@@ -7172,7 +7235,8 @@
             "merged_prs": 13,
             "closed_issues": 37,
             "releases": 0,
-            "contributors": 11
+            "contributors": 11,
+            "watchers": 2
           },
           {
             "name": "tune-tables-light",
@@ -7180,7 +7244,8 @@
             "merged_prs": 0,
             "closed_issues": 0,
             "releases": 0,
-            "contributors": 13
+            "contributors": 13,
+            "watchers": 0
           },
           {
             "name": "lazy-qsar",
@@ -7188,7 +7253,8 @@
             "merged_prs": 11,
             "closed_issues": 29,
             "releases": 33,
-            "contributors": 5
+            "contributors": 5,
+            "watchers": 1
           },
           {
             "name": "reinvent4",
@@ -7196,7 +7262,8 @@
             "merged_prs": 0,
             "closed_issues": 0,
             "releases": 0,
-            "contributors": 19
+            "contributors": 19,
+            "watchers": 0
           },
           {
             "name": "mtb-targeted-protein-degradation",
@@ -7204,7 +7271,8 @@
             "merged_prs": 0,
             "closed_issues": 9,
             "releases": 0,
-            "contributors": 2
+            "contributors": 2,
+            "watchers": 3
           },
           {
             "name": "ersilia-pack",
@@ -7212,7 +7280,8 @@
             "merged_prs": 45,
             "closed_issues": 39,
             "releases": 0,
-            "contributors": 11
+            "contributors": 11,
+            "watchers": 3
           },
           {
             "name": "isaura",
@@ -7220,7 +7289,8 @@
             "merged_prs": 6,
             "closed_issues": 14,
             "releases": 8,
-            "contributors": 7
+            "contributors": 7,
+            "watchers": 3
           },
           {
             "name": "ersilia-model-workflows",
@@ -7228,7 +7298,8 @@
             "merged_prs": 1,
             "closed_issues": 5,
             "releases": 0,
-            "contributors": 5
+            "contributors": 5,
+            "watchers": 1
           },
           {
             "name": "chembl-antimicrobial-tasks",
@@ -7236,11 +7307,34 @@
             "merged_prs": 4,
             "closed_issues": 3,
             "releases": 0,
-            "contributors": 2
+            "contributors": 2,
+            "watchers": 0
           }
         ],
         "n": 10,
         "insight": "ersilia alone holds 13% of the 23,433 commits across all public repositories. 245 repositories publish releases."
+      },
+      "release_recency": {
+        "labels": [
+          "2021",
+          "2023",
+          "2024",
+          "2025",
+          "2026",
+          "never released"
+        ],
+        "values": [
+          2,
+          3,
+          4,
+          164,
+          72,
+          139
+        ],
+        "n": 384,
+        "insight": "245 of 384 public repositories have ever published a release; the rest ship from the default branch.",
+        "countNoun": "repositories",
+        "ordinal": true
       }
     },
     "model_activity": {
@@ -7315,7 +7409,7 @@
           23
         ],
         "n": 241,
-        "insight": "214 of 241 model repositories were pushed to in 2026 — the Hub is maintained rather than archived.",
+        "insight": "214 of 241 pushed to in 2026.",
         "countNoun": "model repositories",
         "ordinal": true
       },
@@ -7419,6 +7513,24 @@
         ],
         "n": 241,
         "insight": "12,271 commits across 241 model repositories; the busiest carries 234."
+      },
+      "image_freshness": {
+        "labels": [
+          "2023",
+          "2024",
+          "2025",
+          "2026"
+        ],
+        "values": [
+          7,
+          13,
+          94,
+          133
+        ],
+        "n": 247,
+        "insight": "133 of 247 model images were last rebuilt in 2026.",
+        "countNoun": "model images",
+        "ordinal": true
       }
     }
   }

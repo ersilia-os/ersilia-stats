@@ -94,6 +94,7 @@ EMPTY_SECTION = {
     "issue_resolution": dict(EMPTY),
     "model_commit_effort": dict(EMPTY),
     "most_active": {"rows": [], "n": 0},
+    "release_recency": dict(EMPTY),
 }
 
 
@@ -121,6 +122,48 @@ def build(collected, today=None):
     out["issue_resolution"] = _issue_resolution(repos)
     out["model_commit_effort"] = _model_commit_effort(repos)
     out["most_active"] = _most_active(repos)
+    out["release_recency"] = _release_recency(repos)
+    return out
+
+
+def _release_recency(repos):
+    """Repositories by the year of their most recent release.
+
+    READ THIS ONE CAREFULLY, because the obvious reading is wrong. 164 repositories last
+    released in 2025 against 72 in 2026 looks like releasing is slowing down. It is not
+    evidence of that: **139 of 384 repositories have never cut a release at all**, and most
+    of those that do release do so rarely, so a repository sitting on a 2025 tag is usually
+    one that ships when there is something to ship rather than one that stopped.
+
+    That is why the never-released group is a bar here rather than an omission. Without it
+    the chart would describe 245 repositories and imply it described all of them.
+    """
+    if "latest_release" not in repos.columns or "releases" not in repos.columns:
+        return dict(EMPTY)
+    years = {}
+    never = 0
+    for i in range(len(repos)):
+        raw = str(repos["latest_release"].iloc[i]).strip()
+        if raw in ("", "nan") or len(raw) < 4 or not raw[:4].isdigit():
+            never += 1
+            continue
+        years[raw[:4]] = years.get(raw[:4], 0) + 1
+    if not years:
+        return dict(EMPTY)
+    labels = sorted(years)
+    values = [years[y] for y in labels]
+    with_release = sum(values)
+    if never:
+        labels.append("never released")
+        values.append(never)
+    out = metric(
+        labels, values,
+        "%s of %s public repositories have ever published a release; the rest ship from "
+        "the default branch." % (ins.num(with_release), ins.num(len(repos))),
+        countNoun="repositories",
+        n=len(repos),
+    )
+    out["ordinal"] = True
     return out
 
 
@@ -463,12 +506,19 @@ def _rows_by(repos, sort_key, columns, top=10):
 def _most_active(repos):
     """The repositories where the work actually happens, on one row each.
 
-    Five columns rather than five ranking charts. Releases are a column here instead of
-    their own card because "how many releases" is only interesting beside the commit and
-    pull-request counts — 33 releases on `lazy-qsar` and 32 on `ersilia` describe very
-    different projects, and the row is what distinguishes them.
+    Columns rather than a ranking chart each. Releases sit here instead of on their own card
+    because "how many releases" is only interesting beside the commit and pull-request counts
+    — 33 releases on `lazy-qsar` and 32 on `ersilia` describe very different projects, and the
+    row is what distinguishes them.
+
+    `watchers` is the real subscriber count, and it corrects the stars figures elsewhere on
+    this page: **158 of 384 repositories have more subscribers than stars.** Subscribers ask
+    to be told when something changes, which is a stronger signal than a bookmark, and by
+    that measure the star counts understate attention rather than overstating it. It arrives
+    as a column rather than a chart because the absolute numbers are small — 19 at most.
     """
-    columns = ["total_commits", "merged_prs", "closed_issues", "releases", "contributors"]
+    columns = ["total_commits", "merged_prs", "closed_issues", "releases", "contributors",
+               "watchers"]
     if any(c not in repos.columns for c in columns):
         return {"rows": [], "n": 0}
     rows = _rows_by(repos, "total_commits", columns, top=10)

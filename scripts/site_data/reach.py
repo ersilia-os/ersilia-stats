@@ -51,6 +51,7 @@ def _counter_from_multi(series):
 def build(countries, orgs, community, events):
     income = _attribute_map(countries, "income_group")
     region = _attribute_map(countries, "region")
+    subregion = _attribute_map(countries, "subregion")
 
     org_counts = resolve_countries(orgs, country_lookup(countries))
     community_counts = _counter_from_multi(col(community, "country_(from_country)", "country")
@@ -70,6 +71,7 @@ def build(countries, orgs, community, events):
         "events_by_country": _sorted_metric(event_counts, "located events"),
         "engagement_by_income_group": _by_income(engaged, income),
         "engagement_by_region": _by_region(engaged, region),
+        "engagement_by_subregion": _by_subregion(engaged, subregion),
         "south_north": _south_north(engaged, income),
         "reference_by_income_group": _reference(countries, "income_group"),
     }
@@ -131,6 +133,37 @@ def _by_region(engaged, region):
         [k for k, _ in items], [v for _, v in items],
         ins.leader({"labels": [k for k, _ in items], "values": [v for _, v in items]},
                    "engaged countries"),
+    )
+
+
+def _by_subregion(engaged, subregion):
+    """Engaged countries by UN subregion — the finer cut of `_by_region`.
+
+    Worth having beside the region chart rather than instead of it, because "Africa" is the
+    answer to a question nobody asked. **14 of the 42 engaged countries are Sub-Saharan and
+    exactly one is Northern African** — a region chart collapses those into a single bar and
+    loses the distinction that matters most for an organisation with this mission.
+
+    Counted over ENGAGED countries, like `_by_region`, not over the reference table. The
+    reference table holds 45 Sub-Saharan countries; engagement reaches 14 of them, and
+    quoting the larger number here would describe the world rather than Ersilia.
+
+    Truncated to the top twelve, because the tail is subregions with one country each.
+    """
+    counter = Counter(subregion[c] for c in engaged if c in subregion)
+    if not counter:
+        return dict(EMPTY)
+    items = counter.most_common(12)
+    labels = [k for k, _ in items]
+    values = [v for _, v in items]
+    total = sum(counter.values())
+    return metric(
+        labels, values,
+        ins.join(
+            ins.leader({"labels": labels, "values": values}, "engaged countries"),
+            "%d subregions in total." % len(counter) if len(counter) > len(items) else None,
+        ),
+        n=total,
     )
 
 

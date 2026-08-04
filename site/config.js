@@ -133,16 +133,37 @@ const VIEWS = [
           desc: "Three things about how the Hub is assembled and who can reuse it. How much packages externally published models rather than Ersilia's own; how much builds for ARM64 as well as AMD64, ARM being the cheap low-power hardware; and how much carries a permissive licence — MIT, Apache, BSD or CC0/CC-BY — as against a licence that imposes conditions, which covers GPL, AGPL, LGPL, proprietary and the non-commercial or no-derivatives Creative Commons variants. The share is of the models that record a licence at all; 40 record none, which for a reuser is the most restrictive state of the three.",
         },
       ] },
+      { h: "h-md", cells: [
+        {
+          title: "Same answer twice?", span: 4, data: "models.output_consistency", type: "donut",
+          desc: "Whether a model returns the same output for the same input on a re-run, as recorded in the registry. This is arguably the most consequential property on this page and it was previously shown nowhere: everything else here says what a model is for, this says whether you can rely on what it tells you. Variable is not a defect — a generative model that samples is supposed to vary — so no verdict is attached to it; for a property predictor the same value would be a problem. Ten models record no value and are excluded from the share.",
+        },
+        {
+          title: "Is the science peer-reviewed?", span: 4, data: "models.publication_type",
+          type: "lollipop",
+          desc: "The publication type of the work each model is based on. Provenance rather than popularity, and the counterpart to the wrapped-work figure above: that says whether Ersilia packaged somebody else's model, this says how well established that model's science is. Preprints are counted separately from peer-reviewed work rather than folded in with it.",
+        },
+        {
+          title: "Licences of the underlying models", span: 4, data: "models.by_license",
+          type: "treemap",
+          desc: "The licence of each wrapped model as recorded in the registry — NOT the licence of Ersilia's wrapper repository, which is GPL-3.0 on 227 of 241 model repositories and is shown on the Code page. The two answer different questions and genuinely differ: the upstream models spread across MIT, both GPL-3.0 variants, Apache-2.0 and BSD-3-Clause, and it is the upstream terms that govern what a reuser may do with the underlying science. 40 models record no licence, which for a reuser is the most restrictive state of all.",
+        },
+      ] },
       { h: "h-lg", cells: [
         {
-          title: "Work on the Hub, by quarter", span: 7, data: "model_activity.hub_commit_growth",
+          title: "Work on the Hub, by quarter", span: 6, data: "model_activity.hub_commit_growth",
           type: "growthcombo",
           desc: "Commits to the per-model repositories only, by calendar quarter, with the running total. Separate from the organisation-wide series on the Code page because it answers a different question: how much work goes into the Hub itself as against Ersilia's tooling. Both come from the same collection pass, filtered differently. The current quarter is partial.",
         },
         {
-          title: "Are models still maintained?", span: 5, data: "model_activity.maintenance",
+          title: "Are models still maintained?", span: 3, data: "model_activity.maintenance",
           type: "ordinallollipop",
           desc: "Each model repository by the year of its last push, with archived ones counted separately. This exists to answer the fair question a sceptic asks of any large model collection — is most of it abandoned? Archived repositories are a deliberate retirement rather than neglect, which is why they are not folded into the oldest year.",
+        },
+        {
+          title: "When images were last built", span: 3, data: "model_activity.image_freshness",
+          type: "column",
+          desc: "The year each model's Docker image was last pushed. This is BUILD recency and not maintenance or demand: the pull-count evidence elsewhere on this page shows that continuous integration pulls every image on a schedule, and that same schedule is what rebuilds them. It sits beside the push chart because the two can disagree, and the disagreement is the useful part — a model whose repository changed this year but whose image is a year old has a packaging problem that neither figure reveals alone.",
         },
       ] },
       { h: "h-lg", cells: [
@@ -376,6 +397,7 @@ const VIEWS = [
             { key: "closed_issues", label: "Issues closed" },
             { key: "releases", label: "Releases" },
             { key: "contributors", label: "People" },
+            { key: "watchers", label: "Watching" },
           ],
           desc: "One row per repository rather than five ranking charts, so a project's whole profile stays together — 33 releases on lazy-qsar against 32 on ersilia describe very different projects, and only the surrounding columns distinguish them. Ranked by commits. Contributor counts include anonymous contributors.",
         },
@@ -418,12 +440,19 @@ const VIEWS = [
       ] },
       { h: "h-lg", cells: [
         {
-          title: "Contributors by repository count", span: 6, data: "repositories.top_contributors",
+          title: "When each repository last released", span: 5, data: "code.release_recency",
+          type: "ordinallollipop",
+          desc: "Repositories by the year of their most recent release. Read this carefully, because the obvious reading is wrong: 164 repositories last releasing in 2025 against 72 in 2026 looks like releasing is slowing, and it is not evidence of that. 139 of 384 repositories have never cut a release at all, and most that do release do so rarely — a repository sitting on a 2025 tag is usually one that ships when there is something to ship, not one that stopped. The never-released group is a bar here rather than an omission, because without it the chart would describe 245 repositories while appearing to describe all of them.",
+        },
+        {
+          title: "Contributors by repository count", span: 7, data: "repositories.top_contributors",
           type: "lollipop",
           desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to. Public repository metadata, not community records.",
         },
+      ] },
+      { h: "h-md", cells: [
         {
-          title: "Repository type", span: 6, data: "repositories.by_type", type: "treemap",
+          title: "Repository type", span: 12, data: "repositories.by_type", type: "treemap",
           desc: "Every repository grouped by type; area is proportional to count. Seven categories with a long tail is more than a donut can carry legibly.",
         },
       ] },
@@ -528,6 +557,13 @@ const VIEWS = [
         {
           title: "By world region", span: 4, data: "reach.engagement_by_region", type: "donut",
           desc: "Countries Ersilia engages with, grouped by world region.",
+        },
+      ] },
+      { h: "h-md", cells: [
+        {
+          title: "By subregion", span: 12, data: "reach.engagement_by_subregion",
+          type: "lollipop",
+          desc: "Engaged countries grouped by UN subregion — the cut that matters most for this organisation, and the one the region donut above cannot show: a region chart collapses Sub-Saharan and Northern Africa into a single 'Africa' segment, when 14 of the 42 engaged countries are Sub-Saharan and exactly one is Northern African. Counted over engaged countries rather than over the reference table: that table lists 45 Sub-Saharan countries and Ersilia's engagement reaches 14 of them, so quoting the larger figure here would describe the world instead of the reach. Full width because several subregion names are too long to read in a narrow card.",
         },
       ] },
       { h: "h-lg", cells: [

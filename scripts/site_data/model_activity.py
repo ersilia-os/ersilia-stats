@@ -51,6 +51,7 @@ EMPTY_SECTION = {
     "maintenance": dict(EMPTY),
     "outside_contribution": dict(EMPTY),
     "most_active_models": {"rows": [], "n": 0},
+    "image_freshness": dict(EMPTY),
 }
 
 
@@ -69,7 +70,52 @@ def build(models, collected, today=None):
         "maintenance": _maintenance(model_rows, today),
         "outside_contribution": _outside_contribution(model_rows),
         "most_active_models": _most_active(model_rows, collected, models),
+        "image_freshness": _image_freshness(collected),
     }
+
+
+def _image_freshness(collected):
+    """Model Docker images by the year their image was last pushed.
+
+    NOT A MAINTENANCE FIGURE, AND NOT A DEMAND FIGURE. `usage.py` establishes that the pull
+    baseline on these images is continuous integration pulling every one on a schedule; the
+    same schedule is what rebuilds and re-pushes them. So this is **build recency**: evidence
+    that the images are still being produced, which is worth knowing and is not evidence that
+    anybody chose to update a model.
+
+    It earns its place beside `maintenance` because the two can disagree, and the gap is the
+    interesting part: a model whose repository was pushed this year but whose image is a year
+    old has a packaging problem that neither figure shows on its own.
+    """
+    images = (collected or {}).get("dockerhub_images")
+    if images is None or images.empty or "last_updated" not in images.columns:
+        return dict(EMPTY)
+    flag = as_text(images.get("is_model")).str.lower()
+    dates = as_text(images["last_updated"])
+    years = {}
+    for i in range(len(images)):
+        if flag.iloc[i] != "yes":
+            continue
+        raw = dates.iloc[i].strip()
+        if len(raw) < 4 or not raw[:4].isdigit():
+            continue
+        years[raw[:4]] = years.get(raw[:4], 0) + 1
+    if not years:
+        return dict(EMPTY)
+    labels = sorted(years)
+    values = [years[y] for y in labels]
+    total = sum(values)
+    newest = labels[-1]
+    out = metric(
+        labels, values,
+        "%s of %s model images were last rebuilt in %s." % (
+            ins.num(years[newest]), ins.num(total), newest,
+        ),
+        countNoun="model images",
+        n=total,
+    )
+    out["ordinal"] = True
+    return out
 
 
 def _model_repos(repos):
@@ -175,8 +221,8 @@ def _maintenance(model_rows, today):
     total = sum(values)
     out = metric(
         labels, values,
-        "%s of %s model repositories were pushed to in %s — the Hub is maintained rather "
-        "than archived." % (ins.num(this_year), ins.num(total), current),
+        # Short: this card is three columns wide. The argument is in its note.
+        "%s of %s pushed to in %s." % (ins.num(this_year), ins.num(total), current),
         countNoun="model repositories",
         n=total,
     )

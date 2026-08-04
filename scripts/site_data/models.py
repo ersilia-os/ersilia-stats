@@ -66,6 +66,8 @@ def build(models):
             "image_size": dict(EMPTY),
             "on_arm": dict(EMPTY),
             "licence_openness": dict(EMPTY),
+            "output_consistency": dict(EMPTY),
+            "publication_type": dict(EMPTY),
             "growth": {"labels": [], "series": [], "n": 0},
         }
 
@@ -110,7 +112,58 @@ def build(models):
         "licence_openness": _licence_openness(models),
         "coverage": _coverage(models),
         "by_source_type": _by_source_type(models),
+        "output_consistency": _output_consistency(models),
+        "publication_type": _publication_type(models),
     }
+
+
+def _output_consistency(models):
+    """Does the model return the same answer twice?
+
+    THE MOST IMPORTANT PROPERTY ON THIS PAGE, and it was not shown anywhere. Everything
+    else here describes what a model is *for*; this describes whether you can rely on what
+    it says. A `Variable` model gives a different answer on a re-run — legitimate for a
+    generative model that samples, and a problem for a property predictor — so the figure is
+    reported without a verdict attached to it.
+
+    A near-binary field: 215 `Fixed` against 18 `Variable`, recorded for 233 of 243 models.
+    """
+    values = col(models, "output_consistency").apply(first_value)
+    out = value_counts(values)
+    if not out["labels"]:
+        return dict(EMPTY)
+    recorded = int(values.notna().sum())
+    fixed = 0
+    for label, value in zip(out["labels"], out["values"]):
+        if str(label).strip().lower() == "fixed":
+            fixed = int(value)
+    out["insight"] = ins.share_of(fixed, recorded, "models with a value",
+                                 "give the same answer on a re-run")
+    # `Fixed` is the reproducible case and reads as the good one; `Variable` is not a
+    # failure, so it takes a neutral rather than a warning colour.
+    out["semantics"] = {"Fixed": "brand", "Variable": "neutral"}
+    return out
+
+
+def _publication_type(models):
+    """Was the science behind the model peer-reviewed?
+
+    Provenance rather than popularity, and the counterpart to `by_source_type`: that says
+    whether Ersilia wrapped somebody else's work, this says how well established that work
+    is. 172 peer-reviewed, 25 preprints, 36 other across 233 recorded.
+    """
+    values = col(models, "publication_type").apply(first_value)
+    out = value_counts(values)
+    if not out["labels"]:
+        return dict(EMPTY)
+    recorded = int(values.notna().sum())
+    reviewed = 0
+    for label, value in zip(out["labels"], out["values"]):
+        if "peer" in str(label).strip().lower():
+            reviewed = int(value)
+    out["insight"] = ins.share_of(reviewed, recorded, "models with a recorded source",
+                                 "are based on peer-reviewed work")
+    return out
 
 
 def _task_tree(models):
@@ -454,10 +507,7 @@ def _by_license(models):
     licences = col(models, "license").apply(first_value)
     out = value_counts(licences, top=10)
     if out["labels"]:
-        out["insight"] = ins.join(
-            ins.leader(out, "models with a licence on file"),
-            ins.share_of(int(licences.notna().sum()), len(models), "models", "record a licence"),
-        )
+        out["insight"] = ins.leader(out, "models with a licence on file")
     return out
 
 
