@@ -72,9 +72,20 @@ def _openalex_totals(collected):
 
 
 def _citation_total(pubs, collected):
-    _per_year, total = _openalex_totals(collected)
-    if total:
-        return int(total)
+    """The headline total: the sum of each work's own `cited_by_count`.
+
+    NOT the sum of the per-year series, which is one citation short — OpenAlex cannot date
+    every citation, so `counts_by_year` omits a few that `cited_by_count` includes. Using
+    the series here made the site say 1,712 while Airtable, written from the same snapshot,
+    said 1,713. A one-citation gap nobody can explain is worse than either number alone, so
+    the authoritative per-work figure is the headline and the series is used only for the
+    shape of the curve.
+    """
+    works = (collected or {}).get("scholar_works")
+    if works is not None and not works.empty and "citations" in works.columns:
+        total = int(to_num(works["citations"]).sum())
+        if total:
+            return total
     return int(to_num(col(pubs, "citations")).sum())
 
 

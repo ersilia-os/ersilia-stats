@@ -261,11 +261,26 @@ def _citation_accrual(collected):
     for value in per_year:
         total += value
         running.append(total)
+
+    # The caption quotes the AUTHORITATIVE total, not the sum of the plotted series.
+    # OpenAlex cannot date every citation, so the dated series is a citation or two short of
+    # each work's own `cited_by_count`. Quoting the series total here made the caption read
+    # 1,712 while the headline tile beside it read 1,713 — a gap of one that no reader could
+    # account for and that would look like a bug in the arithmetic.
+    works = (collected or {}).get("scholar_works")
+    authoritative = total
+    if works is not None and not works.empty and "citations" in works.columns:
+        authoritative = int(to_num(works["citations"]).sum()) or total
+    undated = authoritative - total
     return growth_pair(
         [str(y) for y in span], per_year, running, "citations", period="year",
-        insight="%s citations to date, %s of them in %s." % (
-            ins.num(total), ins.num(max(per_year)),
-            str(list(span)[per_year.index(max(per_year))])),
+        insight=ins.join(
+            "%s citations to date, %s of them in %s." % (
+                ins.num(authoritative), ins.num(max(per_year)),
+                str(list(span)[per_year.index(max(per_year))])),
+            "%s cannot be dated and is not plotted." % ins.num(undated) if undated == 1 else
+            ("%s cannot be dated and are not plotted." % ins.num(undated) if undated else None),
+        ),
     )
 
 

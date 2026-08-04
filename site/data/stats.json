@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-03 22:01 UTC",
-  "snapshot_date": "2026-08-03",
+  "generated_at": "2026-08-04 06:37 UTC",
+  "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
       "blogposts",
@@ -15,16 +15,16 @@
       "repositories"
     ],
     "snapshot_dates": {
-      "blogposts": "2026-08-03",
-      "community": "2026-08-03",
-      "conferences": "2026-08-03",
-      "countries": "2026-08-03",
-      "events": "2026-08-03",
-      "models": "2026-08-03",
-      "organisations": "2026-08-03",
-      "projects": "2026-08-03",
-      "publications": "2026-08-03",
-      "repositories": "2026-08-03"
+      "blogposts": "2026-08-04",
+      "community": "2026-08-04",
+      "conferences": "2026-08-04",
+      "countries": "2026-08-04",
+      "events": "2026-08-04",
+      "models": "2026-08-04",
+      "organisations": "2026-08-04",
+      "projects": "2026-08-04",
+      "publications": "2026-08-04",
+      "repositories": "2026-08-04"
     },
     "collected_dates": {
       "dockerhub": "2026-08-03",
@@ -204,7 +204,7 @@
       "delta_12m": 5
     },
     "total_citations": {
-      "value": 1712,
+      "value": 1713,
       "series": {
         "labels": [
           "2013",
@@ -1600,9 +1600,9 @@
         "today": "2026-08-04",
         "semantics": {
           "Stuck": "bad",
-          "Done": "good",
           "In progress": "brand",
-          "Todo": "neutral"
+          "Todo": "neutral",
+          "Done": "good"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -2088,7 +2088,7 @@
           }
         ],
         "n": 1712,
-        "insight": "1,712 citations to date, 356 of them in 2024.",
+        "insight": "1,713 citations to date, 356 of them in 2024. 1 cannot be dated and is not plotted.",
         "kinds": [
           "bar",
           "line"
@@ -5564,7 +5564,7 @@
           82.1,
           85.6,
           85.7,
-          94.2,
+          95,
           96.2,
           97.4,
           98.3
@@ -6408,9 +6408,9 @@
             },
             {
               "column": "citations",
-              "filled": 36,
+              "filled": 42,
               "total": 42,
-              "pct": 85.7
+              "pct": 100.0
             },
             {
               "column": "doi",

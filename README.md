@@ -144,6 +144,48 @@ node scripts/verify_site.mjs
 `data/air_tables/`, which is gitignored, so a fork cannot build. Committing a small synthetic
 fixture snapshot would unlock a secret-free PR check; that has not been done.
 
+### Writing citations back into Airtable
+
+The site's citation figures come from OpenAlex, but the team works in Airtable, so fixing
+the site did not fix the place people look. `scripts/update_airtable_publications.py` pushes
+the collected counts into the Publications table. It moved the Airtable total from 1,305 to
+1,713 across 40 of 42 records.
+
+The order is not the obvious one — collection comes first, because collection is what
+produces the numbers:
+
+```bash
+export AIRTABLE_API_KEY=...                                  # needs data.records:write
+PYTHONPATH=scripts python3 scripts/fetch_openalex.py -o data/scholar/
+PYTHONPATH=scripts python3 scripts/update_airtable_publications.py           # read the diff
+PYTHONPATH=scripts python3 scripts/update_airtable_publications.py --apply
+```
+
+Step three reads the CSV step two wrote rather than calling OpenAlex again: two calls could
+return different numbers, and then Airtable and the site would disagree for a reason nobody
+could explain.
+
+**The site does not read citations from Airtable and will not start.** The writeback is for
+the humans browsing the base. So a failed write cannot affect a published figure, and the
+per-year accrual (199 rows) and co-author countries (a list per paper) stay in the collected
+CSVs, where they fit, needing no Airtable schema at all.
+
+Because this script can damage the source of truth it is **run by hand, never in CI**, it is
+a **dry run unless given `--apply`**, and it writes exactly one field, `Citations`, from an
+allow-list rather than a denylist — a denylist grows a hole every time someone adds a column.
+It refuses in four situations that all look like a successful update:
+
+| Refusal | Why |
+|---|---|
+| collected snapshot older than 21 days | writing stale counts over fresher ones is a regression dressed as an update |
+| fewer than 80% of DOIs resolved | a half-finished collect looks exactly like "most papers lost their citations" |
+| any single count falling by more than 20% or 10 citations | counts essentially only rise; a big drop means a wrong DOI, not a discovery. `--force` overrides |
+| token without `data.records:write` | says which scope is missing rather than printing a traceback |
+
+Note that switching to OpenAlex **lowers** some individual counts even though the total rises:
+OpenAlex is a more conservative index than Google Scholar, which counts preprints and theses.
+Seven papers went down, the largest by 10.
+
 ### A partial fetch cannot be trusted to announce itself
 
 `fetch_airtable.py` writes what it got and prunes superseded files **before** it raises, so a table
