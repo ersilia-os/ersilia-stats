@@ -11,25 +11,32 @@ GitHub also holds three things Airtable structurally cannot: `pushed_at` (is thi
 reports one number — total commits — for all time.
 
 WHAT IT COLLECTS
-    repos            the public inventory: 382 repositories, one row each
-    commit_activity  52 weekly commit totals per repository
+    repos            the public inventory, one row each, with per-repository counts
+    commit_activity  commits per calendar quarter, for the non-model repositories
     stars            starred_at for the most-starred repositories, i.e. star history
 
-THREE THINGS THAT MATTER
+FOUR THINGS THAT MATTER
 
 **Public repositories only.** This output is committed, and a private repository's *name*
-is disclosure even when its numbers are not. Airtable keeps supplying the private count.
+is disclosure even when its numbers are not. `github_api.list_repos` takes the visibility as
+a required argument so that this file can be seen to ask for "public"; the scripts that
+legitimately need private repositories — the synchronisation check and the Airtable writer —
+ask for "all" and write nothing to disk.
 
-**The 382 are not all comparable.** 239 are `eos####` per-model repositories and 143 are
-not. Airtable curates the 143 (139 of its 140 match), which is a deliberate choice and not
-an omission — so this does not "fix" anything by importing the model repos. Commit activity
-is collected for the non-model repositories only, because the model repos carry almost no
-signal: `eos4e40` has 2 stars, `eos2gw4` has 0.
+**The repositories are not all comparable.** Most are `eos####` per-model repositories and
+the rest are not, split by `github_api.MODEL_RE`. Both kinds are collected throughout. An
+earlier version skipped the model repositories for commit activity on the grounds that they
+carried no signal; that was judged from their stars, and it was wrong — see the comment in
+`main`.
 
 **The statistics endpoints answer 202 with an empty body** the first time they are asked,
 while GitHub computes them, and return data on a later call. Treating that as "no commits"
 would report zero activity for every repository. Verified both halves: `{}` first, then 52
-weeks on retry.
+weeks on retry. `commit_activity` no longer uses them at all — see its docstring.
+
+**Some columns the list endpoint cannot give.** `subscribers_count` is absent from it, and
+this file used to record 0 for every repository as a result; total commits is in no list
+payload. Both now come from one batched GraphQL query at about 1 point per 40 repositories.
 
     export GH_STATS_TOKEN=...        # fine-grained, read-only, metadata on ersilia-os
     python3 scripts/fetch_github.py -o data/github/
@@ -37,97 +44,90 @@ weeks on retry.
 """
 import argparse
 import logging
-import os
-import re
 import sys
 import time
-import urllib.request
 from datetime import datetime, timedelta, timezone
 
-from collect_common import (CONTACT, check_freshness, get_json, prune_superseded,
-                            write_snapshot)
-
-ORG = "ersilia-os"
-API = "https://api.github.com"
-
-# A per-model repository: `eos` plus four alphanumerics.
-MODEL_RE = re.compile(r"^eos[0-9a-z]{4}$")
+from collect_common import check_freshness, get_json, prune_superseded, write_snapshot
+from github_api import (API, MODEL_RE, ORG, auth_headers, contributor_counts, list_repos,
+                        post_graphql, repo_metrics)
 
 REPO_FIELDS = ["name", "is_model", "created_at", "pushed_at", "archived", "fork",
                "language", "license", "topics", "size_kb", "stars", "forks",
-               "watchers", "open_issues", "has_issues", "default_branch"]
+               "watchers", "open_issues", "has_issues", "default_branch",
+               # From the batched GraphQL query and the contributor endpoint.
+               "total_commits", "closed_issues", "merged_prs", "releases",
+               "latest_release", "prs_sampled", "prs_external",
+               "median_days_to_close", "contributors"]
 # `week_start` is now a quarter label ("2026Q2"); the column name is kept so the
 # committed file's shape does not change.
 ACTIVITY_FIELDS = ["name", "week_start", "commits"]
 STAR_FIELDS = ["name", "starred_at"]
 
 
-def auth_headers():
-    token = os.environ.get("GH_STATS_TOKEN") or os.environ.get("GITHUB_TOKEN")
-    headers = {"Accept": "application/vnd.github+json",
-               "X-GitHub-Api-Version": "2022-11-28"}
-    if token:
-        headers["Authorization"] = "Bearer " + token
-    else:
-        # 60 requests/hour unauthenticated is enough for the inventory alone, and not
-        # enough for commit activity across 143 repositories.
-        logging.warning("no GH_STATS_TOKEN set — unauthenticated, 60 requests/hour")
-    return headers
+def inventory(org, headers):
+    """The public inventory as CSV rows, from the REST list endpoint.
 
-
-def list_public_repos(org, headers):
-    """Every public repository, one page of 100 at a time."""
-    rows, page = [], 1
-    while True:
-        payload = get_json("%s/orgs/%s/repos?type=public&per_page=100&page=%d"
-                           % (API, org, page), headers=headers)
-        if not payload:
-            break
-        for repo in payload:
-            name = repo.get("name") or ""
-            rows.append({
-                "name": name,
-                "is_model": "yes" if MODEL_RE.match(name) else "no",
-                "created_at": (repo.get("created_at") or "")[:10],
-                "pushed_at": (repo.get("pushed_at") or "")[:10],
-                "archived": "yes" if repo.get("archived") else "no",
-                "fork": "yes" if repo.get("fork") else "no",
-                "language": repo.get("language") or "",
-                # SPDX from GitHub is authoritative, unlike the hand-entered column.
-                "license": ((repo.get("license") or {}) or {}).get("spdx_id") or "",
-                "topics": " ".join(repo.get("topics") or []),
-                "size_kb": repo.get("size") or 0,
-                "stars": repo.get("stargazers_count") or 0,
-                "forks": repo.get("forks_count") or 0,
-                # `subscribers_count` is absent from the list endpoint; watchers_count
-                # in this payload is a stars alias, so neither is trustworthy here and
-                # the real value would cost one request per repository. Left at 0.
-                "watchers": repo.get("subscribers_count") or 0,
-                "open_issues": repo.get("open_issues_count") or 0,
-                "has_issues": "yes" if repo.get("has_issues") else "no",
-                "default_branch": repo.get("default_branch") or "",
-            })
-        if len(payload) < 100:
-            break
-        page += 1
+    The counts this endpoint cannot supply — subscribers, total commits, releases, closed
+    issues, merged PRs — are filled in by `enrich`. Kept separate so a run without a token
+    still produces the inventory.
+    """
+    rows = []
+    for repo in list_repos(org, headers, visibility="public"):
+        name = repo.get("name") or ""
+        rows.append({
+            "name": name,
+            "is_model": "yes" if MODEL_RE.match(name) else "no",
+            "created_at": (repo.get("created_at") or "")[:10],
+            "pushed_at": (repo.get("pushed_at") or "")[:10],
+            "archived": "yes" if repo.get("archived") else "no",
+            "fork": "yes" if repo.get("fork") else "no",
+            "language": repo.get("language") or "",
+            # SPDX from GitHub is authoritative, unlike the hand-entered column.
+            "license": ((repo.get("license") or {}) or {}).get("spdx_id") or "",
+            "topics": " ".join(repo.get("topics") or []),
+            "size_kb": repo.get("size") or 0,
+            "stars": repo.get("stargazers_count") or 0,
+            "forks": repo.get("forks_count") or 0,
+            # Filled in by `enrich`. `subscribers_count` is absent from this payload and
+            # `watchers_count` here is a stars alias, so neither can be used.
+            "watchers": "",
+            "open_issues": repo.get("open_issues_count") or 0,
+            "has_issues": "yes" if repo.get("has_issues") else "no",
+            "default_branch": repo.get("default_branch") or "",
+        })
     rows.sort(key=lambda r: r["name"])
     return rows
 
 
-GRAPHQL = "https://api.github.com/graphql"
+def enrich(org, rows, headers, with_contributors=True):
+    """Add the batched GraphQL counts, and optionally contributor counts, in place.
 
+    `watchers` is the reason this exists. It is the real subscriber count from
+    `watchers.totalCount`, which agreed with the hand-maintained Airtable column on 25 of
+    25 sampled repositories — where the old list-endpoint reading disagreed on 96 of 141.
+    """
+    names = [r["name"] for r in rows]
+    metrics = repo_metrics(org, names, headers)
+    logging.info("metrics resolved for %d of %d repositories", len(metrics), len(names))
 
-def post_graphql(query, headers, variables=None):
-    """One GraphQL POST. The only non-GET request in any collector, and it is a read."""
-    import json as _json
-    payload = _json.dumps({"query": query, "variables": variables or {}}).encode()
-    request = urllib.request.Request(GRAPHQL, data=payload, headers={
-        **headers, "Content-Type": "application/json"})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        body = _json.loads(response.read())
-    if body.get("errors"):
-        raise RuntimeError("GraphQL: %s" % body["errors"][0].get("message"))
-    return body.get("data") or {}
+    counts = {}
+    if with_contributors:
+        counts = contributor_counts(org, names, headers)
+        logging.info("contributor counts for %d of %d repositories", len(counts), len(names))
+
+    for row in rows:
+        found = metrics.get(row["name"]) or {}
+        row["watchers"] = found.get("subscribers", "")
+        # An empty repository has no default branch and so no commit count. Blank, never
+        # 0 — "no commits recorded" and "not applicable" must not look the same.
+        commits = found.get("total_commits")
+        row["total_commits"] = "" if commits is None else commits
+        for key in ("closed_issues", "merged_prs", "releases", "latest_release",
+                    "prs_sampled", "prs_external", "median_days_to_close"):
+            row[key] = found.get(key, "")
+        row["contributors"] = counts.get(row["name"], "")
+    return rows
 
 
 def quarter_windows(quarters):
@@ -186,7 +186,9 @@ def commit_activity(org, names, headers, quarters=12, batch=20):
                 'r%d: repository(owner: $o, name: "%s") { '
                 'defaultBranchRef { target { ... on Commit { %s } } } }' % (index, name, fields))
         query = "query($o: String!) { %s rateLimit { cost remaining } }" % " ".join(parts)
-        data = post_graphql(query, headers, {"o": org})
+        # allow_missing: a repository deleted between the inventory and this call must not
+        # take down the other 19 in the batch.
+        data = post_graphql(query, headers, {"o": org}, allow_missing=True)
 
         for index, name in enumerate(chunk):
             repo = data.get("r%d" % index) or {}
@@ -251,6 +253,22 @@ def summarise(repos):
     logging.info("%d archived, %d dormant (no push in 180 days), %d active",
                  len(archived), sum(1 for r in repos if dormant(r)),
                  len(repos) - len(archived) - sum(1 for r in repos if dormant(r)))
+
+    def total(rows, key):
+        return sum(int(r[key]) for r in rows if str(r.get(key) or "").strip().isdigit())
+
+    logging.info("commits %s, releases %s, closed issues %s, merged PRs %s",
+                 format(total(repos, "total_commits"), ","), format(total(repos, "releases"), ","),
+                 format(total(repos, "closed_issues"), ","),
+                 format(total(repos, "merged_prs"), ","))
+    # The contribution signal, reported at collection time so a bad sample is visible
+    # before anything is plotted from it.
+    for label, rows in (("model", models), ("other", others)):
+        sampled, external = total(rows, "prs_sampled"), total(rows, "prs_external")
+        if sampled:
+            logging.info("%s repositories: %d of %d recent merged PRs from outside the "
+                         "organisation (%.0f%%)", label, external, sampled,
+                         100.0 * external / sampled)
     return others
 
 
@@ -261,6 +279,9 @@ def main():
     parser.add_argument("--org", default=ORG)
     parser.add_argument("--skip-activity", action="store_true",
                         help="Inventory and stars only. Useful without a token.")
+    parser.add_argument("--skip-contributors", action="store_true",
+                        help="Skip contributor counts: one REST request per repository, "
+                             "which is by far the slowest part of a run.")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--max-age-days", type=int, default=21)
     args = parser.parse_args()
@@ -269,10 +290,11 @@ def main():
         return check_freshness(args.out_dir, args.max_age_days, "github")
 
     headers = auth_headers()
-    repos = list_public_repos(args.org, headers)
+    repos = inventory(args.org, headers)
     if not repos:
         logging.error("no repositories returned for %s — refusing to write", args.org)
         return 1
+    enrich(args.org, repos, headers, with_contributors=not args.skip_contributors)
     non_model = summarise(repos)
 
     written = [write_snapshot(args.out_dir, "repos", REPO_FIELDS, repos)]
@@ -284,7 +306,14 @@ def main():
                      len(stars), len({r["name"] for r in stars}))
 
     if not args.skip_activity:
-        names = [r["name"] for r in non_model if r["archived"] == "no"]
+        # EVERY non-archived repository, model repositories included. This used to skip the
+        # model repositories on the grounds that they "carry almost no signal", judged from
+        # their stars — `eos4e40` has 2, `eos2gw4` has 0. That judgement was wrong: the
+        # median model repository holds 49 commits and 78% of recently merged pull requests
+        # on them come from outside the organisation. Nobody stars a model, they contribute
+        # one, and excluding them made the quarterly series cover 7,349 of 23,428 commits
+        # while the rest of the page quoted the larger figure.
+        names = [r["name"] for r in repos if r["archived"] == "no"]
         activity, missed = commit_activity(args.org, names, headers)
         if activity:
             written.append(write_snapshot(args.out_dir, "commit_activity",

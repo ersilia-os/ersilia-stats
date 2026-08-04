@@ -136,8 +136,10 @@ def _distribution(counts, median):
     take the caveat on trust: a spike of models at one pull count, and a thin tail above
     it. Anyone who sees it will draw the right conclusion without being told.
     """
-    bands = [(0, 1000, "under 1k"), (1000, 2500, "1k–2.5k"), (2500, 5000, "2.5k–5k"),
-             (5000, 10000, "5k–10k"), (10000, float("inf"), "10k+")]
+    # Short labels: this card is four columns wide and the histogram draws every label
+    # horizontally, so "under 1k" and "1k-2.5k" ran into each other.
+    bands = [(0, 1000, "<1k"), (1000, 2500, "1\u20132.5k"), (2500, 5000, "2.5\u20135k"),
+             (5000, 10000, "5\u201310k"), (10000, float("inf"), "10k+")]
     labels, values = [], []
     for low, high, label in bands:
         labels.append(label)
@@ -145,8 +147,9 @@ def _distribution(counts, median):
     clustered = sum(1 for c in counts if median * 0.6 <= c <= median * 1.25)
     out = metric(
         labels, values,
-        "%s of %s models fall in one narrow band, which is the automated build; the tail "
-        "above it is the part that reflects interest." % (
+        # Kept short deliberately: this card is four columns wide and the full argument
+        # is in its methodology note. A caption that overflows is a caption nobody reads.
+        "%s of %s models cluster in one band — the automated build, not demand." % (
             ins.num(clustered), ins.num(len(counts)),
         ),
         countNoun="models",
@@ -171,11 +174,8 @@ def _coverage(rows, models):
     return metric(
         ["Model has an image", "No image published"],
         [with_image, len(listed) - with_image],
-        ins.join(
-            ins.share_of(with_image, len(listed), "models in the registry",
-                         "have a published Docker image"),
-            "%s image(s) have no matching model record." % ins.num(len(published - listed))
-            if published - listed else None,
-        ),
+        # Three columns wide, so this has room for one clause. The count of images with
+        # no matching model record is in the methodology note instead.
+        ins.share_of(with_image, len(listed), "models", "have a published image"),
         n=len(listed),
     )

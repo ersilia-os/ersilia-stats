@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04 06:37 UTC",
+  "generated_at": "2026-08-04 11:16 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -28,7 +28,7 @@
     },
     "collected_dates": {
       "dockerhub": "2026-08-03",
-      "github": "2026-08-03",
+      "github": "2026-08-04",
       "scholar": "2026-08-03"
     },
     "stale_tables": {},
@@ -1600,9 +1600,9 @@
         "today": "2026-08-04",
         "semantics": {
           "Stuck": "bad",
-          "In progress": "brand",
           "Todo": "neutral",
-          "Done": "good"
+          "Done": "good",
+          "In progress": "brand"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -2154,6 +2154,26 @@
         ],
         "n": 37,
         "insight": "37 countries appear among the author institutions; Spain on the most papers."
+      },
+      "collaboration_breadth": {
+        "labels": [
+          "1",
+          "2",
+          "3–4",
+          "5–9",
+          "10+"
+        ],
+        "values": [
+          13,
+          12,
+          10,
+          4,
+          3
+        ],
+        "n": 42,
+        "insight": "29 of 42 papers with a recorded institution span two or more countries.",
+        "countNoun": "papers",
+        "ordinal": true
       },
       "most_cited": {
         "rows": [
@@ -6818,10 +6838,10 @@
       },
       "pull_distribution": {
         "labels": [
-          "under 1k",
-          "1k–2.5k",
-          "2.5k–5k",
-          "5k–10k",
+          "<1k",
+          "1–2.5k",
+          "2.5–5k",
+          "5–10k",
           "10k+"
         ],
         "values": [
@@ -6832,7 +6852,7 @@
           1
         ],
         "n": 247,
-        "insight": "231 of 247 models fall in one narrow band, which is the automated build; the tail above it is the part that reflects interest.",
+        "insight": "231 of 247 models cluster in one band — the automated build, not demand.",
         "countNoun": "models",
         "ordinal": true
       },
@@ -6846,7 +6866,381 @@
           6
         ],
         "n": 243,
-        "insight": "237 of 243 models in the registry (98%) have a published Docker image. 10 image(s) have no matching model record."
+        "insight": "237 of 243 models (98%) have a published image."
+      }
+    },
+    "code": {
+      "commit_growth": {
+        "labels": [
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "series": [
+          {
+            "name": "Added per quarter",
+            "values": [
+              642,
+              714,
+              1136,
+              610,
+              442,
+              1026,
+              2849,
+              2083,
+              2279,
+              1519,
+              2251,
+              761
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              642,
+              1356,
+              2492,
+              3102,
+              3544,
+              4570,
+              7419,
+              9502,
+              11781,
+              13300,
+              15551,
+              16312
+            ]
+          }
+        ],
+        "n": 16312,
+        "insight": "16,312 commits across the 12 quarters collected. Commits in 2026Q3: 761, down from 2,251 in 2026Q2.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
+      },
+      "star_growth": {
+        "labels": [
+          "2020Q4",
+          "2021Q1",
+          "2021Q2",
+          "2021Q3",
+          "2021Q4",
+          "2022Q1",
+          "2022Q2",
+          "2022Q3",
+          "2022Q4",
+          "2023Q1",
+          "2023Q2",
+          "2023Q3",
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "series": [
+          {
+            "name": "Added per quarter",
+            "values": [
+              1,
+              2,
+              4,
+              3,
+              2,
+              16,
+              35,
+              16,
+              27,
+              29,
+              21,
+              24,
+              38,
+              35,
+              11,
+              16,
+              35,
+              35,
+              24,
+              24,
+              17,
+              10,
+              12,
+              6
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              1,
+              3,
+              7,
+              10,
+              12,
+              28,
+              63,
+              79,
+              106,
+              135,
+              156,
+              180,
+              218,
+              253,
+              264,
+              280,
+              315,
+              350,
+              374,
+              398,
+              415,
+              425,
+              437,
+              443
+            ]
+          }
+        ],
+        "n": 443,
+        "insight": "443 dated stars across 10 repositories. Busiest quarter was 2023Q4 with 38 stars.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
+      },
+      "contribution_origin": {
+        "labels": [
+          "Model repos",
+          "Everything else"
+        ],
+        "series": [
+          {
+            "name": "From outside Ersilia",
+            "values": [
+              368,
+              241
+            ]
+          },
+          {
+            "name": "From the organisation",
+            "values": [
+              103,
+              99
+            ]
+          }
+        ],
+        "n": 811,
+        "insight": "609 of 811 recently merged pull requests came from outside the organisation — 78% on model repos; 71% on everything else."
+      },
+      "activity_recency": {
+        "labels": [
+          "this month",
+          "1–3 months",
+          "3–6 months",
+          "6–12 months",
+          "1–2 years",
+          "over 2 years",
+          "archived"
+        ],
+        "values": [
+          78,
+          165,
+          27,
+          14,
+          18,
+          41,
+          41
+        ],
+        "n": 384,
+        "insight": "270 of 384 public repositories were pushed to within six months; 41 are archived, which is a decision rather than neglect.",
+        "countNoun": "repositories",
+        "ordinal": true
+      },
+      "by_language": {
+        "labels": [
+          "Python",
+          "Jupyter Notebook",
+          "HTML",
+          "Shell",
+          "CSS",
+          "Fortran",
+          "JavaScript",
+          "Pascal",
+          "SCSS",
+          "TypeScript"
+        ],
+        "values": [
+          303,
+          56,
+          3,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n": 371,
+        "insight": "303 of 371 repositories with a detected language are Python.",
+        "countNoun": "repositories"
+      },
+      "by_licence": {
+        "labels": [
+          "GPL-3.0",
+          "MIT",
+          "Apache-2.0"
+        ],
+        "values": [
+          334,
+          32,
+          2
+        ],
+        "n": 368,
+        "insight": "334 of 368 licensed repositories (91%) use GPL-3.0. 3 distinct licences in use.",
+        "countNoun": "repositories"
+      },
+      "issue_resolution": {
+        "labels": [
+          "≤ 1 day",
+          "≤ 1 week",
+          "≤ 1 month",
+          "1–3 mo",
+          "> 3 mo"
+        ],
+        "values": [
+          18,
+          32,
+          74,
+          47,
+          56
+        ],
+        "n": 227,
+        "insight": "50 of 227 repositories with closed issues resolve them within a week, measured on each repository's last 30.",
+        "countNoun": "repositories",
+        "ordinal": true
+      },
+      "model_commit_effort": {
+        "labels": [
+          "< 10",
+          "10–25",
+          "26–50",
+          "51–100",
+          "> 100"
+        ],
+        "values": [
+          6,
+          27,
+          99,
+          99,
+          10
+        ],
+        "n": 241,
+        "insight": "The median model repository carries 49 commits; 109 of 241 have more than 50.",
+        "countNoun": "model repositories",
+        "ordinal": true
+      },
+      "most_active": {
+        "rows": [
+          {
+            "name": "ersilia",
+            "total_commits": 3017,
+            "merged_prs": 526,
+            "closed_issues": 1170,
+            "releases": 32,
+            "contributors": 108
+          },
+          {
+            "name": "ersilia-maintenance",
+            "total_commits": 822,
+            "merged_prs": 13,
+            "closed_issues": 37,
+            "releases": 0,
+            "contributors": 11
+          },
+          {
+            "name": "tune-tables-light",
+            "total_commits": 403,
+            "merged_prs": 0,
+            "closed_issues": 0,
+            "releases": 0,
+            "contributors": 13
+          },
+          {
+            "name": "lazy-qsar",
+            "total_commits": 332,
+            "merged_prs": 11,
+            "closed_issues": 29,
+            "releases": 33,
+            "contributors": 5
+          },
+          {
+            "name": "reinvent4",
+            "total_commits": 324,
+            "merged_prs": 0,
+            "closed_issues": 0,
+            "releases": 0,
+            "contributors": 19
+          },
+          {
+            "name": "mtb-targeted-protein-degradation",
+            "total_commits": 322,
+            "merged_prs": 0,
+            "closed_issues": 9,
+            "releases": 0,
+            "contributors": 2
+          },
+          {
+            "name": "ersilia-pack",
+            "total_commits": 289,
+            "merged_prs": 45,
+            "closed_issues": 39,
+            "releases": 0,
+            "contributors": 11
+          },
+          {
+            "name": "isaura",
+            "total_commits": 273,
+            "merged_prs": 6,
+            "closed_issues": 14,
+            "releases": 8,
+            "contributors": 7
+          },
+          {
+            "name": "ersilia-model-workflows",
+            "total_commits": 238,
+            "merged_prs": 1,
+            "closed_issues": 5,
+            "releases": 0,
+            "contributors": 5
+          },
+          {
+            "name": "chembl-antimicrobial-tasks",
+            "total_commits": 235,
+            "merged_prs": 4,
+            "closed_issues": 3,
+            "releases": 0,
+            "contributors": 2
+          }
+        ],
+        "n": 10,
+        "insight": "ersilia alone holds 13% of the 23,433 commits across all public repositories. 245 repositories publish releases."
       }
     }
   }

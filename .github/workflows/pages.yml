@@ -74,6 +74,23 @@ jobs:
             -t data/airtable_api_identifiers.csv \
             -o data/air_tables/
 
+      # THE SITE DECIDES WHICH REPOSITORY NAMES IT MAY PUBLISH by reading Airtable's
+      # `Visibility` column, and nothing used to check that column against GitHub. A
+      # repository marked Public in Airtable and private on GitHub would have its name
+      # published, and no test could have noticed — from the site's point of view nothing
+      # would be wrong. So this gate runs before the build, not after it.
+      #
+      # Public data only, and no GitHub token: it compares the Airtable snapshot fetched
+      # above against the committed public inventory in data/github/. That is deliberate.
+      # Logs on a public repository are world-readable, so CI must never enumerate private
+      # repositories; `--include-private` exists for local runs and is not used here.
+      #
+      # Models whose Airtable status is `In progress` are exempt from needing a public
+      # repository, which is what keeps this free of false alarms — the only two models
+      # without one are both `In progress`.
+      - name: GitHub and Airtable agree about what is public
+        run: PYTHONPATH=scripts python scripts/check_github_airtable_sync.py
+
       # Nothing here used to look at the JavaScript at all: no parse, no run. A single
       # stray character in config.js deployed a page stuck on "Loading figures…" and
       # the workflow reported success.

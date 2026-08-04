@@ -133,6 +133,27 @@ const VIEWS = [
           desc: "Three things about how the Hub is assembled and who can reuse it. How much packages externally published models rather than Ersilia's own; how much builds for ARM64 as well as AMD64, ARM being the cheap low-power hardware; and how much carries a permissive licence — MIT, Apache, BSD or CC0/CC-BY — as against a licence that imposes conditions, which covers GPL, AGPL, LGPL, proprietary and the non-commercial or no-derivatives Creative Commons variants. The share is of the models that record a licence at all; 40 record none, which for a reuser is the most restrictive state of the three.",
         },
       ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Most pulled models", span: 5, data: "usage.most_pulled_models",
+          type: "ranked", nameLabel: "Model", top: 10,
+          columns: [
+            { key: "pulls", label: "Pulls" },
+            { key: "times_baseline", label: "× baseline", raw: true },
+          ],
+          desc: "Docker Hub pull counts, ranked by how far each model exceeds the automated baseline rather than by raw pulls — ranking by raw pulls would rank the build schedule. Only models clearly above the baseline appear. A pull is not a user: mirrors pull images, and one person testing in a loop pulls repeatedly. It is a floor on interest, not a headcount, and Docker Hub publishes no history, so these are totals to date and cannot be turned into a rate.",
+        },
+        {
+          title: "Pull count distribution", span: 4, data: "usage.pull_distribution",
+          type: "histogram",
+          desc: "Why the headline pull total is not a usage figure, shown rather than asserted. Across the model images the counts cluster in one narrow band with a standard deviation of about 400 — human demand does not look like that, it follows a power law, which is exactly what the same organisation's GitHub stars do. A near-uniform floor on almost every image is the signature of continuous integration pulling every image on a schedule. The thin tail above the cluster is the part that reflects interest.",
+        },
+        {
+          title: "Models with a published image", span: 3, data: "usage.image_coverage",
+          type: "donut",
+          desc: "Whether each model in the registry has a matching Docker image on Docker Hub. A model with no image cannot be run by the usual route, so this is a completeness check on the Hub rather than a popularity measure. The mismatch runs both ways and both directions are worth knowing: a handful of published images have no model record at all, which means they are undocumented rather than missing. Infrastructure images — base, conda, shell — are excluded from every figure here: they are pulled as a side effect of running a model rather than chosen, and base alone would inflate the total by roughly 14%.",
+        },
+      ] },
     ],
   },
   {
@@ -247,11 +268,18 @@ const VIEWS = [
           desc: "Whether each paper can be read without a subscription, classified by OpenAlex. This is a mission figure rather than a vanity one: an organisation whose purpose is to serve researchers in low-resource settings has a direct interest in whether its own output is reachable by them. The routes are not equivalent — gold means published open, while bronze is readable at the publisher's discretion and can be withdrawn — and the breakdown is in the table.",
         },
         {
-          title: "Routes to open access", span: 3, data: "publications.oa_routes", type: "lollipop",
+          title: "Routes to open access", span: 4, data: "publications.oa_routes", type: "lollipop",
           desc: "How the open papers are open. Gold is published open access; green is a repository copy; hybrid is an open article in a subscription journal; bronze is free to read at the publisher's discretion and can be withdrawn without notice.",
         },
         {
-          title: "Where co-authors are based", span: 5,
+          title: "How many countries per paper", span: 4,
+          data: "publications.collaboration_breadth", type: "histogram",
+          desc: "Each paper by the number of distinct countries its author institutions span. This answers a different question from the country ranking below, and the difference matters: a long country list can come from one fourteen-partner consortium paper, which would read as broad collaboration across the whole body of work when it was a single paper. Papers with no recorded institution are excluded rather than counted as one country.",
+        },
+      ] },
+      { h: "h-md", cells: [
+        {
+          title: "Where co-authors are based", span: 12,
           data: "publications.collaboration_countries", type: "lollipop",
           desc: "Countries of the author institutions across all papers, from OpenAlex. This measures international collaboration instead of asserting it: the publications table also carries a hand-set African-collaboration flag, and this counts the institutions, so South Africa, Cameroon and Mozambique appear as themselves. Institution countries only — no author names are collected or published.",
         },
@@ -273,8 +301,10 @@ const VIEWS = [
   {
     id: "repositories",
     title: "Code",
-    blurb: "Ersilia's open-source repositories. Counts, dates and totals cover all of them; " +
-           "anything that names a repository or a contributor covers the public ones only.",
+    blurb: "Ersilia's open-source repositories, and what is actually happening inside them. " +
+           "Counts, dates and totals cover all of them; anything that names a repository or a " +
+           "contributor covers the public ones only. The activity figures come from GitHub " +
+           "directly rather than from a stored total, which is why they can be shown by quarter.",
     links: [{ label: "ersilia-os on GitHub", href: "https://github.com/ersilia-os" }],
     headlineKpi: "repositories",
     rows: [
@@ -283,6 +313,46 @@ const VIEWS = [
           title: "Popularity against activity", span: 12, data: "repositories.scatter", type: "logscatter",
           scatter: { x: "stars", y: "commits", xLabel: "Stars", yLabel: "Commits" },
           desc: "One dot per public repository: stars against commits, both on logarithmic axes because a handful of repositories account for most of every metric — on linear axes the other 130 collapse into the corner. Dashed lines mark the medians, so the quadrants separate 'popular but quiet' from 'busy but unknown'. Only outliers are labelled.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Who writes the code", span: 5, data: "code.contribution_origin", type: "stackbar",
+          desc: "Recently merged pull requests, split by whether their author belongs to the Ersilia organisation, from GitHub's own authorAssociation field. This is the most important chart on this page and it corrects a mistake: the per-model repositories were previously dismissed as carrying no signal, judged from their stars — eos4e40 has 2, eos2gw4 has 0. Nobody stars an individual model; they contribute one, through a pull request. Model repositories and everything else are shown separately because they are different kinds of work: a model repository is usually a submission, while ersilia itself is a codebase. The most recent 30 merged pull requests per repository are sampled, so this describes current practice rather than all history. Counts by association only — no author login is collected, so none can be published.",
+        },
+        {
+          title: "Commits per quarter", span: 7, data: "code.commit_growth", type: "growthcombo",
+          desc: "Commits to every non-archived public repository, by calendar quarter, with the running total. Collected through GitHub's GraphQL API as an exact count per window rather than through the REST statistics endpoint, which returns 202 and an empty body indefinitely for repositories with nothing to report. The current quarter is partial, as everywhere else on this site. Model repositories are included: an earlier version excluded them on the grounds that they carried no signal, which made this series cover a third of the commits while the rest of the page quoted the full figure.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Stars gained over time", span: 7, data: "code.star_growth", type: "growthcombo",
+          desc: "Every star on the repositories with more than five of them, by the quarter it was given. GitHub records the date each star was awarded, so this whole curve comes from one collection and needs no accumulated history. Restricted to the better-known repositories because a curve through three points is decoration. A star is not a user and not a download — it is a bookmark, and the honest reading is relative interest over time rather than a size.",
+        },
+        {
+          title: "When each repository was last touched", span: 5, data: "code.activity_recency",
+          type: "ordinallollipop",
+          desc: "Every public repository by time since its last push. Archived repositories are counted separately rather than falling into the oldest band: archiving is a deliberate retirement, and filing it as neglect would report a decision as a failure.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Where the work happens", span: 7, data: "code.most_active",
+          type: "ranked", nameLabel: "Repository", top: 10,
+          columns: [
+            { key: "total_commits", label: "Commits" },
+            { key: "merged_prs", label: "PRs" },
+            { key: "closed_issues", label: "Issues closed" },
+            { key: "releases", label: "Releases" },
+            { key: "contributors", label: "People" },
+          ],
+          desc: "One row per repository rather than five ranking charts, so a project's whole profile stays together — 33 releases on lazy-qsar against 32 on ersilia describe very different projects, and only the surrounding columns distinguish them. Ranked by commits. Contributor counts include anonymous contributors.",
+        },
+        {
+          title: "How long issues stay open", span: 5, data: "code.issue_resolution",
+          type: "histogram",
+          desc: "One value per repository: the median days between opening and closing an issue, over its most recent 30 closed issues, then bucketed. Per repository rather than per issue on purpose — a pooled distribution would be dominated by whichever repository files the most issues, which answers a different question. Repositories that have never closed an issue are absent rather than counted as instant.",
         },
       ] },
       { h: "h-xl", cells: [
@@ -325,6 +395,21 @@ const VIEWS = [
         {
           title: "Repository type", span: 6, data: "repositories.by_type", type: "treemap",
           desc: "Every repository grouped by type; area is proportional to count. Seven categories with a long tail is more than a donut can carry legibly.",
+        },
+      ] },
+      { h: "h-md", cells: [
+        {
+          title: "Work behind each model", span: 4, data: "code.model_commit_effort",
+          type: "histogram",
+          desc: "Commits per per-model repository, bucketed. Included to answer a fair question about a hub of a few hundred models: is each one a file drop? The distribution is the answer.",
+        },
+        {
+          title: "Languages", span: 4, data: "code.by_language", type: "lollipop",
+          desc: "GitHub's detected primary language per repository, which is a guess based on file extensions and counts one language per repository however many it contains. Repositories with no detectable language are excluded, so the total is smaller than the repository count.",
+        },
+        {
+          title: "How the code is licensed", span: 4, data: "code.by_licence", type: "donut",
+          desc: "SPDX identifiers as GitHub reports them, read from each repository's licence file rather than from any hand-entered field. Ersilia standardises on GPL-3.0 across both the tooling and the per-model repositories — 227 of 241 model repositories carry it. Do not read this as the models' own licensing: the Model Hub page reports licence openness from the registry, and that describes the terms of the upstream model being wrapped, which is a different question with a genuinely different answer.",
         },
       ] },
     ],

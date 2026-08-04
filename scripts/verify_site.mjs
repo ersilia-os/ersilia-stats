@@ -24,7 +24,7 @@
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
 import { readFile, mkdtemp, rm } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, extname, normalize } from "node:path";
 
@@ -35,8 +35,20 @@ const argOf = (flag, fallback) => {
 };
 const SITE = argOf("--site", "site");
 
-const ROUTES = ["/", "/models", "/projects", "/publications", "/repositories",
-                "/community", "/reach", "/outreach", "/downloads"];
+// Every view in config.js, plus the two routes that are not views. Derived rather than
+// listed, because a hand-maintained list silently skips whatever was just added — the
+// `activity` view was written, deployed and never verified until this changed.
+const EXTRA_ROUTES = ["/", "/downloads"];
+
+function discoverRoutes(siteDir) {
+  const source = readFileSync(join(siteDir, "config.js"), "utf8");
+  const views = source.slice(source.indexOf("const VIEWS"));
+  const ids = [...views.matchAll(/^\s{4}id:\s*"([a-z0-9-]+)"/gm)].map((m) => m[1]);
+  if (!ids.length) throw new Error("no view ids found in config.js — the regex is stale");
+  return [EXTRA_ROUTES[0], ...ids.map((id) => "/" + id), EXTRA_ROUTES[1]];
+}
+
+const ROUTES = discoverRoutes(SITE);
 
 const MIME = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
@@ -232,11 +244,77 @@ try {
               const p = c.querySelector('.insight');
               return !p || !p.textContent.trim();
             }).length,
+            // Titles, not a count. "2 overflowing" on a thirteen-card page means
+            // measuring every caption by hand to find which two.
             overflowing: chartCards.filter(c => {
               const p = c.querySelector('.insight');
               return p && p.scrollHeight > p.clientHeight + 1;
-            }).length,
+            }).map(c => (c.querySelector('h3,h2,.card-title') || {}).textContent || '?'),
             overflowX: document.documentElement.scrollWidth > window.innerWidth + 1,
+            collidingLabels: (() => {
+              // CATEGORY AXIS LABELS THAT RUN INTO EACH OTHER. This cannot be done
+              // through the DOM: the charts render to canvas, so the labels are pixels
+              // and there is no element to measure. So measure the text instead and
+              // compare it against the slot each label actually gets.
+              //
+              // Several builders force 'interval: 0' — show EVERY label, never thin
+              // them — which is what makes collisions possible at all. That is the
+              // right default for a five-bucket histogram, where a hidden label is a
+              // missing bucket; it just has to be checked rather than assumed.
+              const ctx = document.createElement('canvas').getContext('2d');
+              const bad = [];
+              for (const el of document.querySelectorAll('.chart')) {
+                const inst = window.echarts && echarts.getInstanceByDom(el);
+                if (!inst) continue;
+                let opt; try { opt = inst.getOption(); } catch { continue; }
+                const axis = ((opt || {}).xAxis || [])[0];
+                if (!axis || axis.type !== 'category') continue;
+                const data = axis.data || [];
+                if (data.length < 2) continue;
+                const lab = axis.axisLabel || {};
+                if (lab.show === false || lab.rotate) continue;   // rotated: not this failure
+                const step = lab.interval === 1 ? 2 : 1;          // 'every other label'
+                ctx.font = (lab.fontSize || 12) + 'px ' + (lab.fontFamily || 'sans-serif');
+                // MEASURE WHAT IS DRAWN, NOT WHAT IS IN THE DATA. The time axes carry a
+                // formatter that blanks most quarters and prints only the year, so
+                // measuring the raw '2019Q3' labels reported collisions on every single
+                // time series — all of them false.
+                const shown = (value, index) => {
+                  const raw = value == null ? '' : String(value.value ?? value);
+                  if (typeof lab.formatter === 'function') {
+                    try { return String(lab.formatter(raw, index) ?? ''); } catch { return raw; }
+                  }
+                  return raw;
+                };
+                // The plot is narrower than the chart by the y-axis gutter. 56px is a
+                // deliberate under-estimate of that gutter, which makes the slot width
+                // an OVER-estimate and this check conservative: it reports collisions
+                // that are certain, not ones that are merely close.
+                const perCategory = Math.max(1, inst.getWidth() - 56) / data.length;
+                // Only the labels actually drawn, with the category index each sits on —
+                // two labels four categories apart have four category widths between
+                // them, which is why a sparse axis is fine with long labels.
+                const drawn = [];
+                for (let i = 0; i < data.length; i += step) {
+                  const text = shown(data[i], i).trim();
+                  if (text) drawn.push({ text, index: i });
+                }
+                for (let k = 0; k + 1 < drawn.length; k++) {
+                  const a = drawn[k], b = drawn[k + 1];
+                  const available = perCategory * (b.index - a.index);
+                  const need = ctx.measureText(a.text).width / 2
+                             + ctx.measureText(b.text).width / 2 + 4;
+                  if (need > available) {
+                    const card = el.closest('.card');
+                    const title = card && card.querySelector('h3,h2,.card-title');
+                    bad.push((title ? title.textContent.trim() : '?')
+                             + ' [' + a.text + '|' + b.text + ']');
+                    break;
+                  }
+                }
+              }
+              return bad;
+            })(),
           };
         })()`);
       } catch { /* context still swapping */ }
@@ -252,10 +330,14 @@ try {
       cdp.problems.slice(0, 2).join(" | ") || "clean");
     check(label + "rows sum to 12", state.badRows.length === 0,
       state.badRows.length ? "bad rows: " + state.badRows.join(",") : "all rows exact");
-    check(label + "captions present and fit", state.noCaption === 0 && state.overflowing === 0,
-      `${state.noCaption} missing, ${state.overflowing} overflowing`);
+    check(label + "captions present and fit",
+      state.noCaption === 0 && state.overflowing.length === 0,
+      `${state.noCaption} missing, ${state.overflowing.length} overflowing` +
+      (state.overflowing.length ? ": " + state.overflowing.join(" / ") : ""));
     check(label + "one h1, no h-overflow", state.h1 === 1 && !state.overflowX,
       `h1=${state.h1} overflowX=${state.overflowX}`);
+    check(label + "axis labels do not collide", state.collidingLabels.length === 0,
+      state.collidingLabels.length ? state.collidingLabels.join(" / ") : "clear");
   }
   // ---- narrow pass -------------------------------------------------------------
   await cdp.send("Emulation.setDeviceMetricsOverride",

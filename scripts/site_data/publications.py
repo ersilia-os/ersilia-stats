@@ -42,6 +42,7 @@ def build(pubs, collected=None):
                 "per_year", "citations_per_year", "output_and_impact", "by_topic",
                 "affiliation", "affiliation_by_year", "by_type", "by_african_collab",
                 "top_journals", "open_access", "oa_routes", "collaboration_countries",
+                "collaboration_breadth",
             )},
             growth=dict(empty_series), citation_growth=dict(empty_series),
             most_cited={"rows": [], "n": 0},
@@ -65,6 +66,7 @@ def build(pubs, collected=None):
         "open_access": _open_access(collected),
         "oa_routes": _oa_routes(collected),
         "collaboration_countries": _collaboration_countries(collected),
+        "collaboration_breadth": _collaboration_breadth(collected),
         "most_cited": _most_cited(pubs, citations),
         "citation_growth": _citation_growth(years, citations),
         # Short form: a 4-column card clips the full leader sentence.
@@ -208,6 +210,58 @@ def _oa_routes(collected):
     labels = [str(k).title() for k in counts.index]
     return metric(labels, [int(v) for v in counts.values],
                   "%s is the most common route to open access." % labels[0])
+
+
+def _collaboration_breadth(collected):
+    """Papers by HOW MANY countries their author institutions span.
+
+    `_collaboration_countries` answers "which countries"; this answers "how many at once",
+    and the two are not the same claim. A country list can be long because one paper had
+    fourteen partners, and that would read as broad collaboration across the whole body of
+    work when it was one consortium paper.
+
+    It is worth publishing because the answer is strong on its own terms: **29 of 42 papers
+    involve institutions in two or more countries**, and single-country papers are the
+    minority. For an organisation whose purpose is collaborative research with
+    under-resourced groups, that is a mission figure rather than a vanity one.
+
+    Banded, because the raw counts run 1, 2, 3, 4, 5, 6, 7, 9, 10, 13, 14 with one or two
+    papers in most of the upper values — a bar per distinct value would be mostly noise.
+    """
+    works = (collected or {}).get("scholar_works")
+    if works is None or works.empty or "institution_countries" not in works.columns:
+        return dict(EMPTY)
+
+    # Numerals, not words: the card title already says these are countries, and
+    # "one country" beside "two" collided at the width this card gets.
+    bands = [(1, 1, "1"), (2, 2, "2"), (3, 4, "3\u20134"),
+             (5, 9, "5\u20139"), (10, 10 ** 6, "10+")]
+    labels = [band[2] for band in bands]
+    values = [0] * len(labels)
+    counted = 0
+    for value in as_text(works["institution_countries"]):
+        countries = len({code for code in value.split() if code})
+        if not countries:
+            continue                      # no institution recorded, not "one country"
+        counted += 1
+        for index, (low, high, _name) in enumerate(bands):
+            if low <= countries <= high:
+                values[index] += 1
+                break
+    if not counted:
+        return dict(EMPTY)
+
+    multi = counted - values[0]
+    out = metric(
+        labels, values,
+        "%s of %s papers with a recorded institution span two or more countries." % (
+            ins.num(multi), ins.num(counted),
+        ),
+        countNoun="papers",
+        n=counted,
+    )
+    out["ordinal"] = True
+    return out
 
 
 def _collaboration_countries(collected):

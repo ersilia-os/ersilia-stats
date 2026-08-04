@@ -124,6 +124,7 @@ Each step is a gate, and everything before the upload can stop a deploy:
 |---|---|
 | `pip install -r requirements.txt` | — (but the pin matters: see the note in that file) |
 | `fetch_airtable.py` | any table fails to fetch |
+| `check_github_airtable_sync.py` | GitHub and Airtable disagree about which repositories exist or which are public |
 | `node --check` on `config.js` and `js/*.js` | any shipped script does not parse |
 | `export_site_data.py` | a PII guard trips, or an email-shaped string reaches the output |
 | `check_config_paths.py --fail-on-empty` | a chart points at a missing **or empty** metric |
@@ -185,6 +186,86 @@ It refuses in four situations that all look like a successful update:
 Note that switching to OpenAlex **lowers** some individual counts even though the total rises:
 OpenAlex is a more conservative index than Google Scholar, which counts preprints and theses.
 Seven papers went down, the largest by 10.
+
+### Keeping GitHub and Airtable in step
+
+The site decides **which repository names it may publish** by reading Airtable's `Visibility`
+column, and nothing used to check that column against GitHub. A repository marked `Public` in
+Airtable and private on GitHub would have its name published, and no test could have noticed —
+from the site's point of view nothing would be wrong.
+
+`scripts/check_github_airtable_sync.py` is that check, and it runs in `pages.yml` **before the
+build**, so a disagreement stops a deploy rather than being discovered afterwards.
+
+The two tables split cleanly, which is what makes this tractable: all 243 rows of `models` have
+an `Identifier` matching `^eos[0-9][0-9a-z]{3}$`, the 179 rows of `repositories` hold **zero**
+model repositories, and the two sets do not intersect. So `github_api.MODEL_RE` is the whole
+distinction. It is deliberately stricter than `^eos[0-9a-z]{4}$` because **ten repositories
+begin with `eos` and are not models** — `eos-template`, `eosbench`, `eosdev`, `eos-demo`,
+`eos-analysis-template`, `eos-lite-chem`, `eos-python-package`, `eosframes`, `eosquality`,
+`eosvc`.
+
+**CI uses public data only, and that is a feature.** Two model repositories are private, so
+comparing against a public-only listing would invent drift; the fix is not a private-scoped
+token in CI, because Actions logs on a public repository are world-readable. Instead the
+default mode exempts models whose status is `In progress` from needing a public repository —
+the only two models without one are both `In progress`, so it has zero false alarms while
+enumerating nothing private. Run it locally for the rest:
+
+```bash
+export GH_STATS_TOKEN=...
+PYTHONPATH=scripts python3 scripts/check_github_airtable_sync.py --include-private
+```
+
+That mode writes no file, ever. It finds two more things CI cannot see — a private model
+repository with no Airtable row, and a private repository absent from the table.
+
+One category is treated as a **warning** rather than a failure: Airtable saying `Private`
+while GitHub says public. The site over-hides, which is the harmless direction.
+
+### Writing GitHub figures back into Airtable
+
+`scripts/update_airtable_repositories.py` maintains the numeric columns of the Repositories
+table. Its own description says the table "is automatically completed with a nightly cron
+action"; **that cron no longer runs**, and this replaces it.
+
+The evidence that it stopped rather than never having worked is that the columns are *almost*
+right — small, recent, one-directional drift:
+
+| Column | Agreed with live GitHub | Source |
+|---|---|---|
+| `Stars` | 140 / 141 | REST `stargazers_count` |
+| `Subscribers` | 140 / 141 | GraphQL `watchers.totalCount` |
+| `Forks` | 140 / 141 | REST `forks_count` |
+| `Open Issues` | 131 / 141 | GraphQL `issues(states:OPEN)` |
+| `Contributors` | 122 / 141 | REST `contributors?anon=1`, `Link` last page |
+| `Total Commits` | 118 / 141 | GraphQL `history.totalCount` — drifts fastest |
+
+Those six are the entire **allow-list**, and it is an allow-list rather than a denylist because
+a denylist grows a hole every time someone adds a column. `Visibility` is never written — it is
+the field the site trusts to decide what may be named. Neither are `Type`, `Status`,
+`Contributor Names` (personal data), `Title`, `Description`, `Projects`, or `URL` (a formula).
+
+It resolves private repositories **live and in memory**, because 38 of the 179 rows are private
+and updating only the public ones would leave a fifth of the work undone. `data/github/*.csv`
+stays public-only regardless. **Its output names private repositories, so run it locally, never
+in a workflow on this repository.**
+
+Structural drift is reported and never fixed: it never creates a record (adding a row needs a
+`Type`, a judgement) and never deletes one.
+
+```bash
+export AIRTABLE_API_KEY=...      # needs data.records:write
+export GH_STATS_TOKEN=...        # needs to see private repositories
+PYTHONPATH=scripts python3 scripts/update_airtable_repositories.py           # read the diff
+PYTHONPATH=scripts python3 scripts/update_airtable_repositories.py --apply
+```
+
+On its first real run the sharp-fall refusal earned its place: the `ersilia-stats` row claimed
+310 commits and 9 contributors, but that repository is days old and has 21 commits — the row had
+been seeded with figures from the *capstone* repository, a different and private repository that
+really does have about 310. A guard meant to catch a broken collector caught bad stored data
+instead.
 
 ### A partial fetch cannot be trusted to announce itself
 

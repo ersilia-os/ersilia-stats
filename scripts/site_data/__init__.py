@@ -15,6 +15,7 @@ import os
 import pandas as pd
 
 from . import (
+    code as code_section,
     community as community_section,
     kpis as kpis_section,
     load,
@@ -67,6 +68,9 @@ def build_all(data_dir, today=None):
         # From the committed public snapshots rather than Airtable. Degrades to empty
         # metrics when a collector has not run, so a clone still builds.
         "usage": usage_section.build(collected, models=models),
+        # Development activity over time — commits per quarter, star dates, and where
+        # pull requests come from. None of it can be held in an Airtable column.
+        "code": code_section.build(collected, today=today),
     }
 
     return {
