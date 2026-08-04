@@ -24,9 +24,9 @@ public repositories, not sampled.
 That number matters because of a mistake it corrects. Per-model repositories were dismissed
 here as carrying "almost no signal", on the evidence of stars: `eos4e40` has 2, `eos2gw4`
 has 0. That was true and it was the wrong measurement. Nobody stars a single model — they
-*contribute* one, through a pull request, and 33 of 40 sampled model repositories have at
-least one merged. The contribution signal was there the whole time in a field nobody had
-read.
+*contribute* one, through a pull request, and **207 of 241 model repositories have at least
+one merged, 127 of them from outside the organisation.** The contribution signal was there
+the whole time, in a field nobody had read.
 
 So this module treats external contribution as the headline rather than a footnote, and
 reports it separately for model and non-model repositories, because they are different
@@ -52,7 +52,7 @@ describes recent practice rather than all history. A repository that has closed 
 that contributes the median of what it has.
 """
 from . import insights as ins
-from .parse import EMPTY, as_text, growth_pair, metric, to_num
+from .parse import EMPTY, as_text, growth_pair, metric, quarter_totals, to_num
 
 # Bands for "when was this last touched", in days. Ordered, and rendered as ordered.
 RECENCY_BANDS = [
@@ -167,53 +167,41 @@ def _release_recency(repos):
     return out
 
 
-def _quarter_sort_key(label):
-    """`2026Q2` -> `(2026, 2)`. String sorting puts `2026Q10` before `2026Q2`."""
-    text = str(label)
-    try:
-        year, quarter = text.split("Q")
-        return (int(year), int(quarter))
-    except (ValueError, AttributeError):
-        return (0, 0)
-
-
 def _commit_growth(activity):
-    """Commits per calendar quarter, with the running total.
-
-    The collector stores only non-zero quarters per repository, so this sums across
-    repositories and fills the gaps — a quarter in which nothing was committed anywhere
-    must appear as a zero bar rather than vanish from the axis.
-    """
-    if activity is None or activity.empty:
+    """Commits per calendar quarter across every repository, with the running total."""
+    labels, per_quarter, running = quarter_commits(activity)
+    if not labels:
         return {"labels": [], "series": [], "n": 0}
-    label_col = "week_start" if "week_start" in activity.columns else "quarter"
-    if label_col not in activity.columns or "commits" not in activity.columns:
-        return {"labels": [], "series": [], "n": 0}
-
-    counts = {}
-    labels_raw = as_text(activity[label_col])
-    values = to_num(activity["commits"])
-    for i in range(len(activity)):
-        label = labels_raw.iloc[i].strip()
-        if label:
-            counts[label] = counts.get(label, 0) + int(values.iloc[i] or 0)
-    if not counts:
-        return {"labels": [], "series": [], "n": 0}
-
-    labels = sorted(counts, key=_quarter_sort_key)
-    per_quarter = [counts[q] for q in labels]
-    running, total = [], 0
-    for value in per_quarter:
-        total += value
-        running.append(total)
-
     return growth_pair(
         labels, per_quarter, running, "commits",
         insight="%s commits across the %d quarters collected. %s" % (
-            ins.num(total), len(labels),
+            ins.num(running[-1]), len(labels),
             ins.latest_change(labels, per_quarter, "commits"),
         ),
     )
+
+
+def quarter_commits(activity, keep=None):
+    """`(labels, per_quarter, running)` from a commit-activity frame.
+
+    `keep` is an optional set of repository names; without it every repository counts.
+    Shared with `model_activity.py`, which passes the model repositories so the Hub gets
+    its own series without a second copy of this aggregation.
+    """
+    if activity is None or activity.empty:
+        return [], [], []
+    label_col = "week_start" if "week_start" in activity.columns else "quarter"
+    if label_col not in activity.columns or "commits" not in activity.columns:
+        return [], [], []
+    names = as_text(activity["name"]) if "name" in activity.columns else None
+    labels_raw = as_text(activity[label_col])
+    values = to_num(activity["commits"])
+    pairs = []
+    for i in range(len(activity)):
+        if keep is not None and (names is None or names.iloc[i].strip() not in keep):
+            continue
+        pairs.append((labels_raw.iloc[i], values.iloc[i]))
+    return quarter_totals(pairs)
 
 
 def _star_growth(stars):
@@ -225,7 +213,9 @@ def _star_growth(stars):
     if stars is None or stars.empty or "starred_at" not in stars.columns:
         return {"labels": [], "series": [], "n": 0}
 
-    counts = {}
+    # One star per row, so each contributes 1 to the quarter it was given in. The
+    # aggregation is `quarter_totals`, shared with the commit series.
+    pairs = []
     dates = as_text(stars["starred_at"])
     for i in range(len(stars)):
         text = dates.iloc[i].strip()
@@ -235,23 +225,17 @@ def _star_growth(stars):
             year, month = int(text[:4]), int(text[5:7])
         except ValueError:
             continue
-        counts.setdefault("%dQ%d" % (year, (month - 1) // 3 + 1), 0)
-        counts["%dQ%d" % (year, (month - 1) // 3 + 1)] += 1
-    if not counts:
-        return {"labels": [], "series": [], "n": 0}
+        pairs.append(("%dQ%d" % (year, (month - 1) // 3 + 1), 1))
 
-    labels = sorted(counts, key=_quarter_sort_key)
-    per_quarter = [counts[q] for q in labels]
-    running, total = [], 0
-    for value in per_quarter:
-        total += value
-        running.append(total)
+    labels, per_quarter, running = quarter_totals(pairs)
+    if not labels:
+        return {"labels": [], "series": [], "n": 0}
 
     repos = len(set(as_text(stars["name"]))) if "name" in stars.columns else 0
     return growth_pair(
         labels, per_quarter, running, "stars",
         insight="%s dated stars across %s repositories. %s" % (
-            ins.num(total), ins.num(repos),
+            ins.num(running[-1]), ins.num(repos),
             ins.busiest(labels, per_quarter, "star", "stars"),
         ),
     )

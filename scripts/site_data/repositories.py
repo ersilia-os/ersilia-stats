@@ -16,7 +16,6 @@ So this module splits the two:
 The public/private split is itself published (``visibility``), because the honest
 way to handle the exclusion is to state its size rather than hide it.
 """
-import pandas as pd
 
 from . import insights as ins
 from .parse import (
@@ -78,7 +77,6 @@ def build(repos):
     dense = dense_quarters(created)
     labels = [str(i) for i in dense.index]
     running = list(dense.cumsum().values)
-    undated = int(len(every) - int(dense.sum()))
 
     cumulative_metric = cumulative(
         created,

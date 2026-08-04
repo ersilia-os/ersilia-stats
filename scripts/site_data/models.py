@@ -203,7 +203,6 @@ def _task_tree(models):
     leader = max(nested.items(), key=lambda kv: sum(kv[1].values())) if nested else None
     insight = None
     if leader:
-        biggest_leaf = leader[1].most_common(1)[0]
         insight = "%s is the largest task family, %s of the %s with a task recorded." % (
             leader[0], ins.pct(sum(leader[1].values()), total), ins.num(total),
         )

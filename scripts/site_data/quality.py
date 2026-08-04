@@ -11,7 +11,6 @@ Two views the site never had:
 This is the honest counterpart to the rest of the site: every chart elsewhere is only
 as good as what is filled in here.
 """
-import pandas as pd
 
 from . import insights as ins
 from .parse import EMPTY, as_text, col, first_value, metric, parse_multi

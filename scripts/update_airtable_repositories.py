@@ -67,7 +67,7 @@ import logging
 import os
 import sys
 
-from github_api import ORG, auth_headers, contributor_counts, list_repos, repo_metrics
+from github_api import ORG, auth_headers, contributor_counts, repo_metrics
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 

@@ -8,7 +8,7 @@ import pandas as pd
 
 from . import insights as ins
 from .parse import (EMPTY, as_text, col, growth_pair, metric, parse_multi,
-                    series_metric, value_counts)
+                    value_counts)
 
 # Airtable's project states mapped onto the house semantic tokens, so "in progress"
 # is the same colour in every chart on the site.

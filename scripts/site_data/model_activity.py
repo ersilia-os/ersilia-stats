@@ -39,12 +39,9 @@ image on every build, so a repository with more commits gets more builds and the
 pulls. It measures the build schedule. `usage.py` already establishes that the pull baseline
 is CI; this would quietly contradict it.
 """
-import re
-
 from . import insights as ins
+from .code import quarter_commits
 from .parse import EMPTY, as_text, growth_pair, metric, to_num
-
-MODEL_RE = re.compile(r"^eos[0-9][0-9a-z]{3}$")
 
 EMPTY_SECTION = {
     "hub_commit_growth": {"labels": [], "series": [], "n": 0},
@@ -66,7 +63,9 @@ def build(models, collected, today=None):
         return dict(EMPTY_SECTION)
 
     return {
-        "hub_commit_growth": _commit_growth(collected.get("github_commit_activity")),
+        "hub_commit_growth": _commit_growth(
+            collected.get("github_commit_activity"),
+            {str(r.get("name", "")).strip() for r in model_rows}),
         "maintenance": _maintenance(model_rows, today),
         "outside_contribution": _outside_contribution(model_rows),
         "most_active_models": _most_active(model_rows, collected, models),
@@ -140,50 +139,25 @@ def _int(row, key):
         return None
 
 
-def _quarter_key(label):
-    try:
-        year, quarter = str(label).split("Q")
-        return (int(year), int(quarter))
-    except (ValueError, AttributeError):
-        return (0, 0)
-
-
-def _commit_growth(activity):
+def _commit_growth(activity, model_names):
     """Commits to model repositories per quarter, with the running total.
 
-    Separate from the organisation-wide series on the Code page, because this answers a
-    different question: how much work is going into the Hub itself, as against Ersilia's
-    tooling. The two are collected in the same pass and simply filtered differently.
+    Separate from the organisation-wide series on the Code page because it answers a
+    different question — how much work goes into the Hub itself as against Ersilia's
+    tooling. Same collection pass, different filter, and the aggregation is shared rather
+    than copied.
+
+    The model repositories are identified by the collector's own `is_model` column rather
+    than by re-deriving the identifier pattern here. One definition of "model", in
+    `github_api.MODEL_RE`, applied once at collection time.
     """
-    if activity is None or activity.empty:
+    labels, per_quarter, running = quarter_commits(activity, keep=model_names)
+    if not labels:
         return {"labels": [], "series": [], "n": 0}
-    label_col = "week_start" if "week_start" in activity.columns else "quarter"
-    if label_col not in activity.columns or "commits" not in activity.columns:
-        return {"labels": [], "series": [], "n": 0}
-
-    names = as_text(activity["name"])
-    labels_raw = as_text(activity[label_col])
-    values = to_num(activity["commits"])
-    counts = {}
-    for i in range(len(activity)):
-        if not MODEL_RE.match(names.iloc[i].strip()):
-            continue
-        label = labels_raw.iloc[i].strip()
-        if label:
-            counts[label] = counts.get(label, 0) + int(values.iloc[i] or 0)
-    if not counts:
-        return {"labels": [], "series": [], "n": 0}
-
-    labels = sorted(counts, key=_quarter_key)
-    per_quarter = [counts[q] for q in labels]
-    running, total = [], 0
-    for value in per_quarter:
-        total += value
-        running.append(total)
     return growth_pair(
         labels, per_quarter, running, "commits",
         insight="%s commits to model repositories across %d quarters. %s" % (
-            ins.num(total), len(labels),
+            ins.num(running[-1]), len(labels),
             ins.busiest(labels, per_quarter, "commit", "commits"),
         ),
     )

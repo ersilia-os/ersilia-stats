@@ -5,11 +5,9 @@ rows of recorded intent (which meetings matter, how often they come round, wheth
 you can attend without flying) sitting unused while this page ran out of content
 halfway down.
 """
-import pandas as pd
 
 from . import insights as ins
-from .parse import (EMPTY, col, growth_pair, metric, multi_counts, quarter_counts,
-                    value_counts, year_counts)
+from .parse import (EMPTY, col, growth_pair, metric, multi_counts, value_counts, year_counts)
 
 
 def build_events(events):
@@ -20,7 +18,6 @@ def build_events(events):
 
     country = col(events, "country_(from_country)")
     located = multi_counts(country)
-    missing = int(len(events) - located["n"])
 
     per_year = year_counts(col(events, "year"))
     if per_year["labels"]:

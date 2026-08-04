@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """GitHub inventory and activity for the ersilia-os organisation.
 
-WHY: the Airtable repositories table is a hand-maintained snapshot, and a hand-maintained
-snapshot decays. The site currently lists `eos` as its second most-starred repository with
-92 stars and 190 forks; `GET /repos/ersilia-os/eos` returns **404**. It does not exist.
-Nothing noticed, because nothing was checking.
+WHY: the Airtable repositories table is a snapshot of standing totals, and it was left
+stale when the nightly job that maintained it stopped running. It listed `eos` as the
+second most-starred repository with 92 stars and 190 forks while
+`GET /repos/ersilia-os/eos` returned **404** — the repository did not exist, and nothing
+noticed because nothing was checking. `check_github_airtable_sync.py` is now that check,
+and `update_airtable_repositories.py` maintains the numbers.
 
-GitHub also holds three things Airtable structurally cannot: `pushed_at` (is this alive?),
-`archived` (was it retired on purpose?), and a real weekly commit series. Today the site
-reports one number — total commits — for all time.
+GitHub also holds what Airtable structurally cannot: `pushed_at` (is this alive?),
+`archived` (was it retired on purpose?), and a real commit series over time. A single
+cell can hold "3,017 commits"; it cannot hold when they happened.
 
 WHAT IT COLLECTS
     repos            the public inventory, one row each, with per-repository counts
-    commit_activity  commits per calendar quarter, for the non-model repositories
+    commit_activity  commits per calendar quarter, for every non-archived repository
     stars            starred_at for the most-starred repositories, i.e. star history
 
 FOUR THINGS THAT MATTER
@@ -29,10 +31,10 @@ earlier version skipped the model repositories for commit activity on the ground
 carried no signal; that was judged from their stars, and it was wrong — see the comment in
 `main`.
 
-**The statistics endpoints answer 202 with an empty body** the first time they are asked,
-while GitHub computes them, and return data on a later call. Treating that as "no commits"
-would report zero activity for every repository. Verified both halves: `{}` first, then 52
-weeks on retry. `commit_activity` no longer uses them at all — see its docstring.
+**The REST statistics endpoints do not work here at all.** They answer 202 with an empty
+body while GitHub computes, and for a repository with nothing to report they appear never to
+populate: 20 of 20 stayed on 202 after a 40-second wait and two retries. `commit_activity`
+uses GraphQL instead — see its docstring for the evidence.
 
 **Some columns the list endpoint cannot give.** `subscribers_count` is absent from it, and
 this file used to record 0 for every repository as a result; total commits is in no list
@@ -104,8 +106,9 @@ def enrich(org, rows, headers, with_contributors=True):
     """Add the batched GraphQL counts, and optionally contributor counts, in place.
 
     `watchers` is the reason this exists. It is the real subscriber count from
-    `watchers.totalCount`, which agreed with the hand-maintained Airtable column on 25 of
-    25 sampled repositories — where the old list-endpoint reading disagreed on 96 of 141.
+    `watchers.totalCount`, and it agrees with the Airtable column on 140 of 141 public rows
+    — where the old list-endpoint reading disagreed on 96 of them, because that endpoint does
+    not return `subscribers_count` and the field was silently recorded as 0.
     """
     names = [r["name"] for r in rows]
     metrics = repo_metrics(org, names, headers)
@@ -170,7 +173,7 @@ def commit_activity(org, names, headers, quarters=12, batch=20):
     so all 143 repositories over 12 quarters fit in a handful of requests.
 
     Quarterly rather than weekly on purpose — every other time series on this site is
-    quarterly, and 52 weekly buckets across 143 repositories is mostly zeros.
+    quarterly, and 52 weekly buckets across 343 repositories would be mostly zeros.
     """
     windows = quarter_windows(quarters)
     rows, missing = [], []
@@ -295,7 +298,7 @@ def main():
         logging.error("no repositories returned for %s — refusing to write", args.org)
         return 1
     enrich(args.org, repos, headers, with_contributors=not args.skip_contributors)
-    non_model = summarise(repos)
+    summarise(repos)          # logs the inventory breakdown; return value unused
 
     written = [write_snapshot(args.out_dir, "repos", REPO_FIELDS, repos)]
 

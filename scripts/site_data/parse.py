@@ -236,3 +236,46 @@ def top_by(df, value_col, name_col, n=12, insight=None):
     # n is the number of ranked entries, not the sum of a "top N" column, which
     # would read as a total the chart does not show.
     return metric(as_text(ranked[name_col]), ranked["_v"], insight, n=int(len(ranked)))
+
+
+def quarter_sort_key(label):
+    """``2026Q2`` -> ``(2026, 2)``.
+
+    Quarter labels must never be sorted as strings: that puts ``2026Q10`` before
+    ``2026Q2`` and silently reorders a time axis.
+    """
+    try:
+        year, quarter = str(label).split("Q")
+        return (int(year), int(quarter))
+    except (ValueError, AttributeError):
+        return (0, 0)
+
+
+def quarter_totals(pairs):
+    """``[(quarter_label, amount)]`` -> ``(labels, per_quarter, running)``, calendar order.
+
+    Shared by every "X per quarter, with a running total" series. The collectors store
+    only non-zero quarters per repository, so the caller cannot assume a dense axis —
+    this aggregates whatever rows it is given and returns them in order.
+
+    Filtering is the caller's job: pass only the pairs you want counted. That keeps the
+    aggregation in one place while letting each series carry its own scope and caption.
+    """
+    counts = {}
+    for label, amount in pairs:
+        key = str(label).strip()
+        if not key:
+            continue
+        try:
+            counts[key] = counts.get(key, 0) + int(amount or 0)
+        except (TypeError, ValueError):
+            continue
+    if not counts:
+        return [], [], []
+    labels = sorted(counts, key=quarter_sort_key)
+    per_quarter = [counts[q] for q in labels]
+    running, total = [], 0
+    for value in per_quarter:
+        total += value
+        running.append(total)
+    return labels, per_quarter, running

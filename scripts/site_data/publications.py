@@ -498,7 +498,6 @@ def _top_journals(pubs, citations):
         return dict(EMPTY)
     grouped = frame.groupby("journal")["citations"].agg(["mean", "count", "sum"])
     eligible = grouped[grouped["count"] >= MIN_ARTICLES_FOR_JOURNAL_RANK]
-    excluded = int(len(grouped) - len(eligible))
     ranked = eligible.sort_values("mean", ascending=False).head(10)
     if ranked.empty:
         return {

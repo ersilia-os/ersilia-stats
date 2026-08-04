@@ -26,18 +26,20 @@ append instead of an overwrite.)
 """
 import argparse
 import logging
-import re
 import sys
 
 from collect_common import (check_freshness, paginate_url, prune_superseded,
                             write_snapshot)
+from github_api import MODEL_RE
 
 NAMESPACE = "ersiliaos"
 API = "https://hub.docker.com/v2/repositories/%s/?page_size=100"
 
-# An Ersilia model image is `eos` plus four alphanumerics — the model identifier. Anything
-# else in the namespace is build infrastructure or a one-off.
-MODEL_RE = re.compile(r"^eos[0-9a-z]{4}$")
+# Imported rather than redefined. This file used to carry its own looser copy,
+# `^eos[0-9a-z]{4}$`, which meant the Docker collector and the GitHub collector could
+# disagree about what counts as a model. They agree on every name that exists today, so
+# nothing was ever misclassified — but two definitions of the same thing is a bug waiting
+# for the first repository called `eosbench` to be pushed as an image.
 
 FIELDS = ["name", "is_model", "pull_count", "star_count", "last_updated", "description"]
 
