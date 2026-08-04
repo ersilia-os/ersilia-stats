@@ -19,6 +19,7 @@ from . import (
     community as community_section,
     kpis as kpis_section,
     load,
+    model_activity as model_activity_section,
     models as models_section,
     organisations as organisations_section,
     outreach,
@@ -71,6 +72,9 @@ def build_all(data_dir, today=None):
         # Development activity over time — commits per quarter, star dates, and where
         # pull requests come from. None of it can be held in an Airtable column.
         "code": code_section.build(collected, today=today),
+        # The Model Hub as a whole, joining the curated registry to collected activity
+        # and pull counts on the shared eosXXXX identifier. Derived, so never stored.
+        "model_activity": model_activity_section.build(models, collected, today=today),
     }
 
     return {

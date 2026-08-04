@@ -1,0 +1,11 @@
+closed_issues,merged_prs,name,pulls,title,total_commits
+5,2,eos1vms,4273,Multi-target prediction based on ChEMBL data,234
+8,1,eos8fth,3840,SARS-CoV-2 antiviral prediction: REDIAL-2020,163
+9,1,eos4qda,5270,FasmiFra molecule generator,134
+6,6,eos8a4x,4815,Physicochemical descriptors available from RDKIT,126
+16,8,eos74bo,3945,Aqueous Kinetic Solubility,115
+5,5,eos5axz,7317,Morgan counts fingerprints,112
+4,2,eos238c,4030,MeSH therapeutic use based on chemical structure,108
+7,5,eos5cl7,5087,Growth Inhibitors of Neisseria gonorrhoeae,108
+3,0,eos8aa5,5427,Knowledge-guided pre-trained graph transformer,104
+10,10,eos7a45,4140,Small molecule price prediction,103

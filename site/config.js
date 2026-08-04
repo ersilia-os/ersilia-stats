@@ -135,6 +135,36 @@ const VIEWS = [
       ] },
       { h: "h-lg", cells: [
         {
+          title: "Work on the Hub, by quarter", span: 7, data: "model_activity.hub_commit_growth",
+          type: "growthcombo",
+          desc: "Commits to the per-model repositories only, by calendar quarter, with the running total. Separate from the organisation-wide series on the Code page because it answers a different question: how much work goes into the Hub itself as against Ersilia's tooling. Both come from the same collection pass, filtered differently. The current quarter is partial.",
+        },
+        {
+          title: "Are models still maintained?", span: 5, data: "model_activity.maintenance",
+          type: "ordinallollipop",
+          desc: "Each model repository by the year of its last push, with archived ones counted separately. This exists to answer the fair question a sceptic asks of any large model collection — is most of it abandoned? Archived repositories are a deliberate retirement rather than neglect, which is why they are not folded into the oldest year.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Models with an outside contribution", span: 5,
+          data: "model_activity.outside_contribution", type: "donut",
+          desc: "Counted per model, not per pull request, and that is the point: '78% of merged pull requests come from outside Ersilia' could in principle be a handful of models attracting all the outside work. This counts the models themselves, so it measures how far community contribution actually reaches into the Hub. Only the most recent 30 merged pull requests per repository are sampled, so a model whose only outside contribution is older reads as internal — the figure is a floor, not a ceiling.",
+        },
+        {
+          title: "Busiest model repositories", span: 7, data: "model_activity.most_active_models",
+          type: "ranked", nameLabel: "Model", nameKey: "title", top: 10,
+          columns: [
+            { key: "total_commits", label: "Commits" },
+            { key: "merged_prs", label: "PRs" },
+            { key: "closed_issues", label: "Issues" },
+            { key: "pulls", label: "Pulls" },
+          ],
+          desc: "The three sources on one row: commits, pull requests and issues from GitHub, pull counts from Docker Hub, joined on the shared eosXXXX identifier — 237 of 243 models resolve in all three. Ranked by commits. Pulls are a column rather than a ranking deliberately: they correlate with commits at Spearman 0.52, but that almost certainly measures continuous integration rebuilding busier repositories more often rather than anyone choosing them, so no relationship is implied here.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
           title: "Most pulled models", span: 5, data: "usage.most_pulled_models",
           type: "ranked", nameLabel: "Model", top: 10,
           columns: [

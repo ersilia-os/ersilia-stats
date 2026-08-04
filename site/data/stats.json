@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04 11:16 UTC",
+  "generated_at": "2026-08-04 15:34 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -1600,9 +1600,9 @@
         "today": "2026-08-04",
         "semantics": {
           "Stuck": "bad",
-          "Todo": "neutral",
+          "In progress": "brand",
           "Done": "good",
-          "In progress": "brand"
+          "Todo": "neutral"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -7241,6 +7241,184 @@
         ],
         "n": 10,
         "insight": "ersilia alone holds 13% of the 23,433 commits across all public repositories. 245 repositories publish releases."
+      }
+    },
+    "model_activity": {
+      "hub_commit_growth": {
+        "labels": [
+          "2023Q4",
+          "2024Q1",
+          "2024Q2",
+          "2024Q3",
+          "2024Q4",
+          "2025Q1",
+          "2025Q2",
+          "2025Q3",
+          "2025Q4",
+          "2026Q1",
+          "2026Q2",
+          "2026Q3"
+        ],
+        "series": [
+          {
+            "name": "Added per quarter",
+            "values": [
+              269,
+              316,
+              449,
+              115,
+              19,
+              384,
+              2169,
+              1130,
+              1445,
+              829,
+              1462,
+              369
+            ]
+          },
+          {
+            "name": "Total to date",
+            "values": [
+              269,
+              585,
+              1034,
+              1149,
+              1168,
+              1552,
+              3721,
+              4851,
+              6296,
+              7125,
+              8587,
+              8956
+            ]
+          }
+        ],
+        "n": 8956,
+        "insight": "8,956 commits to model repositories across 12 quarters. Busiest quarter was 2025Q2 with 2,169 commits.",
+        "kinds": [
+          "bar",
+          "line"
+        ],
+        "same_measure": true
+      },
+      "maintenance": {
+        "labels": [
+          "2025",
+          "2026",
+          "archived"
+        ],
+        "values": [
+          4,
+          214,
+          23
+        ],
+        "n": 241,
+        "insight": "214 of 241 model repositories were pushed to in 2026 — the Hub is maintained rather than archived.",
+        "countNoun": "model repositories",
+        "ordinal": true
+      },
+      "outside_contribution": {
+        "labels": [
+          "Has an outside contribution",
+          "Only internal pull requests",
+          "No merged pull requests"
+        ],
+        "values": [
+          127,
+          80,
+          34
+        ],
+        "n": 241,
+        "insight": "127 of 241 models have taken a merged pull request from outside Ersilia.",
+        "countNoun": "models"
+      },
+      "most_active_models": {
+        "rows": [
+          {
+            "name": "eos1vms",
+            "title": "Multi-target prediction based on ChEMBL data",
+            "total_commits": 234,
+            "merged_prs": 2,
+            "closed_issues": 5,
+            "pulls": 4273
+          },
+          {
+            "name": "eos8fth",
+            "title": "SARS-CoV-2 antiviral prediction: REDIAL-2020",
+            "total_commits": 163,
+            "merged_prs": 1,
+            "closed_issues": 8,
+            "pulls": 3840
+          },
+          {
+            "name": "eos4qda",
+            "title": "FasmiFra molecule generator",
+            "total_commits": 134,
+            "merged_prs": 1,
+            "closed_issues": 9,
+            "pulls": 5270
+          },
+          {
+            "name": "eos8a4x",
+            "title": "Physicochemical descriptors available from RDKIT",
+            "total_commits": 126,
+            "merged_prs": 6,
+            "closed_issues": 6,
+            "pulls": 4815
+          },
+          {
+            "name": "eos74bo",
+            "title": "Aqueous Kinetic Solubility",
+            "total_commits": 115,
+            "merged_prs": 8,
+            "closed_issues": 16,
+            "pulls": 3945
+          },
+          {
+            "name": "eos5axz",
+            "title": "Morgan counts fingerprints",
+            "total_commits": 112,
+            "merged_prs": 5,
+            "closed_issues": 5,
+            "pulls": 7317
+          },
+          {
+            "name": "eos238c",
+            "title": "MeSH therapeutic use based on chemical structure",
+            "total_commits": 108,
+            "merged_prs": 2,
+            "closed_issues": 4,
+            "pulls": 4030
+          },
+          {
+            "name": "eos5cl7",
+            "title": "Growth Inhibitors of Neisseria gonorrhoeae",
+            "total_commits": 108,
+            "merged_prs": 5,
+            "closed_issues": 7,
+            "pulls": 5087
+          },
+          {
+            "name": "eos8aa5",
+            "title": "Knowledge-guided pre-trained graph transformer",
+            "total_commits": 104,
+            "merged_prs": 0,
+            "closed_issues": 3,
+            "pulls": 5427
+          },
+          {
+            "name": "eos7a45",
+            "title": "Small molecule price prediction",
+            "total_commits": 103,
+            "merged_prs": 10,
+            "closed_issues": 10,
+            "pulls": 4140
+          }
+        ],
+        "n": 241,
+        "insight": "12,271 commits across 241 model repositories; the busiest carries 234."
       }
     }
   }
