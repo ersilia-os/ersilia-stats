@@ -161,7 +161,8 @@ def _publication_type(models):
     for label, value in zip(out["labels"], out["values"]):
         if "peer" in str(label).strip().lower():
             reviewed = int(value)
-    out["insight"] = ins.share_of(reviewed, recorded, "models with a recorded source",
+    # Four columns wide: keep it to one clause.
+    out["insight"] = ins.share_of(reviewed, recorded, "models",
                                  "are based on peer-reviewed work")
     return out
 
@@ -506,7 +507,7 @@ def _by_license(models):
     licences = col(models, "license").apply(first_value)
     out = value_counts(licences, top=10)
     if out["labels"]:
-        out["insight"] = ins.leader(out, "models with a licence on file")
+        out["insight"] = ins.leader(out, "licensed models")
     return out
 
 

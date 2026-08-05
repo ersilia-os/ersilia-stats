@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05 06:39 UTC",
+  "generated_at": "2026-08-05 07:09 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -1073,7 +1073,7 @@
           1
         ],
         "n": 202,
-        "insight": "MIT leads with 78 of 202 models with a licence on file (39%)."
+        "insight": "MIT leads with 78 of 202 licensed models (39%)."
       },
       "licence_openness": {
         "labels": [
@@ -1144,7 +1144,7 @@
           25
         ],
         "n": 233,
-        "insight": "172 of 233 models with a recorded source (74%) are based on peer-reviewed work."
+        "insight": "172 of 233 models (74%) are based on peer-reviewed work."
       }
     },
     "projects": {
@@ -1601,10 +1601,10 @@
         "n": 36,
         "today": "2026-08-05",
         "semantics": {
-          "Done": "good",
-          "Stuck": "bad",
+          "Todo": "neutral",
           "In progress": "brand",
-          "Todo": "neutral"
+          "Done": "good",
+          "Stuck": "bad"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -6946,7 +6946,7 @@
           }
         ],
         "n": 815,
-        "insight": "609 of 815 recently merged pull requests came from outside the organisation — 78% on model repos; 70% on everything else."
+        "insight": "609 of 815 merged pull requests came from outside Ersilia — 78% on model repos."
       },
       "activity_recency": {
         "labels": [
@@ -6968,7 +6968,7 @@
           41
         ],
         "n": 386,
-        "insight": "272 of 386 public repositories were pushed to within six months; 41 are archived, which is a decision rather than neglect.",
+        "insight": "272 of 386 pushed to within six months; 41 archived.",
         "countNoun": "repositories",
         "ordinal": true
       },
@@ -7013,7 +7013,7 @@
           2
         ],
         "n": 370,
-        "insight": "336 of 370 licensed repositories (91%) use GPL-3.0. 3 distinct licences in use.",
+        "insight": "336 of 370 repositories (91%) use GPL-3.0.",
         "countNoun": "repositories"
       },
       "issue_resolution": {
@@ -7032,7 +7032,7 @@
           56
         ],
         "n": 227,
-        "insight": "50 of 227 repositories with closed issues resolve them within a week, measured on each repository's last 30.",
+        "insight": "50 of 227 repositories close issues within a week.",
         "countNoun": "repositories",
         "ordinal": true
       },
@@ -7170,7 +7170,7 @@
           139
         ],
         "n": 386,
-        "insight": "247 of 386 public repositories have ever published a release; the rest ship from the default branch.",
+        "insight": "247 of 386 repositories have ever published a release.",
         "countNoun": "repositories",
         "ordinal": true
       }

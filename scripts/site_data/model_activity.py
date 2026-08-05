@@ -93,7 +93,7 @@ def _image_freshness(collected):
     dates = as_text(images["last_updated"])
     years = {}
     for i in range(len(images)):
-        if flag.iloc[i] != "yes":
+        if i >= len(flag) or flag.iloc[i] != "yes":
             continue
         raw = dates.iloc[i].strip()
         if len(raw) < 4 or not raw[:4].isdigit():
@@ -123,7 +123,7 @@ def _model_repos(repos):
     out = []
     for i in range(len(repos)):
         name = str(repos["name"].iloc[i] or "").strip()
-        if not name or flag.iloc[i] != "yes":
+        if not name or i >= len(flag) or flag.iloc[i] != "yes":
             continue
         out.append({c: repos[c].iloc[i] for c in repos.columns})
     return out

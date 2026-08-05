@@ -158,8 +158,8 @@ def _release_recency(repos):
         values.append(never)
     out = metric(
         labels, values,
-        "%s of %s public repositories have ever published a release; the rest ship from "
-        "the default branch." % (ins.num(with_release), ins.num(len(repos))),
+        "%s of %s repositories have ever published a release." % (
+            ins.num(with_release), ins.num(len(repos))),
         countNoun="repositories",
         n=len(repos),
     )
@@ -280,9 +280,11 @@ def _contribution_origin(repos):
     overall = sum(g[3] for g in groups)
     shares = ["%s%% on %s" % (round(100.0 * outside / total), label.lower())
               for label, outside, _inside, total in groups if total]
-    lead = "%s of %s recently merged pull requests came from outside the organisation" % (
-        ins.num(overall_out), ins.num(overall))
-    insight = "%s — %s." % (lead, "; ".join(shares)) if shares else lead + "."
+    # Short: five columns wide, and the runner's fonts are wider than this machine's.
+    # The per-kind shares are in the methodology note.
+    insight = "%s of %s merged pull requests came from outside Ersilia%s." % (
+        ins.num(overall_out), ins.num(overall),
+        " — %s" % shares[0] if shares else "")
     return {"labels": labels, "series": series, "n": overall, "insight": insight}
 
 
@@ -303,10 +305,12 @@ def _activity_recency(repos, today):
     labels = [band[2] for band in RECENCY_BANDS] + ["archived"]
     values = [0] * len(labels)
     for i in range(len(repos)):
-        if bool(archived.iloc[i]):
+        # `archived` is empty when the column is absent; treat that as "not archived"
+        # rather than indexing past the end.
+        if i < len(archived) and bool(archived.iloc[i]):
             values[-1] += 1
             continue
-        when = pushed.iloc[i]
+        when = pushed.iloc[i] if i < len(pushed) else None
         if pd.isna(when):
             continue
         age = (now - when).days
@@ -318,8 +322,7 @@ def _activity_recency(repos, today):
     live = sum(values[:3])                       # pushed within six months
     out = metric(
         labels, values,
-        "%s of %s public repositories were pushed to within six months; %s are archived, "
-        "which is a decision rather than neglect." % (
+        "%s of %s pushed to within six months; %s archived." % (
             ins.num(live), ins.num(len(repos)), ins.num(values[-1]),
         ),
         countNoun="repositories",
@@ -382,11 +385,8 @@ def _by_licence(repos):
     total = sum(counts.values())
     return metric(
         [name for name, _ in ranked], [count for _, count in ranked],
-        ins.join(
-            ins.share_of(ranked[0][1], total, "licensed repositories",
-                         "use %s" % ranked[0][0]),
-            "%s distinct licences in use." % ins.num(len(counts)) if len(counts) > 1 else None,
-        ),
+        # One clause: four columns wide. The licence count is in the note.
+        ins.share_of(ranked[0][1], total, "repositories", "use %s" % ranked[0][0]),
         countNoun="repositories",
     )
 
@@ -421,8 +421,8 @@ def _issue_resolution(repos):
     quick = values[0] + values[1]
     out = metric(
         labels, values,
-        "%s of %s repositories with closed issues resolve them within a week, measured on "
-        "each repository's last 30." % (ins.num(quick), ins.num(counted)),
+        "%s of %s repositories close issues within a week." % (
+            ins.num(quick), ins.num(counted)),
         countNoun="repositories",
         n=counted,
     )

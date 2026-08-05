@@ -51,7 +51,8 @@ def _model_images(images):
     flag = as_text(images.get("is_model")).str.lower()
     pulls = to_num(images.get("pull_count"))
     rows = [(str(images["name"].iloc[i]).strip(), int(pulls.iloc[i]))
-            for i in range(len(images)) if flag.iloc[i] == "yes"]
+            for i in range(min(len(images), len(flag), len(pulls)))
+            if flag.iloc[i] == "yes"]
     rows.sort(key=lambda r: (-r[1], r[0]))
     return rows
 

@@ -1,0 +1,10 @@
+name,is_model,created_at,pushed_at,archived,fork,language,license,topics,size_kb,stars,forks,watchers,open_issues,has_issues,default_branch,total_commits,closed_issues,merged_prs,releases,latest_release,prs_sampled,prs_external,median_days_to_close,contributors
+fixture-hub,no,2021-02-01,2026-01-01,no,no,Python,GPL-3.0,,900,120,40,9,3,yes,main,2400,180,95,12,2025-11-02,20,15,4,7
+fixture-tools,no,2022-05-10,2025-10-15,no,no,Python,MIT,,900,18,4,2,1,yes,main,310,24,18,3,2025-07-19,10,6,12,3
+sample-cascade,no,2022-09-01,2025-06-01,no,no,Jupyter Notebook,MIT,,900,6,1,1,0,yes,main,95,8,4,0,,4,1,30,2
+test-amr-models,no,2023-04-01,2024-02-01,no,no,Python,GPL-3.0,,900,0,0,0,2,yes,main,140,12,7,1,2024-01-10,6,5,95,1
+eos1aaa,yes,2021-06-01,2026-01-01,no,no,Python,GPL-3.0,,300,0,0,1,0,yes,main,40,6,3,1,2025-12-01,4,4,5,3
+eos2bbb,yes,2022-03-01,2025-12-10,no,no,Python,GPL-3.0,,300,0,0,1,0,yes,main,62,9,5,0,,5,3,18,4
+eos3ccc,yes,2023-01-15,2025-11-20,no,no,Python,GPL-3.0,,300,0,0,1,0,yes,main,28,4,2,1,2025-09-09,3,3,40,2
+eos4ddd,yes,2024-07-01,2025-08-05,no,no,Python,GPL-3.0,,300,0,0,1,0,yes,main,15,2,1,0,,2,0,60,2
+eos5eee,yes,2025-02-01,2026-01-01,no,no,Python,GPL-3.0,,300,0,0,1,0,yes,main,8,1,0,0,,1,1,2,1

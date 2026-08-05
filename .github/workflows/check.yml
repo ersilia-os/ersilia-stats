@@ -56,24 +56,39 @@ jobs:
       # without the other. The fixture is deterministic, so any diff is a real change.
       - name: Fixture is up to date with its generator
         run: |
-          python scripts/make_fixture.py -o /tmp/fixture-check/
-          if ! diff -r data/air_tables_sample/ /tmp/fixture-check/; then
+          python scripts/make_fixture.py -o /tmp/fixture-check/air_tables \
+                                         -c /tmp/fixture-check
+          if ! diff -r data/air_tables_sample/ /tmp/fixture-check/air_tables/; then
             echo "::error::data/air_tables_sample/ does not match scripts/make_fixture.py."
-            echo "Re-run: python3 scripts/make_fixture.py -o data/air_tables_sample/"
+            echo "Re-run: python3 scripts/make_fixture.py -o data/air_tables_sample/ -c data/collected_sample/"
             exit 1
           fi
+          for source in github dockerhub scholar; do
+            if ! diff -r "data/collected_sample/$source/" "/tmp/fixture-check/$source/"; then
+              echo "::error::data/collected_sample/$source/ does not match scripts/make_fixture.py."
+              echo "Re-run: python3 scripts/make_fixture.py -o data/air_tables_sample/ -c data/collected_sample/"
+              exit 1
+            fi
+          done
 
       # The committed index.html must carry current stamps. Editing styles.css without
       # restamping would ship a URL browsers already have cached.
       - name: Asset stamps are current
         run: python scripts/stamp_assets.py --site site --check
 
+      # The exporter finds the collected snapshots as SIBLINGS of --data-dir, so the two
+      # halves of the fixture have to be assembled into one root. Pointing --data-dir at
+      # data/air_tables_sample directly would make it read the REAL data/github/, whose
+      # repository names do not match the fixture's — which left six charts empty and
+      # stopped the check exercising them at all.
       - name: Build the site from the synthetic fixture
         run: |
-          mkdir -p /tmp/checksite
+          mkdir -p /tmp/checksite /tmp/fixture-root
           cp -r site/. /tmp/checksite/
+          cp -r data/air_tables_sample /tmp/fixture-root/air_tables
+          cp -r data/collected_sample/. /tmp/fixture-root/
           python scripts/export_site_data.py \
-            --data-dir data/air_tables_sample \
+            --data-dir /tmp/fixture-root/air_tables \
             --out /tmp/checksite/data/stats.json
 
       - name: Check every chart has data

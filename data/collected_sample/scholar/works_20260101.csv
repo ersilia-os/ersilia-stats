@@ -1,0 +1,4 @@
+doi,title,year,publication_date,type,venue,publisher,citations,is_open_access,oa_status,institution_countries,institution_count,referenced_works_count
+10.5555/fixture.1,A fixture paper on antimicrobial models,2021,2021-06-01,article,Journal of Fixtures,Fixture Press,42,yes,gold,ES US ZA,4,30
+10.5555/fixture.2,A second fixture paper,2023,2023-06-01,article,Journal of Fixtures,Fixture Press,7,yes,green,ES,1,30
+10.5555/fixture.3,A fixture review,2025,2025-06-01,article,Sample Reviews,Fixture Press,310,no,closed,US GB CM MZ,6,30

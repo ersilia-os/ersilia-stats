@@ -72,7 +72,12 @@ def _affiliated_dois(pubs):
     flags = as_text(col(pubs, "ersilia_affiliation")).str.strip().str.lower()
     dois = as_text(col(pubs, "doi"))
     keep = set()
-    for i in range(len(pubs)):
+    # `col()` returns an EMPTY Series when the column is absent, so a `range(len(pubs))`
+    # loop over it is an IndexError waiting for a table without a `doi` column. The
+    # synthetic fixture is exactly such a table, and this is what it caught.
+    for i in range(min(len(pubs), len(flags))):
+        if i >= len(dois):
+            break
         if flags.iloc[i] in YES:
             bare = str(dois.iloc[i] or "").strip().lower()
             for prefix in ("https://doi.org/", "http://doi.org/", "doi:"):
