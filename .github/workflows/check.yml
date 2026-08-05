@@ -104,6 +104,15 @@ jobs:
       - name: Check every chart has data
         run: python scripts/check_config_paths.py --stats /tmp/checksite/data/stats.json --fail-on-empty
 
+      # A missing column must empty a card, never crash the export. `col()` and
+      # `DataFrame.get()` return an empty object for an absent column, so a loop bounded by
+      # `len(frame)` that indexes one raises IndexError and takes down the whole build. That
+      # reached CI once from a publications table with no DOI column; sweeping the general
+      # case found eight more, several of them in functions that were already *partially*
+      # guarded. Runs on the fixture, so it needs no secrets.
+      - name: A missing column degrades, never crashes
+        run: PYTHONPATH=scripts python scripts/check_degradation.py
+
       - name: Smoke-test the rendered site
         run: node scripts/verify_site.mjs --site /tmp/checksite
 

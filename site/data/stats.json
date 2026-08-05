@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05 21:59 UTC",
+  "generated_at": "2026-08-05 22:05 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -1328,7 +1328,7 @@
           {
             "name": "Ersilia Model Hub",
             "start": "2021-01-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "In progress",
             "open": true,
             "months": 67.1
@@ -1480,7 +1480,7 @@
           {
             "name": "The Gambia MRC",
             "start": "2024-09-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "In progress",
             "open": true,
             "months": 23.1
@@ -1520,23 +1520,23 @@
           {
             "name": "ChemPFN",
             "start": "2025-06-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "Stuck",
             "open": true,
-            "months": 14.1
+            "months": 14.2
           },
           {
             "name": "PREEMI maternal healthcare",
             "start": "2025-07-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "Stuck",
             "open": true,
-            "months": 13.1
+            "months": 13.2
           },
           {
             "name": "HIV follow up during COVID in Zambia",
             "start": "2025-08-24",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "Stuck",
             "open": true,
             "months": 11.4
@@ -1552,18 +1552,18 @@
           {
             "name": "NPs as schistosoma drugs",
             "start": "2025-10-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "In progress",
             "open": true,
-            "months": 10.1
+            "months": 10.2
           },
           {
             "name": "PQZ signature reversal",
             "start": "2025-10-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "In progress",
             "open": true,
-            "months": 10.1
+            "months": 10.2
           },
           {
             "name": "Collaboration Fund BMGF",
@@ -1576,7 +1576,7 @@
           {
             "name": "AID3 molecular glue discovery",
             "start": "2025-11-01",
-            "end": "2026-08-05",
+            "end": "2026-08-06",
             "status": "Todo",
             "open": true,
             "months": 9.1
@@ -1599,12 +1599,12 @@
           }
         ],
         "n": 36,
-        "today": "2026-08-05",
+        "today": "2026-08-06",
         "semantics": {
-          "Todo": "neutral",
           "In progress": "brand",
-          "Done": "good",
-          "Stuck": "bad"
+          "Stuck": "bad",
+          "Todo": "neutral",
+          "Done": "good"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -6959,8 +6959,8 @@
           "archived"
         ],
         "values": [
-          70,
-          175,
+          60,
+          185,
           27,
           14,
           18,

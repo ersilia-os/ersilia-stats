@@ -131,6 +131,7 @@ Each step is a gate, and everything before the upload can stop a deploy:
 | `node --check` on `config.js` and `js/*.js` | any shipped script does not parse |
 | `export_site_data.py` | a PII guard trips, or an email-shaped string reaches the output |
 | `check_config_paths.py --fail-on-empty` | a chart points at a missing **or empty** metric |
+| `check_degradation.py` | a missing column crashes the build instead of emptying one card |
 | `verify_site.mjs` | a route renders no cards, logs a console error, has a row not summing to 12, has a caption that does not fit, or scrolls sideways at 390px |
 | the artifact grep | a raw snapshot or an address is inside `site/` |
 
@@ -387,6 +388,8 @@ scripts/
   site_data/                   one module per section, plus parsing, insights and KPIs
   check_config_paths.py        fails if a chart's metric is missing, empty, or names a
                                row key that does not exist
+  check_degradation.py         drops every column of every source one at a time and rebuilds:
+                               a missing column must empty a card, never crash
   make_fixture.py              the synthetic snapshot the secret-free PR check builds from
   stamp_assets.py              content-hash stamps on asset URLs, so a deploy cannot
                                serve a half-updated page
