@@ -50,8 +50,6 @@ function setChartWidth(width) {
   CHART_WIDTH = width > 0 ? width : 900;
   NARROW = CHART_WIDTH < NARROW_WIDTH;
 }
-function isNarrow() { return NARROW; }
-
 /* The label gutter for a horizontal ranking: ~42% of the box, never less than 96px
    (below that even "United States" will not fit) and never more than 210px (beyond
    that the labels win space the marks need). */

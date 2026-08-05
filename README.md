@@ -374,11 +374,28 @@ site/
   vendor/             echarts.min.js, world.geo.json — no CDN, same-origin only
   data/               generated: stats.json + one CSV per chart
 scripts/
-  fetch_airtable.py       read-only Airtable -> CSV, with the identifying-column denylist
-  export_site_data.py     CLI: snapshots -> site/data, with the disclosure guards
-  site_data/              one module per section, plus parsing, insights and KPIs
-  check_config_paths.py   fails if a chart's metric is missing from stats.json
+  collect_common.py            shared snapshot/retry/prune plumbing for the collectors
+  github_api.py                shared GitHub access: inventory, batched metrics, contributors
+  fetch_airtable.py            read-only Airtable -> CSV, with the identifying-column denylist
+  fetch_github.py              the public inventory, commit activity, stars, contributors
+  fetch_dockerhub.py           model image pull counts
+  fetch_openalex.py            citations, open access and author-institution countries, by DOI
+  resolve_dois.py              proposes a DOI per publication for a human to check
+  check_github_airtable_sync.py  fails the deploy when GitHub and Airtable disagree
+  update_airtable_publications.py  writes citation counts back, behind four refusals
+  export_site_data.py          CLI: snapshots -> site/data, with the disclosure guards
+  site_data/                   one module per section, plus parsing, insights and KPIs
+  check_config_paths.py        fails if a chart's metric is missing, empty, or names a
+                               row key that does not exist
+  make_fixture.py              the synthetic snapshot the secret-free PR check builds from
+  stamp_assets.py              content-hash stamps on asset URLs, so a deploy cannot
+                               serve a half-updated page
+  verify_site.mjs              headless smoke test: renders every route, checks rows,
+                               captions and axis-label collisions
 data/airtable_api_identifiers.csv   base/table id configuration
+data/air_tables_sample/             committed Airtable fixture (see make_fixture.py)
+data/collected_sample/              committed github/dockerhub/scholar fixture
+ruff.toml                           the pinned lint rule set, enforced in CI
 ```
 
 ## Design notes

@@ -5,10 +5,16 @@ fail silently: a renamed metric left a hole in the grid, and a whole page of cha
 once disappeared from the deployed site without anything erroring. This turns that
 class of mistake into a failing build.
 
-Reports three things:
+Reports four things:
   * config paths with no matching metric in stats.json        (error)
+  * ranked-table column keys absent from the metric's rows    (error)
   * config paths whose metric is present but empty            (warning)
   * exported metrics no chart references                      (warning)
+
+The column check exists because a `ranked` card names its columns by row key, and nothing
+validated them: renaming a key in the builder left the column heading in place and the cells
+blank, which looks like missing data rather than a broken reference. The same applies to a
+`shares` card's `highlight`, which names a label that must exist.
 
 Usage:
     python scripts/check_config_paths.py [--config site/config.js]
@@ -24,6 +30,7 @@ import sys
 DATA_PATH_RE = re.compile(r"""\bdata:\s*["']([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)+)["']""")
 
 
+
 def config_paths(text):
     """Ordered, de-duplicated dot paths referenced by config.js."""
     seen, out = set(), []
@@ -35,6 +42,35 @@ def config_paths(text):
             seen.add(path)
             out.append(path)
     return out
+
+
+def row_key_problems(text, sections):
+    """`[(path, kind, key)]` for ranked columns and shares highlights that do not exist.
+
+    Parsed with a deliberately small regex rather than a JS parser: each cell declares its
+    `data`, its optional `nameKey`, and its `columns` keys, and those are the only three
+    things needed. A cell whose shape defeats the regex is skipped rather than guessed at,
+    so this can under-report but never false-alarm.
+    """
+    problems = []
+    for cell in re.findall(r"\{[\s\S]*?\n(?=\s*\},|\s*\}\s*\])", text):
+        path_match = re.search(r"""\bdata:\s*["']([A-Za-z0-9_.]+)["']""", cell)
+        type_match = re.search(r"""\btype:\s*["'](\w+)["']""", cell)
+        if not path_match or not type_match or type_match.group(1) != "ranked":
+            continue
+        path = path_match.group(1)
+        metric = resolve(sections, path)
+        rows = (metric or {}).get("rows") or []
+        if not rows:
+            continue
+        keys = set(rows[0])
+        name_key = (re.search(r"""\bnameKey:\s*["'](\w+)["']""", cell) or [None, "name"])[1]
+        if name_key not in keys:
+            problems.append((path, "nameKey", name_key))
+        for key in re.findall(r"""\{\s*key:\s*["'](\w+)["']""", cell):
+            if key not in keys:
+                problems.append((path, "column", key))
+    return problems
 
 
 def resolve(sections, path):
@@ -95,6 +131,8 @@ def main():
         elif is_empty(metric):
             empty.append(path)
 
+    with open(args.config, encoding="utf-8") as handle:
+        bad_keys = row_key_problems(handle.read(), sections)
     unused = sorted(set(exported_paths(sections)) - set(paths))
 
     print("Checked %d chart data paths against %s" % (len(paths), args.stats))
@@ -106,15 +144,21 @@ def main():
         print("\nEMPTY in this snapshot (%d) — the card will show its empty state:" % len(empty))
         for path in empty:
             print("  - %s" % path)
+    if bad_keys:
+        print("\nROW KEYS that do not exist (%d) — the column renders blank:" % len(bad_keys))
+        for path, kind, key in bad_keys:
+            print("  - %s: %s %r" % (path, kind, key))
     if unused:
         print("\nEXPORTED but unused by any chart (%d):" % len(unused))
         for path in unused:
             print("  - %s" % path)
-    if not (missing or empty or unused):
+    if not (missing or empty or unused or bad_keys):
         print("All paths resolve and every exported metric is used.")
 
     if missing:
         raise SystemExit("FAIL: %d chart data path(s) missing from stats.json." % len(missing))
+    if bad_keys:
+        raise SystemExit("FAIL: %d ranked-table row key(s) do not exist." % len(bad_keys))
     if args.strict and (empty or unused):
         raise SystemExit("FAIL (strict): %d empty, %d unused." % (len(empty), len(unused)))
     if args.fail_on_empty and empty:

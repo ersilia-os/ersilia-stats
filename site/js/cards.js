@@ -348,15 +348,6 @@ function drillDown(chart, metric, csvPath) {
    any more: an earlier version guessed spans from the data and packed rows
    afterwards, which left short rows and ragged edges. A dashboard wants a layout
    decided up front. */
-function countCategories(chart, metric) {
-  if (!metric) return 0;
-  if (metric.tree) return metric.tree.length;
-  if (metric.cells) return (metric.x || []).length;
-  if (metric.points) return metric.points.length;
-  if (metric.rows) return metric.rows.length;
-  return (metric.labels || []).length;
-}
-
 /* --------------------------------------------------------------- card */
 function chartCard(chart, data, registry) {
   const sources = chart.toggles && chart.toggles.length
