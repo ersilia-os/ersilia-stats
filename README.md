@@ -12,7 +12,10 @@ Airtable ──fetch──> data/air_tables/*.csv ──export──> site/data/
            read-only, never committed              aggregate-only, committed
 ```
 
-Everything is **read-only** with respect to Airtable — nothing here ever writes back.
+Almost everything is **read-only** with respect to Airtable. The one exception is
+`scripts/update_airtable_publications.py`, which pushes collected citation counts into the
+Publications table by hand, behind four refusals and a one-field allow-list — see below. The
+site never reads what it writes, so a failed write cannot move a published figure.
 
 ## What is not in this repository
 
@@ -223,49 +226,58 @@ repository with no Airtable row, and a private repository absent from the table.
 One category is treated as a **warning** rather than a failure: Airtable saying `Private`
 while GitHub says public. The site over-hides, which is the harmless direction.
 
-### Writing GitHub figures back into Airtable
+### The Repositories table no longer stores GitHub figures
 
-`scripts/update_airtable_repositories.py` maintains the numeric columns of the Repositories
-table. Its own description says the table "is automatically completed with a nightly cron
-action"; **that cron no longer runs**, and this replaces it.
+Seven columns were deleted from the Airtable Repositories table — `Stars`, `Forks`,
+`Open Issues`, `Subscribers`, `Total Commits`, `Contributors` and `Contributor Names` — because
+a standing total copied into a spreadsheet is precisely the thing that goes stale unnoticed.
+That table now holds only what a person decides: `Name`, `Title`, `Description`, `Status`,
+`Type`, `Visibility`, `Projects` and `Creation Date`.
 
-The evidence that it stopped rather than never having worked is that the columns are *almost*
-right — small, recent, one-directional drift:
+**This is not a cosmetic change: it broke the build.** `repositories.py` did
+`int(row["stars"])`, which on the new schema raises `cannot convert float NaN to integer`.
+Every count now comes from `data/github/` and is joined onto the Airtable frame by repository
+name in `repositories.attach_github_counts()`.
 
-| Column | Agreed with live GitHub | Source |
-|---|---|---|
-| `Stars` | 140 / 141 | REST `stargazers_count` |
-| `Subscribers` | 140 / 141 | GraphQL `watchers.totalCount` |
-| `Forks` | 140 / 141 | REST `forks_count` |
-| `Open Issues` | 131 / 141 | GraphQL `issues(states:OPEN)` |
-| `Contributors` | 122 / 141 | REST `contributors?anon=1`, `Link` last page |
-| `Total Commits` | 118 / 141 | GraphQL `history.totalCount` — drifts fastest |
+Two consequences worth knowing, both stated on the affected cards:
 
-Those six are the entire **allow-list**, and it is an allow-list rather than a denylist because
-a denylist grows a hole every time someone adds a column. `Visibility` is never written — it is
-the field the site trusts to decide what may be named. Neither are `Type`, `Status`,
-`Contributor Names` (personal data), `Title`, `Description`, `Projects`, or `URL` (a formula).
+* **Commit concentration is now public-only.** The committed GitHub snapshot is public by
+  design, so a private repository has no commit count to contribute and drops out of the
+  Lorenz curve. It covered every repository while the figure lived in Airtable.
+* **The star KPI still covers private repositories**, via `org_totals_<date>.csv` — two
+  integers, `private_repositories` and `private_stars`, and **no names**. That is what lets
+  the total include private work without CI ever holding a token that can list private
+  repositories. Measured: 664 stars public, 5 private across 40 repositories.
 
-It resolves private repositories **live and in memory**, because 38 of the 179 rows are private
-and updating only the public ones would leave a fifth of the work undone. `data/github/*.csv`
-stays public-only regardless. **Its output names private repositories, so run it locally, never
-in a workflow on this repository.**
+`Creation Date` was deliberately retained, and it is the GitHub repository creation date —
+verified, 139 of 141 rows match `created_at` exactly. Two do not: `chembl-antimicrobial-models`,
+and `ersilia-stats`, whose 2023-12-08 is the *capstone* repository's creation date. That is the
+same contamination that gave the row 310 commits.
 
-Structural drift is reported and never fixed: it never creates a record (adding a row needs a
-`Type`, a judgement) and never deletes one.
+The contributor ranking now comes from GitHub's contributors endpoint rather than the deleted
+column, which also ends its hand-maintenance. It publishes **public handles attached to public
+commits** — the decision to show them was already taken; the community table's own handles are
+still dropped at load and never reach the site. Anonymous contributors are excluded, because
+GitHub identifies them by an email address rather than a login and no address is ever fetched.
 
-```bash
-export AIRTABLE_API_KEY=...      # needs data.records:write
-export GH_STATS_TOKEN=...        # needs to see private repositories
-PYTHONPATH=scripts python3 scripts/update_airtable_repositories.py           # read the diff
-PYTHONPATH=scripts python3 scripts/update_airtable_repositories.py --apply
-```
+### The GitHub writeback, and why it was removed
 
-On its first real run the sharp-fall refusal earned its place: the `ersilia-stats` row claimed
-310 commits and 9 contributors, but that repository is days old and has 21 commits — the row had
-been seeded with figures from the *capstone* repository, a different and private repository that
-really does have about 310. A guard meant to catch a broken collector caught bad stored data
-instead.
+`scripts/update_airtable_repositories.py` used to maintain the six numeric columns of the
+Repositories table, replacing a retired nightly cron. It is **deleted**, because the columns
+it wrote were deleted: every field in its allow-list — `Stars`, `Forks`, `Open Issues`,
+`Subscribers`, `Total Commits`, `Contributors` — no longer exists, so the script could not
+write anything. Keeping it would have been dead code that fails on its first call.
+
+The problem it solved is solved better by not storing the numbers at all. Nothing has to be
+kept in step, because there is now one source: GitHub, read at collection time.
+
+It is worth recording what it caught before it went, because the guard earned its place. On
+its only real run the sharp-fall refusal stopped a write and named the row: `ersilia-stats`
+claimed 310 commits and 9 contributors, while that repository is days old and has 21. The row
+had been seeded with figures from the *capstone* repository — private, and genuinely around
+310. A guard written to catch a broken collector caught bad stored data instead. The residue
+of that same error is still visible in `Creation Date`, which reads 2023-12-08 for a
+repository created 2026-07-31.
 
 ### A partial fetch cannot be trusted to announce itself
 

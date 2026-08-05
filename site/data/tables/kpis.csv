@@ -2,12 +2,12 @@ metric,value,change_last_12_months
 community_members,113,11
 repositories,179,53
 repositories_public,141,
-publications,42,5
-total_citations,1713,211
+publications,25,4
+total_citations,694,157
 projects,36,9
 organisations,320,
 countries_represented,25,
-total_stars,665,
+total_stars,669,
 events,91,14
 blogposts,54,6
 models,243,55

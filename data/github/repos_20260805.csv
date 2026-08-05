@@ -32,7 +32,7 @@ coadd-binary-tasks,no,2025-01-14,2026-06-15,no,no,Python,GPL-3.0,,125,1,0,2,0,ye
 compound-embedding,no,2022-12-20,2023-04-11,no,no,Jupyter Notebook,GPL-3.0,,121493,6,1,1,0,yes,main,93,1,0,0,,0,0,6,3
 compound-embedding-lite,no,2023-04-05,2024-04-09,no,no,Python,GPL-3.0,,44015,0,0,1,0,yes,main,7,0,0,2,2024-04-08,0,0,,2
 d4g-cohort-2024-hackathon-group3,no,2024-08-12,2024-07-17,no,yes,,,,1242,0,0,0,0,no,main,40,0,0,0,,0,0,,7
-digests,no,2026-05-20,2026-08-04,no,no,CSS,GPL-3.0,,166,2,0,0,1,yes,main,53,0,1,0,,1,0,,1
+digests,no,2026-05-20,2026-08-04,no,no,CSS,GPL-3.0,,131,2,0,0,0,yes,main,61,0,4,0,,4,0,,2
 docking-gnina,no,2025-07-02,2026-03-05,yes,no,Python,MIT,,1794,0,0,0,0,yes,main,4,0,0,0,,0,0,,1
 dvc-gd-github-test,no,2025-09-08,2026-03-02,yes,no,,,,17,0,0,0,0,yes,main,8,0,0,0,,0,0,,2
 easylinkage,no,2019-08-19,2020-07-30,no,no,Python,MIT,,70,1,0,1,0,yes,master,20,0,0,0,,0,0,,3
@@ -185,7 +185,7 @@ eos60mw,yes,2026-03-25,2026-06-10,no,no,Python,GPL-3.0,,49,0,0,0,0,yes,main,21,0
 eos633t,yes,2023-11-03,2026-07-30,no,no,Python,GPL-3.0,,2749,0,0,1,0,yes,main,62,6,1,1,2025-11-20,1,0,287,7
 eos65rt,yes,2021-11-10,2026-05-18,no,no,Python,GPL-3.0,,1659,0,2,1,0,yes,main,50,5,7,1,2025-10-13,7,7,5,7
 eos694w,yes,2024-02-07,2026-05-18,no,no,Python,GPL-3.0,,158867,0,1,2,0,yes,main,97,3,3,1,2025-11-20,3,3,16,8
-eos69e6,yes,2023-12-01,2026-08-04,no,no,Python,GPL-3.0,,24782,0,0,1,1,yes,main,66,2,1,0,,1,0,321,7
+eos69e6,yes,2023-12-01,2026-08-04,no,no,Python,GPL-3.0,,24772,0,0,1,1,yes,main,70,2,1,1,2026-08-04,1,0,321,7
 eos69jj,yes,2026-06-24,2026-06-26,no,no,Python,GPL-3.0,,34,0,1,0,0,yes,main,11,0,1,1,2026-06-26,1,0,,3
 eos69p9,yes,2022-06-16,2026-05-20,no,no,Python,GPL-3.0,,10974,1,3,1,0,yes,main,69,8,2,1,2025-10-13,2,2,10,8
 eos6ao8,yes,2021-10-19,2026-05-18,no,no,Jupyter Notebook,GPL-3.0,,2126,1,1,1,0,yes,main,76,15,3,1,2025-10-13,3,3,1,7
@@ -235,6 +235,7 @@ eos81ew,yes,2023-01-29,2026-07-06,no,no,Python,GPL-3.0,,43466,0,1,3,0,yes,main,5
 eos81zy,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,47690,0,0,0,0,yes,main,43,0,1,4,2026-07-22,1,0,,3
 eos82v1,yes,2025-11-29,2026-05-18,no,no,Python,GPL-3.0,,151,0,0,0,0,yes,main,41,0,2,3,2026-02-16,2,0,,5
 eos8451,yes,2022-07-19,2026-07-06,no,no,Python,GPL-3.0,,135,1,2,1,0,yes,main,62,9,2,1,2025-10-14,2,2,29,7
+eos84nf,yes,2026-08-04,2026-08-04,no,no,Python,GPL-3.0,,20,0,0,0,0,yes,main,2,0,0,0,,0,0,,1
 eos85a3,yes,2022-07-19,2026-07-06,no,no,Python,GPL-3.0,,2134,0,1,1,0,yes,main,70,7,2,1,2025-10-14,2,2,28,7
 eos85mn,yes,2025-08-27,2026-06-03,no,no,Python,GPL-3.0,,73,0,1,0,0,yes,main,27,0,1,1,2026-06-03,1,1,,3
 eos8a4x,yes,2021-09-17,2025-12-24,no,no,Python,GPL-3.0,,115,2,2,1,0,yes,main,126,6,6,2,2025-12-24,6,6,6,6
@@ -254,6 +255,7 @@ eos8lok,yes,2023-03-24,2026-05-19,no,no,Python,GPL-3.0,,79,1,0,1,0,yes,main,51,1
 eos8ub5,yes,2024-11-10,2026-05-18,no,no,Python,GPL-3.0,,56,0,1,2,0,yes,main,63,6,0,1,2025-11-18,0,0,31,6
 eos8v1a,yes,2026-05-19,2026-07-22,no,no,Python,GPL-3.0,,42711,0,0,0,0,yes,main,32,0,1,3,2026-07-22,1,0,,3
 eos8vud,yes,2024-05-01,2026-08-03,no,no,Python,GPL-3.0,,38086,0,0,2,0,yes,main,48,4,3,1,2026-02-13,3,0,70,6
+eos8zvb,yes,2026-08-04,2026-08-04,no,no,Python,GPL-3.0,,3172,0,0,0,0,yes,main,11,0,1,1,2026-08-04,1,0,,2
 eos92sw,yes,2021-04-30,2026-05-18,no,no,Python,NOASSERTION,,341,1,2,1,0,yes,main,51,8,4,1,2025-10-08,4,4,1,6
 eos935d,yes,2022-12-16,2026-05-18,no,no,Python,GPL-3.0,,309,0,0,3,0,yes,main,84,8,3,1,2025-10-22,3,3,11,8
 eos93h2,yes,2023-01-25,2026-07-30,no,no,Python,GPL-3.0,,66,0,0,3,0,yes,main,62,11,4,1,2025-10-16,4,4,150,6
@@ -288,7 +290,7 @@ eosdev,no,2026-01-06,2026-01-22,yes,no,Python,GPL-3.0,,22,0,0,0,0,yes,main,5,0,0
 eosframes,no,2025-07-22,2026-06-24,no,no,Python,MIT,,20623,2,0,0,2,yes,main,149,0,1,3,2026-05-12,1,1,,5
 eosquality,no,2026-04-16,2026-05-29,no,no,Python,GPL-3.0,,491,1,0,0,0,yes,main,7,0,0,1,2026-05-19,0,0,,1
 eosvc,no,2025-12-23,2026-06-25,no,no,Python,GPL-3.0,,203,0,0,0,0,yes,main,35,2,0,5,2026-06-25,0,0,105,4
-ersilia,no,2020-07-04,2026-08-01,no,no,Python,GPL-3.0,drug-discovery global-south machine-learning model-hub neglected-tropical-disease open-source,44202,306,177,19,13,yes,master,3017,1170,526,32,2026-08-01,30,21,3,108
+ersilia,no,2020-07-04,2026-08-01,no,no,Python,GPL-3.0,drug-discovery global-south machine-learning model-hub neglected-tropical-disease open-source,44202,306,177,19,15,yes,master,3017,1170,526,32,2026-08-01,30,21,3,108
 ersilia-api,no,2023-06-11,2023-09-04,no,no,Python,GPL-3.0,api ersilia python rest,85,0,0,1,0,yes,main,12,0,0,0,,0,0,,2
 ersilia-app,no,2020-07-23,2024-09-03,no,no,Python,GPL-3.0,,511,1,1,1,0,yes,master,39,3,3,2,2024-09-02,3,3,28,4
 ersilia-apptainer,no,2026-01-16,2026-07-20,no,no,Python,GPL-3.0,,47,0,0,0,0,yes,main,15,0,2,1,2026-07-20,2,0,,2
@@ -301,21 +303,21 @@ ersilia-intro-workshop,no,2023-09-05,2023-10-02,no,no,Jupyter Notebook,GPL-3.0,a
 ersilia-maintenance,no,2024-03-05,2026-08-03,no,no,Python,GPL-3.0,,10045,0,2,2,2,yes,main,822,37,13,0,,13,12,50,11
 ersilia-mcp,no,2026-06-04,2026-07-29,no,no,Python,GPL-3.0,,331,0,2,0,5,yes,main,59,1,18,0,,18,4,1,4
 ersilia-metadata-annotation,no,2025-04-02,2025-04-17,yes,no,Python,GPL-3.0,,21,0,0,1,1,yes,main,7,0,2,0,,2,2,,4
-ersilia-ml-benchmark,no,2025-10-25,2026-08-04,no,no,Jupyter Notebook,GPL-3.0,,213124,1,0,0,0,yes,main,21,0,0,0,,0,0,,2
+ersilia-ml-benchmark,no,2025-10-25,2026-08-04,no,no,Jupyter Notebook,GPL-3.0,,213132,1,0,0,0,yes,main,22,0,0,0,,0,0,,2
 ersilia-model-hub-maintained-inputs,no,2022-10-14,2026-05-15,no,no,Jupyter Notebook,GPL-3.0,,234132,0,0,1,0,yes,main,50,1,1,0,,1,1,90,7
 ersilia-model-hub-paper,no,2026-01-14,2026-07-30,no,no,Python,GPL-3.0,,340,1,0,0,0,yes,main,18,0,0,0,,0,0,,4
 ersilia-model-request-app,no,2025-10-06,2026-03-26,no,no,TypeScript,,,1171,0,0,0,1,yes,main,69,0,64,0,,30,28,,7
 ersilia-model-workflows,no,2025-02-27,2026-07-21,no,no,,GPL-3.0,,284,0,0,1,0,yes,main,238,5,1,0,,1,0,26,5
 ersilia-pack,no,2024-05-29,2026-04-13,no,no,Python,GPL-3.0,,4955,6,7,3,3,yes,main,289,39,45,0,,30,30,42,11
-ersilia-self-service,no,2024-04-23,2025-04-23,no,no,Python,GPL-3.0,,218,2,1,1,11,yes,main,65,433,4,0,,4,4,142,5
-ersilia-skills,no,2026-03-06,2026-08-04,no,no,Python,,,1550,2,0,0,4,yes,main,106,1,18,0,,18,0,27,6
-ersilia-stats,no,2026-07-31,2026-08-04,no,no,Python,GPL-3.0,,1215,0,0,0,0,yes,main,21,0,0,0,,0,0,,2
+ersilia-self-service,no,2024-04-23,2025-04-23,no,no,Python,GPL-3.0,,218,2,1,1,12,yes,main,65,433,4,0,,4,4,142,5
+ersilia-skills,no,2026-03-06,2026-08-04,no,no,Python,,,1589,2,0,0,6,yes,main,107,3,18,0,,18,0,27,6
+ersilia-stats,no,2026-07-31,2026-08-04,no,no,Python,GPL-3.0,,1410,0,0,0,0,yes,main,21,0,0,0,,0,0,,2
 ersilia-tabpfn-client,no,2026-03-18,2026-03-19,no,no,Python,GPL-3.0,,137,0,0,0,0,yes,main,4,0,0,0,,0,0,,2
 ersilia-to-cdd,no,2024-07-25,2024-11-19,no,no,,GPL-3.0,,17,0,0,2,0,yes,main,2,0,0,0,,0,0,,2
 ersilia.io,no,2020-11-19,2021-06-02,yes,no,Vue,MIT,ersilia model-hub,83603,1,3,1,0,yes,main,90,0,0,0,,0,0,,2
 esther-workshop,no,2021-09-05,2021-09-07,no,no,,MIT,,38576,0,0,1,0,yes,master,8,0,0,0,,0,0,,1
 estherlinkage,no,2021-09-06,2021-09-07,no,no,Python,MIT,,10,0,0,1,0,yes,main,7,0,0,0,,0,0,,1
-eu-openscreen-antimicrobial-tasks,no,2026-05-18,2026-05-29,no,no,Python,GPL-3.0,,67,0,0,0,0,yes,main,6,0,0,0,,0,0,,1
+eu-openscreen-antimicrobial-tasks,no,2026-05-18,2026-08-04,no,no,Python,GPL-3.0,,86,0,0,0,0,yes,main,7,0,0,0,,0,0,,2
 evc-dev-analysis,no,2025-12-30,2026-01-05,yes,no,Shell,GPL-3.0,,30,0,0,0,0,yes,main,5,0,0,0,,0,0,,2
 event-fund-ai-drug-discovery,no,2022-09-12,2026-03-02,no,no,Jupyter Notebook,GPL-3.0,,92787,10,2,1,0,yes,main,97,0,1,0,,1,1,,4
 few-shot-bioassays,no,2024-02-23,2024-05-11,no,no,Python,GPL-3.0,,270140,1,0,2,0,yes,main,55,4,0,0,,0,0,827,3

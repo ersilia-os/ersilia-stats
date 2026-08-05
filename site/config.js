@@ -266,14 +266,18 @@ const VIEWS = [
   {
     id: "publications",
     title: "Publications",
-    blurb: "Peer-reviewed papers and preprints linked to Ersilia, and how far they reach.",
+    blurb: "Peer-reviewed papers and preprints carrying an Ersilia affiliation, and how far " +
+           "they reach. Every figure here covers those 25 papers only. The team has 17 more " +
+           "tracked here without an Ersilia affiliation \u2014 earlier work, holding more " +
+           "citations than the affiliated set \u2014 and they are shown in their own right at " +
+           "the foot of the page rather than folded into totals labelled Ersilia.",
     links: [{ label: "Publications", href: "https://ersilia.io/publications" }],
     headlineKpi: "publications",
     rows: [
       { h: "h-lg", cells: [
         {
           title: "Publications over time", span: 7, data: "publications.growth", type: "growthcombo",
-          desc: "Papers and preprints by year of publication: bars for the year, a line for the running total. The bars can be hidden from the legend to read the total on its own.",
+          desc: "Ersilia-affiliated papers and preprints by year of publication: bars for the year, a line for the running total. The bars can be hidden from the legend to read the total on its own. Unaffiliated work by the team is excluded here and shown at the foot of the page.",
         },
         {
           title: "How the work is framed", span: 5, type: "shares",
@@ -283,7 +287,7 @@ const VIEWS = [
             { label: "African collaboration", data: "publications.by_african_collab", highlight: "Yes" },
             { label: "Primary research", data: "publications.by_type", highlight: "Research" },
           ],
-          desc: "Three splits that say what kind of body of work this is. African collaboration is recorded on some papers only; the share is of those where it is recorded.",
+          desc: "Three splits that say what kind of body of work this is. The affiliation share is computed over ALL tracked papers, since it is the figure that describes the split itself \u2014 unlike every other number on this page, which covers the affiliated papers only. African collaboration is recorded on some papers only; that share is of those where it is recorded.",
         },
       ] },
       { h: "h-lg", cells: [
@@ -305,7 +309,7 @@ const VIEWS = [
         {
           title: "Ersilia-affiliated against external, per year", span: 8,
           data: "publications.affiliation_by_year", type: "stackbar",
-          desc: "Publications per year split by whether they carry a direct Ersilia affiliation.",
+          desc: "All tracked publications per year, split by whether they carry a direct Ersilia affiliation. One of the two charts on this page deliberately covering the whole set rather than the affiliated subset, because its subject IS the split \u2014 it shows how much of the team\u2019s recorded output is Ersilia work and how that has changed.",
         },
       ] },
       { h: "h-lg", cells: [
@@ -344,7 +348,20 @@ const VIEWS = [
             { key: "year", label: "Year", raw: true },
             { key: "ersilia", label: "Ersilia", raw: true },
           ],
-          desc: "Individual papers ranked by citation count. The Ersilia column is the point of this table rather than an aside: the four most-cited papers here carry no direct Ersilia affiliation — they are earlier work by people who later founded or joined Ersilia — and the most-cited affiliated paper has 53 citations. Ranking by citations alone under an Ersilia heading would claim credit the data does not support, and quietly dropping the unaffiliated papers would hide that the distinction exists.",
+          desc: "Ersilia-affiliated papers ranked by citation count. Ranked over everything tracked instead, the top four would all be unaffiliated — 420, 132, 101 and 69 citations, the team's earlier careers — against 115 for the most-cited affiliated paper, so a bare ranking under an Ersilia heading would claim credit the data does not support. Those papers are not dropped silently: they are the card below. Titles, journals and years are public bibliographic facts; no author names are published.",
+        },
+      ] },
+      { h: "h-lg", cells: [
+        {
+          title: "Other relevant work by the team, outside Ersilia", span: 12,
+          data: "publications.external_work", type: "ranked", nameLabel: "Title",
+          nameKey: "title", top: 10,
+          columns: [
+            { key: "citations", label: "Citations" },
+            { key: "year", label: "Year", raw: true },
+            { key: "journal", label: "Journal", raw: true },
+          ],
+          desc: "Research by people who founded or joined Ersilia, carrying no Ersilia affiliation — mostly earlier in their careers, and closely related in subject. This card exists so that the filtering applied to the rest of the page is visible rather than silent: these 17 papers hold more citations between them than the 25 affiliated ones, and the most-cited has 420 against 115. Excluding them from figures labelled Ersilia is the only way those figures can describe Ersilia; excluding them from the page altogether would hide both the work and the choice.",
         },
       ] },
     ],
@@ -353,9 +370,11 @@ const VIEWS = [
     id: "repositories",
     title: "Code",
     blurb: "Ersilia's open-source repositories, and what is actually happening inside them. " +
-           "Counts, dates and totals cover all of them; anything that names a repository or a " +
-           "contributor covers the public ones only. The activity figures come from GitHub " +
-           "directly rather than from a stored total, which is why they can be shown by quarter.",
+           "How many there are and when they were created covers all of them, public and " +
+           "private. Everything measured from the code itself — commits, stars, issues, " +
+           "contributors — comes from GitHub and therefore covers the public repositories " +
+           "only; the exception is the star total in the headline figures, which adds a " +
+           "private aggregate carrying no names.",
     links: [{ label: "ersilia-os on GitHub", href: "https://github.com/ersilia-os" }],
     headlineKpi: "repositories",
     rows: [
@@ -363,7 +382,7 @@ const VIEWS = [
         {
           title: "Popularity against activity", span: 12, data: "repositories.scatter", type: "logscatter",
           scatter: { x: "stars", y: "commits", xLabel: "Stars", yLabel: "Commits" },
-          desc: "One dot per public repository: stars against commits, both on logarithmic axes because a handful of repositories account for most of every metric — on linear axes the other 130 collapse into the corner. Dashed lines mark the medians, so the quadrants separate 'popular but quiet' from 'busy but unknown'. Only outliers are labelled.",
+          desc: "One dot per public repository: stars against commits, both on logarithmic axes because a handful of repositories account for most of every metric — on linear axes the other 130 collapse into the corner. Dashed lines mark the medians, so the quadrants separate 'popular but quiet' from 'busy but unknown'. Only outliers are labelled. Both measures now come from GitHub directly rather than from a stored column, so they cannot drift from what the repository actually shows.",
         },
       ] },
       { h: "h-lg", cells: [
@@ -430,12 +449,12 @@ const VIEWS = [
             { key: "forks", label: "Forks" },
             { key: "contributors", label: "People" },
           ],
-          desc: "One table rather than three ranking charts, so a repository's whole profile sits on one row. Ranked by stars.",
+          desc: "One table rather than three ranking charts, so a repository's whole profile sits on one row. Ranked by stars. Every figure here is read from GitHub at collection time; these used to be hand-maintained columns in Airtable and have been removed from it, because a standing total copied into a spreadsheet is precisely the thing that goes stale unnoticed.",
         },
         {
           title: "Commit concentration", span: 5, data: "repositories.contributor_concentration",
           type: "lorenz",
-          desc: "Cumulative share of all commits held by the least active repositories. The dashed diagonal is perfect evenness; the further the curve sits below it, the more the work concentrates in a few repositories.",
+          desc: "Cumulative share of commits held by the least active repositories. The dashed diagonal is perfect evenness; the further the curve sits below it, the more the work concentrates in a few. Public repositories only — commit counts come from the GitHub snapshot, which is public by design, so a private repository has no count to contribute. This covered every repository while the figure was stored in Airtable.",
         },
       ] },
       { h: "h-lg", cells: [
@@ -447,7 +466,7 @@ const VIEWS = [
         {
           title: "Contributors by repository count", span: 7, data: "repositories.top_contributors",
           type: "lollipop",
-          desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to. Public repository metadata, not community records.",
+          desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to, read from GitHub's contributors endpoint. The numbers are much larger than they used to be, and the reason is coverage rather than activity: this now spans all 386 public repositories including the per-model ones, where the Airtable column it replaced tracked only the 141 curated repositories. Automation accounts are excluded — ersilia-bot alone had committed to 245 repositories and would rank third, which describes CI rather than people. Anonymous contributors are also excluded, because GitHub identifies those by an email address rather than a login and no address is ever collected. Public handles attached to public commits: repository metadata, not community records, and the community table's own handles are dropped before they can reach this site. One repository counts once per person however many commits they made to it.",
         },
       ] },
       { h: "h-md", cells: [

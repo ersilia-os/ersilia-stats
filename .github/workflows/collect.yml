@@ -75,6 +75,11 @@ jobs:
           expected = {
               "data/dockerhub/images_*.csv": ("name", "pull_count", "is_model"),
               "data/github/repos_*.csv": ("name", "pushed_at", "archived", "stars"),
+              # The site's repository counts come from here now, not from Airtable —
+              # those columns were deleted from that table. A missing column would
+              # silently zero the Code page rather than fail it.
+              "data/github/contributors_*.csv": ("login", "repositories"),
+              "data/github/org_totals_*.csv": ("metric", "value"),
               "data/scholar/works_*.csv": ("doi", "citations", "is_open_access"),
           }
           failed = False

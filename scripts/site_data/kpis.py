@@ -6,7 +6,9 @@ total says how big Ersilia is; the delta says whether it is still growing.
 """
 import pandas as pd
 
-from .parse import col, dense_quarters, quarter_counts, to_num
+from .parse import as_text, col, dense_quarters, quarter_counts, to_num
+
+YES = {"yes", "true", "1"}
 
 QUARTERS_PER_YEAR = 4
 
@@ -55,11 +57,49 @@ def _kpi(value, series=None, per_period=QUARTERS_PER_YEAR):
     return {"value": int(value), "series": series, "delta_12m": delta}
 
 
-def _openalex_totals(collected):
+def _affiliated_dois(pubs):
+    """Bare DOIs of the Ersilia-AFFILIATED publications.
+
+    The headline "Citations" tile has to agree with the Publications page, and that page now
+    reports affiliated work only: 17 of the 42 tracked papers carry no Ersilia affiliation
+    and hold **1,019 of the 1,713 citations**, the largest being a 420-citation paper from
+    before Ersilia existed. A tile labelled "Citations" beside an Ersilia logo cannot count
+    those and stay honest, so this restricts it. The excluded work is published in its own
+    right at the foot of the Publications page.
+    """
+    if pubs is None or pubs.empty or "ersilia_affiliation" not in pubs.columns:
+        return None
+    flags = as_text(col(pubs, "ersilia_affiliation")).str.strip().str.lower()
+    dois = as_text(col(pubs, "doi"))
+    keep = set()
+    for i in range(len(pubs)):
+        if flags.iloc[i] in YES:
+            bare = str(dois.iloc[i] or "").strip().lower()
+            for prefix in ("https://doi.org/", "http://doi.org/", "doi:"):
+                if bare.startswith(prefix):
+                    bare = bare[len(prefix):]
+            if bare:
+                keep.add(bare.strip())
+    return keep
+
+
+def _bare(value):
+    text = str(value or "").strip().lower()
+    for prefix in ("https://doi.org/", "http://doi.org/", "doi:"):
+        if text.startswith(prefix):
+            text = text[len(prefix):]
+    return text.strip()
+
+
+def _openalex_totals(collected, dois=None):
     """``(per_year, total)`` from the collected OpenAlex citation series, or ``(None, None)``."""
     years = (collected or {}).get("scholar_citations_by_year")
     if years is None or years.empty:
         return None, None
+    if dois is not None and "doi" in years.columns:
+        years = years[[_bare(years["doi"].iloc[i]) in dois for i in range(len(years))]]
+        if years.empty:
+            return None, None
     counts = to_num(years.get("citations"))
     totals = {}
     for i in range(len(years)):
@@ -69,6 +109,34 @@ def _openalex_totals(collected):
     if not totals:
         return None, None
     return totals, sum(totals.values())
+
+
+def _star_total(collected):
+    """Stars across every repository in the organisation, public and private.
+
+    Summed from the collected GitHub snapshot plus the private aggregate, not from
+    Airtable — the `Stars` column was deleted from that table, so the old
+    `to_num(col(every_repo, "stars")).sum()` would now return 0 and the KPI would read
+    zero stars.
+
+    PRIVATE REPOSITORIES ARE INCLUDED, and doing it this way is the point: `org_totals`
+    carries two integers and no names, so the total can cover private work without CI
+    ever holding a token that can list private repositories. Measured when written: 664
+    public + 5 private across 40 private repositories. If the aggregate is missing —
+    a collector run without private access — the total silently covers public
+    repositories only, which is the safe direction for a figure like this.
+    """
+    total = 0
+    frame = (collected or {}).get("github_repos")
+    if frame is not None and not frame.empty and "stars" in frame.columns:
+        total += int(to_num(frame["stars"]).sum())
+    totals = (collected or {}).get("github_org_totals")
+    if totals is not None and not totals.empty and {"metric", "value"} <= set(totals.columns):
+        values = to_num(totals["value"])
+        for i in range(len(totals)):
+            if str(totals["metric"].iloc[i]).strip() == "private_stars":
+                total += int(values.iloc[i] or 0)
+    return total
 
 
 def _citation_total(pubs, collected):
@@ -81,17 +149,24 @@ def _citation_total(pubs, collected):
     the authoritative per-work figure is the headline and the series is used only for the
     shape of the curve.
     """
+    dois = _affiliated_dois(pubs)
     works = (collected or {}).get("scholar_works")
     if works is not None and not works.empty and "citations" in works.columns:
-        total = int(to_num(works["citations"]).sum())
+        frame = works
+        if dois is not None and "doi" in works.columns:
+            frame = works[[_bare(works["doi"].iloc[i]) in dois for i in range(len(works))]]
+        total = int(to_num(frame["citations"]).sum())
         if total:
             return total
+    if dois is not None and "ersilia_affiliation" in pubs.columns:
+        flags = as_text(col(pubs, "ersilia_affiliation")).str.strip().str.lower()
+        return int(to_num(col(pubs, "citations"))[flags.isin(YES).values].sum())
     return int(to_num(col(pubs, "citations")).sum())
 
 
 def _citation_series(pubs, collected):
-    """Cumulative citations by the year the citation happened."""
-    per_year, _total = _openalex_totals(collected)
+    """Cumulative citations by the year the citation happened, affiliated papers only."""
+    per_year, _total = _openalex_totals(collected, _affiliated_dois(pubs))
     if not per_year:
         return _yearly_cumulative(col(pubs, "year"), col(pubs, "citations"))
     labels, values, running = [], [], 0
@@ -128,7 +203,17 @@ def build(tables, repos_public, models, repos_all=None, collected=None):
     # against 1,713 — and a site that prints both numbers in two places is worse than one
     # that prints the wrong one consistently.
     citations = _citation_total(pubs, collected)
-    stars = int(to_num(col(every_repo, "stars")).sum()) if has_repos else 0
+    stars = _star_total(collected)
+
+    # Ersilia-affiliated papers only, so the tile agrees with the Publications page and with
+    # the citation total beside it. The other 17 tracked papers are the team's earlier work
+    # and get their own card there; counting them here would make "Publications" mean
+    # "papers we keep a record of", which is not what a reader takes it to mean.
+    if pubs is not None and not pubs.empty and "ersilia_affiliation" in pubs.columns:
+        aff_flags = as_text(col(pubs, "ersilia_affiliation")).str.strip().str.lower()
+        affiliated_pubs = pubs[aff_flags.isin(YES).values]
+    else:
+        affiliated_pubs = pubs
 
     out = {
         "community_members": _kpi(len(community), _cumulative_series(col(community, "start_date"))),
@@ -138,7 +223,8 @@ def build(tables, repos_public, models, repos_all=None, collected=None):
         "repositories_public": _kpi(len(repos_public) if repos_public is not None else 0),
         # Yearly, not quarterly: publications only carry a year. One year back,
         # accordingly.
-        "publications": _kpi(len(pubs), _yearly_cumulative(col(pubs, "year")), per_period=1),
+        "publications": _kpi(len(affiliated_pubs),
+                             _yearly_cumulative(col(affiliated_pubs, "year")), per_period=1),
         # The series is the REAL accrual — citations by the year they were made, which
         # OpenAlex records — not citations attributed to their paper's publication year.
         # The two differ a lot at the recent end, and only one of them is what a reader

@@ -49,7 +49,7 @@ compound-embedding-lite,2024Q2,1
 d4g-cohort-2024-hackathon-group3,2024Q2,27
 d4g-cohort-2024-hackathon-group3,2024Q3,13
 digests,2026Q2,37
-digests,2026Q3,18
+digests,2026Q3,24
 eos-analysis-template,2025Q3,8
 eos-analysis-template,2025Q4,6
 eos-analysis-template,2026Q1,2
@@ -747,7 +747,7 @@ eos69e6,2025Q3,3
 eos69e6,2025Q4,1
 eos69e6,2026Q1,13
 eos69e6,2026Q2,3
-eos69e6,2026Q3,11
+eos69e6,2026Q3,15
 eos69jj,2026Q2,11
 eos69p9,2024Q1,1
 eos69p9,2024Q2,2
@@ -984,6 +984,7 @@ eos8451,2025Q4,6
 eos8451,2026Q1,5
 eos8451,2026Q2,3
 eos8451,2026Q3,8
+eos84nf,2026Q3,2
 eos85a3,2024Q2,2
 eos85a3,2025Q2,8
 eos85a3,2025Q3,4
@@ -1081,6 +1082,7 @@ eos8vud,2025Q3,2
 eos8vud,2026Q1,23
 eos8vud,2026Q2,4
 eos8vud,2026Q3,8
+eos8zvb,2026Q3,11
 eos92sw,2024Q1,1
 eos92sw,2024Q2,2
 eos92sw,2025Q2,14
@@ -1279,7 +1281,7 @@ ersilia-mcp,2026Q2,10
 ersilia-mcp,2026Q3,49
 ersilia-ml-benchmark,2025Q4,9
 ersilia-ml-benchmark,2026Q1,2
-ersilia-ml-benchmark,2026Q3,10
+ersilia-ml-benchmark,2026Q3,11
 ersilia-model-hub-maintained-inputs,2024Q1,1
 ersilia-model-hub-maintained-inputs,2024Q4,2
 ersilia-model-hub-maintained-inputs,2025Q3,1
@@ -1314,12 +1316,13 @@ ersilia-self-service,2025Q1,2
 ersilia-self-service,2025Q2,1
 ersilia-skills,2026Q1,12
 ersilia-skills,2026Q2,70
-ersilia-skills,2026Q3,24
+ersilia-skills,2026Q3,25
 ersilia-stats,2026Q3,21
 ersilia-tabpfn-client,2026Q1,4
 ersilia-to-cdd,2024Q3,1
 ersilia-to-cdd,2024Q4,1
 eu-openscreen-antimicrobial-tasks,2026Q2,6
+eu-openscreen-antimicrobial-tasks,2026Q3,1
 event-fund-ai-drug-discovery,2026Q1,1
 few-shot-bioassays,2024Q1,14
 few-shot-bioassays,2024Q2,41

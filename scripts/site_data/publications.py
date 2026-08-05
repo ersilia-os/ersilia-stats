@@ -45,7 +45,7 @@ def build(pubs, collected=None):
                 "collaboration_breadth",
             )},
             growth=dict(empty_series), citation_growth=dict(empty_series),
-            most_cited={"rows": [], "n": 0},
+            most_cited={"rows": [], "n": 0}, external_work={"rows": [], "n": 0},
             citation_accrual={"labels": [], "series": [], "n": 0},
         )
 
@@ -55,29 +55,46 @@ def build(pubs, collected=None):
     # once and then goes on being true for a while.
     live = _openalex_citations(collected)
     citations = _merge_citations(pubs, live)
-    years = pd.to_numeric(col(pubs, "year"), errors="coerce")
+
+    # EVERY FIGURE BELOW COVERS ERSILIA-AFFILIATED PAPERS ONLY, except the two that are
+    # about the split itself. 17 of the 42 tracked papers carry no Ersilia affiliation and
+    # hold 1,019 of the 1,713 citations — they are the team's earlier careers, and counting
+    # them under an Ersilia heading claims credit the data does not support. They are not
+    # hidden: they get their own card at the foot of the page.
+    flags = as_text(col(pubs, "ersilia_affiliation")).str.strip().str.lower()
+    is_ersilia = flags.isin(YES)
+    affiliated = pubs[is_ersilia.values]
+    external = pubs[(~is_ersilia).values]
+    aff_citations = citations[is_ersilia.values]
+    ext_citations = citations[(~is_ersilia).values]
+    aff_dois = {_bare_doi(v) for v in as_text(col(affiliated, "doi"))} - {""}
+    aff_collected = _affiliated_collected(collected, aff_dois)
+    years = pd.to_numeric(col(affiliated, "year"), errors="coerce")
+    all_years = pd.to_numeric(col(pubs, "year"), errors="coerce")
 
     return {
         "per_year": _per_year(years),
-        "citations_per_year": _citations_per_year(years, citations),
-        "output_and_impact": _output_and_impact(years, citations),
+        "citations_per_year": _citations_per_year(years, aff_citations),
+        "output_and_impact": _output_and_impact(years, aff_citations),
         "growth": _growth(years),
-        "citation_accrual": _citation_accrual(collected),
-        "open_access": _open_access(collected),
-        "oa_routes": _oa_routes(collected),
-        "collaboration_countries": _collaboration_countries(collected),
-        "collaboration_breadth": _collaboration_breadth(collected),
-        "most_cited": _most_cited(pubs, citations),
-        "citation_growth": _citation_growth(years, citations),
+        "external_work": _external_work(external, ext_citations),
+        "citation_accrual": _citation_accrual(aff_collected),
+        "open_access": _open_access(aff_collected),
+        "oa_routes": _oa_routes(aff_collected),
+        "collaboration_countries": _collaboration_countries(aff_collected),
+        "collaboration_breadth": _collaboration_breadth(aff_collected),
+        "most_cited": _most_cited(affiliated, aff_citations),
+        "citation_growth": _citation_growth(years, aff_citations),
         # Short form: a 4-column card clips the full leader sentence.
-        "by_topic": multi_counts(col(pubs, "topic"), top=12,
-                                 insight=ins.leader_short(multi_counts(col(pubs, "topic")))),
+        "by_topic": multi_counts(col(affiliated, "topic"), top=12,
+                                 insight=ins.leader_short(multi_counts(col(affiliated, "topic")))),
         "affiliation": _affiliation(pubs),
-        "affiliation_by_year": _affiliation_by_year(pubs, years),
-        "by_type": value_counts(col(pubs, "type"),
-                                insight=ins.leader(value_counts(col(pubs, "type")), "publications")),
-        "by_african_collab": _african(pubs),
-        "top_journals": _top_journals(pubs, citations),
+        "affiliation_by_year": _affiliation_by_year(pubs, all_years),
+        "by_type": value_counts(col(affiliated, "type"),
+                                insight=ins.leader(value_counts(col(affiliated, "type")),
+                                                   "affiliated publications")),
+        "by_african_collab": _african(affiliated),
+        "top_journals": _top_journals(affiliated, aff_citations),
     }
 
 
@@ -130,6 +147,28 @@ def _output_and_impact(years, citations):
         kinds=["bar", "line"],
         n=int(sum(per_year)),
     )
+
+
+def _affiliated_collected(collected, dois):
+    """A `collected`-shaped dict whose OpenAlex frames hold only the given DOIs.
+
+    Everything on the Publications page that reads OpenAlex directly — open access, the
+    routes, co-author countries, collaboration breadth, citation accrual — took the whole
+    snapshot. That silently mixed in the team's pre-Ersilia work, which is 17 of the 42
+    papers and **1,019 of the 1,713 citations**, including the single most-cited paper at
+    420. Those figures were therefore not describing Ersilia.
+
+    Filtering here rather than inside each helper keeps their signatures and their logic
+    untouched: they still receive a `collected` mapping and cannot tell the difference.
+    """
+    out = dict(collected or {})
+    for key in ("scholar_works", "scholar_citations_by_year"):
+        frame = out.get(key)
+        if frame is None or frame.empty or "doi" not in frame.columns:
+            continue
+        keep = [_bare_doi(frame["doi"].iloc[i]) in dois for i in range(len(frame))]
+        out[key] = frame[keep].copy()
+    return out
 
 
 def _openalex_citations(collected):
@@ -338,19 +377,67 @@ def _citation_accrual(collected):
     )
 
 
+def _external_work(external, citations):
+    """The team's relevant work that carries no Ersilia affiliation.
+
+    THIS CARD EXISTS SO THE FILTERING IS HONEST. Every other figure on the page now covers
+    affiliated papers only, and quietly dropping 17 papers holding 1,019 citations would
+    hide both the work and the choice. So they are shown, once, in their own right and
+    under their own heading — related research by the same people, done elsewhere.
+
+    Keeping them out of the main figures is not a judgement on the work; it is the only way
+    an Ersilia statistics page can describe Ersilia. The most-cited paper here has 420
+    citations, six times the most-cited affiliated one, which is exactly why it cannot sit
+    inside a total labelled "Ersilia".
+    """
+    if external is None or external.empty:
+        return {"rows": [], "n": 0}
+    titles = as_text(col(external, "title"))
+    if titles.empty:
+        return {"rows": [], "n": 0}
+    years = pd.to_numeric(col(external, "year"), errors="coerce")
+    journals = as_text(col(external, "journal"))
+
+    rows = []
+    for i in range(len(external)):
+        title = titles.iloc[i] if i < len(titles) else ""
+        if not title:
+            continue
+        cites = citations.iloc[i] if i < len(citations) else 0
+        year = years.iloc[i] if i < len(years) else None
+        rows.append({
+            "title": title,
+            "year": int(year) if pd.notna(year) else "",
+            "journal": (journals.iloc[i] if i < len(journals) else "")[:40],
+            "citations": int(cites) if pd.notna(cites) else 0,
+        })
+    if not rows:
+        return {"rows": [], "n": 0}
+    rows.sort(key=lambda r: (-r["citations"], r["title"]))
+    total = sum(r["citations"] for r in rows)
+    return {
+        "rows": rows[:10],
+        "n": len(rows),
+        "insight": "%s related papers by the team without an Ersilia affiliation, holding "
+                   "%s citations between them." % (ins.num(len(rows)), ins.num(total)),
+    }
+
+
 def _most_cited(pubs, citations):
     """The individual papers, named, ranked by citations.
 
     The site aggregates publications six ways and never named a single one, which for a
     research organisation's statistics page is a conspicuous gap.
 
-    THE AFFILIATION COLUMN IS WHY THIS IS PUBLISHABLE, not decoration. Ranked by
-    citations alone the top four papers all carry ``Ersilia Affiliation = No`` — 389,
-    123, 66 and 54 citations, which are the founders' pre-Ersilia careers. The most
-    cited *affiliated* paper has 53. A bare citation ranking under an Ersilia heading
-    would therefore claim credit the data does not support, so the flag is shown as a
-    column and the caption says what it means. Filtering the unaffiliated papers out
-    silently would be the less honest fix, since it hides that the distinction exists.
+    ERSILIA-AFFILIATED PAPERS ONLY. Ranked over everything tracked, the top four all carry
+    ``Ersilia Affiliation = No`` — 420, 132, 101 and 69 citations, the team's earlier
+    careers — while the most-cited affiliated paper has 115. A bare ranking under an Ersilia
+    heading would claim credit the data does not support.
+
+    The unaffiliated papers are NOT dropped silently, which would hide that the distinction
+    exists: they have their own card, `external_work`, at the foot of the page. The
+    ``ersilia`` column here is consequently all "Yes" and is retained only so the table
+    still states its own scope.
 
     Titles, journals and years are public bibliographic facts. No author names are
     emitted, so this adds no disclosure surface.
@@ -381,14 +468,16 @@ def _most_cited(pubs, citations):
         return {"rows": [], "n": 0}
     rows.sort(key=lambda r: (-r["citations"], r["title"]))
 
-    affiliated = [r for r in rows if r["ersilia"] == "Yes"]
-    top_affiliated = affiliated[0]["citations"] if affiliated else 0
+    # The old caption contrasted "most cited overall" with "most cited affiliated". Both
+    # figures now describe the same paper, because the table is affiliated-only, so the
+    # sentence contradicted itself. The comparison it was making lives on the card below.
+    total = sum(r["citations"] for r in rows)
     return {
         "rows": rows[:12],
         "n": len(rows),
-        "insight": "Most cited overall is %s citations; most cited with a direct Ersilia "
-                   "affiliation is %s." % (ins.num(rows[0]["citations"]),
-                                           ins.num(top_affiliated)),
+        "insight": "%s affiliated papers holding %s citations; the most cited has %s." % (
+            ins.num(len(rows)), ins.num(total), ins.num(rows[0]["citations"]),
+        ),
     }
 
 

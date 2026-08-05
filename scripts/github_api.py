@@ -6,7 +6,7 @@ Three callers need the same GitHub reads, and they need them with *different* vi
 
 * `fetch_github.py`         public repositories only, because its output is committed
 * `check_github_airtable_sync.py`  all repositories, to avoid false alarms on private ones
-* `update_airtable_repositories.py`  all repositories, because 38 Airtable rows are private
+* `private_totals` (below)          all repositories, to count private stars without names
 
 Keeping one implementation means the three cannot drift into disagreeing about what a
 "model repository" is or how a subscriber is counted — which is the whole point of a
@@ -14,10 +14,13 @@ synchronisation check.
 
 TWO RULES THIS MODULE ENFORCES, not merely follows
 --------------------------------------------------
-**No personal data is ever returned.** `repo_metrics` reads pull-request author
-*associations* and returns counts by association; it never returns a login. The stargazer
-and contributor endpoints both carry logins, and both are reduced to a number here so a
-caller cannot accidentally write one to disk.
+**Exactly one function returns personal data, and it says so.** `repo_metrics` reads
+pull-request author *associations* and returns counts by association, never a login. The
+stargazer endpoint carries logins and they are discarded. `contributor_counts` reduces to a
+number. The single exception is **`contributor_logins`**, which returns GitHub handles because
+the site publishes a contributors ranking and the Airtable column that fed it was deleted —
+public handles on public commits, a disclosure already decided. Anything new that touches a
+login belongs beside it, named as plainly.
 
 **`list_repos` makes visibility explicit.** There is no default. A caller that writes a
 committed file must pass `visibility="public"` and be seen to do it, because a private
@@ -58,6 +61,22 @@ MODEL_RE = re.compile(r"^eos[0-9][0-9a-z]{3}$")
 # here rather than at each call site means the site cannot end up with two different
 # definitions of an external contributor.
 INTERNAL_ASSOCIATIONS = {"OWNER", "MEMBER", "COLLABORATOR"}
+
+# Automation accounts, excluded from any contributor figure. `ersilia-bot` is the one that
+# matters: it had committed to 245 repositories and would have ranked THIRD on the
+# contributors chart, above every human but two, which is a statement about CI rather than
+# about people. GitHub App accounts are identifiable by the `[bot]` suffix — dependabot,
+# github-actions and vercel all appeared — but `ersilia-bot` is an ordinary account used as
+# one, so it has to be named. Matching any login merely CONTAINING "bot" would be wrong: a
+# person may legitimately be called `robotics-lab`.
+BOT_LOGINS = {"ersilia-bot"}
+
+
+def is_bot(login):
+    """Whether a GitHub login is an automation account rather than a person."""
+    text = str(login or "").strip()
+    return text.lower() in BOT_LOGINS or text.endswith("[bot]")
+
 
 # A repository name that is safe to interpolate into a GraphQL string literal. GitHub
 # allows only these characters, so anything else means the caller built a name rather
@@ -268,6 +287,70 @@ def contributor_counts(org, names, headers, progress=True):
         if progress and position % 50 == 0:
             logging.info("  contributors: %d/%d repositories", position, len(names))
     return out
+
+
+def contributor_logins(org, names, headers, progress=True):
+    """`{repo: [login]}` for the named repositories.
+
+    THIS RETURNS PERSONAL DATA — GitHub handles — and is the only function here that does.
+    It exists because the site publishes a contributors-by-repository ranking, and the
+    column that fed it (`Contributor Names` in Airtable) was removed. Publishing these
+    handles is a decision already taken and documented in `fetch_airtable.py`: they are
+    **public** handles attached to **public** commits, unlike the community table's
+    handles, which are dropped at load and never leave the snapshot.
+
+    Anonymous contributors are excluded here (`anon` is not requested), because an
+    anonymous entry has an email rather than a login and email must never be collected.
+    That makes this a slight undercount against `contributor_counts`, which does include
+    them — the two answer different questions and are not interchangeable.
+    """
+    out = {}
+    for position, name in enumerate(names, start=1):
+        if not SAFE_NAME_RE.match(name):
+            continue
+        logins, page = [], 1
+        try:
+            while page <= 5:                       # 500 contributors is ample headroom
+                batch = get_json("%s/repos/%s/%s/contributors?per_page=100&page=%d"
+                                 % (API, org, name, page), headers=headers)
+                if not batch:
+                    break
+                for entry in batch:
+                    login = (entry or {}).get("login")
+                    if login:
+                        logins.append(login)
+                if len(batch) < 100:
+                    break
+                page += 1
+        except Exception as error:                 # noqa: BLE001 - one repo must not stop the run
+            logging.warning("  contributor logins: %s failed (%s)", name, error)
+            continue
+        if logins:
+            out[name] = logins
+        if progress and position % 50 == 0:
+            logging.info("  contributor logins: %d/%d repositories", position, len(names))
+    return out
+
+
+def private_totals(org, headers):
+    """Aggregate counts over PRIVATE repositories: `{"repositories": n, "stars": n}`.
+
+    NO NAMES, EVER. This exists so the site can report an organisation-wide star total
+    that includes private work without CI ever holding a token that can enumerate private
+    repositories: a human runs the collector, and only these two integers are committed.
+
+    Measured when this was written: 40 private repositories holding 5 stars between them,
+    against 664 on the public ones. The private contribution is negligible, which is
+    itself worth knowing — but "negligible" is a finding, not an assumption, so it is
+    counted rather than dismissed.
+    """
+    totals = {"repositories": 0, "stars": 0}
+    for repo in list_repos(org, headers, visibility="all"):
+        if not repo.get("private"):
+            continue
+        totals["repositories"] += 1
+        totals["stars"] += int(repo.get("stargazers_count") or 0)
+    return totals
 
 
 def _contributor_count(url, headers):

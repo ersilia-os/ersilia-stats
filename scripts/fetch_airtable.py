@@ -34,9 +34,13 @@ EXCLUDE_TABLE_SLUGS = {"news", "videos", "grants", "donations", "contacts"}
 # these to the repo.
 PII_COLUMNS = {"email", "linkedin", "twitter handle", "github handle"}
 
-# Free-text columns that embed personal names, per table. Nothing on the site reads
-# them. (Repository contributor handles are deliberately kept: they are public GitHub
-# metadata attached to public repositories.)
+# Free-text columns that embed personal names, per table. Nothing on the site reads them.
+#
+# This note used to add that repository contributor handles were deliberately kept, as
+# public GitHub metadata attached to public repositories. That decision stands, but the
+# column no longer exists: `Contributor Names` was deleted from the Repositories table
+# along with the other GitHub-derived fields, and the handles now come from GitHub itself
+# via `github_api.contributor_logins`. Nothing in this file carries them any more.
 NARRATIVE_COLUMNS = {
     "community": {"name", "description", "contribution"},
 }

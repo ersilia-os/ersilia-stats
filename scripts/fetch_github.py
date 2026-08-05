@@ -5,8 +5,9 @@ WHY: the Airtable repositories table is a snapshot of standing totals, and it wa
 stale when the nightly job that maintained it stopped running. It listed `eos` as the
 second most-starred repository with 92 stars and 190 forks while
 `GET /repos/ersilia-os/eos` returned **404** — the repository did not exist, and nothing
-noticed because nothing was checking. `check_github_airtable_sync.py` is now that check,
-and `update_airtable_repositories.py` maintains the numbers.
+noticed because nothing was checking. `check_github_airtable_sync.py` is now that check, and
+those stored columns have since been deleted from Airtable outright — every count on the site
+comes from here instead.
 
 GitHub also holds what Airtable structurally cannot: `pushed_at` (is this alive?),
 `archived` (was it retired on purpose?), and a real commit series over time. A single
@@ -51,8 +52,9 @@ import time
 from datetime import datetime, timedelta, timezone
 
 from collect_common import check_freshness, get_json, prune_superseded, write_snapshot
-from github_api import (API, MODEL_RE, ORG, auth_headers, contributor_counts, list_repos,
-                        post_graphql, repo_metrics)
+from github_api import (API, MODEL_RE, ORG, auth_headers, contributor_counts,
+                        contributor_logins, is_bot, list_repos, post_graphql,
+                        private_totals, repo_metrics)
 
 REPO_FIELDS = ["name", "is_model", "created_at", "pushed_at", "archived", "fork",
                "language", "license", "topics", "size_kb", "stars", "forks",
@@ -65,6 +67,12 @@ REPO_FIELDS = ["name", "is_model", "created_at", "pushed_at", "archived", "fork"
 # committed file's shape does not change.
 ACTIVITY_FIELDS = ["name", "week_start", "commits"]
 STAR_FIELDS = ["name", "starred_at"]
+# Public GitHub handles, aggregated to one row per person. Replaces the Airtable
+# `Contributor Names` column, which was removed from that table.
+CONTRIBUTOR_FIELDS = ["login", "repositories"]
+# Aggregates over private repositories — two integers, no names. Lets the site report an
+# org-wide star total without CI ever seeing a private repository.
+TOTALS_FIELDS = ["metric", "value"]
 
 
 def inventory(org, headers):
@@ -283,8 +291,11 @@ def main():
     parser.add_argument("--skip-activity", action="store_true",
                         help="Inventory and stars only. Useful without a token.")
     parser.add_argument("--skip-contributors", action="store_true",
-                        help="Skip contributor counts: one REST request per repository, "
-                             "which is by far the slowest part of a run.")
+                        help="Skip contributor counts and handles: one to two REST "
+                             "requests per repository, by far the slowest part of a run.")
+    parser.add_argument("--skip-private-totals", action="store_true",
+                        help="Skip the private-repository aggregate. Use when the token "
+                             "cannot see private repositories.")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--max-age-days", type=int, default=21)
     args = parser.parse_args()
@@ -326,6 +337,40 @@ def main():
         if missed:
             logging.info("%d repositories have no default branch (empty): %s",
                          len(missed), ", ".join(missed[:6]))
+
+    if not args.skip_contributors:
+        # Public handles on public repositories, aggregated to one row per person. This
+        # replaces the Airtable `Contributor Names` column, which has been removed from
+        # that table — the site's contributor ranking now comes from GitHub directly.
+        by_repo = contributor_logins(args.org, [r["name"] for r in repos], headers)
+        tally = {}
+        for logins in by_repo.values():
+            for login in set(logins):              # one repository counts once per person
+                if is_bot(login):                  # CI is not a contributor
+                    continue
+                tally[login] = tally.get(login, 0) + 1
+        if tally:
+            rows = [{"login": login, "repositories": count}
+                    for login, count in sorted(tally.items(), key=lambda kv: (-kv[1], kv[0]))]
+            written.append(write_snapshot(args.out_dir, "contributors",
+                                          CONTRIBUTOR_FIELDS, rows))
+            logging.info("contributors: %d distinct handles across %d repositories",
+                         len(rows), len(by_repo))
+
+    if not args.skip_private_totals:
+        # Two integers and no names, so that the org-wide star total can include private
+        # work without CI ever holding a token that can list private repositories.
+        try:
+            totals = private_totals(args.org, headers)
+        except Exception as error:                 # noqa: BLE001 - the message is the point
+            logging.warning("private totals unavailable (%s). The star KPI will cover "
+                            "public repositories only.", error)
+        else:
+            rows = [{"metric": "private_repositories", "value": totals["repositories"]},
+                    {"metric": "private_stars", "value": totals["stars"]}]
+            written.append(write_snapshot(args.out_dir, "org_totals", TOTALS_FIELDS, rows))
+            logging.info("private repositories: %d holding %d star(s) — names not recorded",
+                         totals["repositories"], totals["stars"])
 
     prune_superseded(args.out_dir, written)
     return 0
