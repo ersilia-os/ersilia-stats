@@ -150,7 +150,7 @@ def _distribution(counts, median):
         labels, values,
         # Kept short deliberately: this card is four columns wide and the full argument
         # is in its methodology note. A caption that overflows is a caption nobody reads.
-        "%s of %s models cluster in one band — the automated build, not demand." % (
+        "%s of %s model images cluster in one band — the automated build." % (
             ins.num(clustered), ins.num(len(counts)),
         ),
         countNoun="models",

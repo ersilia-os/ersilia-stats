@@ -162,8 +162,8 @@ def _publication_type(models):
         if "peer" in str(label).strip().lower():
             reviewed = int(value)
     # Four columns wide: keep it to one clause.
-    out["insight"] = ins.share_of(reviewed, recorded, "models",
-                                 "are based on peer-reviewed work")
+    out["insight"] = ins.share_of(reviewed, recorded, "models with a recorded type",
+                                 "are peer-reviewed")
     return out
 
 

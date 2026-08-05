@@ -196,7 +196,8 @@ def _maintenance(model_rows, today):
     out = metric(
         labels, values,
         # Short: this card is three columns wide. The argument is in its note.
-        "%s of %s pushed to in %s." % (ins.num(this_year), ins.num(total), current),
+        "%s of %s model repositories pushed to in %s." % (
+            ins.num(this_year), ins.num(total), current),
         countNoun="model repositories",
         n=total,
     )

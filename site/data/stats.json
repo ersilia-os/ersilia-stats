@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05 22:09 UTC",
+  "generated_at": "2026-08-05 22:11 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -1144,7 +1144,7 @@
           25
         ],
         "n": 233,
-        "insight": "172 of 233 models (74%) are based on peer-reviewed work."
+        "insight": "172 of 233 models with a recorded type (74%) are peer-reviewed."
       }
     },
     "projects": {
@@ -1601,10 +1601,10 @@
         "n": 36,
         "today": "2026-08-06",
         "semantics": {
-          "In progress": "brand",
-          "Done": "good",
           "Todo": "neutral",
-          "Stuck": "bad"
+          "Stuck": "bad",
+          "Done": "good",
+          "In progress": "brand"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },
@@ -6752,7 +6752,7 @@
           1
         ],
         "n": 247,
-        "insight": "231 of 247 models cluster in one band — the automated build, not demand.",
+        "insight": "231 of 247 model images cluster in one band — the automated build.",
         "countNoun": "models",
         "ordinal": true
       },
@@ -6946,7 +6946,7 @@
           }
         ],
         "n": 815,
-        "insight": "609 of 815 merged pull requests came from outside Ersilia — 78% on model repos."
+        "insight": "609 of 815 recent merged PRs came from outside Ersilia — 78% on model repos."
       },
       "activity_recency": {
         "labels": [
@@ -6968,7 +6968,7 @@
           41
         ],
         "n": 386,
-        "insight": "272 of 386 pushed to within six months; 41 archived.",
+        "insight": "272 of 386 repositories pushed to within six months; 41 archived.",
         "countNoun": "repositories",
         "ordinal": true
       },
@@ -7013,7 +7013,7 @@
           2
         ],
         "n": 370,
-        "insight": "336 of 370 repositories (91%) use GPL-3.0.",
+        "insight": "336 of 370 licensed repositories (91%) use GPL-3.0.",
         "countNoun": "repositories"
       },
       "issue_resolution": {
@@ -7032,7 +7032,7 @@
           56
         ],
         "n": 227,
-        "insight": "50 of 227 repositories close issues within a week.",
+        "insight": "50 of 227 repositories with closed issues resolve them within a week.",
         "countNoun": "repositories",
         "ordinal": true
       },
@@ -7247,7 +7247,7 @@
           23
         ],
         "n": 243,
-        "insight": "216 of 243 pushed to in 2026.",
+        "insight": "216 of 243 model repositories pushed to in 2026.",
         "countNoun": "model repositories",
         "ordinal": true
       },

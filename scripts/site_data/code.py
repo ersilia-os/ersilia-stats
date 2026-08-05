@@ -295,7 +295,7 @@ def _contribution_origin(repos):
               for label, outside, _inside, total in groups if total]
     # Short: five columns wide, and the runner's fonts are wider than this machine's.
     # The per-kind shares are in the methodology note.
-    insight = "%s of %s merged pull requests came from outside Ersilia%s." % (
+    insight = "%s of %s recent merged PRs came from outside Ersilia%s." % (
         ins.num(overall_out), ins.num(overall),
         " — %s" % shares[0] if shares else "")
     return {"labels": labels, "series": series, "n": overall, "insight": insight}
@@ -333,7 +333,7 @@ def _activity_recency(repos, today):
     live = sum(values[:3])                       # pushed within six months
     out = metric(
         labels, values,
-        "%s of %s pushed to within six months; %s archived." % (
+        "%s of %s repositories pushed to within six months; %s archived." % (
             ins.num(live), ins.num(len(repos)), ins.num(values[-1]),
         ),
         countNoun="repositories",
@@ -397,7 +397,8 @@ def _by_licence(repos):
     return metric(
         [name for name, _ in ranked], [count for _, count in ranked],
         # One clause: four columns wide. The licence count is in the note.
-        ins.share_of(ranked[0][1], total, "repositories", "use %s" % ranked[0][0]),
+        ins.share_of(ranked[0][1], total, "licensed repositories",
+                     "use %s" % ranked[0][0]),
         countNoun="repositories",
     )
 
@@ -432,7 +433,7 @@ def _issue_resolution(repos):
     quick = values[0] + values[1]
     out = metric(
         labels, values,
-        "%s of %s repositories close issues within a week." % (
+        "%s of %s repositories with closed issues resolve them within a week." % (
             ins.num(quick), ins.num(counted)),
         countNoun="repositories",
         n=counted,
