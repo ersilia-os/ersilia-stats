@@ -56,12 +56,14 @@ def read_table_list(csv_path):
             base_id = (row.get("base_id") or row.get("base") or "").strip()
             table_id = (row.get("table_id") or row.get("table") or "").strip()
             # prefer human-readable 'table' column (or 'table_name' / 'name')
-            table_name = (row.get("table") or row.get("table_name") or row.get("name") or "").strip()
+            table_name = (row.get("table") or row.get("table_name") or row.get("name")
+                              or "").strip()
             filename = (row.get("filename") or "").strip()
             if not base_id or not table_id:
                 logging.warning("Skipping row without base_id or table_id: %s", row)
                 continue
-            tables.append({"base_id": base_id, "table_id": table_id, "table_name": table_name, "filename": filename})
+            tables.append({"base_id": base_id, "table_id": table_id, "table_name": table_name,
+                          "filename": filename})
     return tables
 
 
@@ -88,7 +90,7 @@ def records_to_rows(records, table_slug=""):
     if removed:
         logging.info("  withheld %d column(s): %s", len(removed), ", ".join(removed))
 
-    header = ["airtable_id"] + kept
+    header = ["airtable_id", *kept]
     rows = []
     for r in records:
         fields = r.get("fields", {})
@@ -160,8 +162,10 @@ def main():
     from pyairtable import Api
 
     parser = argparse.ArgumentParser(description="Fetch Airtable tables to CSV files")
-    parser.add_argument("--api-key", "-k", required=False, help="Airtable API key (or set AIRTABLE_API_KEY)")
-    parser.add_argument("--tables-file", "-t", required=True, help="CSV file listing base_id,table_id,optional filename")
+    parser.add_argument("--api-key", "-k", required=False,
+                        help="Airtable API key (or set AIRTABLE_API_KEY)")
+    parser.add_argument("--tables-file", "-t", required=True,
+                        help="CSV file listing base_id,table_id,optional filename")
     parser.add_argument("--out-dir", "-o", required=True, help="Output directory for CSV files")
     args = parser.parse_args()
 
@@ -204,7 +208,7 @@ def main():
             write_csv(out_path, header, rows)
             written.append(out_path)
             logging.info("Wrote %d records to %s", len(rows), out_path)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - one table must not abort the run
             failed.append(table_name or table_id)
             logging.error("Failed to fetch/write %s/%s: %s", base_id, table_id, e)
 

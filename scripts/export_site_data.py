@@ -27,7 +27,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from site_data import build_all  # noqa: E402
+from site_data import build_all
 
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
 
@@ -86,7 +86,7 @@ def _rows_for(metric):
             rows.append([label] + [
                 s["values"][index] if index < len(s["values"]) else "" for s in metric["series"]
             ])
-        return ["label"] + names, rows
+        return ["label", *names], rows
 
     if "labels" in metric:
         labels, values = metric.get("labels", []), metric.get("values", [])

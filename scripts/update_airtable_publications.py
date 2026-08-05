@@ -257,7 +257,7 @@ def main():
     table = Api(key).table(base_id, table_id)
     try:
         records = table.all()
-    except Exception as error:                        # noqa: BLE001 - message matters more
+    except Exception as error:  # noqa: BLE001 - the message matters more than the type
         logging.error("could not read the Publications table: %s", error)
         return 1
     logging.info("Airtable: %d records", len(records))
@@ -282,7 +282,7 @@ def main():
     logging.info("writing %s to %d record(s)", CITATIONS_FIELD, len(changes))
     try:
         written = apply_changes(table, changes)
-    except Exception as error:                        # noqa: BLE001
+    except Exception as error:  # noqa: BLE001 - the scope message matters, not the type
         text = str(error)
         if "403" in text or "NOT_AUTHORIZED" in text or "INVALID_PERMISSIONS" in text:
             logging.error("Airtable refused the write. The personal access token needs "

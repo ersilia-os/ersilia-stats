@@ -193,7 +193,8 @@ def build(tables, repos_public, models, repos_all=None, collected=None):
     # Countries with any Ersilia presence, not the 197-row reference table.
     from .parse import parse_multi
     footprint = set()
-    for frame, column in ((community, "country_(from_country)"), (events, "country_(from_country)")):
+    for frame, column in ((community, "country_(from_country)"), (events,
+                          "country_(from_country)")):
         if frame is not None and not frame.empty and column in frame.columns:
             for value in frame[column].dropna():
                 footprint.update(parse_multi(value))

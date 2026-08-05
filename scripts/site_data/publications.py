@@ -62,7 +62,12 @@ def build(pubs, collected=None):
     # them under an Ersilia heading claims credit the data does not support. They are not
     # hidden: they get their own card at the foot of the page.
     flags = as_text(col(pubs, "ersilia_affiliation")).str.strip().str.lower()
-    is_ersilia = flags.isin(YES)
+    # When the column is absent `col()` returns an EMPTY Series, and a boolean mask built
+    # from it is the wrong length — the shape of bug that crashed the build from
+    # `kpis._affiliated_dois`. With no way to tell affiliated from external, show everything
+    # rather than nothing; the affiliation chart then reports the absence itself.
+    is_ersilia = (flags.isin(YES) if len(flags) == len(pubs)
+                  else pd.Series(True, index=pubs.index))
     affiliated = pubs[is_ersilia.values]
     external = pubs[(~is_ersilia).values]
     aff_citations = citations[is_ersilia.values]
@@ -229,7 +234,7 @@ def _open_access(collected):
     return metric(
         ["Open access", "Paywalled"], [openly, closed],
         ins.share_of(openly, len(status), "papers", "can be read without a subscription"),
-        n=int(len(status)),
+        n=len(status),
     )
 
 
@@ -259,10 +264,11 @@ def _collaboration_breadth(collected):
     fourteen partners, and that would read as broad collaboration across the whole body of
     work when it was one consortium paper.
 
-    It is worth publishing because the answer is strong on its own terms: **29 of 42 papers
-    involve institutions in two or more countries**, and single-country papers are the
-    minority. For an organisation whose purpose is collaborative research with
-    under-resourced groups, that is a mission figure rather than a vanity one.
+    It is worth publishing because the answer is strong on its own terms: **20 of the 25
+    Ersilia-affiliated papers involve institutions in two or more countries**, and
+    single-country papers are the minority. For an organisation whose purpose is
+    collaborative research with under-resourced groups, that is a mission figure rather
+    than a vanity one.
 
     Banded, because the raw counts run 1, 2, 3, 4, 5, 6, 7, 9, 10, 13, 14 with one or two
     papers in most of the upper values — a bar per distinct value would be mostly noise.
@@ -594,7 +600,7 @@ def _top_journals(pubs, citations):
             "insight": "No venue yet has %d or more Ersilia articles to rank on." %
                        MIN_ARTICLES_FOR_JOURNAL_RANK,
         }
-    out = metric(ranked.index, ranked["mean"].round(1), None, n=int(len(ranked)))
+    out = metric(ranked.index, ranked["mean"].round(1), None, n=len(ranked))
     out["counts"] = [int(c) for c in ranked["count"]]
     out["totals"] = [int(s) for s in ranked["sum"]]
     out["unit"] = "mean citations per article"

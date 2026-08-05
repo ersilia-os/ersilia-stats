@@ -105,7 +105,7 @@ def build(models):
         "scaling_limit": _scaling_limit(models),
         "image_size": _image_size(models),
         "on_arm": _on_arm(models),
-        "cohorts_by_status": _cohorts_by_status(models, incorporated, status),
+        "cohorts_by_status": _cohorts_by_status(incorporated, status),
         "by_status": by_status,
         "by_biomedical_area": _by_biomedical_area(models),
         "by_license": _by_license(models),
@@ -298,7 +298,7 @@ def _publication_lag(models, incorporated):
         median=round(float(lag.median()), 1),
         unit="years",
         countNoun="models",
-        n=int(len(lag)),
+        n=len(lag),
     )
 
 
@@ -375,7 +375,7 @@ def _image_size(models):
         mean=round(float(gb.mean()), 1),
         unit="GB",
         countNoun="models",
-        n=int(len(gb)),
+        n=len(gb),
     )
 
 
@@ -417,7 +417,7 @@ def _by_source_type(models):
     return out
 
 
-def _cohorts_by_status(models, incorporated, status):
+def _cohorts_by_status(incorporated, status):
     """Incorporation quarter x curation status — is the backlog growing?"""
     dates = pd.to_datetime(incorporated, errors="coerce")
     valid = dates.notna()
@@ -490,7 +490,7 @@ def _licence_openness(models):
     if recorded.empty:
         return dict(EMPTY)
     permissive = int(recorded.apply(_is_permissive).sum())
-    total = int(len(recorded))
+    total = len(recorded)
     unrecorded = int(len(text) - total)
     return metric(
         ["Permissive", "Conditions apply"], [permissive, total - permissive],
@@ -545,5 +545,5 @@ def _coverage(models):
             labels[best], ins.num(values[best]), ins.num(len(models)),
         ),
         # The whole is every model, so the meters can show a real percentage.
-        total=int(len(models)),
+        total=len(models),
     )

@@ -47,8 +47,12 @@ def build_all(data_dir, today=None):
         return tables.get(name, pd.DataFrame())
 
     models = table("models")
-    repos_public, private_excluded = repositories_section.public_only(
-        repositories_section.attach_github_counts(table("repositories"), collected))
+    # Attached ONCE and shared. `build_all` and `repositories.build` both need the counts,
+    # and doing the join twice meant two passes over the collected frame for identical
+    # output.
+    repos_with_counts = repositories_section.attach_github_counts(
+        table("repositories"), collected)
+    repos_public, private_excluded = repositories_section.public_only(repos_with_counts)
 
     sections = {
         "models": models_section.build(models),
@@ -58,7 +62,7 @@ def build_all(data_dir, today=None):
                                            repos=table("repositories"),
                                            publications=table("publications")),
         "publications": publications_section.build(table("publications"), collected),
-        "repositories": repositories_section.build(table("repositories"), collected),
+        "repositories": repositories_section.build(repos_with_counts, collected),
         "community": community_section.build(table("community"), today),
         "organisations": organisations_section.build(table("organisations"), table("countries")),
         "reach": reach_section.build(table("countries"), table("organisations"),

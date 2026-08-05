@@ -106,7 +106,8 @@ def build(orgs, countries):
             ins.leader({"labels": [k for k, _ in full], "values": [v for _, v in full]},
                        "organisations with a country on file"),
             "%s countries represented." % ins.num(len(per_country)),
-            ("No country recorded for %s." % ins.count_of(unresolved, "organisation", "organisations"))
+            ("No country recorded for %s." % ins.count_of(unresolved, "organisation",
+             "organisations"))
             if unresolved > 0 else None,
         ),
     )

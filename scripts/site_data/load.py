@@ -152,12 +152,3 @@ def stale_tables(data_dir):
     newest = max(dates.values())
     return {name: date for name, date in dates.items() if date != newest}
 
-
-def superseded_snapshots(data_dir):
-    """Paths of snapshots that are no longer the newest for their table."""
-    keep = {path for _stamp, path in newest_snapshots(data_dir).values()}
-    return sorted(
-        os.path.join(data_dir, f)
-        for f in os.listdir(data_dir)
-        if f.endswith(".csv") and os.path.join(data_dir, f) not in keep
-    )

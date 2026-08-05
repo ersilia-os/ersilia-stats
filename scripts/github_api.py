@@ -279,7 +279,7 @@ def contributor_counts(org, names, headers, progress=True):
         url = ("%s/repos/%s/%s/contributors?per_page=1&anon=1" % (API, org, name))
         try:
             count = _contributor_count(url, headers)
-        except Exception as error:               # noqa: BLE001 - one repo must not stop the run
+        except Exception as error:  # noqa: BLE001 - one repo must not stop the run
             logging.warning("  contributors: %s failed (%s)", name, error)
             continue
         if count is not None:
@@ -322,7 +322,7 @@ def contributor_logins(org, names, headers, progress=True):
                 if len(batch) < 100:
                     break
                 page += 1
-        except Exception as error:                 # noqa: BLE001 - one repo must not stop the run
+        except Exception as error:  # noqa: BLE001 - one repo must not stop the run
             logging.warning("  contributor logins: %s failed (%s)", name, error)
             continue
         if logins:

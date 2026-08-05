@@ -78,24 +78,33 @@ def attach_github_counts(repos, collected):
         for i in range(len(frame)):
             lookup[str(frame["name"].iloc[i] or "").strip()] = i
     names = as_text(col(out, "name")) if "name" in out.columns else None
+    # One index per Airtable row, resolved once rather than per column.
+    matched = [lookup.get(names.iloc[i].strip()) if names is not None else None
+               for i in range(len(out))]
 
     for field, source in (("stars", "stars"), ("forks", "forks"),
                           ("open_issues", "open_issues"), ("subscribers", "watchers"),
                           ("total_commits", "total_commits"),
                           ("contributors", "contributors")):
+        has_source = frame is not None and source in frame.columns
         values = []
-        for i in range(len(out)):
-            row = lookup.get(names.iloc[i].strip()) if names is not None else None
-            raw = ""
-            if row is not None and source in frame.columns:
-                raw = str(frame[source].iloc[row]).strip()
+        for row in matched:
+            raw = str(frame[source].iloc[row]).strip() if has_source and row is not None else ""
             values.append(raw if raw not in ("", "nan") else 0)
         out[field] = values
     return out
 
 
 def build(repos, collected=None):
-    repos = attach_github_counts(repos, collected)
+    """Build the section. `repos` must ALREADY carry the GitHub counts.
+
+    The caller attaches them with `attach_github_counts`, because `build_all` needs the same
+    joined frame for its public/private split — doing the join here as well produced
+    identical output from two passes over the collected frame.
+
+    `collected` is still required, for the contributor handles, which are a separate
+    snapshot rather than a column on this frame.
+    """
     public_raw, private_count = public_only(repos)
     if repos is None or repos.empty:
         return dict(
@@ -109,7 +118,8 @@ def build(repos, collected=None):
         )
 
     every = _numeric(repos)                        # aggregates: all repositories
-    public = _numeric(public_raw) if public_raw is not None and not public_raw.empty else every.head(0)
+    public = (_numeric(public_raw)
+              if public_raw is not None and not public_raw.empty else every.head(0))
     name_col = "name" if "name" in every.columns else "title"
 
     created = quarter_counts(col(every, "creation_date"))
@@ -150,12 +160,11 @@ def build(repos, collected=None):
 def _visibility(every, private_count):
     """Published deliberately: the honest way to handle an exclusion is to size it."""
     public_count = int(len(every) - private_count)
-    out = metric(
+    return metric(
         ["Public", "Private"], [public_count, private_count],
         ins.share_of(public_count, len(every), "repositories", "are public"),
         semantics={"Public": "brand", "Private": "neutral"},
     )
-    return out
 
 
 def _by_type(every):
@@ -231,7 +240,7 @@ def _top_contributors(collected):
         return dict(EMPTY)
     top = pairs[:12]
     total = sum(v for _, v in pairs)
-    out = metric(
+    return metric(
         [k for k, _ in top], [v for _, v in top],
         "%s distinct contributors; the top 3 hold %s of all repository contributions." % (
             ins.num(len(pairs)),
@@ -240,7 +249,6 @@ def _top_contributors(collected):
         countNoun="repositories",
         n=len(pairs),
     )
-    return out
 
 
 def _concentration_curve(every):

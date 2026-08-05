@@ -362,7 +362,7 @@ def main():
         # work without CI ever holding a token that can list private repositories.
         try:
             totals = private_totals(args.org, headers)
-        except Exception as error:                 # noqa: BLE001 - the message is the point
+        except Exception as error:  # noqa: BLE001 - the message is the point
             logging.warning("private totals unavailable (%s). The star KPI will cover "
                             "public repositories only.", error)
         else:

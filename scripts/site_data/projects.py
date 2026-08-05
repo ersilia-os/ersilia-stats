@@ -26,7 +26,7 @@ def _has_outputs(projects, repos, publications):
     none. The mirror of quality.repo_project_link: that one asks how much of the code is
     accounted for, this asks how much of the portfolio has a recorded output."""
     table = outputs_table(projects, repos, publications)
-    total = int(len(projects)) if projects is not None else 0
+    total = len(projects) if projects is not None else 0
     linked = int(table.get("n", 0))
     if not total:
         return dict(EMPTY)
@@ -58,7 +58,8 @@ def outputs_table(projects, repos, publications):
         vis = as_text(col(repos, "visibility")).str.lower()
         visibility = dict(zip(repos["airtable_id"], vis))
     known_pubs = set()
-    if publications is not None and not publications.empty and "airtable_id" in publications.columns:
+    if (publications is not None and not publications.empty
+                and "airtable_id" in publications.columns):
         known_pubs = set(publications["airtable_id"])
 
     rows = []
@@ -82,7 +83,7 @@ def outputs_table(projects, repos, publications):
         return {"rows": [], "n": 0}
 
     linked = len(rows)
-    total = int(len(projects))
+    total = len(projects)
     return {
         "rows": rows,
         "n": linked,
@@ -110,7 +111,7 @@ def build(projects, today, repos=None, publications=None):
         "growth": _growth(start),
         "active_over_time": _active_over_time(start, end, today),
         "timeline": _timeline(projects, start, end, status, today),
-        "duration": _duration(start, end, status, today),
+        "duration": _duration(start, end, today),
         "outputs": outputs_table(projects, repos, publications),
         "has_outputs": _has_outputs(projects, repos, publications),
     }
@@ -216,7 +217,7 @@ def _timeline(projects, start, end, status, today):
     }
 
 
-def _duration(start, end, status, today):
+def _duration(start, end, today):
     """Median run length of finished vs still-running projects."""
     finished = start.notna() & end.notna()
     running = start.notna() & end.isna()

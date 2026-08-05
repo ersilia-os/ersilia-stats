@@ -32,7 +32,7 @@ import time
 import urllib.parse
 
 sys.path.insert(0, "scripts")
-from collect_common import CONTACT, get_json                      # noqa: E402
+from collect_common import CONTACT, get_json
 
 OPENALEX = "https://api.openalex.org"
 
@@ -84,7 +84,8 @@ def from_title(title):
     matched = work.get("display_name") or ""
     a, b = normalise(title), normalise(matched)
     exact = a == b or (len(a) > 30 and (a.startswith(b[:30]) or b.startswith(a[:30])))
-    return doi or None, ("title-exact" if exact else "title-fuzzy"), matched, work.get("cited_by_count")
+    return (doi or None, "title-exact" if exact else "title-fuzzy",
+                matched, work.get("cited_by_count"))
 
 
 def main():
@@ -94,7 +95,7 @@ def main():
     parser.add_argument("--out", default="data/scholar/doi_map_review.csv")
     args = parser.parse_args()
 
-    from site_data import load                                     # noqa: E402
+    from site_data import load
     tables = load.load_tables(args.data_dir)
     pubs = tables.get("publications")
     if pubs is None or pubs.empty:

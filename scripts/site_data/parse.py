@@ -235,7 +235,7 @@ def top_by(df, value_col, name_col, n=12, insight=None):
     ranked = ranked[ranked["_v"] > 0]
     # n is the number of ranked entries, not the sum of a "top N" column, which
     # would read as a total the chart does not show.
-    return metric(as_text(ranked[name_col]), ranked["_v"], insight, n=int(len(ranked)))
+    return metric(as_text(ranked[name_col]), ranked["_v"], insight, n=len(ranked))
 
 
 def quarter_sort_key(label):

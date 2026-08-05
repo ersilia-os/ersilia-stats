@@ -14,7 +14,7 @@ prose, so the caller owns the wording.
 def num(value):
     """Thousands-separated integer."""
     try:
-        return "{:,}".format(int(round(float(value))))
+        return "{:,}".format(round(float(value)))
     except (TypeError, ValueError):
         return str(value)
 

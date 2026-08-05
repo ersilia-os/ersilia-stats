@@ -46,6 +46,16 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # Lint against the rule set pinned in ruff.toml, so "clean" is enforced rather than
+      # a matter of which flags someone happened to pass. This is not cosmetic: the pinned
+      # set includes ARG, which found two dead function parameters, and B, whose B007
+      # caught a fixture tuple being mis-unpacked so that one column silently took the
+      # wrong value.
+      - name: Lint the Python
+        run: |
+          pip install "ruff==0.15.17"
+          ruff check scripts/
+
       - name: Check the JavaScript parses
         run: |
           for f in site/config.js site/js/*.js; do

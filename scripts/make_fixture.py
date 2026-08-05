@@ -83,10 +83,13 @@ def countries():
 
 def organisations():
     rows = [
-        ("Testland Research Institute", "TRI", "Academia", ["Collaborator"], COUNTRY[0], ["Science"]),
-        ("Sampleia Health Foundation", "SHF", "Foundation", ["Funder"], COUNTRY[1], ["Capacity building", "Science"]),
+        ("Testland Research Institute", "TRI", "Academia", ["Collaborator"], COUNTRY[0],
+         ["Science"]),
+        ("Sampleia Health Foundation", "SHF", "Foundation", ["Funder"], COUNTRY[1],
+         ["Capacity building", "Science"]),
         ("Fixture Pharma", "FP", "Corporate", ["Collaborator"], COUNTRY[2], ["Healthcare"]),
-        ("Example Open Network", "EON", "Civil Society", ["Network", "Funder"], COUNTRY[3], ["Open Source"]),
+        ("Example Open Network", "EON", "Civil Society", ["Network", "Funder"], COUNTRY[3],
+         ["Open Source"]),
         # An unresolvable country id: resolve_countries must pass it through and count it.
         ("Orphan Org", "OO", "Academia", ["Collaborator"], "recMISSING000001", []),
     ]
@@ -108,7 +111,8 @@ def organisations():
 def projects():
     rows = [
         # name, status, start, end, repos, publications
-        ("Fixture Model Hub", "In progress", "2021-01-01", "", [REPO[0], REPO[1], REPO[4]], [PUB[0]]),
+        ("Fixture Model Hub", "In progress", "2021-01-01", "", [REPO[0], REPO[1], REPO[4]],
+         [PUB[0]]),
         ("Sample Screening Cascade", "Done", "2022-03-01", "2024-06-30", [REPO[2]], [PUB[1]]),
         ("Test Antimicrobials", "Done", "2023-01-15", "2025-01-14", [REPO[3]], []),
         # No outputs at all: outputs_table must omit it and has_outputs must count it.
@@ -192,13 +196,16 @@ def publications():
 def community():
     rows = [
         # role, gender, country, org, start, end
-        (["Intern"], "Female", "Testland", "Testland Research Institute", "2021-03-01", "2021-09-01"),
-        (["Volunteer", "Mentor"], "Male", "Sampleia", "Sampleia Health Foundation", "2022-01-10", "2022-07-10"),
+        (["Intern"], "Female", "Testland", "Testland Research Institute", "2021-03-01",
+         "2021-09-01"),
+        (["Volunteer", "Mentor"], "Male", "Sampleia", "Sampleia Health Foundation", "2022-01-10",
+         "2022-07-10"),
         (["Employee"], "Female", "Exampleland", "Example Open Network", "2022-06-01", ""),
         (["Volunteer"], "Male", "Fixtureland", "Fixture Pharma", "2023-02-01", "2024-08-01"),
         # No end date, so still involved; and no gender recorded.
         (["Trustee"], "", "Exampleland", "Example Open Network", "2023-09-15", ""),
-        (["Intern"], "Female", "Testland", "Testland Research Institute", "2024-01-08", "2024-04-08"),
+        (["Intern"], "Female", "Testland", "Testland Research Institute", "2024-01-08",
+         "2024-04-08"),
     ]
     out = []
     for i, (role, gender, country, org, start, end) in enumerate(rows):
@@ -356,11 +363,13 @@ def github_repos():
          0, 0, 0, 2, 140, 12, 7, 1, "2024-01-10", 6, 5, 95, 1),
     ]
     model_rows = [
-        ("eos1aaa", "2021-06-01", "2026-01-01", 40, 6, 3, 2, 1, "2025-12-01", 4, 4, 5, 3),
-        ("eos2bbb", "2022-03-01", "2025-12-10", 62, 9, 5, 1, 0, "", 5, 3, 18, 4),
-        ("eos3ccc", "2023-01-15", "2025-11-20", 28, 4, 2, 1, 1, "2025-09-09", 3, 3, 40, 2),
-        ("eos4ddd", "2024-07-01", "2025-08-05", 15, 2, 1, 0, 0, "", 2, 0, 60, 2),
-        ("eos5eee", "2025-02-01", "2026-01-01", 8, 1, 0, 0, 0, "", 1, 1, 2, 1),
+        # name, created, pushed, commits, closed, merged, releases, latest release,
+        # PRs sampled, PRs external, median days to close, contributors
+        ("eos1aaa", "2021-06-01", "2026-01-01", 40, 6, 3, 1, "2025-12-01", 4, 4, 5, 3),
+        ("eos2bbb", "2022-03-01", "2025-12-10", 62, 9, 5, 0, "", 5, 3, 18, 4),
+        ("eos3ccc", "2023-01-15", "2025-11-20", 28, 4, 2, 1, "2025-09-09", 3, 3, 40, 2),
+        ("eos4ddd", "2024-07-01", "2025-08-05", 15, 2, 1, 0, "", 2, 0, 60, 2),
+        ("eos5eee", "2025-02-01", "2026-01-01", 8, 1, 0, 0, "", 1, 1, 2, 1),
     ]
     out = []
     for (name, created, pushed, lang, lic, stars, forks, subs, openi, commits,
@@ -375,7 +384,7 @@ def github_repos():
             "latest_release": latest, "prs_sampled": sampled, "prs_external": external,
             "median_days_to_close": median, "contributors": contribs,
         })
-    for (name, created, pushed, commits, closed, merged, rel, reln, latest,
+    for (name, created, pushed, commits, closed, merged, releases, latest,
          sampled, external, median, contribs) in model_rows:
         out.append({
             "name": name, "is_model": "yes", "created_at": created, "pushed_at": pushed,
@@ -383,7 +392,7 @@ def github_repos():
             "topics": "", "size_kb": 300, "stars": 0, "forks": 0, "watchers": 1,
             "open_issues": 0, "has_issues": "yes", "default_branch": "main",
             "total_commits": commits, "closed_issues": closed, "merged_prs": merged,
-            "releases": reln, "latest_release": latest, "prs_sampled": sampled,
+            "releases": releases, "latest_release": latest, "prs_sampled": sampled,
             "prs_external": external, "median_days_to_close": median,
             "contributors": contribs,
         })

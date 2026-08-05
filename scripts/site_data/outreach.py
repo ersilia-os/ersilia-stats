@@ -33,7 +33,8 @@ def build_events(events):
         "growth": _year_growth(per_year, "events"),
         "by_country": by_country,
         "by_organiser": multi_counts(col(events, "organiser"), top=10,
-                                     insight="Organisations that convened the most events Ersilia took part in."),
+                                     insight="Organisations that convened the most "
+                                                 "events Ersilia took part in."),
     }
 
 

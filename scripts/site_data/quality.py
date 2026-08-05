@@ -114,7 +114,7 @@ def _repo_project_link(repos):
     for i in range(len(repos)):
         if parse_multi(repos["projects"].iloc[i]):
             linked += 1
-    total = int(len(repos))
+    total = len(repos)
     if not total:
         return dict(EMPTY)
     return metric(
@@ -169,9 +169,11 @@ def _project_repo_status(projects, repos):
         "n": len(pairs), "orphans": orphans,
         "insight": ins.join(
             "%s repository-project links." % ins.num(len(pairs)),
-            ("%s links pair a finished project with a repository that is still open." % ins.num(stale))
+            ("%s links pair a finished project with a repository that is still "
+                 "open." % ins.num(stale))
             if stale else None,
-            ("%s public repositories are linked to no project." % ins.num(orphans)) if orphans else None,
+            ("%s public repositories are linked to no project."
+                 % ins.num(orphans)) if orphans else None,
         ),
     }
 

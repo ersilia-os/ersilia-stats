@@ -18,13 +18,14 @@ structurally cannot store:
 THE FINDING THAT REORGANISED THIS PAGE
 --------------------------------------
 **78% of recently merged pull requests on model repositories come from outside the
-organisation** — 368 of 471 — and 71% on the other repositories. Measured across all 384
-public repositories, not sampled.
+organisation** — and a similar share on the other repositories. Measured across every public
+repository rather than a sample; the exact counts are recomputed on each build and appear in
+the caption, so they are not repeated here to go stale.
 
 That number matters because of a mistake it corrects. Per-model repositories were dismissed
 here as carrying "almost no signal", on the evidence of stars: `eos4e40` has 2, `eos2gw4`
 has 0. That was true and it was the wrong measurement. Nobody stars a single model — they
-*contribute* one, through a pull request, and **207 of 241 model repositories have at least
+*contribute* one, through a pull request, and **208 of 243 model repositories have at least
 one merged, 127 of them from outside the organisation.** The contribution signal was there
 the whole time, in a field nobody had read.
 
@@ -131,7 +132,7 @@ def _release_recency(repos):
 
     READ THIS ONE CAREFULLY, because the obvious reading is wrong. 164 repositories last
     released in 2025 against 72 in 2026 looks like releasing is slowing down. It is not
-    evidence of that: **139 of 384 repositories have never cut a release at all**, and most
+    evidence of that: **139 of 386 repositories have never cut a release at all**, and most
     of those that do release do so rarely, so a repository sitting on a 2025 tag is usually
     one that ships when there is something to ship rather than one that stopped.
 
@@ -362,7 +363,7 @@ def _by_licence(repos):
     A CORRECTION IS RECORDED HERE because the wrong version nearly shipped. This was
     written claiming the organisation's tooling was "largely GPL-3.0 while the model
     repositories are overwhelmingly MIT". That is false, and checking it took one query:
-    **227 of 241 model repositories are GPL-3.0** and 7 are MIT; the non-model
+    **229 of 243 model repositories are GPL-3.0** and 7 are MIT; the non-model
     repositories are 107 GPL-3.0 and 25 MIT. GPL-3.0 dominates both kinds, so there is no
     model-versus-tooling split to report.
 
@@ -496,7 +497,7 @@ def _most_active(repos):
     row is what distinguishes them.
 
     `watchers` is the real subscriber count, and it corrects the stars figures elsewhere on
-    this page: **158 of 384 repositories have more subscribers than stars.** Subscribers ask
+    this page: **158 of 386 repositories have more subscribers than stars.** Subscribers ask
     to be told when something changes, which is a stronger signal than a bookmark, and by
     that measure the star counts understate attention rather than overstating it. It arrives
     as a column rather than a chart because the absolute numbers are small — 19 at most.

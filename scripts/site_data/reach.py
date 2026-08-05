@@ -191,5 +191,6 @@ def _reference(countries, attribute):
     labels = [g for g in INCOME_ORDER if g in counts.index]
     labels += [g for g in counts.index if g not in labels]
     return metric(labels, [int(counts[g]) for g in labels],
-                  "All %s countries in the reference table, for comparison with Ersilia's footprint." %
+                  "All %s countries in the reference table, for comparison "
+                      "with Ersilia's footprint." %
                   ins.num(int(counts.sum())))
