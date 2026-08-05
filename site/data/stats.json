@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05 22:05 UTC",
+  "generated_at": "2026-08-05 22:09 UTC",
   "snapshot_date": "2026-08-04",
   "meta": {
     "tables": [
@@ -1602,9 +1602,9 @@
         "today": "2026-08-06",
         "semantics": {
           "In progress": "brand",
-          "Stuck": "bad",
+          "Done": "good",
           "Todo": "neutral",
-          "Done": "good"
+          "Stuck": "bad"
         },
         "insight": "36 projects, 2019-07 to 2029-03; 2 past its end date."
       },

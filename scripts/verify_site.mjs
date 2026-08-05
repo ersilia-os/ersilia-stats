@@ -43,8 +43,17 @@ const EXTRA_ROUTES = ["/", "/downloads"];
 function discoverRoutes(siteDir) {
   const source = readFileSync(join(siteDir, "config.js"), "utf8");
   const views = source.slice(source.indexOf("const VIEWS"));
-  const ids = [...views.matchAll(/^\s{4}id:\s*"([a-z0-9-]+)"/gm)].map((m) => m[1]);
+  const ids = [...views.matchAll(/^\s+id:\s*"([a-z0-9-]+)"/gm)].map((m) => m[1]);
   if (!ids.length) throw new Error("no view ids found in config.js — the regex is stale");
+  // Cross-check against a second marker that appears exactly once per view. Matching `id:`
+  // alone is indentation-sensitive, so a reformat could find SOME views and silently leave
+  // the rest untested — which is the failure this function exists to prevent, reappearing
+  // in a subtler form. Disagreement means the parse is wrong, not that a view is missing.
+  const headlines = (views.match(/^\s+headlineKpi:/gm) || []).length;
+  if (headlines && headlines !== ids.length) {
+    throw new Error(`config.js parse mismatch: ${ids.length} view id(s) but ${headlines} `
+                    + `headlineKpi entries. Routes would be under-tested; fix the regex.`);
+  }
   return [EXTRA_ROUTES[0], ...ids.map((id) => "/" + id), EXTRA_ROUTES[1]];
 }
 
