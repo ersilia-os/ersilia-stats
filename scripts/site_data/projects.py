@@ -180,7 +180,10 @@ def _timeline(projects, start, end, status, today):
     """
     names = as_text(col(projects, "name"))
     rows = []
-    for i in range(len(projects)):
+    # `start` and `end` come from `col()`, so both are EMPTY when their column is absent —
+    # the loop is bounded by them, not by `projects`. `names` and `status` were already
+    # guarded this way; these two were not.
+    for i in range(min(len(projects), len(start), len(end))):
         if pd.isna(start.iloc[i]):
             continue
         finish = end.iloc[i]

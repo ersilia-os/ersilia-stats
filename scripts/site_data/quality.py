@@ -141,7 +141,9 @@ def _project_repo_status(projects, repos):
         if not linked:
             orphans += 1
             continue
-        their_status = repo_status.iloc[i]
+        # `repo_status` comes from `col()` and is EMPTY when the column is absent. A
+        # repository with no recorded status simply contributes no pair.
+        their_status = repo_status.iloc[i] if i < len(repo_status) else ""
         for record in linked:
             owner = project_status.get(record)
             if owner and their_status:

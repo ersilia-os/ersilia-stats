@@ -59,6 +59,17 @@ def col(df, *names):
 
 
 def to_num(series):
+    """A guaranteed-numeric Series. Missing values and unparseable ones become ``0``.
+
+    `None` IS a valid argument and must stay one, because five call sites pass
+    `frame.get("column")` and that returns None when the column is absent. Without the guard
+    `pd.to_numeric(None)` returns a bare numpy scalar and `.fillna` raises
+    `'numpy.float64' object has no attribute 'fillna'` — which is how a Docker Hub snapshot
+    missing `pull_count` crashed the whole build rather than emptying one card. `as_text`
+    already handled None; this is the same contract on the numeric side.
+    """
+    if series is None:
+        return pd.Series(dtype=float)
     return pd.to_numeric(series, errors="coerce").fillna(0)
 
 

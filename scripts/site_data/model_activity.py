@@ -253,7 +253,9 @@ def _most_active(model_rows, collected, models):
     if images is not None and not images.empty and "name" in images.columns:
         flag = as_text(images.get("is_model")).str.lower()
         counts = to_num(images.get("pull_count"))
-        for i in range(len(images)):
+        # Both are EMPTY when their column is absent, so the loop is bounded by the
+        # shortest of the three rather than by `images`.
+        for i in range(min(len(images), len(flag), len(counts))):
             if flag.iloc[i] == "yes":
                 pulls[str(images["name"].iloc[i]).strip()] = int(counts.iloc[i] or 0)
 

@@ -231,8 +231,10 @@ def _top_contributors(collected):
     if frame is None or frame.empty or "login" not in frame.columns:
         return dict(EMPTY)
     counts = to_num(col(frame, "repositories"))
+    # `counts` is empty when the column is absent; bound the loop by the shorter of the two.
     pairs = sorted(((str(frame["login"].iloc[i]).strip(), int(counts.iloc[i] or 0))
-                    for i in range(len(frame))), key=lambda kv: (-kv[1], kv[0]))
+                    for i in range(min(len(frame), len(counts)))),
+                   key=lambda kv: (-kv[1], kv[0]))
     # Second line of defence, matching how PII columns are dropped at fetch AND at load:
     # a snapshot collected before the bot filter existed must not put CI on the chart.
     pairs = [p for p in pairs if p[0] and p[1] > 0 and not _is_bot(p[0])]

@@ -183,7 +183,7 @@ def _openalex_citations(collected):
         return {}
     counts = to_num(works.get("citations"))
     return {_bare_doi(works["doi"].iloc[i]): int(counts.iloc[i])
-            for i in range(len(works))}
+            for i in range(min(len(works), len(counts)))}
 
 
 def _bare_doi(value):
@@ -348,7 +348,9 @@ def _citation_accrual(collected):
         return {"labels": [], "series": [], "n": 0}
     totals = {}
     counts = to_num(years.get("citations"))
-    for i in range(len(years)):
+    if "year" not in years.columns:
+        return {"labels": [], "series": [], "n": 0}
+    for i in range(min(len(years), len(counts))):
         year = str(years["year"].iloc[i]).strip()[:4]
         if year.isdigit():
             totals[int(year)] = totals.get(int(year), 0) + int(counts.iloc[i])

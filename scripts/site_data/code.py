@@ -52,6 +52,8 @@ with more than five stars because a curve through three points is decoration.
 describes recent practice rather than all history. A repository that has closed fewer than
 that contributes the median of what it has.
 """
+import pandas as pd
+
 from . import insights as ins
 from .parse import EMPTY, as_text, growth_pair, metric, quarter_totals, to_num
 
@@ -243,7 +245,17 @@ def _star_growth(stars):
 
 
 def _split_models(repos):
+    """`(is_model, is_other)` boolean masks aligned to `repos`.
+
+    A mask built from an absent column is EMPTY, and pandas rejects it as an indexer with
+    "Unalignable boolean Series". Falling back to all-False for models keeps every figure
+    that splits on this from raising, and reports no model repositories rather than
+    guessing.
+    """
     flag = as_text(repos.get("is_model")).str.lower()
+    if len(flag) != len(repos):
+        empty = pd.Series(False, index=repos.index)
+        return empty, ~empty
     return flag == "yes", flag != "yes"
 
 
@@ -297,8 +309,6 @@ def _activity_recency(repos, today):
     """
     if "pushed_at" not in repos.columns:
         return dict(EMPTY)
-    import pandas as pd
-
     now = pd.Timestamp(today) if today is not None else pd.Timestamp.today().normalize()
     pushed = pd.to_datetime(repos["pushed_at"], errors="coerce")
     archived = as_text(repos.get("archived")).str.lower() == "yes"

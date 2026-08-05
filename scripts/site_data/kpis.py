@@ -107,7 +107,9 @@ def _openalex_totals(collected, dois=None):
             return None, None
     counts = to_num(years.get("citations"))
     totals = {}
-    for i in range(len(years)):
+    if "year" not in years.columns:
+        return None, None
+    for i in range(min(len(years), len(counts))):
         year = str(years["year"].iloc[i]).strip()[:4]
         if year.isdigit():
             totals[int(year)] = totals.get(int(year), 0) + int(counts.iloc[i])
