@@ -62,13 +62,18 @@ def build(models):
             "by_source_type": dict(EMPTY),
             "by_target_organism": dict(EMPTY),
             "publication_lag": dict(EMPTY),
-            "scaling_limit": dict(EMPTY),
+            "performance_by_scale": {"labels": [], "series": [], "n": 0},
             "image_size": dict(EMPTY),
             "on_arm": dict(EMPTY),
             "licence_openness": dict(EMPTY),
             "output_consistency": dict(EMPTY),
             "publication_type": dict(EMPTY),
             "growth": {"labels": [], "series": [], "n": 0},
+            "task_by_area": {"x": [], "y": [], "cells": [], "n": 0},
+            "image_composition": {"labels": [], "series": [], "n": 0},
+            "top_contributors": dict(EMPTY),
+            "contributor_concentration": dict(EMPTY),
+            "template_migration": dict(EMPTY),
         }
 
     incorporated = col(models, "incorporation_date")
@@ -102,7 +107,7 @@ def build(models):
         "task_tree": _task_tree(models),
         "by_target_organism": _by_target_organism(models),
         "publication_lag": _publication_lag(models, incorporated),
-        "scaling_limit": _scaling_limit(models),
+        "performance_by_scale": _performance_by_scale(models),
         "image_size": _image_size(models),
         "on_arm": _on_arm(models),
         "cohorts_by_status": _cohorts_by_status(incorporated, status),
@@ -114,6 +119,11 @@ def build(models):
         "by_source_type": _by_source_type(models),
         "output_consistency": _output_consistency(models),
         "publication_type": _publication_type(models),
+        "task_by_area": _task_by_area(models),
+        "image_composition": _image_composition(models),
+        "top_contributors": _top_contributors(models),
+        "contributor_concentration": _contributor_concentration(models),
+        "template_migration": _template_migration(models),
     }
 
 
@@ -261,6 +271,53 @@ def _by_target_organism(models):
     return out
 
 
+def _task_by_area(models):
+    """Coverage: task family x biomedical area, crossed.
+
+    The task-tree and biomedical-area charts above answer "what" and "for what disease"
+    separately and never together. Task is single-valued, so every model with one recorded
+    contributes to exactly one row; biomedical area is multi-select, so a model naming two
+    areas contributes to both columns it touches. Capped to the 8 largest task families and
+    10 largest areas so the matrix stays legible.
+    """
+    task_col = col(models, "task")
+    area_col = col(models, "biomedical_area")
+    if task_col.empty or area_col.empty:
+        return {"x": [], "y": [], "cells": [], "n": 0}
+
+    cross, task_totals, area_totals = Counter(), Counter(), Counter()
+    n = 0
+    for i in range(len(models)):
+        task = first_value(task_col.iloc[i]) if i < len(task_col) else None
+        if not task:
+            continue
+        areas = parse_multi(area_col.iloc[i]) if i < len(area_col) else []
+        for area in areas:
+            cross[(task, area)] += 1
+            task_totals[task] += 1
+            area_totals[area] += 1
+            n += 1
+    if not cross:
+        return {"x": [], "y": [], "cells": [], "n": 0}
+
+    tasks = [t for t, _ in task_totals.most_common(8)]
+    areas = [a for a, _ in area_totals.most_common(10)]
+    cells = [
+        [xi, yi, cross[(task, area)]]
+        for yi, task in enumerate(tasks)
+        for xi, area in enumerate(areas)
+        if cross.get((task, area))
+    ]
+    top_task, top_count = task_totals.most_common(1)[0]
+    return {
+        "x": areas, "y": tasks, "cells": cells, "n": n,
+        "insight": "%s task-area pairings recorded across %s task families and %s biomedical "
+                   "areas; %s leads with %s." % (
+                       ins.num(n), len(tasks), len(areas), top_task, ins.num(top_count),
+                   ),
+    }
+
+
 def _publication_lag(models, incorporated):
     """How long a published model waits before Ersilia wraps it.
 
@@ -296,15 +353,18 @@ def _publication_lag(models, incorporated):
             ins.num(same_year), ins.num(len(lag)), round(float(lag.mean()), 1)),
         mean=round(float(lag.mean()), 1),
         median=round(float(lag.median()), 1),
-        unit="years",
+        # No `unit`: the card's title already says "Years", and six bins in a span-4
+        # card have no room for a suffix — "5–9" ran into "10+ years".
         countNoun="models",
         n=len(lag),
     )
 
 
-# The five Computational Performance columns are runtimes at increasing input sizes.
+# The five Computational Performance columns are runtimes (seconds) at increasing
+# batch sizes. Plain numeric strings, not "1 input" — the chart parses these back
+# into numbers for a log-scale axis, so anything non-numeric would drop off it.
 SCALE_STEPS = [
-    ("1 input", "computational_performance_1"),
+    ("1", "computational_performance_1"),
     ("10", "computational_performance_2"),
     ("100", "computational_performance_3"),
     ("1,000", "computational_performance_4"),
@@ -312,46 +372,54 @@ SCALE_STEPS = [
 ]
 
 
-def _scaling_limit(models):
-    """The largest batch each model actually completed.
+def _performance_by_scale(models):
+    """Runtime at each batch size the Hub benchmarks: 1, 10, 100, 1,000 and 10,000
+    molecules in one call, as a median with its 25th-75th percentile band — the same
+    plot entry_project draws (median line, shaded IQR, log-log axes).
 
-    DERIVED, NOT RECORDED, and the derivation rests on one convention: a value of
-    ``-1`` in a Computational Performance column means the model FAILED at that
-    input size. So the largest column holding a positive number is the largest batch
-    the model got through. This is stated in Methods because a reader cannot infer
-    it from the chart.
+    A value of ``-1`` in a Computational Performance column means the model FAILED
+    at that size, so it is excluded from the runtime figures rather than counted as
+    an instant run — a real effect here, not a theoretical one: 74 of 234 models
+    (32%) fail at the largest size, and leaving ``-1`` in would drag the median
+    toward zero rather than showing the runtime of the models that actually
+    completed. Models drop out of later batch sizes as they fail, so the sample
+    shrinks left to right; the count benchmarked at each size is in the drill-down.
     """
-    present = [(label, column) for label, column in SCALE_STEPS
-               if not col(models, column).empty]
-    if not present:
-        return dict(EMPTY)
-    numeric = [(label, pd.to_numeric(col(models, column), errors="coerce"))
-               for label, column in present]
+    labels, medians, p25s, p75s, counts = [], [], [], [], []
+    for label, column in SCALE_STEPS:
+        values = pd.to_numeric(col(models, column), errors="coerce")
+        values = values[values > 0]
+        if values.empty:
+            continue
+        labels.append(label)
+        medians.append(round(float(values.median()), 4))
+        p25s.append(round(float(values.quantile(0.25)), 4))
+        p75s.append(round(float(values.quantile(0.75)), 4))
+        counts.append(int(values.count()))
+    if not labels:
+        return {"labels": [], "series": [], "n": 0}
 
-    counts = Counter()
-    for i in range(len(models)):
-        best = None
-        for label, series in numeric:
-            value = series.iloc[i] if i < len(series) else None
-            if pd.notna(value) and value > 0:
-                best = label
-        if best is not None:
-            counts[best] += 1
-    if not counts:
-        return dict(EMPTY)
-
-    labels = [label for label, _ in numeric if label in counts]
-    values = [counts[label] for label in labels]
-    total = sum(values)
-    top = labels[-1]
-    out = metric(
-        labels, values,
-        "%s of %s reached the largest batch, %s inputs." % (
-            ins.num(counts[top]), ins.num(total), top),
-        n=total,
+    out = series_metric(
+        labels,
+        [{"name": "p25", "values": p25s},
+         {"name": "Median runtime (s)", "values": medians},
+         {"name": "p75", "values": p75s}],
+        "Median runtime goes from %ss at %s molecule to %ss at %s molecules — %s "
+        "models still completing a run there." % (
+            _fmt_seconds(medians[0]), labels[0], _fmt_seconds(medians[-1]), labels[-1],
+            ins.num(counts[-1]),
+        ),
     )
-    out["ordinal"] = True
+    out["n"] = counts[-1]
     return out
+
+
+def _fmt_seconds(value):
+    if value < 1:
+        return "%.3f" % value
+    if value < 10:
+        return "%.2f" % value
+    return "%.1f" % value
 
 
 def _image_size(models):
@@ -404,6 +472,51 @@ def _on_arm(models):
                      "also build for ARM64"),
         n=with_arch,
     )
+
+
+def _image_composition(models):
+    """Model weights vs. installed environment vs. everything else, for the heaviest images.
+
+    A packaging-efficiency question `_image_size`'s distribution doesn't break down: how much
+    of an image is the checkpoint itself against the environment it runs in. All three sizes
+    are recorded in the same unit (MB), so no conversion is needed. "Other" folds in the base
+    OS layer, package caches and anything else the two named parts don't account for; it is
+    clipped at zero rather than shown negative, since a negative would mean the two recorded
+    parts overstate the whole rather than something real.
+    """
+    image = pd.to_numeric(col(models, "image_size"), errors="coerce")
+    weight = pd.to_numeric(col(models, "model_size"), errors="coerce")
+    env = pd.to_numeric(col(models, "environment_size"), errors="coerce")
+    if image.empty or weight.empty or env.empty:
+        return {"labels": [], "series": [], "n": 0}
+
+    title = as_text(col(models, "title"))
+    identifier = as_text(col(models, "identifier"))
+    label = title.where(title != "", identifier)
+
+    df = pd.DataFrame({"image": image, "weight": weight, "env": env, "label": label}).dropna(
+        subset=["image", "weight", "env"]
+    )
+    df = df[(df["image"] > 0) & (df["weight"] >= 0) & (df["env"] >= 0)]
+    if df.empty:
+        return {"labels": [], "series": [], "n": 0}
+    df["other"] = (df["image"] - df["weight"] - df["env"]).clip(lower=0)
+    top = df.sort_values("image", ascending=False).head(12)
+
+    out = series_metric(
+        list(top["label"]),
+        [
+            {"name": "Model weights", "values": [round(v, 1) for v in top["weight"]]},
+            {"name": "Environment", "values": [round(v, 1) for v in top["env"]]},
+            {"name": "Other", "values": [round(v, 1) for v in top["other"]]},
+        ],
+        "Environment accounts for %s of uncompressed image size, across the %s models that "
+        "record model, environment and image size together — the heaviest %s shown here." % (
+            ins.pct(int(df["env"].sum()), int(df["image"].sum())) or "n/a", len(df), len(top),
+        ),
+    )
+    out["n"] = len(df)
+    return out
 
 
 def _by_source_type(models):
@@ -546,4 +659,85 @@ def _coverage(models):
         ),
         # The whole is every model, so the meters can show a real percentage.
         total=len(models),
+    )
+
+
+def _top_contributors(models):
+    """People credited with incorporating a model, by how many they've done.
+
+    `Contributor` records the GitHub handle of whoever wrapped the model — the same kind of
+    public identifier already published for commit authorship elsewhere on the site (see
+    `repositories.py`'s `_top_contributors`), not a narrative name field. Multi-select, so a
+    model credited to two people counts for both.
+    """
+    out = multi_counts(col(models, "contributor"), top=12)
+    if not out["labels"]:
+        return dict(EMPTY)
+    out["insight"] = ins.leader(out, "models incorporated")
+    return out
+
+
+def _contributor_concentration(models):
+    """Lorenz curve of models incorporated per contributor — the bus-factor question for
+    the Hub's own incorporation work, alongside `repositories.py`'s equivalent for commits.
+
+    x = cumulative share of contributors (least active first), y = cumulative share of
+    models incorporated. A curve hugging the bottom-right means a handful of people have
+    done almost all of the incorporation.
+    """
+    counts = Counter()
+    for value in col(models, "contributor").dropna():
+        for name in parse_multi(value):
+            name = name.strip()
+            if name:
+                counts[name] += 1
+    if not counts:
+        return dict(EMPTY)
+
+    ordered = sorted(counts.values())
+    total = sum(ordered)
+    labels, values, running = ["0"], [0.0], 0
+    for index, value in enumerate(ordered, start=1):
+        running += value
+        labels.append(str(round(100.0 * index / len(ordered), 1)))
+        values.append(round(100.0 * running / total, 1))
+    # Gini via the trapezoid area under the Lorenz curve.
+    area = 0.0
+    for i in range(1, len(values)):
+        width = (float(labels[i]) - float(labels[i - 1])) / 100.0
+        area += width * (values[i] + values[i - 1]) / 200.0
+    gini = round(max(0.0, min(1.0, 1 - 2 * area)), 2)
+    top_decile = sum(ordered[-max(1, len(ordered) // 10):])
+    return metric(
+        labels, values,
+        "The busiest 10%% of contributors have incorporated %s of all credited models "
+        "(Gini %s)." % (ins.pct(top_decile, total), gini),
+        gini=gini, unit="% of models", n=len(ordered),
+    )
+
+
+def _template_migration(models):
+    """Whether a model repository declares its Python version and dependencies via
+    ``install.yml`` — the current ersilia-model-template — or still carries them
+    baked into its Dockerfile, the legacy layout every model shipped with before it.
+
+    `install_python_version` is read straight off ``install.yml`` at collection
+    time; a blank cell means the file was never found, not that the version is
+    literally unset.
+    """
+    versions = col(models, "install_python_version")
+    if versions.empty:
+        return dict(EMPTY)
+    has = as_text(versions)
+    has = has[(has != "") & (has.str.lower() != "nan")]
+    current = len(has)
+    total = len(models)
+    if not total:
+        return dict(EMPTY)
+    return metric(
+        ["Current template (install.yml)", "Legacy template (deps in Dockerfile)"],
+        [current, total - current],
+        ins.share_of(current, total, "model repositories",
+                     "declare their Python version and dependencies via install.yml"),
+        n=total,
     )

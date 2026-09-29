@@ -290,3 +290,42 @@ def quarter_totals(pairs):
         total += value
         running.append(total)
     return labels, per_quarter, running
+
+
+# ---------------------------------------------------------------------------
+# The Hub's currently active population — shared by every module that measures
+# ONGOING model maintenance, so "active" means the same thing everywhere it is asked.
+# ---------------------------------------------------------------------------
+ACTIVE_MODEL_STATUSES = {"ready", "in maintenance"}
+
+
+def active_repo_names(models, repos, universe):
+    """``universe`` narrowed to repositories that are both a currently active
+    registry entry (status Ready or In maintenance) and not archived on GitHub.
+
+    A model still In progress has not settled into a release or packaging rhythm
+    yet, and an archived repository's history describes work that has stopped —
+    counting either would describe a different, larger population than "the
+    models actively in the Hub today". Falls back to ``universe`` unfiltered
+    wherever a needed column is absent, so a partial snapshot still shows what
+    it can rather than emptying every card.
+    """
+    keep = set(universe)
+    if models is not None and not models.empty and \
+            {"identifier", "status"}.issubset(models.columns):
+        # Airtable's status column arrives as a single-select, but resolve it the
+        # same way `models.py` does (`first_value`) rather than comparing the raw
+        # cell: a linked/multi-select field can come through as a list-repr string
+        # like "['Ready']", which a bare `.lower()` would never match.
+        status = models["status"].apply(first_value).fillna("").astype(str).str.lower()
+        ids = as_text(models["identifier"])
+        active_ids = {i.strip() for i, s in zip(ids, status)
+                      if s.strip() in ACTIVE_MODEL_STATUSES}
+        keep &= active_ids
+    if repos is not None and not repos.empty and \
+            {"name", "archived"}.issubset(repos.columns):
+        names = as_text(repos["name"])
+        flags = as_text(repos["archived"])
+        archived = {n.strip() for n, a in zip(names, flags) if a.strip().lower() == "yes"}
+        keep -= archived
+    return keep

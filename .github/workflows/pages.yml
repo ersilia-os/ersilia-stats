@@ -1,16 +1,25 @@
 name: Deploy site
 
-# Fetches the Airtable snapshots into the runner, builds site/data from them, and
-# deploys site/ to GitHub Pages.
+# Fetches every data source into the runner, builds site/data from it, and deploys
+# site/ to GitHub Pages. Nothing fetched is committed (see .gitignore): the data lives
+# only in the runner for the length of this job.
 #
-# The snapshots are deliberately NOT committed (see .gitignore): the community table
-# in raw form carries personal data, and a public repository has no reason to hold a
-# copy of the registry. They live only in the runner for the length of this job, so
-# the fetch and the build have to happen in the same workflow.
+# Repository secrets:
+#   AIRTABLE_API_KEY    read-only Airtable personal access token (required)
+#   GH_STATS_TOKEN      GitHub token with read access to ersilia-os metadata (required).
+#                       The traffic collector also needs "Administration: Read-only"
+#                       (fine-grained) or the `repo` scope (classic).
+#   DOCKERHUB_USERNAME  optional; with DOCKERHUB_TOKEN, lifts Docker Hub's anonymous
+#   DOCKERHUB_TOKEN     pagination cap
 #
-# This needs AIRTABLE_API_KEY (a read-only personal access token is sufficient). The
-# aggregation drops identifying columns and the export aborts if anything
-# email-shaped reaches the output, so the published files stay aggregate-only.
+# WHAT CAN STOP A DEPLOY, AND WHAT CANNOT. Only two fetches are required: Airtable, and
+# the GitHub inventory that the public/private check below reads. Every other collector
+# is `continue-on-error`: if one fails, the run shows a warning, its cards render their
+# empty state, and the rest of the site still refreshes — the next weekly run fills them
+# back in. Likewise an EMPTY chart is a warning here, not a failure, because it means an
+# upstream source changed, not that the code is broken. What still fails the build is a
+# code error (a chart pointing at a metric that does not exist, JavaScript that does not
+# parse or render) or a disclosure guard; the previous deployment then stays live.
 
 on:
   workflow_dispatch:
@@ -23,13 +32,9 @@ on:
     branches: [main]
     paths:
       - "site/**"
-      - "scripts/export_site_data.py"
-      - "scripts/site_data/**"
-      - "scripts/fetch_airtable.py"
-      - "scripts/check_config_paths.py"
-      - "scripts/verify_site.mjs"
+      - "scripts/**"
+      - "data/**"
       - "requirements.txt"
-      - "data/airtable_api_identifiers.csv"
       - ".github/workflows/pages.yml"
 
 permissions:
@@ -45,6 +50,7 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -74,6 +80,70 @@ jobs:
             -t data/airtable_api_identifiers.csv \
             -o data/air_tables/
 
+      # The public collectors. Order matters twice: fetch_docker_tags.py reads the image
+      # list fetch_dockerhub.py writes, and fetch_openalex.py reads the DOIs from the
+      # Airtable snapshot fetched above.
+      - name: Fetch GitHub inventory
+        env:
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+        run: python scripts/fetch_github.py -o data/github/
+
+      - name: Fetch GitHub releases
+        continue-on-error: true
+        env:
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+        run: python scripts/fetch_github_releases.py -o data/github/
+
+      - name: Fetch model packages
+        continue-on-error: true
+        env:
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+        run: python scripts/fetch_model_packages.py -o data/github/
+
+      # GitHub keeps only a rolling 14-day traffic window, so fetch_github_traffic.py
+      # unions today's fetch with the previous snapshot to build a history. That snapshot
+      # is carried between runs in the Actions cache, and saved straight after the fetch
+      # so a later failure in this job cannot lose it. A cache unused for 7 days is
+      # evicted, which loses the history: keep the weekly schedule running. The fetch
+      # needs a token with traffic access; without one it fails as a warning only.
+      - name: Restore GitHub traffic history
+        uses: actions/cache/restore@v4
+        with:
+          path: data/github/traffic_sources_*.csv
+          key: github-traffic-${{ github.run_id }}
+          restore-keys: github-traffic-
+
+      - name: Fetch GitHub traffic
+        id: traffic
+        continue-on-error: true
+        env:
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+        run: python scripts/fetch_github_traffic.py -o data/github/
+
+      - name: Save GitHub traffic history
+        if: steps.traffic.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: data/github/traffic_sources_*.csv
+          key: github-traffic-${{ github.run_id }}
+
+      - name: Fetch Docker Hub images and tags
+        continue-on-error: true
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          python scripts/fetch_dockerhub.py   -o data/dockerhub/
+          python scripts/fetch_docker_tags.py -o data/dockerhub/
+
+      - name: Fetch OpenAlex citations
+        continue-on-error: true
+        run: python scripts/fetch_openalex.py -o data/scholar/ --data-dir data/air_tables
+
+      - name: Fetch PyPI packages and downloads
+        continue-on-error: true
+        run: python scripts/fetch_pypi.py -o data/pypi/
+
       # THE SITE DECIDES WHICH REPOSITORY NAMES IT MAY PUBLISH by reading Airtable's
       # `Visibility` column, and nothing used to check that column against GitHub. A
       # repository marked Public in Airtable and private on GitHub would have its name
@@ -81,7 +151,7 @@ jobs:
       # would be wrong. So this gate runs before the build, not after it.
       #
       # Public data only, and no GitHub token: it compares the Airtable snapshot fetched
-      # above against the committed public inventory in data/github/. That is deliberate.
+      # above against the public inventory fetched into data/github/. That is deliberate.
       # Logs on a public repository are world-readable, so CI must never enumerate private
       # repositories; `--include-private` exists for local runs and is not used here.
       #
@@ -109,13 +179,12 @@ jobs:
         run: python scripts/export_site_data.py --data-dir data/air_tables --out site/data/stats.json
 
       # Fails the build if any chart in config.js points at a metric the exporter no
-      # longer produces. Without this, a renamed metric silently drops a card.
-      # --fail-on-empty, not --strict: an empty metric means a table came back with no
-      # usable rows and the card would ship showing its empty state, which must fail the
-      # build. Unused exports are deliberate (they are the Downloads CSVs), and --strict
-      # fails on those too.
-      - name: Check every chart has data
-        run: python scripts/check_config_paths.py --fail-on-empty
+      # longer produces — a code error. Without this, a renamed metric silently drops a
+      # card. EMPTY metrics are listed in the log but do not fail the deploy: that is an
+      # upstream data gap (see the header), and check.yml's --fail-on-empty against the
+      # fixture is what proves every chart CAN be drawn.
+      - name: Check every chart resolves
+        run: python scripts/check_config_paths.py
 
       # Per-file content hashes on every asset URL. GitHub Pages sends max-age=600 for
       # scripts and stylesheets alike, so without this a returning visitor can hold an

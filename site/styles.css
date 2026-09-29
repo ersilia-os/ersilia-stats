@@ -312,6 +312,20 @@ main > * { max-width: var(--content-w); }
 .stat .delta.flat::before { content: "· "; color: var(--muted); }
 .stat .spark { display: block; width: 100%; height: 24px; margin-top: var(--sp-3); }
 
+/* ---------- Group header (within a view) -------------------------------- */
+/* A view can break into topic sections — e.g. Model Hub separates growth,
+   licensing, distribution, Docker demand and GitHub activity so a chart about
+   licences never shares a row with one about stars or pulls. Smaller than
+   .viewhead so the hierarchy reads view > group > chart. */
+.grouphead {
+  padding-top: var(--sp-6); border-top: 1px solid var(--border);
+}
+.chart-grid > .grouphead:first-child { padding-top: 0; border-top: 0; }
+.grouphead h3 {
+  font-size: var(--fs-title); font-weight: 600; margin: 0 0 2px; color: var(--ink);
+}
+.grouphead p { margin: 0; color: var(--muted); font-size: var(--fs-meta); max-width: 74ch; }
+
 /* ===========================================================================
    Rows of twelve columns.
 
@@ -508,6 +522,9 @@ table.ranked td.txt {
 @media (max-width: 720px) {
   table.ranked td.barcell, table.ranked th:last-child { display: none; }
   table.ranked td.name { width: 44%; }
+  /* Four text columns ("In maintenance", a date, a GitHub handle) have no break point
+     of their own and pushed the table past a 390px viewport. Let them break anywhere. */
+  table.ranked th, table.ranked td.txt { overflow-wrap: anywhere; }
 }
 table.ranked td.barcell { width: 28%; padding-left: var(--sp-4); }
 table.ranked .microbar { height: 4px; border-radius: 999px; background: var(--chart-1); min-width: 2px; }

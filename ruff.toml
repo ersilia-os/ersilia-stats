@@ -37,4 +37,3 @@ ignore = [
 # The collectors and the export CLI insert the scripts directory on sys.path before
 # importing from it, so their imports cannot all sit at the top of the file.
 "scripts/export_site_data.py" = ["E402"]
-"scripts/resolve_dois.py" = ["E402"]

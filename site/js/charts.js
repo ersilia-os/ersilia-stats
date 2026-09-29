@@ -209,7 +209,7 @@ function seriesColors(metric, count) {
    leader back to the label. Reads as a ranking, costs almost no ink, and stays
    legible at any card width. */
 function optLollipop(d) {
-  const prepared = capRows(collapseTies(d), 9);
+  const prepared = capRows(collapseTies(d), 9, d.nonAdditive);
   const labels = prepared.labels.slice().reverse();
   const values = prepared.values.slice().reverse();
   const color = accent();
@@ -304,11 +304,19 @@ function optOrdinalLollipop(d) {
 
 /* More rows than the card can give them turns a ranking into overlapping text. Keep
    the top N and summarise the tail, so a lollipop is legible whatever height it
-   lands in. */
-function capRows(d, max) {
+   lands in.
+
+   `nonAdditive` metrics count each row out of the SAME population (packages per model:
+   one model counts towards every package it installs), so a summed tail is not a count
+   of anything and drew as the second-longest bar. Those keep the top `max` rows and
+   leave the rest to the table view. */
+function capRows(d, max, nonAdditive) {
   const labels = d.labels || [];
   if (labels.length <= max) return d;
   const values = d.values || [];
+  if (nonAdditive) {
+    return { labels: labels.slice(0, max), values: values.slice(0, max), unit: d.unit };
+  }
   const kept = max - 1;
   const rest = values.slice(kept).reduce((a, b) => a + Number(b), 0);
   return {
@@ -742,6 +750,60 @@ function optLogScatter(d, conf) {
   return o;
 }
 
+/* Two measures on LINEAR axes, split into a fixed set of colour categories — unlike
+ * optLogScatter, which is for a long tail and a single series. Used where the categories
+ * ARE the point (does a trait correlate with the measure), and the range does not span
+ * orders of magnitude, so a log axis would only make it harder to read.
+ *
+ * `categories` is optional: omit it (no `cat` field, no legend) for a plain single-series
+ * scatter — the linear-axis counterpart to optLogScatter when the data does not have a
+ * long tail. `xUnit`/`yUnit` are appended to that axis's tick labels AND its tooltip line
+ * ("2 GB" rather than a bare "2"), for a measure whose unit is not obvious from the number
+ * alone. */
+function optCategoryScatter(d, conf) {
+  const c = conf || {};
+  const categories = c.categories && c.categories.length ? c.categories : [{ key: null, label: "" }];
+  const single = categories.length === 1 && !categories[0].label;
+  const rows = (d.points || []).map((p) => ({
+    x: Number(p[c.x]), y: Number(p[c.y]), name: p.name,
+    cat: single ? categories[0].key : p[c.category],
+  }));
+  if (!rows.length) return base();
+
+  const withUnit = (value, unit) => fmtCompact(value) + (unit ? " " + unit : "");
+  const o = base();
+  // Extra right margin: the boundary tick's own label (e.g. "21 GB") sits AT the
+  // axis's max, which containLabel does not reliably keep clear of the card edge.
+  o.grid = { left: 6, right: 34, top: single ? 10 : 40, bottom: 4, containLabel: true };
+  if (!single) o.legend = legend(categories.map((cat) => cat.label));
+  o.tooltip.trigger = "item";
+  o.tooltip.formatter = (p) =>
+    "<b>" + p.data[2] + "</b><br/>" + c.xLabel + " " + withUnit(p.data[0], c.xUnit) +
+    " · " + c.yLabel + " " + withUnit(p.data[1], c.yUnit);
+  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta };
+  const valueAxis = (name, gap, unit) => ({
+    type: "value", name: name, nameLocation: "middle", nameGap: gap,
+    nameTextStyle: nameStyle,
+    axisLine: { show: false }, axisTick: { show: false },
+    splitLine: { lineStyle: { color: T.axis } },
+    axisLabel: {
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono,
+      formatter: (v) => withUnit(v, unit),
+    },
+  });
+  o.xAxis = valueAxis(c.xLabel, 28, c.xUnit);
+  o.yAxis = valueAxis(c.yLabel, 44, c.yUnit);
+  o.series = categories.map((cat, i) => ({
+    name: cat.label,
+    type: "scatter",
+    data: rows.filter((r) => r.cat === cat.key).map((r) => [r.x, r.y, r.name]),
+    symbolSize: 8,
+    itemStyle: { color: alpha(single ? accent() : catColor(i), 0.7), borderColor: T.surface, borderWidth: 1 },
+    emphasis: { itemStyle: { color: single ? accent() : catColor(i) }, scale: 1.5 },
+  }));
+  return o;
+}
+
 
 /* ------------------------------------------------- growth: rate + total */
 /* Per-period bars and the running total, in ONE panel.
@@ -832,10 +894,20 @@ function optHistogram(d) {
   o.tooltip.axisPointer = { type: "shadow", shadowStyle: { color: alpha(accent(), 0.06) } };
   // The counted thing is not always people — these bins now hold models by wrap lag
   // and by image size too, where "3 people" was simply wrong. `countNoun` names the
-  // rows; `unit` describes the x axis and belongs in the caption, not here.
+  // rows, in the tooltip.
   const noun = d.countNoun || "";
   o.tooltip.valueFormatter = (v) => fmtNum(v) + (noun ? " " + noun : "");
-  o.xAxis = catAxis(d.labels, { axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, interval: 0, rotate: 0 } });
+  // `unit` suffixes the LAST bin label only ("… 5–9 10+ years"), when the exporter set
+  // one. On every label it made six bins too wide for a span-4 card, and "0 years" ran
+  // into "1 years". Every raw `d.labels` value stays unchanged, so the mean-line lookup
+  // below (which parses those same strings) is unaffected.
+  const lastLabel = d.labels[d.labels.length - 1];
+  o.xAxis = catAxis(d.labels, {
+    axisLabel: {
+      color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, interval: 0, rotate: 0,
+      formatter: (v) => v + (d.unit && v === lastLabel ? " " + d.unit : ""),
+    },
+  });
   o.yAxis = valAxis({ show: false });
   o.series = [{
     type: "bar", data: d.values, barCategoryGap: "18%",
@@ -1034,6 +1106,7 @@ const MAP_ALIAS = {
   "united states of america": "United States", "usa": "United States", "u.s.a.": "United States",
   "czech republic": "Czech Rep.", "czechia": "Czech Rep.",
   "russian federation": "Russia", "south korea": "Korea", "republic of korea": "Korea",
+  "korea, republic of": "Korea",
   "democratic republic of the congo": "Dem. Rep. Congo", "republic of the congo": "Congo",
   "bosnia and herzegovina": "Bosnia and Herz.", "dominican republic": "Dominican Rep.",
   "tanzania, united republic of": "Tanzania", "ivory coast": "Côte d'Ivoire",
@@ -1099,6 +1172,89 @@ function optMap(d, label) {
   };
 }
 
+/* ----------------------------------------------- band line (log scaling) */
+/* A median line with its 25th-75th percentile band, against log-scale axes — for a
+   measure that spans orders of magnitude on both the x (batch size) and y (runtime).
+   The same plot entry_project drew with Plotly (median line, shaded IQR, log-log
+   axes), redrawn here in ECharts. Expects a series_metric with a "p25", a "p75" and
+   one other (the median) series, sharing labels that parse as numbers (commas
+   allowed: "10,000").
+
+   The band is ECharts' standard stacking trick: an invisible floor series holding
+   the lower edge, and a second stacked on top of it whose height is (upper - lower),
+   so the visible fill spans exactly the IQR. Stacking sums the raw data values
+   before the log scale ever sees them, so the top of the band still lands exactly
+   at the upper edge's true position — the log transform only affects pixel
+   placement, not the stacking arithmetic. */
+function fmtSeconds(value) {
+  const n = Number(value);
+  if (value == null || Number.isNaN(n)) return "—";
+  const abs = Math.abs(n);
+  if (abs < 1) return n.toFixed(3) + "s";
+  if (abs < 10) return n.toFixed(2) + "s";
+  if (abs < 100) return n.toFixed(1) + "s";
+  return Math.round(n) + "s";
+}
+
+function optBandLine(d) {
+  const series = d.series || [];
+  const lower = series.find((s) => s.name === "p25");
+  const upper = series.find((s) => s.name === "p75");
+  const median = series.find((s) => s !== lower && s !== upper);
+  if (!median || !d.labels || !d.labels.length) return base();
+
+  const x = d.labels.map((l) => Number(String(l).replace(/,/g, "")));
+  const color = accent();
+  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta };
+
+  const o = base();
+  o.grid = { left: 6, right: 20, top: 30, bottom: 4, containLabel: true };
+  o.legend = legend(["Median runtime"]);
+  o.tooltip.trigger = "item";
+  o.tooltip.formatter = (p) => fmtNum(p.value[0]) + " molecules: " + fmtSeconds(p.value[1]);
+
+  const logAxis = (name, gap, formatter) => ({
+    type: "log", logBase: 10,
+    name: name, nameLocation: "middle", nameGap: gap, nameTextStyle: nameStyle,
+    axisLine: { show: false }, axisTick: { show: false },
+    minorTick: { show: true, splitNumber: 5 },
+    splitLine: { lineStyle: { color: T.axis, type: "solid" } },
+    minorSplitLine: { show: true, lineStyle: { color: T.axis, opacity: 0.5 } },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, formatter: formatter },
+  });
+  o.xAxis = logAxis("Molecules per run", 26, fmtCompact);
+  o.yAxis = logAxis("Median runtime (s)", 44, fmtSeconds);
+
+  o.series = [];
+  if (lower && upper) {
+    // A single closed polygon — forward through p75, back through p25 — filled.
+    // The same technique entry_project's own Plotly chart uses (`fill="toself"`),
+    // and it needs no ECharts `stack`: a stacked series lines its points up by
+    // pixel position on a log VALUE axis rather than by index, which is what
+    // pulled an earlier version of this band away from the line it was supposed
+    // to surround. A plain closed path has no such ambiguity on any axis type.
+    // `showSymbol` draws the p25/p75 points themselves, the same incidental
+    // detail the source chart has (its fill trace never turned markers off).
+    const reversedX = x.slice().reverse();
+    const reversedLower = lower.values.slice().reverse();
+    const band = x.map((v, i) => [v, upper.values[i]])
+      .concat(reversedX.map((v, i) => [v, reversedLower[i]]));
+    o.series.push({
+      name: "25th–75th percentile", type: "line",
+      data: band, lineStyle: { opacity: 0 }, areaStyle: { color: alpha(color, 0.15) },
+      showSymbol: true, symbolSize: 5, itemStyle: { color: alpha(color, 0.55) },
+      silent: true, tooltip: { show: false }, legendHoverLink: false,
+    });
+  }
+  o.series.push({
+    name: "Median runtime", type: "line",
+    data: x.map((v, i) => [v, median.values[i]]),
+    lineStyle: { color: color, width: 2 }, showSymbol: true, symbolSize: 7,
+    itemStyle: { color: color, borderColor: T.surface, borderWidth: 1.5 },
+  });
+  return o;
+}
+
 /* ------------------------------------------------------------ dispatch */
 const BUILDERS = {
   lollipop: optLollipop,
@@ -1118,10 +1274,12 @@ const BUILDERS = {
   lorenz: optLorenz,
   heatmap: optHeatmap,
   gantt: optGantt,
+  bandline: optBandLine,
 };
 
 function buildOption(chart, d) {
   if (chart.type === "logscatter") return optLogScatter(d, chart.scatter || {});
+  if (chart.type === "categoryscatter") return optCategoryScatter(d, chart.scatter || {});
   if (chart.type === "map") return optMap(d, chart.mapLabel);
   const builder = BUILDERS[chart.type] || optLollipop;
   return builder(d);
@@ -1133,7 +1291,9 @@ const HTML_TYPES = { meters: 1, ranked: 1, shares: 1 };
 /* Does this metric have anything to draw? */
 function hasData(chart, d) {
   if (!d) return false;
-  if (chart.type === "logscatter") return Array.isArray(d.points) && d.points.length > 0;
+  if (chart.type === "logscatter" || chart.type === "categoryscatter") {
+    return Array.isArray(d.points) && d.points.length > 0;
+  }
   // A ranked table is row-shaped, not label/value-shaped — checking labels here is
   // what left "Most starred public repositories" showing an empty state.
   if (chart.type === "ranked") {

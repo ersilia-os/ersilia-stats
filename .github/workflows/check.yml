@@ -73,7 +73,7 @@ jobs:
             echo "Re-run: python3 scripts/make_fixture.py -o data/air_tables_sample/ -c data/collected_sample/"
             exit 1
           fi
-          for source in github dockerhub scholar; do
+          for source in github dockerhub scholar pypi pypi_geo; do
             if ! diff -r "data/collected_sample/$source/" "/tmp/fixture-check/$source/"; then
               echo "::error::data/collected_sample/$source/ does not match scripts/make_fixture.py."
               echo "Re-run: python3 scripts/make_fixture.py -o data/air_tables_sample/ -c data/collected_sample/"

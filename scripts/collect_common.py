@@ -4,10 +4,9 @@
 dataset, prune the snapshot it supersedes so exactly one survives, and exit non-zero on
 failure rather than leaving a half-written directory that looks complete.
 
-The three collectors that use this — Docker Hub, GitHub and OpenAlex — differ from the
-Airtable one in a way that matters: **their sources are public, so their output is
-committed.** That makes the build reproducible without any secret and gives the figures
-an audit trail. It also means the disclosure rules apply at the point of writing: no
+The collectors that use this — Docker Hub, GitHub, OpenAlex and PyPI — read public
+sources. CI runs them on every deploy (`.github/workflows/pages.yml`) and nothing they
+write is committed, but the disclosure rules still apply at the point of writing: no
 personal names, and no private repository names (see `fetch_github.py`, which reads only
 public repositories for exactly this reason).
 
@@ -27,6 +26,30 @@ from datetime import datetime, timezone
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 SNAPSHOT_RE = re.compile(r"^(?P<name>.+?)_(?P<stamp>\d{8})\.csv$")
+
+
+def load_dotenv(path=".env"):
+    """Load ``KEY=VALUE`` lines from a local ``.env`` into the environment.
+
+    No new dependency for three lines of local config — this project pins exactly
+    three (see requirements.txt), and python-dotenv would be a fourth for something
+    a dozen lines of stdlib already does. A variable the shell already set wins over
+    the file, same precedence python-dotenv itself uses. Silently a no-op when the
+    file is absent, which is the normal case in CI: secrets arrive as real env vars
+    there, never as a committed file.
+    """
+    if not os.path.exists(path):
+        return
+    with open(path, encoding="utf-8") as handle:
+        for line in handle:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+
+
+load_dotenv()
 
 # Identifies this client to the APIs that ask for one. OpenAlex in particular routes
 # requests with a contact address to a faster pool, and it is simply good manners.
@@ -102,7 +125,7 @@ def write_snapshot(out_dir, name, fieldnames, rows, now=None):
     """Write `<name>_<YYYYMMDD>.csv` and return its path.
 
     Rows are written in the order given; the caller decides the sort, because a stable
-    order is what keeps a committed file's diff readable between runs.
+    order is what keeps a file's diff readable between runs.
     """
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "%s_%s.csv" % (name, stamp(now)))
@@ -158,11 +181,10 @@ def newest_stamp(out_dir):
 
 
 def check_freshness(out_dir, max_age_days, label):
-    """Exit non-zero if the committed snapshot is missing or too old.
+    """Exit non-zero if the local snapshot is missing or too old.
 
-    This is what lets CI nag about stale data without being given permission to write
-    any: the workflow runs the collectors in --check mode, and a human refreshes and
-    commits. Returns a process exit code.
+    Backs each collector's --check flag, for checking a local working copy before
+    building from it. Returns a process exit code.
     """
     found = newest_stamp(out_dir)
     if not found:

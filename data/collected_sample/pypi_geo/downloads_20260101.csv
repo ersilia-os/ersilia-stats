@@ -1,0 +1,4 @@
+package,country_code,country_name,os_name,cpu_architecture,python_version,file_type,downloads,ci_downloads
+fixture-flagship,US,United States,,,,bdist_wheel,40,0
+fixture-flagship,DE,Germany,Linux,x86_64,3.11,bdist_wheel,10,1
+fixture-flagship,KE,Kenya,,,,sdist,5,0

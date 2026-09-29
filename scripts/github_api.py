@@ -4,7 +4,7 @@ WHY THIS IS A MODULE AND NOT PART OF `fetch_github.py`
 ------------------------------------------------------
 Three callers need the same GitHub reads, and they need them with *different* visibility:
 
-* `fetch_github.py`         public repositories only, because its output is committed
+* `fetch_github.py`         public repositories only, because its output is published
 * `check_github_airtable_sync.py`  all repositories, to avoid false alarms on private ones
 * `private_totals` (below)          all repositories, to count private stars without names
 
@@ -23,7 +23,7 @@ public handles on public commits, a disclosure already decided. Anything new tha
 login belongs beside it, named as plainly.
 
 **`list_repos` makes visibility explicit.** There is no default. A caller that writes a
-committed file must pass `visibility="public"` and be seen to do it, because a private
+published file must pass `visibility="public"` and be seen to do it, because a private
 repository's *name* is a disclosure even when its numbers are not.
 
 WHAT A METRICS BATCH COSTS
@@ -336,8 +336,8 @@ def private_totals(org, headers):
     """Aggregate counts over PRIVATE repositories: `{"repositories": n, "stars": n}`.
 
     NO NAMES, EVER. This exists so the site can report an organisation-wide star total
-    that includes private work without CI ever holding a token that can enumerate private
-    repositories: a human runs the collector, and only these two integers are committed.
+    that includes private work without a private repository name ever being written or
+    logged: only these two integers leave this function.
 
     Measured when this was written: 40 private repositories holding 5 stars between them,
     against 664 on the public ones. The private contribution is negligible, which is

@@ -53,6 +53,16 @@ def listrepr(values):
     return "[" + ", ".join("'%s'" % v for v in values) + "]"
 
 
+# Ten extra Ready models with heavy (>= 3 GB) images and parsed install.yml files, because
+# `packages.heaviest_common` and `packages.most_pulled_common` each need at least
+# `packages.MIN_HEAVY_MODELS` of them before they draw anything. They exist in Airtable,
+# GitHub, Docker Hub (images and tags) and model_packages.
+HEAVY_MODELS = ["eos7h%02d" % i for i in range(10)]
+# A model repository on GitHub with no Docker Hub image (`missing_docker_image`), and a
+# Docker Hub model image with no repository left on GitHub (`orphaned_docker_images`).
+UNPACKAGED_MODEL = "eos6fff"
+ORPHANED_IMAGE = "eos9zzz"
+
 COUNTRY = [rec("CTRY", i) for i in range(1, 6)]
 ORG = [rec("ORGX", i) for i in range(1, 6)]
 PROJ = [rec("PROJ", i) for i in range(1, 5)]
@@ -297,7 +307,19 @@ def models():
         ("eos5eee", ["Tuberculosis"], "Annotation", "Activity prediction",
          "Ready", "External", ["ChEMBL"], "Escherichia coli",
          ["AMD64", "ARM64"], "2025-06-30", "", "", [33, 31, 38, 95, 280]),
+        # Incorporated, repository on GitHub, not yet packaged: no Docker Hub image.
+        (UNPACKAGED_MODEL, ["Malaria"], "Annotation", "Activity prediction",
+         "In progress", "External", ["ChEMBL"], "Plasmodium falciparum",
+         ["AMD64"], "2025-12-01", 2025, "", [30, 30, 30, 30, 30]),
     ]
+    for i, ident in enumerate(HEAVY_MODELS):
+        rows.append((ident, ["Any"], "Annotation", "Property calculation",
+                     "Ready", "External", ["ADME"], "Any",
+                     ["AMD64"], "2025-%02d-01" % (i + 1), 2024, 3500.0 + 100 * i,
+                     [30, 32, 35, 40, -1]))
+    # install.yml's Python version, so `models.template_migration` has both kinds: blank
+    # means a legacy repository whose dependencies still live in its Dockerfile.
+    legacy = {"eos3ccc", "eos4ddd", UNPACKAGED_MODEL}
     out = []
     for i, r in enumerate(rows):
         (ident, area, task, subtask, status, source, tag, organism, arch,
@@ -323,6 +345,7 @@ def models():
             "Output": listrepr(["Value"]), "Output Consistency": "Fixed",
             "Output Dimension": 1, "Publication": "", "Publication Type": "Paper",
             "Release": "", "Repository": "", "Source": "",
+            "Install Python Version": "" if ident in legacy else "3.10",
         }
         for n, value in enumerate(perf, start=1):
             row["Computational Performance %d" % n] = value
@@ -370,7 +393,10 @@ def github_repos():
         ("eos3ccc", "2023-01-15", "2025-11-20", 28, 4, 2, 1, "2025-09-09", 3, 3, 40, 2),
         ("eos4ddd", "2024-07-01", "2025-08-05", 15, 2, 1, 0, "", 2, 0, 60, 2),
         ("eos5eee", "2025-02-01", "2026-01-01", 8, 1, 0, 0, "", 1, 1, 2, 1),
+        (UNPACKAGED_MODEL, "2025-11-20", "2025-12-15", 5, 0, 0, 0, "", 0, 0, 0, 1),
     ]
+    model_rows += [(ident, "2025-%02d-01" % (i + 1), "2025-12-01", 10 + i, 1, 1, 0, "",
+                    1, 0, 7, 1) for i, ident in enumerate(HEAVY_MODELS)]
     out = []
     for (name, created, pushed, lang, lic, stars, forks, subs, openi, commits,
          closed, merged, rel, latest, sampled, external, median, contribs) in rows:
@@ -436,18 +462,181 @@ def github_stars():
     return rows
 
 
+def github_releases():
+    """Release history for two fixture models: one that only ever shipped v1.0.0,
+    one that has progressed through a minor and a patch bump, so 'progressed past
+    v1.0.0', the bump-type donut and the growth curve all have something to draw."""
+    rows = [
+        ("eos1aaa", 1, "v1.0.0", "2025-01-10T00:00:00", "no", 1, 0, 0, "initial"),
+        ("eos1aaa", 2, "v1.1.0", "2025-04-02T00:00:00", "no", 1, 1, 0, "minor"),
+        ("eos1aaa", 3, "v1.1.1", "2025-06-15T00:00:00", "no", 1, 1, 1, "patch"),
+        ("eos2bbb", 1, "v1.0.0", "2025-02-20T00:00:00", "no", 1, 0, 0, "initial"),
+    ]
+    return [{
+        "repo": repo, "release_index": idx, "tag_name": tag, "published_at": published,
+        "is_prerelease": prerelease, "major": major, "minor": minor, "patch": patch,
+        "bump_type": bump, "release_name": tag,
+    } for repo, idx, tag, published, prerelease, major, minor, patch, bump in rows]
+
+
+def github_traffic_sources():
+    """One fetched window, spanning several referrer categories and page types so the
+    donut, both lollipops and the page-type ranking each have more than one row."""
+    fetched = "2026-01-01T00:00:00+00:00"
+    referrers = [
+        ("fixture-hub", "ersilia.io", "", 40, 30),
+        ("fixture-hub", "google.com", "", 25, 20),
+        ("fixture-hub", "doi.org", "", 12, 10),
+        ("fixture-hub", "twitter.com", "", 8, 6),
+        ("fixture-tools", "github.com", "", 15, 12),
+    ]
+    paths = [
+        ("fixture-hub", "/ersilia-os/fixture-hub", "fixture-hub", 50, 40),
+        ("fixture-hub", "/ersilia-os/fixture-hub/blob/main/metadata.yml", "metadata.yml", 20, 15),
+        ("fixture-hub", "/ersilia-os/fixture-hub/issues", "Issues", 10, 8),
+        ("fixture-tools", "/ersilia-os/fixture-tools/tree/main", "fixture-tools", 9, 7),
+    ]
+    rows = [{"repo": r, "kind": "referrer", "source": s, "title": t,
+             "count": c, "uniques": u, "fetched_at": fetched}
+            for r, s, t, c, u in referrers]
+    rows += [{"repo": r, "kind": "path", "source": s, "title": t,
+              "count": c, "uniques": u, "fetched_at": fetched}
+             for r, s, t, c, u in paths]
+    return rows
+
+
+def github_model_requests():
+    """A few model-request issues: some closed fast, one slow, one still open."""
+    rows = [
+        (501, "closed", "2025-01-01", "2025-01-01"),
+        (502, "closed", "2025-02-01", "2025-02-04"),
+        (503, "closed", "2025-03-01", "2025-03-20"),
+        (504, "closed", "2025-04-01", "2025-07-10"),
+        (505, "open", "2025-08-01", ""),
+    ]
+    return [{"issue_number": n, "state": s, "created_at": c, "closed_at": cl}
+            for n, s, c, cl in rows]
+
+
+def github_model_packages():
+    """install.yml contents for the fixture model repos, joined against
+    `dockerhub_tags`' sizes. The ten `HEAVY_MODELS` clear `packages.MIN_HEAVY_MODELS`,
+    so `heaviest_common` has something to rank."""
+    rows = [
+        ("eos1aaa", "pip", "rdkit", "2026.3.4", ""),
+        ("eos1aaa", "pip", "numpy", "1.26.4", ""),
+        ("eos3ccc", "pip", "rdkit", "2026.3.4", ""),
+        ("eos3ccc", "pip", "torch", "2.8.0", ""),
+        ("eos3ccc", "conda", "openbabel", "3.2.1", "conda-forge"),
+    ]
+    for i, ident in enumerate(HEAVY_MODELS):
+        rows.append((ident, "pip", "rdkit", "2026.3.4", ""))
+        rows.append((ident, "pip", "torch" if i % 2 else "tensorflow", "2.8.0", ""))
+        if i % 3 == 0:
+            rows.append((ident, "conda", "openbabel", "3.2.1", "conda-forge"))
+    return [{"repo": r, "manager": m, "package": p, "version": v, "extra": c}
+            for r, m, p, v, c in rows]
+
+
 def dockerhub_images():
     """Model images, plus the infrastructure images that must be excluded from every figure."""
     pulls = {"eos1aaa": 4200, "eos2bbb": 4100, "eos3ccc": 29000, "eos4ddd": 4300,
              "eos5eee": 900}
+    pulls.update({ident: 5000 + 150 * i for i, ident in enumerate(HEAVY_MODELS)})
     rows = [{"name": n, "is_model": "yes", "pull_count": p, "star_count": 0,
              "last_updated": "2025-11-%02dT00:00:00" % (i + 1), "description": ""}
             for i, (n, p) in enumerate(sorted(pulls.items()))]
+    # A model image whose GitHub repository is gone.
+    rows.append({"name": ORPHANED_IMAGE, "is_model": "yes", "pull_count": 350,
+                 "star_count": 0, "last_updated": "2024-03-01T00:00:00",
+                 "description": ""})
     for infra in ("base", "conda"):
         rows.append({"name": infra, "is_model": "no", "pull_count": 31000,
                      "star_count": 1, "last_updated": "2025-12-01T00:00:00",
                      "description": ""})
     return rows
+
+
+def dockerhub_tags():
+    """Per (repo, tag, architecture) rows, spanning a range of pull recency, weekday
+    and hour so the dormancy, rhythm and ARM64-vs-AMD64-size charts each have
+    something to draw. Sizes in bytes, matching the real collector's unit.
+
+    Dates are relative to the fixture's reference date, 2026-01-01 (`STAMP` /
+    `check_degradation.py`'s `TODAY`) so "days since last pull" comes out positive.
+    """
+    rows = [
+        # repo, tag, tag_kind, architecture, size_bytes, pushed_at, pulled_at
+        ("eos1aaa", "latest", "rolling", "amd64", 900_000_000,
+         "2025-12-01T09:00:00", "2025-12-31T09:15:00"),   # Wed, <=1 day
+        ("eos1aaa", "latest", "rolling", "arm64", 700_000_000,
+         "2025-12-01T09:00:00", "2025-12-25T14:30:00"),   # Thu, lagging behind amd64
+        ("eos2bbb", "latest", "rolling", "amd64", 1_200_000_000,
+         "2025-12-01T09:00:00", "2025-12-28T03:05:00"),   # Sun, weekend
+        ("eos2bbb", "latest", "rolling", "arm64", 1_100_000_000,
+         "2025-12-01T09:00:00", "2025-12-28T03:07:00"),   # in step with amd64
+        ("eos3ccc", "latest", "rolling", "amd64", 5_000_000_000,
+         "2025-08-01T09:00:00", "2025-09-01T22:00:00"),   # Mon, untouched 3 months+
+        ("eos4ddd", "latest", "rolling", "amd64", 2_000_000_000,
+         "2025-11-15T09:00:00", "2025-12-15T11:00:00"),   # Mon, 8-30 days
+        ("eos4ddd", "latest", "rolling", "arm64", 1_800_000_000,
+         "2025-11-15T09:00:00", "2025-12-10T11:02:00"),   # Wed, 8-30 days
+        ("eos5eee", "latest", "rolling", "amd64", 300_000_000,
+         "2025-12-01T09:00:00", "2025-12-26T06:00:00"),   # Fri, 2-7 days
+        # Earlier dated builds, so `usage.size_swings` has a first build to compare
+        # against: eos1aaa grew and eos2bbb shrank.
+        ("eos1aaa", "2025-06-01", "dated", "amd64", 650_000_000,
+         "2025-06-01T09:00:00", "2025-07-01T10:00:00"),
+        ("eos2bbb", "2025-03-01", "dated", "amd64", 1_500_000_000,
+         "2025-03-01T09:00:00", "2025-04-02T10:00:00"),
+    ]
+    for i, ident in enumerate(HEAVY_MODELS):
+        rows.append((ident, "latest", "rolling", "amd64", 3_200_000_000 + 100_000_000 * i,
+                     "2025-10-01T09:00:00", "2025-12-%02dT12:00:00" % (i + 10)))
+    return [{
+        "repo": repo, "tag": tag, "tag_kind": kind, "architecture": arch,
+        "digest": "sha256:fixture-%s-%s-%s" % (repo, tag, arch), "size_bytes": size,
+        "pushed_at": pushed, "pulled_at": pulled,
+    } for repo, tag, kind, arch, size, pushed, pulled in rows]
+
+
+def pypi_packages():
+    """Three fixture packages spanning a lead, a mid-pack and a thin one, so the
+    download-share donut and the ranked table both have more than one row to draw."""
+    rows = [
+        ("fixture-flagship", "GPLv3", ">=3.10", "1.2.0", 20, "2021-03-01T00:00:00Z",
+         "2026-06-01T00:00:00Z", 2400, 480, 60),
+        ("fixture-utils", "MIT", ">=3.8", "0.4.1", 4, "2024-05-01T00:00:00Z",
+         "2026-02-01T00:00:00Z", 300, 90, 12),
+        ("fixture-tiny", "", ">=3.9", "0.1.0", 1, "2025-09-01T00:00:00Z",
+         "2025-09-01T00:00:00Z", 40, 40, 5),
+    ]
+    return [{
+        "package": name, "summary": "Fixture package", "license": licence,
+        "requires_python": requires_python, "latest_version": version,
+        "repository_url": "https://github.com/ersilia-os/%s" % name,
+        "total_releases": releases, "first_release_date": first, "latest_release_date": latest,
+        "downloads_window_days": 90, "downloads_window_total": window_total,
+        "downloads_last_30d": last_30, "downloads_last_7d": last_7,
+    } for name, licence, requires_python, version, releases, first, latest,
+          window_total, last_30, last_7 in rows]
+
+
+def pypi_geo_downloads():
+    """A handful of countries for the fixture package, mirroring the real snapshot's
+    shape: most rows carry no OS/architecture (the BigQuery sample's usual case), one
+    row does, so the completeness figure the site computes has something to show."""
+    rows = [
+        ("fixture-flagship", "US", "", "", "", "bdist_wheel", 40, 0),
+        ("fixture-flagship", "DE", "Linux", "x86_64", "3.11", "bdist_wheel", 10, 1),
+        ("fixture-flagship", "KE", "", "", "", "sdist", 5, 0),
+    ]
+    return [{
+        "package": pkg, "country_code": code,
+        "country_name": {"US": "United States", "DE": "Germany", "KE": "Kenya"}[code],
+        "os_name": os_name, "cpu_architecture": arch, "python_version": pyver,
+        "file_type": file_type, "downloads": downloads, "ci_downloads": ci,
+    } for pkg, code, os_name, arch, pyver, file_type, downloads, ci in rows]
 
 
 def scholar_works():
@@ -485,9 +674,13 @@ def scholar_citations_by_year():
 COLLECTED = {
     "github": {"repos": github_repos, "contributors": github_contributors,
                "org_totals": github_org_totals, "commit_activity": github_commit_activity,
-               "stars": github_stars},
-    "dockerhub": {"images": dockerhub_images},
+               "stars": github_stars, "model_requests": github_model_requests,
+               "traffic_sources": github_traffic_sources, "releases": github_releases,
+               "model_packages": github_model_packages},
+    "dockerhub": {"images": dockerhub_images, "tags": dockerhub_tags},
     "scholar": {"works": scholar_works, "citations_by_year": scholar_citations_by_year},
+    "pypi": {"packages": pypi_packages},
+    "pypi_geo": {"downloads": pypi_geo_downloads},
 }
 
 
@@ -505,7 +698,7 @@ def main():
     parser.add_argument("-o", "--out-dir", default="data/air_tables_sample",
                         help="Where to write the Airtable fixture CSVs.")
     parser.add_argument("-c", "--collected-dir", default="data/collected_sample",
-                        help="Where to write the synthetic github/dockerhub/scholar "
+                        help="Where to write the synthetic github/dockerhub/scholar/pypi "
                              "snapshots. The site reads its repository counts and citation "
                              "figures from these, so a fixture without them cannot "
                              "exercise most of the build.")

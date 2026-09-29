@@ -1,10 +1,15 @@
-# The site pipeline only. Two dependencies:
+# The site pipeline, plus one manual tool. Three dependencies:
 #   pandas     — aggregation in scripts/site_data/. PINNED, and CI installs THIS file:
 #                pandas changes how .astype(str) treats missing values between minor
 #                versions, which once passed locally and failed on the runner. Keep this
 #                equal to the version you develop against.
 #   pyairtable — the read-only snapshot fetch
+#   pycountry  — country-code -> name resolution, used ONLY by
+#                scripts/convert_pypi_geo.py (the manual BigQuery-export converter for
+#                PyPI download geography; see that script's docstring). Nothing CI runs
+#                needs it.
 # The published site itself has no Python at run time: it is static files plus a
 # vendored copy of ECharts.
 pandas==2.3.3
 pyairtable==3.0.1
+pycountry==26.2.16

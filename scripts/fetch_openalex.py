@@ -52,8 +52,8 @@ def read_dois(data_dir):
 
     Prefers a real `doi` column — the durable answer, entered once in Airtable. Falls
     back to extracting one from the recorded URL, which covers about half the rows, and
-    NEVER guesses from a title: a title search belongs in `resolve_dois.py`, where a
-    person reads the result before it is trusted.
+    NEVER guesses from a title: a title search can be confidently wrong, so a missing
+    DOI is for a person to look up and enter in Airtable.
     """
     from site_data import load
     tables = load.load_tables(data_dir)
@@ -65,8 +65,7 @@ def read_dois(data_dir):
     have_column = "doi" in pubs.columns
     if not have_column:
         logging.warning("no DOI column in the publications table — falling back to the "
-                        "URL field. Add a DOI field in Airtable to make this exact; see "
-                        "scripts/resolve_dois.py.")
+                        "URL field. Add a DOI field in Airtable to make this exact.")
 
     entries, missing = [], 0
     for i in range(len(pubs)):
@@ -141,8 +140,8 @@ def main():
 
     entries, missing = read_dois(args.data_dir)
     if not entries:
-        logging.error("no DOIs available — run scripts/resolve_dois.py and add a DOI "
-                      "field in Airtable")
+        logging.error("no DOIs available — add a DOI field to the Airtable "
+                      "publications table")
         return 1
     if missing:
         logging.warning("%d publication(s) have no DOI and are skipped", missing)

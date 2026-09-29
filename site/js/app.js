@@ -74,11 +74,18 @@ function renderLanding(outlet, registry) {
   outlet.appendChild(jumps);
 }
 
+/* A view is either a flat list of rows, or `groups` — topic sections, each with
+   its own rows — for views too broad for one undifferentiated pile of cards. */
+function viewGroups(view) {
+  return view.groups || [{ rows: view.rows }];
+}
+
 /* The card's one-liner: prefer the lead chart's computed takeaway over the static
    blurb, so the landing page says something current. */
 function viewTakeaway(view) {
-  // The first chart of the first row is the view's lead.
-  const lead = view.rows && view.rows[0] && view.rows[0].cells[0];
+  // The first chart of the first row of the first group is the view's lead.
+  const firstRow = viewGroups(view)[0].rows[0];
+  const lead = firstRow && firstRow.cells[0];
   const metric = lead && lead.data && getByPath(DATA.sections, lead.data);
   if (metric && metric.insight) return metric.insight;
   return view.blurb;
@@ -185,11 +192,20 @@ function renderView(view) {
 
     const grid = el("div", "chart-grid");
     // One .crow per configured row: spans sum to 12, cards share a height, and the
-    // charts inside flex to fill it.
-    view.rows.forEach((row) => {
-      const crow = el("div", "crow " + (row.h || "h-md"));
-      row.cells.forEach((chart) => crow.appendChild(chartCard(chart, DATA, registry)));
-      grid.appendChild(crow);
+    // charts inside flex to fill it. A view with `groups` gets a heading before
+    // each topic section, so e.g. licensing never shares a row with Docker pulls.
+    viewGroups(view).forEach((group) => {
+      if (group.title) {
+        const gh = el("div", "grouphead");
+        gh.appendChild(el("h3", null, group.title));
+        if (group.blurb) gh.appendChild(el("p", null, group.blurb));
+        grid.appendChild(gh);
+      }
+      group.rows.forEach((row) => {
+        const crow = el("div", "crow " + (row.h || "h-md"));
+        row.cells.forEach((chart) => crow.appendChild(chartCard(chart, DATA, registry)));
+        grid.appendChild(crow);
+      });
     });
     outlet.appendChild(grid);
   };
@@ -642,21 +658,32 @@ async function main() {
   VIEWS.forEach((view) => Router.add("/" + view.id, renderView(view), view.title));
   Router.add("/downloads", renderDownloads, "Downloads");
   // The router's afterRender hook existed and had never been used. It does two jobs:
-  // announce the new view, and pull in the map geometry only for the view that needs it.
+  // announce the new view, and pull in the map geometry only for a view that needs it.
   Router.start(outlet, (path) => {
     announceView();
-    if (path === "/reach") ensureWorldMap(outlet);
+    if (MAP_ROUTES.has(path)) ensureWorldMap(outlet);
   });
 }
+
+/* Every route whose config carries a `type: "map"` chart, derived from VIEWS rather
+   than hand-listed — a view gaining a map card (reach first, then the PyPI section of
+   Code) must not also require remembering to add it here. */
+const MAP_ROUTES = new Set(
+  VIEWS.filter((view) => {
+    const groups = view.groups || [{ rows: view.rows }];
+    return groups.some((g) => (g.rows || []).some((row) =>
+      row.cells.some((cell) => cell.type === "map")));
+  }).map((view) => "/" + view.id),
+);
 
 /* 1 MB of world geometry, fetched once, on demand.
 
    This used to be awaited in main() BEFORE anything rendered — so every visitor
    downloaded and JSON-parsed a megabyte of coastlines to look at the Overview page,
    which has no map, and saw nothing at all until it finished. It is 43% of the
-   Overview page's transferred bytes for a chart that appears on one of eight views.
+   Overview page's transferred bytes for a chart that appears on a couple of views.
 
-   Now: the reach view renders immediately with the map card in its empty state, the
+   Now: a view with a map renders immediately with the card in its empty state, the
    geometry arrives, and that one card is re-rendered. Every other view never asks
    for it. */
 let worldMapState = null;   // null = untried, "loading", "ready", "failed"
@@ -670,7 +697,7 @@ async function ensureWorldMap(outlet) {
     worldMapState = "ready";
     // Re-render so the map card picks up the now-registered geometry. Guard on the
     // route: the reader may have navigated away while the megabyte was in flight.
-    if (Router.current() === "/reach") Router.rerender();
+    if (MAP_ROUTES.has(Router.current())) Router.rerender();
   } catch (e) {
     worldMapState = "failed";
     console.warn("World map geometry unavailable; the map card shows an empty state.", e);

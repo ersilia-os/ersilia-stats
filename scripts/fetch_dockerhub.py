@@ -5,8 +5,15 @@ WHY THIS IS THE MOST VALUABLE COLLECTOR
 ---------------------------------------
 The dashboard describes 240 models in fifteen different ways and never once says whether
 anyone runs them. Docker Hub answers that, because the models ARE Docker images, and it
-answers it in **three requests with no authentication**: 245 model images and roughly a
-million pulls between them.
+answers it in **three requests**: 245 model images and roughly a million pulls between
+them.
+
+Authentication is OPTIONAL but raises a real ceiling: Docker Hub caps how far an
+anonymous client can paginate ("pagination offset too large for anonymous requests"),
+which is exactly what a namespace with a couple hundred repositories can hit. Setting
+`DOCKERHUB_USERNAME` / `DOCKERHUB_TOKEN` (a free Docker Hub account and a Personal
+Access Token, no paid tier needed) removes that cap — see `dockerhub_api.py`. No
+credentials set, and this still runs, just with a shallower pagination limit.
 
 Two things this must get right.
 
@@ -30,6 +37,7 @@ import sys
 
 from collect_common import (check_freshness, paginate_url, prune_superseded,
                             write_snapshot)
+from dockerhub_api import auth_headers
 from github_api import MODEL_RE
 
 NAMESPACE = "ersiliaos"
@@ -45,8 +53,9 @@ FIELDS = ["name", "is_model", "pull_count", "star_count", "last_updated", "descr
 
 
 def collect(namespace=NAMESPACE):
+    headers = auth_headers()
     rows = []
-    for page in paginate_url(API % namespace):
+    for page in paginate_url(API % namespace, headers=headers):
         for repo in page.get("results", []):
             name = (repo.get("name") or "").strip()
             if not name:
@@ -60,7 +69,7 @@ def collect(namespace=NAMESPACE):
                 # Short, factual, written by Ersilia. No personal data here.
                 "description": (repo.get("description") or "").replace("\n", " ")[:200],
             })
-    # Sorted by pulls so the committed diff is stable and the interesting rows are first.
+    # Sorted by pulls so the output is stable and the interesting rows are first.
     rows.sort(key=lambda r: (-r["pull_count"], r["name"]))
     return rows
 
@@ -86,7 +95,7 @@ def main():
     parser.add_argument("-o", "--out-dir", default="data/dockerhub")
     parser.add_argument("-n", "--namespace", default=NAMESPACE)
     parser.add_argument("--check", action="store_true",
-                        help="Do not fetch; fail if the committed snapshot is stale.")
+                        help="Do not fetch; fail if the local snapshot is stale.")
     parser.add_argument("--max-age-days", type=int, default=21)
     args = parser.parse_args()
 

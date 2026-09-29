@@ -41,7 +41,8 @@ import traceback
 import pandas as pd
 
 from site_data import (code, community, kpis, load, model_activity, models, organisations,
-                       outreach, projects, publications, quality, reach, repositories, usage)
+                       outreach, projects, publications, pypi, quality, reach, releases,
+                       repositories, traffic, usage)
 
 TODAY = pd.Timestamp("2026-01-01")
 
@@ -63,7 +64,10 @@ def build_everything(tables, collected):
     models.build(table("models"))
     code.build(collected)
     model_activity.build(table("models"), collected)
-    usage.build(collected, models=table("models"))
+    usage.build(collected, models=table("models"), today=TODAY)
+    pypi.build(collected)
+    traffic.build(collected)
+    releases.build(table("models"), collected)
     reach.build(table("countries"), table("organisations"), table("community"),
                 table("events"))
     quality.build(tables, public)

@@ -23,12 +23,16 @@ from . import (
     models as models_section,
     organisations as organisations_section,
     outreach,
+    packages as packages_section,
+    pypi as pypi_section,
     usage as usage_section,
     projects as projects_section,
     publications as publications_section,
     quality as quality_section,
     reach as reach_section,
+    releases as releases_section,
     repositories as repositories_section,
+    traffic as traffic_section,
 )
 
 __all__ = ["build_all", "load"]
@@ -73,13 +77,29 @@ def build_all(data_dir, today=None):
         "quality": quality_section.build(tables, repos_public),
         # From the committed public snapshots rather than Airtable. Degrades to empty
         # metrics when a collector has not run, so a clone still builds.
-        "usage": usage_section.build(collected, models=models),
+        "usage": usage_section.build(collected, models=models, today=today),
         # Development activity over time — commits per quarter, star dates, and where
         # pull requests come from. None of it can be held in an Airtable column.
         "code": code_section.build(collected, today=today),
         # The Model Hub as a whole, joining the curated registry to collected activity
         # and pull counts on the shared eosXXXX identifier. Derived, so never stored.
         "model_activity": model_activity_section.build(models, collected, today=today),
+        # Ersilia's published PyPI packages — releases and a rolling download window.
+        # From the committed public snapshot, like usage/code; degrades to empty when
+        # the collector has not run.
+        "pypi": pypi_section.build(collected),
+        # GitHub traffic — where visitors come from and what they look at. Unlike
+        # every other collected source, its window is only ever the last 14 days,
+        # so degrades to empty until fetch_github_traffic.py has been run at least
+        # once with a token that has push-access-equivalent permission.
+        "traffic": traffic_section.build(collected),
+        # Full GitHub Release history per model, joined on the same eosXXXX
+        # identifier as model_activity. Derived, not stored, like everything else
+        # that reads collected/ rather than Airtable.
+        "releases": releases_section.build(models, collected),
+        # Installed packages, joined against the same Docker Hub size reading as
+        # usage.py's size figures, for the models over the Hub's heavy threshold.
+        "packages": packages_section.build(collected, models=models),
     }
 
     return {

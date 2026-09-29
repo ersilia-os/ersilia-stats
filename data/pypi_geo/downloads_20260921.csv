@@ -1,0 +1,260 @@
+package,country_code,country_name,os_name,cpu_architecture,python_version,file_type,downloads,ci_downloads
+ersilia,US,United States,,,,bdist_wheel,1607,0
+ersilia,US,United States,,,,sdist,1385,0
+ersilia,US,United States,Linux,,,bdist_wheel,286,0
+ersilia,HK,Hong Kong,,,,bdist_wheel,227,0
+ersilia,HK,Hong Kong,,,,sdist,222,0
+ersilia,US,United States,Linux,x86_64,3.12,bdist_wheel,208,163
+ersilia,CN,China,,,,bdist_wheel,188,0
+ersilia,FR,France,,,,bdist_wheel,175,0
+ersilia,RU,Russia,,,,bdist_wheel,172,0
+ersilia,CN,China,,,,sdist,154,0
+ersilia,RU,Russia,,,,sdist,141,0
+ersilia,FR,France,,,,sdist,126,0
+ersilia,SG,Singapore,,,,bdist_wheel,90,0
+ersilia,DE,Germany,,,,sdist,88,0
+ersilia,SG,Singapore,,,,sdist,86,0
+ersilia,SE,Sweden,,,,sdist,72,0
+ersilia,SE,Sweden,,,,bdist_wheel,70,0
+ersilia,DE,Germany,,,,bdist_wheel,64,0
+ersilia,AU,Australia,,,,bdist_wheel,59,0
+ersilia,TW,Taiwan,,,,sdist,53,0
+ersilia,TW,Taiwan,,,,bdist_wheel,53,0
+ersilia,US,United States,Linux,x86_64,3.11,bdist_wheel,43,19
+ersilia,JP,Japan,,,,sdist,43,0
+ersilia,JP,Japan,,,,bdist_wheel,34,0
+ersilia,US,United States,Linux,x86_64,3.10,bdist_wheel,33,7
+ersilia,CA,Canada,,,,sdist,30,0
+ersilia,NL,Netherlands,,,,sdist,23,0
+ersilia,KR,Korea,,,,bdist_wheel,21,0
+ersilia,KR,Korea,,,,sdist,20,0
+ersilia,CA,Canada,,,,bdist_wheel,19,0
+ersilia,NL,Netherlands,,,,bdist_wheel,16,0
+ersilia,GB,United Kingdom,,,,sdist,15,0
+ersilia,IL,Israel,,,,bdist_wheel,15,0
+ersilia,IL,Israel,,,,sdist,15,0
+ersilia,AE,United Arab Emirates,,,,bdist_wheel,14,0
+ersilia,US,United States,Linux,x86_64,3.9,bdist_wheel,14,0
+ersilia,IN,India,Linux,x86_64,3.12,bdist_wheel,14,0
+ersilia,US,United States,Linux,x86_64,3.7,bdist_wheel,13,0
+ersilia,US,United States,Linux,aarch64,3.11,bdist_wheel,12,6
+ersilia,DK,Denmark,,,,sdist,10,0
+ersilia,DK,Denmark,,,,bdist_wheel,10,0
+ersilia,GB,United Kingdom,,,,bdist_wheel,10,0
+ersilia,AU,Australia,,,,sdist,8,0
+ersilia,IN,India,Darwin,arm64,3.11,bdist_wheel,8,0
+ersilia,BR,Brazil,Linux,x86_64,3.11,bdist_wheel,8,0
+ersilia,ES,Spain,Linux,x86_64,3.12,bdist_wheel,7,0
+ersilia,SG,Singapore,Linux,x86_64,3.13,sdist,7,0
+ersilia,NG,Nigeria,Linux,x86_64,3.12,bdist_wheel,6,0
+ersilia,IE,Ireland,,,,sdist,6,0
+ersilia,IN,India,Linux,x86_64,3.11,bdist_wheel,5,0
+ersilia,BE,Belgium,,,,sdist,5,0
+ersilia,US,United States,Darwin,arm64,3.12,bdist_wheel,5,0
+ersilia,ES,Spain,,,,sdist,4,0
+ersilia,JP,Japan,Linux,x86_64,3.14,bdist_wheel,4,0
+ersilia,US,United States,Linux,x86_64,3.13,bdist_wheel,4,0
+ersilia,EE,Estonia,Windows,AMD64,3.12,bdist_wheel,4,0
+ersilia,KR,Korea,Linux,x86_64,3.10,bdist_wheel,4,0
+ersilia,IE,Ireland,,,,bdist_wheel,4,0
+ersilia,UA,Ukraine,,,,bdist_wheel,4,0
+ersilia,SG,Singapore,Darwin,x86_64,3.11,sdist,4,0
+ersilia,SG,Singapore,Darwin,x86_64,3.11,bdist_wheel,4,0
+ersilia,LT,Lithuania,,,,sdist,3,0
+ersilia,FI,Finland,,,,bdist_wheel,3,0
+ersilia,ZA,South Africa,Linux,x86_64,3.11,bdist_wheel,3,0
+ersilia,BE,Belgium,,,,bdist_wheel,3,0
+ersilia,VN,Vietnam,,,,bdist_wheel,3,0
+ersilia,UA,Ukraine,,,,sdist,3,0
+ersilia,CN,China,Linux,x86_64,3.14,bdist_wheel,3,0
+ersilia,IN,India,,,,sdist,3,0
+ersilia,LV,Latvia,,,,sdist,3,0
+ersilia,ES,Spain,Linux,aarch64,3.11,bdist_wheel,3,0
+ersilia,KR,Korea,Darwin,arm64,3.11,bdist_wheel,2,0
+ersilia,US,United States,Windows,AMD64,3.14,bdist_wheel,2,0
+ersilia,EC,Ecuador,Linux,x86_64,3.10,bdist_wheel,2,0
+ersilia,ID,Indonesia,Linux,x86_64,3.14,bdist_wheel,2,0
+ersilia,NG,Nigeria,Linux,x86_64,3.10,bdist_wheel,2,0
+ersilia,CN,China,Windows,AMD64,3.13,bdist_wheel,2,0
+ersilia,VN,Vietnam,,,,sdist,2,0
+ersilia,ES,Spain,Windows,AMD64,3.11,bdist_wheel,2,0
+ersilia,FR,France,Linux,x86_64,3.12,bdist_wheel,2,0
+ersilia,FR,France,Windows,AMD64,3.10,bdist_wheel,2,0
+ersilia,SG,Singapore,Linux,x86_64,3.12,bdist_wheel,2,0
+ersilia,MD,Moldova,,,,bdist_wheel,2,0
+ersilia,RO,Romania,,,,bdist_wheel,2,0
+ersilia,LV,Latvia,,,,bdist_wheel,2,0
+ersilia,US,United States,Windows,AMD64,3.12,bdist_wheel,2,0
+ersilia,FI,Finland,,,,sdist,2,0
+ersilia,HK,Hong Kong,,,3.8,sdist,2,0
+ersilia,NO,Norway,,,,bdist_wheel,2,0
+ersilia,ES,Spain,Darwin,arm64,3.12,bdist_wheel,2,0
+ersilia,GB,United Kingdom,Linux,armv7l,3.11,sdist,2,0
+ersilia,ES,Spain,,,,bdist_wheel,2,0
+ersilia,ES,Spain,Linux,x86_64,3.10,bdist_wheel,2,0
+ersilia,IN,India,Darwin,arm64,3.13,bdist_wheel,2,0
+ersilia,AR,Argentina,,,,sdist,2,0
+ersilia,ES,Spain,Darwin,x86_64,3.10,bdist_wheel,2,0
+ersilia,ZA,South Africa,Linux,x86_64,3.12,bdist_wheel,2,0
+ersilia,NO,Norway,,,,sdist,2,0
+ersilia,IE,Ireland,Linux,x86_64,3.10,bdist_wheel,2,0
+ersilia,IN,India,Windows,AMD64,3.12,bdist_wheel,2,0
+ersilia,ES,Spain,Windows,AMD64,3.10,bdist_wheel,2,0
+ersilia,EC,Ecuador,Linux,x86_64,3.11,bdist_wheel,2,0
+ersilia,IT,Italy,,,,sdist,2,0
+ersilia,ES,Spain,Linux,x86_64,3.9,bdist_wheel,1,0
+ersilia,IR,Iran,,,,sdist,1,0
+ersilia,IQ,Iraq,,,,bdist_wheel,1,0
+ersilia,GB,United Kingdom,Linux,x86_64,3.12,bdist_wheel,1,0
+ersilia,CH,Switzerland,,,,bdist_wheel,1,0
+ersilia,GB,United Kingdom,Linux,x86_64,3.8,bdist_wheel,1,0
+ersilia,CO,Colombia,,,,bdist_wheel,1,0
+ersilia,CH,Switzerland,,,,sdist,1,0
+ersilia,PT,Portugal,,,,sdist,1,0
+ersilia,IQ,Iraq,,,,sdist,1,0
+ersilia,IN,India,Linux,aarch64,3.13,bdist_wheel,1,0
+ersilia,ML,Mali,Linux,x86_64,3.14,bdist_wheel,1,0
+ersilia,AR,Argentina,Linux,x86_64,3.12,bdist_wheel,1,0
+ersilia,SG,Singapore,Windows,AMD64,3.10,bdist_wheel,1,0
+ersilia,US,United States,Darwin,,,bdist_wheel,1,0
+ersilia,VG,British Virgin Islands,,,,bdist_wheel,1,0
+ersilia,US,United States,Linux,x86_64,3.11,sdist,1,0
+ersilia,CN,China,Linux,x86_64,3.10,bdist_wheel,1,0
+ersilia,IR,Iran,,,,bdist_wheel,1,0
+ersilia,ES,Spain,Darwin,x86_64,3.9,bdist_wheel,1,0
+ersilia,DE,Germany,Windows,,,bdist_wheel,1,0
+ersilia,RU,Russia,Windows,AMD64,3.11,bdist_wheel,1,0
+ersilia,CA,Canada,Linux,x86_64,3.14,bdist_wheel,1,0
+ersilia,CL,Chile,,,,sdist,1,0
+ersilia,AL,Albania,,,,sdist,1,0
+ersilia,ML,Mali,,,,bdist_wheel,1,0
+ersilia,SK,Slovakia,,,,sdist,1,0
+ersilia-pack-utils,US,United States,,,,bdist_wheel,221,0
+ersilia-pack-utils,US,United States,,,,sdist,188,0
+ersilia-pack-utils,US,United States,Linux,x86_64,3.12,bdist_wheel,156,110
+ersilia-pack-utils,US,United States,Linux,x86_64,3.10,bdist_wheel,146,119
+ersilia-pack-utils,US,United States,Linux,aarch64,3.12,bdist_wheel,87,43
+ersilia-pack-utils,US,United States,Linux,x86_64,3.11,bdist_wheel,49,36
+ersilia-pack-utils,CN,China,,,,sdist,41,0
+ersilia-pack-utils,US,United States,Linux,aarch64,3.10,bdist_wheel,40,18
+ersilia-pack-utils,CN,China,,,,bdist_wheel,36,0
+ersilia-pack-utils,US,United States,Linux,aarch64,3.11,bdist_wheel,26,13
+ersilia-pack-utils,RU,Russia,,,,bdist_wheel,25,0
+ersilia-pack-utils,SG,Singapore,,,,bdist_wheel,23,0
+ersilia-pack-utils,HK,Hong Kong,,,,bdist_wheel,22,0
+ersilia-pack-utils,FR,France,,,,bdist_wheel,21,0
+ersilia-pack-utils,DE,Germany,,,,sdist,21,0
+ersilia-pack-utils,RU,Russia,,,,sdist,19,0
+ersilia-pack-utils,HK,Hong Kong,,,,sdist,19,0
+ersilia-pack-utils,SG,Singapore,,,,sdist,19,0
+ersilia-pack-utils,ES,Spain,Linux,x86_64,3.12,bdist_wheel,17,0
+ersilia-pack-utils,FR,France,,,,sdist,15,0
+ersilia-pack-utils,DE,Germany,,,,bdist_wheel,15,0
+ersilia-pack-utils,JP,Japan,,,,sdist,14,0
+ersilia-pack-utils,JP,Japan,,,,bdist_wheel,14,0
+ersilia-pack-utils,SE,Sweden,,,,bdist_wheel,12,0
+ersilia-pack-utils,NL,Netherlands,,,,sdist,12,0
+ersilia-pack-utils,ES,Spain,Linux,x86_64,3.10,bdist_wheel,9,0
+ersilia-pack-utils,SE,Sweden,,,,sdist,9,0
+ersilia-pack-utils,CA,Canada,,,,sdist,8,0
+ersilia-pack-utils,US,United States,Linux,x86_64,3.8,bdist_wheel,7,5
+ersilia-pack-utils,TW,Taiwan,,,,bdist_wheel,6,0
+ersilia-pack-utils,IL,Israel,,,,bdist_wheel,6,0
+ersilia-pack-utils,NL,Netherlands,,,,bdist_wheel,6,0
+ersilia-pack-utils,TW,Taiwan,,,,sdist,6,0
+ersilia-pack-utils,IL,Israel,,,,sdist,6,0
+ersilia-pack-utils,DK,Denmark,,,,sdist,6,0
+ersilia-pack-utils,KR,Korea,,,,bdist_wheel,6,0
+ersilia-pack-utils,DK,Denmark,,,,bdist_wheel,6,0
+ersilia-pack-utils,CA,Canada,,,,bdist_wheel,5,0
+ersilia-pack-utils,GB,United Kingdom,,,,sdist,4,0
+ersilia-pack-utils,CA,Canada,Linux,aarch64,3.10,bdist_wheel,4,4
+ersilia-pack-utils,KR,Korea,,,,sdist,4,0
+ersilia-pack-utils,SG,Singapore,Linux,x86_64,3.10,bdist_wheel,4,0
+ersilia-pack-utils,BE,Belgium,,,,bdist_wheel,3,0
+ersilia-pack-utils,GB,United Kingdom,,,,bdist_wheel,3,0
+ersilia-pack-utils,BE,Belgium,,,,sdist,3,0
+ersilia-pack-utils,US,United States,Linux,aarch64,3.8,bdist_wheel,3,1
+ersilia-pack-utils,RO,Romania,,,,bdist_wheel,2,0
+ersilia-pack-utils,EE,Estonia,Windows,AMD64,3.12,bdist_wheel,2,0
+ersilia-pack-utils,ES,Spain,Linux,aarch64,3.10,bdist_wheel,2,0
+ersilia-pack-utils,ES,Spain,Linux,x86_64,3.11,bdist_wheel,2,0
+ersilia-pack-utils,IE,Ireland,,,,sdist,2,0
+ersilia-pack-utils,SG,Singapore,Linux,x86_64,3.12,bdist_wheel,2,0
+ersilia-pack-utils,ES,Spain,Darwin,arm64,3.14,bdist_wheel,2,0
+ersilia-pack-utils,FI,Finland,,,,bdist_wheel,1,0
+ersilia-pack-utils,IQ,Iraq,,,,sdist,1,0
+ersilia-pack-utils,FI,Finland,,,,sdist,1,0
+ersilia-pack-utils,IR,Iran,,,,bdist_wheel,1,0
+ersilia-pack-utils,PT,Portugal,,,,sdist,1,0
+ersilia-pack-utils,CH,Switzerland,,,,bdist_wheel,1,0
+ersilia-pack-utils,UA,Ukraine,,,,bdist_wheel,1,0
+ersilia-pack-utils,MX,Mexico,Linux,x86_64,3.10,bdist_wheel,1,1
+ersilia-pack-utils,IN,India,,,,sdist,1,0
+ersilia-pack-utils,ID,Indonesia,,,,sdist,1,0
+ersilia-pack-utils,MX,Mexico,Linux,x86_64,3.11,bdist_wheel,1,0
+ersilia-pack-utils,MW,Malawi,Windows,AMD64,3.11,bdist_wheel,1,0
+ersilia-pack-utils,IE,Ireland,,,,bdist_wheel,1,0
+stylia,US,United States,Linux,x86_64,3.12,bdist_wheel,82,72
+stylia,US,United States,Linux,x86_64,3.11,bdist_wheel,67,60
+stylia,US,United States,,,,bdist_wheel,60,0
+stylia,US,United States,,,,sdist,52,0
+stylia,JP,Japan,,,,sdist,9,0
+stylia,SG,Singapore,,,,sdist,9,0
+stylia,CN,China,,,,sdist,9,0
+stylia,SG,Singapore,,,,bdist_wheel,9,0
+stylia,JP,Japan,,,,bdist_wheel,9,0
+stylia,CN,China,,,,bdist_wheel,8,0
+stylia,SE,Sweden,,,,bdist_wheel,8,0
+stylia,DE,Germany,,,,sdist,7,0
+stylia,ES,Spain,Linux,x86_64,3.12,bdist_wheel,7,0
+stylia,NL,Netherlands,,,,sdist,6,0
+stylia,GB,United Kingdom,,,,sdist,6,0
+stylia,SE,Sweden,,,,sdist,5,0
+stylia,ZA,South Africa,Linux,x86_64,3.11,bdist_wheel,5,0
+stylia,DE,Germany,,,,bdist_wheel,4,0
+stylia,SG,Singapore,Linux,x86_64,3.12,bdist_wheel,4,0
+stylia,BR,Brazil,Linux,x86_64,3.12,bdist_wheel,4,0
+stylia,CA,Canada,,,,sdist,3,0
+stylia,GB,United Kingdom,,,,bdist_wheel,3,0
+stylia,CN,China,Linux,x86_64,3.12,bdist_wheel,3,0
+stylia,FR,France,,,,sdist,3,0
+stylia,RU,Russia,,,,bdist_wheel,3,0
+stylia,RU,Russia,,,,sdist,3,0
+stylia,HK,Hong Kong,,,,bdist_wheel,3,0
+stylia,FR,France,,,,bdist_wheel,3,0
+stylia,NL,Netherlands,,,,bdist_wheel,3,0
+stylia,ES,Spain,Darwin,arm64,3.10,bdist_wheel,2,0
+stylia,BE,Belgium,,,,bdist_wheel,2,0
+stylia,ES,Spain,Linux,x86_64,3.11,bdist_wheel,2,0
+stylia,ES,Spain,Darwin,arm64,3.12,bdist_wheel,2,0
+stylia,KR,Korea,,,,bdist_wheel,2,0
+stylia,BR,Brazil,Linux,x86_64,3.11,bdist_wheel,2,0
+stylia,HK,Hong Kong,Windows,AMD64,3.12,bdist_wheel,2,0
+stylia,CA,Canada,,,,bdist_wheel,2,0
+stylia,US,United States,Linux,x86_64,3.9,bdist_wheel,2,0
+stylia,BR,Brazil,Windows,AMD64,3.12,bdist_wheel,2,0
+stylia,ZA,South Africa,Linux,x86_64,3.12,bdist_wheel,2,0
+stylia,BE,Belgium,,,,sdist,2,0
+stylia,AU,Australia,,,,bdist_wheel,1,0
+stylia,UA,Ukraine,,,,bdist_wheel,1,0
+stylia,NL,Netherlands,Linux,x86_64,3.12,bdist_wheel,1,0
+stylia,US,United States,Linux,x86_64,3.11,sdist,1,0
+stylia,IN,India,,,,sdist,1,0
+stylia,ES,Spain,Linux,x86_64,3.13,bdist_wheel,1,0
+stylia,MD,Moldova,,,,sdist,1,0
+stylia,CH,Switzerland,,,,bdist_wheel,1,0
+stylia,EE,Estonia,Windows,AMD64,3.12,bdist_wheel,1,0
+stylia,IR,Iran,,,,sdist,1,0
+stylia,SC,Seychelles,,,,bdist_wheel,1,0
+stylia,FI,Finland,,,,sdist,1,0
+stylia,ES,Spain,Linux,x86_64,3.10,bdist_wheel,1,0
+stylia,FI,Finland,,,,bdist_wheel,1,0
+stylia,KR,Korea,,,,sdist,1,0
+stylia,RO,Romania,,,,bdist_wheel,1,0
+stylia,HK,Hong Kong,,,,sdist,1,0
+stylia,AU,Australia,,,,sdist,1,0
+stylia,MD,Moldova,,,,bdist_wheel,1,0
+stylia,IR,Iran,,,,bdist_wheel,1,0
+stylia,SC,Seychelles,,,,sdist,1,0
+stylia,PT,Portugal,,,,sdist,1,0

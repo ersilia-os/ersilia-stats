@@ -1,0 +1,5 @@
+repo,release_index,tag_name,published_at,is_prerelease,major,minor,patch,bump_type,release_name
+eos1aaa,1,v1.0.0,2025-01-10T00:00:00,no,1,0,0,initial,v1.0.0
+eos1aaa,2,v1.1.0,2025-04-02T00:00:00,no,1,1,0,minor,v1.1.0
+eos1aaa,3,v1.1.1,2025-06-15T00:00:00,no,1,1,1,patch,v1.1.1
+eos2bbb,1,v1.0.0,2025-02-20T00:00:00,no,1,0,0,initial,v1.0.0

@@ -40,7 +40,7 @@ rather than a log. It writes no file, ever.
     export GH_STATS_TOKEN=...
     PYTHONPATH=scripts python3 scripts/check_github_airtable_sync.py --include-private
 
-    # what CI runs: committed public inventory vs the Airtable snapshot, no GitHub token
+    # what CI runs: the fetched public inventory vs the Airtable snapshot, no GitHub token
     PYTHONPATH=scripts python3 scripts/check_github_airtable_sync.py
 """
 import argparse
@@ -71,7 +71,7 @@ def newest_repos_csv(github_dir):
 
 
 def read_public_inventory(github_dir):
-    """`{name: row}` from the committed public inventory.
+    """`{name: row}` from the collected public inventory (data/github/).
 
     Reading the CSV rather than calling GitHub is what lets the default mode need no token
     at all: the file is public-only by construction, because `fetch_github.py` asks
@@ -296,7 +296,7 @@ def main():
             logging.error("no repos_*.csv in %s. Run scripts/fetch_github.py first.",
                           args.github_dir)
             return 1
-        logging.info("GitHub (committed inventory %s): %d public repositories",
+        logging.info("GitHub (collected inventory %s): %d public repositories",
                      os.path.basename(path), len(github))
         mode = "public only"
 

@@ -217,6 +217,102 @@ try {
 
   // Two widths. The desktop pass checks structure and content; the phone pass exists
   // because a layout can be perfect at 1440 and scroll sideways at 390 — which it did.
+  // Everything one route is checked on, read in a single evaluate.
+  const ROUTE_PROBE = `(() => {
+      // Two different populations. All cards prove the page rendered at all;
+      // only cards inside a chart row carry the caption contract, because the
+      // Downloads view's single card is a list of links.
+      const cards = [...document.querySelectorAll('.card')];
+      const chartCards = [...document.querySelectorAll('.crow > .card')];
+      const rows = [...document.querySelectorAll('.crow')].map(row =>
+        [...row.children].reduce((sum, card) => {
+          const m = /span-(\\d+)/.exec(card.className);
+          return sum + (m ? Number(m[1]) : 0);
+        }, 0));
+      return {
+        loading: !!document.querySelector('.loading'),
+        cards: cards.length,
+        h1: document.querySelectorAll('h1').length,
+        badRows: rows.filter(n => n !== 12),
+        noCaption: chartCards.filter(c => {
+          if (c.querySelector('.empty')) return false;
+          const p = c.querySelector('.insight');
+          return !p || !p.textContent.trim();
+        }).length,
+        // Titles, not a count. "2 overflowing" on a thirteen-card page means
+        // measuring every caption by hand to find which two.
+        overflowing: chartCards.filter(c => {
+          const p = c.querySelector('.insight');
+          return p && p.scrollHeight > p.clientHeight + 1;
+        }).map(c => (c.querySelector('h3,h2,.card-title') || {}).textContent || '?'),
+        overflowX: document.documentElement.scrollWidth > window.innerWidth + 1,
+        collidingLabels: (() => {
+          // CATEGORY AXIS LABELS THAT RUN INTO EACH OTHER. This cannot be done
+          // through the DOM: the charts render to canvas, so the labels are pixels
+          // and there is no element to measure. So measure the text instead and
+          // compare it against the slot each label actually gets.
+          //
+          // Several builders force 'interval: 0' — show EVERY label, never thin
+          // them — which is what makes collisions possible at all. That is the
+          // right default for a five-bucket histogram, where a hidden label is a
+          // missing bucket; it just has to be checked rather than assumed.
+          const ctx = document.createElement('canvas').getContext('2d');
+          const bad = [];
+          for (const el of document.querySelectorAll('.chart')) {
+            const inst = window.echarts && echarts.getInstanceByDom(el);
+            if (!inst) continue;
+            let opt; try { opt = inst.getOption(); } catch { continue; }
+            const axis = ((opt || {}).xAxis || [])[0];
+            if (!axis || axis.type !== 'category') continue;
+            const data = axis.data || [];
+            if (data.length < 2) continue;
+            const lab = axis.axisLabel || {};
+            if (lab.show === false || lab.rotate) continue;   // rotated: not this failure
+            const step = lab.interval === 1 ? 2 : 1;          // 'every other label'
+            ctx.font = (lab.fontSize || 12) + 'px ' + (lab.fontFamily || 'sans-serif');
+            // MEASURE WHAT IS DRAWN, NOT WHAT IS IN THE DATA. The time axes carry a
+            // formatter that blanks most quarters and prints only the year, so
+            // measuring the raw '2019Q3' labels reported collisions on every single
+            // time series — all of them false.
+            const shown = (value, index) => {
+              const raw = value == null ? '' : String(value.value ?? value);
+              if (typeof lab.formatter === 'function') {
+                try { return String(lab.formatter(raw, index) ?? ''); } catch { return raw; }
+              }
+              return raw;
+            };
+            // The plot is narrower than the chart by the y-axis gutter. 56px is a
+            // deliberate under-estimate of that gutter, which makes the slot width
+            // an OVER-estimate and this check conservative: it reports collisions
+            // that are certain, not ones that are merely close.
+            const perCategory = Math.max(1, inst.getWidth() - 56) / data.length;
+            // Only the labels actually drawn, with the category index each sits on —
+            // two labels four categories apart have four category widths between
+            // them, which is why a sparse axis is fine with long labels.
+            const drawn = [];
+            for (let i = 0; i < data.length; i += step) {
+              const text = shown(data[i], i).trim();
+              if (text) drawn.push({ text, index: i });
+            }
+            for (let k = 0; k + 1 < drawn.length; k++) {
+              const a = drawn[k], b = drawn[k + 1];
+              const available = perCategory * (b.index - a.index);
+              const need = ctx.measureText(a.text).width / 2
+                         + ctx.measureText(b.text).width / 2 + 4;
+              if (need > available) {
+                const card = el.closest('.card');
+                const title = card && card.querySelector('h3,h2,.card-title');
+                bad.push((title ? title.textContent.trim() : '?')
+                         + ' [' + a.text + '|' + b.text + ']');
+                break;
+              }
+            }
+          }
+          return bad;
+        })(),
+      };
+    })()`;
+
   for (const route of ROUTES) {
     cdp.problems.length = 0;
     // A fresh query string per route so nothing can be served from memory cache.
@@ -232,102 +328,17 @@ try {
     for (let i = 0; i < 14; i++) {
       await new Promise((r) => setTimeout(r, 250));
       try {
-        state = await cdp.evaluate(`(() => {
-          // Two different populations. All cards prove the page rendered at all;
-          // only cards inside a chart row carry the caption contract, because the
-          // Downloads view's single card is a list of links.
-          const cards = [...document.querySelectorAll('.card')];
-          const chartCards = [...document.querySelectorAll('.crow > .card')];
-          const rows = [...document.querySelectorAll('.crow')].map(row =>
-            [...row.children].reduce((sum, card) => {
-              const m = /span-(\\d+)/.exec(card.className);
-              return sum + (m ? Number(m[1]) : 0);
-            }, 0));
-          return {
-            loading: !!document.querySelector('.loading'),
-            cards: cards.length,
-            h1: document.querySelectorAll('h1').length,
-            badRows: rows.filter(n => n !== 12),
-            noCaption: chartCards.filter(c => {
-              if (c.querySelector('.empty')) return false;
-              const p = c.querySelector('.insight');
-              return !p || !p.textContent.trim();
-            }).length,
-            // Titles, not a count. "2 overflowing" on a thirteen-card page means
-            // measuring every caption by hand to find which two.
-            overflowing: chartCards.filter(c => {
-              const p = c.querySelector('.insight');
-              return p && p.scrollHeight > p.clientHeight + 1;
-            }).map(c => (c.querySelector('h3,h2,.card-title') || {}).textContent || '?'),
-            overflowX: document.documentElement.scrollWidth > window.innerWidth + 1,
-            collidingLabels: (() => {
-              // CATEGORY AXIS LABELS THAT RUN INTO EACH OTHER. This cannot be done
-              // through the DOM: the charts render to canvas, so the labels are pixels
-              // and there is no element to measure. So measure the text instead and
-              // compare it against the slot each label actually gets.
-              //
-              // Several builders force 'interval: 0' — show EVERY label, never thin
-              // them — which is what makes collisions possible at all. That is the
-              // right default for a five-bucket histogram, where a hidden label is a
-              // missing bucket; it just has to be checked rather than assumed.
-              const ctx = document.createElement('canvas').getContext('2d');
-              const bad = [];
-              for (const el of document.querySelectorAll('.chart')) {
-                const inst = window.echarts && echarts.getInstanceByDom(el);
-                if (!inst) continue;
-                let opt; try { opt = inst.getOption(); } catch { continue; }
-                const axis = ((opt || {}).xAxis || [])[0];
-                if (!axis || axis.type !== 'category') continue;
-                const data = axis.data || [];
-                if (data.length < 2) continue;
-                const lab = axis.axisLabel || {};
-                if (lab.show === false || lab.rotate) continue;   // rotated: not this failure
-                const step = lab.interval === 1 ? 2 : 1;          // 'every other label'
-                ctx.font = (lab.fontSize || 12) + 'px ' + (lab.fontFamily || 'sans-serif');
-                // MEASURE WHAT IS DRAWN, NOT WHAT IS IN THE DATA. The time axes carry a
-                // formatter that blanks most quarters and prints only the year, so
-                // measuring the raw '2019Q3' labels reported collisions on every single
-                // time series — all of them false.
-                const shown = (value, index) => {
-                  const raw = value == null ? '' : String(value.value ?? value);
-                  if (typeof lab.formatter === 'function') {
-                    try { return String(lab.formatter(raw, index) ?? ''); } catch { return raw; }
-                  }
-                  return raw;
-                };
-                // The plot is narrower than the chart by the y-axis gutter. 56px is a
-                // deliberate under-estimate of that gutter, which makes the slot width
-                // an OVER-estimate and this check conservative: it reports collisions
-                // that are certain, not ones that are merely close.
-                const perCategory = Math.max(1, inst.getWidth() - 56) / data.length;
-                // Only the labels actually drawn, with the category index each sits on —
-                // two labels four categories apart have four category widths between
-                // them, which is why a sparse axis is fine with long labels.
-                const drawn = [];
-                for (let i = 0; i < data.length; i += step) {
-                  const text = shown(data[i], i).trim();
-                  if (text) drawn.push({ text, index: i });
-                }
-                for (let k = 0; k + 1 < drawn.length; k++) {
-                  const a = drawn[k], b = drawn[k + 1];
-                  const available = perCategory * (b.index - a.index);
-                  const need = ctx.measureText(a.text).width / 2
-                             + ctx.measureText(b.text).width / 2 + 4;
-                  if (need > available) {
-                    const card = el.closest('.card');
-                    const title = card && card.querySelector('h3,h2,.card-title');
-                    bad.push((title ? title.textContent.trim() : '?')
-                             + ' [' + a.text + '|' + b.text + ']');
-                    break;
-                  }
-                }
-              }
-              return bad;
-            })(),
-          };
-        })()`);
+        state = await cdp.evaluate(ROUTE_PROBE);
       } catch { /* context still swapping */ }
       if (state && !state.loading && state.cards > 0) break;
+    }
+    // Mounted is not settled. The label check sizes each slot from the chart's width,
+    // and read straight after mount a chart can still be short of its final width —
+    // which reported axis-label collisions at random, a different route on each run.
+    // Measure again once layout has settled, and keep that reading.
+    if (state && !state.loading && state.cards > 0) {
+      await new Promise((r) => setTimeout(r, 1500));
+      try { state = await cdp.evaluate(ROUTE_PROBE); } catch { /* keep the first */ }
     }
 
     const label = route.padEnd(15);

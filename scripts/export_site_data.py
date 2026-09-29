@@ -1,6 +1,6 @@
 """Export aggregate statistics for the static site (site/data/stats.json).
 
-Reads the committed Airtable CSV snapshots in data/air_tables/ and writes a compact
+Reads the Airtable CSV snapshots in data/air_tables/ and writes a compact
 JSON of pre-computed aggregates, plus one downloadable CSV per chart. This is the
 data source for the static HTML site in site/.
 

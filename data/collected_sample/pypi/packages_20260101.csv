@@ -1,0 +1,4 @@
+package,summary,license,requires_python,latest_version,repository_url,total_releases,first_release_date,latest_release_date,downloads_window_days,downloads_window_total,downloads_last_30d,downloads_last_7d
+fixture-flagship,Fixture package,GPLv3,>=3.10,1.2.0,https://github.com/ersilia-os/fixture-flagship,20,2021-03-01T00:00:00Z,2026-06-01T00:00:00Z,90,2400,480,60
+fixture-utils,Fixture package,MIT,>=3.8,0.4.1,https://github.com/ersilia-os/fixture-utils,4,2024-05-01T00:00:00Z,2026-02-01T00:00:00Z,90,300,90,12
+fixture-tiny,Fixture package,,>=3.9,0.1.0,https://github.com/ersilia-os/fixture-tiny,1,2025-09-01T00:00:00Z,2025-09-01T00:00:00Z,90,40,40,5

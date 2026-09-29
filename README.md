@@ -4,27 +4,32 @@ Aggregate statistics for the [Ersilia Open Source Initiative](https://ersilia.io
 static site: **[Ersilia in numbers](https://ersilia-os.github.io/ersilia-stats/)**.
 
 Ersilia's organisational data lives in Airtable — the Model Hub, projects, community, publications,
-repositories, partner organisations, events, blog posts and countries. This repository holds the
-pipeline that turns it into a published dashboard, and nothing else.
+repositories, partner organisations, events, blog posts and countries. Usage and code activity come
+from public APIs: GitHub, Docker Hub, OpenAlex and PyPI. This repository holds the code that fetches
+all of it and turns it into a published dashboard, and no data of its own.
 
 ```
-Airtable ──fetch──> data/air_tables/*.csv ──export──> site/data/ ──> GitHub Pages
-           read-only, never committed              aggregate-only, committed
+Airtable, GitHub,  ──fetch──> data/*/  ──export──> site/data/ ──> GitHub Pages
+Docker Hub,                   in the CI runner     aggregate-only
+OpenAlex, PyPI                only, never committed
 ```
 
-Almost everything is **read-only** with respect to Airtable. The one exception is
-`scripts/update_airtable_publications.py`, which pushes collected citation counts into the
-Publications table by hand, behind four refusals and a one-field allow-list — see below. The
-site never reads what it writes, so a failed write cannot move a published figure.
+Everything is **read-only** with respect to every source.
 
 ## What is not in this repository
 
-The registry itself. `data/air_tables/` is gitignored: the community table in raw form contains
-personal data, and a public repository has no business holding a copy of the source records. The
-snapshots exist only in a developer's working copy and, for the length of a deploy, in the CI runner.
+The data. CI fetches every source afresh on each deploy (`.github/workflows/pages.yml`), builds
+`site/data/` from it and publishes the result. Neither the fetched snapshots nor the built
+aggregates are committed (see `.gitignore`); the Airtable community table in raw form contains
+personal data, and a public repository has no business holding a copy of the source records.
 
-What *is* committed is `site/data/` — the aggregates the page actually reads. Those are safe by
-construction, so a plain clone serves the whole site with no Airtable access at all.
+Three things under `data/` *are* committed, because CI cannot fetch them:
+
+- `data/airtable_api_identifiers.csv` — the base and table ids, which are configuration;
+- `data/pypi_geo/` — PyPI downloads by country, from a manual BigQuery export
+  (`scripts/convert_pypi_geo.py` explains why there is no API for it);
+- `data/air_tables_sample/` and `data/collected_sample/` — a synthetic fixture, so pull requests
+  can be checked without any secret (`scripts/make_fixture.py`).
 
 Grants, donations, contacts, news and videos are never fetched.
 
@@ -53,6 +58,7 @@ Percentages are suppressed below n=10, where a share invites a conclusion the sa
 | `#/projects` | The project portfolio as a timeline — concurrency, overrun, status |
 | `#/publications` | Output and accumulated citations, venue impact, African collaboration |
 | `#/repositories` | Public code: popularity against activity, commit concentration, contributors |
+| `#/pypi` | Ersilia's PyPI packages: releases, Python support, a rolling download window. Not yet split into Model Hub or Code |
 | `#/community` | Who has taken part: people over time, concurrent involvement, tenure, roles, countries. Aggregates only |
 | `#/reach` | "Countries & partners" — where Ersilia works, how that maps onto its Global South mission, and who its partners are |
 | `#/outreach` | "Events & writing" — events, the blog, and the conferences Ersilia tracks |
@@ -67,20 +73,34 @@ dialog.
 
 ## Running it locally
 
-Serve what is already committed — no Airtable access needed:
-
-```bash
-python -m http.server -d site 8000     # http://localhost:8000
-```
-
-Rebuild `site/data/` from a fresh snapshot:
+Fetch everything, build, and serve — the same steps `pages.yml` runs. Tokens can also go in a
+local `.env`, which is gitignored:
 
 ```bash
 pip install -r requirements.txt
-export AIRTABLE_API_KEY=...             # a read-only personal access token is enough
+export AIRTABLE_API_KEY=...    # read-only Airtable personal access token
+export GH_STATS_TOKEN=...      # GitHub token; traffic also needs Administration: Read-only
 python scripts/fetch_airtable.py -t data/airtable_api_identifiers.csv -o data/air_tables/
-python scripts/export_site_data.py      # data/air_tables/ -> site/data/
+python scripts/fetch_github.py          -o data/github/
+python scripts/fetch_github_releases.py -o data/github/
+python scripts/fetch_model_packages.py  -o data/github/
+python scripts/fetch_github_traffic.py  -o data/github/
+python scripts/fetch_dockerhub.py       -o data/dockerhub/
+python scripts/fetch_docker_tags.py     -o data/dockerhub/
+python scripts/fetch_openalex.py        -o data/scholar/
+python scripts/fetch_pypi.py            -o data/pypi/
+python scripts/export_site_data.py      # data/ -> site/data/
 python scripts/check_config_paths.py    # every chart still has data behind it
+python -m http.server -d site 8000      # http://localhost:8000
+```
+
+Or build from the synthetic fixture with no secrets at all, as `check.yml` does:
+
+```bash
+mkdir -p /tmp/fixture-root
+cp -r data/air_tables_sample /tmp/fixture-root/air_tables
+cp -r data/collected_sample/. /tmp/fixture-root/
+python scripts/export_site_data.py --data-dir /tmp/fixture-root/air_tables
 ```
 
 Each fetch writes `<table>_<YYYYMMDD>.csv` and prunes the snapshot it supersedes, so exactly one
@@ -118,20 +138,38 @@ so they are not rebuilt:
 
 ## Deploying
 
-`.github/workflows/pages.yml` is the whole pipeline in one job. Weekly, on demand, and on pushes that
-touch the site, the scripts or `requirements.txt`. It needs `AIRTABLE_API_KEY` in repository secrets.
+`.github/workflows/pages.yml` is the whole pipeline in one job: fetch, check, build, deploy. It runs
+weekly, on demand, and on pushes to `main` that touch the site, the scripts, `data/` or
+`requirements.txt`. Repository secrets:
 
-Each step is a gate, and everything before the upload can stop a deploy:
+| Secret | |
+|---|---|
+| `AIRTABLE_API_KEY` | required; a read-only personal access token |
+| `GH_STATS_TOKEN` | required; read access to `ersilia-os` metadata, plus **Administration: Read-only** (fine-grained) or `repo` (classic) for the traffic endpoints |
+| `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN` | optional; lift Docker Hub's anonymous pagination cap |
+
+GitHub keeps only a 14-day traffic window, so `fetch_github_traffic.py` accumulates a history by
+merging each fetch into the previous snapshot. The workflow carries that snapshot between runs in
+the Actions cache. A cache unused for seven days is evicted, and with it the history, so the weekly
+schedule has to keep running.
+
+Only two fetches are required: Airtable, and the GitHub inventory the public/private check reads.
+Every other collector is non-blocking. If one fails, the run shows a warning, its cards show their
+empty state, and the rest of the site still refreshes; the next run fills them back in. An empty
+chart is likewise a warning, not a failure, because it means a source changed rather than the code
+broke.
+
+What does stop a deploy, leaving the previous deployment live:
 
 | Step | Fails the build when |
 |---|---|
 | `pip install -r requirements.txt` | — (but the pin matters: see the note in that file) |
 | `fetch_airtable.py` | any table fails to fetch |
+| `fetch_github.py` | the public inventory cannot be fetched |
 | `check_github_airtable_sync.py` | GitHub and Airtable disagree about which repositories exist or which are public |
 | `node --check` on `config.js` and `js/*.js` | any shipped script does not parse |
 | `export_site_data.py` | a PII guard trips, or an email-shaped string reaches the output |
-| `check_config_paths.py --fail-on-empty` | a chart points at a missing **or empty** metric |
-| `check_degradation.py` | a missing column crashes the build instead of emptying one card |
+| `check_config_paths.py` | a chart points at a metric that does not exist, or a table row key that does not |
 | `verify_site.mjs` | a route renders no cards, logs a console error, has a row not summing to 12, has a caption that does not fit, or scrolls sideways at 390px |
 | the artifact grep | a raw snapshot or an address is inside `site/` |
 
@@ -145,51 +183,16 @@ CI does:
 node scripts/verify_site.mjs
 ```
 
-**There is still no `pull_request` trigger**, and there cannot easily be one: the build needs
-`data/air_tables/`, which is gitignored, so a fork cannot build. Committing a small synthetic
-fixture snapshot would unlock a secret-free PR check; that has not been done.
+`.github/workflows/check.yml` runs on every pull request and needs no secrets: it lints with ruff,
+checks the fixture matches `make_fixture.py`, builds the site from the fixture, and runs
+`check_config_paths.py --fail-on-empty` (the fixture is built to give every chart data, so an empty
+one there is a bug), `check_degradation.py` (a missing column must empty a card, never crash
+the build) and `verify_site.mjs` against it. The fixture is invented, so this proves the code
+works, not that the real numbers are right.
 
-### Writing citations back into Airtable
-
-The site's citation figures come from OpenAlex, but the team works in Airtable, so fixing
-the site did not fix the place people look. `scripts/update_airtable_publications.py` pushes
-the collected counts into the Publications table. It moved the Airtable total from 1,305 to
-1,713 across 40 of 42 records.
-
-The order is not the obvious one — collection comes first, because collection is what
-produces the numbers:
-
-```bash
-export AIRTABLE_API_KEY=...                                  # needs data.records:write
-PYTHONPATH=scripts python3 scripts/fetch_openalex.py -o data/scholar/
-PYTHONPATH=scripts python3 scripts/update_airtable_publications.py           # read the diff
-PYTHONPATH=scripts python3 scripts/update_airtable_publications.py --apply
-```
-
-Step three reads the CSV step two wrote rather than calling OpenAlex again: two calls could
-return different numbers, and then Airtable and the site would disagree for a reason nobody
-could explain.
-
-**The site does not read citations from Airtable and will not start.** The writeback is for
-the humans browsing the base. So a failed write cannot affect a published figure, and the
-per-year accrual (199 rows) and co-author countries (a list per paper) stay in the collected
-CSVs, where they fit, needing no Airtable schema at all.
-
-Because this script can damage the source of truth it is **run by hand, never in CI**, it is
-a **dry run unless given `--apply`**, and it writes exactly one field, `Citations`, from an
-allow-list rather than a denylist — a denylist grows a hole every time someone adds a column.
-It refuses in four situations that all look like a successful update:
-
-| Refusal | Why |
-|---|---|
-| collected snapshot older than 21 days | writing stale counts over fresher ones is a regression dressed as an update |
-| fewer than 80% of DOIs resolved | a half-finished collect looks exactly like "most papers lost their citations" |
-| any single count falling by more than 20% or 10 citations | counts essentially only rise; a big drop means a wrong DOI, not a discovery. `--force` overrides |
-| token without `data.records:write` | says which scope is missing rather than printing a traceback |
-
-Note that switching to OpenAlex **lowers** some individual counts even though the total rises:
-OpenAlex is a more conservative index than Google Scholar, which counts preprints and theses.
-Seven papers went down, the largest by 10.
+**The site's citation figures come from OpenAlex, not Airtable.** OpenAlex is a more conservative
+index than Google Scholar, which counts preprints and theses, so some individual counts are lower
+than the ones stored in Airtable even though the total is higher.
 
 ### Keeping GitHub and Airtable in step
 
@@ -242,13 +245,13 @@ name in `repositories.attach_github_counts()`.
 
 Two consequences worth knowing, both stated on the affected cards:
 
-* **Commit concentration is now public-only.** The committed GitHub snapshot is public by
+* **Commit concentration is now public-only.** The collected GitHub snapshot is public by
   design, so a private repository has no commit count to contribute and drops out of the
   Lorenz curve. It covered every repository while the figure lived in Airtable.
 * **The star KPI still covers private repositories**, via `org_totals_<date>.csv` — two
   integers, `private_repositories` and `private_stars`, and **no names**. That is what lets
-  the total include private work without CI ever holding a token that can list private
-  repositories. Measured: 664 stars public, 5 private across 40 repositories.
+  the total include private work without a private repository name ever being written or
+  logged. Measured: 664 stars public, 5 private across 40 repositories.
 
 `Creation Date` was deliberately retained, and it is the GitHub repository creation date —
 verified, 139 of 141 rows match `created_at` exactly. Two do not: `chembl-antimicrobial-models`,
@@ -261,32 +264,13 @@ commits** — the decision to show them was already taken; the community table's
 still dropped at load and never reach the site. Anonymous contributors are excluded, because
 GitHub identifies them by an email address rather than a login and no address is ever fetched.
 
-### The GitHub writeback, and why it was removed
-
-`scripts/update_airtable_repositories.py` used to maintain the six numeric columns of the
-Repositories table, replacing a retired nightly cron. It is **deleted**, because the columns
-it wrote were deleted: every field in its allow-list — `Stars`, `Forks`, `Open Issues`,
-`Subscribers`, `Total Commits`, `Contributors` — no longer exists, so the script could not
-write anything. Keeping it would have been dead code that fails on its first call.
-
-The problem it solved is solved better by not storing the numbers at all. Nothing has to be
-kept in step, because there is now one source: GitHub, read at collection time.
-
-It is worth recording what it caught before it went, because the guard earned its place. On
-its only real run the sharp-fall refusal stopped a write and named the row: `ersilia-stats`
-claimed 310 commits and 9 contributors, while that repository is days old and has 21. The row
-had been seeded with figures from the *capstone* repository — private, and genuinely around
-310. A guard written to catch a broken collector caught bad stored data instead. The residue
-of that same error is still visible in `Creation Date`, which reads 2023-12-08 for a
-repository created 2026-07-31.
-
 ### A partial fetch cannot be trusted to announce itself
 
 `fetch_airtable.py` writes what it got and prunes superseded files **before** it raises, so a table
 that failed keeps its previous CSV. `load.newest_snapshots()` then takes the newest stamp *per table*,
 which will happily pair today's Community with last month's Repositories. In CI this is harmless —
-the job stops and the previous deployment stays live — but a local `fetch → export → commit → push`
-would publish mixed-age data.
+the runner starts empty, the job stops and the previous deployment stays live — but a local
+working copy can hold mixed-age data.
 
 `meta.snapshot_dates` therefore records one date per table and `meta.stale_tables` names any that are
 behind, which the sidebar prints next to the snapshot date. `snapshot_date` on its own is the **max**
@@ -373,17 +357,22 @@ site/
   styles.css          site layer over assets/ersilia.css
   assets/ersilia.css  the Ersilia house stylesheet, verbatim
   vendor/             echarts.min.js, world.geo.json — no CDN, same-origin only
-  data/               generated: stats.json + one CSV per chart
+  data/               built by CI, not committed: stats.json + one CSV per chart
 scripts/
   collect_common.py            shared snapshot/retry/prune plumbing for the collectors
   github_api.py                shared GitHub access: inventory, batched metrics, contributors
+  dockerhub_api.py             shared Docker Hub login, which lifts the pagination cap
   fetch_airtable.py            read-only Airtable -> CSV, with the identifying-column denylist
   fetch_github.py              the public inventory, commit activity, stars, contributors
+  fetch_github_releases.py     every release of every model repository
+  fetch_github_traffic.py      referrers and popular pages, accumulated past GitHub's 14 days
+  fetch_model_packages.py      each model's pinned packages, from its install.yml
   fetch_dockerhub.py           model image pull counts
+  fetch_docker_tags.py         per-architecture tags, sizes and last-pulled times
   fetch_openalex.py            citations, open access and author-institution countries, by DOI
-  resolve_dois.py              proposes a DOI per publication for a human to check
+  fetch_pypi.py                package metadata and pypistats.org's rolling download window
+  convert_pypi_geo.py          manual: a BigQuery export -> data/pypi_geo/
   check_github_airtable_sync.py  fails the deploy when GitHub and Airtable disagree
-  update_airtable_publications.py  writes citation counts back, behind four refusals
   export_site_data.py          CLI: snapshots -> site/data, with the disclosure guards
   site_data/                   one module per section, plus parsing, insights and KPIs
   check_config_paths.py        fails if a chart's metric is missing, empty, or names a
@@ -396,8 +385,9 @@ scripts/
   verify_site.mjs              headless smoke test: renders every route, checks rows,
                                captions and axis-label collisions
 data/airtable_api_identifiers.csv   base/table id configuration
-data/air_tables_sample/             committed Airtable fixture (see make_fixture.py)
-data/collected_sample/              committed github/dockerhub/scholar fixture
+data/pypi_geo/                      PyPI downloads by country (manual BigQuery export)
+data/air_tables_sample/             synthetic Airtable fixture (see make_fixture.py)
+data/collected_sample/              synthetic github/dockerhub/scholar/pypi fixture
 ruff.toml                           the pinned lint rule set, enforced in CI
 ```
 

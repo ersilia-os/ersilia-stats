@@ -249,4 +249,10 @@ def build(tables, repos_public, models, repos_all=None, collected=None):
     if models is not None and not models.empty:
         out["models"] = _kpi(len(models), _cumulative_series(col(models, "incorporation_date")))
 
+    pypi = (collected or {}).get("pypi_packages")
+    if pypi is not None and not pypi.empty and "downloads_window_total" in pypi.columns:
+        # No series: pypistats.org exposes only a rolling window, not a history long
+        # enough to plot, so this tile carries no sparkline and no 12-month delta.
+        out["pypi_downloads"] = _kpi(to_num(pypi["downloads_window_total"]).sum())
+
     return out

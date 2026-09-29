@@ -17,14 +17,16 @@ WHAT IT COLLECTS
     repos            the public inventory, one row each, with per-repository counts
     commit_activity  commits per calendar quarter, for every non-archived repository
     stars            starred_at for the most-starred repositories, i.e. star history
+    model_requests   open/closed timestamps for every "new-model"-labelled issue on
+                     the flagship repository — the incorporation pipeline's lead time
 
 FOUR THINGS THAT MATTER
 
-**Public repositories only.** This output is committed, and a private repository's *name*
-is disclosure even when its numbers are not. `github_api.list_repos` takes the visibility as
-a required argument so that this file can be seen to ask for "public"; the scripts that
-legitimately need private repositories — the synchronisation check and the Airtable writer —
-ask for "all" and write nothing to disk.
+**Public repositories only.** This output feeds the published site, and a private
+repository's *name* is disclosure even when its numbers are not. `github_api.list_repos`
+takes the visibility as a required argument so that this file can be seen to ask for
+"public"; the code that legitimately needs private repositories — the synchronisation
+check and `private_totals` — asks for "all" and writes no name to disk.
 
 **The repositories are not all comparable.** Most are `eos####` per-model repositories and
 the rest are not, split by `github_api.MODEL_RE`. Both kinds are collected throughout. An
@@ -71,8 +73,14 @@ STAR_FIELDS = ["name", "starred_at"]
 # `Contributor Names` column, which was removed from that table.
 CONTRIBUTOR_FIELDS = ["login", "repositories"]
 # Aggregates over private repositories — two integers, no names. Lets the site report an
-# org-wide star total without CI ever seeing a private repository.
+# org-wide star total without any private repository name being written or logged.
 TOTALS_FIELDS = ["metric", "value"]
+# Every issue asking for a new model, on the flagship repository rather than any
+# per-model one. No title: it is free text written by whoever opened the issue, and
+# nothing on the site needs it — the lead-time chart only reads the two timestamps.
+FLAGSHIP_REPO = "ersilia"
+MODEL_REQUEST_LABEL = "new-model"
+MODEL_REQUEST_FIELDS = ["issue_number", "state", "created_at", "closed_at"]
 
 
 def inventory(org, headers):
@@ -249,6 +257,36 @@ def star_history(org, repos, headers, top=20):
     return rows
 
 
+def model_requests(org, repo, label, headers):
+    """Every issue labelled `label` on `org/repo` — open/closed timestamps only.
+
+    The Search API rather than the issues list endpoint, because it can filter by
+    label server-side. Paginated at 100 per page up to the Search API's own 1,000-
+    result ceiling (ten pages), which is far beyond anything this one label holds —
+    266 issues at the time this was written.
+    """
+    rows = []
+    query = "repo:%s/%s+is:issue+label:%s" % (org, repo, label)
+    for page in range(1, 11):
+        payload = get_json(
+            "%s/search/issues?q=%s&per_page=100&page=%d" % (API, query, page),
+            headers=headers)
+        items = (payload or {}).get("items") or []
+        if not items:
+            break
+        for item in items:
+            rows.append({
+                "issue_number": item.get("number"),
+                "state": item.get("state") or "",
+                "created_at": (item.get("created_at") or "")[:10],
+                "closed_at": (item.get("closed_at") or "")[:10],
+            })
+        if len(items) < 100:
+            break
+    rows.sort(key=lambda r: r["issue_number"])
+    return rows
+
+
 def summarise(repos):
     models = [r for r in repos if r["is_model"] == "yes"]
     others = [r for r in repos if r["is_model"] == "no"]
@@ -296,6 +334,9 @@ def main():
     parser.add_argument("--skip-private-totals", action="store_true",
                         help="Skip the private-repository aggregate. Use when the token "
                              "cannot see private repositories.")
+    parser.add_argument("--skip-model-requests", action="store_true",
+                        help="Skip the model-request issue history (Search API, one label "
+                             "on the flagship repository).")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--max-age-days", type=int, default=21)
     args = parser.parse_args()
@@ -318,6 +359,15 @@ def main():
         written.append(write_snapshot(args.out_dir, "stars", STAR_FIELDS, stars))
         logging.info("star history: %d dated stars across %d repositories",
                      len(stars), len({r["name"] for r in stars}))
+
+    if not args.skip_model_requests:
+        requests = model_requests(args.org, FLAGSHIP_REPO, MODEL_REQUEST_LABEL, headers)
+        if requests:
+            written.append(write_snapshot(args.out_dir, "model_requests",
+                                          MODEL_REQUEST_FIELDS, requests))
+            closed = sum(1 for r in requests if r["state"] == "closed")
+            logging.info("model requests: %d issues labelled %r, %d closed",
+                         len(requests), MODEL_REQUEST_LABEL, closed)
 
     if not args.skip_activity:
         # EVERY non-archived repository, model repositories included. This used to skip the
@@ -359,7 +409,7 @@ def main():
 
     if not args.skip_private_totals:
         # Two integers and no names, so that the org-wide star total can include private
-        # work without CI ever holding a token that can list private repositories.
+        # work without a private repository name reaching a file or a (public) CI log.
         try:
             totals = private_totals(args.org, headers)
         except Exception as error:  # noqa: BLE001 - the message is the point

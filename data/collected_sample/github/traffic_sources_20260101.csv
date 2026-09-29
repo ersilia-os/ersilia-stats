@@ -1,0 +1,10 @@
+repo,kind,source,title,count,uniques,fetched_at
+fixture-hub,referrer,ersilia.io,,40,30,2026-01-01T00:00:00+00:00
+fixture-hub,referrer,google.com,,25,20,2026-01-01T00:00:00+00:00
+fixture-hub,referrer,doi.org,,12,10,2026-01-01T00:00:00+00:00
+fixture-hub,referrer,twitter.com,,8,6,2026-01-01T00:00:00+00:00
+fixture-tools,referrer,github.com,,15,12,2026-01-01T00:00:00+00:00
+fixture-hub,path,/ersilia-os/fixture-hub,fixture-hub,50,40,2026-01-01T00:00:00+00:00
+fixture-hub,path,/ersilia-os/fixture-hub/blob/main/metadata.yml,metadata.yml,20,15,2026-01-01T00:00:00+00:00
+fixture-hub,path,/ersilia-os/fixture-hub/issues,Issues,10,8,2026-01-01T00:00:00+00:00
+fixture-tools,path,/ersilia-os/fixture-tools/tree/main,fixture-tools,9,7,2026-01-01T00:00:00+00:00

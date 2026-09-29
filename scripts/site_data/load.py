@@ -84,14 +84,18 @@ def load_collected(root="data"):
     """
     out = {}
     for key, subdir in (("dockerhub", "dockerhub"), ("github", "github"),
-                        ("scholar", "scholar")):
+                        ("scholar", "scholar"), ("pypi", "pypi"),
+                        # A manual, irregular-cadence snapshot (see
+                        # scripts/convert_pypi_geo.py) rather than a scheduled
+                        # collector's output — kept in its own directory precisely so
+                        # its age never gets averaged into `pypi`'s freshness check.
+                        ("pypi_geo", "pypi_geo")):
         path = os.path.join(root, subdir)
         if not os.path.isdir(path):
             continue
         for name, (stamp, file_path) in newest_snapshots(path).items():
             # Dated files only. An undated CSV in one of these directories is a working
-            # artefact, not a snapshot — `doi_map_review.csv` is there for a person to
-            # read, and loading it as data would be a category error.
+            # artefact, not a snapshot, and loading it as data would be a category error.
             if not stamp:
                 continue
             frame = pd.read_csv(file_path)
@@ -107,7 +111,7 @@ def collected_dates(root="data"):
     """
     dates = {}
     for key, subdir in (("dockerhub", "dockerhub"), ("github", "github"),
-                        ("scholar", "scholar")):
+                        ("scholar", "scholar"), ("pypi", "pypi")):
         path = os.path.join(root, subdir)
         stamps = [s for s, _ in newest_snapshots(path).values() if s] if os.path.isdir(path) else []
         if stamps:
