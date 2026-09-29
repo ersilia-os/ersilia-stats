@@ -147,8 +147,9 @@ def _output_consistency(models):
     for label, value in zip(out["labels"], out["values"]):
         if str(label).strip().lower() == "fixed":
             fixed = int(value)
-    out["insight"] = ins.share_of(fixed, recorded, "models with a value",
-                                 "give the same answer on a re-run")
+    # Three columns wide: CI overflowed two lines at "models with a value ... give the same
+    # answer on a re-run". "Recorded" keeps the denominator honest in fewer characters.
+    out["insight"] = ins.share_of(fixed, recorded, "recorded models", "are reproducible")
     # `Fixed` is the reproducible case and reads as the good one; `Variable` is not a
     # failure, so it takes a neutral rather than a warning colour.
     out["semantics"] = {"Fixed": "brand", "Variable": "neutral"}

@@ -336,7 +336,8 @@ def _outside_contribution(model_rows):
         ["Has an outside contribution", "Only internal pull requests",
          "No merged pull requests"],
         [outside, internal, none],
-        "%s of %s models have taken a merged pull request from outside Ersilia." % (
+        # Three columns wide: the longer wording overflowed two lines in CI.
+        "%s of %s models merged an outside pull request." % (
             ins.num(outside), ins.num(total),
         ),
         countNoun="models",
