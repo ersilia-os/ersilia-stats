@@ -454,9 +454,9 @@ falling; these used to sit behind a Cumulative/Per-quarter toggle, which meant y
 see one of them.
 
 **Four Model Hub figures are derived rather than recorded**, and each states its derivation in
-Methods: years from a model's publication to its incorporation; the largest input batch a model
-completed (inferred from the five Computational Performance columns, where `-1` marks a failure at
-that size); Docker image size; and ARM64 coverage. "Pathogens targeted" excludes `Any` and
+Methods: years from a model's publication to its incorporation; runtime at each input batch size (the five
+Computational Performance columns, where `-1` marks a run that did not finish at that size and is
+counted as infinitely slow, not dropped); Docker image size; and ARM64 coverage. "Pathogens targeted" excludes `Any` and
 `Homo sapiens` — both real answers, but they describe organism-agnostic chemistry and human-property
 prediction, and together they would fill the ranking without saying anything about pathogen coverage.
 

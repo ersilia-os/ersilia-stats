@@ -327,10 +327,12 @@ function fillMethods() {
       "year. Models whose incorporation year precedes their publication year are dropped: a " +
       "negative lag means one of the two dates is wrong, not that a paper was wrapped before " +
       "it existed."],
-    ["How far models scale", "DERIVED, not recorded. The five Computational Performance " +
-      "columns hold runtimes at increasing input batch sizes, and a value of -1 means the " +
-      "model failed at that size. The largest column holding a positive number is therefore " +
-      "the largest batch the model actually completed. Models with no benchmark are absent."],
+    ["Runtime by batch size", "The five Computational Performance columns hold runtimes " +
+      "at 1, 10, 100, 1,000 and 10,000 molecules. A value of -1 means the run did not " +
+      "finish at that size, so it is counted as infinitely slow — slower than any run that " +
+      "did finish — rather than dropped: it raises the median and percentiles, and ranks a " +
+      "model among the slowest. The charts pin such a run to the top of the runtime axis. " +
+      "Models with no benchmark are absent."],
     ["Growth charts", "Where something grows over time, the rate and the running total are " +
       "drawn as two panels sharing one time axis, never as two y-axes on one plot. A " +
       "cumulative curve only ever rises, so on its own it hides whether the rate is rising " +

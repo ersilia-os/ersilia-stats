@@ -901,13 +901,31 @@ function optHistogram(d) {
   // one. On every label it made six bins too wide for a span-4 card, and "0 years" ran
   // into "1 years". Every raw `d.labels` value stays unchanged, so the mean-line lookup
   // below (which parses those same strings) is unaffected.
+  //
+  // `display`, when the exporter sends one, replaces each bin's label outright (one per
+  // bin, units included) — for a wide card where "0–1 … 8+ GB" read as a bare range. The
+  // raw labels stay the category values, so the mean-line lookup still parses them.
   const lastLabel = d.labels[d.labels.length - 1];
+  const shown = (v) => {
+    const i = d.labels.indexOf(v);
+    if (d.display && i >= 0) return d.display[i];
+    return v + (d.unit && v === lastLabel ? " " + d.unit : "");
+  };
+  o.tooltip.axisPointer.label = { formatter: (p) => shown(p.value) };
   o.xAxis = catAxis(d.labels, {
     axisLabel: {
       color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, interval: 0, rotate: 0,
-      formatter: (v) => v + (d.unit && v === lastLabel ? " " + d.unit : ""),
+      formatter: shown,
     },
   });
+  // `xName` titles the axis: what is being binned, which the bin labels alone don't say.
+  if (d.xName) {
+    Object.assign(o.xAxis, {
+      name: d.xName, nameLocation: "middle", nameGap: 26,
+      nameTextStyle: { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta },
+    });
+    o.grid.bottom = 22;
+  }
   o.yAxis = valAxis({ show: false });
   o.series = [{
     type: "bar", data: d.values, barCategoryGap: "18%",
@@ -1196,6 +1214,51 @@ function fmtSeconds(value) {
   return Math.round(n) + "s";
 }
 
+/* A log-10 axis for the runtime-by-batch-size charts, which span orders of magnitude
+   on both axes. */
+function runtimeLogAxis(name, gap, formatter) {
+  return {
+    type: "log", logBase: 10,
+    name: name, nameLocation: "middle", nameGap: gap,
+    nameTextStyle: { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta },
+    axisLine: { show: false }, axisTick: { show: false },
+    minorTick: { show: true, splitNumber: 5 },
+    splitLine: { lineStyle: { color: T.axis, type: "solid" } },
+    minorSplitLine: { show: true, lineStyle: { color: T.axis, opacity: 0.5 } },
+    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, formatter: formatter },
+  };
+}
+
+/* Runtime points for one curve. A `null` runtime is a run that did NOT FINISH — slower
+   than any that did, so it has no finite height. The first one is pinned to `ceiling`
+   (the top of the axis) with an upward triangle, so the line visibly runs off the top
+   of the chart; later ones are gaps, since past that size there is no run to plot. */
+function runtimePoints(x, values, ceiling) {
+  const stop = values.findIndex((v) => v == null);
+  return x.map((v, i) => {
+    if (values[i] != null) return [v, values[i]];
+    if (i !== stop) return [v, "-"];
+    return { value: [v, ceiling], dnf: true, symbol: "triangle", symbolSize: 9 };
+  });
+}
+
+/* The top of the runtime axis: the decade strictly above the slowest finished run,
+   so a did-not-finish marker sits clear of every real point. */
+function runtimeCeiling(seriesList) {
+  const finite = [].concat.apply([], seriesList.map((s) => s.values))
+    .filter((v) => v != null && Number(v) > 0);
+  const max = finite.length ? Math.max.apply(null, finite) : 1;
+  return Math.pow(10, Math.floor(Math.log10(max)) + 1);
+}
+
+/* Runtime tick labels: the ceiling row holds only did-not-finish markers, so it is
+   labelled as such rather than as a runtime nobody recorded. */
+const runtimeTicks = (ceiling) => (v) => (v >= ceiling ? "Not finished" : fmtSeconds(v));
+
+const runtimeTooltip = (p) =>
+  (p.seriesName && p.seriesName !== "Median runtime" ? "<b>" + p.seriesName + "</b><br/>" : "") +
+  fmtNum(p.value[0]) + " molecules: " + (p.data && p.data.dnf ? "did not finish" : fmtSeconds(p.value[1]));
+
 function optBandLine(d) {
   const series = d.series || [];
   const lower = series.find((s) => s.name === "p25");
@@ -1205,25 +1268,16 @@ function optBandLine(d) {
 
   const x = d.labels.map((l) => Number(String(l).replace(/,/g, "")));
   const color = accent();
-  const nameStyle = { color: T.muted, fontFamily: T.sans, fontSize: T.fs.meta };
+  const ceiling = runtimeCeiling([lower, median, upper].filter(Boolean));
 
   const o = base();
-  o.grid = { left: 6, right: 20, top: 30, bottom: 4, containLabel: true };
+  o.grid = { left: 22, right: 20, top: 30, bottom: 4, containLabel: true };
   o.legend = legend(["Median runtime"]);
   o.tooltip.trigger = "item";
-  o.tooltip.formatter = (p) => fmtNum(p.value[0]) + " molecules: " + fmtSeconds(p.value[1]);
+  o.tooltip.formatter = runtimeTooltip;
 
-  const logAxis = (name, gap, formatter) => ({
-    type: "log", logBase: 10,
-    name: name, nameLocation: "middle", nameGap: gap, nameTextStyle: nameStyle,
-    axisLine: { show: false }, axisTick: { show: false },
-    minorTick: { show: true, splitNumber: 5 },
-    splitLine: { lineStyle: { color: T.axis, type: "solid" } },
-    minorSplitLine: { show: true, lineStyle: { color: T.axis, opacity: 0.5 } },
-    axisLabel: { color: T.muted, fontSize: T.fs.meta, fontFamily: T.mono, formatter: formatter },
-  });
-  o.xAxis = logAxis("Molecules per run", 26, fmtCompact);
-  o.yAxis = logAxis("Median runtime (s)", 44, fmtSeconds);
+  o.xAxis = runtimeLogAxis("Molecules per run", 26, fmtCompact);
+  o.yAxis = Object.assign(runtimeLogAxis("Median runtime (s)", 44, runtimeTicks(ceiling)), { max: ceiling });
 
   o.series = [];
   if (lower && upper) {
@@ -1235,10 +1289,15 @@ function optBandLine(d) {
     // to surround. A plain closed path has no such ambiguity on any axis type.
     // `showSymbol` draws the p25/p75 points themselves, the same incidental
     // detail the source chart has (its fill trace never turned markers off).
+    //
+    // A null percentile is infinite — more than a quarter of models did not finish
+    // at that size — so the band edge goes to the top of the axis there: it really
+    // does run off the chart.
+    const edge = (v) => (v == null ? ceiling : v);
     const reversedX = x.slice().reverse();
     const reversedLower = lower.values.slice().reverse();
-    const band = x.map((v, i) => [v, upper.values[i]])
-      .concat(reversedX.map((v, i) => [v, reversedLower[i]]));
+    const band = x.map((v, i) => [v, edge(upper.values[i])])
+      .concat(reversedX.map((v, i) => [v, edge(reversedLower[i])]));
     o.series.push({
       name: "25th–75th percentile", type: "line",
       data: band, lineStyle: { opacity: 0 }, areaStyle: { color: alpha(color, 0.15) },
@@ -1248,9 +1307,54 @@ function optBandLine(d) {
   }
   o.series.push({
     name: "Median runtime", type: "line",
-    data: x.map((v, i) => [v, median.values[i]]),
+    data: runtimePoints(x, median.values, ceiling),
     lineStyle: { color: color, width: 2 }, showSymbol: true, symbolSize: 7,
     itemStyle: { color: color, borderColor: T.surface, borderWidth: 1.5 },
+  });
+  return o;
+}
+
+/* The slowest models' own runtime curves, one line each, against the Hub median as a
+   dashed reference — the named counterpart to the bandline's typical model. The
+   exporter sends the median as the LAST series; every other series takes a palette
+   slot in rank order. A model that did not finish at some size runs up to a triangle
+   at the top of the axis there (see `runtimePoints`). */
+function optRuntimeLines(d) {
+  const series = d.series || [];
+  if (!series.length || !d.labels || !d.labels.length) return base();
+  const x = d.labels.map((l) => Number(String(l).replace(/,/g, "")));
+  const models = series.slice(0, -1);
+  const median = series[series.length - 1];
+
+  const o = base();
+  o.grid = { left: 22, right: 20, top: 34, bottom: 4, containLabel: true };
+  // Scrolling rather than wrapping: model titles are long, and a wrapped legend's
+  // height is unknown here, so it would run into the plot.
+  o.legend = Object.assign(legend(series.map((s) => s.name)),
+    { type: "scroll", left: 0, right: 0, pageIconSize: 10,
+      pageTextStyle: { color: T.muted, fontSize: T.fs.meta } });
+  o.tooltip.trigger = "item";
+  o.tooltip.formatter = runtimeTooltip;
+  const ceiling = runtimeCeiling(series);
+  o.xAxis = runtimeLogAxis("Molecules per run", 26, fmtCompact);
+  o.yAxis = Object.assign(runtimeLogAxis("Runtime (s)", 44, runtimeTicks(ceiling)), { max: ceiling });
+
+  o.series = models.map((s, i) => {
+    const color = T.cat[i % T.cat.length];
+    return {
+      name: s.name, type: "line",
+      data: runtimePoints(x, s.values, ceiling),
+      lineStyle: { color: color, width: 2 }, showSymbol: true, symbolSize: 6,
+      itemStyle: { color: color, borderColor: T.surface, borderWidth: 1.5 },
+      emphasis: { focus: "series" },
+    };
+  });
+  o.series.push({
+    name: median.name, type: "line",
+    data: runtimePoints(x, median.values, ceiling),
+    lineStyle: { color: T.muted, width: 1.5, type: "dashed" },
+    showSymbol: true, symbolSize: 5, itemStyle: { color: T.muted },
+    emphasis: { focus: "series" },
   });
   return o;
 }
@@ -1275,6 +1379,7 @@ const BUILDERS = {
   heatmap: optHeatmap,
   gantt: optGantt,
   bandline: optBandLine,
+  runtimelines: optRuntimeLines,
 };
 
 function buildOption(chart, d) {

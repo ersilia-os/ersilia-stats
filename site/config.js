@@ -26,6 +26,8 @@
                    categories — the categories are the point, not the tail.
         bandline   a median line with its 25th-75th percentile band, log-scale y —
                    a measure spanning orders of magnitude across a few known steps.
+        runtimelines a few named log-log curves against a dashed median — the
+                   individual outliers behind a bandline.
         lorenz     how unevenly a total is spread.
         gantt      spans in time.
         map        geography.
@@ -128,7 +130,7 @@ const VIEWS = [
           { h: "h-lg", cells: [
             {
               title: "Coverage: task × biomedical area", span: 12, data: "models.task_by_area", type: "heatmap",
-              desc: "The task and biomedical-area charts above, crossed — which task types actually serve which diseases. Task is single-valued, so every model with one recorded lands in exactly one row; biomedical area is multi-select, so a model naming two areas is counted in both columns it touches. Capped to the 8 largest task families and 10 largest areas so the matrix stays legible.",
+              desc: "The task and biomedical-area charts above, crossed — which kinds of model actually serve which diseases. Every model in the registry appears. Rows are the subtask (falling back to the task family where no subtask is recorded); columns are the 10 largest biomedical areas, then 'Other areas' for the long tail and 'Not recorded' for models that name none. Biomedical area is multi-select, so a model naming two areas is counted in both columns it touches, and a row can sum to more than its model count.",
             },
           ] },
         ],
@@ -192,7 +194,14 @@ const VIEWS = [
             {
               title: "Computational performance", span: 12, data: "models.performance_by_scale",
               type: "bandline",
-              desc: "Median runtime as the batch size grows tenfold at each step, with the 25th-75th percentile band — the same plot as entry_project's Engineering tab, redrawn here. The runtime axis is log scale because the measure spans orders of magnitude: a model taking fractions of a second on one input can take minutes on ten thousand. A value of -1 in the underlying Computational Performance column means the model FAILED at that size rather than ran instantly, so failed runs are excluded from the runtime figures rather than pulling the median toward zero — which is also why fewer models are represented at the larger batch sizes; the drill-down table has the count benchmarked at each one. Replaces the single-number \"largest batch reached\" chart with the runtime curve behind it.",
+              desc: "Median runtime as the batch size grows tenfold at each step, with the 25th-75th percentile band — the same plot as entry_project's Engineering tab, redrawn here. The runtime axis is log scale because the measure spans orders of magnitude: a model taking fractions of a second on one input can take minutes on ten thousand. A value of -1 in the underlying Computational Performance column means the run did not finish at that size, so it counts as infinitely slow rather than being dropped: leaving those runs out would make the larger batch sizes look faster than they are, because the slowest models are exactly the ones that stop finishing. Where more than a quarter of models did not finish, the 75th percentile is itself unbounded and the band runs to the top of the chart; the drill-down table has the count that did not finish at each size.",
+            },
+          ] },
+          { h: "h-lg", cells: [
+            {
+              title: "The slowest models", span: 12, data: "models.slowest_models",
+              type: "runtimelines",
+              desc: "Runtime at 10, 100, 1,000 and 10,000 molecules for the six slowest models, with the Hub median at each size as a dashed line — the named outliers behind the median curve above. A value of -1 means the run did not finish, which counts as infinitely slow: a model that stopped finishing at a smaller batch ranks slower than one that stopped at a larger batch, and both rank slower than any model that finished every size. Ties go to the runtime at the largest batch the model did finish. A run that did not finish is drawn as a triangle at the top of the chart, where the line stops. The median covers every model benchmarked at all four sizes, with unfinished runs counted the same way. Both axes are log scale: one step right is ten times the molecules, one step up ten times the time.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -406,18 +415,6 @@ const VIEWS = [
               title: "Most actively versioned models", span: 12, data: "releases.most_versioned",
               type: "lollipop",
               desc: "Models ranked by how many GitHub Releases they carry — updated most often since their first v1.0.0. Not the same ranking as commits or pulls: a model can be re-packaged repeatedly with small patch bumps and lead here while sitting well down those other rankings.",
-            },
-          ] },
-          { h: "h-lg", cells: [
-            {
-              title: "Release history, model by model", span: 12, data: "releases.summary",
-              type: "ranked", nameLabel: "Model", nameKey: "title", top: 12,
-              columns: [
-                { key: "num_releases", label: "Releases" },
-                { key: "latest_tag", label: "Latest tag", raw: true },
-                { key: "progressed", label: "Past v1.0.0?", raw: true },
-              ],
-              desc: "Every model with release history, ranked by release count, with its most recent tag. 'Past v1.0.0?' is 'Yes' for any model with two or more releases — updated at least once since it was first incorporated.",
             },
           ] },
         ],

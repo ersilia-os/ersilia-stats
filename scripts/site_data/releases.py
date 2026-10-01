@@ -23,7 +23,6 @@ EMPTY_SECTION = {
     "growth": {"labels": [], "series": [], "n": 0},
     "most_versioned": dict(EMPTY),
     "cadence": dict(EMPTY),
-    "summary": {"rows": [], "n": 0},
 }
 
 REQUIRED_COLUMNS = {"repo", "release_index", "bump_type", "published_at", "tag_name"}
@@ -58,7 +57,6 @@ def build(models, collected):
         "growth": _growth(releases),
         "most_versioned": _most_versioned(releases, titles),
         "cadence": _cadence(releases),
-        "summary": _summary(releases, titles),
     }
 
 
@@ -148,30 +146,3 @@ def _cadence(releases):
     out["ordinal"] = True
     return out
 
-
-def _summary(releases, titles):
-    """One row per model with release history: how many releases, and its most
-    recent tag — the static equivalent of picking one model to inspect, for every
-    model at once rather than one at a time."""
-    counts = releases.groupby("repo")["release_index"].max()
-    if counts.empty:
-        return {"rows": [], "n": 0}
-    latest = releases.sort_values("release_index").groupby("repo").tail(1).set_index("repo")
-
-    rows = []
-    for repo, num_releases in counts.items():
-        rows.append({
-            "name": repo,
-            "title": titles.get(repo, repo),
-            "num_releases": int(num_releases),
-            "progressed": "Yes" if num_releases > 1 else "No",
-            "latest_tag": str(latest.loc[repo, "tag_name"]) if repo in latest.index else "",
-        })
-    rows.sort(key=lambda r: (-r["num_releases"], r["name"]))
-    progressed = sum(1 for r in rows if r["progressed"] == "Yes")
-    return {
-        "rows": rows[:12],
-        "n": len(rows),
-        "insight": ins.share_of(progressed, len(rows), "models with release history",
-                                "have been updated at least once past their first release"),
-    }

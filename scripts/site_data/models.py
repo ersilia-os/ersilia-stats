@@ -7,6 +7,7 @@ that *was* recorded elsewhere in the repo (``appgxpCzCDNyGjWc8``) 403s — it is
 stale. Every builder here degrades to an empty metric when the table is absent,
 so the site still renders before a fetch that includes it.
 """
+import math
 from collections import Counter, defaultdict
 
 import pandas as pd
@@ -27,6 +28,10 @@ from .parse import (
     series_metric,
     value_counts,
 )
+
+# Placeholder row/column names for the task x area matrix, so no model falls out of it.
+NOT_RECORDED = "Not recorded"
+OTHER_AREAS = "Other areas"
 
 # Curation states, in lifecycle order, so the stacked cohort chart reads
 # left-to-right as progress rather than alphabetically.
@@ -108,6 +113,7 @@ def build(models):
         "by_target_organism": _by_target_organism(models),
         "publication_lag": _publication_lag(models, incorporated),
         "performance_by_scale": _performance_by_scale(models),
+        "slowest_models": _slowest_models(models),
         "image_size": _image_size(models),
         "on_arm": _on_arm(models),
         "cohorts_by_status": _cohorts_by_status(incorporated, status),
@@ -273,50 +279,70 @@ def _by_target_organism(models):
 
 
 def _task_by_area(models):
-    """Coverage: task family x biomedical area, crossed.
+    """Coverage: what each model does x the disease it serves, crossed.
 
-    The task-tree and biomedical-area charts above answer "what" and "for what disease"
-    separately and never together. Task is single-valued, so every model with one recorded
-    contributes to exactly one row; biomedical area is multi-select, so a model naming two
-    areas contributes to both columns it touches. Capped to the 8 largest task families and
-    10 largest areas so the matrix stays legible.
+    Every model in the registry lands in the matrix, so the cells sum (per row) to the
+    Hub's model count rather than to whatever happened to fit. Rows are the subtask
+    (Activity prediction, Featurization, ...) — the three top-level task families put
+    almost every non-Annotation model in a single "Any" cell — falling back to the task
+    family when no subtask is recorded, and to "Not recorded" when neither is. Columns are
+    the 10 largest biomedical areas, then "Other areas" for the long tail and "Not
+    recorded" for models naming none. Biomedical area is multi-select, so a model naming
+    two shown areas is counted in both; it is counted once in "Other areas" however many
+    of the tail areas it names.
     """
     task_col = col(models, "task")
+    subtask_col = col(models, "subtask")
     area_col = col(models, "biomedical_area")
-    if task_col.empty or area_col.empty:
+    if models.empty or (task_col.empty and area_col.empty):
         return {"x": [], "y": [], "cells": [], "n": 0}
 
-    cross, task_totals, area_totals = Counter(), Counter(), Counter()
-    n = 0
+    def cell(series, i):
+        return series.iloc[i] if i < len(series) else None
+
+    rows = []
     for i in range(len(models)):
-        task = first_value(task_col.iloc[i]) if i < len(task_col) else None
-        if not task:
-            continue
-        areas = parse_multi(area_col.iloc[i]) if i < len(area_col) else []
-        for area in areas:
-            cross[(task, area)] += 1
-            task_totals[task] += 1
-            area_totals[area] += 1
-            n += 1
-    if not cross:
-        return {"x": [], "y": [], "cells": [], "n": 0}
+        task = (first_value(cell(subtask_col, i)) or first_value(cell(task_col, i))
+                or NOT_RECORDED)
+        areas = list(dict.fromkeys(parse_multi(cell(area_col, i))))
+        rows.append((task, areas))
 
-    tasks = [t for t, _ in task_totals.most_common(8)]
-    areas = [a for a, _ in area_totals.most_common(10)]
+    area_totals = Counter(a for _, areas in rows for a in areas)
+    shown = [a for a, _ in area_totals.most_common(10)]
+    tail = len(area_totals) > len(shown)
+
+    cross, task_totals = Counter(), Counter()
+    for task, areas in rows:
+        task_totals[task] += 1
+        if not areas:
+            cross[(task, NOT_RECORDED)] += 1
+            continue
+        for area in areas:
+            if area in shown:
+                cross[(task, area)] += 1
+        if any(a not in shown for a in areas):
+            cross[(task, OTHER_AREAS)] += 1
+
+    # Largest rows first, with the unrecorded row last wherever its size would put it.
+    tasks = sorted(task_totals, key=lambda t: (t == NOT_RECORDED, -task_totals[t]))
+    areas = shown + ([OTHER_AREAS] if tail else [])
+    if any(t[1] == NOT_RECORDED for t in cross):
+        areas.append(NOT_RECORDED)
     cells = [
         [xi, yi, cross[(task, area)]]
         for yi, task in enumerate(tasks)
         for xi, area in enumerate(areas)
         if cross.get((task, area))
     ]
-    top_task, top_count = task_totals.most_common(1)[0]
-    return {
-        "x": areas, "y": tasks, "cells": cells, "n": n,
-        "insight": "%s task-area pairings recorded across %s task families and %s biomedical "
-                   "areas; %s leads with %s." % (
-                       ins.num(n), len(tasks), len(areas), top_task, ins.num(top_count),
-                   ),
-    }
+    top_task, top_count = max(
+        ((t, c) for t, c in task_totals.items() if t != NOT_RECORDED),
+        key=lambda tc: tc[1], default=(None, 0),
+    )
+    n = len(rows)
+    insight = "All %s models placed" % ins.num(n)
+    if top_task:
+        insight += "; %s leads with %s." % (top_task, ins.num(top_count))
+    return {"x": areas, "y": tasks, "cells": cells, "n": n, "insight": insight}
 
 
 def _publication_lag(models, incorporated):
@@ -373,46 +399,144 @@ SCALE_STEPS = [
 ]
 
 
+def _runtimes(models, column):
+    """Runtimes in seconds at one batch size, with a NOT-FINISHED run as infinity.
+
+    A value of ``-1`` in a Computational Performance column means the run did not
+    finish at that size — it was not a failure to be dropped, it is slower than any
+    run that did finish, so it is kept as ``inf``. Dropping it (as an earlier version
+    did) made the larger sizes look faster than they are: the slowest models fell out
+    of the sample exactly where they mattered, roughly a third of models at 10,000.
+    Blank cells mean not benchmarked and are dropped, as are other non-positive values.
+    """
+    values = pd.to_numeric(col(models, column), errors="coerce").astype(float)
+    values = values.where(values != -1, float("inf"))
+    return values[values > 0]
+
+
+def _quantile(values, q):
+    """Linear-interpolated quantile that tolerates infinity: ``inf`` when the rank
+    falls on or next to an unfinished run, rather than numpy's ``inf - inf`` NaN."""
+    ordered = sorted(values)
+    if not ordered:
+        return float("nan")
+    pos = q * (len(ordered) - 1)
+    low, high = ordered[math.floor(pos)], ordered[math.ceil(pos)]
+    if math.isinf(high):
+        return float("inf")
+    return low + (high - low) * (pos - math.floor(pos))
+
+
+def _finite(value, digits=4):
+    """``value`` rounded, or ``None`` when it is infinite or undefined — JSON has no
+    infinity, and the charts read ``null`` as "beyond the top of the axis"."""
+    value = float(value)
+    return round(value, digits) if math.isfinite(value) else None
+
+
 def _performance_by_scale(models):
     """Runtime at each batch size the Hub benchmarks: 1, 10, 100, 1,000 and 10,000
     molecules in one call, as a median with its 25th-75th percentile band — the same
     plot entry_project draws (median line, shaded IQR, log-log axes).
 
-    A value of ``-1`` in a Computational Performance column means the model FAILED
-    at that size, so it is excluded from the runtime figures rather than counted as
-    an instant run — a real effect here, not a theoretical one: 74 of 234 models
-    (32%) fail at the largest size, and leaving ``-1`` in would drag the median
-    toward zero rather than showing the runtime of the models that actually
-    completed. Models drop out of later batch sizes as they fail, so the sample
-    shrinks left to right; the count benchmarked at each size is in the drill-down.
+    A run that did not finish (``-1``) counts as infinitely slow, so it moves the
+    median and percentiles up rather than out — see `_runtimes`. Where more than a
+    quarter of models did not finish at a size, the 75th percentile is itself
+    infinite and is sent as ``null``: the band runs off the top of the chart there,
+    which is the truth. The count that did not finish at each size is a series of its
+    own, so it shows in the drill-down.
     """
-    labels, medians, p25s, p75s, counts = [], [], [], [], []
+    labels, medians, p25s, p75s, unfinished = [], [], [], [], []
     for label, column in SCALE_STEPS:
-        values = pd.to_numeric(col(models, column), errors="coerce")
-        values = values[values > 0]
+        values = _runtimes(models, column)
         if values.empty:
             continue
         labels.append(label)
-        medians.append(round(float(values.median()), 4))
-        p25s.append(round(float(values.quantile(0.25)), 4))
-        p75s.append(round(float(values.quantile(0.75)), 4))
-        counts.append(int(values.count()))
+        medians.append(_finite(_quantile(values, 0.5)))
+        p25s.append(_finite(_quantile(values, 0.25)))
+        p75s.append(_finite(_quantile(values, 0.75)))
+        unfinished.append(int((values == float("inf")).sum()))
     if not labels:
         return {"labels": [], "series": [], "n": 0}
 
-    out = series_metric(
-        labels,
-        [{"name": "p25", "values": p25s},
-         {"name": "Median runtime (s)", "values": medians},
-         {"name": "p75", "values": p75s}],
-        "Median runtime goes from %ss at %s molecule to %ss at %s molecules — %s "
-        "models still completing a run there." % (
-            _fmt_seconds(medians[0]), labels[0], _fmt_seconds(medians[-1]), labels[-1],
-            ins.num(counts[-1]),
-        ),
-    )
-    out["n"] = counts[-1]
-    return out
+    benchmarked = len(_runtimes(models, SCALE_STEPS[-1][1]))
+    median_last = ("%ss" % _fmt_seconds(medians[-1]) if medians[-1] is not None
+                   else "beyond any finished run")
+    return {
+        "labels": labels,
+        "series": [
+            {"name": "p25", "values": p25s},
+            {"name": "Median runtime (s)", "values": medians},
+            {"name": "p75", "values": p75s},
+            {"name": "Did not finish", "values": unfinished},
+        ],
+        "n": benchmarked,
+        "insight": "Median runtime goes from %ss at %s molecule to %s at %s molecules; "
+                   "%s of %s models did not finish there." % (
+                       _fmt_seconds(medians[0]) if medians[0] is not None else "∞",
+                       labels[0], median_last, labels[-1],
+                       ins.num(unfinished[-1]), ins.num(benchmarked),
+                   ),
+    }
+
+
+def _slowest_models(models, top=6):
+    """The slowest models, as runtime curves from 10 to 10,000 molecules.
+
+    The median curve in `performance_by_scale` says how the typical model scales; this
+    names the ones at the slow end, across every batch size rather than one. A run
+    that did not finish (``-1``) is infinitely slow (see `_runtimes`), so the ranking
+    goes: a model that stopped finishing at a SMALLER batch is slower than one that
+    stopped at a larger one, and any model that did not finish somewhere is slower
+    than every model that finished everything; ties are broken by the runtime at the
+    largest batch the model did finish. Each curve stops at its last finished size and
+    the next size is sent as ``null``, which the chart marks as "did not finish".
+    Six lines, one per categorical palette slot, plus the Hub median at each size,
+    over every benchmarked model and unfinished runs included, for reference.
+    """
+    steps = SCALE_STEPS[1:]
+    labels = [label for label, _ in steps]
+    runs = pd.DataFrame({label: _runtimes(models, column) for label, column in steps})
+    runs = runs.reindex(columns=labels).dropna()
+    if runs.empty:
+        return {"labels": [], "series": [], "n": 0}
+
+    inf = float("inf")
+
+    def rank_key(row):
+        finished = [v for v in row if v != inf]
+        first_unfinished = next((i for i, v in enumerate(row) if v == inf), len(row))
+        return (first_unfinished, -(finished[-1] if finished else inf))
+
+    order = sorted(runs.index, key=lambda i: rank_key(list(runs.loc[i])))[:top]
+    names = as_text(col(models, "title"))
+    ids = as_text(col(models, "identifier"))
+    series = []
+    for i in order:
+        name = (names.get(i) if len(names) else None) or (ids.get(i) if len(ids) else None)
+        values = [_finite(v, 2) for v in runs.loc[i]]
+        # Past the first unfinished size there is no run to speak of; keep only the
+        # point where it stopped finishing, so the chart marks it once.
+        stop = next((k for k, v in enumerate(values) if v is None), None)
+        if stop is not None:
+            values = values[:stop + 1] + [None] * (len(values) - stop - 1)
+        series.append({"name": name or "Unnamed model", "values": values,
+                       "stopped": labels[stop] if stop is not None else None})
+    medians = [_finite(_quantile(runs[label], 0.5), 2) for label in labels]
+    series.append({"name": "Hub median", "values": medians})
+
+    leader = series[0]
+    if leader["stopped"]:
+        insight = "%s did not finish at %s molecules; %s of %s models did not finish at %s." % (
+            leader["name"], leader["stopped"],
+            ins.num(int((runs[labels[-1]] == inf).sum())), ins.num(len(runs)), labels[-1],
+        )
+    else:
+        insight = "%s is slowest: %ss for %s molecules, against a Hub median of %ss." % (
+            leader["name"], _fmt_seconds(leader["values"][-1]), labels[-1],
+            _fmt_seconds(medians[-1]),
+        )
+    return {"labels": labels, "series": series, "n": len(runs), "insight": insight}
 
 
 def _fmt_seconds(value):
@@ -443,6 +567,8 @@ def _image_size(models):
             ins.num(under_two), ins.num(len(gb)), round(float(gb.mean()), 1)),
         mean=round(float(gb.mean()), 1),
         unit="GB",
+        display=["Under 1 GB", "1–2 GB", "2–4 GB", "4–8 GB", "8 GB or more"],
+        xName="Docker image size",
         countNoun="models",
         n=len(gb),
     )
