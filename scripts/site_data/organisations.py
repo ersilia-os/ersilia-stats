@@ -44,9 +44,9 @@ def resolve_countries(frame, id_to_name, column="country"):
 
 
 # The link columns that record an organisation actually doing something with Ersilia.
-# `grants` is a fifth such column and is deliberately absent: grant data is out of scope
+# `grants` is a fourth such column and is deliberately absent: grant data is out of scope
 # for this site, so counting it here would leak its shape through the back door.
-ACTIVITY_LINKS = ("projects", "events", "conferences", "community")
+ACTIVITY_LINKS = ("projects", "events", "community")
 
 
 def _engagement_depth(orgs):
@@ -54,8 +54,9 @@ def _engagement_depth(orgs):
 
     This is the figure that qualifies the other three partner charts. `by_type`,
     `by_classification` and `by_focus` all treat 320 rows as "partners", and on the
-    current snapshot 229 of them — 72% — have no recorded project, event, conference or
-    community member at all. Either the directory is largely prospects or the link fields
+    current snapshot 229 of them — 72% — had no recorded project, event, conference or
+    community member at all (conferences were a fourth kind until the Conferences table
+    was removed in October 2026). Either the directory is largely prospects or the link fields
     are unfilled; either way a reader of those three charts needs to know which kind of
     320 this is.
 
@@ -72,8 +73,8 @@ def _engagement_depth(orgs):
         kinds = sum(1 for name in present if parse_multi(orgs[name].iloc[i]))
         buckets[kinds] += 1
 
-    labels = ["None recorded", "One kind", "Two kinds", "Three kinds", "All four"]
-    # Trailing empty bands are dropped: "All four: 0" is a row that says nothing.
+    labels = ["None recorded", "One kind", "Two kinds", "All three"]
+    # Trailing empty bands are dropped: "All three: 0" is a row that says nothing.
     highest = max((i for i, count in enumerate(buckets) if count), default=0)
     labels, values = labels[:highest + 1], buckets[:highest + 1]
 
@@ -82,7 +83,7 @@ def _engagement_depth(orgs):
     out = metric(
         labels, values,
         ins.share_of(engaged, total, "partner organisations",
-                     "have at least one recorded project, event, conference or member"),
+                     "have at least one recorded project, event or member"),
     )
     out["ordinal"] = True
     out["n"] = total
