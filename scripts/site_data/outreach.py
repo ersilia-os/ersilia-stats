@@ -1,13 +1,11 @@
-"""Events, blog activity, and the conferences Ersilia tracks.
+"""Events and blog activity.
 
-The conferences table was loaded but never read by anything — nine columns and 21
-rows of recorded intent (which meetings matter, how often they come round, whether
-you can attend without flying) sitting unused while this page ran out of content
-halfway down.
+The Conferences table (meetings Ersilia tracked) was removed from Airtable in October
+2026, and its two charts with it.
 """
 
 from . import insights as ins
-from .parse import (EMPTY, col, growth_pair, metric, multi_counts, value_counts, year_counts)
+from .parse import (EMPTY, col, growth_pair, multi_counts, value_counts, year_counts)
 
 
 def build_events(events):
@@ -79,34 +77,3 @@ def _year_growth(per_year, noun_plural):
     return growth_pair(per_year["labels"], per_year["values"], running,
                        noun_plural, period="year")
 
-
-def build_conferences(conferences):
-    """Conferences Ersilia tracks: how often they run and how reachable they are.
-
-    Small (21 rows), so these are shares rather than rankings. `remote_option` is the
-    mission-relevant one: a conference you can join remotely is a conference a
-    researcher without travel funding can actually attend.
-    """
-    if conferences is None or conferences.empty:
-        return {"by_cadence": dict(EMPTY), "remote": dict(EMPTY)}
-
-    cadence = value_counts(col(conferences, "cadence"))
-    if cadence["labels"]:
-        cadence["insight"] = ins.leader(cadence, "tracked conferences")
-
-    remote = col(conferences, "remote_option")
-    yes = no = 0
-    for value in (remote.dropna() if len(remote) else []):
-        token = str(value).strip().lower()
-        if token in ("yes", "true"):
-            yes += 1
-        elif token in ("no", "false"):
-            no += 1
-    remote_metric = dict(EMPTY)
-    if yes or no:
-        remote_metric = metric(
-            ["Remote option", "In person only"], [yes, no],
-            ins.share_of(yes, yes + no, "conferences recording the answer",
-                         "can be attended remotely"),
-        )
-    return {"by_cadence": cadence, "remote": remote_metric}

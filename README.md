@@ -61,7 +61,7 @@ Percentages are suppressed below n=10, where a share invites a conclusion the sa
 | `#/pypi` | Ersilia's PyPI packages: releases, Python support, a rolling download window. Not yet split into Model Hub or Code |
 | `#/community` | Who has taken part: people over time, concurrent involvement, tenure, roles, countries. Aggregates only |
 | `#/reach` | "Countries & partners" — where Ersilia works, how that maps onto its Global South mission, and who its partners are |
-| `#/outreach` | "Events & writing" — events, the blog, and the conferences Ersilia tracks |
+| `#/outreach` | "Events & writing" — events and the blog |
 | `#/downloads` | Every aggregate as CSV, plus the full dataset as JSON |
 
 Field completeness and the other data-quality caveats live in the **Methods** dialog rather than in a

@@ -77,7 +77,6 @@ def build_everything(tables, collected):
                    publications=table("publications"))
     outreach.build_events(table("events"))
     outreach.build_blogposts(table("blogposts"))
-    outreach.build_conferences(table("conferences"))
     kpis.build(tables, public, table("models"), repos_all=with_counts, collected=collected)
 
 

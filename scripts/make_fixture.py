@@ -85,8 +85,7 @@ def countries():
         out.append({
             "airtable_id": COUNTRY[i], "Country": name, "Income Group": income,
             "Region": region, "Subregion": sub, "Population": pop,
-            "Collaborators": "", "Community": "", "Conferences": "",
-            "Donations": "", "Events": "",
+            "Collaborators": "", "Community": "", "Donations": "", "Events": "",
         })
     return out
 
@@ -111,9 +110,9 @@ def organisations():
             "Country": listrepr([country]),
             "Focus Areas": listrepr(focus),
             "Focus Region": listrepr(["Global"]),
-            "Community": "", "Conferences": "", "Contacts": "", "Description": "",
+            "Community": "", "Contacts": "", "Description": "",
             "Events": "", "Grants": "", "Opportunities": "", "Website": "",
-            "Projects": "", "Workshops": "",
+            "Projects": "",
         })
     return out
 
@@ -265,23 +264,6 @@ def blogposts():
             "Category": listrepr(cats), "Publisher": publisher,
             "Year": date[:4], "Quarter": "", "Author": "",
             "Name (from Author)": "", "Intro": "", "Slug": "", "URL": "",
-        })
-    return out
-
-
-def conferences():
-    rows = [
-        ("Fixture Summit", "Annual", "Yes", "2026-09-01"),
-        ("Sample Symposium", "Recurring", "No", ""),
-        ("Example Plenary", "Biannual", "", "2026-11-15"),
-    ]
-    out = []
-    for i, (name, cadence, remote, upcoming) in enumerate(rows):
-        out.append({
-            "airtable_id": rec("CONF", i + 1), "Name": name, "Cadence": cadence,
-            "Remote option": remote, "Upcoming date": upcoming,
-            "Countries": listrepr([COUNTRY[i]]), "Focus": "",
-            "Organiser": listrepr([ORG[i]]), "Website": "",
         })
     return out
 
@@ -685,9 +667,8 @@ COLLECTED = {
 
 
 TABLES = {
-    "blogposts": blogposts, "community": community, "conferences": conferences,
-    "countries": countries, "events": events, "models": models,
-    "organisations": organisations, "projects": projects,
+    "blogposts": blogposts, "community": community, "countries": countries,
+    "events": events, "models": models, "organisations": organisations, "projects": projects,
     "publications": publications, "repositories": repositories,
 }
 

@@ -1005,7 +1005,7 @@ const VIEWS = [
         {
           title: "How much partners are involved", span: 7, data: "organisations.engagement_depth",
           type: "ordinallollipop",
-          desc: "How many KINDS of recorded activity each partner has, out of four: a linked project, event, conference or community member. Read it alongside the three charts above, which count all 320 organisations equally — most of them have no recorded activity of any kind, so the directory is either largely prospective or the link fields are unfilled. Grants are a fifth link type and are deliberately excluded, since grant data is out of scope for this site.",
+          desc: "How many KINDS of recorded activity each partner has, out of three: a linked project, event or community member. Read it alongside the three charts above, which count all 320 organisations equally — most of them have no recorded activity of any kind, so the directory is either largely prospective or the link fields are unfilled. Grants are a fourth link type and are deliberately excluded, since grant data is out of scope for this site.",
         },
         {
           title: "How partners are involved", span: 5, data: "organisations.by_classification",
@@ -1041,21 +1041,16 @@ const VIEWS = [
       ] },
       { h: "h-lg", cells: [
         {
-          title: "Who convened the events", span: 5, data: "events.by_organiser", type: "lollipop",
+          title: "Who convened the events", span: 7, data: "events.by_organiser", type: "lollipop",
           desc: "Organisations that convened the most events Ersilia took part in.",
         },
         {
-          title: "Conferences tracked", span: 4, data: "conferences.by_cadence", type: "lollipop",
-          desc: "The conferences Ersilia keeps an eye on, by how often they come round. A small, deliberately curated list rather than everything that exists.",
-        },
-        {
-          title: "Reach of what we publish", span: 3, type: "shares",
-          blurb: "Where posts appear, and remote access.",
+          title: "Reach of what we publish", span: 5, type: "shares",
+          blurb: "Where posts appear.",
           sources: [
             { label: "On Ersilia's own channels", data: "blogposts.by_publisher", highlight: "Ersilia" },
-            { label: "Conferences joinable remotely", data: "conferences.remote", highlight: "Remote option" },
           ],
-          desc: "Where the writing appears, and how many tracked conferences can be attended without travelling — which decides whether a researcher without travel funding can take part at all.",
+          desc: "Where the writing appears: on Ersilia's own channels, or with another publisher.",
         },
       ] },
     ],
