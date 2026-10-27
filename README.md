@@ -56,12 +56,11 @@ Percentages are suppressed below n=10, where a share invites a conclusion the sa
 | `#/` | Headline figures, and how Ersilia has grown across four measures on one indexed axis |
 | `#/models` | The Model Hub: growth, task mix, pathogens targeted, wrap lag, scaling limit, footprint |
 | `#/projects` | The project portfolio as a timeline — concurrency, overrun, status |
-| `#/publications` | Output and accumulated citations, venue impact, African collaboration |
-| `#/repositories` | Public code: popularity against activity, commit concentration, contributors |
+| `#/publications` | Papers — output, citations, open access, collaboration — plus the blog and videos |
+| `#/repositories` | Public code: who writes it, commit activity, where the work happens, contributors |
 | `#/pypi` | Ersilia's PyPI packages: releases, Python support, a rolling download window. Not yet split into Model Hub or Code |
 | `#/community` | Who has taken part: people over time, concurrent involvement, tenure, roles, countries. Aggregates only |
-| `#/reach` | "Countries & partners" — where Ersilia works, how that maps onto its Global South mission, and who its partners are |
-| `#/outreach` | "Events & writing" — events, the blog, and the conferences Ersilia tracks |
+| `#/partners` | "Partners" — the organisations Ersilia has run projects with, where Ersilia works against its Global South mission, and the events it takes part in |
 | `#/downloads` | Every aggregate as CSV, plus the full dataset as JSON |
 
 Field completeness and the other data-quality caveats live in the **Methods** dialog rather than in a
@@ -243,11 +242,8 @@ That table now holds only what a person decides: `Name`, `Title`, `Description`,
 Every count now comes from `data/github/` and is joined onto the Airtable frame by repository
 name in `repositories.attach_github_counts()`.
 
-Two consequences worth knowing, both stated on the affected cards:
+One consequence worth knowing, stated on the affected card:
 
-* **Commit concentration is now public-only.** The collected GitHub snapshot is public by
-  design, so a private repository has no commit count to contribute and drops out of the
-  Lorenz curve. It covered every repository while the figure lived in Airtable.
 * **The star KPI still covers private repositories**, via `org_totals_<date>.csv` — two
   integers, `private_repositories` and `private_stars`, and **no names**. That is what lets
   the total include private work without a private repository name ever being written or

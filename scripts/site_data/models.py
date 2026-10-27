@@ -29,10 +29,6 @@ from .parse import (
     value_counts,
 )
 
-# Placeholder row/column names for the task x area matrix, so no model falls out of it.
-NOT_RECORDED = "Not recorded"
-OTHER_AREAS = "Other areas"
-
 # Curation states, in lifecycle order, so the stacked cohort chart reads
 # left-to-right as progress rather than alphabetically.
 STATUS_ORDER = ["Ready", "In progress", "In maintenance", "To do", "Test", "Archived"]
@@ -53,7 +49,11 @@ def _ordered_statuses(present):
     return known + sorted(s for s in present if s not in STATUS_ORDER)
 
 
-def build(models):
+def build(models, registry=None):
+    """The Models page's figures, on ``models`` (the active Hub, see
+    ``parse.active_model_ids``). Curation status alone reads ``registry``, the whole
+    table, because the split between statuses is what it shows."""
+    registry = models if registry is None else registry
     if models is None or models.empty:
         return {
             "cumulative": dict(EMPTY),
@@ -63,21 +63,15 @@ def build(models):
             "by_status": dict(EMPTY),
             "by_biomedical_area": dict(EMPTY),
             "by_license": dict(EMPTY),
-            "coverage": dict(EMPTY),
             "by_source_type": dict(EMPTY),
             "by_target_organism": dict(EMPTY),
             "publication_lag": dict(EMPTY),
             "performance_by_scale": {"labels": [], "series": [], "n": 0},
             "image_size": dict(EMPTY),
             "on_arm": dict(EMPTY),
-            "licence_openness": dict(EMPTY),
-            "output_consistency": dict(EMPTY),
             "publication_type": dict(EMPTY),
             "growth": {"labels": [], "series": [], "n": 0},
-            "task_by_area": {"x": [], "y": [], "cells": [], "n": 0},
-            "image_composition": {"labels": [], "series": [], "n": 0},
             "top_contributors": dict(EMPTY),
-            "contributor_concentration": dict(EMPTY),
             "template_migration": dict(EMPTY),
         }
 
@@ -94,10 +88,10 @@ def build(models):
         ins.latest_change(labels, list(dense.values), "models incorporated"),
     )
 
-    status = col(models, "status").apply(first_value)
+    status = col(registry, "status").apply(first_value)
     by_status = value_counts(status, insight=None)
     ready = int((as_text(status).str.lower() == "ready").sum())
-    by_status["insight"] = ins.share_of(ready, len(models), "models", "are ready to run")
+    by_status["insight"] = ins.share_of(ready, len(registry), "models", "are ready to run")
     by_status["semantics"] = {
         label: STATUS_SEMANTICS.get(str(label).strip().lower(), "neutral")
         for label in by_status["labels"]
@@ -116,50 +110,15 @@ def build(models):
         "slowest_models": _slowest_models(models),
         "image_size": _image_size(models),
         "on_arm": _on_arm(models),
-        "cohorts_by_status": _cohorts_by_status(incorporated, status),
+        "cohorts_by_status": _cohorts_by_status(col(registry, "incorporation_date"), status),
         "by_status": by_status,
         "by_biomedical_area": _by_biomedical_area(models),
         "by_license": _by_license(models),
-        "licence_openness": _licence_openness(models),
-        "coverage": _coverage(models),
         "by_source_type": _by_source_type(models),
-        "output_consistency": _output_consistency(models),
         "publication_type": _publication_type(models),
-        "task_by_area": _task_by_area(models),
-        "image_composition": _image_composition(models),
         "top_contributors": _top_contributors(models),
-        "contributor_concentration": _contributor_concentration(models),
         "template_migration": _template_migration(models),
     }
-
-
-def _output_consistency(models):
-    """Does the model return the same answer twice?
-
-    THE MOST IMPORTANT PROPERTY ON THIS PAGE, and it was not shown anywhere. Everything
-    else here describes what a model is *for*; this describes whether you can rely on what
-    it says. A `Variable` model gives a different answer on a re-run — legitimate for a
-    generative model that samples, and a problem for a property predictor — so the figure is
-    reported without a verdict attached to it.
-
-    A near-binary field: 215 `Fixed` against 18 `Variable`, recorded for 233 of 243 models.
-    """
-    values = col(models, "output_consistency").apply(first_value)
-    out = value_counts(values)
-    if not out["labels"]:
-        return dict(EMPTY)
-    recorded = int(values.notna().sum())
-    fixed = 0
-    for label, value in zip(out["labels"], out["values"]):
-        if str(label).strip().lower() == "fixed":
-            fixed = int(value)
-    # Three columns wide: CI overflowed two lines at "models with a value ... give the same
-    # answer on a re-run". "Recorded" keeps the denominator honest in fewer characters.
-    out["insight"] = ins.share_of(fixed, recorded, "recorded models", "are reproducible")
-    # `Fixed` is the reproducible case and reads as the good one; `Variable` is not a
-    # failure, so it takes a neutral rather than a warning colour.
-    out["semantics"] = {"Fixed": "brand", "Variable": "neutral"}
-    return out
 
 
 def _publication_type(models):
@@ -276,73 +235,6 @@ def _by_target_organism(models):
         ins.num(sum(counts.values())), items[0][0], ins.num(items[0][1]),
     )
     return out
-
-
-def _task_by_area(models):
-    """Coverage: what each model does x the disease it serves, crossed.
-
-    Every model in the registry lands in the matrix, so the cells sum (per row) to the
-    Hub's model count rather than to whatever happened to fit. Rows are the subtask
-    (Activity prediction, Featurization, ...) — the three top-level task families put
-    almost every non-Annotation model in a single "Any" cell — falling back to the task
-    family when no subtask is recorded, and to "Not recorded" when neither is. Columns are
-    the 10 largest biomedical areas, then "Other areas" for the long tail and "Not
-    recorded" for models naming none. Biomedical area is multi-select, so a model naming
-    two shown areas is counted in both; it is counted once in "Other areas" however many
-    of the tail areas it names.
-    """
-    task_col = col(models, "task")
-    subtask_col = col(models, "subtask")
-    area_col = col(models, "biomedical_area")
-    if models.empty or (task_col.empty and area_col.empty):
-        return {"x": [], "y": [], "cells": [], "n": 0}
-
-    def cell(series, i):
-        return series.iloc[i] if i < len(series) else None
-
-    rows = []
-    for i in range(len(models)):
-        task = (first_value(cell(subtask_col, i)) or first_value(cell(task_col, i))
-                or NOT_RECORDED)
-        areas = list(dict.fromkeys(parse_multi(cell(area_col, i))))
-        rows.append((task, areas))
-
-    area_totals = Counter(a for _, areas in rows for a in areas)
-    shown = [a for a, _ in area_totals.most_common(10)]
-    tail = len(area_totals) > len(shown)
-
-    cross, task_totals = Counter(), Counter()
-    for task, areas in rows:
-        task_totals[task] += 1
-        if not areas:
-            cross[(task, NOT_RECORDED)] += 1
-            continue
-        for area in areas:
-            if area in shown:
-                cross[(task, area)] += 1
-        if any(a not in shown for a in areas):
-            cross[(task, OTHER_AREAS)] += 1
-
-    # Largest rows first, with the unrecorded row last wherever its size would put it.
-    tasks = sorted(task_totals, key=lambda t: (t == NOT_RECORDED, -task_totals[t]))
-    areas = shown + ([OTHER_AREAS] if tail else [])
-    if any(t[1] == NOT_RECORDED for t in cross):
-        areas.append(NOT_RECORDED)
-    cells = [
-        [xi, yi, cross[(task, area)]]
-        for yi, task in enumerate(tasks)
-        for xi, area in enumerate(areas)
-        if cross.get((task, area))
-    ]
-    top_task, top_count = max(
-        ((t, c) for t, c in task_totals.items() if t != NOT_RECORDED),
-        key=lambda tc: tc[1], default=(None, 0),
-    )
-    n = len(rows)
-    insight = "All %s models placed" % ins.num(n)
-    if top_task:
-        insight += "; %s leads with %s." % (top_task, ins.num(top_count))
-    return {"x": areas, "y": tasks, "cells": cells, "n": n, "insight": insight}
 
 
 def _publication_lag(models, incorporated):
@@ -472,7 +364,7 @@ def _performance_by_scale(models):
         ],
         "n": benchmarked,
         "insight": "Median runtime goes from %ss at %s molecule to %s at %s molecules; "
-                   "%s of %s models did not finish there." % (
+                   "%s of %s models were stopped there before finishing." % (
                        _fmt_seconds(medians[0]) if medians[0] is not None else "∞",
                        labels[0], median_last, labels[-1],
                        ins.num(unfinished[-1]), ins.num(benchmarked),
@@ -527,7 +419,7 @@ def _slowest_models(models, top=6):
 
     leader = series[0]
     if leader["stopped"]:
-        insight = "%s did not finish at %s molecules; %s of %s models did not finish at %s." % (
+        insight = "%s was stopped at %s molecules; %s of %s models were stopped at %s." % (
             leader["name"], leader["stopped"],
             ins.num(int((runs[labels[-1]] == inf).sum())), ins.num(len(runs)), labels[-1],
         )
@@ -601,53 +493,11 @@ def _on_arm(models):
     )
 
 
-def _image_composition(models):
-    """Model weights vs. installed environment vs. everything else, for the heaviest images.
-
-    A packaging-efficiency question `_image_size`'s distribution doesn't break down: how much
-    of an image is the checkpoint itself against the environment it runs in. All three sizes
-    are recorded in the same unit (MB), so no conversion is needed. "Other" folds in the base
-    OS layer, package caches and anything else the two named parts don't account for; it is
-    clipped at zero rather than shown negative, since a negative would mean the two recorded
-    parts overstate the whole rather than something real.
-    """
-    image = pd.to_numeric(col(models, "image_size"), errors="coerce")
-    weight = pd.to_numeric(col(models, "model_size"), errors="coerce")
-    env = pd.to_numeric(col(models, "environment_size"), errors="coerce")
-    if image.empty or weight.empty or env.empty:
-        return {"labels": [], "series": [], "n": 0}
-
-    title = as_text(col(models, "title"))
-    identifier = as_text(col(models, "identifier"))
-    label = title.where(title != "", identifier)
-
-    df = pd.DataFrame({"image": image, "weight": weight, "env": env, "label": label}).dropna(
-        subset=["image", "weight", "env"]
-    )
-    df = df[(df["image"] > 0) & (df["weight"] >= 0) & (df["env"] >= 0)]
-    if df.empty:
-        return {"labels": [], "series": [], "n": 0}
-    df["other"] = (df["image"] - df["weight"] - df["env"]).clip(lower=0)
-    top = df.sort_values("image", ascending=False).head(12)
-
-    out = series_metric(
-        list(top["label"]),
-        [
-            {"name": "Model weights", "values": [round(v, 1) for v in top["weight"]]},
-            {"name": "Environment", "values": [round(v, 1) for v in top["env"]]},
-            {"name": "Other", "values": [round(v, 1) for v in top["other"]]},
-        ],
-        "Environment accounts for %s of uncompressed image size, across the %s models that "
-        "record model, environment and image size together — the heaviest %s shown here." % (
-            ins.pct(int(df["env"].sum()), int(df["image"].sum())) or "n/a", len(df), len(top),
-        ),
-    )
-    out["n"] = len(df)
-    return out
-
-
 def _by_source_type(models):
-    """Whether a model was built in-house or wrapped from external work."""
+    """Where a model comes from: Internal (built by Ersilia), External (a third party's
+    published model, wrapped as is) or Replicated (a third party's model that Ersilia
+    re-trained). Every category present is kept, so the donut sums to the models that
+    record a source type."""
     out = value_counts(col(models, "source_type").apply(first_value))
     if not out["labels"]:
         return dict(EMPTY)
@@ -692,101 +542,28 @@ def _cohorts_by_status(incorporated, status):
     )
 
 
-# A permissive licence imposes no condition on a downstream user beyond attribution.
-# For a model hub the distinction is practical rather than ideological: it decides who can
-# build on a model, and whether they can ship the result.
-#
-# The two exclusions matter and were both caught misclassifying real rows. A prefix test
-# alone put CC-BY-NC-ND-4.0 in the permissive bucket, when non-commercial plus
-# no-derivatives is the MOST restrictive Creative Commons combination there is — the
-# opposite of the claim. And "Proprietary" is not copyleft; it is not a share-alike
-# obligation but a closed licence, so the other bucket cannot be called "Copyleft"
-# either. It is "Conditions apply", which is true of all of GPL, AGPL, LGPL,
-# proprietary and the NC/ND variants.
-PERMISSIVE_LICENCES = ("mit", "apache", "bsd", "isc", "unlicense", "cc0", "cc-by")
-RESTRICTIVE_MARKERS = ("-nc", "-nd")
-
-
-def _is_permissive(licence):
-    text = licence.lower()
-    if not text.startswith(PERMISSIVE_LICENCES):
-        return False
-    return not any(marker in text for marker in RESTRICTIVE_MARKERS)
-
-
-def _licence_openness(models):
-    """Permissive against copyleft, over the models that record a licence at all.
-
-    Two categories so it can sit as a row in the "how the Hub is built" share card.
-    Models with no licence recorded are excluded from the ratio and named in the caption
-    rather than folded into either side — an unrecorded licence is not a permissive one,
-    and for a reuser it is the most restrictive state of all.
-    """
-    licences = col(models, "license").apply(first_value)
+def _by_license(models):
+    """Every model by the licence of the model it wraps, with "None" for models that
+    record no licence — for a reuser, the most restrictive state of all, so it is shown
+    rather than dropped."""
+    licences = as_text(col(models, "license").apply(first_value)).str.strip()
     if licences.empty:
         return dict(EMPTY)
-    text = as_text(licences).str.lower()
-    recorded = text[text != ""]
-    if recorded.empty:
+    licences = licences.where((licences != "") & (licences.str.lower() != "nan"), "None")
+    out = value_counts(licences)
+    if not out["labels"]:
         return dict(EMPTY)
-    permissive = int(recorded.apply(_is_permissive).sum())
-    total = len(recorded)
-    unrecorded = int(len(text) - total)
-    return metric(
-        ["Permissive", "Conditions apply"], [permissive, total - permissive],
-        ins.join(
-            ins.share_of(permissive, total, "models with a licence on file",
-                         "carry a permissive licence"),
-            "%s record no licence." % ins.num(unrecorded) if unrecorded else None,
-        ),
-        n=total,
-    )
-
-
-def _by_license(models):
-    licences = col(models, "license").apply(first_value)
-    out = value_counts(licences, top=10)
-    if out["labels"]:
-        out["insight"] = ins.leader(out, "licensed models")
+    recorded = {k: v for k, v in zip(out["labels"], out["values"]) if k != "None"}
+    unrecorded = len(licences) - sum(recorded.values())
+    if recorded:
+        top = max(recorded, key=recorded.get)
+        out["insight"] = ins.join(
+            "%s leads with %s of %s models." % (top, ins.num(recorded[top]),
+                                                ins.num(len(licences))),
+            "%s record none." % ins.num(unrecorded) if unrecorded else None,
+        )
+    out["n"] = len(licences)
     return out
-
-
-def _coverage(models):
-    """Deployment reach: how many models are actually runnable, and where.
-
-    Presence of a value is the signal — an empty DockerHub cell means the model
-    was never pushed there.
-    """
-    # No "Hosted API" row: it used to look for a `host_url` column that does not
-    # exist in the table, so the meter was silently absent from every build. The
-    # nearest real field is `deployment`, but it is Local for 233 of 236 models —
-    # no variance, nothing to show.
-    checks = [
-        ("Docker image", "dockerhub"),
-        ("S3 bundle", "s3"),
-        ("Source code", "source_code"),
-    ]
-    labels, values = [], []
-    for label, column in checks:
-        series = col(models, column)
-        if series.empty:
-            continue
-        filled = as_text(series)
-        labels.append(label)
-        values.append(int(((filled != "") & (filled.str.lower() != "nan")).sum()))
-    if not labels:
-        return dict(EMPTY)
-    best = max(range(len(values)), key=lambda i: values[i])
-    return metric(
-        labels, values,
-        # Short on purpose: this lands in a 3-column card, where a longer sentence is
-        # clipped by the one-line caption clamp.
-        insight="%s reaches the most models: %s of %s." % (
-            labels[best], ins.num(values[best]), ins.num(len(models)),
-        ),
-        # The whole is every model, so the meters can show a real percentage.
-        total=len(models),
-    )
 
 
 def _top_contributors(models):
@@ -802,45 +579,6 @@ def _top_contributors(models):
         return dict(EMPTY)
     out["insight"] = ins.leader(out, "models incorporated")
     return out
-
-
-def _contributor_concentration(models):
-    """Lorenz curve of models incorporated per contributor — the bus-factor question for
-    the Hub's own incorporation work, alongside `repositories.py`'s equivalent for commits.
-
-    x = cumulative share of contributors (least active first), y = cumulative share of
-    models incorporated. A curve hugging the bottom-right means a handful of people have
-    done almost all of the incorporation.
-    """
-    counts = Counter()
-    for value in col(models, "contributor").dropna():
-        for name in parse_multi(value):
-            name = name.strip()
-            if name:
-                counts[name] += 1
-    if not counts:
-        return dict(EMPTY)
-
-    ordered = sorted(counts.values())
-    total = sum(ordered)
-    labels, values, running = ["0"], [0.0], 0
-    for index, value in enumerate(ordered, start=1):
-        running += value
-        labels.append(str(round(100.0 * index / len(ordered), 1)))
-        values.append(round(100.0 * running / total, 1))
-    # Gini via the trapezoid area under the Lorenz curve.
-    area = 0.0
-    for i in range(1, len(values)):
-        width = (float(labels[i]) - float(labels[i - 1])) / 100.0
-        area += width * (values[i] + values[i - 1]) / 200.0
-    gini = round(max(0.0, min(1.0, 1 - 2 * area)), 2)
-    top_decile = sum(ordered[-max(1, len(ordered) // 10):])
-    return metric(
-        labels, values,
-        "The busiest 10%% of contributors have incorporated %s of all credited models "
-        "(Gini %s)." % (ins.pct(top_decile, total), gini),
-        gini=gini, unit="% of models", n=len(ordered),
-    )
 
 
 def _template_migration(models):

@@ -1,6 +1,6 @@
 /* Entry point: load stats.json, register the routes, render.
 
-     #/            landing — headline stats, one flagship chart, section cards
+     #/            landing — headline stats, one flagship chart, the other tracked counts
      #/<section>   one section: lead chart, then supporting charts
      #/downloads   every aggregate as CSV
 
@@ -11,13 +11,12 @@
 
 let DATA = null;
 
-/* Two metrics are composed in the client rather than exported, because each only
-   makes sense as a combination of others. Both are prefixed "__" so csvFor() knows
-   not to offer a download that does not exist. */
+/* One metric is composed in the client rather than exported, because it only makes
+   sense as a combination of others. It is prefixed "__" so csvFor() knows not to
+   offer a download that does not exist. */
 function syntheticSections() {
   return {
     __growth: buildGrowthIndex(),
-    __outreach_per_year: buildOutreachPerYear(),
   };
 }
 
@@ -52,43 +51,12 @@ function renderLanding(outlet, registry) {
   outlet.appendChild(el("div", "section-label", "Also tracked"));
   outlet.appendChild(statStrip(DATA.kpis, SECONDARY_KPIS));
 
-  outlet.appendChild(el("div", "section-label", "Explore"));
-  const jumps = el("div", "jump-grid");
-  VIEWS.forEach((view, index) => {
-    const hue = slotColor(index);
-    const link = el("a", "jump");
-    link.href = "#/" + view.id;
-    link.style.setProperty("--slot", hue);
-
-    const title = el("div", "t");
-    title.appendChild(el("span", null, view.title));
-    const kpi = view.headlineKpi && DATA.kpis[view.headlineKpi];
-    if (kpi) title.appendChild(el("span", "n", fmtNum(kpi.value)));
-    link.appendChild(title);
-    link.appendChild(el("div", "s", viewTakeaway(view)));
-    if (kpi && kpi.series && kpi.series.values && kpi.series.values.length > 1) {
-      link.appendChild(sparkline(kpi.series.values, hue, 20));
-    }
-    jumps.appendChild(link);
-  });
-  outlet.appendChild(jumps);
 }
 
 /* A view is either a flat list of rows, or `groups` — topic sections, each with
    its own rows — for views too broad for one undifferentiated pile of cards. */
 function viewGroups(view) {
   return view.groups || [{ rows: view.rows }];
-}
-
-/* The card's one-liner: prefer the lead chart's computed takeaway over the static
-   blurb, so the landing page says something current. */
-function viewTakeaway(view) {
-  // The first chart of the first row of the first group is the view's lead.
-  const firstRow = viewGroups(view)[0].rows[0];
-  const lead = firstRow && firstRow.cells[0];
-  const metric = lead && lead.data && getByPath(DATA.sections, lead.data);
-  if (metric && metric.insight) return metric.insight;
-  return view.blurb;
 }
 
 /* Index each cumulative series to its own final value. */
@@ -128,37 +96,6 @@ function buildGrowthIndex() {
     n: available.length,
     insight: "Each line is that measure as a percentage of where it stands today (" +
       available.map((w) => w.name.toLowerCase() + " " + fmtNum(DATA.kpis[w.key].value)).join(", ") + ").",
-  };
-}
-
-/* Events and blog posts are both counts per year, so they belong on one axis in
-   one chart rather than in two charts that merely sit next to each other. */
-function buildOutreachPerYear() {
-  const events = DATA.sections.events && DATA.sections.events.per_year;
-  const posts = DATA.sections.blogposts && DATA.sections.blogposts.per_year;
-  if (!events || !events.labels || !events.labels.length) return null;
-
-  const labels = Array.from(new Set(
-    events.labels.concat(posts && posts.labels ? posts.labels : [])
-  )).sort();
-  const pick = (metric) => {
-    if (!metric) return labels.map(() => 0);
-    const lookup = new Map(metric.labels.map((l, i) => [l, metric.values[i]]));
-    return labels.map((l) => lookup.get(l) || 0);
-  };
-  const eventValues = pick(events);
-  const postValues = pick(posts);
-  const peak = labels[eventValues.indexOf(Math.max.apply(null, eventValues))];
-
-  return {
-    labels: labels,
-    series: [
-      { name: "Events", values: eventValues },
-      { name: "Blog posts", values: postValues },
-    ],
-    n: eventValues.reduce((a, b) => a + b, 0) + postValues.reduce((a, b) => a + b, 0),
-    insight: "Busiest year for events was " + peak + ". Both are counts per year, so " +
-      "they are directly comparable.",
   };
 }
 
@@ -313,7 +250,7 @@ function fillMethods() {
     ["Global South", "Taken from the World Bank income group on the Countries table: LIC, " +
       "LMIC and UMIC counted as Global South, HIC as Global North. Countries with no income " +
       "group recorded are excluded rather than assumed."],
-    ["How long people stay", "Only ENDED collaborations are binned by length; including " +
+    ["Engagement duration", "Only ENDED collaborations are binned by length; including " +
       "current members would censor every long one downwards. Read the distribution as the " +
       "shape of the placements Ersilia runs — most are internships, fellowships and student " +
       "placements with a term fixed before anyone arrived — rather than as a target missed. " +

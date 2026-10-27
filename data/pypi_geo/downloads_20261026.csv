@@ -1,0 +1,138 @@
+package,country_code,country_name,os_name,cpu_architecture,python_version,file_type,downloads,ci_downloads
+"ersilia, ersilia-pack-utils",US,United States,,,,bdist_wheel,1702,0
+"ersilia, ersilia-pack-utils",US,United States,,,,sdist,1565,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,,,bdist_wheel,425,0
+"ersilia, ersilia-pack-utils",CN,China,,,,bdist_wheel,288,0
+"ersilia, ersilia-pack-utils",HK,Hong Kong,,,,bdist_wheel,258,0
+"ersilia, ersilia-pack-utils",HK,Hong Kong,,,,sdist,254,0
+"ersilia, ersilia-pack-utils",CN,China,,,,sdist,232,0
+"ersilia, ersilia-pack-utils",RU,Russia,,,,bdist_wheel,130,0
+"ersilia, ersilia-pack-utils",DE,Germany,,,,sdist,118,0
+"ersilia, ersilia-pack-utils",RU,Russia,,,,sdist,101,0
+"ersilia, ersilia-pack-utils",SG,Singapore,,,,bdist_wheel,96,0
+"ersilia, ersilia-pack-utils",DE,Germany,,,,bdist_wheel,95,0
+"ersilia, ersilia-pack-utils",KR,Korea,,,,sdist,94,0
+"ersilia, ersilia-pack-utils",FR,France,,,,bdist_wheel,91,0
+"ersilia, ersilia-pack-utils",CA,Canada,,,,sdist,90,0
+"ersilia, ersilia-pack-utils",SG,Singapore,,,,sdist,81,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.12,bdist_wheel,79,1
+"ersilia, ersilia-pack-utils",KR,Korea,,,,bdist_wheel,78,0
+"ersilia, ersilia-pack-utils",CA,Canada,,,,bdist_wheel,74,0
+"ersilia, ersilia-pack-utils",AU,Australia,,,,bdist_wheel,60,0
+"ersilia, ersilia-pack-utils",LU,Luxembourg,,,,bdist_wheel,57,0
+"ersilia, ersilia-pack-utils",NZ,New Zealand,,,,sdist,54,0
+"ersilia, ersilia-pack-utils",NZ,New Zealand,,,,bdist_wheel,54,0
+"ersilia, ersilia-pack-utils",IR,Iran,,,,sdist,53,0
+"ersilia, ersilia-pack-utils",IR,Iran,,,,bdist_wheel,53,0
+"ersilia, ersilia-pack-utils",TW,Taiwan,,,,sdist,53,0
+"ersilia, ersilia-pack-utils",TW,Taiwan,,,,bdist_wheel,52,0
+"ersilia, ersilia-pack-utils",FR,France,,,,sdist,46,0
+"ersilia, ersilia-pack-utils",JP,Japan,,,,sdist,40,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.10,bdist_wheel,31,1
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.9,bdist_wheel,31,0
+"ersilia, ersilia-pack-utils",JP,Japan,,,,bdist_wheel,25,0
+"ersilia, ersilia-pack-utils",SE,Sweden,,,,sdist,24,0
+"ersilia, ersilia-pack-utils",NL,Netherlands,,,,sdist,22,0
+"ersilia, ersilia-pack-utils",GB,United Kingdom,,,,sdist,22,0
+"ersilia, ersilia-pack-utils",SE,Sweden,,,,bdist_wheel,21,0
+"ersilia, ersilia-pack-utils",NL,Netherlands,,,,bdist_wheel,18,0
+"ersilia, ersilia-pack-utils",DK,Denmark,,,,sdist,16,0
+"ersilia, ersilia-pack-utils",DK,Denmark,,,,bdist_wheel,16,0
+"ersilia, ersilia-pack-utils",AE,United Arab Emirates,,,,bdist_wheel,14,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.11,bdist_wheel,14,1
+"ersilia, ersilia-pack-utils",GB,United Kingdom,,,,bdist_wheel,11,0
+"ersilia, ersilia-pack-utils",AU,Australia,,,,sdist,10,0
+"ersilia, ersilia-pack-utils",IE,Ireland,,,,sdist,9,0
+"ersilia, ersilia-pack-utils",IN,India,,,,sdist,9,0
+"ersilia, ersilia-pack-utils",ES,Spain,,,,sdist,8,0
+"ersilia, ersilia-pack-utils",IN,India,Linux,x86_64,3.12,bdist_wheel,8,0
+"ersilia, ersilia-pack-utils",FI,Finland,,,,bdist_wheel,7,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.7,bdist_wheel,7,0
+"ersilia, ersilia-pack-utils",KN,Saint Kitts and Nevis,,,,sdist,6,0
+"ersilia, ersilia-pack-utils",SG,Singapore,Darwin,x86_64,3.11,sdist,6,0
+"ersilia, ersilia-pack-utils",SG,Singapore,Darwin,x86_64,3.11,bdist_wheel,6,0
+"ersilia, ersilia-pack-utils",ES,Spain,Linux,x86_64,3.12,bdist_wheel,5,0
+"ersilia, ersilia-pack-utils",AT,Austria,,,,sdist,5,0
+"ersilia, ersilia-pack-utils",IE,Ireland,,,,bdist_wheel,5,0
+"ersilia, ersilia-pack-utils",FI,Finland,,,,sdist,5,0
+"ersilia, ersilia-pack-utils",JP,Japan,Linux,x86_64,3.14,bdist_wheel,5,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.13,bdist_wheel,5,0
+"ersilia, ersilia-pack-utils",AT,Austria,,,,bdist_wheel,5,0
+"ersilia, ersilia-pack-utils",UA,Ukraine,,,,bdist_wheel,5,0
+"ersilia, ersilia-pack-utils",BE,Belgium,,,,sdist,5,0
+"ersilia, ersilia-pack-utils",VN,Vietnam,,,,bdist_wheel,4,0
+"ersilia, ersilia-pack-utils",LV,Latvia,,,,sdist,4,0
+"ersilia, ersilia-pack-utils",CN,China,Windows,AMD64,3.11,bdist_wheel,4,0
+"ersilia, ersilia-pack-utils",BR,Brazil,Linux,x86_64,3.11,bdist_wheel,4,0
+"ersilia, ersilia-pack-utils",IE,Ireland,Linux,aarch64,3.10,bdist_wheel,4,0
+"ersilia, ersilia-pack-utils",LT,Lithuania,,,,sdist,4,0
+"ersilia, ersilia-pack-utils",BE,Belgium,,,,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",GB,United Kingdom,Linux,armv7l,3.11,sdist,3,0
+"ersilia, ersilia-pack-utils",RO,Romania,,,,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.8,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",UA,Ukraine,,,,sdist,3,0
+"ersilia, ersilia-pack-utils",NO,Norway,,,,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",ES,Spain,,,,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",NG,Nigeria,Linux,x86_64,3.12,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",HK,Hong Kong,,,3.8,sdist,3,0
+"ersilia, ersilia-pack-utils",LV,Latvia,,,,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",ES,Spain,Darwin,arm64,3.12,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",NO,Norway,,,,sdist,3,0
+"ersilia, ersilia-pack-utils",VN,Vietnam,,,,sdist,3,0
+"ersilia, ersilia-pack-utils",ES,Spain,Linux,x86_64,3.11,bdist_wheel,3,0
+"ersilia, ersilia-pack-utils",NG,Nigeria,Linux,x86_64,3.10,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",AR,Argentina,,,,sdist,2,0
+"ersilia, ersilia-pack-utils",FR,France,Linux,x86_64,3.12,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",SG,Singapore,Linux,x86_64,3.12,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",DE,Germany,Windows,,,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",KR,Korea,Darwin,arm64,3.11,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",CL,Chile,,,,sdist,2,0
+"ersilia, ersilia-pack-utils",ES,Spain,Linux,x86_64,3.10,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",CM,Cameroon,Linux,x86_64,3.12,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",CN,China,Linux,x86_64,3.12,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",GB,United Kingdom,Windows,AMD64,3.13,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",ID,Indonesia,,,,sdist,2,0
+"ersilia, ersilia-pack-utils",EC,Ecuador,Linux,x86_64,3.10,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",CN,China,Windows,AMD64,3.13,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",CN,China,Linux,x86_64,3.10,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",ID,Indonesia,Linux,x86_64,3.14,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",CM,Cameroon,Windows,AMD64,3.14,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",IN,India,Windows,AMD64,3.12,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",EC,Ecuador,Linux,x86_64,3.11,bdist_wheel,2,0
+"ersilia, ersilia-pack-utils",IN,India,Linux,x86_64,3.14,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",CH,Switzerland,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",CN,China,Linux,x86_64,3.11,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",ML,Mali,,,,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",IN,India,Linux,aarch64,3.13,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",GB,United Kingdom,Linux,x86_64,3.12,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",IQ,Iraq,,,,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",CH,Switzerland,,,,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",CN,China,Linux,x86_64,3.14,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",AL,Albania,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",IN,India,Darwin,arm64,3.11,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",ES,Spain,Linux,x86_64,3.9,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",CA,Canada,Linux,x86_64,3.14,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",US,United States,Windows,AMD64,3.12,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.14,sdist,1,0
+"ersilia, ersilia-pack-utils",VG,British Virgin Islands,,,,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.14,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",AD,Andorra,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",SG,Singapore,Windows,AMD64,3.10,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",CM,Cameroon,Windows,AMD64,3.13,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",ES,Spain,Darwin,arm64,3.13,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,x86_64,3.8,sdist,1,0
+"ersilia, ersilia-pack-utils",KR,Korea,Linux,x86_64,3.12,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",HK,Hong Kong,Linux,x86_64,3.10,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",CN,China,Windows,AMD64,3.12,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",ML,Mali,Linux,x86_64,3.14,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",AR,Argentina,Linux,x86_64,3.12,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",RU,Russia,Windows,AMD64,3.11,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",GB,United Kingdom,Linux,x86_64,3.8,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",IT,Italy,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",ZA,South Africa,Linux,x86_64,3.11,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",BD,Bangladesh,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",US,United States,Linux,aarch64,3.12,bdist_wheel,1,0
+"ersilia, ersilia-pack-utils",JP,Japan,Windows,AMD64,3.13,bdist_wheel,1,1
+"ersilia, ersilia-pack-utils",PL,Poland,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",SK,Slovakia,,,,sdist,1,0
+"ersilia, ersilia-pack-utils",IL,Israel,,,,bdist_wheel,1,0

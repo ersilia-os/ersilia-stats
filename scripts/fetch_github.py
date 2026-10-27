@@ -48,7 +48,10 @@ payload. Both now come from one batched GraphQL query at about 1 point per 40 re
     python3 scripts/fetch_github.py --check
 """
 import argparse
+import csv
+import glob
 import logging
+import os
 import sys
 import time
 from datetime import datetime, timedelta, timezone
@@ -57,6 +60,7 @@ from collect_common import check_freshness, get_json, prune_superseded, write_sn
 from github_api import (API, MODEL_RE, ORG, auth_headers, contributor_counts,
                         contributor_logins, is_bot, list_repos, post_graphql,
                         private_totals, repo_metrics)
+from site_data.parse import parse_multi
 
 REPO_FIELDS = ["name", "is_model", "created_at", "pushed_at", "archived", "fork",
                "language", "license", "topics", "size_kb", "stars", "forks",
@@ -118,7 +122,64 @@ def inventory(org, headers):
     return rows
 
 
-def enrich(org, rows, headers, with_contributors=True):
+def _handle(value):
+    """A GitHub handle as typed into Airtable, reduced to the bare lowercased login.
+
+    The column is free text: entries carry trailing spaces, a leading `@` or the whole
+    profile URL (`https://github.com/dhrvrc`).
+    """
+    return str(value or "").strip().rstrip("/").split("/")[-1].lstrip("@").lower()
+
+
+def community_handles(tables_file):
+    """Lowercased GitHub handles from the Airtable Community table, read live.
+
+    `fetch_airtable.py` drops the `GitHub Handle` column from its snapshot as personal
+    data, so this reads it straight from the API, in memory, and never writes it. Without
+    it, staff who have never incorporated a model and were never added to the GitHub
+    organisation — the people who build ersilia-hub and ersilia-pack — read as outside:
+    on the October 2026 sample, 29 of 30 merged pull requests on ersilia-hub.
+    """
+    from pyairtable import Api
+
+    key = os.environ.get("AIRTABLE_API_KEY")
+    if not key:
+        raise SystemExit("AIRTABLE_API_KEY is not set: it is needed to read the Community "
+                         "table's GitHub handles, which decide who counts as from the "
+                         "organisation")
+    with open(tables_file, newline="", encoding="utf-8") as handle:
+        row = next((r for r in csv.DictReader(handle)
+                    if r.get("table", "").strip().lower() == "community"), None)
+    if row is None:
+        raise SystemExit("no Community row in %s" % tables_file)
+    records = Api(key).table(row["base_id"].strip(), row["table_id"].strip()).all(
+        fields=["GitHub Handle"])
+    return {_handle(r["fields"].get("GitHub Handle")) for r in records} - {""}
+
+
+def load_team(airtable_dir, tables_file):
+    """Lowercased GitHub handles of everyone who counts as from the organisation.
+
+    The union of the newest Airtable Models snapshot's `Contributor` column (whoever
+    incorporated each model) and the Community table's `GitHub Handle` column (see
+    `community_handles`). Used by `github_api.is_internal` to split merged pull requests
+    by author; the handles are used for that comparison only and are never written out.
+    """
+    snapshots = sorted(glob.glob(os.path.join(airtable_dir, "models_*.csv")))
+    if not snapshots:
+        raise SystemExit("no models_*.csv in %s: fetch Airtable first, or pass --team-from"
+                         % airtable_dir)
+    with open(snapshots[-1], newline="", encoding="utf-8") as handle:
+        models = {_handle(name) for row in csv.DictReader(handle)
+                  for name in parse_multi(row.get("Contributor"))}
+    community = community_handles(tables_file)
+    team = (models | community) - {""}
+    logging.info("team: %d handles (%d from %s, %d from Community)", len(team), len(models),
+                 os.path.basename(snapshots[-1]), len(community))
+    return frozenset(team)
+
+
+def enrich(org, rows, headers, team=frozenset(), with_contributors=True):
     """Add the batched GraphQL counts, and optionally contributor counts, in place.
 
     `watchers` is the reason this exists. It is the real subscriber count from
@@ -127,7 +188,7 @@ def enrich(org, rows, headers, with_contributors=True):
     not return `subscribers_count` and the field was silently recorded as 0.
     """
     names = [r["name"] for r in rows]
-    metrics = repo_metrics(org, names, headers)
+    metrics = repo_metrics(org, names, headers, team=team)
     logging.info("metrics resolved for %d of %d repositories", len(metrics), len(names))
 
     counts = {}
@@ -337,6 +398,12 @@ def main():
     parser.add_argument("--skip-model-requests", action="store_true",
                         help="Skip the model-request issue history (Search API, one label "
                              "on the flagship repository).")
+    parser.add_argument("--team-from", default="data/air_tables",
+                        help="Airtable snapshot directory whose models_*.csv `Contributor` "
+                             "column lists who counts as from the organisation.")
+    parser.add_argument("--tables-file", default="data/airtable_api_identifiers.csv",
+                        help="Airtable table list; its Community row is read live for "
+                             "GitHub handles (needs AIRTABLE_API_KEY).")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--max-age-days", type=int, default=21)
     args = parser.parse_args()
@@ -344,12 +411,13 @@ def main():
     if args.check:
         return check_freshness(args.out_dir, args.max_age_days, "github")
 
+    team = load_team(args.team_from, args.tables_file)
     headers = auth_headers()
     repos = inventory(args.org, headers)
     if not repos:
         logging.error("no repositories returned for %s — refusing to write", args.org)
         return 1
-    enrich(args.org, repos, headers, with_contributors=not args.skip_contributors)
+    enrich(args.org, repos, headers, team=team, with_contributors=not args.skip_contributors)
     summarise(repos)          # logs the inventory breakdown; return value unused
 
     written = [write_snapshot(args.out_dir, "repos", REPO_FIELDS, repos)]
@@ -373,10 +441,10 @@ def main():
         # EVERY non-archived repository, model repositories included. This used to skip the
         # model repositories on the grounds that they "carry almost no signal", judged from
         # their stars — `eos4e40` has 2, `eos2gw4` has 0. That judgement was wrong: the
-        # median model repository holds 49 commits and 78% of recently merged pull requests
-        # on them come from outside the organisation. Nobody stars a model, they contribute
-        # one, and excluding them made the quarterly series cover 7,349 of 23,428 commits
-        # while the rest of the page quoted the larger figure.
+        # median model repository holds 49 commits and almost every one has merged pull
+        # requests. Nobody stars a model, they contribute one, and excluding them made the
+        # quarterly series cover 7,349 of 23,428 commits while the rest of the page quoted
+        # the larger figure.
         names = [r["name"] for r in repos if r["archived"] == "no"]
         activity, missed = commit_activity(args.org, names, headers)
         if activity:

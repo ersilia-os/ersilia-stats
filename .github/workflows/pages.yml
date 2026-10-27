@@ -86,6 +86,9 @@ jobs:
       - name: Fetch GitHub inventory
         env:
           GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+          # Reads the Community table's GitHub handles in memory, to tell staff from
+          # outside contributors. They are never written. See fetch_github.community_handles.
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: python scripts/fetch_github.py -o data/github/
 
       - name: Fetch GitHub releases

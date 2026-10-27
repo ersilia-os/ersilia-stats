@@ -91,7 +91,7 @@ function accent() {
 
    Slot 6 is crimson, reserved so that only a genuine sixth data category reaches it.
    Chrome is never a data category, so it must never reach it either: with the full
-   length here, the "Repositories" hero sparkline and the "Countries & partners" card
+   length here, the "Repositories" hero sparkline and the "Partners" card
    came out red, which is precisely the false alarm the palette order exists to
    prevent. Five hues are plenty for eight tiles. */
 const CHROME_SLOTS = 5;

@@ -37,8 +37,7 @@
   --tab-publications: #734080;  /* plum       */
   --tab-repositories: #67bb55;  /* lime       */
   --tab-community:    #af5cc7;  /* orchid     */
-  --tab-reach:        #d19710;  /* amber      */
-  --tab-outreach:     #1c7db0;  /* cobalt     */
+  --tab-partners:     #d19710;  /* amber      */
 
   /* --- Multi-series chart marks -------------------------------------------
      The global categorical set. Any chart on any page may draw on it: a one-series
@@ -215,7 +214,7 @@ main:focus { outline: none; }
 /* Keyboard focus must be obvious and must not look like selection. */
 .sidebar nav a:focus-visible,
 .sidebar .foot a:focus-visible, .sidebar .foot button:focus-visible,
-.toggle button:focus-visible, a.jump:focus-visible, a.dl:focus-visible,
+.toggle button:focus-visible, a.dl:focus-visible,
 .info:focus-visible, .methods-btn:focus-visible {
   outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--radius-sm);
 }
@@ -597,29 +596,6 @@ table.ranked tbody tr:hover td { background: var(--surface-2); }
   margin: var(--sp-6) 0 var(--sp-4); font-size: var(--fs-meta); font-weight: 500; color: var(--muted);
 }
 
-/* 12 columns so seven cards tile as 3+3+3+3 then 4+4+4 — no empty slot. */
-.jump-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(12, 1fr); }
-.jump-grid > a:nth-child(-n+4) { grid-column: span 3; }
-.jump-grid > a:nth-child(n+5) { grid-column: span 4; }
-a.jump {
-  display: flex; flex-direction: column; gap: var(--sp-2);
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: var(--sp-4) var(--sp-5) var(--sp-4);
-  box-shadow: var(--shadow-sm); color: var(--ink);
-  border-top: 2px solid var(--slot, var(--chart-1));
-  transition: box-shadow var(--tap), transform var(--tap);
-}
-a.jump:hover { text-decoration: none; box-shadow: var(--shadow); transform: translateY(-1px); }
-a.jump .t {
-  font-size: var(--fs-body); font-weight: 500; display: flex;
-  align-items: baseline; justify-content: space-between; gap: var(--sp-3);
-}
-a.jump .n {
-  font-family: var(--mono); font-variant-numeric: normal;
-  color: var(--slot, var(--chart-1)); font-size: var(--fs-title);
-}
-a.jump .s { font-size: var(--fs-meta); color: var(--muted); line-height: 1.45; }
-a.jump .spark { height: 20px; margin-top: 2px; }
 
 /* ===========================================================================
    Downloads
@@ -671,8 +647,6 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
    Responsive — the sidebar becomes a scrolling strip above the content
    =========================================================================== */
 @media (max-width: 1100px) {
-  .jump-grid { grid-template-columns: repeat(2, 1fr); }
-
   /* ONE COLUMN, and this is deliberate rather than lazy.
      The previous mapping halved some spans and full-widthed others (3/4/5 -> 6,
      7/8 -> 12), which meant a row built to sum to 12 now summed to 18 and wrapped —
@@ -733,7 +707,6 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
 }
 @media (max-width: 620px) {
   .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-12 { grid-column: span 12; }
-  .jump-grid { grid-template-columns: 1fr; }
   /* Cards stack one per row here, so a row's min-height would be split across all of
      them and every chart would collapse to its 110px floor. Give each stacked card a
      real height of its own instead. */
@@ -778,23 +751,20 @@ a.dl:hover { color: var(--ink); text-decoration: none; }
 .crow:nth-child(4) > .card { animation-delay: .14s; }
 .crow:nth-child(n+5) > .card { animation-delay: .16s; }
 
-.stat, a.jump, .strip { animation: cardIn .24s var(--ease) both; }
+.stat, .strip { animation: cardIn .24s var(--ease) both; }
 .stat-row .stat:nth-child(2) { animation-delay: .03s; }
 .stat-row .stat:nth-child(3) { animation-delay: .06s; }
 .stat-row .stat:nth-child(4) { animation-delay: .09s; }
 
 .card { transition: box-shadow .18s var(--ease), border-color .18s var(--ease); }
 .card:hover { box-shadow: var(--shadow); }
-a.jump:hover { transform: translateY(-2px); }
-a.jump { transition: box-shadow .18s var(--ease), transform .18s var(--ease), border-color .18s var(--ease); }
 
 /* The house standard honours prefers-reduced-motion globally for transitions;
    animations need saying separately. */
 @media (prefers-reduced-motion: reduce) {
-  #view, #view[data-entering], .crow > .card, .stat, a.jump, .strip {
+  #view, #view[data-entering], .crow > .card, .stat, .strip {
     animation: none !important;
   }
-  a.jump:hover { transform: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -802,7 +772,7 @@ a.jump { transition: box-shadow .18s var(--ease), transform .18s var(--ease), bo
    Print
    =========================================================================== */
 @media print {
-  .sidebar, .toggle, .drill, .jump-grid, .modal, .scrim { display: none !important; }
+  .sidebar, .toggle, .drill, .modal, .scrim { display: none !important; }
   body { background: #fff; }
   main { margin: 0; padding: 0; max-width: none; }
   main > * { max-width: none; }

@@ -1,10 +1,12 @@
-"""Events, blog activity, and the conferences Ersilia tracks.
+"""Events, blog activity, videos, and the conferences Ersilia tracks.
 
 The conferences table was loaded but never read by anything — nine columns and 21
 rows of recorded intent (which meetings matter, how often they come round, whether
 you can attend without flying) sitting unused while this page ran out of content
 halfway down.
 """
+
+import pandas as pd
 
 from . import insights as ins
 from .parse import (EMPTY, col, growth_pair, metric, multi_counts, value_counts, year_counts)
@@ -13,7 +15,8 @@ from .parse import (EMPTY, col, growth_pair, metric, multi_counts, value_counts,
 def build_events(events):
     if events is None or events.empty:
         return {"per_year": dict(EMPTY), "by_country": dict(EMPTY),
-                "by_organiser": dict(EMPTY),
+                "by_organiser": dict(EMPTY), "by_type": dict(EMPTY),
+                "by_format": dict(EMPTY),
                 "growth": {"labels": [], "series": [], "n": 0}}
 
     country = col(events, "country_(from_country)")
@@ -28,9 +31,22 @@ def build_events(events):
     if by_country["labels"]:
         by_country["insight"] = ins.leader(located, "located events")
 
+    # Airtable calls the event type `Category`; the page calls it type.
+    by_type = value_counts(col(events, "category"))
+    if by_type["labels"]:
+        by_type["insight"] = ins.leader(by_type, "events with a type recorded")
+
+    by_format = value_counts(col(events, "format"))
+    if by_format["labels"]:
+        online = dict(zip(by_format["labels"], by_format["values"])).get("Online", 0)
+        by_format["insight"] = ins.share_of(online, sum(by_format["values"]),
+                                            "events with a format recorded", "were online")
+
     return {
         "per_year": per_year,
         "growth": _year_growth(per_year, "events"),
+        "by_type": by_type,
+        "by_format": by_format,
         "by_country": by_country,
         "by_organiser": multi_counts(col(events, "organiser"), top=10,
                                      insight="Organisations that convened the most "
@@ -65,6 +81,30 @@ def build_blogposts(blogposts):
         "growth": _year_growth(per_year, "posts"),
         "by_category": by_category,
         "by_publisher": publisher,
+    }
+
+
+def build_videos(videos):
+    """Videos: how many, when, and what about. The table carries no year column, so
+    the year is read from the date."""
+    if videos is None or videos.empty:
+        return {"per_year": dict(EMPTY), "by_domain": dict(EMPTY),
+                "growth": {"labels": [], "series": [], "n": 0}}
+
+    years = pd.to_datetime(col(videos, "date"), errors="coerce").dt.year
+    per_year = year_counts(years)
+    if per_year["labels"]:
+        per_year["insight"] = ins.busiest(per_year["labels"], per_year["values"],
+                                          "video", "videos", period="year")
+
+    by_domain = multi_counts(col(videos, "domain"), top=10)
+    if by_domain["labels"]:
+        by_domain["insight"] = ins.leader_short(by_domain)
+
+    return {
+        "per_year": per_year,
+        "growth": _year_growth(per_year, "videos"),
+        "by_domain": by_domain,
     }
 
 

@@ -13,12 +13,12 @@ distribution — six packages is a ranking, not a population large enough to buc
 Country, OS and CPU-architecture detail comes from a SEPARATE, manual source: Google
 BigQuery's public dataset, queried by hand and converted with
 ``scripts/convert_pypi_geo.py`` (see its docstring for why this one is not fetched).
-It currently covers 3 of the 6 packages — ``isaura``, ``eosce`` and ``olinda`` simply
-have too little volume to appear in a BigQuery sample of this size — so every caption
-that uses it says which packages, rather than implying it describes all six.
+It currently covers 2 of the 6 packages, ``ersilia`` and ``ersilia-pack-utils``, summed
+together — so every caption that uses it says which packages, rather than implying it
+describes all six.
 """
 from . import insights as ins
-from .parse import EMPTY, as_text, metric, series_metric, to_num
+from .parse import EMPTY, as_text, metric, parse_multi, series_metric, to_num
 
 EMPTY_SECTION = {
     "packages": {"rows": [], "n": 0},
@@ -216,8 +216,9 @@ def _by_country(geo):
         if not label:
             continue
         counts[label] = counts.get(label, 0) + int(downloads.iloc[i])
-    packages = sorted(set(as_text(geo.get("package")))) if "package" in geo.columns else []
-    packages = [p for p in packages if p]
+    # A cell can name several packages ("ersilia, ersilia-pack-utils") when the BigQuery
+    # export was aggregated across them rather than grouped by package.
+    packages = sorted({p for cell in as_text(geo.get("package")) for p in parse_multi(cell)})
     return counts, packages
 
 
@@ -225,7 +226,7 @@ def _coverage_note(packages):
     if not packages:
         return ""
     named = packages[0] if len(packages) == 1 else ", ".join(packages[:-1]) + " and " + packages[-1]
-    return "Covers %s only — the rest have too little BigQuery-sampled volume to appear." % named
+    return "Covers %s only." % named
 
 
 def _downloads_by_country(counts, packages):

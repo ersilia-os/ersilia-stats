@@ -6,11 +6,11 @@ not disclosure, a name is.**
 So this module splits the two:
 
 * **Aggregates cover every repository**, public and private — how many there are,
-  when they were created, the type and status mix, how commits concentrate, the
-  totals. Knowing that Ersilia has 38 private repositories reveals nothing about
-  any of them, and excluding them made the totals quietly wrong.
+  when they were created, the type and status mix, the totals. Knowing that Ersilia
+  has 38 private repositories reveals nothing about any of them, and excluding them
+  made the totals quietly wrong.
 * **Anything that names a repository or a contributor covers public repositories
-  only** — the rankings, the scatter points, the contributor handles. A private
+  only** — the rankings and the contributor handles. A private
   repository's *name* is disclosure, and so is who works on it.
 
 The public/private split is itself published (``visibility``), because the honest
@@ -107,15 +107,12 @@ def build(repos, collected=None):
     """
     public_raw, private_count = public_only(repos)
     if repos is None or repos.empty:
-        return dict(
-            {k: dict(EMPTY) for k in (
-                "per_quarter", "cumulative", "by_type", "by_status", "visibility",
-                "growth",
-                "top_by_stars", "top_by_forks", "most_collaborative", "top_contributors",
-                "contributor_concentration", "ranked",
-            )},
-            scatter={"points": [], "n": 0},
-        )
+        return {k: dict(EMPTY) for k in (
+            "per_quarter", "cumulative", "by_type", "by_status", "visibility",
+            "growth",
+            "top_by_stars", "top_by_forks", "most_collaborative", "top_contributors",
+            "progress", "ranked",
+        )}
 
     every = _numeric(repos)                        # aggregates: all repositories
     public = (_numeric(public_raw)
@@ -144,7 +141,7 @@ def build(repos, collected=None):
         "by_type": _by_type(every),
         "by_status": _by_status(every),
         "visibility": _visibility(every, private_count),
-        "contributor_concentration": _concentration_curve(every),
+        "progress": _progress(every),
         # ---- name-bearing: public repositories only ---------------------------
         "ranked": _ranked(public, name_col),
         "top_by_stars": top_by(public, "stars", name_col,
@@ -153,7 +150,6 @@ def build(repos, collected=None):
         "top_by_forks": top_by(public, "forks", name_col),
         "most_collaborative": top_by(public, "contributors", name_col),
         "top_contributors": _top_contributors(collected),
-        "scatter": _scatter(public, name_col),
     }
 
 
@@ -183,6 +179,27 @@ def _by_status(every):
         out["insight"] = ins.share_of(active, len(every), "repositories",
                                       "are in progress or idle rather than closed out")
     return out
+
+
+def _progress(every):
+    """Repositories in progress against those completed, every other status left out.
+
+    Archived, Discontinued, Idle and Todo are not part of the question this answers —
+    how much of the work under way has been finished — so they are counted in `n` of
+    `by_status` but not here.
+    """
+    status = as_text(col(every, "status").apply(first_value)).str.strip().str.lower()
+    in_progress = int((status == "in progress").sum())
+    completed = int((status == "completed").sum())
+    total = in_progress + completed
+    if not total:
+        return dict(EMPTY)
+    return metric(
+        ["In progress", "Completed"], [in_progress, completed],
+        ins.share_of(in_progress, total, "repositories", "are still in progress"),
+        countNoun="repositories",
+        n=total,
+    )
 
 
 def _ranked(public, name_col):
@@ -252,68 +269,3 @@ def _top_contributors(collected):
         n=len(pairs),
     )
 
-
-def _concentration_curve(every):
-    """Lorenz curve of commits across repositories — the bus-factor question.
-
-    PUBLIC REPOSITORIES ONLY, now, and not by choice. Commit counts come from the
-    committed GitHub snapshot since the Airtable column was deleted, and that snapshot is
-    public-only; a private repository lands at 0 commits and is dropped by the `v > 0`
-    filter below. It used to cover every repository, because Airtable held a count for the
-    private ones too. Worth stating rather than leaving as an unexplained change in the
-    denominator.
-
-    x = cumulative share of repositories (least active first), y = cumulative
-    share of commits. A curve hugging the bottom-right means a few repositories
-    carry almost everything.
-    """
-    commits = sorted(int(v) for v in every["total_commits"] if v > 0)
-    total = sum(commits)
-    if not commits or total == 0:
-        return dict(EMPTY)
-    labels, values, running = ["0"], [0.0], 0
-    for index, value in enumerate(commits, start=1):
-        running += value
-        labels.append(str(round(100.0 * index / len(commits), 1)))
-        values.append(round(100.0 * running / total, 1))
-    # Gini via the trapezoid area under the Lorenz curve.
-    area = 0.0
-    for i in range(1, len(values)):
-        width = (float(labels[i]) - float(labels[i - 1])) / 100.0
-        area += width * (values[i] + values[i - 1]) / 200.0
-    gini = round(max(0.0, min(1.0, 1 - 2 * area)), 2)
-    top_decile = sum(commits[-max(1, len(commits) // 10):])
-    return metric(
-        labels, values,
-        "The busiest 10%% of repositories hold %s of all commits (Gini %s)." % (
-            ins.pct(top_decile, total), gini,
-        ),
-        gini=gini, unit="% of commits", n=len(commits),
-    )
-
-
-def _scatter(public, name_col):
-    """Per-repository points for the log-log popularity/activity chart.
-
-    Public only: each point carries a name in its tooltip.
-    """
-    if public is None or public.empty:
-        return {"points": [], "n": 0}
-    points = []
-    for _, row in public.iterrows():
-        name = str(row.get(name_col, "")).strip()
-        if not name:
-            continue
-        points.append({
-            "name": name,
-            "stars": int(row["stars"]),
-            "forks": int(row["forks"]),
-            "commits": int(row["total_commits"]),
-            "issues": int(row["open_issues"]),
-            "contributors": int(row["contributors"]),
-        })
-    insight = None
-    if points:
-        quiet = [p for p in points if p["commits"] >= 50 and p["stars"] == 0]
-        insight = "%s public repositories with 50+ commits have no stars." % ins.num(len(quiet))
-    return {"points": points, "n": len(points), "insight": insight}

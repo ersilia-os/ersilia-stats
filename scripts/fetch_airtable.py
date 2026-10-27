@@ -27,7 +27,7 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 # Never export these to CSV: confidential (financial data, contact lists) or unused.
 # `models` used to be here, which left the Ersilia Model Hub — the flagship, and the
 # richest table available — entirely absent from the site.
-EXCLUDE_TABLE_SLUGS = {"news", "videos", "grants", "donations", "contacts"}
+EXCLUDE_TABLE_SLUGS = {"news", "grants", "donations", "contacts"}
 
 # Columns dropped from every table. Direct identifiers and contact routes: the site
 # only ever shows community figures in aggregate, so there is no reason to commit

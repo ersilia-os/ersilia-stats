@@ -43,7 +43,15 @@ nobody asked for.
 import pandas as pd
 
 from . import insights as ins
-from .parse import EMPTY, active_repo_names, as_text, metric, parse_multi, to_num
+from .parse import EMPTY, as_text, metric, to_num
+
+# Models that Ersilia's own CI pulls from Docker Hub on every test run, so their pull
+# counts are inflated by automated testing rather than demand: the ersilia package's
+# `tests_and_cleanup.yml` workflow runs the playground suite with `--fetch from_dockerhub`
+# on the models in `test/playground/config.yml` — eos3b5e as the single model, and
+# eos5axz, eos4e40 and eos2r5a as the multiple-model set. eos3b5e is also the default
+# test model across ersilia-pack. Re-check that config if it changes.
+CI_TEST_MODELS = {"eos3b5e", "eos5axz", "eos4e40", "eos2r5a"}
 
 WEEKDAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
@@ -61,7 +69,7 @@ def _model_images(images):
     return rows
 
 
-def build(collected, models=None, today=None):
+def build(collected, today=None):
     """Metrics from ``data/dockerhub/images_<date>.csv``.
 
     Every key degrades to an empty metric when the collector has not run, so the site
@@ -73,24 +81,16 @@ def build(collected, models=None, today=None):
 
     # The tags-based recency metrics come from a separate collector
     # (fetch_docker_tags.py) and degrade independently of the images snapshot.
-    repos = (collected or {}).get("github_repos")
     recency = {
         "pull_dormancy": _pull_dormancy(tags, today),
         "arm_vs_amd_size": _arm_vs_amd_size(tags),
         "pull_rhythm_weekday": _pull_rhythm_weekday(tags),
-        "pull_rhythm_hour": _pull_rhythm_hour(tags),
-        "tag_versioning": _tag_versioning(tags, models, repos),
-        "size_swings": _size_swings(tags, models, repos),
     }
 
     if not rows:
         return {
             "model_pulls_total": dict(EMPTY),
             "most_pulled_models": {"rows": [], "n": 0},
-            "pull_distribution": dict(EMPTY),
-            "pulls_by_arch": dict(EMPTY),
-            "image_coverage": dict(EMPTY),
-            "size_vs_pulls": {"points": [], "n": 0},
             **recency,
         }
 
@@ -101,10 +101,6 @@ def build(collected, models=None, today=None):
     return {
         "model_pulls_total": _total(rows, total, median),
         "most_pulled_models": _ranked(rows, median),
-        "pull_distribution": _distribution(counts, median),
-        "pulls_by_arch": _pulls_by_arch(rows, models),
-        "image_coverage": _coverage(rows, models),
-        "size_vs_pulls": _size_vs_pulls(rows, models),
         **recency,
     }
 
@@ -137,6 +133,10 @@ def _ranked(rows, median):
     Ranked by the MULTIPLE of the baseline rather than by raw pulls, because raw pulls
     ranks the schedule. A model at 1.0x has been pulled exactly as often as everything
     else, which is the same as saying nothing about it.
+
+    Each row also says whether the model is one of Ersilia's CI test models
+    (`CI_TEST_MODELS`), whose pulls are inflated by automated testing on top of the
+    baseline — they top this list for that reason, not for demand.
     """
     scored = [(name, pulls, round(pulls / median, 1)) for name, pulls in rows
               if median and pulls > median * 1.5]
@@ -145,179 +145,25 @@ def _ranked(rows, median):
         return {"rows": [], "n": 0,
                 "insight": "No model stands clearly above the automated baseline."}
     return {
-        "rows": [{"name": name, "pulls": pulls, "times_baseline": mult}
+        "rows": [{"name": name, "pulls": pulls, "times_baseline": mult,
+                  "ci_test": "Yes" if name in CI_TEST_MODELS else ""}
                  for name, pulls, mult in scored[:12]],
         "n": len(scored),
-        "insight": "%s models exceed the ~%s baseline; %s leads at %sx it." % (
-            ins.num(len(scored)), ins.num(median), scored[0][0], scored[0][2],
-        ),
+        "insight": _ranked_insight(scored, median),
     }
 
 
-def _arch_by_id(models):
-    """``{identifier: "ARM64 and AMD64" | "AMD64 only"}``, from the registry's
-    Docker Architecture field. Shared by every chart that splits on architecture
-    support, so the category names and the AMD64-only default live in one place.
-    """
-    if models is None or models.empty or "identifier" not in models.columns \
-            or "docker_architecture" not in models.columns:
-        return {}
-    ids = as_text(models["identifier"])
-    archs = models["docker_architecture"]
-    arch_by_id = {}
-    for i in range(min(len(ids), len(archs))):
-        ident = ids.iloc[i].strip()
-        if not ident:
-            continue
-        tokens = {t.strip().upper() for t in parse_multi(archs.iloc[i])}
-        if not tokens:
-            continue
-        arch_by_id[ident] = "ARM64 and AMD64" if "ARM64" in tokens else "AMD64 only"
-    return arch_by_id
-
-
-def _pulls_by_arch(rows, models):
-    """Median Docker Hub pulls, split by whether the image also builds for ARM64.
-
-    Joined on the model identifier against the same Airtable Docker Architecture
-    column ``models.on_arm`` reads. The rest of this page says how many images
-    exist and how much they are pulled; this is the one chart that asks whether
-    those two questions interact — whether a multi-architecture image is pulled
-    any differently from an AMD64-only one, or whether ARM64 support is as
-    invisible in the pull counts as it is in most Docker Hub browsing.
-    """
-    arch_by_id = _arch_by_id(models)
-    if not arch_by_id:
-        return dict(EMPTY)
-
-    groups = {"ARM64 and AMD64": [], "AMD64 only": []}
-    for name, pulls in rows:
-        category = arch_by_id.get(name)
-        if category:
-            groups[category].append(pulls)
-    groups = {label: pulls for label, pulls in groups.items() if pulls}
-    if not groups:
-        return dict(EMPTY)
-
-    labels = list(groups.keys())
-    medians = {label: sorted(pulls)[len(pulls) // 2] for label, pulls in groups.items()}
-    values = [medians[label] for label in labels]
-    total_n = sum(len(pulls) for pulls in groups.values())
-
-    both, amd_only = groups.get("ARM64 and AMD64"), groups.get("AMD64 only")
-    if both and amd_only:
-        insight = (
-            "Median %s pulls for images that also build for ARM64, against %s for "
-            "AMD64-only, across %s images with a recorded architecture." % (
-                ins.num(medians["ARM64 and AMD64"]), ins.num(medians["AMD64 only"]),
-                ins.num(total_n),
-            )
-        )
-    else:
-        insight = "%s images with a recorded architecture; median %s pulls." % (
-            ins.num(total_n), ins.num(values[0]),
-        )
-    return metric(labels, values, insight, n=total_n)
-
-
-def _size_vs_pulls(rows, models):
-    """Per-model points: image size (GB) against Docker Hub pulls, split by whether
-    the image also builds for ARM64.
-
-    Both axes are LINEAR, unlike every other scatter on this site: pulls have a long
-    tail org-wide, but within one model's images the range is narrow enough that a log
-    axis would only compress it, and image size does not span orders of magnitude at
-    all. Coloured by architecture support because that is the one trait already known
-    to matter for low-bandwidth, low-resource deployments — the question this asks is
-    whether it also shows up as a pull-count difference, not whether size itself does.
-    """
-    if models is None or models.empty or "identifier" not in models.columns \
-            or "image_size" not in models.columns:
-        return {"points": [], "n": 0}
-
-    arch_by_id = _arch_by_id(models)
-    ids = as_text(models["identifier"])
-    sizes = to_num(models["image_size"])
-    size_by_id = {}
-    for i in range(min(len(ids), len(sizes))):
-        ident = ids.iloc[i].strip()
-        size = float(sizes.iloc[i])
-        if ident and size > 0:
-            # Registry records image_size in MB; GB matches the size-distribution card.
-            size_by_id[ident] = round(size / 1024.0, 2)
-
-    points = [
-        {"name": name, "size": size_by_id[name], "pulls": pulls, "category": arch_by_id[name]}
-        for name, pulls in rows if name in size_by_id and name in arch_by_id
-    ]
-    if not points:
-        return {"points": [], "n": 0}
-
-    both = [p["pulls"] for p in points if p["category"] == "ARM64 and AMD64"]
-    amd_only = [p["pulls"] for p in points if p["category"] == "AMD64 only"]
-    insight = "%s model images with a size, a pull count and a recorded architecture." % (
-        ins.num(len(points)),
-    )
-    if both and amd_only:
-        both_median = ins.num(sorted(both)[len(both) // 2])
-        amd_only_median = ins.num(sorted(amd_only)[len(amd_only) // 2])
-        insight = "Median %s pulls for images that also build for ARM64, against %s for " \
-                  "AMD64-only, across %s images." % (
-                      both_median, amd_only_median, ins.num(len(points)),
-                  )
-    return {"points": points, "n": len(points), "insight": insight}
-
-
-def _distribution(counts, median):
-    """The shape, which is the actual finding.
-
-    This chart exists to show the reader the baseline directly rather than asking them to
-    take the caveat on trust: a spike of models at one pull count, and a thin tail above
-    it. Anyone who sees it will draw the right conclusion without being told.
-    """
-    # Short labels: this card is four columns wide and the histogram draws every label
-    # horizontally, so "under 1k" and "1k-2.5k" ran into each other.
-    bands = [(0, 1000, "<1k"), (1000, 2500, "1\u20132.5k"), (2500, 5000, "2.5\u20135k"),
-             (5000, 10000, "5\u201310k"), (10000, float("inf"), "10k+")]
-    labels, values = [], []
-    for low, high, label in bands:
-        labels.append(label)
-        values.append(sum(1 for c in counts if low <= c < high))
-    clustered = sum(1 for c in counts if median * 0.6 <= c <= median * 1.25)
-    out = metric(
-        labels, values,
-        # Kept short deliberately: this card is four columns wide and the full argument
-        # is in its methodology note. A caption that overflows is a caption nobody reads.
-        "%s of %s model images cluster in one band — the automated build." % (
-            ins.num(clustered), ins.num(len(counts)),
-        ),
-        countNoun="models",
-        n=len(counts),
-    )
-    out["ordinal"] = True
-    return out
-
-
-def _coverage(rows, models):
-    """Do the registry and the registry of images agree?
-
-    Two ways they can disagree, and both are worth publishing: a model with no image
-    cannot be run, and an image with no model row is undocumented. Neither is a
-    catastrophe; both are the sort of thing that quietly drifts.
-    """
-    if models is None or models.empty or "identifier" not in models.columns:
-        return dict(EMPTY)
-    listed = {i.strip() for i in as_text(models["identifier"]) if i.strip()}
-    published = {name for name, _ in rows}
-    with_image = len(listed & published)
-    return metric(
-        ["Model has an image", "No image published"],
-        [with_image, len(listed) - with_image],
-        # Three columns wide, so this has room for one clause. The count of images with
-        # no matching model record is in the methodology note instead.
-        ins.share_of(with_image, len(listed), "models", "have a published image"),
-        n=len(listed),
-    )
+def _ranked_insight(scored, median):
+    """Name the leader, and say so when it is a CI test model."""
+    leader = scored[0]
+    tests = sum(1 for name, _, _ in scored[:10] if name in CI_TEST_MODELS)
+    text = "%s models exceed the ~%s baseline; %s leads at %sx it" % (
+        ins.num(len(scored)), ins.num(median), leader[0], leader[2])
+    if leader[0] in CI_TEST_MODELS:
+        text += ", but it is a CI test model"
+    elif tests:
+        text += "; %s of the top ten are CI test models" % ins.num(tests)
+    return text + "."
 
 
 # ---------------------------------------------------------------------------
@@ -425,120 +271,3 @@ def _pull_rhythm_weekday(tags):
     return out
 
 
-def _tag_versioning(tags, models=None, repos=None):
-    """Whether each model's Docker Hub tags include a proper semver-style version
-    tag, or only ``dev``, ``rolling`` (``latest``) and dated snapshot tags.
-
-    The collector classifies every tag into one of five kinds at fetch time
-    (``dated``, ``dev``, ``version``, ``rolling``, ``other``); this asks a per-MODEL
-    question of that classification, the Docker Hub counterpart to the GitHub-side
-    'Past v1.0.0?' column on the Versioning section's release-history table. A model
-    can satisfy one without the other: a GitHub release does not by itself republish
-    the image under a matching Docker tag, and a repository can be re-tagged on
-    Docker Hub without a GitHub release to go with it.
-
-    Restricted to the Hub's currently active population — status Ready or In
-    maintenance, repository not archived — via the same `active_repo_names` filter
-    as the Versioning page's GitHub-side figures, so the two describe the same set
-    of models.
-    """
-    if tags is None or tags.empty or not {"repo", "tag_kind"}.issubset(tags.columns):
-        return dict(EMPTY)
-    active = active_repo_names(models, repos, set(as_text(tags["repo"])))
-    tags = tags[as_text(tags["repo"]).isin(active)]
-    if tags.empty:
-        return dict(EMPTY)
-    kinds = tags.groupby("repo")["tag_kind"].apply(lambda s: set(as_text(s)))
-    if kinds.empty:
-        return dict(EMPTY)
-    has_version = kinds.apply(lambda s: "version" in s)
-    versioned, unversioned = int(has_version.sum()), int((~has_version).sum())
-    total = versioned + unversioned
-    if not total:
-        return dict(EMPTY)
-    return metric(
-        ["Has a semver-tagged image", "Dev/rolling/dated tags only"],
-        [versioned, unversioned],
-        ins.share_of(versioned, total, "models with a Docker image",
-                     "publish at least one semver-tagged version"),
-        n=total,
-    )
-
-
-def _size_swings(tags, models=None, repos=None):
-    """Docker image size, a model's FIRST recorded build against its LATEST —
-    which models have grown or shrunk the most since Docker Hub started tracking
-    them, not just how big they are today.
-
-    AMD64 only: architecture is a separate question (`arm_vs_amd_size`, elsewhere
-    on this page), and mixing two architectures' sizes into one 'first vs latest'
-    figure would compare builds that were never meant to match. Repositories with
-    only one recorded build have nothing to swing against and are excluded, same
-    reasoning as `releases.cadence`'s single-release repos.
-
-    Restricted to the Hub's currently active population, the same
-    `active_repo_names` filter as the rest of the Versioning page: a swing on an
-    archived or not-yet-Ready model describes work that has since stopped, not
-    the Hub's current packaging trend.
-    """
-    if tags is None or tags.empty or not \
-            {"repo", "architecture", "size_bytes", "pushed_at"}.issubset(tags.columns):
-        return {"rows": [], "n": 0}
-    df = tags[as_text(tags["architecture"]) == "amd64"].copy()
-    df["pushed_at"] = pd.to_datetime(df["pushed_at"], errors="coerce", utc=True)
-    df = df.dropna(subset=["pushed_at", "size_bytes"]).sort_values("pushed_at")
-
-    active = active_repo_names(models, repos, set(as_text(df["repo"])))
-    df = df[as_text(df["repo"]).isin(active)]
-
-    rows = []
-    for repo, group in df.groupby("repo"):
-        if len(group) < 2:
-            continue
-        first_gb = float(group.iloc[0]["size_bytes"]) / 1e9
-        latest_gb = float(group.iloc[-1]["size_bytes"]) / 1e9
-        if first_gb <= 0:
-            continue
-        swing = latest_gb - first_gb
-        rows.append({
-            "name": repo,
-            "swing_abs": round(abs(swing), 2),
-            "direction": "Grew" if swing > 0 else ("Shrank" if swing < 0 else "Unchanged"),
-            "first_size": round(first_gb, 2),
-            "latest_size": round(latest_gb, 2),
-        })
-    if not rows:
-        return {"rows": [], "n": 0}
-    rows.sort(key=lambda r: -r["swing_abs"])
-
-    grown = sum(1 for r in rows if r["direction"] == "Grew")
-    shrunk = sum(1 for r in rows if r["direction"] == "Shrank")
-    biggest = rows[0]
-    return {
-        "rows": rows[:12],
-        "n": len(rows),
-        "insight": "%s models have grown and %s have shrunk since their first recorded "
-                  "build; %s swung the most, %s to %s GB." % (
-                      ins.num(grown), ins.num(shrunk), biggest["name"],
-                      biggest["first_size"], biggest["latest_size"],
-                  ),
-    }
-
-
-def _pull_rhythm_hour(tags):
-    """Every digest's last-pull timestamp, by hour of day (UTC)."""
-    if tags is None or tags.empty or "pulled_at" not in tags.columns:
-        return {"labels": [], "values": [], "n": 0}
-    pulled = pd.to_datetime(tags["pulled_at"], errors="coerce", utc=True).dropna()
-    if pulled.empty:
-        return {"labels": [], "values": [], "n": 0}
-    counts = pulled.dt.hour.value_counts().reindex(range(24), fill_value=0)
-    peak = int(counts.values.argmax())
-    return metric(
-        [str(h) for h in range(24)], counts.values,
-        "Busiest hour is %02d:00 UTC, across %s last-pull timestamps." % (
-            peak, ins.num(int(counts.sum())),
-        ),
-        countNoun="digests",
-        n=int(counts.sum()),
-    )

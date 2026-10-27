@@ -14,8 +14,8 @@ member sitting at 100%, which squashed every real cohort into the pale end. A
 contributor whose collaboration ended is not a loss — most were students, interns and
 fellows whose placements were always going to end.
 
-So what this measures now is participation: how many people have been involved, how
-many are involved at once, how long they stay, and where they come from.
+So what this measures now is participation: how many people have been involved, how long
+they stay, and where they come from.
 """
 import pandas as pd
 
@@ -35,13 +35,12 @@ from .parse import (
 DAYS_PER_MONTH = 30.44
 
 
-def build(community, today):
+def build(community):
     if community is None or community.empty:
         return dict(
             {k: dict(EMPTY) for k in (
                 "roles", "growth", "joined_per_quarter", "duration_buckets",
                 "by_country", "active_status", "by_gender", "by_organisation",
-                "active_over_time",
             )},
             participation={"labels": [], "series": [], "n": 0},
         )
@@ -55,7 +54,6 @@ def build(community, today):
         "growth": _growth(start),
         "joined_per_quarter": _joined_per_quarter(start),
         "participation": _participation(start),
-        "active_over_time": _active_over_time(start, end, today),
         "duration_buckets": _duration_buckets(start, end),
         "active_status": _active_status(end),
         # Short form: this sits in a 4-column card, where the full
@@ -121,34 +119,6 @@ def _participation(start):
             ins.num(total), labels[0],
         ),
     )
-
-
-def _active_over_time(start, end, today):
-    """How many people were involved AT ONCE in each quarter.
-
-    Joined and not yet ended, counted per quarter — the same shape as
-    ``projects.active_over_time``. This is the honest measure of how big the
-    community is at a given moment, as opposed to how many have ever passed through
-    it, and unlike a churn ledger it does not treat a finished placement as a loss.
-    """
-    valid = start.notna()
-    if not valid.any():
-        return dict(EMPTY)
-    span = pd.period_range(start[valid].min(), max(start[valid].max(), today), freq="Q")
-    closed = end.fillna(today)
-    labels, values = [], []
-    for quarter in span:
-        edge = quarter.end_time
-        active = valid & (start <= edge) & (closed >= quarter.start_time)
-        labels.append(str(quarter))
-        values.append(int(active.sum()))
-    peak = max(range(len(values)), key=lambda i: values[i])
-    out = metric(labels, values,
-                 "%s people involved at once now; the peak was %s in %s." % (
-                     ins.num(values[-1]), ins.num(values[peak]), labels[peak],
-                 ))
-    out["n"] = int(values[-1])
-    return out
 
 
 def _duration_buckets(start, end):

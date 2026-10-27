@@ -15,7 +15,8 @@ synchronisation check.
 TWO RULES THIS MODULE ENFORCES, not merely follows
 --------------------------------------------------
 **Exactly one function returns personal data, and it says so.** `repo_metrics` reads
-pull-request author *associations* and returns counts by association, never a login. The
+pull-request authors, compares each against the team list it is given, and returns counts
+only, never a login. The
 stargazer endpoint carries logins and they are discarded. `contributor_counts` reduces to a
 number. The single exception is **`contributor_logins`**, which returns GitHub handles because
 the site publishes a contributors ranking and the Airtable column that fed it was deleted —
@@ -57,9 +58,14 @@ GRAPHQL = "https://api.github.com/graphql"
 # strict form, and none of those 10 do.
 MODEL_RE = re.compile(r"^eos[0-9][0-9a-z]{3}$")
 
-# GitHub's own vocabulary for "is this person part of the organisation?". Splitting it
-# here rather than at each call site means the site cannot end up with two different
-# definitions of an external contributor.
+# GitHub's own vocabulary for "is this person part of the organisation?". On its own it
+# is not enough: GitHub works the association out from org membership TODAY, so staff who
+# were never added to the org, and interns whose membership has ended, come back as
+# CONTRIBUTOR. On the September 2026 sample that put 566 of 926 merged PRs "outside",
+# including all 30 on ersilia-pack. `is_internal` therefore also accepts anyone credited in
+# the Airtable Models `Contributor` column or listed in the Community table, and bots.
+# Splitting it here rather than at each call site means the site cannot end up with two
+# different definitions of an external contributor.
 INTERNAL_ASSOCIATIONS = {"OWNER", "MEMBER", "COLLABORATOR"}
 
 # Automation accounts, excluded from any contributor figure. `ersilia-bot` is the one that
@@ -76,6 +82,21 @@ def is_bot(login):
     """Whether a GitHub login is an automation account rather than a person."""
     text = str(login or "").strip()
     return text.lower() in BOT_LOGINS or text.endswith("[bot]")
+
+
+def is_internal(association, login, typename, team):
+    """Whether a pull request's author counts as from the organisation.
+
+    True for a current org member or repository collaborator, for anyone in `team` (the
+    lowercased handles from the Airtable Models `Contributor` column and the Community
+    table's `GitHub Handle` column, see `fetch_github.load_team`), and for automation
+    accounts — dependabot, Claude and other GitHub Apps, and `ersilia-bot` — since a bot
+    acts on the organisation's behalf. A deleted ("ghost") author has no login and counts
+    as outside.
+    """
+    if association in INTERNAL_ASSOCIATIONS or typename == "Bot" or is_bot(login):
+        return True
+    return bool(login) and login.lower() in team
 
 
 # A repository name that is safe to interpolate into a GraphQL string literal. GitHub
@@ -167,7 +188,7 @@ _METRICS_FRAGMENT = """
     releases { totalCount }
     latestRelease { publishedAt }
     prSample: pullRequests(states: MERGED, last: %(sample)d) {
-      nodes { authorAssociation }
+      nodes { authorAssociation author { login __typename } }
     }
     issueSample: issues(states: CLOSED, last: %(sample)d) {
       nodes { createdAt closedAt }
@@ -177,7 +198,7 @@ _METRICS_FRAGMENT = """
 """
 
 
-def repo_metrics(org, names, headers, batch=20, sample=30, progress=True):
+def repo_metrics(org, names, headers, team=frozenset(), batch=20, sample=30, progress=True):
     """Per-repository counts that the REST list endpoint does not carry.
 
     Returns `{name: {...}}`. A repository that GraphQL cannot resolve — deleted, renamed,
@@ -192,8 +213,9 @@ def repo_metrics(org, names, headers, batch=20, sample=30, progress=True):
     * total commits is not in any list payload, and it is the number that drifts fastest —
       3 of 25 sampled repositories were already behind in the hand-maintained table.
 
-    NO LOGINS ARE RETURNED. `prSample` reads `authorAssociation` and is reduced to two
-    integers here; the nodes never leave this function.
+    NO LOGINS ARE RETURNED. `prSample` reads each author's association and login, which
+    `is_internal` checks against `team` (lowercased handles); the result is reduced to two
+    integers here and the nodes never leave this function.
     """
     out = {}
     for offset in range(0, len(names), batch):
@@ -209,18 +231,21 @@ def repo_metrics(org, names, headers, batch=20, sample=30, progress=True):
             repo = data.get("r%d" % index)
             if not repo:
                 continue
-            out[name] = _flatten_metrics(repo)
+            out[name] = _flatten_metrics(repo, team)
         if progress:
             logging.info("  metrics: %d/%d repositories",
                          min(offset + batch, len(names)), len(names))
     return out
 
 
-def _flatten_metrics(repo):
+def _flatten_metrics(repo, team=frozenset()):
     """One GraphQL repository payload reduced to plain numbers."""
     internal = external = 0
     for node in ((repo.get("prSample") or {}).get("nodes") or []):
-        if (node or {}).get("authorAssociation") in INTERNAL_ASSOCIATIONS:
+        node = node or {}
+        author = node.get("author") or {}
+        if is_internal(node.get("authorAssociation"), author.get("login"),
+                       author.get("__typename"), team):
             internal += 1
         else:
             external += 1

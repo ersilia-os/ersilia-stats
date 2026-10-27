@@ -15,7 +15,7 @@ from collections import Counter
 
 from . import insights as ins
 from .parse import EMPTY, as_text, col, metric, parse_multi
-from .organisations import country_lookup, resolve_countries
+from .organisations import country_lookup, partners, resolve_countries
 
 GLOBAL_SOUTH_GROUPS = {"LIC", "LMIC", "UMIC"}
 GLOBAL_NORTH_GROUPS = {"HIC"}
@@ -48,12 +48,13 @@ def _counter_from_multi(series):
     return counter
 
 
-def build(countries, orgs, community, events):
+def build(countries, orgs, community, events, projects=None):
     income = _attribute_map(countries, "income_group")
     region = _attribute_map(countries, "region")
     subregion = _attribute_map(countries, "subregion")
 
-    org_counts = resolve_countries(orgs, country_lookup(countries))
+    # Partners only — organisations with a project — not the whole directory.
+    org_counts = resolve_countries(partners(orgs, projects), country_lookup(countries))
     community_counts = _counter_from_multi(col(community, "country_(from_country)", "country")
                                            if community is not None else None)
     event_counts = _counter_from_multi(col(events, "country_(from_country)")

@@ -299,6 +299,59 @@ def quarter_totals(pairs):
 ACTIVE_MODEL_STATUSES = {"ready", "in maintenance"}
 
 
+def active_model_ids(models):
+    """Identifiers of the registry's active models (status Ready or In maintenance), or
+    None when the table lacks the columns to tell, so callers can leave it unfiltered.
+
+    The ONE definition of the population the Models page describes. Every chart there
+    except Curation status reads it, so they all count the same models: before, the
+    registry (267), the GitHub repositories (262) and the Docker Hub images (271) each
+    gave their own total and no two cards agreed.
+    """
+    if models is None or models.empty or \
+            not {"identifier", "status"}.issubset(models.columns):
+        return None
+    # Resolved with `first_value`, as `models.py` does: a single-select can arrive as a
+    # list-repr string like "['Ready']", which a bare `.lower()` would never match.
+    status = models["status"].apply(first_value).fillna("").astype(str).str.strip().str.lower()
+    ids = as_text(models["identifier"]).str.strip()
+    return {i for i, s in zip(ids, status) if i and s in ACTIVE_MODEL_STATUSES}
+
+
+def active_models(models, ids):
+    """``models`` narrowed to the rows whose identifier is in ``ids``."""
+    if ids is None:
+        return models
+    return models[as_text(models["identifier"]).str.strip().isin(ids)]
+
+
+def restrict_to_models(collected, models, ids):
+    """``collected`` with every row about a model outside ``ids`` dropped.
+
+    A row is about a model when its `name` or `repo` is a registry identifier or is
+    flagged `is_model` in the GitHub or Docker Hub inventory. Rows about anything else
+    (ersilia, ersilia-pack and the rest of the tooling) are kept, so a frame that mixes
+    both, like the commit history, keeps its non-model part intact.
+    """
+    if ids is None:
+        return collected
+    model_names = set(as_text(models["identifier"]).str.strip())
+    for key in ("github_repos", "dockerhub_images"):
+        frame = collected.get(key)
+        if frame is not None and {"name", "is_model"}.issubset(frame.columns):
+            flags = as_text(frame["is_model"]).str.lower() == "yes"
+            model_names |= set(as_text(frame["name"])[flags].str.strip())
+    out = {}
+    for key, frame in collected.items():
+        column = next((c for c in ("name", "repo") if c in frame.columns), None)
+        if column is None:
+            out[key] = frame
+            continue
+        names = as_text(frame[column]).str.strip()
+        out[key] = frame[~names.isin(model_names) | names.isin(ids)]
+    return out
+
+
 def active_repo_names(models, repos, universe):
     """``universe`` narrowed to repositories that are both a currently active
     registry entry (status Ready or In maintenance) and not archived on GitHub.

@@ -6,6 +6,7 @@ total says how big Ersilia is; the delta says whether it is still growing.
 """
 import pandas as pd
 
+from .organisations import partners
 from .parse import as_text, col, dense_quarters, quarter_counts, to_num
 
 YES = {"yes", "true", "1"}
@@ -239,7 +240,9 @@ def build(tables, repos_public, models, repos_all=None, collected=None):
         # assumes a citation curve means.
         "total_citations": _kpi(citations, _citation_series(pubs, collected), per_period=1),
         "projects": _kpi(len(projects), _cumulative_series(col(projects, "start_date"))),
-        "organisations": _kpi(len(orgs)),
+        # Partners, not the whole contact table: only organisations with a project.
+        # The table also holds funders, conference hosts and contacts.
+        "organisations": _kpi(len(partners(orgs, projects)) if not orgs.empty else 0),
         "countries_represented": _kpi(len(footprint)),
         "total_stars": _kpi(stars),
         "events": _kpi(len(events), _cumulative_series(col(events, "date"))),

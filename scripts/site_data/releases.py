@@ -1,7 +1,7 @@
 """Model version history, from GitHub Releases (fetch_github_releases.py).
 
-WHAT THIS ADDS THAT `code.py`'s "release_recency" AND model_activity's join CANNOT
-------------------------------------------------------------------------------------
+WHAT THIS ADDS THAT model_activity's join CANNOT
+------------------------------------------------
 Every other release-shaped figure on this site comes from `github_repos.csv`'s
 `latest_release` and `releases` (a bare count) — the CURRENT state, not the history.
 Model repos get a new GitHub Release each time a maintainer re-packages or updates
@@ -14,6 +14,8 @@ fetch time, once, against the previous release's own parsed version — not
 recomputed here, so this module only ever aggregates what the collector already
 classified.
 """
+import pandas as pd
+
 from . import insights as ins
 from .parse import (EMPTY, active_repo_names, as_text, dense_quarters, growth_pair,
                     metric, quarter_counts)
@@ -21,19 +23,10 @@ from .parse import (EMPTY, active_repo_names, as_text, dense_quarters, growth_pa
 EMPTY_SECTION = {
     "bump_types": dict(EMPTY),
     "growth": {"labels": [], "series": [], "n": 0},
-    "most_versioned": dict(EMPTY),
     "cadence": dict(EMPTY),
 }
 
 REQUIRED_COLUMNS = {"repo", "release_index", "bump_type", "published_at", "tag_name"}
-
-
-def _titles_by_identifier(models):
-    if models is None or models.empty or "identifier" not in models.columns:
-        return {}
-    ids = as_text(models["identifier"])
-    titles = as_text(models["title"]) if "title" in models.columns else as_text(ids)
-    return {ident: (title or ident) for ident, title in zip(ids, titles) if ident}
 
 
 def build(models, collected):
@@ -51,11 +44,9 @@ def build(models, collected):
     if releases.empty:
         return dict(EMPTY_SECTION)
 
-    titles = _titles_by_identifier(models)
     return {
         "bump_types": _bump_types(releases),
         "growth": _growth(releases),
-        "most_versioned": _most_versioned(releases, titles),
         "cadence": _cadence(releases),
     }
 
@@ -81,10 +72,20 @@ def _bump_types(releases):
     return metric(labels, values, insight, countNoun="releases", n=total)
 
 
+# GitHub Releases were introduced across the Hub at the end of 2025, when every existing
+# model got its first release at once: 147 of the 178 releases in 2025Q4 are a first
+# release. Counting that quarter would show a one-off backfill as a peak of activity, so
+# the release timeline starts here.
+RELEASES_START = "2026-01-01"
+
+
 def _growth(releases):
     """Releases published per quarter, hub-wide, with the running total —
-    maintenance activity across the whole Hub over time, not any one model's."""
-    quarters = quarter_counts(releases["published_at"])
+    maintenance activity across the whole Hub over time, not any one model's.
+    From `RELEASES_START` on."""
+    published = pd.to_datetime(releases["published_at"], errors="coerce", utc=True)
+    since = published >= pd.Timestamp(RELEASES_START, tz="UTC")
+    quarters = quarter_counts(releases["published_at"][since])
     if quarters.empty:
         return {"labels": [], "series": [], "n": 0}
     dense = dense_quarters(quarters)
@@ -93,25 +94,9 @@ def _growth(releases):
     return growth_pair(labels, list(dense.values), running, "releases")
 
 
-def _most_versioned(releases, titles):
-    """Models ranked by how many releases they carry — the ones updated most since
-    their first `v1.0.0`, not the ones pulled most or committed to most."""
-    counts = releases.groupby("repo")["release_index"].max()
-    if counts.empty:
-        return dict(EMPTY)
-    counts = counts.sort_values(ascending=False).head(10)
-    labels = [titles.get(repo, repo) for repo in counts.index]
-    return metric(
-        labels, counts.values,
-        "%s leads with %s releases." % (labels[0], ins.num(int(counts.iloc[0]))),
-        countNoun="releases",
-        n=int(counts.sum()),
-    )
-
-
 def _cadence(releases):
     """Days between a model's CONSECUTIVE releases — not whether it gets re-released
-    (`most_versioned` already answers that), but how often.
+    (`growth` counts every release), but how often.
 
     Only repositories with two or more releases contribute a gap: a repo's first
     release has nothing before it to measure a gap against, so it drops out rather

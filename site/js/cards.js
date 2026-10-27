@@ -155,7 +155,9 @@ function rankedTable(metric, spec) {
   table.appendChild(thead);
 
   const body = el("tbody");
-  const primary = columns[0].key;
+  // The bar follows the first NUMERIC column, so a text column such as an ID can sit
+  // first, beside the name.
+  const primary = (columns.find((c) => !c.raw) || columns[0]).key;
   const rows = metric.rows || metric.labels.map((label, i) => {
     const row = { [nameKey]: label, value: metric.values[i] };
     (metric.extra || []).forEach((ex) => { row[ex.key] = ex.values[i]; });

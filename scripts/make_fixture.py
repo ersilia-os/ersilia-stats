@@ -54,12 +54,13 @@ def listrepr(values):
 
 
 # Ten extra Ready models with heavy (>= 3 GB) images and parsed install.yml files, because
-# `packages.heaviest_common` and `packages.most_pulled_common` each need at least
-# `packages.MIN_HEAVY_MODELS` of them before they draw anything. They exist in Airtable,
+# `packages.most_common` needs at least `packages.MIN_MODELS` models with an
+# install.yml before it draws anything. They exist in Airtable,
 # GitHub, Docker Hub (images and tags) and model_packages.
 HEAVY_MODELS = ["eos7h%02d" % i for i in range(10)]
-# A model repository on GitHub with no Docker Hub image (`missing_docker_image`), and a
-# Docker Hub model image with no repository left on GitHub (`orphaned_docker_images`).
+# A model repository on GitHub with no Docker Hub image, and a Docker Hub model image
+# with no repository left on GitHub and no registry entry: the joins across the three
+# sources, and `parse.restrict_to_models`, must cope with both.
 UNPACKAGED_MODEL = "eos6fff"
 ORPHANED_IMAGE = "eos9zzz"
 
@@ -113,7 +114,10 @@ def organisations():
             "Focus Region": listrepr(["Global"]),
             "Community": "", "Conferences": "", "Contacts": "", "Description": "",
             "Events": "", "Grants": "", "Opportunities": "", "Website": "",
-            "Projects": "", "Workshops": "",
+            # The back-link of projects()' `Organization` (project i -> ORG[i]), so the
+            # Partner organisations KPI, which counts organisations linked to a project,
+            # has partners to count. Orphan Org has none and must be left out.
+            "Projects": listrepr([PROJ[i]]) if i < len(PROJ) else "", "Workshops": "",
         })
     return out
 
@@ -234,20 +238,24 @@ def community():
 
 def events():
     rows = [
-        ("Fixture Symposium", "2022-04-05", "Testland", "Testland Research Institute"),
-        ("Sample Workshop", "2023-06-12", "Sampleia", "Sampleia Health Foundation"),
-        ("Example Conference", "2024-02-20", "Exampleland", "Example Open Network"),
+        ("Fixture Symposium", "2022-04-05", "Testland", "Testland Research Institute",
+         "Conference", "In person"),
+        ("Sample Workshop", "2023-06-12", "Sampleia", "Sampleia Health Foundation",
+         "Training", "In person"),
+        ("Example Conference", "2024-02-20", "Exampleland", "Example Open Network",
+         "Conference", "Online"),
         # No country recorded: the "located events" count must exclude it.
-        ("Remote Fixture Talk", "2025-05-01", "", "Example Open Network"),
+        ("Remote Fixture Talk", "2025-05-01", "", "Example Open Network", "Talk", "Online"),
     ]
     out = []
-    for i, (name, date, country, organiser) in enumerate(rows):
+    for i, (name, date, country, organiser, category, fmt) in enumerate(rows):
         out.append({
             "airtable_id": rec("EVNT", i + 1), "Name": name, "Date": date,
             "Country (from Country)": listrepr([country] if country else []),
             "Country": "", "Organiser": listrepr([organiser]),
             "Year": date[:4], "Quarter": "", "Description": "",
             "Event URL": "", "Organisations": "", "Videos": "",
+            "Category": category, "Format": fmt,
         })
     return out
 
@@ -267,6 +275,19 @@ def blogposts():
             "Name (from Author)": "", "Intro": "", "Slug": "", "URL": "",
         })
     return out
+
+
+def videos():
+    rows = [
+        ("A fixture talk recording", "2021-03-10", ["Media"]),
+        ("Fixture course: module 1", "2022-08-01", ["Training"]),
+        ("Fixture course: module 2", "2022-08-08", ["Training", "External"]),
+    ]
+    return [
+        {"airtable_id": rec("VIDE", i + 1), "Title": title, "Date": date,
+         "Domain": listrepr(domain), "Events": "", "Youtube": ""}
+        for i, (title, date, domain) in enumerate(rows)
+    ]
 
 
 def conferences():
@@ -307,9 +328,10 @@ def models():
         ("eos5eee", ["Tuberculosis"], "Annotation", "Activity prediction",
          "Ready", "External", ["ChEMBL"], "Escherichia coli",
          ["AMD64", "ARM64"], "2025-06-30", "", "", [33, 31, 38, 95, 280]),
-        # Incorporated, repository on GitHub, not yet packaged: no Docker Hub image.
+        # In the active Hub (In maintenance) with a repository on GitHub but no Docker Hub
+        # image.
         (UNPACKAGED_MODEL, ["Malaria"], "Annotation", "Activity prediction",
-         "In progress", "External", ["ChEMBL"], "Plasmodium falciparum",
+         "In maintenance", "External", ["ChEMBL"], "Plasmodium falciparum",
          ["AMD64"], "2025-12-01", 2025, "", [30, 30, 30, 30, 30]),
     ]
     for i, ident in enumerate(HEAVY_MODELS):
@@ -471,6 +493,8 @@ def github_releases():
         ("eos1aaa", 2, "v1.1.0", "2025-04-02T00:00:00", "no", 1, 1, 0, "minor"),
         ("eos1aaa", 3, "v1.1.1", "2025-06-15T00:00:00", "no", 1, 1, 1, "patch"),
         ("eos2bbb", 1, "v1.0.0", "2025-02-20T00:00:00", "no", 1, 0, 0, "initial"),
+        # On or after `releases.RELEASES_START`, so the growth curve has a point to draw.
+        ("eos2bbb", 2, "v1.0.1", "2026-01-01T00:00:00", "no", 1, 0, 1, "patch"),
     ]
     return [{
         "repo": repo, "release_index": idx, "tag_name": tag, "published_at": published,
@@ -520,8 +544,8 @@ def github_model_requests():
 
 def github_model_packages():
     """install.yml contents for the fixture model repos, joined against
-    `dockerhub_tags`' sizes. The ten `HEAVY_MODELS` clear `packages.MIN_HEAVY_MODELS`,
-    so `heaviest_common` has something to rank."""
+    `dockerhub_tags`' sizes. The ten `HEAVY_MODELS` clear `packages.MIN_MODELS`,
+    so `most_common` has something to rank."""
     rows = [
         ("eos1aaa", "pip", "rdkit", "2026.3.4", ""),
         ("eos1aaa", "pip", "numpy", "1.26.4", ""),
@@ -540,7 +564,8 @@ def github_model_packages():
 
 def dockerhub_images():
     """Model images, plus the infrastructure images that must be excluded from every figure."""
-    pulls = {"eos1aaa": 4200, "eos2bbb": 4100, "eos3ccc": 29000, "eos4ddd": 4300,
+    # The standout is a Ready model: `most_pulled_models` reads the active Hub only.
+    pulls = {"eos1aaa": 29000, "eos2bbb": 4100, "eos3ccc": 4200, "eos4ddd": 4300,
              "eos5eee": 900}
     pulls.update({ident: 5000 + 150 * i for i, ident in enumerate(HEAVY_MODELS)})
     rows = [{"name": n, "is_model": "yes", "pull_count": p, "star_count": 0,
@@ -583,8 +608,8 @@ def dockerhub_tags():
          "2025-11-15T09:00:00", "2025-12-10T11:02:00"),   # Wed, 8-30 days
         ("eos5eee", "latest", "rolling", "amd64", 300_000_000,
          "2025-12-01T09:00:00", "2025-12-26T06:00:00"),   # Fri, 2-7 days
-        # Earlier dated builds, so `usage.size_swings` has a first build to compare
-        # against: eos1aaa grew and eos2bbb shrank.
+        # Earlier dated builds, so the latest-build readings have older ones to skip
+        # past: eos1aaa grew and eos2bbb shrank.
         ("eos1aaa", "2025-06-01", "dated", "amd64", 650_000_000,
          "2025-06-01T09:00:00", "2025-07-01T10:00:00"),
         ("eos2bbb", "2025-03-01", "dated", "amd64", 1_500_000_000,
@@ -688,7 +713,7 @@ TABLES = {
     "blogposts": blogposts, "community": community, "conferences": conferences,
     "countries": countries, "events": events, "models": models,
     "organisations": organisations, "projects": projects,
-    "publications": publications, "repositories": repositories,
+    "publications": publications, "repositories": repositories, "videos": videos,
 }
 
 

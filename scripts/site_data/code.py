@@ -11,32 +11,31 @@ The collected GitHub snapshots can. Three files, and each one carries a dimensio
 structurally cannot store:
 
     repos_<date>.csv            per-repository counts, including commits, releases,
-                                closed issues, merged PRs and PR author associations
+                                closed issues, merged PRs and PR author origin
     commit_activity_<date>.csv  commits per calendar quarter per repository
     stars_<date>.csv            one row per star, WITH THE DATE IT WAS GIVEN
 
-THE FINDING THAT REORGANISED THIS PAGE
---------------------------------------
-**78% of recently merged pull requests on model repositories come from outside the
-organisation** — and a similar share on the other repositories. Measured across every public
-repository rather than a sample; the exact counts are recomputed on each build and appear in
-the caption, so they are not repeated here to go stale.
+WHO WRITES THE CODE
+-------------------
+Per-model repositories were once dismissed here as carrying "almost no signal", on the
+evidence of stars: `eos4e40` has 2, `eos2gw4` has 0. That was the wrong measurement. Nobody
+stars a single model; they *contribute* one, through a pull request, and most model
+repositories have at least one merged.
 
-That number matters because of a mistake it corrects. Per-model repositories were dismissed
-here as carrying "almost no signal", on the evidence of stars: `eos4e40` has 2, `eos2gw4`
-has 0. That was true and it was the wrong measurement. Nobody stars a single model — they
-*contribute* one, through a pull request, and **208 of 243 model repositories have at least
-one merged, 127 of them from outside the organisation.** The contribution signal was there
-the whole time, in a field nobody had read.
+So this module splits recently merged pull requests by who wrote them, separately for model
+and other repositories, because they are different kinds of work: a model repository is a
+submission, and `ersilia` itself is a codebase.
 
-So this module treats external contribution as the headline rather than a footnote, and
-reports it separately for model and non-model repositories, because they are different
-kinds of work: a model repository is a submission, and `ersilia` itself is a codebase.
+"From the organisation" is defined in `github_api.is_internal`: a current org member or
+collaborator, anyone credited in the Airtable Models `Contributor` column or listed in the
+Community table, or a bot. An earlier version used GitHub's `authorAssociation` alone and
+reported 78% "from outside"; that counted staff who were never in the GitHub org, former
+interns and dependabot as outside contributors.
 
 WHAT IS DELIBERATELY NOT HERE
 -----------------------------
-**No author names, ever.** `prs_external` is a count derived from GitHub's
-`authorAssociation` enum; no login is collected, so none can be published. The existing
+**No author names, ever.** `prs_external` is a count; the logins it is derived from are
+compared in memory at fetch time and never written, so none can be published. The existing
 contributor ranking on this page comes from the Airtable `Contributor Names` column, which
 is a separate, deliberate decision documented in `fetch_airtable.py`.
 
@@ -79,25 +78,14 @@ RESOLUTION_BANDS = [
     (91, float("inf"), "> 3 mo"),
 ]
 
-COMMIT_BANDS = [
-    (0, 11, "< 10"),
-    (11, 26, "10\u201325"),
-    (26, 51, "26\u201350"),
-    (51, 101, "51\u2013100"),
-    (101, float("inf"), "> 100"),
-]
-
 EMPTY_SECTION = {
     "commit_growth": {"labels": [], "series": [], "n": 0},
     "star_growth": {"labels": [], "series": [], "n": 0},
     "contribution_origin": {"labels": [], "series": [], "n": 0},
     "activity_recency": dict(EMPTY),
     "by_language": dict(EMPTY),
-    "by_licence": dict(EMPTY),
     "issue_resolution": dict(EMPTY),
-    "model_commit_effort": dict(EMPTY),
     "most_active": {"rows": [], "n": 0},
-    "release_recency": dict(EMPTY),
 }
 
 
@@ -121,52 +109,8 @@ def build(collected, today=None):
     out["contribution_origin"] = _contribution_origin(repos)
     out["activity_recency"] = _activity_recency(repos, today)
     out["by_language"] = _by_language(repos)
-    out["by_licence"] = _by_licence(repos)
     out["issue_resolution"] = _issue_resolution(repos)
-    out["model_commit_effort"] = _model_commit_effort(repos)
     out["most_active"] = _most_active(repos)
-    out["release_recency"] = _release_recency(repos)
-    return out
-
-
-def _release_recency(repos):
-    """Repositories by the year of their most recent release.
-
-    READ THIS ONE CAREFULLY, because the obvious reading is wrong. 164 repositories last
-    released in 2025 against 72 in 2026 looks like releasing is slowing down. It is not
-    evidence of that: **139 of 386 repositories have never cut a release at all**, and most
-    of those that do release do so rarely, so a repository sitting on a 2025 tag is usually
-    one that ships when there is something to ship rather than one that stopped.
-
-    That is why the never-released group is a bar here rather than an omission. Without it
-    the chart would describe 245 repositories and imply it described all of them.
-    """
-    if "latest_release" not in repos.columns or "releases" not in repos.columns:
-        return dict(EMPTY)
-    years = {}
-    never = 0
-    for i in range(len(repos)):
-        raw = str(repos["latest_release"].iloc[i]).strip()
-        if raw in ("", "nan") or len(raw) < 4 or not raw[:4].isdigit():
-            never += 1
-            continue
-        years[raw[:4]] = years.get(raw[:4], 0) + 1
-    if not years:
-        return dict(EMPTY)
-    labels = sorted(years)
-    values = [years[y] for y in labels]
-    with_release = sum(values)
-    if never:
-        labels.append("never released")
-        values.append(never)
-    out = metric(
-        labels, values,
-        "%s of %s repositories have ever published a release." % (
-            ins.num(with_release), ins.num(len(repos))),
-        countNoun="repositories",
-        n=len(repos),
-    )
-    out["ordinal"] = True
     return out
 
 
@@ -266,9 +210,11 @@ def _contribution_origin(repos):
     different things: a pull request against a model repository is usually a model
     *submission*, and one against `ersilia` is work on the tool itself.
 
-    Counts come from GitHub's `authorAssociation`: OWNER, MEMBER and COLLABORATOR are
-    inside the organisation, everything else is outside. Only the most recent 30 merged
-    pull requests per repository are sampled, so this describes current practice.
+    "From the organisation" means a current org member or collaborator, anyone credited
+    in the Airtable Models `Contributor` column or listed in the Community table, or a bot
+    (`github_api.is_internal`).
+    Everyone else is outside. Only the most recent 30 merged pull requests per repository
+    are sampled, so this describes current practice.
     """
     if "prs_sampled" not in repos.columns or "prs_external" not in repos.columns:
         return {"labels": [], "series": [], "n": 0}
@@ -279,7 +225,7 @@ def _contribution_origin(repos):
     groups = []
     # Short labels: at five columns wide "Model repositories" was truncated to
     # "Model reposit…" on the axis.
-    for label, mask in (("Model repos", is_model), ("Everything else", is_other)):
+    for label, mask in (("Model repos", is_model), ("Other repos", is_other)):
         total = int(sampled[mask].sum())
         outside = int(external[mask].sum())
         groups.append((label, outside, total - outside, total))
@@ -367,42 +313,6 @@ def _by_language(repos):
     )
 
 
-def _by_licence(repos):
-    """SPDX identifiers as GitHub reports them, read from the licence file.
-
-    A CORRECTION IS RECORDED HERE because the wrong version nearly shipped. This was
-    written claiming the organisation's tooling was "largely GPL-3.0 while the model
-    repositories are overwhelmingly MIT". That is false, and checking it took one query:
-    **229 of 243 model repositories are GPL-3.0** and 7 are MIT; the non-model
-    repositories are 107 GPL-3.0 and 25 MIT. GPL-3.0 dominates both kinds, so there is no
-    model-versus-tooling split to report.
-
-    The confusion is worth naming, because the site shows both numbers. The Models page
-    reports `licence_openness` from the Airtable `License` column, and that describes the
-    **upstream model's** licence — the terms of the thing being wrapped. This describes the
-    licence of Ersilia's own wrapper repository. They answer different questions and they
-    genuinely differ; treating one as evidence about the other is the mistake.
-    """
-    if "license" not in repos.columns:
-        return dict(EMPTY)
-    counts = {}
-    for value in as_text(repos["license"]):
-        name = value.strip()
-        if name and name.upper() not in ("NOASSERTION",):
-            counts[name] = counts.get(name, 0) + 1
-    if not counts:
-        return dict(EMPTY)
-    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:8]
-    total = sum(counts.values())
-    return metric(
-        [name for name, _ in ranked], [count for _, count in ranked],
-        # One clause: four columns wide. The licence count is in the note.
-        ins.share_of(ranked[0][1], total, "licensed repositories",
-                     "use %s" % ranked[0][0]),
-        countNoun="repositories",
-    )
-
-
 def _issue_resolution(repos):
     """How long issues stay open, bucketed, one row per repository.
 
@@ -437,41 +347,6 @@ def _issue_resolution(repos):
             ins.num(quick), ins.num(counted)),
         countNoun="repositories",
         n=counted,
-    )
-    out["ordinal"] = True
-    return out
-
-
-def _model_commit_effort(repos):
-    """Commits per model repository, bucketed.
-
-    The point: a model is not a file drop. The distribution shows how much work sits
-    behind a typical entry in the Model Hub.
-    """
-    if "total_commits" not in repos.columns:
-        return dict(EMPTY)
-    is_model, _ = _split_models(repos)
-    commits = to_num(repos["total_commits"])[is_model]
-    counted = [int(v) for v in commits if v is not None and v == v]
-    if not counted:
-        return dict(EMPTY)
-
-    labels = [band[2] for band in COMMIT_BANDS]
-    values = [0] * len(labels)
-    for value in counted:
-        for index, (low, high, _name) in enumerate(COMMIT_BANDS):
-            if low <= value < high:
-                values[index] += 1
-                break
-    counted.sort()
-    median = counted[len(counted) // 2]
-    out = metric(
-        labels, values,
-        "The median model repository carries %s commits; %s of %s have more than 50." % (
-            ins.num(median), ins.num(values[3] + values[4]), ins.num(len(counted)),
-        ),
-        countNoun="model repositories",
-        n=len(counted),
     )
     out["ordinal"] = True
     return out
@@ -512,11 +387,18 @@ def _most_active(repos):
     to be told when something changes, which is a stronger signal than a bookmark, and by
     that measure the star counts understate attention rather than overstating it. It arrives
     as a column rather than a chart because the absolute numbers are small — 19 at most.
+
+    Public, non-model repositories only. Public because `repos` is the public GitHub
+    inventory and nothing else reaches this module; non-model because the per-model
+    `eosXXXX` repositories belong to the Model Hub page — `eos1vms` alone would otherwise
+    take a place in the top ten.
     """
     columns = ["total_commits", "merged_prs", "closed_issues", "releases", "contributors",
                "watchers"]
     if any(c not in repos.columns for c in columns):
         return {"rows": [], "n": 0}
+    _is_model, is_other = _split_models(repos)
+    repos = repos[is_other]
     rows = _rows_by(repos, "total_commits", columns, top=10)
     if not rows:
         return {"rows": [], "n": 0}
@@ -530,7 +412,7 @@ def _most_active(repos):
         # `ins.join` separates with a space only, so each fragment carries its own
         # full stop — without it the two sentences run together.
         "insight": ins.join(
-            "%s alone holds %s of the %s commits across all public repositories." % (
+            "%s alone holds %s of the %s commits outside the model repositories." % (
                 leader["name"], ins.pct(leader["total_commits"], total), ins.num(total),
             ),
             "%s repositories publish releases." % ins.num(with_releases)

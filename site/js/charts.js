@@ -1263,7 +1263,8 @@ function optBandLine(d) {
   const series = d.series || [];
   const lower = series.find((s) => s.name === "p25");
   const upper = series.find((s) => s.name === "p75");
-  const median = series.find((s) => s !== lower && s !== upper);
+  const stopped = series.find((s) => s.name === "Did not finish");
+  const median = series.find((s) => s !== lower && s !== upper && s !== stopped);
   if (!median || !d.labels || !d.labels.length) return base();
 
   const x = d.labels.map((l) => Number(String(l).replace(/,/g, "")));
@@ -1311,6 +1312,28 @@ function optBandLine(d) {
     lineStyle: { color: color, width: 2 }, showSymbol: true, symbolSize: 7,
     itemStyle: { color: color, borderColor: T.surface, borderWidth: 1.5 },
   });
+  // How many models were stopped at each size, on the "Not finished" row at the top:
+  // a run that takes too long is stopped and records no runtime, so these models have
+  // no point of their own, but they are counted in the median and band as slowest.
+  if (stopped) {
+    // The last size sits on the right edge, so its label is right-aligned to stay inside.
+    const marks = x.map((v, i) => Object.assign(
+      { value: [v, ceiling], n: stopped.values[i] || 0 },
+      i === x.length - 1 ? { label: { align: "right" } } : {}))
+      .filter((m) => m.n > 0);
+    o.series.push({
+      name: "Did not finish", type: "scatter", data: marks,
+      symbol: "triangle", symbolSize: 9, itemStyle: { color: T.muted },
+      label: {
+        show: true, position: "bottom", distance: 4, color: T.muted, fontSize: T.fs.meta,
+        fontFamily: T.sans, formatter: (m) => fmtNum(m.data.n) + " stopped",
+      },
+      tooltip: {
+        formatter: (m) => fmtNum(m.value[0]) + " molecules: " + fmtNum(m.data.n) +
+          " models stopped before finishing",
+      },
+    });
+  }
   return o;
 }
 

@@ -43,6 +43,27 @@ def resolve_countries(frame, id_to_name, column="country"):
     return counter
 
 
+def partners(orgs, projects=None):
+    """The organisations Ersilia has done, or is doing, a project with.
+
+    The Organisations table is a directory — funders, conference hosts, contacts — and
+    most of its rows have never worked with Ersilia. A partner is an organisation with a
+    project, read from both ends of the link: the organisation's own ``projects`` column
+    and each project's ``organization`` column, since either can be filled alone.
+    """
+    if orgs is None or orgs.empty:
+        return orgs
+    linked = {i for v in col(projects, "organization") for i in parse_multi(v)} \
+        if projects is not None else set()
+    own = [bool(parse_multi(v)) for v in col(orgs, "projects")]
+    ids = as_text(col(orgs, "airtable_id"))
+    mask = [
+        (own[i] if i < len(own) else False) or (i < len(ids) and ids.iloc[i] in linked)
+        for i in range(len(orgs))
+    ]
+    return orgs[mask]
+
+
 # The link columns that record an organisation actually doing something with Ersilia.
 # `grants` is a fifth such column and is deliberately absent: grant data is out of scope
 # for this site, so counting it here would leak its shape through the back door.

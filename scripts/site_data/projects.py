@@ -15,7 +15,7 @@ from .parse import (EMPTY, as_text, col, growth_pair, metric, parse_multi,
 STATUS_SEMANTICS = {
     "done": "good",
     "in progress": "brand",
-    "stuck": "bad",
+    "ongoing": "neutral",
     "todo": "neutral",
     "to do": "neutral",
 }
@@ -104,13 +104,17 @@ def build(projects, today, repos=None, publications=None):
     start = pd.to_datetime(col(projects, "start_date"), errors="coerce")
     end = pd.to_datetime(col(projects, "end_date"), errors="coerce")
     status = as_text(col(projects, "status"))
+    # "Stuck" is never published: a collaborator reading it as a verdict on their project
+    # is a cost the label does not earn. The timeline says "Ongoing"; the status donut,
+    # which counts what is running, folds it into "In progress".
+    stuck = status.str.strip().str.lower() == "stuck"
 
     return {
-        "status": _status(projects, status),
+        "status": _status(projects, status.mask(stuck, "In progress")),
         "per_year": _per_year(start),
         "growth": _growth(start),
         "active_over_time": _active_over_time(start, end, today),
-        "timeline": _timeline(projects, start, end, status, today),
+        "timeline": _timeline(projects, start, end, status.mask(stuck, "Ongoing"), today),
         "duration": _duration(start, end, today),
         "outputs": outputs_table(projects, repos, publications),
         "has_outputs": _has_outputs(projects, repos, publications),
@@ -198,15 +202,12 @@ def _timeline(projects, start, end, status, today):
             "months": round(max((pd.Timestamp(finish) - start.iloc[i]).days, 0) / 30.44, 1),
         })
     rows.sort(key=lambda r: r["start"])
-    overdue = sum(
-        1 for r in rows
-        if r["status"].strip().lower() != "done" and r["end"] < today.strftime("%Y-%m-%d")
-    )
+    # No "past its end date" count: an end date is often indicative only — a no-cost
+    # extension, or a project held open until its paper is out — so it is not a deadline.
     insight = None
     if rows:
-        insight = "%s projects, %s to %s%s." % (
+        insight = "%s projects, %s to %s." % (
             ins.num(len(rows)), rows[0]["start"][:7], max(r["end"] for r in rows)[:7],
-            ("; %s past its end date" % ins.num(overdue)) if overdue else "",
         )
     return {
         "rows": rows,

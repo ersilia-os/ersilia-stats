@@ -34,6 +34,7 @@ from . import (
     repositories as repositories_section,
     traffic as traffic_section,
 )
+from .parse import active_model_ids, active_models, restrict_to_models
 
 __all__ = ["build_all", "load"]
 
@@ -51,6 +52,12 @@ def build_all(data_dir, today=None):
         return tables.get(name, pd.DataFrame())
 
     models = table("models")
+    # The Models page describes the ACTIVE Hub, models Ready or In maintenance, so every
+    # chart on it counts the same models. Its sections read `hub` and `collected_hub`;
+    # only Curation status, whose point is the split, sees the whole registry.
+    active_ids = active_model_ids(models)
+    hub = active_models(models, active_ids)
+    collected_hub = restrict_to_models(collected, models, active_ids)
     # Attached ONCE and shared. `build_all` and `repositories.build` both need the counts,
     # and doing the join twice meant two passes over the collected frame for identical
     # output.
@@ -59,7 +66,7 @@ def build_all(data_dir, today=None):
     repos_public, private_excluded = repositories_section.public_only(repos_with_counts)
 
     sections = {
-        "models": models_section.build(models),
+        "models": models_section.build(hub, registry=models),
         # Projects needs the repositories and publications tables to resolve its own
         # link columns — the only cross-table roll-up in the build.
         "projects": projects_section.build(table("projects"), today,
@@ -67,23 +74,25 @@ def build_all(data_dir, today=None):
                                            publications=table("publications")),
         "publications": publications_section.build(table("publications"), collected),
         "repositories": repositories_section.build(repos_with_counts, collected),
-        "community": community_section.build(table("community"), today),
+        "community": community_section.build(table("community")),
         "organisations": organisations_section.build(table("organisations"), table("countries")),
         "reach": reach_section.build(table("countries"), table("organisations"),
-                                     table("community"), table("events")),
+                                     table("community"), table("events"),
+                                     projects=table("projects")),
         "events": outreach.build_events(table("events")),
         "blogposts": outreach.build_blogposts(table("blogposts")),
         "conferences": outreach.build_conferences(table("conferences")),
+        "videos": outreach.build_videos(table("videos")),
         "quality": quality_section.build(tables, repos_public),
         # From the committed public snapshots rather than Airtable. Degrades to empty
         # metrics when a collector has not run, so a clone still builds.
-        "usage": usage_section.build(collected, models=models, today=today),
+        "usage": usage_section.build(collected_hub, today=today),
         # Development activity over time — commits per quarter, star dates, and where
         # pull requests come from. None of it can be held in an Airtable column.
         "code": code_section.build(collected, today=today),
         # The Model Hub as a whole, joining the curated registry to collected activity
         # and pull counts on the shared eosXXXX identifier. Derived, so never stored.
-        "model_activity": model_activity_section.build(models, collected, today=today),
+        "model_activity": model_activity_section.build(hub, collected_hub),
         # Ersilia's published PyPI packages — releases and a rolling download window.
         # From the committed public snapshot, like usage/code; degrades to empty when
         # the collector has not run.
@@ -96,10 +105,10 @@ def build_all(data_dir, today=None):
         # Full GitHub Release history per model, joined on the same eosXXXX
         # identifier as model_activity. Derived, not stored, like everything else
         # that reads collected/ rather than Airtable.
-        "releases": releases_section.build(models, collected),
+        "releases": releases_section.build(hub, collected_hub),
         # Installed packages, joined against the same Docker Hub size reading as
         # usage.py's size figures, for the models over the Hub's heavy threshold.
-        "packages": packages_section.build(collected, models=models),
+        "packages": packages_section.build(collected_hub, models=hub),
     }
 
     return {
@@ -118,7 +127,7 @@ def build_all(data_dir, today=None):
             "private_repositories": private_excluded,
             "aggregates_only": True,
         },
-        "kpis": kpis_section.build(tables, repos_public, models,
+        "kpis": kpis_section.build(tables, repos_public, hub,
                                    repos_all=table("repositories"), collected=collected),
         "sections": sections,
     }

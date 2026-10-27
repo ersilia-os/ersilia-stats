@@ -64,20 +64,21 @@ def build_everything(tables, collected):
     models.build(table("models"))
     code.build(collected)
     model_activity.build(table("models"), collected)
-    usage.build(collected, models=table("models"), today=TODAY)
+    usage.build(collected, today=TODAY)
     pypi.build(collected)
     traffic.build(collected)
     releases.build(table("models"), collected)
     reach.build(table("countries"), table("organisations"), table("community"),
-                table("events"))
+                table("events"), projects=table("projects"))
     quality.build(tables, public)
-    community.build(table("community"), TODAY)
+    community.build(table("community"))
     organisations.build(table("organisations"), table("countries"))
     projects.build(table("projects"), TODAY, repos=table("repositories"),
                    publications=table("publications"))
     outreach.build_events(table("events"))
     outreach.build_blogposts(table("blogposts"))
     outreach.build_conferences(table("conferences"))
+    outreach.build_videos(table("videos"))
     kpis.build(tables, public, table("models"), repos_all=with_counts, collected=collected)
 
 
