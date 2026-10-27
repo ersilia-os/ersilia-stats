@@ -798,12 +798,6 @@ const VIEWS = [
               desc: "Organisations that convened the most events Ersilia took part in.",
             },
           ] },
-          { h: "h-md", cells: [
-            {
-              title: "Conferences tracked", span: 12, data: "conferences.by_cadence", type: "lollipop",
-              desc: "The conferences Ersilia keeps an eye on, by how often they come round. A small, deliberately curated list rather than everything that exists.",
-            },
-          ] },
         ],
       },
     ],
