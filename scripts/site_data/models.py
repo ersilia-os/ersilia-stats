@@ -138,8 +138,10 @@ def _publication_type(models):
         if "peer" in str(label).strip().lower():
             reviewed = int(value)
     # Four columns wide: keep it to one clause.
-    out["insight"] = ins.share_of(reviewed, recorded, "models with a recorded type",
-                                 "are peer-reviewed")
+    # "recorded type" confused readers: say what the denominator is in plain words.
+    share = ins.pct(reviewed, recorded)
+    out["insight"] = "%s of %s models%s are based on a peer-reviewed paper." % (
+        ins.num(reviewed), ins.num(recorded), " (%s)" % share if share else "")
     return out
 
 

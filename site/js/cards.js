@@ -150,7 +150,9 @@ function rankedTable(metric, spec) {
   const headRow = el("tr");
   headRow.appendChild(el("th", null, spec.nameLabel || "Name"));
   columns.forEach((c) => headRow.appendChild(el("th", null, c.label)));
-  headRow.appendChild(el("th", null, ""));
+  // The bar column's header is empty by default; `barLabel` names what the bar measures
+  // when it could be mistaken for the column beside it.
+  headRow.appendChild(el("th", null, spec.barLabel || ""));
   thead.appendChild(headRow);
   table.appendChild(thead);
 
@@ -527,7 +529,7 @@ function chartCard(chart, data, registry) {
         instance.__metric = next;
         instance.setOption(buildOption(chart, next), true);
         insight.textContent = next.insight || "";
-        canvas.setAttribute("aria-label", chart.title + " — " + source.label + ". " + (next.insight || ""));
+        canvas.setAttribute("aria-label", chart.title + ": " + source.label + ". " + (next.insight || ""));
         const fresh = drillDown(chart, next, csvFor(source.data));
         drill.replaceWith(fresh);
         drill = fresh;

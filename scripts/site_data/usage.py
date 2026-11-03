@@ -117,7 +117,7 @@ def _total(rows, total, median):
         ["Image pulls, automated included", "Models with an image",
          "Pulled well above the baseline"],
         [total, len(rows), above],
-        "%s image pulls to date, but %s models sit within a narrow band around %s — a "
+        "%s image pulls to date, but %s models sit within a narrow band around %s: a "
         "scheduled build, not demand. %s stand clearly above it." % (
             ins.num(total), ins.num(sum(1 for _, p in rows if median * 0.6 <= p <= median * 1.25)),
             ins.num(median), ins.num(above),

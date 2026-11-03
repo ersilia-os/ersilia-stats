@@ -79,7 +79,7 @@ const SECONDARY_KPIS = [
   { key: "total_stars", label: "GitHub stars" },
   { key: "events", label: "Events" },
   { key: "blogposts", label: "Blog posts" },
-  { key: "pypi_downloads", label: "PyPI downloads" },
+  { key: "pypi_downloads", label: "PyPI downloads (incl. CI)" },
 ];
 
 const VIEWS = [
@@ -110,7 +110,7 @@ const VIEWS = [
             },
             {
               title: "Curation status", span: 4, data: "models.by_status", type: "donut",
-              desc: "Every model in the registry by curation status, including Archived and In progress — the only chart on this page that goes beyond the models Ready or In maintenance. Colours follow the house status scale, so 'ready' is the same green wherever it appears.",
+              desc: "Every model in the registry by curation status, including Archived and In progress. It is the only chart on this page that goes beyond the models Ready or In maintenance. Colours follow the house status scale, so 'ready' is the same green wherever it appears.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -132,12 +132,12 @@ const VIEWS = [
           { h: "h-md", cells: [
             {
               title: "Years from paper to Hub", span: 4, data: "models.publication_lag", type: "histogram",
-              desc: "Incorporation year minus the model's original publication year — how quickly the Hub tracks the literature. Rows where incorporation precedes publication are dropped, since a negative lag means one of the two dates is wrong.",
+              desc: "Incorporation year minus the model's original publication year: how quickly the Hub tracks the literature. Rows where incorporation precedes publication are dropped, since a negative lag means one of the two dates is wrong.",
             },
             {
               title: "Is the science peer-reviewed?", span: 4, data: "models.publication_type",
               type: "donut",
-              desc: "The publication type of the work each model is based on. Provenance rather than popularity, and the counterpart to the source-type figure ('Wraps external work?') beside it: that says whether Ersilia packaged somebody else's model, this says how well established that model's science is. Preprints are counted separately from peer-reviewed work rather than folded in with it.",
+              desc: "The publication type of the work each model is based on. Provenance rather than popularity, and the counterpart to the source-type figure ('Wraps external work?') beside it: that says whether Ersilia packaged somebody else's model, this says how well established that model's science is. Preprints are counted separately from peer-reviewed work rather than folded in with it. Models with no publication type in the registry are left out of the total.",
             },
             {
               title: "Wraps external work?", span: 4, data: "models.by_source_type", type: "donut",
@@ -148,7 +148,7 @@ const VIEWS = [
             {
               title: "Licences of the underlying models", span: 12, data: "models.by_license",
               type: "treemap",
-              desc: "The licence of each wrapped model as recorded in the registry — NOT the licence of Ersilia's wrapper repository, which is GPL-3.0 on 224 of the 237 model repositories. The two answer different questions and genuinely differ: the upstream models spread across MIT, both GPL-3.0 variants, Apache-2.0 and BSD-3-Clause, and it is the upstream terms that govern what a reuser may do with the underlying science. 'None' is the models that record no licence, which for a reuser is the most restrictive state of all.",
+              desc: "The licence of each wrapped model as recorded in the registry, NOT the licence of Ersilia's wrapper repository, which is GPL-3.0 on 224 of the 237 model repositories. The two answer different questions and genuinely differ: the upstream models spread across MIT, both GPL-3.0 variants, Apache-2.0 and BSD-3-Clause, and it is the upstream terms that govern what a reuser may do with the underlying science. 'None' is the models that record no licence, which for a reuser is the most restrictive state of all.",
             },
           ] },
         ],
@@ -161,42 +161,40 @@ const VIEWS = [
             {
               title: "Computational performance", span: 12, data: "models.performance_by_scale",
               type: "bandline",
-              desc: "Median runtime as the batch size grows tenfold at each step, with the 25th-75th percentile band — the same plot as entry_project's Engineering tab, redrawn here. The runtime axis is log scale because the measure spans orders of magnitude: a model taking fractions of a second on one input can take minutes on ten thousand. A run that takes too long is stopped and no runtime is recorded for it (a -1 in the registry's Computational Performance column). Those models are not dropped: each counts as slower than every model that finished, so it pushes the median and the band up — leaving them out would make the larger batch sizes look faster than they are, because the slowest models are exactly the ones that get stopped. The number stopped at each size is marked on the 'Not finished' row at the top. Where more than a quarter of models were stopped, the 75th percentile has no runtime either and the band runs to the top of the chart.",
+              desc: "Median runtime as the batch size grows tenfold at each step, with the 25th-75th percentile band. The runtime axis is log scale. Runs that were stopped for taking too long count as slower than every finished run, so they push the median and the band up instead of being dropped. The 'Not finished' row at the top shows how many were stopped at each size.",
             },
           ] },
           { h: "h-lg", cells: [
             {
               title: "The slowest models", span: 12, data: "models.slowest_models",
               type: "runtimelines",
-              desc: "Runtime at 10, 100, 1,000 and 10,000 molecules for the six slowest models, with the Hub median at each size as a dashed line — the named outliers behind the median curve above. A value of -1 means the run did not finish, which counts as infinitely slow: a model that stopped finishing at a smaller batch ranks slower than one that stopped at a larger batch, and both rank slower than any model that finished every size. Ties go to the runtime at the largest batch the model did finish. A run that did not finish is drawn as a triangle at the top of the chart, where the line stops. The median covers every model benchmarked at all four sizes, with unfinished runs counted the same way. Both axes are log scale: one step right is ten times the molecules, one step up ten times the time.",
-            },
-          ] },
-          { h: "h-lg", cells: [
-            {
-              title: "When images were last built", span: 12, data: "model_activity.image_freshness",
-              type: "column",
-              desc: "The year each model's Docker image was last pushed. This is BUILD recency and not maintenance or demand: the pull-count evidence elsewhere on this page shows that continuous integration pulls every image on a schedule, and that same schedule is what rebuilds them.",
+              desc: "Runtime at 10, 100, 1,000 and 10,000 molecules for the six slowest models, with the Hub median at each size as a dashed line: the named outliers behind the median curve above. A value of -1 means the run did not finish, which counts as infinitely slow: a model that stopped finishing at a smaller batch ranks slower than one that stopped at a larger batch, and both rank slower than any model that finished every size. Ties go to the runtime at the largest batch the model did finish. A run that did not finish is drawn as a triangle at the top of the chart, where the line stops. The median covers every model benchmarked at all four sizes, with unfinished runs counted the same way. Both axes are log scale: one step right is ten times the molecules, one step up ten times the time.",
             },
           ] },
           { h: "h-md", cells: [
             {
-              title: "How heavy is a model?", span: 7, data: "models.image_size", type: "histogram",
-              desc: "Docker image size, as recorded in the registry — the low-resource deployment question. A dashed rule marks the mean. Heavier images cost more to pull on slow or metered connections, which matters directly for the low-bandwidth settings the Hub targets.",
+              title: "When images were last built", span: 3, data: "model_activity.image_freshness",
+              type: "column",
+              desc: "The year each model's Docker image was last pushed. This is BUILD recency and not maintenance or demand: the pull-count evidence elsewhere on this page shows that continuous integration pulls every image on a schedule, and that same schedule is what rebuilds them.",
             },
             {
-              title: "ARM64 support", span: 5, type: "shares",
+              title: "How heavy is a model?", span: 6, data: "models.image_size", type: "histogram",
+              desc: "Docker image size, as recorded in the registry: the low-resource deployment question. A dashed rule marks the mean. Heavier images cost more to pull on slow or metered connections, which matters directly for the low-bandwidth settings the Hub targets.",
+            },
+            {
+              title: "ARM64 support", span: 3, type: "shares",
               blurb: "Of models that record an architecture, how many also build for ARM64?",
               sources: [
                 { label: "Also builds for ARM64", data: "models.on_arm", highlight: "ARM64 and AMD64" },
               ],
-              desc: "Every model records an AMD64 build; this is whether it also publishes an ARM64 one — the cheap, low-power hardware.",
+              desc: "Every model records an AMD64 build; this is whether it also publishes an ARM64 one (the cheap, low-power hardware).",
             },
           ] },
         ],
       },
       {
         title: "Docker Hub demand",
-        blurb: "Pull counts from Docker Hub — a floor on interest, not a headcount.",
+        blurb: "Pull counts from Docker Hub: a floor on interest, not a headcount.",
         rows: [
           { h: "h-lg", cells: [
             {
@@ -207,14 +205,14 @@ const VIEWS = [
                 { key: "times_baseline", label: "× baseline", raw: true },
                 { key: "ci_test", label: "CI test model", raw: true },
               ],
-              desc: "Docker Hub pull counts, ranked by how far each model exceeds the automated baseline rather than by raw pulls — ranking by raw pulls would rank the build schedule. Only models clearly above the baseline appear. Read the top of this list with care: eos3b5e, eos5axz, eos4e40 and eos2r5a are the models Ersilia's own continuous integration pulls from Docker Hub on every test run of the ersilia package (marked 'Yes' in the CI test model column), and eos3b5e is also the default test model across Ersilia's tooling. Their counts are inflated by automated testing, not demand. A pull is not a user: mirrors pull images, and one person testing in a loop pulls repeatedly. It is a floor on interest, not a headcount, and Docker Hub publishes no history, so these are totals to date and cannot be turned into a rate.",
+              desc: "Docker Hub pull counts, ranked by how far each model exceeds the automated baseline rather than by raw pulls, because ranking by raw pulls would rank the build schedule. Only models clearly above the baseline appear. Read the top of this list with care: eos3b5e, eos5axz, eos4e40 and eos2r5a are the models Ersilia's own continuous integration pulls from Docker Hub on every test run of the ersilia package (marked 'Yes' in the CI test model column), and eos3b5e is also the default test model across Ersilia's tooling. Their counts are inflated by automated testing, not demand. A pull is not a user: mirrors pull images, and one person testing in a loop pulls repeatedly. It is a floor on interest, not a headcount, and Docker Hub publishes no history, so these are totals to date and cannot be turned into a rate.",
             },
           ] },
           { h: "h-md", cells: [
             {
               title: "Time since last pull", span: 7, data: "usage.pull_dormancy",
               type: "ordinallollipop",
-              desc: "Every model image, by how long ago it was last pulled on ANY tag or architecture — Docker Hub's lifetime pull count never goes down, so an image abandoned a year ago and one pulled this morning look identical in it; this is the part that decays. From a separate collector (fetch_docker_tags.py) that reads the per-tag endpoint rather than the repository summary, one request per model.",
+              desc: "Every model image, by how long ago it was last pulled on ANY tag or architecture. Docker Hub's lifetime pull count never goes down, so an image abandoned a year ago and one pulled this morning look identical in it; this is the part that decays. From a separate collector (fetch_docker_tags.py) that reads the per-tag endpoint rather than the repository summary, one request per model.",
             },
             {
               title: "ARM64 vs. AMD64 image size", span: 5, data: "usage.arm_vs_amd_size",
@@ -223,14 +221,14 @@ const VIEWS = [
                 x: "amd64", y: "arm64", xUnit: "GB", yUnit: "GB",
                 xLabel: "AMD64 size (GB)", yLabel: "ARM64 size (GB)",
               },
-              desc: "The newest AMD64 build's size against the newest ARM64 build's size, for models that publish both — points below the diagonal implied by matching axes are lighter on ARM, usually a leaner base image with no x86-only CUDA/MKL wheels pulled in. Linear axes: unlike Docker pulls elsewhere on this page, image size does not span orders of magnitude, so a log axis would only make the cluster harder to read.",
+              desc: "The newest AMD64 build's size against the newest ARM64 build's size, for models that publish both. Points below the diagonal implied by matching axes are lighter on ARM, usually a leaner base image with no x86-only CUDA/MKL wheels pulled in. Linear axes: unlike Docker pulls elsewhere on this page, image size does not span orders of magnitude, so a log axis would only make the cluster harder to read.",
             },
           ] },
           { h: "h-md", cells: [
             {
               title: "Last pull, by day of the week", span: 12,
               data: "usage.pull_rhythm_weekday", type: "ordinallollipop",
-              desc: "Every image's most recent pull, by the UTC day of the week it landed on. Scheduled automation is flat across the week; human work collapses at the weekend — so a real weekend dip is evidence some of this traffic is not a machine. One recency-biased sample per digest, not a volume: Docker Hub exposes only the most recent pull per digest, never a series.",
+              desc: "Every image's most recent pull, by the UTC day of the week it landed on. Scheduled automation is flat across the week; human work collapses at the weekend, so a real weekend dip is evidence some of this traffic is not a machine. One recency-biased sample per digest, not a volume: Docker Hub exposes only the most recent pull per digest, never a series.",
             },
           ] },
         ],
@@ -248,7 +246,7 @@ const VIEWS = [
             {
               title: "Models with an outside contribution", span: 4,
               data: "model_activity.outside_contribution", type: "donut",
-              desc: "Counted per model, not per pull request, and that is the point: a high share of outside pull requests could in principle be a handful of models attracting all of them. 'Outside' means anyone who is not a current member of the ersilia-os GitHub organisation, not credited as a model contributor in the Model Hub registry, and not a bot. This counts the models themselves, so it measures how far community contribution actually reaches into the Hub. Only the most recent 30 merged pull requests per repository are sampled, so a model whose only outside contribution is older reads as internal — the figure is a floor, not a ceiling.",
+              desc: "Counted per model, not per pull request, and that is the point: a high share of outside pull requests could in principle be a handful of models attracting all of them. 'Outside' means anyone who is not a current member of the ersilia-os GitHub organisation, not credited as a model contributor in the Model Hub registry, and not a bot. This counts the models themselves, so it measures how far community contribution actually reaches into the Hub. Only the most recent 30 merged pull requests per repository are sampled, so a model whose only outside contribution is older reads as internal: the figure is a floor, not a ceiling.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -262,14 +260,14 @@ const VIEWS = [
                 { key: "closed_issues", label: "Issues" },
                 { key: "pulls", label: "Pulls" },
               ],
-              desc: "The three sources on one row: commits, pull requests and issues from GitHub, pull counts from Docker Hub, joined on the shared eosXXXX identifier — every one of the 237 models resolves in all three. Ranked by commits. Pulls are a column rather than a ranking deliberately: they correlate with commits at Spearman 0.52, but that almost certainly measures continuous integration rebuilding busier repositories more often rather than anyone choosing them, so no relationship is implied here.",
+              desc: "The three sources on one row: commits, pull requests and issues from GitHub, pull counts from Docker Hub, joined on the shared eosXXXX identifier; every one of the 237 models resolves in all three. Ranked by commits. Pulls are a column rather than a ranking deliberately: they correlate with commits at Spearman 0.52, but that almost certainly measures continuous integration rebuilding busier repositories more often rather than anyone choosing them, so no relationship is implied here.",
             },
           ] },
           { h: "h-lg", cells: [
             {
               title: "Who gets credited for incorporating a model", span: 12,
               data: "models.top_contributors", type: "lollipop",
-              desc: "The registry's `Contributor` field, by how many models each person is credited with — a public GitHub handle, the same kind of identifier already published for commit authorship on the Code page. Multi-select, so a model credited to two people counts for both.",
+              desc: "The registry's `Contributor` field, by how many models each person is credited with. It is a public GitHub handle, the same kind of identifier already published for commit authorship on the Code page. Multi-select, so a model credited to two people counts for both.",
             },
           ] },
         ],
@@ -282,7 +280,7 @@ const VIEWS = [
             {
               title: "How models get updated", span: 5, data: "releases.bump_types",
               type: "donut",
-              desc: "The semver bump type of every release after a model's first — major, minor or patch — hub-wide. The first release of each repo is excluded: it is not a bump from anything, and counting it would dilute the read on ongoing maintenance with releases that only ever happened once.",
+              desc: "The semver bump type of every release after a model's first (major, minor or patch), hub-wide. The first release of each repo is excluded: it is not a bump from anything, and counting it would dilute the read on ongoing maintenance with releases that only ever happened once.",
             },
             {
               title: "Model releases over time, hub-wide", span: 7, data: "releases.growth",
@@ -294,7 +292,7 @@ const VIEWS = [
             {
               title: "Time between a model's releases", span: 12, data: "releases.cadence",
               type: "ordinallollipop",
-              desc: "The gap between one GitHub Release and the next, for the same model — not whether a model gets re-released (the release-count chart above answers that), but how often. Only gaps between two releases of the same repository count; a repo's first release has nothing before it to measure a gap against, so it is excluded rather than counted as zero or infinite.",
+              desc: "The gap between one GitHub Release and the next, for the same model: not whether a model gets re-released (the release-count chart above answers that), but how often. Only gaps between two releases of the same repository count; a repo's first release has nothing before it to measure a gap against, so it is excluded rather than counted as zero or infinite.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -308,18 +306,18 @@ const VIEWS = [
       },
       {
         title: "Community requests",
-        blurb: "How often people ask Ersilia to add a model, and how quickly those requests get answered — from the flagship repository's issue tracker, independent of which models exist yet.",
+        blurb: "How often people ask Ersilia to add a model, and how quickly those requests get answered, from the flagship repository's issue tracker, independent of which models exist yet.",
         rows: [
           { h: "h-lg", cells: [
             {
               title: "Requests to add a model, over time", span: 7,
               data: "model_activity.requests_growth", type: "growthcombo",
-              desc: "Every GitHub issue labelled a model request on the flagship ersilia repository, by the quarter it was opened, with the running total. Counted at OPEN rather than at close, so this measures how much the community is asking for — the chart beside it, 'How long a model request takes to close', answers the separate question of how fast Ersilia keeps up.",
+              desc: "Every GitHub issue labelled a model request on the flagship ersilia repository, by the quarter it was opened, with the running total. Counted at OPEN rather than at close, so this measures how much the community is asking for; the chart beside it, 'How long a model request takes to close', answers the separate question of how fast Ersilia keeps up.",
             },
             {
               title: "How long a model request takes to close", span: 5,
               data: "model_activity.request_lead_time", type: "ordinallollipop",
-              desc: "Days from a model-request issue opening to closing, for closed requests only — an open request has no lead time yet, so it is excluded rather than counted as zero. Bucketed because lead times run from hours to years: a linear scale would flatten the whole picture into one bar near zero.",
+              desc: "Days from a model-request issue opening to closing, for closed requests only. An open request has no lead time yet, so it is excluded rather than counted as zero. Bucketed because lead times run from hours to years: a linear scale would flatten the whole picture into one bar near zero.",
             },
           ] },
         ],
@@ -329,7 +327,7 @@ const VIEWS = [
   {
     id: "projects",
     title: "Projects",
-    blurb: "The project portfolio — what ran when, what overlapped, and what is still open.",
+    blurb: "The project portfolio: what ran when, what overlapped, and what is still open.",
     links: [{ label: "Our work", href: "https://ersilia.io/work" }],
     headlineKpi: "projects",
     rows: [
@@ -348,13 +346,13 @@ const VIEWS = [
       { h: "h-lg", cells: [
         {
           title: "What each project produced", span: 12, data: "projects.outputs",
-          type: "ranked", nameLabel: "Project", top: 10,
+          type: "ranked", nameLabel: "Project", top: 10, barLabel: "Repos",
           columns: [
             { key: "repositories", label: "Repos" },
             { key: "public", label: "Public" },
             { key: "publications", label: "Papers" },
           ],
-          desc: "Repositories and publications linked to each project, from the Airtable link columns. Repository counts cover public and private alike — a count is not disclosure — and the public column says how many can be named; no private repository name is ever resolved. Projects with neither are omitted.",
+          desc: "Repositories and publications linked to each project, from the Airtable link columns. The bars show the number of repositories. Repository counts cover public and private alike (a count is not disclosure), and the public column says how many can be named; no private repository name is ever resolved. Projects with neither are omitted.",
         },
       ] },
       { h: "h-md", cells: [
@@ -402,7 +400,7 @@ const VIEWS = [
             {
               title: "Citations accumulated", span: 7, data: "publications.citation_accrual",
               type: "growthcombo",
-              desc: "Citations by the year each citation was MADE, from OpenAlex — real accrual, not citations attributed to their paper's publication year. That distinction used to require a caveat here, because the previous source only recorded the paper's year and made recent years look artificially thin. Kept separate from the publication count above rather than sharing a plot with it: publications and citations are different measures, and two different measures on two axes is what invites a reader to see a relationship the data does not assert.",
+              desc: "Citations by the year each citation was MADE, from OpenAlex: real accrual, not citations attributed to their paper's publication year. That distinction used to require a caveat here, because the previous source only recorded the paper's year and made recent years look artificially thin. Kept separate from the publication count above rather than sharing a plot with it: publications and citations are different measures, and two different measures on two axes is what invites a reader to see a relationship the data does not assert.",
             },
             {
               title: "Research topics", span: 5, data: "publications.by_topic", type: "lollipop",
@@ -416,7 +414,7 @@ const VIEWS = [
               sources: [
                 { label: "Open access", data: "publications.open_access", highlight: "Open access" },
               ],
-              desc: "Whether each paper can be read without a subscription, classified by OpenAlex. This is a mission figure rather than a vanity one: an organisation whose purpose is to serve researchers in low-resource settings has a direct interest in whether its own output is reachable by them. The routes are not equivalent — gold means published open, while bronze is readable at the publisher's discretion and can be withdrawn — and the breakdown is in the next card.",
+              desc: "Whether each paper can be read without a subscription, classified by OpenAlex. This is a mission figure rather than a vanity one: an organisation whose purpose is to serve researchers in low-resource settings has a direct interest in whether its own output is reachable by them. The routes are not equivalent: gold means published open, while bronze is readable at the publisher's discretion and can be withdrawn. The breakdown is in the next card.",
             },
             {
               title: "Routes to open access", span: 4, data: "publications.oa_routes", type: "lollipop",
@@ -432,7 +430,7 @@ const VIEWS = [
             {
               title: "Where co-authors are based", span: 12,
               data: "publications.collaboration_countries", type: "lollipop",
-              desc: "Countries of the author institutions across the Ersilia-affiliated papers, from OpenAlex. This measures international collaboration instead of asserting it: the publications table also carries a hand-set African-collaboration flag, and this counts the institutions, so South Africa, Cameroon and Mozambique appear as themselves. Institution countries only — no author names are collected or published.",
+              desc: "Countries of the author institutions across the Ersilia-affiliated papers, from OpenAlex. This measures international collaboration instead of asserting it: the publications table also carries a hand-set African-collaboration flag, and this counts the institutions, so South Africa, Cameroon and Mozambique appear as themselves. Institution countries only; no author names are collected or published.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -443,7 +441,7 @@ const VIEWS = [
                 { key: "citations", label: "Citations" },
                 { key: "year", label: "Year", raw: true },
               ],
-              desc: "Ersilia-affiliated papers ranked by citation count. Ranked over everything tracked instead, the top four would all be unaffiliated — 420, 132, 101 and 69 citations, the team's earlier careers — against 115 for the most-cited affiliated paper, so a bare ranking under an Ersilia heading would claim credit the data does not support. Those papers are not dropped silently: they are the card below. Titles, journals and years are public bibliographic facts; no author names are published.",
+              desc: "Ersilia-affiliated papers ranked by citation count. Ranked over everything tracked instead, the top four would all be unaffiliated (420, 132, 101 and 69 citations, the team's earlier careers) against 115 for the most-cited affiliated paper, so a bare ranking under an Ersilia heading would claim credit the data does not support. Those papers are not dropped silently: they are the card below. Titles, journals and years are public bibliographic facts; no author names are published.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -456,7 +454,7 @@ const VIEWS = [
                 { key: "year", label: "Year", raw: true },
                 { key: "journal", label: "Journal", raw: true },
               ],
-              desc: "Research by people who founded or joined Ersilia, carrying no Ersilia affiliation — mostly earlier in their careers, and closely related in subject. This card exists so that the filtering applied to the rest of the page is visible rather than silent: these 17 papers hold more citations between them than the 25 affiliated ones, and the most-cited has 420 against 115. Excluding them from figures labelled Ersilia is the only way those figures can describe Ersilia; excluding them from the page altogether would hide both the work and the choice.",
+              desc: "Research by people who founded or joined Ersilia, carrying no Ersilia affiliation, mostly earlier in their careers, and closely related in subject. This card exists so that the filtering applied to the rest of the page is visible rather than silent: these 17 papers hold more citations between them than the 25 affiliated ones, and the most-cited has 420 against 115. Excluding them from figures labelled Ersilia is the only way those figures can describe Ersilia; excluding them from the page altogether would hide both the work and the choice.",
             },
           ] },
         ],
@@ -508,7 +506,7 @@ const VIEWS = [
     groups: [
       {
         title: "Repository composition",
-        blurb: "What the repositories are — type, counts, language — not what they have done.",
+        blurb: "What the repositories are (type, counts, language), not what they have done.",
         rows: [
           { h: "h-md", cells: [
             {
@@ -523,7 +521,7 @@ const VIEWS = [
             },
             {
               title: "In progress vs completed", span: 4, data: "repositories.progress", type: "donut",
-              desc: "Repositories whose Airtable status is In progress against those marked Completed, public and private alike. The other statuses — Archived, Discontinued, Idle and Todo — are left out, so the total is smaller than the repository count.",
+              desc: "Repositories whose Airtable status is In progress against those marked Completed, public and private alike. The other statuses (Archived, Discontinued, Idle and Todo) are left out, so the total is smaller than the repository count.",
             },
           ] },
           { h: "h-md", cells: [
@@ -541,7 +539,7 @@ const VIEWS = [
           { h: "h-lg", cells: [
             {
               title: "Who writes the code", span: 5, data: "code.contribution_origin", type: "stackbar",
-              desc: "Recently merged pull requests, split by who wrote them. 'From the organisation' means the author is a current member or collaborator of the ersilia-os GitHub organisation, is listed in Ersilia's community records or credited as a model contributor in the Model Hub registry, or is a bot such as dependabot or Claude, which act on the organisation's behalf. Everyone else is outside. GitHub's own membership label is not enough on its own: it reflects membership today, so staff who were never added to the GitHub organisation and interns whose membership has ended would read as outside. 'Model repos' are the per-model eosXXXX repositories; 'Other repos' are every other public repository — ersilia itself, ersilia-pack, ersilia-hub, eos-template and the rest of the tooling. The most recent 30 merged pull requests per repository are sampled, so this describes current practice rather than all history. Only counts are kept — no author login is stored, so none can be published.",
+              desc: "Recently merged pull requests, split by who wrote them. 'From the organisation' means the author is a current member or collaborator of the ersilia-os GitHub organisation, is listed in Ersilia's community records or credited as a model contributor in the Model Hub registry, or is a bot such as dependabot or Claude, which act on the organisation's behalf. Everyone else is outside. GitHub's own membership label is not enough on its own: it reflects membership today, so staff who were never added to the GitHub organisation and interns whose membership has ended would read as outside. 'Model repos' are the per-model eosXXXX repositories; 'Other repos' are every other public repository: ersilia itself, ersilia-pack, ersilia-hub, eos-template and the rest of the tooling. The most recent 30 merged pull requests per repository are sampled, so this describes current practice rather than all history. Only counts are kept; no author login is stored, so none can be published.",
             },
             {
               title: "Commits per quarter", span: 7, data: "code.commit_growth", type: "growthcombo",
@@ -551,12 +549,12 @@ const VIEWS = [
           { h: "h-lg", cells: [
             {
               title: "Stars gained over time", span: 7, data: "code.star_growth", type: "growthcombo",
-              desc: "Every star on the repositories with more than five of them, by the quarter it was given. GitHub records the date each star was awarded, so this whole curve comes from one collection and needs no accumulated history. Restricted to the better-known repositories because a curve through three points is decoration. A star is not a user and not a download — it is a bookmark, and the honest reading is relative interest over time rather than a size.",
+              desc: "Every star on the repositories with more than five of them, by the quarter it was given. GitHub records the date each star was awarded, so this whole curve comes from one collection and needs no accumulated history. Restricted to the better-known repositories because a curve through three points is decoration. A star is not a user and not a download. It is a bookmark, and the honest reading is relative interest over time rather than a size.",
             },
             {
-              title: "When each repository was last touched", span: 5, data: "code.activity_recency",
-              type: "ordinallollipop",
-              desc: "Every public repository by time since its last push. Archived repositories are counted separately rather than falling into the oldest band: archiving is a deliberate retirement, and filing it as neglect would report a decision as a failure.",
+              title: "When each repository was last updated", span: 5, data: "code.activity_recency",
+              type: "ordinallollipop", darkFirst: true,
+              desc: "Every public repository except the model repositories, by time since its last push. Models are left out because nearly every model repository is pushed to every month, so they filled 'this month' and hid how recently the tools themselves were worked on. Archived repositories are counted separately rather than falling into the oldest band: archiving is a deliberate retirement, and filing it as neglect would report a decision as a failure.",
             },
           ] },
         ],
@@ -577,12 +575,12 @@ const VIEWS = [
                 { key: "contributors", label: "People" },
                 { key: "watchers", label: "Watching" },
               ],
-              desc: "One row per repository rather than five ranking charts, so a project's whole profile stays together — 33 releases on lazy-qsar against 32 on ersilia describe very different projects, and only the surrounding columns distinguish them. Ranked by commits. Public repositories only, and the per-model eosXXXX repositories are left out — they belong to the Model Hub page. Contributor counts include anonymous contributors.",
+              desc: "One row per repository rather than five ranking charts, so a project's whole profile stays together: 33 releases on lazy-qsar against 32 on ersilia describe very different projects, and only the surrounding columns distinguish them. Ranked by commits. Public repositories only, and the per-model eosXXXX repositories are left out because they belong to the Model Hub page. Contributor counts include anonymous contributors.",
             },
             {
               title: "How long issues stay open", span: 5, data: "code.issue_resolution",
               type: "histogram",
-              desc: "One value per repository: the median days between opening and closing an issue, over its most recent 30 closed issues, then bucketed. Per repository rather than per issue on purpose — a pooled distribution would be dominated by whichever repository files the most issues, which answers a different question. Repositories that have never closed an issue are absent rather than counted as instant.",
+              desc: "One value per repository: the median days between opening and closing an issue, over its most recent 30 closed issues, then bucketed. Per repository rather than per issue on purpose: a pooled distribution would be dominated by whichever repository files the most issues, which answers a different question. Repositories that have never closed an issue are absent rather than counted as instant.",
             },
           ] },
           { h: "h-lg", cells: [
@@ -598,7 +596,7 @@ const VIEWS = [
             {
               title: "Contributors by repository count", span: 6, data: "repositories.top_contributors",
               type: "lollipop",
-              desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to, read from GitHub's contributors endpoint. The numbers are much larger than they used to be, and the reason is coverage rather than activity: this now spans all 386 public repositories including the per-model ones, where the Airtable column it replaced tracked only the 141 curated repositories. Automation accounts are excluded — ersilia-bot alone had committed to 245 repositories and would rank third, which describes CI rather than people. Anonymous contributors are also excluded, because GitHub identifies those by an email address rather than a login and no address is ever collected. Public handles attached to public commits: repository metadata, not community records, and the community table's own handles are dropped before they can reach this site. One repository counts once per person however many commits they made to it.",
+              desc: "Public GitHub handles by how many public Ersilia repositories they have contributed to, read from GitHub's contributors endpoint. The numbers are much larger than they used to be, and the reason is coverage rather than activity: this now spans all 386 public repositories including the per-model ones, where the Airtable column it replaced tracked only the 141 curated repositories. Automation accounts are excluded: ersilia-bot alone had committed to 245 repositories and would rank third, which describes CI rather than people. Anonymous contributors are also excluded, because GitHub identifies those by an email address rather than a login and no address is ever collected. Public handles attached to public commits: repository metadata, not community records, and the community table's own handles are dropped before they can reach this site. One repository counts once per person however many commits they made to it.",
             },
           ] },
         ],
@@ -619,7 +617,7 @@ const VIEWS = [
                 { key: "last_30d", label: "Last 30d" },
                 { key: "last_7d", label: "Last 7d" },
               ],
-              desc: "Every package Ersilia publishes to PyPI, from PyPI's own package API. 'Downloads (window)' is a rolling total from pypistats.org — commonly 90 to 180 days of history, never a lifetime figure, because PyPI itself exposes no per-day download series and pypistats.org is the only public source that keeps one at all. Ranked by that window total.",
+              desc: "Every package Ersilia publishes to PyPI, from PyPI's own package API. Downloads include automated installs from CI pipelines (Ersilia's own and other people's), so they measure installs, not people. 'Downloads (window)' is a rolling total from pypistats.org, commonly 90 to 180 days of history, never a lifetime figure, because PyPI itself exposes no per-day download series and pypistats.org is the only public source that keeps one at all. Ranked by that window total.",
             },
           ] },
           { h: "h-md", cells: [
@@ -637,38 +635,38 @@ const VIEWS = [
             {
               title: "First published", span: 6, data: "pypi.first_release_year",
               type: "ordinallollipop",
-              desc: "Packages by the year they first appeared on PyPI — the organisation's packaging history, not its current activity. With six packages this is a timeline of when each one shipped, not a distribution to be read for shape.",
+              desc: "Packages by the year they first appeared on PyPI: the organisation's packaging history, not its current activity. With six packages this is a timeline of when each one shipped, not a distribution to be read for shape.",
             },
             {
               title: "Most recently released", span: 6, data: "pypi.release_recency",
               type: "ordinallollipop",
-              desc: "Packages by the year of their most recent release — is each one still maintained, or shipped once and left. Read it beside the table above: a package can carry many releases and still not have shipped recently, or the reverse.",
+              desc: "Packages by the year of their most recent release: is each one still maintained, or shipped once and left. Read it beside the table above: a package can carry many releases and still not have shipped recently, or the reverse.",
             },
           ] },
           { h: "h-map", cells: [
             {
               title: "Where downloads come from", span: 12, data: "pypi.downloads_by_country",
               type: "map", mapLabel: "downloads",
-              desc: "PyPI downloads by the country pip's request came from, for ersilia and ersilia-pack-utils combined; the other four packages are not in this export. From a manual BigQuery export (see scripts/convert_pypi_geo.py), not the live pypistats.org figures elsewhere on this page, and covering a different window. Hong Kong and Taiwan have real totals — 516 and 105 downloads — but no shape in this site's simplified world map; see the ranked list below for those. Downloads with no reliably reported country are excluded rather than guessed at.",
+              desc: "PyPI downloads by the country pip's request came from, including automated installs from CI pipelines, for ersilia and ersilia-pack-utils combined; the other four packages are not in this export. From a manual BigQuery export (see scripts/convert_pypi_geo.py), not the live pypistats.org figures elsewhere on this page, and covering a different window. Hong Kong and Taiwan have real totals (516 and 105 downloads) but no shape in this site's simplified world map; see the ranked list below for those. Downloads with no reliably reported country are excluded rather than guessed at.",
             },
           ] },
           { h: "h-md", cells: [
             {
               title: "Top countries", span: 12, data: "pypi.top_countries", type: "lollipop",
-              desc: "The same download counts as the map, ranked — the form that does not depend on a country having a shape to shade. Hong Kong and Taiwan place 3rd and 12th here despite being invisible on the map above.",
+              desc: "The same download counts as the map, ranked: the form that does not depend on a country having a shape to shade. Hong Kong and Taiwan place 3rd and 12th here despite being invisible on the map above.",
             },
           ] },
         ],
       },
       {
         title: "Web traffic",
-        blurb: "Which repositories GitHub visitors look at, org-wide — GitHub keeps no history here, only a rolling 14-day window.",
+        blurb: "Which repositories GitHub visitors look at, org-wide. GitHub keeps no history here, only a rolling 14-day window.",
         rows: [
           { h: "h-lg", cells: [
             {
               title: "Most-visited repositories", span: 12, data: "traffic.most_visited_repos",
               type: "lollipop",
-              desc: "Which repositories carry the page-view traffic in the most recently fetched 14-day window — scope is the whole organisation rather than just the per-model repositories, because the flagship ersilia repository is where most inbound traffic lands.",
+              desc: "Which repositories carry the page-view traffic in the most recently fetched 14-day window. Scope is the whole organisation rather than just the per-model repositories, because the flagship ersilia repository is where most inbound traffic lands.",
             },
           ] },
         ],
@@ -678,7 +676,7 @@ const VIEWS = [
   {
     id: "community",
     title: "Community",
-    blurb: "The people who have contributed to Ersilia. Aggregate figures only — " +
+    blurb: "The people who have contributed to Ersilia. Aggregate figures only: " +
            "no individual is identifiable anywhere on this site.",
     links: [{ label: "The team", href: "https://ersilia.io/team" }],
     headlineKpi: "community_members",
@@ -692,11 +690,11 @@ const VIEWS = [
       { h: "h-lg", cells: [
         {
           title: "Engagement duration", span: 5, data: "community.duration_buckets", type: "ordinallollipop",
-          desc: "Completed collaborations by length. Only ended collaborations are counted — including current members would censor every long one downwards. Read it as the shape of the placements Ersilia runs, not as a target being missed.",
+          desc: "Completed collaborations by length. Only ended collaborations are counted, because including current members would censor every long one downwards. Most short collaborations are volunteers and interns, whose involvement is short by design (the card's summary gives the current count). Read it as the shape of the placements Ersilia runs, not as a target being missed.",
         },
         {
           title: "Roles held", span: 4, data: "community.roles", type: "lollipop",
-          desc: "Roles across the community. A multi-select — someone who was both mentor and maintainer counts in both, so the shares sum above 100%.",
+          desc: "Roles across the community. A multi-select: someone who was both mentor and maintainer counts in both, so the shares sum above 100%.",
         },
         {
           title: "Composition", span: 3, type: "shares",
@@ -724,7 +722,7 @@ const VIEWS = [
     id: "partners",
     title: "Partners",
     blurb: "The organisations Ersilia has run projects with, where they and the community " +
-           "are, and the events Ersilia takes part in — many of them co-organised with partners.",
+           "are, and the events Ersilia takes part in, many of them co-organised with partners.",
     links: [{ label: "About Ersilia", href: "https://ersilia.io/about" }],
     headlineKpi: "organisations",
     groups: [
@@ -765,7 +763,7 @@ const VIEWS = [
             {
               title: "By subregion", span: 12, data: "reach.engagement_by_subregion",
               type: "lollipop",
-              desc: "Engaged countries grouped by UN subregion — the cut that matters most for this organisation, and the one the region donut above cannot show: a region chart collapses Sub-Saharan and Northern Africa into a single 'Africa' segment, when 14 of the 42 engaged countries are Sub-Saharan and exactly one is Northern African. Counted over engaged countries rather than over the reference table: that table lists 45 Sub-Saharan countries and Ersilia's engagement reaches 14 of them, so quoting the larger figure here would describe the world instead of the reach. Full width because several subregion names are too long to read in a narrow card.",
+              desc: "Engaged countries grouped by UN subregion: the cut that matters most for this organisation, and the one the region donut above cannot show: a region chart collapses Sub-Saharan and Northern Africa into a single 'Africa' segment, when 14 of the 42 engaged countries are Sub-Saharan and exactly one is Northern African. Counted over engaged countries rather than over the reference table: that table lists 45 Sub-Saharan countries and Ersilia's engagement reaches 14 of them, so quoting the larger figure here would describe the world instead of the reach. Full width because several subregion names are too long to read in a narrow card.",
             },
           ] },
         ],
@@ -787,7 +785,7 @@ const VIEWS = [
           { h: "h-lg", cells: [
             {
               title: "Type of event", span: 4, data: "events.by_type", type: "lollipop",
-              desc: "Events by type — talk, conference, training or other.",
+              desc: "Events by type: talk, conference, training or other.",
             },
             {
               title: "Where events took place", span: 4, data: "events.by_country", type: "lollipop",
