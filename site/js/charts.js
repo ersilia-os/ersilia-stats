@@ -632,6 +632,8 @@ function optTreeMap(d) {
       ? p.treePathInfo[1].name + " · " + p.name
       : p.name) + ": <b>" + fmtNum(p.value) + "</b>";
   const tree = d.tree || [];
+  const total = tree.reduce((sum, parent) =>
+    sum + (parent.children || []).reduce((s, c) => s + (Number(c.value) || 0), 0), 0);
   o.series = [{
     type: "treemap", roam: false, nodeClick: false, breadcrumb: { show: false },
     width: "100%", height: "100%", top: 0, left: 0, right: 0, bottom: 0,
@@ -646,10 +648,12 @@ function optTreeMap(d) {
         },
       },
     ],
+    // White on every tile. Long names wrap rather than being cut off; a tile under 5%
+    // of the total is too short for two lines, so its name and count share one.
     label: {
-      show: true, fontFamily: T.sans, fontSize: T.fs.meta,
-      formatter: (p) => p.name + "\n" + fmtNum(p.value),
-      overflow: "truncate", lineHeight: 13,
+      show: true, color: "#fff", fontFamily: T.sans, fontSize: T.fs.meta,
+      formatter: (p) => p.name + (p.value < 0.05 * total ? " · " : "\n") + fmtNum(p.value),
+      overflow: "break", lineHeight: 13, padding: [0, 4],
     },
     data: tree.map((parent, i) => {
       // One palette slot per parent, then lighter tints for its children: the colour
@@ -660,17 +664,15 @@ function optTreeMap(d) {
         name: parent.name,
         itemStyle: { color: parentColor },
         children: children.map((child, j) => {
-          const tint = 0.10 + 0.30 * (j / Math.max(children.length - 1, 1));
+          // Kept shallow so the white labels stay readable on the lightest tile.
+          const tint = 0.20 * (j / Math.max(children.length - 1, 1));
           return {
             name: child.name,
             value: child.value,
             itemStyle: { color: mixWithWhite(parentColor, tint) },
-            // The tint decides whether ink or white stays readable on the tile. This
-            // used to be compared against a `parentTint` constant of 0, which made
-            // the test `tint > 0.40` on a range that stops AT 0.40 — never true, so
-            // every child label was white, including on the palest tiles where it
-            // vanished into the fill.
-            label: { color: tint > 0.26 ? T.ink : "#fff" },
+            // A small tile can come out as a thin upright strip, where wrapping stacks
+            // the name one letter per line; cut it short there (the tooltip has it).
+            ...(child.value < 0.05 * total ? { label: { overflow: "truncate" } } : {}),
           };
         }),
       };
