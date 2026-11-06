@@ -44,8 +44,8 @@ asks for public repositories precisely so this file cannot leak a private name.
 
 TWO LIMITS STATED ON THE CARDS
 ------------------------------
-A **star count is not a user count**, and the star curve is restricted to the repositories
-with more than five stars because a curve through three points is decoration.
+A **star count is not a user count**. The star curve covers every public repository;
+private stars are in the overview total but have no dates, so they are not on the curve.
 
 **`median_days_to_close` is computed from the last 30 closed issues** per repository, so it
 describes recent practice rather than all history. A repository that has closed fewer than

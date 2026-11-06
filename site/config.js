@@ -549,7 +549,7 @@ const VIEWS = [
           { h: "h-lg", cells: [
             {
               title: "Stars gained over time", span: 7, data: "code.star_growth", type: "growthcombo",
-              desc: "Stars by the quarter they were given, for repositories with more than five stars.",
+              desc: "Stars by the quarter they were given, across all public repositories.",
             },
             {
               title: "When each repository was last updated", span: 5, data: "code.activity_recency",
