@@ -23,8 +23,9 @@ function fmtCompact(value) {
   return String(n);
 }
 
+/* "—" below the LOW_N floor too, so no caller can print a percentage of a tiny whole. */
 function fmtPct(part, whole, digits) {
-  if (!whole) return "—";
+  if (!whole || !showsPercentages(whole)) return "—";
   return (100 * part / whole).toFixed(digits == null ? 0 : digits) + "%";
 }
 

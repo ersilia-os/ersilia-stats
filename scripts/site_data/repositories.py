@@ -261,9 +261,10 @@ def _top_contributors(collected):
     total = sum(v for _, v in pairs)
     return metric(
         [k for k, _ in top], [v for _, v in top],
-        "%s distinct contributors; the top 3 hold %s of all repository contributions." % (
+        "%s distinct contributors; the top 3 hold %s of %s repository contributions." % (
             ins.num(len(pairs)),
-            ins.pct(sum(v for _, v in pairs[:3]), total),
+            ins.pct(sum(v for _, v in pairs[:3]), total) or ins.num(sum(v for _, v in pairs[:3])),
+            "all" if ins.pct(sum(v for _, v in pairs[:3]), total) else ins.num(total),
         ),
         countNoun="repositories",
         n=len(pairs),

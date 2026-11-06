@@ -422,7 +422,9 @@ def _most_active(repos):
         # full stop — without it the two sentences run together.
         "insight": ins.join(
             "%s alone holds %s of the %s commits outside the model repositories." % (
-                leader["name"], ins.pct(leader["total_commits"], total), ins.num(total),
+                leader["name"],
+                ins.pct(leader["total_commits"], total) or ins.num(leader["total_commits"]),
+                ins.num(total),
             ),
             "%s repositories publish releases." % ins.num(with_releases)
             if with_releases else None,

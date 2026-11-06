@@ -262,8 +262,11 @@ def _pull_rhythm_weekday(tags):
     total = int(counts.sum())
     out = metric(
         WEEKDAY_ORDER, counts.values,
-        "%s of last-pull timestamps fall at the weekend, against the 28.6%% an evenly "
-        "scheduled automation would produce." % (ins.pct(weekend, total) or "0%"),
+        ("%s of last-pull timestamps fall at the weekend, against the 28.6%% an evenly "
+         "scheduled automation would produce." % ins.pct(weekend, total))
+        if ins.pct(weekend, total) else
+        "%s of %s last-pull timestamps fall at the weekend." % (
+            ins.num(weekend), ins.num(total)),
         countNoun="digests",
         n=total,
     )

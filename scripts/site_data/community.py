@@ -64,7 +64,7 @@ def build(community):
         "by_gender": _gender(community),
         "by_organisation": multi_counts(
             col(community, "name_(from_org)", "organisation"), top=10,
-            insight="Home institutions of community members, as recorded.",
+            insight="Home institutions of community members.",
         ),
     }
 
@@ -190,5 +190,5 @@ def _gender(community):
     """Aggregate gender counts only — two numbers, no rows."""
     out = value_counts(col(community, "gender"))
     if out["labels"]:
-        out["insight"] = ins.leader(out, "members with a recorded gender")
+        out["insight"] = ins.leader(out, "members")
     return out

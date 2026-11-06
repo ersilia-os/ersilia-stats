@@ -121,7 +121,7 @@ function meterRow(metric) {
     const top = el("div", "top");
     top.appendChild(el("span", "lbl", label));
     const readout = total
-      ? fmtNum(value) + "  " + fmtPct(value, total)
+      ? fmtNum(value) + (showsPercentages(total) ? "  " + fmtPct(value, total) : "")
       : fmtNum(value) + (metric.unit ? " " + metric.unit : "");
     top.appendChild(el("span", "val", readout));
     row.appendChild(top);
@@ -210,7 +210,8 @@ function shareRow(sources, data) {
     const row = el("div", "share");
     const top = el("div", "top");
     top.appendChild(el("span", "lbl", source.label));
-    top.appendChild(el("span", "pct", fmtPct(value, total)));
+    top.appendChild(el("span", "pct", showsPercentages(total)
+      ? fmtPct(value, total) : fmtNum(value) + " of " + fmtNum(total)));
     row.appendChild(top);
 
     const track = el("div", "track");

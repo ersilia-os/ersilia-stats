@@ -182,8 +182,10 @@ def _task_tree(models):
     leader = max(nested.items(), key=lambda kv: sum(kv[1].values())) if nested else None
     insight = None
     if leader:
-        insight = "%s is the largest task family, %s of the %s with a task recorded." % (
-            leader[0], ins.pct(sum(leader[1].values()), total), ins.num(total),
+        insight = "%s is the largest task family, %s of %s models." % (
+            leader[0],
+            ins.pct(sum(leader[1].values()), total) or ins.num(sum(leader[1].values())),
+            ins.num(total),
         )
     return {"tree": tree, "n": int(total), "insight": insight}
 
@@ -245,16 +247,16 @@ def _publication_lag(models, incorporated):
     This is the Hub's responsiveness to the literature, and it is the kind of number
     that only exists once you subtract two columns nobody had subtracted.
 
-    Rows where the incorporation year precedes the stated publication year are
-    dropped (3 of them) — a negative lag means one of the two dates is wrong, not
-    that Ersilia wrapped a paper before it existed.
+    Rows where the incorporation year precedes the stated publication year count as
+    0 (7 of them, all one year early): the model was likely wrapped from a preprint
+    before the paper came out, so for the Hub the wait was nil.
     """
     years = pd.to_numeric(col(models, "publication_year"), errors="coerce")
     dates = pd.to_datetime(incorporated, errors="coerce")
     if years.empty or dates.empty:
         return dict(EMPTY)
     lag = (dates.dt.year - years).dropna()
-    lag = lag[lag >= 0]
+    lag = lag.clip(lower=0)
     if lag.empty:
         return dict(EMPTY)
 
@@ -489,7 +491,7 @@ def _on_arm(models):
         return dict(EMPTY)
     return metric(
         ["ARM64 and AMD64", "AMD64 only"], [on_arm, with_arch - on_arm],
-        ins.share_of(on_arm, with_arch, "models with a recorded architecture",
+        ins.share_of(on_arm, with_arch, "models",
                      "also build for ARM64"),
         n=with_arch,
     )
@@ -562,7 +564,7 @@ def _by_license(models):
         out["insight"] = ins.join(
             "%s leads with %s of %s models." % (top, ins.num(recorded[top]),
                                                 ins.num(len(licences))),
-            "%s record none." % ins.num(unrecorded) if unrecorded else None,
+            "%s have none." % ins.num(unrecorded) if unrecorded else None,
         )
     out["n"] = len(licences)
     return out
