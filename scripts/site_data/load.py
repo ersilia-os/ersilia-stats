@@ -10,6 +10,8 @@ import re
 
 import pandas as pd
 
+from .parse import parse_multi
+
 SNAPSHOT_RE = re.compile(r"^(?P<name>.+)_(?P<stamp>\d{8})\.csv$")
 
 # Columns that must never reach the repo or the site. The fetch script drops these
@@ -30,6 +32,14 @@ NARRATIVE_COLUMNS = {
 
 # Airtable scratch columns from abandoned imports.
 JUNK_COLUMNS = {"table_15", "imported_table"}
+
+
+# Tables with a Public / Private ``visibility`` column. Only Public rows are published.
+VISIBILITY_TABLES = {"projects"}
+
+
+class VisibilityError(ValueError):
+    """A visibility-controlled table arrived without its ``visibility`` column."""
 
 
 def _slug(value):
@@ -66,6 +76,42 @@ def load_tables(data_dir):
         drop = (PII_COLUMNS | JUNK_COLUMNS | NARRATIVE_COLUMNS.get(name, set()))
         keep = [c for c in df.columns if c not in drop]
         tables[name] = df[keep]
+    return drop_private_rows(tables)
+
+
+def drop_private_rows(tables):
+    """Remove non-Public rows of visibility-controlled tables, and every link to them.
+
+    ``fetch_airtable.py`` already withholds these rows; this is the second line of
+    defence for an older snapshot. Removing the row is not enough on its own: other
+    tables still hold the private record's id in their link columns (an organisation's
+    ``projects``, say), and a builder counting links would let the private record back
+    in — an organisation whose only project is private would still read as a partner.
+    So the ids are stripped from every other table's column of the same name.
+
+    Fails closed: a table that should carry ``visibility`` but does not is an error,
+    not "everything public" — a renamed Airtable field must not publish private rows.
+    """
+    for name in VISIBILITY_TABLES:
+        df = tables.get(name)
+        if df is None:
+            continue
+        if "visibility" not in df.columns:
+            raise VisibilityError(
+                "The %s snapshot has no `visibility` column, so private rows cannot be "
+                "told apart. Refetch it with scripts/fetch_airtable.py." % name)
+        public = df["visibility"].fillna("").astype(str).str.strip().str.lower() == "public"
+        hidden = set(df.loc[~public, "airtable_id"].astype(str)) if "airtable_id" in df else set()
+        tables[name] = df[public].drop(columns="visibility").reset_index(drop=True)
+        if not hidden:
+            continue
+        for other, frame in tables.items():
+            if other == name or name not in frame.columns:
+                continue
+            frame = frame.copy()
+            frame[name] = [str([i for i in parse_multi(v) if i not in hidden])
+                           if parse_multi(v) else v for v in frame[name]]
+            tables[other] = frame
     return tables
 
 

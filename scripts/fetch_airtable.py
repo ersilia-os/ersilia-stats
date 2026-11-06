@@ -48,6 +48,24 @@ NARRATIVE_COLUMNS = {
 # Airtable scratch columns left over from abandoned imports.
 JUNK_COLUMNS = {"table 15", "imported table"}
 
+# Tables whose rows carry a `Visibility` single-select (Public / Private). Only rows
+# marked Public are exported; Private rows — and rows with the field left blank — never
+# reach the repository. `scripts/site_data/load.py` applies the same rule again.
+VISIBILITY_TABLES = {"projects"}
+VISIBILITY_FIELD = "Visibility"
+PUBLIC = "public"
+
+
+def public_records(records, table_slug=""):
+    """Drop the records of a visibility-controlled table that are not marked Public."""
+    if table_slug not in VISIBILITY_TABLES:
+        return records
+    kept = [r for r in records
+            if str(r.get("fields", {}).get(VISIBILITY_FIELD, "")).strip().lower() == PUBLIC]
+    if len(kept) < len(records):
+        logging.info("  withheld %d non-public row(s)", len(records) - len(kept))
+    return kept
+
 def read_table_list(csv_path):
     tables = []
     with open(csv_path, newline="", encoding="utf-8") as fh:
@@ -203,7 +221,7 @@ def main():
         out_path = os.path.join(args.out_dir, filename)
         logging.info("Fetching base=%s table=%s -> %s", base_id, table_id, out_path)
         try:
-            records = fetch_all_records(api, base_id, table_id)
+            records = public_records(fetch_all_records(api, base_id, table_id), table_slug)
             header, rows = records_to_rows(records, table_slug)
             write_csv(out_path, header, rows)
             written.append(out_path)

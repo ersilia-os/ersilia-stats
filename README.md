@@ -82,6 +82,11 @@ Definitions, provenance and data-quality caveats live in the **Methods** dialog.
   that names a repository or a contributor covers public ones only. Which repositories are public is
   read from Airtable's `Visibility` column, and `check_github_airtable_sync.py` stops the deploy if
   GitHub disagrees.
+- **Private projects stay out.** Only Projects rows whose Airtable `Visibility` is `Public` are
+  published; `Private` and blank rows are withheld at fetch (`fetch_airtable.py`), removed again at
+  load (`site_data/load.py`), and their ids are stripped from every other table's links, so an
+  organisation whose only project is private does not count as a partner. If the `Visibility` field
+  is missing, the build fails rather than publishing everything.
 - **No data in the repository.** Fetched snapshots and built aggregates are gitignored. The deploy
   re-checks the artifact: a raw snapshot or an email address inside `site/` fails the job.
 - **Small numbers.** Percentages are suppressed below n = 10.

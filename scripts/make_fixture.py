@@ -66,7 +66,7 @@ ORPHANED_IMAGE = "eos9zzz"
 
 COUNTRY = [rec("CTRY", i) for i in range(1, 6)]
 ORG = [rec("ORGX", i) for i in range(1, 6)]
-PROJ = [rec("PROJ", i) for i in range(1, 5)]
+PROJ = [rec("PROJ", i) for i in range(1, 6)]
 REPO = [rec("REPO", i) for i in range(1, 6)]
 PUB = [rec("PUBL", i) for i in range(1, 4)]
 
@@ -116,7 +116,8 @@ def organisations():
             "Events": "", "Grants": "", "Opportunities": "", "Website": "",
             # The back-link of projects()' `Organization` (project i -> ORG[i]), so the
             # Partner organisations KPI, which counts organisations linked to a project,
-            # has partners to count. Orphan Org has none and must be left out.
+            # has partners to count. Orphan Org's only project is private, so it must
+            # be left out.
             "Projects": listrepr([PROJ[i]]) if i < len(PROJ) else "", "Workshops": "",
         })
     return out
@@ -131,7 +132,11 @@ def projects():
         ("Test Antimicrobials", "Done", "2023-01-15", "2025-01-14", [REPO[3]], []),
         # No outputs at all: outputs_table must omit it and has_outputs must count it.
         ("Unlinked Effort", "Stuck", "2024-02-01", "", [], []),
+        # Private: load.drop_private_rows must remove it and the link from Orphan Org,
+        # whose only project it is — so Orphan Org must still not count as a partner.
+        ("Confidential Pilot", "In progress", "2025-05-01", "", [], []),
     ]
+    private = {"Confidential Pilot"}
     out = []
     for i, (name, status, start, end, repos, pubs) in enumerate(rows):
         out.append({
@@ -141,6 +146,7 @@ def projects():
             "Collaborator": "", "Description": "", "Drive": "", "Grant": "",
             "Organization": listrepr([ORG[i % len(ORG)]]), "Team": "",
             "Start Quarter": "", "Start Year": "", "End Quarter": "", "End Year": "",
+            "Visibility": "Private" if name in private else "Public",
         })
     return out
 
