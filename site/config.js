@@ -132,7 +132,7 @@ const VIEWS = [
           { h: "h-md", cells: [
             {
               title: "Years from paper to Hub", span: 4, data: "models.publication_lag", type: "histogram",
-              desc: "Incorporation year minus the publication year of the model's paper. Models incorporated before their publication year count as 0.",
+              desc: "Incorporation year minus the publication year of the model's paper. Models incorporated before their publication year count as 0. Dashed line: mean.",
             },
             {
               title: "Is the science peer-reviewed?", span: 4, data: "models.publication_type",

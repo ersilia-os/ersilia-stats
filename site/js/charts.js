@@ -941,10 +941,13 @@ function optHistogram(d) {
     label: valueLabel("top", (p) => (p.value ? fmtNum(p.value) : "")),
   }];
   if (d.mean != null) {
-    const index = d.labels.findIndex((label) => {
-      const parts = String(label).split(/[–+]/);
-      const low = parseFloat(parts[0]);
-      const high = parts[1] === "" || parts[1] == null ? Infinity : parseFloat(parts[1]);
+    // A bin runs from its own lower bound to the next bin's. Reading the upper bound
+    // off the label put the mean in the wrong bin: a single-value label ("0", "1")
+    // has none, so it read as 0-to-infinity, and an integer range ("3–4") left a gap
+    // before the next bin ("5–9") that a mean of 4.5 fell into.
+    const lows = d.labels.map((label) => parseFloat(String(label).split(/[–+]/)[0]));
+    const index = lows.findIndex((low, i) => {
+      const high = i + 1 < lows.length ? lows[i + 1] : Infinity;
       return d.mean >= low && d.mean < high;
     });
     if (index >= 0) {
