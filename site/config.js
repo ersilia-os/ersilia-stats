@@ -132,7 +132,7 @@ const VIEWS = [
           { h: "h-md", cells: [
             {
               title: "Years from paper to Hub", span: 4, data: "models.publication_lag", type: "histogram",
-              desc: "Incorporation year minus the publication year of the model's paper. Models incorporated before their publication year count as 0.",
+              desc: "Incorporation year minus the publication year of the model's paper. Models incorporated before their publication year count as 0. Dashed line: mean.",
             },
             {
               title: "Is the science peer-reviewed?", span: 4, data: "models.publication_type",
@@ -549,7 +549,7 @@ const VIEWS = [
           { h: "h-lg", cells: [
             {
               title: "Stars gained over time", span: 7, data: "code.star_growth", type: "growthcombo",
-              desc: "Stars by the quarter they were given, for repositories with more than five stars.",
+              desc: "Stars by the quarter they were given, across all public repositories.",
             },
             {
               title: "When each repository was last updated", span: 5, data: "code.activity_recency",

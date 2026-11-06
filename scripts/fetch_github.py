@@ -16,7 +16,7 @@ cell can hold "3,017 commits"; it cannot hold when they happened.
 WHAT IT COLLECTS
     repos            the public inventory, one row each, with per-repository counts
     commit_activity  commits per calendar quarter, for every non-archived repository
-    stars            starred_at for the most-starred repositories, i.e. star history
+    stars            starred_at for every starred public repository, i.e. star history
     model_requests   open/closed timestamps for every "new-model"-labelled issue on
                      the flagship repository — the incorporation pipeline's lead time
 
@@ -287,19 +287,19 @@ def commit_activity(org, names, headers, quarters=12, batch=20):
     return rows, missing
 
 
-def star_history(org, repos, headers, top=20):
-    """`starred_at` per star, for the most-starred repositories.
+def star_history(org, repos, headers):
+    """`starred_at` per star, for every public repository that has any.
 
     This is why a star *curve* needs no accumulated history: GitHub records when each
-    star was given. Restricted to the top repositories because everything else has too
-    few stars for a curve to mean anything.
+    star was given. Every starred repository is read, not only the most-starred, so the
+    curve ends at the public star total (less stars from deleted accounts, which GitHub
+    counts but no longer lists). One request per 100 stars: about 140 in all.
     """
-    ranked = sorted((r for r in repos if r["stars"] > 5),
-                    key=lambda r: -r["stars"])[:top]
+    starred = sorted((r for r in repos if r["stars"] > 0), key=lambda r: -r["stars"])
     rows = []
-    for repo in ranked:
+    for repo in starred:
         page = 1
-        while page <= 12:                          # 1,200 stars is plenty of headroom
+        while page <= 50:                          # 5,000 stars is plenty of headroom
             payload = get_json(
                 "%s/repos/%s/%s/stargazers?per_page=100&page=%d" % (API, org, repo["name"], page),
                 headers={**headers, "Accept": "application/vnd.github.star+json"})
