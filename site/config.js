@@ -183,7 +183,7 @@ const VIEWS = [
             },
             {
               title: "ARM64 support", span: 3, type: "shares",
-              blurb: "Of models that record an architecture, how many also build for ARM64?",
+              blurb: "How many models also build for ARM64?",
               sources: [
                 { label: "Also builds for ARM64", data: "models.on_arm", highlight: "ARM64 and AMD64" },
               ],
