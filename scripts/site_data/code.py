@@ -243,17 +243,26 @@ def _contribution_origin(repos):
     # The per-kind shares are in the methodology note.
     insight = "%s of %s recent merged PRs came from outside Ersilia%s." % (
         ins.num(overall_out), ins.num(overall),
-        " — %s" % shares[0] if shares else "")
+        ", %s" % shares[0] if shares else "")
     return {"labels": labels, "series": series, "n": overall, "insight": insight}
 
 
 def _activity_recency(repos, today):
-    """Repositories by how long since the last push, archived counted separately.
+    """Non-model repositories by how long since the last push, archived counted separately.
 
     An archived repository is not neglected — it was retired deliberately — so putting it
     in a "two years untouched" bucket would report a decision as a failure.
+
+    Model repositories (`eosXXXX`) are left out: nearly all of them are pushed to every
+    month (230 of 239 unarchived in the 26 Oct 2026 snapshot), so they filled "this month"
+    and hid how recently the tools themselves were worked on. The Model Hub page covers
+    model maintenance.
     """
     if "pushed_at" not in repos.columns:
+        return dict(EMPTY)
+    _is_model, is_other = _split_models(repos)
+    repos = repos[is_other.values].reset_index(drop=True)
+    if repos.empty:
         return dict(EMPTY)
     now = pd.Timestamp(today) if today is not None else pd.Timestamp.today().normalize()
     pushed = pd.to_datetime(repos["pushed_at"], errors="coerce")
@@ -279,7 +288,7 @@ def _activity_recency(repos, today):
     live = sum(values[:3])                       # pushed within six months
     out = metric(
         labels, values,
-        "%s of %s repositories pushed to within six months; %s archived." % (
+        "%s of %s non-model repositories pushed to within six months; %s archived." % (
             ins.num(live), ins.num(len(repos)), ins.num(values[-1]),
         ),
         countNoun="repositories",
@@ -413,7 +422,9 @@ def _most_active(repos):
         # full stop — without it the two sentences run together.
         "insight": ins.join(
             "%s alone holds %s of the %s commits outside the model repositories." % (
-                leader["name"], ins.pct(leader["total_commits"], total), ins.num(total),
+                leader["name"],
+                ins.pct(leader["total_commits"], total) or ins.num(leader["total_commits"]),
+                ins.num(total),
             ),
             "%s repositories publish releases." % ins.num(with_releases)
             if with_releases else None,

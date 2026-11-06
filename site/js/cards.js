@@ -121,7 +121,7 @@ function meterRow(metric) {
     const top = el("div", "top");
     top.appendChild(el("span", "lbl", label));
     const readout = total
-      ? fmtNum(value) + "  " + fmtPct(value, total)
+      ? fmtNum(value) + (showsPercentages(total) ? "  " + fmtPct(value, total) : "")
       : fmtNum(value) + (metric.unit ? " " + metric.unit : "");
     top.appendChild(el("span", "val", readout));
     row.appendChild(top);
@@ -150,7 +150,9 @@ function rankedTable(metric, spec) {
   const headRow = el("tr");
   headRow.appendChild(el("th", null, spec.nameLabel || "Name"));
   columns.forEach((c) => headRow.appendChild(el("th", null, c.label)));
-  headRow.appendChild(el("th", null, ""));
+  // The bar column's header is empty by default; `barLabel` names what the bar measures
+  // when it could be mistaken for the column beside it.
+  headRow.appendChild(el("th", null, spec.barLabel || ""));
   thead.appendChild(headRow);
   table.appendChild(thead);
 
@@ -208,7 +210,8 @@ function shareRow(sources, data) {
     const row = el("div", "share");
     const top = el("div", "top");
     top.appendChild(el("span", "lbl", source.label));
-    top.appendChild(el("span", "pct", fmtPct(value, total)));
+    top.appendChild(el("span", "pct", showsPercentages(total)
+      ? fmtPct(value, total) : fmtNum(value) + " of " + fmtNum(total)));
     row.appendChild(top);
 
     const track = el("div", "track");
@@ -527,7 +530,7 @@ function chartCard(chart, data, registry) {
         instance.__metric = next;
         instance.setOption(buildOption(chart, next), true);
         insight.textContent = next.insight || "";
-        canvas.setAttribute("aria-label", chart.title + " — " + source.label + ". " + (next.insight || ""));
+        canvas.setAttribute("aria-label", chart.title + ": " + source.label + ". " + (next.insight || ""));
         const fresh = drillDown(chart, next, csvFor(source.data));
         drill.replaceWith(fresh);
         drill = fresh;

@@ -28,6 +28,7 @@ from .parse import (
     growth_pair,
     metric,
     multi_counts,
+    parse_multi,
     quarter_counts,
     value_counts,
 )
@@ -54,7 +55,7 @@ def build(community):
         "growth": _growth(start),
         "joined_per_quarter": _joined_per_quarter(start),
         "participation": _participation(start),
-        "duration_buckets": _duration_buckets(start, end),
+        "duration_buckets": _duration_buckets(start, end, col(community, "role")),
         "active_status": _active_status(end),
         # Short form: this sits in a 4-column card, where the full
         # "leads with N of M recorded member countries (P%)" is clipped.
@@ -63,7 +64,7 @@ def build(community):
         "by_gender": _gender(community),
         "by_organisation": multi_counts(
             col(community, "name_(from_org)", "organisation"), top=10,
-            insight="Home institutions of community members, as recorded.",
+            insight="Home institutions of community members.",
         ),
     }
 
@@ -121,15 +122,18 @@ def _participation(start):
     )
 
 
-def _duration_buckets(start, end):
+def _duration_buckets(start, end, role=None):
     """How long completed collaborations ran.
 
-    Stated as the most common length rather than as a share "under six months". The
-    two say the same thing about the same numbers, but the second reads as a
-    shortfall, and there is no standard here to fall short of: most of these are
-    internships, fellowships and student placements with a term fixed before anyone
-    arrived. Only ended collaborations are binned — counting current members would
-    censor every long one downwards.
+    A bare share "under six months" reads as a shortfall, and there is no standard here
+    to fall short of: most of these are volunteers and interns with a short term by
+    design. So the share is only stated together with who held those roles; without
+    roles the insight falls back to the most common length. In the 26 Oct 2026
+    snapshot, 83 of the 93 short ones were volunteers (49) or interns (34). Computed
+    rather than written into the description, so it stays true when the table changes.
+
+    Only ended collaborations are binned — counting current members would censor every
+    long one downwards.
     """
     finished = end.notna() & start.notna()
     months = ((end - start)[finished].dt.days / DAYS_PER_MONTH)
@@ -140,15 +144,38 @@ def _duration_buckets(start, end):
     total = sum(values)
     if not total:
         return metric(labels, values, None)
-    most = max(range(len(values)), key=lambda i: values[i])
-    out = metric(
-        labels, values,
-        "%s of %s completed collaborations ran %s, the most common length." % (
+    # Who the short ones were, when the roles say; otherwise the most common length.
+    # One sentence either way: the card clips a summary at two lines.
+    insight = _short_by_role(months, role)
+    if not insight:
+        most = max(range(len(values)), key=lambda i: values[i])
+        insight = "%s of %s completed collaborations ran %s, the most common length." % (
             ins.num(values[most]), ins.num(total), labels[most].replace("> ", "over "),
-        ),
-    )
+        )
+    out = metric(labels, values, insight)
     out["ordinal"] = True
     return out
+
+
+def _short_by_role(months, role):
+    """"N of T completed collaborations ran under six months: V volunteers, I interns."
+    or "" when no role is recorded.
+
+    `months` is indexed like the community table, so the roles line up by index. A
+    person holding both roles counts in both, as everywhere roles are counted.
+    """
+    if role is None or len(role) == 0:
+        return ""
+    short = months[months < 6].index
+    roles = [{r.strip().lower() for r in parse_multi(role.get(i))} for i in short]
+    if not roles:
+        return ""
+    volunteers = sum("volunteer" in r for r in roles)
+    interns = sum("intern" in r for r in roles)
+    if not volunteers and not interns:
+        return ""
+    return "%s of %s completed collaborations ran under six months: %s volunteers, %s interns." % (
+        ins.num(len(roles)), ins.num(len(months)), ins.num(volunteers), ins.num(interns))
 
 
 def _active_status(end):
@@ -163,5 +190,5 @@ def _gender(community):
     """Aggregate gender counts only — two numbers, no rows."""
     out = value_counts(col(community, "gender"))
     if out["labels"]:
-        out["insight"] = ins.leader(out, "members with a recorded gender")
+        out["insight"] = ins.leader(out, "members")
     return out

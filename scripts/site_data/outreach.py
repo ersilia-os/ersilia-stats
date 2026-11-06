@@ -34,13 +34,13 @@ def build_events(events):
     # Airtable calls the event type `Category`; the page calls it type.
     by_type = value_counts(col(events, "category"))
     if by_type["labels"]:
-        by_type["insight"] = ins.leader(by_type, "events with a type recorded")
+        by_type["insight"] = ins.leader(by_type, "events")
 
     by_format = value_counts(col(events, "format"))
     if by_format["labels"]:
         online = dict(zip(by_format["labels"], by_format["values"])).get("Online", 0)
         by_format["insight"] = ins.share_of(online, sum(by_format["values"]),
-                                            "events with a format recorded", "were online")
+                                            "events", "were online")
 
     return {
         "per_year": per_year,

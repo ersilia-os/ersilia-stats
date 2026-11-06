@@ -26,8 +26,7 @@ def resolve_countries(frame, id_to_name, column="country"):
     An id that does NOT resolve is dropped rather than used as its own label. It used to
     fall through unchanged, which put a raw ``recXXXXXXXXXXXXXX`` on the axis of the
     country ranking and shaded nothing on the map — a database key presented to the
-    reader as though it were a place. The count of unresolved ids is still published in
-    the insight, so the gap is stated rather than hidden.
+    reader as though it were a place.
     """
     counter = Counter()
     if frame is None or frame.empty or column not in frame.columns:
@@ -93,7 +92,7 @@ def _engagement_depth(orgs):
         kinds = sum(1 for name in present if parse_multi(orgs[name].iloc[i]))
         buckets[kinds] += 1
 
-    labels = ["None recorded", "One kind", "Two kinds", "Three kinds", "All four"]
+    labels = ["None", "One kind", "Two kinds", "Three kinds", "All four"]
     # Trailing empty bands are dropped: "All four: 0" is a row that says nothing.
     highest = max((i for i, count in enumerate(buckets) if count), default=0)
     labels, values = labels[:highest + 1], buckets[:highest + 1]
@@ -103,7 +102,7 @@ def _engagement_depth(orgs):
     out = metric(
         labels, values,
         ins.share_of(engaged, total, "partner organisations",
-                     "have at least one recorded project, event, conference or member"),
+                     "have at least one project, event, conference or member"),
     )
     out["ordinal"] = True
     out["n"] = total
@@ -119,17 +118,13 @@ def build(orgs, countries):
     per_country = resolve_countries(orgs, country_lookup(countries))
     top = per_country.most_common(12)
     full = per_country.most_common()
-    unresolved = int(len(orgs) - sum(per_country.values()))
 
     by_country = metric(
         [k for k, _ in top], [v for _, v in top],
         ins.join(
             ins.leader({"labels": [k for k, _ in full], "values": [v for _, v in full]},
-                       "organisations with a country on file"),
+                       "organisations"),
             "%s countries represented." % ins.num(len(per_country)),
-            ("No country recorded for %s." % ins.count_of(unresolved, "organisation",
-             "organisations"))
-            if unresolved > 0 else None,
         ),
     )
 

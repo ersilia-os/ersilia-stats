@@ -31,7 +31,7 @@ def _has_outputs(projects, repos, publications):
     if not total:
         return dict(EMPTY)
     return metric(
-        ["With an output", "None recorded"], [linked, total - linked],
+        ["With an output", "None"], [linked, total - linked],
         ins.share_of(linked, total, "projects", "have a repository or publication linked"),
     )
 

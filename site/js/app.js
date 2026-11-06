@@ -25,7 +25,7 @@ function renderLanding(outlet, registry) {
   const head = el("div", "viewhead");
   head.appendChild(el("h2", null, "Overview"));
   head.appendChild(el("p", null,
-    "Aggregate statistics for the Ersilia Open Source Initiative — the Model Hub, " +
+    "Aggregate statistics for the Ersilia Open Source Initiative: the Model Hub, " +
     "the people behind it, the code, the science, and the countries it reaches."));
   outlet.appendChild(head);
 
@@ -154,7 +154,7 @@ function renderDownloads(outlet) {
   head.appendChild(el("h2", null, "Downloads"));
   head.appendChild(el("p", null,
     "The aggregate table behind every chart, as CSV, plus the full dataset as JSON. " +
-    "Aggregates only — the same guarantee as the charts. Some tables are exported but " +
+    "Aggregates only, the same guarantee as the charts. Some tables are exported but " +
     "not charted; they are all here."));
   outlet.appendChild(head);
 
@@ -208,9 +208,9 @@ function fillMethods() {
   const body = document.getElementById("methods-body");
   const kpi = (key) => (DATA.kpis[key] ? fmtNum(DATA.kpis[key].value) : "0");
   const rows = [
-    ["Source", "Every figure comes from Ersilia's own Airtable — the Model Hub, projects, " +
+    ["Source", "Every figure comes from Ersilia's own Airtable (the Model Hub, projects, " +
       "community, publications, repositories, organisations, events, blog posts and " +
-      "countries — read only. Snapshot: " + (DATA.snapshot_date || "unknown") +
+      "countries), read only. Snapshot: " + (DATA.snapshot_date || "unknown") +
       ". Built: " + (DATA.generated_at || "unknown") + "."],
     ["Snapshot dates", "Each table is fetched separately, so the date in the sidebar is " +
       "the newest stamp across all of them. If a fetch fails for one table its previous " +
@@ -222,7 +222,7 @@ function fillMethods() {
       "output."],
     ["Repositories", "Counts, dates, types and totals cover all " + kpi("repositories") +
       " repositories, including the " + fmtNum(DATA.meta.private_repositories || 0) +
-      " private ones — a count is not disclosure. Anything that names a repository or a " +
+      " private ones, since a count is not disclosure. Anything that names a repository or a " +
       "contributor covers the " + kpi("repositories_public") + " public ones only, because " +
       "a private repository's name is disclosure."],
     ["Multi-select fields", "Roles, tags, topics, categories, biomedical areas and focus " +
@@ -231,8 +231,8 @@ function fillMethods() {
     ["Citations come from OpenAlex", "Citation counts, the per-year accrual, open-access " +
       "status and the countries of author institutions are collected from OpenAlex against " +
       "each paper's DOI, not entered by hand. That matters because citation counts are " +
-      "source-dependent — one paper reads 43 in OpenAlex, 37 in Semantic Scholar and 44 in " +
-      "the older manual record — so the source is named rather than a bare number printed. " +
+      "source-dependent: one paper reads 43 in OpenAlex, 37 in Semantic Scholar and 44 in " +
+      "the older manual record, so the source is named rather than a bare number printed. " +
       "The manual figures understated the total by 31%, 1,305 against 1,712, with 38 of 42 " +
       "papers differing. Google Scholar is not used: it has no API and its robots.txt " +
       "disallows the paths that carry per-paper counts, so the Scholar links here point at " +
@@ -252,8 +252,8 @@ function fillMethods() {
       "group recorded are excluded rather than assumed."],
     ["Engagement duration", "Only ENDED collaborations are binned by length; including " +
       "current members would censor every long one downwards. Read the distribution as the " +
-      "shape of the placements Ersilia runs — most are internships, fellowships and student " +
-      "placements with a term fixed before anyone arrived — rather than as a target missed. " +
+      "shape of the placements Ersilia runs (most are internships, fellowships and student " +
+      "placements with a term fixed before anyone arrived) rather than as a target missed. " +
       "This section previously led with a churn ledger and a cohort-retention grid; both " +
       "were correct arithmetic and both framed a growing community as attrition."],
     ["Pathogens targeted", "Counts models whose target organism is a named pathogen. " +
@@ -266,8 +266,8 @@ function fillMethods() {
       "it existed."],
     ["Runtime by batch size", "The five Computational Performance columns hold runtimes " +
       "at 1, 10, 100, 1,000 and 10,000 molecules. A value of -1 means the run did not " +
-      "finish at that size, so it is counted as infinitely slow — slower than any run that " +
-      "did finish — rather than dropped: it raises the median and percentiles, and ranks a " +
+      "finish at that size, so it is counted as infinitely slow (slower than any run that " +
+      "did finish) rather than dropped: it raises the median and percentiles, and ranks a " +
       "model among the slowest. The charts pin such a run to the top of the runtime axis. " +
       "Models with no benchmark are absent."],
     ["Growth charts", "Where something grows over time, the rate and the running total are " +
@@ -303,7 +303,7 @@ function fillMethods() {
       "deficiency (worst adjacent pair ΔE 20.0 against a target of 8). Red sits last in that " +
       "order on purpose: it carries a verdict whether or not one is meant, so only a genuine " +
       "sixth category reaches it. Green, amber and red are otherwise reserved for real " +
-      "states — a model's curation status, a project's status. Every chart also has a table " +
+      "states: a model's curation status, a project's status. Every chart also has a table " +
       "view, so no value is conveyed by colour alone."],
   ];
   rows.forEach((row) => {
@@ -492,7 +492,7 @@ function wireSkipLink() {
 function announceView() {
   const live = document.getElementById("route-status");
   const heading = document.querySelector("#view .viewhead h2");
-  if (live && heading) live.textContent = heading.textContent + " — view loaded";
+  if (live && heading) live.textContent = heading.textContent + ": view loaded";
 }
 
 function wireKeyboard() {

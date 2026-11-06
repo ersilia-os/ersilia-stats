@@ -281,7 +281,7 @@ function optLollipop(d) {
 /* An ordered lollipop (income bands, tenure bands): the dot takes its step from the
    sequential ramp, so the reader sees the order in the colour as well as the
    position. One hue, light to dark — that is what a ramp is for. */
-function optOrdinalLollipop(d) {
+function optOrdinalLollipop(d, darkFirst) {
   const o = optLollipop(d);
   const n = d.labels.length;
   // Re-colour the dots along the sequential ramp, keeping whatever shape optLollipop
@@ -294,7 +294,10 @@ function optOrdinalLollipop(d) {
     return {
       value: pair,
       itemStyle: {
-        color: seqAt(n > 1 ? (n - 1 - i) / (n - 1) : 0),
+        // Default: the first (top) row is the lightest step. `darkFirst` flips the
+        // ramp where the first row is the one to look at (recency: "this month"
+        // should be the strongest colour, "archived" the palest).
+        color: seqAt(n > 1 ? (darkFirst ? i : n - 1 - i) / (n - 1) : 0),
         borderColor: T.surface, borderWidth: 1.5,
       },
     };
@@ -538,9 +541,14 @@ function optDonut(d) {
   const bySemantics = d.semantics && !Array.isArray(d.semantics);
   // A dominant slice crowds every small one into the same corner. Label only the
   // slices with room for a label; the rest are in the tooltip and the table.
-  const minShare = 0.045;
+  // With five segments or fewer there is room for every label, and hiding a small
+  // one read as a missing category ("Replicated" at 7 of 241 looked filtered out).
+  const minShare = d.labels.length <= 5 ? 0 : 0.045;
   o.series = [{
-    type: "pie", radius: ["60%", "80%"], center: ["50%", "52%"], avoidLabelOverlap: true,
+    // A narrower ring than the card allows: labels sit outside it, pinned to the
+    // card edge, and an 80% ring left them no room, so "In progress" was drawn on
+    // top of its own slice.
+    type: "pie", radius: ["46%", "62%"], center: ["50%", "52%"], avoidLabelOverlap: true,
     // 2px surface gap between segments instead of an outline.
     itemStyle: { borderColor: T.surface, borderWidth: 2 },
     label: {
@@ -1409,6 +1417,7 @@ function buildOption(chart, d) {
   if (chart.type === "logscatter") return optLogScatter(d, chart.scatter || {});
   if (chart.type === "categoryscatter") return optCategoryScatter(d, chart.scatter || {});
   if (chart.type === "map") return optMap(d, chart.mapLabel);
+  if (chart.type === "ordinallollipop") return optOrdinalLollipop(d, chart.darkFirst);
   const builder = BUILDERS[chart.type] || optLollipop;
   return builder(d);
 }

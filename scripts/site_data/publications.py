@@ -299,7 +299,7 @@ def _collaboration_breadth(collected):
     multi = counted - values[0]
     out = metric(
         labels, values,
-        "%s of %s papers with a recorded institution span two or more countries." % (
+        "%s of %s papers span two or more countries." % (
             ins.num(multi), ins.num(counted),
         ),
         countNoun="papers",
@@ -574,7 +574,7 @@ def _african(pubs):
     recorded = raw[(raw != "") & (raw.str.lower() != "nan")]
     out = value_counts(recorded)
     yes = int(recorded.str.lower().isin(YES).sum())
-    out["insight"] = ins.share_of(yes, len(recorded), "recorded publications",
+    out["insight"] = ins.share_of(yes, len(recorded), "publications",
                                   "involve an African collaboration")
     # Neutral rather than crimson for "No": the absence of an African
     # collaboration is not a failure state, and a red bar would say it was.

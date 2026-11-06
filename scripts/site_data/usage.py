@@ -117,7 +117,7 @@ def _total(rows, total, median):
         ["Image pulls, automated included", "Models with an image",
          "Pulled well above the baseline"],
         [total, len(rows), above],
-        "%s image pulls to date, but %s models sit within a narrow band around %s — a "
+        "%s image pulls to date, but %s models sit within a narrow band around %s: a "
         "scheduled build, not demand. %s stand clearly above it." % (
             ins.num(total), ins.num(sum(1 for _, p in rows if median * 0.6 <= p <= median * 1.25)),
             ins.num(median), ins.num(above),
@@ -262,8 +262,11 @@ def _pull_rhythm_weekday(tags):
     total = int(counts.sum())
     out = metric(
         WEEKDAY_ORDER, counts.values,
-        "%s of last-pull timestamps fall at the weekend, against the 28.6%% an evenly "
-        "scheduled automation would produce." % (ins.pct(weekend, total) or "0%"),
+        ("%s of last-pull timestamps fall at the weekend, against the 28.6%% an evenly "
+         "scheduled automation would produce." % ins.pct(weekend, total))
+        if ins.pct(weekend, total) else
+        "%s of %s last-pull timestamps fall at the weekend." % (
+            ins.num(weekend), ins.num(total)),
         countNoun="digests",
         n=total,
     )

@@ -19,11 +19,18 @@ def num(value):
         return str(value)
 
 
+# Below this many, a percentage invites a conclusion the sample cannot support, so
+# summaries state counts instead. The site's JavaScript applies the same floor
+# (LOW_N in site/js/format.js), and the Methods dialog promises it.
+LOW_N = 10
+
+
 def pct(part, whole, digits=0):
-    """``part`` as a percentage of ``whole``; empty string when undefined."""
+    """``part`` as a percentage of ``whole``; empty string when undefined or ``whole``
+    is below ``LOW_N``, so callers fall back to counts."""
     try:
         whole = float(whole)
-        if whole <= 0:
+        if whole < LOW_N:
             return ""
         value = 100.0 * float(part) / whole
     except (TypeError, ValueError, ZeroDivisionError):

@@ -63,9 +63,10 @@ def _most_common(packages, models, repos):
     total = len(covered)
     return metric(
         counts.index, counts.values,
-        "%s appears in %s of the %s models with an install.yml (%s)." % (
+        "%s appears in %s of the %s models with an install.yml%s." % (
             counts.index[0], ins.num(int(counts.iloc[0])), ins.num(total),
-            ins.pct(int(counts.iloc[0]), total),
+            " (%s)" % ins.pct(int(counts.iloc[0]), total)
+            if ins.pct(int(counts.iloc[0]), total) else "",
         ),
         countNoun="models",
         # Each count is out of the same models, so the chart must not sum a tail.

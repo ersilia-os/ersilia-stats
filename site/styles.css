@@ -179,18 +179,6 @@ main:focus { outline: none; }
 /* The wordmark is the page's single <h1>, so it needs the heading margin off. */
 .sidebar .wordmark { font-size: var(--fs-title); margin: 0; letter-spacing: -.015em; }
 
-/* Read before any figure, so it sits under the title rather than at the foot of the
-   column. A caveat, not an alarm: amber on pale amber, with a left rule to catch the
-   eye on the way down the nav. It does not shout and it cannot be missed. */
-.sidebar .devnote {
-  margin: -var(--sp-3) 0 var(--sp-5); padding: var(--sp-3) var(--sp-4);
-  border-radius: var(--radius-sm);
-  border-left: 2px solid var(--warn);
-  font-size: var(--fs-meta); line-height: 1.45; color: var(--ink);
-  background: color-mix(in srgb, var(--warn) 14%, var(--surface));
-}
-.sidebar .devnote strong { font-weight: 600; color: color-mix(in srgb, var(--warn) 78%, #000); }
-
 .sidebar nav ul { list-style: none; margin: 0; padding: 0; }
 /* Each tab has its own colour, but the WORDS stay neutral — coloured label text
    reads as decoration and makes a column of eight look busy. The hue lives in the

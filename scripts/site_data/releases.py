@@ -67,7 +67,7 @@ def _bump_types(releases):
     total = sum(values)
     patch_share = ins.pct(counts.get("patch", 0), total)
     insight = "%s releases tracked past each model's first; %s are patch bumps." % (
-        ins.num(total), patch_share or "0%",
+        ins.num(total), patch_share or ins.num(counts.get("patch", 0)),
     )
     return metric(labels, values, insight, countNoun="releases", n=total)
 
